@@ -1,0 +1,823 @@
+<!DOCTYPE html>
+<html>
+<head><meta name="generator" content="Hexo 3.9.0">
+    <meta charset="utf-8">
+    
+    
+    <title>[吴恩达机器学习]02单变量线性回归.md | yirufeng&#39;s Blog | 未来的小幸运 || 致正在努力的我们 ---- 逸如风</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    
+    <meta name="keywords" content="ML,吴恩达">
+    <link rel="shortcut icon" href="/img/favicon.ico">
+    <link rel="stylesheet" href="//cdn.jsdelivr.net/gh/fancyapps/fancybox@3.5.2/dist/jquery.fancybox.min.css">
+    <link rel="stylesheet" href="/css/style.css?v=1.4.2">
+    
+    <script type="text/javascript">
+        // Data Center
+        var DC = {
+            reward:	true,
+            lv: JSON.parse('{"enable":true,"app_id":"K2RVtHi7RnmoN6dovlDKafn8-gzGzoHsz","app_key":"Qxmil0oqPFdDUyyIp2i1Xikt","icon":true}'),
+            v: JSON.parse('{"enable":false,"appid":"ACuOJIasBeRLiDe2iUApHj67-gzGzoHsz","appkey":"qbgg4tClrQQmvq8uwlpwA5mA","notify":true,"verify":true,"placeholder":"give me some sugers plz...","avatar":"wavatar"}'),
+            g: JSON.parse('{"enable":false,"lazy":true,"owner":"codefine","repo":"gitment","oauth":{"client_id":null,"client_secret":null},"perPage":10}'),
+            d: JSON.parse('{"app_id":null}')
+        };
+    </script>
+    <script type="text/javascript">
+        window.lazyScripts=[];
+    </script>
+    
+</head>
+
+
+<body>
+    <div id="loading" class="active"></div>
+
+    <aside id="menu" class="">
+  <div class="inner flex-row-vertical">
+    <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menu-off">
+        <i class="icon icon-lg icon-close"></i>
+    </a>
+    <div class="brand-wrap">
+      
+      <img src="/img/brand.jpg" class="brand-bg">
+      
+      <div class="brand">
+        <a href="/" class="avatar waves-effect waves-circle waves-light">
+          <img src="/img/1.jpg">
+        </a>
+        <hgroup class="introduce">
+          <h5 class="nickname">逸如风(yirufeng)</h5>
+          <a href="mailto:yirufeng@foxmail.com" title="yirufeng@foxmail.com" class="mail">
+            
+              <span>y</span>
+            
+              <span>i</span>
+            
+              <span>r</span>
+            
+              <span>u</span>
+            
+              <span>f</span>
+            
+              <span>e</span>
+            
+              <span>n</span>
+            
+              <span>g</span>
+            
+              <span>@</span>
+            
+              <span>f</span>
+            
+              <span>o</span>
+            
+              <span>x</span>
+            
+              <span>m</span>
+            
+              <span>a</span>
+            
+              <span>i</span>
+            
+              <span>l</span>
+            
+              <span>.</span>
+            
+              <span>c</span>
+            
+              <span>o</span>
+            
+              <span>m</span>
+            
+          </a>
+        </hgroup>
+        
+        <ul class="menu-link">
+          
+              <li>
+                <a href="https://github.com/sivanWu0222" target="_blank">
+                  <i class="icon icon-lg icon-github"></i>
+                </a>
+              </li>
+            
+              <li>
+                <a href="https://mail.qq.com/cgi-bin/qm_share?t=qm_mailme&amp;amp;email=xfTz8-Py8-f08vWFtLTrpqqo" target="_blank">
+                  <i class="icon icon-lg icon-envelope"></i>
+                </a>
+              </li>
+            
+        </ul>
+        
+      </div>
+    </div>
+    <div class="scroll-wrap flex-col">
+      <ul class="nav">
+        
+            <li class="">
+              <a href="/"  >
+                <i class="icon icon-lg icon-home"></i>
+                Home
+              </a>
+            </li>
+        
+            <li class="">
+              <a href="/categories"  >
+                <i class="icon icon-lg icon-th-list"></i>
+                Category
+              </a>
+            </li>
+        
+            <li class="">
+              <a href="/research"  >
+                <i class="icon icon-lg icon-mortar-board"></i>
+                Research
+              </a>
+            </li>
+        
+            <li class="">
+              <a href="/tags"  >
+                <i class="icon icon-lg icon-tags"></i>
+                Tag
+              </a>
+            </li>
+        
+            <li class="">
+              <a href="/archives"  >
+                <i class="icon icon-lg icon-archives"></i>
+                Archive
+              </a>
+            </li>
+        
+            <li class="">
+              <a href="/about"  >
+                <i class="icon icon-lg icon-user"></i>
+                About
+              </a>
+            </li>
+        
+            <li class="">
+              <a href="/open-source"  >
+                <i class="icon icon-lg icon-github"></i>
+                Project
+              </a>
+            </li>
+        
+            <li class="">
+              <a href="/demo"  >
+                <i class="icon icon-lg icon-audio-description"></i>
+                Demo
+              </a>
+            </li>
+        
+            <li class="">
+              <a href="/wechat-number"  >
+                <i class="icon icon-lg icon-wechat"></i>
+                公众号
+              </a>
+            </li>
+        
+            <li class="">
+              <a href="http://www.sivan.tech/LeetCodeAlgo/" target="_blank" >
+                <i class="icon icon-lg icon-braille"></i>
+                Leetcode
+              </a>
+            </li>
+        
+            <li class="">
+              <a href="http://resume.sivan.tech/" target="_blank" >
+                <i class="icon icon-lg icon-file-pdf-o"></i>
+                Resume
+              </a>
+            </li>
+        
+      </ul>
+    </div>
+  </div>
+</aside>
+
+    <main id="main">
+        <header class="top-header" id="header">
+    <div class="flex-row clearfix">
+        <a href="javascript:;" class="header-icon pull-left waves-effect waves-circle waves-light on" id="menu-toggle">
+          <i class="icon icon-lg icon-navicon"></i>
+        </a>
+        <div class="flex-col header-title ellipsis">
+            <span>[吴恩达机器学习]02单变量线性回归.md</span>
+            
+        </div>
+        
+        <a href="javascript:;" id="site_search_btn" class="header-icon pull-right waves-effect waves-circle waves-light">
+            <i class="icon icon-lg icon-search"></i>
+        </a>
+        
+    </div>
+</header>
+<header class="content-header post-header">
+    <img src="/img/s3.jpg" class="header-bg">
+    <div class="container fade-scale">
+        <h1 class="title">[吴恩达机器学习]02单变量线性回归.md</h1>
+        <h5 class="subtitle">
+            
+                <time datetime="2019-09-05T11:45:31.000Z" itemprop="datePublished" class="page-time">
+  2019-09-05
+</time>
+
+
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/机器学习/">机器学习</a><ul class="article-category-list-child"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/机器学习/第一阶段/">第一阶段</a></li></ul></li></ul>
+
+            
+        </h5>
+        
+    </div>
+    
+
+</header>
+
+<div id="site_search">
+    <div class="search-title clearfix">
+        <span class="pull-left">
+          <i class="icon icon-lg icon-search"></i>
+        </span>
+        <input type="text" id="local-search-input" name="q" results="0" placeholder="search my blog..." class="form-control pull-left"/>
+        <a href="javascript:;" class="close pull-right waves-effect waves-circle waves-light">
+          <i class="icon icon-lg icon-close"></i>
+        </a>
+    </div>
+    <div id="local-search-result"></div>
+</div>
+
+
+<div class="container body-wrap">
+    <article id="post-吴恩达机器学习-02单变量线性回归-md"
+  class="post-article article-type-post" itemprop="blogPost">
+    <div class="post-card">
+        <h1 class="post-card-title">[吴恩达机器学习]02单变量线性回归.md</h1>
+        <div class="post-meta">
+            <time class="post-time" title="2019-09-05 19:45:31" datetime="2019-09-05T11:45:31.000Z"  itemprop="datePublished">2019-09-05</time>
+
+            
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/机器学习/">机器学习</a><ul class="article-category-list-child"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/机器学习/第一阶段/">第一阶段</a></li></ul></li></ul>
+
+
+
+            
+	<span id="/2019/09/05/吴恩达机器学习-02单变量线性回归-md/" class="leancloud_visitors" data-flag-title="[吴恩达机器学习]02单变量线性回归.md" title="[吴恩达机器学习]02单变量线性回归.md">
+		
+			<i class="icon icon-eye"></i>
+		
+		<span class="leancloud-visitors-count"></span>
+	</span>
+ 
+
+            
+
+
+            
+        </div>
+        <div class="post-content" id="post-content" itemprop="postContent">
+            
+            <h1 id="单变量线性回归"><a href="#单变量线性回归" class="headerlink" title="单变量线性回归"></a>单变量线性回归</h1><h2 id="模型描述"><a href="#模型描述" class="headerlink" title="模型描述"></a>模型描述</h2><h3 id="课程用到的一些符号说明"><a href="#课程用到的一些符号说明" class="headerlink" title="课程用到的一些符号说明"></a>课程用到的一些符号说明</h3><ul>
+<li>m = 训练集的样本数量</li>
+<li>x = 输入变量 （或特征）</li>
+<li>y = 输出变量 (预测的值)</li>
+<li>(x , y) 表示一个训练样本</li>
+<li>$$(x_i, y_i)表示第i个训练样本$$ </li>
+</ul>
+<p><a rel=[吴恩达机器学习]02单变量线性回归.md href="2单变量线性回归.png" title="单变量线性回归.png" data-fancybox="images"><img src="2单变量线性回归.png" alt="单变量线性回归.png"></a></p>
+<blockquote>
+<p>一般可以表示为$$h(x) = c_1 * x + c_2$$</p>
+</blockquote>
+<h2 id="代价函数"><a href="#代价函数" class="headerlink" title="代价函数"></a>代价函数</h2><p>在线性回归预测中，我们希望获得两个理想的参数$$c_1和c_2$$使得我们预测的结果h与实际的结果y的差值越小越好。这里我们引入了代价函数$$\sum_{i=1}^m{(h-y)^2} ，$$ 也就是<strong>预测值与实际值的误差平方和越小越好</strong>, 也就是<strong>最小化代价函数</strong></p>
+<blockquote>
+<p>代价函数也被成为平方误差函数或平方误差代价函数</p>
+</blockquote>
+<p>此时我们已经将问题转换为求使得代价函数$$\sum_{i=1}^m{(h-y)^2} $$最小的两个理想参数$$c_1和c_2$$， 我们可以把其看作线性回归的整体目标函数。</p>
+<p>为了更直观理解，吴恩达老师将其代价函数简化为如下图中描述(即在求和的基础上除以2m)</p>
+<figure class="image-box">
+                <a rel=[吴恩达机器学习]02单变量线性回归.md href="02代价函数.png" title="02代价函数.png" data-fancybox="images"><img src="02代价函数.png" alt="02代价函数.png" title class></a>
+                <p>02代价函数.png</p>
+            </figure>
+<figure class="image-box">
+                <a rel=[吴恩达机器学习]02单变量线性回归.md href="02代价函数2.png" title="02代价函数2.png" data-fancybox="images"><img src="02代价函数2.png" alt="02代价函数2.png" title class></a>
+                <p>02代价函数2.png</p>
+            </figure>
+<p>也有其他评估线性回归的代价函数，但是平方误差和是我们最常见的一个评估手段。</p>
+<h2 id="梯度下降法-Gradient-Descent-Algorithm"><a href="#梯度下降法-Gradient-Descent-Algorithm" class="headerlink" title="梯度下降法(Gradient Descent Algorithm)"></a>梯度下降法(Gradient Descent Algorithm)</h2><blockquote>
+<p>梯度下降法可以将代价函数最小化，不仅可以用来最小化代价函数，而且可以最小化其他函数，并且应用领域十分广泛</p>
+</blockquote>
+<p>梯度下降的思路：</p>
+<ol>
+<li>给要确定值的所有参数一个初始值(通常我们都把他们初始化为0)</li>
+<li>不停的改变所有参数来减小代价函数的值直到找到了代价函数的最小值</li>
+</ol>
+<blockquote>
+<p>计算注意事项：所有参数必须做到同时更新，不可以更新后赋值。梯度下降必须做到所有参数的同时更新。</p>
+</blockquote>
+<figure class="image-box">
+                <a rel=[吴恩达机器学习]02单变量线性回归.md href="梯度下降公式以及注意事项.png" title="梯度下降公式以及注意事项" data-fancybox="images"><img src="梯度下降公式以及注意事项.png" alt="梯度下降公式以及注意事项" title class></a>
+                <p>梯度下降公式以及注意事项</p>
+            </figure>
+<p>其中α称为学习率，也就是决定梯度下降走路的步伐，控制我们以多大的速度更新参数$$Θ_j,第二部分是导数项，</p>
+<p>吴恩达老师提出的问题：对于J(Θ_1),如果Θ_1已经处于一个局部最优点，那么下一步梯度下降会怎样？$$</p>
+<blockquote>
+<p>$$因为已经处于局部最优点，此时导数为0，所以Θ_1将不会再改变，也就是Θ_1就是原来的Θ_1，将会使我们的解一直保持在局部最优解中$$</p>
+</blockquote>
+<figure class="image-box">
+                <a rel=[吴恩达机器学习]02单变量线性回归.md href="梯度下降2.png" title="梯度下降一些问题" data-fancybox="images"><img src="梯度下降2.png" alt="梯度下降一些问题" title class></a>
+                <p>梯度下降一些问题</p>
+            </figure>
+<p>注意：随着梯度下降算法的运行，后面的步骤中，导数将会变得越来越小，使得梯度下降越来越慢，因此没必要在后面的步骤中减小学习率</p>
+<h2 id="梯度下降与代价函数结合–线性回归"><a href="#梯度下降与代价函数结合–线性回归" class="headerlink" title="梯度下降与代价函数结合–线性回归"></a>梯度下降与代价函数结合–线性回归</h2><figure class="image-box">
+                <a rel=[吴恩达机器学习]02单变量线性回归.md href="线性回归总结.png" title="线性回归总结" data-fancybox="images"><img src="线性回归总结.png" alt="线性回归总结" title class></a>
+                <p>线性回归总结</p>
+            </figure>
+<p>Batch梯度下降法，表示每一步梯度下降，我们都遍历了整个训练集，其实在数学中可以通过方程组求出最小代价函数的参数，但是对于大规模数据集，梯度下降比较实用</p>
+<p><a rel=[吴恩达机器学习]02单变量线性回归.md href="梯度下降推导公式1.png" title="梯度下降公式1" data-fancybox="images"><img src="梯度下降推导公式1.png" alt="梯度下降公式1"></a><br><figure class="image-box">
+                <a rel=[吴恩达机器学习]02单变量线性回归.md href="梯度下降推导公式2.png" title="梯度下降公式2" data-fancybox="images"><img src="梯度下降推导公式2.png" alt="梯度下降公式2" title class></a>
+                <p>梯度下降公式2</p>
+            </figure></p>
+<a id="more"></a>
+        </div>
+        
+<blockquote class="post-copyright">
+    <div class="content">
+        
+<span class="post-time">
+    最后更新时间：<time datetime="2019-09-05T11:53:23.631Z" itemprop="dateUpdated">2019-09-05 19:53:23</time>
+</span><br>
+
+
+        
+        转载注明出处，原文地址：<a href="/2019/09/05/吴恩达机器学习-02单变量线性回归-md/" target="_blank" rel="external">http://www.sivan.tech/2019/09/05/吴恩达机器学习-02单变量线性回归-md/</a>
+        
+    </div>
+    <footer>
+        <a href="http://www.sivan.tech">
+            <img src="/img/1.jpg" alt="逸如风(yirufeng)">
+            逸如风(yirufeng)
+        </a>
+    </footer>
+</blockquote>
+
+        
+            <div class="page-reward">
+    <a id="rewardBtn" href="javascript:;" class="page-reward-btn waves-effect waves-circle waves-light">赏</a>
+</div>
+
+            
+        
+        <div class="post-footer">
+            
+	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/ML/">ML</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/吴恩达/">吴恩达</a></li></ul>
+
+            <div class="page-share-wrap">
+    
+
+<div class="page-share" id="pageShare">
+    <ul class="reset share-icons">
+      
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://www.sivan.tech/2019/09/05/吴恩达机器学习-02单变量线性回归-md/&title=《[吴恩达机器学习]02单变量线性回归.md》 — yirufeng's Blog&pic=http://www.sivan.tech/img/1.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://www.sivan.tech/2019/09/05/吴恩达机器学习-02单变量线性回归-md/&title=《[吴恩达机器学习]02单变量线性回归.md》 — yirufeng's Blog&source=单变量线性回归模型描述课程用到的一些符号说明
+m = 训练集的样本数量
+x = 输入变量 （或特征）
+y = 输出变量 (预测的值)
+(x , y) 表示..." data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http://www.sivan.tech/2019/09/05/吴恩达机器学习-02单变量线性回归-md/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《[吴恩达机器学习]02单变量线性回归.md》 — yirufeng's Blog&url=http://www.sivan.tech/2019/09/05/吴恩达机器学习-02单变量线性回归-md/&via=http://www.sivan.tech" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=http://www.sivan.tech/2019/09/05/吴恩达机器学习-02单变量线性回归-md/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+      
+    </ul>
+ </div>
+
+
+
+    <a href="javascript:;" id="shareFab" class="page-share-fab waves-effect waves-circle">
+        <i class="icon icon-share-alt icon-lg"></i>
+    </a>
+</div>
+
+        </div>
+        
+            
+
+
+        
+    </div>
+    
+<nav class="post-nav flex-row flex-justify-between">
+  
+    <div class="prev">
+      <a href="/2019/09/07/吴恩达机器学习-03多变量线性回归/" id="post-prev" class="post-nav-link">
+        <div class="tips"><i class="icon icon-angle-left icon-lg icon-pr"></i> Prev</div>
+        <h4 class="title">[吴恩达机器学习]03多变量线性回归</h4>
+      </a>
+    </div>
+  
+
+  
+    <div class="next">
+      <a href="/2019/09/05/吴恩达机器学习-01机器学习入门-md/" id="post-next" class="post-nav-link">
+        <div class="tips">Next <i class="icon icon-angle-right icon-lg icon-pl"></i></div>
+        <h4 class="title">[吴恩达机器学习]01机器学习入门.md</h4>
+      </a>
+    </div>
+  
+</nav>
+
+
+    
+        <div id="repo">
+    <div class="loading active"></div>
+    <div class="top clearfix">
+        <div class="avatar pull-left"></div>
+        <div class="content pull-left">
+            <p class="name"></p>
+            <p class="description"></p>
+        </div>
+    </div>
+    <ul class="bottom">
+        <li class="star">
+            <span class="icon icon-star"></span>
+            <span class="val">0</span>
+        </li>
+        <li class="fork">
+            <span class="icon icon-code-fork"></span>
+            <span class="val">0</span>
+        </li>
+        <li class="date">
+            <span class="icon icon-clock-o"></span>
+            <span class="val">0000-00-00</span>
+        </li>
+    </ul>
+    <a class="link" href=""></a>
+</div>
+    
+    
+        <aside class="post-widget">
+            <nav class="post-toc-wrap" id="post-toc">
+                <strong>目录</strong>
+                <ol class="post-toc"><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#单变量线性回归"><span class="post-toc-number">1.</span> <span class="post-toc-text">单变量线性回归</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#模型描述"><span class="post-toc-number">1.1.</span> <span class="post-toc-text">模型描述</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#课程用到的一些符号说明"><span class="post-toc-number">1.1.1.</span> <span class="post-toc-text">课程用到的一些符号说明</span></a></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#代价函数"><span class="post-toc-number">1.2.</span> <span class="post-toc-text">代价函数</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#梯度下降法-Gradient-Descent-Algorithm"><span class="post-toc-number">1.3.</span> <span class="post-toc-text">梯度下降法(Gradient Descent Algorithm)</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#梯度下降与代价函数结合–线性回归"><span class="post-toc-number">1.4.</span> <span class="post-toc-text">梯度下降与代价函数结合–线性回归</span></a></li></ol></li></ol>
+            </nav>
+            <div class="toc-bar"><div>
+        </aside>
+    
+</article>
+
+    <div id="reward" class="page-modal reward-lay">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <h3 class="reward-title">
+        <i class="icon icon-quote-left"></i>
+        感谢原作，你的打赏是我的动力！
+        <i class="icon icon-quote-right"></i>
+    </h3>
+    <div class="reward-content">
+        
+        <div class="reward-code">
+            <img id="rewardCode" src="/img/reward-wechat.jpg" alt="打赏二维码">
+        </div>
+        
+        <label class="reward-toggle">
+            <input id="rewardToggle" type="checkbox" class="reward-toggle-check"
+                data-wechat="/img/reward-wechat.jpg" data-alipay="/img/reward-alipay.jpg">
+            <div class="reward-toggle-ctrol">
+                <span class="reward-toggle-item wechat">微信</span>
+                <span class="reward-toggle-label"></span>
+                <span class="reward-toggle-item alipay">支付宝</span>
+            </div>
+        </label>
+        
+    </div>
+</div>
+
+    
+
+</div>
+
+    </main>
+    <footer class="footer ">
+    
+    <div class="top">
+        
+            <p>
+    <span>Links：</span>
+    
+    <span class="blogroll-item">
+        <a href="https://github.com/sivanWu0222" target="_blank">GitHub</a>
+    </span>
+    
+    <span class="blogroll-item">
+        <a href="http://weibo.com/Msingwen0222/home?wvr=5" target="_blank">新浪微博</a>
+    </span>
+    
+    <span class="blogroll-item">
+        <a href="https://www.linkedin.com/in/%E6%99%93%E6%96%87-%E5%90%B4-79057a121/" target="_blank">Linkedin</a>
+    </span>
+    
+    <span class="blogroll-item">
+        <a href="http://wpa.qq.com/msgrd?v=3&amp;uin=1666762170&amp;site=qq&amp;menu=yes" target="_blank">QQ</a>
+    </span>
+    
+    <span class="blogroll-item">
+        <a href="https://zh-cn.facebook.com/people/SiVan-Wu/100014408918389" target="_blank">Facebook</a>
+    </span>
+    
+    <span class="blogroll-item">
+        <a href="https://mail.qq.com/cgi-bin/qm_share?t=qm_mailme&amp;email=xfTz8-Py8-f08vWFtLTrpqqo" target="_blank">Contact</a>
+    </span>
+    
+    <span class="blogroll-item">
+        <a href="https://twitter.com/SiVan_Wu" target="_blank">Twitter</a>
+    </span>
+    
+</p>
+
+        
+    </div>
+    
+    <div class="bottom">
+        <p>
+            <span>
+                逸如风(yirufeng) &copy; 2016 - 2019
+            </span>
+
+           	
+           	<span>
+           		<a href="http://beian.miit.gov.cn/" target="_blank">已实名认证</a>
+           	</span>
+           	
+
+            
+
+            
+
+            
+                
+<span class="site-uv" title="总访客量">
+    <i class="icon icon-user"></i>
+    <i class="busuanzi-value" id="busuanzi_value_site_uv"></i>
+</span>
+
+
+<span class="site-pv" title="总访问量">
+    <i class="icon icon-eye"></i>
+    <i class="busuanzi-value" id="busuanzi_value_site_pv"></i>
+</span>
+
+            
+        </p>
+    </div>
+</footer>
+
+    <div class="mask" id="mask"></div>
+<a href="javascript:;" id="gotop" class="waves-effect waves-circle waves-light"><span class="icon icon-lg icon-chevron-up"></span></a>
+
+
+
+<div class="global-share" id="globalShare">
+    <ul class="reset share-icons">
+      
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://www.sivan.tech/2019/09/05/吴恩达机器学习-02单变量线性回归-md/&title=《[吴恩达机器学习]02单变量线性回归.md》 — yirufeng's Blog&pic=http://www.sivan.tech/img/1.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://www.sivan.tech/2019/09/05/吴恩达机器学习-02单变量线性回归-md/&title=《[吴恩达机器学习]02单变量线性回归.md》 — yirufeng's Blog&source=单变量线性回归模型描述课程用到的一些符号说明
+m = 训练集的样本数量
+x = 输入变量 （或特征）
+y = 输出变量 (预测的值)
+(x , y) 表示..." data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http://www.sivan.tech/2019/09/05/吴恩达机器学习-02单变量线性回归-md/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《[吴恩达机器学习]02单变量线性回归.md》 — yirufeng's Blog&url=http://www.sivan.tech/2019/09/05/吴恩达机器学习-02单变量线性回归-md/&via=http://www.sivan.tech" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=http://www.sivan.tech/2019/09/05/吴恩达机器学习-02单变量线性回归-md/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+      
+    </ul>
+ </div>
+
+
+<div class="page-modal wx-share" id="wxShare">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAN4AAADeCAAAAAB3DOFrAAACw0lEQVR42u3awWrkMBAE0Pz/T2chp4VgT1XLjXN4Pg2Dx9ZTQK1U6+srvr5/rvzO/6/f31/df/+ufAz1hYeHhzca+tV19ej8V8l1PzW/x5A8DQ8PD2+bd78Q3y/x+YDatzxQPPDw8PBe5SWlItlY3+97WzweHh7eX+blr0nihqfKBh4eHt5bvDwmSKLe+yU+j4xnMQceHh7eNm/2ync/L/b38PDw8A666vniO7sn2XAfjRAPDw9vgZdvl8/X2zbezQPfDyPHw8PDW+C1ra/zgwWzzyeThYeHh/csb9bQmhWVpMwk2/Rk0vHw8PA2eHmIkEcPs4NWbZwR/WHw8PDw1nj5tjhf0Geb6Xyio1KBh4eH9xKvjVNPBj2LcS8teHh4eGu8kzAiZ+QxRNvDusTj4eHhrfGSaKC9Z9YMOw+LP2yp8fDw8I55xT/2Zdlom/2zpb+IJPDw8PAWeG2DKt9kJ9+3vy2iCjw8PLwFXn64qg5Sy4MCyRPyz3h4eHh7vHyZbsPWfMryAtNOCh4eHt4Gry0GeZFoD2C1T6sDXzw8PLyHeLPgdXbsIA8d8uIUFQM8PDy8R3lP/fPftqZOgtoHIgk8PDy80ahO9uBt47/dNOcJ9OWv8PDw8BZ4yYJ+3tpvm1ttDPFh5Hh4eHgLvDyemMWp+aGutgmXx8p4eHh4G7x8i5wnHO285gHEsBjg4eHhPcTLt8gnUUKyxLdlKQLj4eHhrfGS5TupMLOh5FNWX3h4eHiP8r7La7YRr5fyIGiIYmI8PDy8Bd5J8cjX5PYJbWTchsJ4eHh457y20ZUv0/mTk219+0Y8PDy8bd6s6ZXHGW3jqq1dlyPEw8PD+wO89ghC8k2+ma4nCw8PD+9VXptntE9uO1lRwwwPDw9vjZdHBvmW+vyo1vlU4uHh4W3wZhvlWRnIw472UMLRIS08PDy8lPcPcHoDJ1nVQegAAAAASUVORK5CYII=" alt="微信分享二维码">
+</div>
+
+
+    
+    <!-- main-js -->
+<script type="text/javascript" src="//cdn.bootcss.com/jquery/2.1.0/jquery.min.js"></script>
+<script type="text/javascript" src="/js/plugins/fastclick.js?v=1.4.2"></script>
+<script type="text/javascript" src="/js/plugins/ios-orientationchange-fix.js?v=1.4.2"></script>
+<script type="text/javascript" src="//cdn.jsdelivr.net/gh/fancyapps/fancybox@3.5.2/dist/jquery.fancybox.min.js"></script>
+
+<script type="text/javascript" src="//cdn.bootcss.com/node-waves/0.7.4/waves.min.js"></script>
+
+<script type="text/javascript" src="/js/method.js?v=1.4.2"></script>
+<script type="text/javascript" src="/js/blog.js?v=1.4.2"></script>
+
+<!-- third-party -->
+
+
+    <script type="text/javascript">
+    (function() {
+
+        const origin = "sivanWu0222 | ML_AndrewNg"
+        let user, repo;
+        origin.replace(/(\S+)\s{0,1}\|\s{0,1}(\S+)/g, (...rest) => {
+            [user, repo] = [ rest[1], rest[2] ];
+        });
+        if (user && repo) {
+            const url = `//api.github.com/repos/${user}/${repo}?callback=?`;
+            $.getJSON(url, (data) => {
+                updateRepoInPage(data.data);
+            });
+        }
+
+        function updateRepoInPage(data) {
+            const {name, description, html_url: url, stargazers_count: stars, forks, owner: owner, updated_at: update} = data;
+            _loadAvatar(owner.avatar_url).then(avatarUrl => {
+                const avatarBg = `url(${avatarUrl})`;
+                const container = $('#repo');
+                container.click(() => {
+                    window.open(url);
+                });
+
+                //init
+                const loadingItem = container.find('.loading').hide();
+                const topItem = container.find('.top').addClass('active');
+                const bottomItem = container.find('.bottom').addClass('active');
+
+                //avatar
+                const avatarItem = container.find('.avatar');
+                const oldBg = avatarItem.css('background-image');
+                avatarItem.hover(() => {
+                    avatarItem.css('background-image', avatarBg);
+                }, () => {
+                    avatarItem.css('background-image', oldBg);
+                });
+
+                //repo-name
+                const nameItem = container.find('.name').html(name);
+
+                //description
+                const descriptionItem = container.find('.description').html(description);
+
+                //stars
+                const starItem = container.find('.star>.val').html(stars);
+
+                //forks
+                const forkItem = container.find('.fork>.val').html(forks);
+
+                //date
+                const formatDate = update.replace(/T.+/g, '');
+                const dateItem = container.find('.date>.val').html(formatDate);
+            });
+
+            function _loadAvatar(url) {
+                return new Promise((resolve, reject) => {
+                    const img = new Image();
+                    img.onload = () => {
+                        resolve(url);
+                    };
+                    img.src = url;
+                });
+            }
+
+        }
+
+    })();
+</script>
+
+
+
+
+
+<script type="text/javascript" src="/js/plugins/local_search.js?v=1.4.2"></script>
+<script type="text/javascript">
+	var search_path = "search.xml";
+	if (search_path.length === 0) {
+		search_path = "search.xml";
+	}
+	var path = "/" + search_path;
+	searchFunc(path, "local-search-input", "local-search-result");
+</script>
+
+
+
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+    
+    
+
+
+
+<script type="text/javascript" src="https://cdn1.lncld.net/static/js/av-core-mini-0.6.4.js"></script>
+<script type="text/javascript" src="/js/plugins/leancloud_visitors.js?v=1.4.2"></script>
+
+
+
+    <!-- mathjax config similar to math.stackexchange -->
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+        tex2jax: {
+            inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+            processEscapes: true,
+            skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+        }
+    });
+</script>
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for (i=0; i < all.length; i += 1) {
+            all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+    });
+</script>
+
+<script type="text/javascript" src="//cdn.bootcss.com/mathjax/2.7.1/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+
+
+
+    <script>
+    (function() {
+        var OriginTitile = document.title, titleTime;
+        document.addEventListener('visibilitychange', function() {
+            if (document.hidden) {
+                document.title = '死鬼去哪里了！';
+                clearTimeout(titleTime);
+            } else {
+                document.title = '(つェ⊂)咦!又好了!';
+                titleTime = setTimeout(function() {
+                    document.title = OriginTitile;
+                },2000);
+            }
+        });
+    })();
+</script>
+
+
+
+
+
+    
+</body>
+</html>

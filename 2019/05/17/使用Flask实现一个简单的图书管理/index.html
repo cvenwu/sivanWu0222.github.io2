@@ -1,0 +1,862 @@
+<!DOCTYPE html>
+<html>
+<head><meta name="generator" content="Hexo 3.9.0">
+    <meta charset="utf-8">
+    
+    
+    <title>使用Flask实现一个简单的图书管理 | yirufeng&#39;s Blog | 未来的小幸运 || 致正在努力的我们 ---- 逸如风</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    
+    <meta name="keywords" content="Python,Flask,Web,flask">
+    <link rel="shortcut icon" href="/img/favicon.ico">
+    <link rel="stylesheet" href="//cdn.jsdelivr.net/gh/fancyapps/fancybox@3.5.2/dist/jquery.fancybox.min.css">
+    <link rel="stylesheet" href="/css/style.css?v=1.4.2">
+    
+    <script type="text/javascript">
+        // Data Center
+        var DC = {
+            reward:	true,
+            lv: JSON.parse('{"enable":true,"app_id":"K2RVtHi7RnmoN6dovlDKafn8-gzGzoHsz","app_key":"Qxmil0oqPFdDUyyIp2i1Xikt","icon":true}'),
+            v: JSON.parse('{"enable":false,"appid":"ACuOJIasBeRLiDe2iUApHj67-gzGzoHsz","appkey":"qbgg4tClrQQmvq8uwlpwA5mA","notify":true,"verify":true,"placeholder":"give me some sugers plz...","avatar":"wavatar"}'),
+            g: JSON.parse('{"enable":false,"lazy":true,"owner":"codefine","repo":"gitment","oauth":{"client_id":null,"client_secret":null},"perPage":10}'),
+            d: JSON.parse('{"app_id":null}')
+        };
+    </script>
+    <script type="text/javascript">
+        window.lazyScripts=[];
+    </script>
+    
+</head>
+
+
+<body>
+    <div id="loading" class="active"></div>
+
+    <aside id="menu" class="">
+  <div class="inner flex-row-vertical">
+    <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menu-off">
+        <i class="icon icon-lg icon-close"></i>
+    </a>
+    <div class="brand-wrap">
+      
+      <img src="/img/brand.jpg" class="brand-bg">
+      
+      <div class="brand">
+        <a href="/" class="avatar waves-effect waves-circle waves-light">
+          <img src="/img/1.jpg">
+        </a>
+        <hgroup class="introduce">
+          <h5 class="nickname">逸如风(yirufeng)</h5>
+          <a href="mailto:yirufeng@foxmail.com" title="yirufeng@foxmail.com" class="mail">
+            
+              <span>y</span>
+            
+              <span>i</span>
+            
+              <span>r</span>
+            
+              <span>u</span>
+            
+              <span>f</span>
+            
+              <span>e</span>
+            
+              <span>n</span>
+            
+              <span>g</span>
+            
+              <span>@</span>
+            
+              <span>f</span>
+            
+              <span>o</span>
+            
+              <span>x</span>
+            
+              <span>m</span>
+            
+              <span>a</span>
+            
+              <span>i</span>
+            
+              <span>l</span>
+            
+              <span>.</span>
+            
+              <span>c</span>
+            
+              <span>o</span>
+            
+              <span>m</span>
+            
+          </a>
+        </hgroup>
+        
+        <ul class="menu-link">
+          
+              <li>
+                <a href="https://github.com/sivanWu0222" target="_blank">
+                  <i class="icon icon-lg icon-github"></i>
+                </a>
+              </li>
+            
+              <li>
+                <a href="https://mail.qq.com/cgi-bin/qm_share?t=qm_mailme&amp;amp;email=xfTz8-Py8-f08vWFtLTrpqqo" target="_blank">
+                  <i class="icon icon-lg icon-envelope"></i>
+                </a>
+              </li>
+            
+        </ul>
+        
+      </div>
+    </div>
+    <div class="scroll-wrap flex-col">
+      <ul class="nav">
+        
+            <li class="">
+              <a href="/"  >
+                <i class="icon icon-lg icon-home"></i>
+                Home
+              </a>
+            </li>
+        
+            <li class="">
+              <a href="/categories"  >
+                <i class="icon icon-lg icon-th-list"></i>
+                Category
+              </a>
+            </li>
+        
+            <li class="">
+              <a href="/research"  >
+                <i class="icon icon-lg icon-mortar-board"></i>
+                Research
+              </a>
+            </li>
+        
+            <li class="">
+              <a href="/tags"  >
+                <i class="icon icon-lg icon-tags"></i>
+                Tag
+              </a>
+            </li>
+        
+            <li class="">
+              <a href="/archives"  >
+                <i class="icon icon-lg icon-archives"></i>
+                Archive
+              </a>
+            </li>
+        
+            <li class="">
+              <a href="/about"  >
+                <i class="icon icon-lg icon-user"></i>
+                About
+              </a>
+            </li>
+        
+            <li class="">
+              <a href="/open-source"  >
+                <i class="icon icon-lg icon-github"></i>
+                Project
+              </a>
+            </li>
+        
+            <li class="">
+              <a href="/demo"  >
+                <i class="icon icon-lg icon-audio-description"></i>
+                Demo
+              </a>
+            </li>
+        
+            <li class="">
+              <a href="/wechat-number"  >
+                <i class="icon icon-lg icon-wechat"></i>
+                公众号
+              </a>
+            </li>
+        
+            <li class="">
+              <a href="http://www.sivan.tech/LeetCodeAlgo/" target="_blank" >
+                <i class="icon icon-lg icon-braille"></i>
+                Leetcode
+              </a>
+            </li>
+        
+            <li class="">
+              <a href="http://resume.sivan.tech/" target="_blank" >
+                <i class="icon icon-lg icon-file-pdf-o"></i>
+                Resume
+              </a>
+            </li>
+        
+      </ul>
+    </div>
+  </div>
+</aside>
+
+    <main id="main">
+        <header class="top-header" id="header">
+    <div class="flex-row clearfix">
+        <a href="javascript:;" class="header-icon pull-left waves-effect waves-circle waves-light on" id="menu-toggle">
+          <i class="icon icon-lg icon-navicon"></i>
+        </a>
+        <div class="flex-col header-title ellipsis">
+            <span>使用Flask实现一个简单的图书管理</span>
+            
+        </div>
+        
+        <a href="javascript:;" id="site_search_btn" class="header-icon pull-right waves-effect waves-circle waves-light">
+            <i class="icon icon-lg icon-search"></i>
+        </a>
+        
+    </div>
+</header>
+<header class="content-header post-header">
+    <img src="/img/s3.jpg" class="header-bg">
+    <div class="container fade-scale">
+        <h1 class="title">使用Flask实现一个简单的图书管理</h1>
+        <h5 class="subtitle">
+            
+                <time datetime="2019-05-17T02:00:56.000Z" itemprop="datePublished" class="page-time">
+  2019-05-17
+</time>
+
+
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/Flask/">Flask</a></li></ul>
+
+            
+        </h5>
+        
+    </div>
+    
+
+</header>
+
+<div id="site_search">
+    <div class="search-title clearfix">
+        <span class="pull-left">
+          <i class="icon icon-lg icon-search"></i>
+        </span>
+        <input type="text" id="local-search-input" name="q" results="0" placeholder="search my blog..." class="form-control pull-left"/>
+        <a href="javascript:;" class="close pull-right waves-effect waves-circle waves-light">
+          <i class="icon icon-lg icon-close"></i>
+        </a>
+    </div>
+    <div id="local-search-result"></div>
+</div>
+
+
+<div class="container body-wrap">
+    <article id="post-使用Flask实现一个简单的图书管理"
+  class="post-article article-type-post" itemprop="blogPost">
+    <div class="post-card">
+        <h1 class="post-card-title">使用Flask实现一个简单的图书管理</h1>
+        <div class="post-meta">
+            <time class="post-time" title="2019-05-17 10:00:56" datetime="2019-05-17T02:00:56.000Z"  itemprop="datePublished">2019-05-17</time>
+
+            
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/Flask/">Flask</a></li></ul>
+
+
+
+            
+	<span id="/2019/05/17/使用Flask实现一个简单的图书管理/" class="leancloud_visitors" data-flag-title="使用Flask实现一个简单的图书管理" title="使用Flask实现一个简单的图书管理">
+		
+			<i class="icon icon-eye"></i>
+		
+		<span class="leancloud-visitors-count"></span>
+	</span>
+ 
+
+            
+
+
+            
+        </div>
+        <div class="post-content" id="post-content" itemprop="postContent">
+            
+            <h2 id="项目演示以及讲解项目开发流程"><a href="#项目演示以及讲解项目开发流程" class="headerlink" title="项目演示以及讲解项目开发流程"></a>项目演示以及讲解项目开发流程</h2><ol>
+<li>配置连接数据库</li>
+<li>添加书和作者模型</li>
+<li>添加数据</li>
+<li>使用模板显示数据库查询的数据</li>
+<li>使用WTF显示变淡</li>
+<li>实现相关增删逻辑</li>
+</ol>
+<h2 id="配置数据库"><a href="#配置数据库" class="headerlink" title="配置数据库"></a>配置数据库</h2><ol>
+<li>导入SQLAlchemy</li>
+<li>配置数据库</li>
+<li>关闭动态跟踪修改</li>
+<li>创建数据库对象</li>
+<li>使用终端创建数据库</li>
+</ol>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> flask_sqlalchemy <span class="keyword">import</span> SQLAlchemy</span><br><span class="line"></span><br><span class="line"><span class="comment"># 数据库配置</span></span><br><span class="line">app.config[<span class="string">'SQLALCHEMY_DATABASE_URI'</span>] = <span class="string">'mysql://root:123456@localhost:3306/flask_books'</span></span><br><span class="line"><span class="comment"># 关闭自动跟踪修改</span></span><br><span class="line">app.config[<span class="string">'SQLALCHEMY_TRACK_MODIFICATIONS'</span>] = <span class="literal">False</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 创建数据库对象，并将数据库对应与对应的app绑定起来</span></span><br><span class="line">db = SQLAlchemy(app)</span><br></pre></td></tr></table></figure>
+<h3 id="定义书和作者模型"><a href="#定义书和作者模型" class="headerlink" title="定义书和作者模型"></a>定义书和作者模型</h3><ul>
+<li>模型继承自db.Model</li>
+<li><strong>tablename</strong> 指定表名</li>
+<li>db.Column() 标明是一个字段</li>
+<li>db.relationship 定义关系引用 </li>
+</ul>
+<a id="more"></a>
+<h3 id="添加数据"><a href="#添加数据" class="headerlink" title="添加数据"></a>添加数据</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line">db.drop_all()</span><br><span class="line">db.create_all()</span><br><span class="line"></span><br><span class="line"><span class="comment"># 生成数据</span></span><br><span class="line">au1 = Author(name=<span class="string">'老王'</span>)</span><br><span class="line">au2 = Author(name=<span class="string">'老惠'</span>)</span><br><span class="line">au3 = Author(name=<span class="string">'老刘'</span>)</span><br><span class="line"><span class="comment"># 把数据提交给用户会话</span></span><br><span class="line">db.session.add([au1, au2, au3])</span><br><span class="line"><span class="comment"># 提交会话</span></span><br><span class="line">db.session.commit()</span><br><span class="line"></span><br><span class="line">bk1 = Book(name=<span class="string">'老王回忆录'</span>, author_id=au1.id)</span><br><span class="line">bk2 = Book(name=<span class="string">'我读书少，你别骗我'</span>, author_id=au1.id)</span><br><span class="line">bk3 = Book(name=<span class="string">'如何才能让自己更骚'</span>, author_id=au2.id)</span><br><span class="line">bk4 = Book(name=<span class="string">'怎样征服美丽少女'</span>, author_id=au3.id)</span><br><span class="line">bk5 = Book(name=<span class="string">'如何征服英俊少男'</span>, author_id=au3.id)</span><br><span class="line"><span class="comment"># 将数据提交给会话</span></span><br><span class="line">db.session.add([bk1, bk2, bk3. bk4, bk5])</span><br><span class="line"><span class="comment"># 提交会话</span></span><br><span class="line">db.session.commit()</span><br><span class="line">print(<span class="string">'1'</span>)</span><br></pre></td></tr></table></figure>
+<h3 id="显示作者数据"><a href="#显示作者数据" class="headerlink" title="显示作者数据"></a>显示作者数据</h3><ol>
+<li>查询所有作者信息，将消息传递给模板</li>
+<li>模板按照格式，依次for循环作者和书籍即可 </li>
+</ol>
+<blockquote>
+<p>这里用到了关系引用，通过作者获得书名，但实际上作者表中只有书的id，这里使用了关系引用来获取书名</p>
+</blockquote>
+<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">&lt;hr&gt;</span><br><span class="line">&lt;ul&gt;</span><br><span class="line">&#123;% <span class="keyword">for</span> author <span class="keyword">in</span> authors %&#125;</span><br><span class="line">    &lt;li&gt;&#123;&#123; author.name &#125;&#125;&lt;/li&gt;</span><br><span class="line">    &lt;ul&gt;</span><br><span class="line">        &#123;% <span class="keyword">for</span> book <span class="keyword">in</span> author.books %&#125;</span><br><span class="line">            &lt;li&gt;&#123;&#123; book.name &#125;&#125;&lt;/li&gt;</span><br><span class="line">        &#123;% endfor %&#125;</span><br><span class="line">    &lt;/ul&gt;</span><br><span class="line"></span><br><span class="line">&#123;% endfor %&#125;</span><br><span class="line">&lt;/ul&gt;</span><br></pre></td></tr></table></figure>
+<h3 id="使用WTF显示表单"><a href="#使用WTF显示表单" class="headerlink" title="使用WTF显示表单"></a>使用WTF显示表单</h3><ol>
+<li>自定义表单类,需要继承FlaskForm</li>
+<li>模板中进行显示</li>
+<li>注意：设置secret_key / 编码 / csrf_token</li>
+</ol>
+<p>自定义表单类：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 自定义表单类</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">AuthorForm</span><span class="params">(FlaskForm)</span>:</span></span><br><span class="line">    author = StringField(label=<span class="string">'作者'</span>, validators=[DataRequired()])</span><br><span class="line">    books = StringField(label=<span class="string">'书籍'</span>, validators=[DataRequired()])</span><br><span class="line">    submit = SubmitField(label=<span class="string">'添加'</span>)</span><br></pre></td></tr></table></figure>
+<p>视图函数中创建表单对象并进行传递</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@app.route('/')</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">index</span><span class="params">()</span>:</span></span><br><span class="line">    <span class="comment"># 查询所有作者信息并传递给模板</span></span><br><span class="line">    authors = Author.query.all()</span><br><span class="line">    <span class="comment"># 创建自定义表单类</span></span><br><span class="line">    form = AuthorForm()</span><br><span class="line">    <span class="keyword">return</span> render_template(<span class="string">'books.html'</span>, authors=authors, form=form)</span><br></pre></td></tr></table></figure>
+<p>在对应的Html文件中使用表单</p>
+<blockquote>
+<p>Tips: 记得编写csrf_token,如果有flash消息，记得显示flash</p>
+</blockquote>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">form</span> <span class="attr">action</span>=<span class="string">""</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">center</span>&gt;</span>&#123;&#123;form.csrf_token()&#125;&#125;<span class="tag">&lt;/<span class="name">center</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">center</span>&gt;</span>&#123;&#123;form.author.label&#125;&#125; &#123;&#123; form.author &#125;&#125;<span class="tag">&lt;/<span class="name">center</span>&gt;</span><span class="tag">&lt;<span class="name">br</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">center</span>&gt;</span>&#123;&#123;form.books.label&#125;&#125; &#123;&#123; form.books &#125;&#125;<span class="tag">&lt;/<span class="name">center</span>&gt;</span><span class="tag">&lt;<span class="name">br</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">center</span>&gt;</span>&#123;&#123; form.submit &#125;&#125;<span class="tag">&lt;/<span class="name">center</span>&gt;</span><span class="tag">&lt;<span class="name">br</span>&gt;</span></span><br><span class="line">    &#123;# 显示消息闪现的内容 #&#125;</span><br><span class="line">    &#123;% for message in get_flashed_messages() %&#125;</span><br><span class="line">        &#123;&#123; message &#125;&#125;</span><br><span class="line">    &#123;% endfor %&#125;</span><br><span class="line"><span class="tag">&lt;/<span class="name">form</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<h3 id="实现相关的增删逻辑"><a href="#实现相关的增删逻辑" class="headerlink" title="实现相关的增删逻辑"></a>实现相关的增删逻辑</h3><blockquote>
+<p>做表单验证记得添加对应的POST请求</p>
+</blockquote>
+<blockquote>
+<p>采用默认的html文件中的表单需要记得修改method=’post’，如果没有修改将会默认是get请求</p>
+</blockquote>
+<h4 id="增加数据"><a href="#增加数据" class="headerlink" title="增加数据"></a>增加数据</h4><ol>
+<li>调用wtf验证函数用一行代码实现验证</li>
+<li>如果通过验证可以获取数据</li>
+<li>判断作者是否存在</li>
+<li>如果作者存在，判断书籍是否存在，如果没有重复书籍，则可以添加数据</li>
+<li>如果作者不存在，就添加作者和书籍</li>
+<li>验证不通过就提示错误</li>
+</ol>
+<p>调用wtf验证函数用一行代码实现验证: form.validate_on_submit() 其中<strong>form是自定义表单类的对象名</strong></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 1. 调用wtf验证函数用一行代码实现验证</span></span><br><span class="line">    <span class="keyword">if</span> form.validate_on_submit():</span><br><span class="line">        <span class="comment"># 2. 如果通过验证可以获取数据</span></span><br><span class="line">        author_name = form.author.data</span><br><span class="line">        book_name = form.books.data</span><br><span class="line">        print(author_name)</span><br><span class="line">        print(book_name)</span><br><span class="line">        <span class="comment"># 3. 判断作者是否存在</span></span><br><span class="line">        author = Author.query.filter_by(name=author_name).first()</span><br><span class="line"></span><br><span class="line">        <span class="comment"># 4. 如果作者存在</span></span><br><span class="line">        <span class="keyword">if</span> author:</span><br><span class="line">            <span class="comment"># 判断书籍是否存在，如果没有重复书籍，则可以添加数据</span></span><br><span class="line">            book = Book.query.filter_by(name=book_name).first()</span><br><span class="line">            <span class="keyword">if</span> book:</span><br><span class="line">                <span class="comment"># 书籍存在</span></span><br><span class="line">                flash(<span class="string">'已存在同名书籍'</span>)</span><br><span class="line">            <span class="keyword">else</span>:</span><br><span class="line">                <span class="comment"># 书籍不存在</span></span><br><span class="line">                <span class="keyword">try</span>:</span><br><span class="line">                    <span class="comment"># 添加数据</span></span><br><span class="line">                    new_book = Book(name=book_name, author_id=author.id)</span><br><span class="line">                    db.session.add(new_book)</span><br><span class="line">                    db.session.commit()</span><br><span class="line">                <span class="keyword">except</span> Exception <span class="keyword">as</span> e:</span><br><span class="line">                    print(e)</span><br><span class="line">                    flash(<span class="string">"添加书籍失败"</span>)</span><br><span class="line">                    <span class="comment"># 添加失败，数据库回滚</span></span><br><span class="line">                    db.session.rollback()</span><br><span class="line">        <span class="keyword">else</span>:</span><br><span class="line">            print(<span class="string">'45'</span>)</span><br><span class="line">            <span class="comment"># 5. 如果作者不存在，就先添加作者再添加书籍</span></span><br><span class="line">            <span class="keyword">try</span>:</span><br><span class="line">                <span class="comment"># 添加数据</span></span><br><span class="line">                new_author = Author(name=author_name)</span><br><span class="line">                db.session.add(new_author)</span><br><span class="line">                db.session.commit()</span><br><span class="line"></span><br><span class="line">                new_book = Book(name=book_name, author_id=new_author.id)</span><br><span class="line">                db.session.add(new_book)</span><br><span class="line">                db.session.commit()</span><br><span class="line">            <span class="keyword">except</span> Exception <span class="keyword">as</span> e:</span><br><span class="line">                print(e)</span><br><span class="line">                flash(<span class="string">"添加作者和书籍失败"</span>)</span><br><span class="line">                <span class="comment"># 添加失败，数据库回滚</span></span><br><span class="line">                db.session.rollback()</span><br><span class="line">    <span class="keyword">else</span>:</span><br><span class="line">        <span class="comment"># 6. 验证不通过就提示错误</span></span><br><span class="line">        <span class="keyword">if</span> request.method == <span class="string">'post'</span>:</span><br><span class="line">            flash(<span class="string">"参数不全"</span>)</span><br><span class="line">        print(<span class="string">'2'</span>)</span><br></pre></td></tr></table></figure>
+<p>tips: <strong>一定要记得在添加作者和书籍之后才查询作者并显示，否则新加的作者或书籍不会被显示</strong></p>
+<h4 id="删除数据"><a href="#删除数据" class="headerlink" title="删除数据"></a>删除数据</h4><h4 id="点击书籍旁边的删除"><a href="#点击书籍旁边的删除" class="headerlink" title="点击书籍旁边的删除"></a>点击书籍旁边的删除</h4><blockquote>
+<p> url_for redirect 控制代码块 与 for else 的使用</p>
+</blockquote>
+<blockquote>
+<p>根据书籍的id删除书籍</p>
+</blockquote>
+<p>流程：点击删除按钮 –&gt; 将需要发送书籍的ID传入给删除书籍的路由–&gt; 路由需要接收参数</p>
+<blockquote>
+<p>from flask import Flask, render_template, flash, request, redirect, url_for</p>
+</blockquote>
+<blockquote>
+<p> <strong>一般情况下redirect 与 url_for 是结合使用的</strong><br>redirect: 就是用来重定向的</p>
+</blockquote>
+<blockquote>
+<p>url_for() 需要传入视图函数名，会返回该视图函数对应的路由地址</p>
+</blockquote>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&gt;</span><br><span class="line">&gt; <span class="keyword">return</span> redirect(&#123;&#123; url_for(<span class="string">'index'</span>) &#125;&#125;)</span><br><span class="line">&gt; 等同于<span class="keyword">return</span> redirect(<span class="string">'/'</span>)</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&gt; url_for() 除了第1个传入视图函数名，后面还可以在对应的视图界面中传入视图函数所需要的参数，参数名便是视图函数中的动态参数名</span><br><span class="line">&gt; &lt;a href=&quot;&#123;&#123; url_for(&apos;delete_book&apos;, book_id=book.id) &#125;&#125;&quot;&gt;删除&lt;/a&gt;</span><br></pre></td></tr></table></figure>
+<p>对应的视图函数：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@app.route('/delete_book/&lt;int:book_id&gt;')</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">delete_book</span><span class="params">(book_id)</span>:</span></span><br><span class="line">    <span class="comment"># 查询数据库对应id书籍是否存在，如果有就删除，没有就提示错误</span></span><br><span class="line">    book = Book.query.get(book_id)</span><br><span class="line">    <span class="keyword">if</span> book:</span><br><span class="line">        <span class="keyword">try</span>:</span><br><span class="line">            db.session.delete(book)</span><br><span class="line">            db.session.commit()</span><br><span class="line">        <span class="keyword">except</span> Exception <span class="keyword">as</span> e:</span><br><span class="line">            print(e)</span><br><span class="line">            flash(<span class="string">'删除书籍出错'</span>)</span><br><span class="line">            db.session.rollback()</span><br><span class="line">    <span class="keyword">else</span>:</span><br><span class="line">        flash(<span class="string">'书籍不存在'</span>)</span><br><span class="line"><span class="comment"># 如何返回当前网址 --&gt; 重定向</span></span><br><span class="line">    <span class="comment"># url_for 需要传入视图函数名，会返回该视图函数对应的路由地址</span></span><br><span class="line">    <span class="keyword">return</span> redirect(&#123;&#123; url_for(<span class="string">'index'</span>) &#125;&#125;)</span><br><span class="line">    <span class="comment"># 等同于return redirect('/')</span></span><br></pre></td></tr></table></figure>
+<p>删除书籍对应的视图界面：</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">&#123;% for book in author.books %&#125;</span><br><span class="line">    &#123;# 如果有书将会执行下面这一行代码 #&#125;</span><br><span class="line">    <span class="tag">&lt;<span class="name">li</span>&gt;</span>&#123;&#123; book.name &#125;&#125; <span class="tag">&lt;<span class="name">a</span> <span class="attr">href</span>=<span class="string">"&#123;&#123; url_for('delete_book', book_id=book.id) &#125;&#125;"</span>&gt;</span>删除<span class="tag">&lt;/<span class="name">a</span>&gt;</span><span class="tag">&lt;/<span class="name">li</span>&gt;</span></span><br><span class="line">&#123;% else %&#125;</span><br><span class="line">    &#123;# 如果没有书将会执行下面这一行代码 #&#125;</span><br><span class="line">    <span class="tag">&lt;<span class="name">li</span>&gt;</span>无<span class="tag">&lt;/<span class="name">li</span>&gt;</span></span><br><span class="line">&#123;% endfor %&#125;</span><br></pre></td></tr></table></figure>
+<p>删除书籍对应的功能函数：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@app.route('/delete_book/&lt;int:book_id&gt;')</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">delete_book</span><span class="params">(book_id)</span>:</span></span><br><span class="line">    <span class="comment"># 查询数据库对应id书籍是否存在，如果有就删除，没有就提示错误</span></span><br><span class="line">    book = Book.query.get(book_id)</span><br><span class="line">    <span class="keyword">if</span> book:</span><br><span class="line">        <span class="keyword">try</span>:</span><br><span class="line">            db.session.delete(book)</span><br><span class="line">            db.session.commit()</span><br><span class="line">        <span class="keyword">except</span> Exception <span class="keyword">as</span> e:</span><br><span class="line">            print(e)</span><br><span class="line">            flash(<span class="string">'删除书籍出错'</span>)</span><br><span class="line">            db.session.rollback()</span><br><span class="line">    <span class="keyword">else</span>:</span><br><span class="line">        flash(<span class="string">'书籍不存在'</span>)</span><br><span class="line"></span><br><span class="line">    <span class="comment"># 如何返回当前网址 --&gt; 重定向</span></span><br><span class="line">    <span class="comment"># url_for 需要传入视图函数名，会返回该视图函数对应的路由地址</span></span><br><span class="line">    <span class="keyword">return</span> redirect(url_for(<span class="string">'index'</span>))</span><br><span class="line">    <span class="comment"># 等同于return redirect('/')</span></span><br></pre></td></tr></table></figure>
+<h5 id="点击作者旁边的删除"><a href="#点击作者旁边的删除" class="headerlink" title="点击作者旁边的删除"></a>点击作者旁边的删除</h5><p>首先判断作者是否存在，如果存在，先删除作者名下对应的书籍然后再删除书籍</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@app.route('/delete_author/&lt;int:author_id&gt;')</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">delete_author</span><span class="params">(author_id)</span>:</span></span><br><span class="line">    <span class="comment"># 1 查询是否有该id对应的作者</span></span><br><span class="line">    author = Author.query.get(author_id)</span><br><span class="line">    <span class="keyword">if</span> author:</span><br><span class="line">        <span class="comment"># 先删除作者名下的书籍</span></span><br><span class="line">        <span class="keyword">try</span>:</span><br><span class="line">            <span class="comment"># 首先对书查询之后直接删除</span></span><br><span class="line">            Book.query.filter_by(author_id=author.id).delete()</span><br><span class="line"></span><br><span class="line">            <span class="comment"># 删除作者</span></span><br><span class="line">            db.session.delete(author)</span><br><span class="line">            db.session.commit()</span><br><span class="line">        <span class="keyword">except</span> Exception <span class="keyword">as</span> e:</span><br><span class="line">            print(e)</span><br><span class="line">            flash(<span class="string">'删除作者出错'</span>)</span><br><span class="line">            db.session.rollback()</span><br><span class="line">    <span class="keyword">else</span>:</span><br><span class="line">        flash(<span class="string">'作者不存在'</span>)</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> redirect(url_for(<span class="string">'index'</span>))</span><br></pre></td></tr></table></figure>
+<h3 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h3><p>做项目的时候，最好先从数据库入手，做模型的一个创建，表名，字段的设置，然后在模板中显示数据</p>
+<p>注意csrf_token的问题，secret_key的问题，中文编码的问题</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 中文编码问题的解决</span></span><br><span class="line"><span class="keyword">import</span> sys</span><br><span class="line">reload(sys)</span><br><span class="line">sys.setdefaultencoding(<span class="string">'utf-8'</span>)</span><br></pre></td></tr></table></figure>
+        </div>
+        
+<blockquote class="post-copyright">
+    <div class="content">
+        
+<span class="post-time">
+    最后更新时间：<time datetime="2019-08-26T10:46:59.871Z" itemprop="dateUpdated">2019-08-26 18:46:59</time>
+</span><br>
+
+
+        
+        转载注明出处，原文地址：<a href="/2019/05/17/使用Flask实现一个简单的图书管理/" target="_blank" rel="external">http://www.sivan.tech/2019/05/17/使用Flask实现一个简单的图书管理/</a>
+        
+    </div>
+    <footer>
+        <a href="http://www.sivan.tech">
+            <img src="/img/1.jpg" alt="逸如风(yirufeng)">
+            逸如风(yirufeng)
+        </a>
+    </footer>
+</blockquote>
+
+        
+            <div class="page-reward">
+    <a id="rewardBtn" href="javascript:;" class="page-reward-btn waves-effect waves-circle waves-light">赏</a>
+</div>
+
+            
+        
+        <div class="post-footer">
+            
+	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Flask/">Flask</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Python/">Python</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Web/">Web</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/flask/">flask</a></li></ul>
+
+            <div class="page-share-wrap">
+    
+
+<div class="page-share" id="pageShare">
+    <ul class="reset share-icons">
+      
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://www.sivan.tech/2019/05/17/使用Flask实现一个简单的图书管理/&title=《使用Flask实现一个简单的图书管理》 — yirufeng's Blog&pic=http://www.sivan.tech/img/1.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://www.sivan.tech/2019/05/17/使用Flask实现一个简单的图书管理/&title=《使用Flask实现一个简单的图书管理》 — yirufeng's Blog&source=项目演示以及讲解项目开发流程
+配置连接数据库
+添加书和作者模型
+添加数据
+使用模板显示数据库查询的数据
+使用WTF显示变淡
+实现相关增删逻辑
+
+配置数据库..." data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http://www.sivan.tech/2019/05/17/使用Flask实现一个简单的图书管理/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《使用Flask实现一个简单的图书管理》 — yirufeng's Blog&url=http://www.sivan.tech/2019/05/17/使用Flask实现一个简单的图书管理/&via=http://www.sivan.tech" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=http://www.sivan.tech/2019/05/17/使用Flask实现一个简单的图书管理/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+      
+    </ul>
+ </div>
+
+
+
+    <a href="javascript:;" id="shareFab" class="page-share-fab waves-effect waves-circle">
+        <i class="icon icon-share-alt icon-lg"></i>
+    </a>
+</div>
+
+        </div>
+        
+            
+
+
+        
+    </div>
+    
+<nav class="post-nav flex-row flex-justify-between">
+  
+    <div class="prev">
+      <a href="/2019/06/07/MLA-01-k-近邻算法初探/" id="post-prev" class="post-nav-link">
+        <div class="tips"><i class="icon icon-angle-left icon-lg icon-pr"></i> Prev</div>
+        <h4 class="title">[MLA-01]k-近邻算法初探</h4>
+      </a>
+    </div>
+  
+
+  
+    <div class="next">
+      <a href="/2019/05/14/OpenCV-TensorFlow-入门人工智能图像处理-2/" id="post-next" class="post-nav-link">
+        <div class="tips">Next <i class="icon icon-angle-right icon-lg icon-pl"></i></div>
+        <h4 class="title">OpenCV+TensorFlow 入门人工智能图像处理[2]</h4>
+      </a>
+    </div>
+  
+</nav>
+
+
+    
+        <div id="repo">
+    <div class="loading active"></div>
+    <div class="top clearfix">
+        <div class="avatar pull-left"></div>
+        <div class="content pull-left">
+            <p class="name"></p>
+            <p class="description"></p>
+        </div>
+    </div>
+    <ul class="bottom">
+        <li class="star">
+            <span class="icon icon-star"></span>
+            <span class="val">0</span>
+        </li>
+        <li class="fork">
+            <span class="icon icon-code-fork"></span>
+            <span class="val">0</span>
+        </li>
+        <li class="date">
+            <span class="icon icon-clock-o"></span>
+            <span class="val">0000-00-00</span>
+        </li>
+    </ul>
+    <a class="link" href=""></a>
+</div>
+    
+    
+        <aside class="post-widget">
+            <nav class="post-toc-wrap" id="post-toc">
+                <strong>目录</strong>
+                <ol class="post-toc"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#项目演示以及讲解项目开发流程"><span class="post-toc-number">1.</span> <span class="post-toc-text">项目演示以及讲解项目开发流程</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#配置数据库"><span class="post-toc-number">2.</span> <span class="post-toc-text">配置数据库</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#定义书和作者模型"><span class="post-toc-number">2.1.</span> <span class="post-toc-text">定义书和作者模型</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#添加数据"><span class="post-toc-number">2.2.</span> <span class="post-toc-text">添加数据</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#显示作者数据"><span class="post-toc-number">2.3.</span> <span class="post-toc-text">显示作者数据</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#使用WTF显示表单"><span class="post-toc-number">2.4.</span> <span class="post-toc-text">使用WTF显示表单</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#实现相关的增删逻辑"><span class="post-toc-number">2.5.</span> <span class="post-toc-text">实现相关的增删逻辑</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#增加数据"><span class="post-toc-number">2.5.1.</span> <span class="post-toc-text">增加数据</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#删除数据"><span class="post-toc-number">2.5.2.</span> <span class="post-toc-text">删除数据</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#点击书籍旁边的删除"><span class="post-toc-number">2.5.3.</span> <span class="post-toc-text">点击书籍旁边的删除</span></a></li></ol></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#总结"><span class="post-toc-number">2.6.</span> <span class="post-toc-text">总结</span></a></li></ol></li></ol>
+            </nav>
+            <div class="toc-bar"><div>
+        </aside>
+    
+</article>
+
+    <div id="reward" class="page-modal reward-lay">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <h3 class="reward-title">
+        <i class="icon icon-quote-left"></i>
+        感谢原作，你的打赏是我的动力！
+        <i class="icon icon-quote-right"></i>
+    </h3>
+    <div class="reward-content">
+        
+        <div class="reward-code">
+            <img id="rewardCode" src="/img/reward-wechat.jpg" alt="打赏二维码">
+        </div>
+        
+        <label class="reward-toggle">
+            <input id="rewardToggle" type="checkbox" class="reward-toggle-check"
+                data-wechat="/img/reward-wechat.jpg" data-alipay="/img/reward-alipay.jpg">
+            <div class="reward-toggle-ctrol">
+                <span class="reward-toggle-item wechat">微信</span>
+                <span class="reward-toggle-label"></span>
+                <span class="reward-toggle-item alipay">支付宝</span>
+            </div>
+        </label>
+        
+    </div>
+</div>
+
+    
+
+</div>
+
+    </main>
+    <footer class="footer ">
+    
+    <div class="top">
+        
+            <p>
+    <span>Links：</span>
+    
+    <span class="blogroll-item">
+        <a href="https://github.com/sivanWu0222" target="_blank">GitHub</a>
+    </span>
+    
+    <span class="blogroll-item">
+        <a href="http://weibo.com/Msingwen0222/home?wvr=5" target="_blank">新浪微博</a>
+    </span>
+    
+    <span class="blogroll-item">
+        <a href="https://www.linkedin.com/in/%E6%99%93%E6%96%87-%E5%90%B4-79057a121/" target="_blank">Linkedin</a>
+    </span>
+    
+    <span class="blogroll-item">
+        <a href="http://wpa.qq.com/msgrd?v=3&amp;uin=1666762170&amp;site=qq&amp;menu=yes" target="_blank">QQ</a>
+    </span>
+    
+    <span class="blogroll-item">
+        <a href="https://zh-cn.facebook.com/people/SiVan-Wu/100014408918389" target="_blank">Facebook</a>
+    </span>
+    
+    <span class="blogroll-item">
+        <a href="https://mail.qq.com/cgi-bin/qm_share?t=qm_mailme&amp;email=xfTz8-Py8-f08vWFtLTrpqqo" target="_blank">Contact</a>
+    </span>
+    
+    <span class="blogroll-item">
+        <a href="https://twitter.com/SiVan_Wu" target="_blank">Twitter</a>
+    </span>
+    
+</p>
+
+        
+    </div>
+    
+    <div class="bottom">
+        <p>
+            <span>
+                逸如风(yirufeng) &copy; 2016 - 2019
+            </span>
+
+           	
+           	<span>
+           		<a href="http://beian.miit.gov.cn/" target="_blank">已实名认证</a>
+           	</span>
+           	
+
+            
+
+            
+
+            
+                
+<span class="site-uv" title="总访客量">
+    <i class="icon icon-user"></i>
+    <i class="busuanzi-value" id="busuanzi_value_site_uv"></i>
+</span>
+
+
+<span class="site-pv" title="总访问量">
+    <i class="icon icon-eye"></i>
+    <i class="busuanzi-value" id="busuanzi_value_site_pv"></i>
+</span>
+
+            
+        </p>
+    </div>
+</footer>
+
+    <div class="mask" id="mask"></div>
+<a href="javascript:;" id="gotop" class="waves-effect waves-circle waves-light"><span class="icon icon-lg icon-chevron-up"></span></a>
+
+
+
+<div class="global-share" id="globalShare">
+    <ul class="reset share-icons">
+      
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://www.sivan.tech/2019/05/17/使用Flask实现一个简单的图书管理/&title=《使用Flask实现一个简单的图书管理》 — yirufeng's Blog&pic=http://www.sivan.tech/img/1.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://www.sivan.tech/2019/05/17/使用Flask实现一个简单的图书管理/&title=《使用Flask实现一个简单的图书管理》 — yirufeng's Blog&source=项目演示以及讲解项目开发流程
+配置连接数据库
+添加书和作者模型
+添加数据
+使用模板显示数据库查询的数据
+使用WTF显示变淡
+实现相关增删逻辑
+
+配置数据库..." data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http://www.sivan.tech/2019/05/17/使用Flask实现一个简单的图书管理/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《使用Flask实现一个简单的图书管理》 — yirufeng's Blog&url=http://www.sivan.tech/2019/05/17/使用Flask实现一个简单的图书管理/&via=http://www.sivan.tech" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=http://www.sivan.tech/2019/05/17/使用Flask实现一个简单的图书管理/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+      
+    </ul>
+ </div>
+
+
+<div class="page-modal wx-share" id="wxShare">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAN4AAADeCAAAAAB3DOFrAAACrUlEQVR42u3aS3LjMAwE0Nz/0pkDZKx0A6TjxdPK5Q/Fx1QJSJNfX/H1/eP6+f7zO68+fb5j+6vhhYeHh7ee+p7xavxXU381QjKfV9/Bw8PDu81LHs3td56nOytC+Xzw8PDwPof3y4M4LhJ5890WITw8PLzP5CXF4Hkh8iX4g8KAh4eHF/DaB3FbHpKFeG67r2cteHh4eDEv30X6nNdX9vfw8PDw1rvqbRAwi4D3ZeDlbPHw8PAu8Nrptrc8dayqHRMPDw/vPbzNllUequbLcez4Fx4eHt5R3r51bkn7Y1vJotfnFPDw8PBi3mxabRlIFqstGO1y4OHh4Z3itY1si2xb6uIo1b5G4eHh4a0PDcw27J+D3dn47afFfw94eHh4a14bzibff2acKifRCHh4eHgXeJv4NS8hyWLNxi8CaDw8PLxDvE1r+zzRvIS0hwOK8oOHh4d3gZdP9Ea0moe8m403PDw8vLO8/IGe3P7eFtqsHcfDw8N7D+/5O5uwdbZwsz8AHh4e3j3erFVtQ4dZxDCLif8zDh4eHt41Xnvoqn1kb3rdfJ54eHh47+RtAtb29u3I+SZckRbj4eHhHeIlTW0eSeTRxuzYVqTAw8PDO8prG+Kkzc3DglmpKAILPDw8vAu8/CFbH3gK2uhZxDBr3PHw8PDO8vKfnVqIfRMfFQA8PDy8N/JmD+42Qd2EyMUS4+Hh4V3mzW68KRXDba04bcDDw8M7y/sur9kkkig2YdfzwcPDw7vAax+1bXudBxyb1wcuPDw8vJLXbjLNgt3Zg74dDQ8PD++dvH0IO4Pto4dfRsDDw8P7GN4mXMgb8X3BwMPDw/sEXjKhNghuY4hiZDw8PLxrvPzo1ea4QJ64zprsl4UBDw8P7yiv/Vnb5rZLuTmgcCDDwMPDw3v69B//Uc8UZVmBhwAAAABJRU5ErkJggg==" alt="微信分享二维码">
+</div>
+
+
+    
+    <!-- main-js -->
+<script type="text/javascript" src="//cdn.bootcss.com/jquery/2.1.0/jquery.min.js"></script>
+<script type="text/javascript" src="/js/plugins/fastclick.js?v=1.4.2"></script>
+<script type="text/javascript" src="/js/plugins/ios-orientationchange-fix.js?v=1.4.2"></script>
+<script type="text/javascript" src="//cdn.jsdelivr.net/gh/fancyapps/fancybox@3.5.2/dist/jquery.fancybox.min.js"></script>
+
+<script type="text/javascript" src="//cdn.bootcss.com/node-waves/0.7.4/waves.min.js"></script>
+
+<script type="text/javascript" src="/js/method.js?v=1.4.2"></script>
+<script type="text/javascript" src="/js/blog.js?v=1.4.2"></script>
+
+<!-- third-party -->
+
+
+    <script type="text/javascript">
+    (function() {
+
+        const origin = "sivanWu0222 | FlaskPython"
+        let user, repo;
+        origin.replace(/(\S+)\s{0,1}\|\s{0,1}(\S+)/g, (...rest) => {
+            [user, repo] = [ rest[1], rest[2] ];
+        });
+        if (user && repo) {
+            const url = `//api.github.com/repos/${user}/${repo}?callback=?`;
+            $.getJSON(url, (data) => {
+                updateRepoInPage(data.data);
+            });
+        }
+
+        function updateRepoInPage(data) {
+            const {name, description, html_url: url, stargazers_count: stars, forks, owner: owner, updated_at: update} = data;
+            _loadAvatar(owner.avatar_url).then(avatarUrl => {
+                const avatarBg = `url(${avatarUrl})`;
+                const container = $('#repo');
+                container.click(() => {
+                    window.open(url);
+                });
+
+                //init
+                const loadingItem = container.find('.loading').hide();
+                const topItem = container.find('.top').addClass('active');
+                const bottomItem = container.find('.bottom').addClass('active');
+
+                //avatar
+                const avatarItem = container.find('.avatar');
+                const oldBg = avatarItem.css('background-image');
+                avatarItem.hover(() => {
+                    avatarItem.css('background-image', avatarBg);
+                }, () => {
+                    avatarItem.css('background-image', oldBg);
+                });
+
+                //repo-name
+                const nameItem = container.find('.name').html(name);
+
+                //description
+                const descriptionItem = container.find('.description').html(description);
+
+                //stars
+                const starItem = container.find('.star>.val').html(stars);
+
+                //forks
+                const forkItem = container.find('.fork>.val').html(forks);
+
+                //date
+                const formatDate = update.replace(/T.+/g, '');
+                const dateItem = container.find('.date>.val').html(formatDate);
+            });
+
+            function _loadAvatar(url) {
+                return new Promise((resolve, reject) => {
+                    const img = new Image();
+                    img.onload = () => {
+                        resolve(url);
+                    };
+                    img.src = url;
+                });
+            }
+
+        }
+
+    })();
+</script>
+
+
+
+
+
+<script type="text/javascript" src="/js/plugins/local_search.js?v=1.4.2"></script>
+<script type="text/javascript">
+	var search_path = "search.xml";
+	if (search_path.length === 0) {
+		search_path = "search.xml";
+	}
+	var path = "/" + search_path;
+	searchFunc(path, "local-search-input", "local-search-result");
+</script>
+
+
+
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+    
+    
+
+
+
+<script type="text/javascript" src="https://cdn1.lncld.net/static/js/av-core-mini-0.6.4.js"></script>
+<script type="text/javascript" src="/js/plugins/leancloud_visitors.js?v=1.4.2"></script>
+
+
+
+    <!-- mathjax config similar to math.stackexchange -->
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+        tex2jax: {
+            inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+            processEscapes: true,
+            skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+        }
+    });
+</script>
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for (i=0; i < all.length; i += 1) {
+            all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+    });
+</script>
+
+<script type="text/javascript" src="//cdn.bootcss.com/mathjax/2.7.1/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+
+
+
+    <script>
+    (function() {
+        var OriginTitile = document.title, titleTime;
+        document.addEventListener('visibilitychange', function() {
+            if (document.hidden) {
+                document.title = '死鬼去哪里了！';
+                clearTimeout(titleTime);
+            } else {
+                document.title = '(つェ⊂)咦!又好了!';
+                titleTime = setTimeout(function() {
+                    document.title = OriginTitile;
+                },2000);
+            }
+        });
+    })();
+</script>
+
+
+
+
+
+    
+</body>
+</html>

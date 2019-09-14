@@ -1,0 +1,704 @@
+<!DOCTYPE html>
+<html>
+<head><meta name="generator" content="Hexo 3.9.0">
+    <meta charset="utf-8">
+    
+    
+    <title>MyBatis中的基本概念 | yirufeng&#39;s Blog | 未来的小幸运 || 致正在努力的我们 ---- 逸如风</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    
+    <meta name="keywords" content="MyBatis,框架">
+    <link rel="shortcut icon" href="/img/favicon.ico">
+    <link rel="stylesheet" href="//cdn.jsdelivr.net/gh/fancyapps/fancybox@3.5.2/dist/jquery.fancybox.min.css">
+    <link rel="stylesheet" href="/css/style.css?v=1.4.2">
+    
+    <script type="text/javascript">
+        // Data Center
+        var DC = {
+            reward:	true,
+            lv: JSON.parse('{"enable":true,"app_id":"K2RVtHi7RnmoN6dovlDKafn8-gzGzoHsz","app_key":"Qxmil0oqPFdDUyyIp2i1Xikt","icon":true}'),
+            v: JSON.parse('{"enable":false,"appid":"ACuOJIasBeRLiDe2iUApHj67-gzGzoHsz","appkey":"qbgg4tClrQQmvq8uwlpwA5mA","notify":true,"verify":true,"placeholder":"give me some sugers plz...","avatar":"wavatar"}'),
+            g: JSON.parse('{"enable":false,"lazy":true,"owner":"codefine","repo":"gitment","oauth":{"client_id":null,"client_secret":null},"perPage":10}'),
+            d: JSON.parse('{"app_id":null}')
+        };
+    </script>
+    <script type="text/javascript">
+        window.lazyScripts=[];
+    </script>
+    
+</head>
+
+
+<body>
+    <div id="loading" class="active"></div>
+
+    <aside id="menu" class="">
+  <div class="inner flex-row-vertical">
+    <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menu-off">
+        <i class="icon icon-lg icon-close"></i>
+    </a>
+    <div class="brand-wrap">
+      
+      <img src="/img/brand.jpg" class="brand-bg">
+      
+      <div class="brand">
+        <a href="/" class="avatar waves-effect waves-circle waves-light">
+          <img src="/img/1.jpg">
+        </a>
+        <hgroup class="introduce">
+          <h5 class="nickname">逸如风(yirufeng)</h5>
+          <a href="mailto:yirufeng@foxmail.com" title="yirufeng@foxmail.com" class="mail">
+            
+              <span>y</span>
+            
+              <span>i</span>
+            
+              <span>r</span>
+            
+              <span>u</span>
+            
+              <span>f</span>
+            
+              <span>e</span>
+            
+              <span>n</span>
+            
+              <span>g</span>
+            
+              <span>@</span>
+            
+              <span>f</span>
+            
+              <span>o</span>
+            
+              <span>x</span>
+            
+              <span>m</span>
+            
+              <span>a</span>
+            
+              <span>i</span>
+            
+              <span>l</span>
+            
+              <span>.</span>
+            
+              <span>c</span>
+            
+              <span>o</span>
+            
+              <span>m</span>
+            
+          </a>
+        </hgroup>
+        
+        <ul class="menu-link">
+          
+              <li>
+                <a href="https://github.com/sivanWu0222" target="_blank">
+                  <i class="icon icon-lg icon-github"></i>
+                </a>
+              </li>
+            
+              <li>
+                <a href="https://mail.qq.com/cgi-bin/qm_share?t=qm_mailme&amp;amp;email=xfTz8-Py8-f08vWFtLTrpqqo" target="_blank">
+                  <i class="icon icon-lg icon-envelope"></i>
+                </a>
+              </li>
+            
+        </ul>
+        
+      </div>
+    </div>
+    <div class="scroll-wrap flex-col">
+      <ul class="nav">
+        
+            <li class="">
+              <a href="/"  >
+                <i class="icon icon-lg icon-home"></i>
+                Home
+              </a>
+            </li>
+        
+            <li class="">
+              <a href="/categories"  >
+                <i class="icon icon-lg icon-th-list"></i>
+                Category
+              </a>
+            </li>
+        
+            <li class="">
+              <a href="/research"  >
+                <i class="icon icon-lg icon-mortar-board"></i>
+                Research
+              </a>
+            </li>
+        
+            <li class="">
+              <a href="/tags"  >
+                <i class="icon icon-lg icon-tags"></i>
+                Tag
+              </a>
+            </li>
+        
+            <li class="">
+              <a href="/archives"  >
+                <i class="icon icon-lg icon-archives"></i>
+                Archive
+              </a>
+            </li>
+        
+            <li class="">
+              <a href="/about"  >
+                <i class="icon icon-lg icon-user"></i>
+                About
+              </a>
+            </li>
+        
+            <li class="">
+              <a href="/open-source"  >
+                <i class="icon icon-lg icon-github"></i>
+                Project
+              </a>
+            </li>
+        
+            <li class="">
+              <a href="/demo"  >
+                <i class="icon icon-lg icon-audio-description"></i>
+                Demo
+              </a>
+            </li>
+        
+            <li class="">
+              <a href="/wechat-number"  >
+                <i class="icon icon-lg icon-wechat"></i>
+                公众号
+              </a>
+            </li>
+        
+            <li class="">
+              <a href="http://www.sivan.tech/LeetCodeAlgo/" target="_blank" >
+                <i class="icon icon-lg icon-braille"></i>
+                Leetcode
+              </a>
+            </li>
+        
+            <li class="">
+              <a href="http://resume.sivan.tech/" target="_blank" >
+                <i class="icon icon-lg icon-file-pdf-o"></i>
+                Resume
+              </a>
+            </li>
+        
+      </ul>
+    </div>
+  </div>
+</aside>
+
+    <main id="main">
+        <header class="top-header" id="header">
+    <div class="flex-row clearfix">
+        <a href="javascript:;" class="header-icon pull-left waves-effect waves-circle waves-light on" id="menu-toggle">
+          <i class="icon icon-lg icon-navicon"></i>
+        </a>
+        <div class="flex-col header-title ellipsis">
+            <span>MyBatis中的基本概念</span>
+            
+        </div>
+        
+        <a href="javascript:;" id="site_search_btn" class="header-icon pull-right waves-effect waves-circle waves-light">
+            <i class="icon icon-lg icon-search"></i>
+        </a>
+        
+    </div>
+</header>
+<header class="content-header post-header">
+    <img src="/img/s3.jpg" class="header-bg">
+    <div class="container fade-scale">
+        <h1 class="title">MyBatis中的基本概念</h1>
+        <h5 class="subtitle">
+            
+                <time datetime="2017-11-22T11:25:15.000Z" itemprop="datePublished" class="page-time">
+  2017-11-22
+</time>
+
+
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/框架/">框架</a><ul class="article-category-list-child"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/框架/MyBatis/">MyBatis</a></li></ul></li></ul>
+
+            
+        </h5>
+        
+    </div>
+    
+
+</header>
+
+<div id="site_search">
+    <div class="search-title clearfix">
+        <span class="pull-left">
+          <i class="icon icon-lg icon-search"></i>
+        </span>
+        <input type="text" id="local-search-input" name="q" results="0" placeholder="search my blog..." class="form-control pull-left"/>
+        <a href="javascript:;" class="close pull-right waves-effect waves-circle waves-light">
+          <i class="icon icon-lg icon-close"></i>
+        </a>
+    </div>
+    <div id="local-search-result"></div>
+</div>
+
+
+<div class="container body-wrap">
+    <article id="post-MyBatis中的基本概念"
+  class="post-article article-type-post" itemprop="blogPost">
+    <div class="post-card">
+        <h1 class="post-card-title">MyBatis中的基本概念</h1>
+        <div class="post-meta">
+            <time class="post-time" title="2017-11-22 19:25:15" datetime="2017-11-22T11:25:15.000Z"  itemprop="datePublished">2017-11-22</time>
+
+            
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/框架/">框架</a><ul class="article-category-list-child"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/框架/MyBatis/">MyBatis</a></li></ul></li></ul>
+
+
+
+            
+	<span id="/2017/11/22/MyBatis中的基本概念/" class="leancloud_visitors" data-flag-title="MyBatis中的基本概念" title="MyBatis中的基本概念">
+		
+			<i class="icon icon-eye"></i>
+		
+		<span class="leancloud-visitors-count"></span>
+	</span>
+ 
+
+            
+
+
+            
+        </div>
+        <div class="post-content" id="post-content" itemprop="postContent">
+            
+            <h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><ol>
+<li>pojo：不按MVC进行分层，只有Java Bean有一些属性，还有get以及set方法</li>
+<li>domain：不按MVC进行分层，只有Java Bean有一些属性，还有get以及set方法</li>
+<li>po：用在持久层，相当于 pojo+xml！在页面中进行添加或者修改的时候，直接传入到action中！<br> po中的类名等于表名，属性名等于字段名，还有对应的set以及get方法</li>
+<li>vo：View Object表现层对象，主要用于在高级查询中接收从页面中传过来的参数，好处是扩展性强！</li>
+<li>bo：用在service层，现在基本不用</li>
+</ol>
+<p>pojo,domain.po,vo,bo可以用在各种层面，不会报错！（也就是说po用在表现层，vo用在表现层不报错，<br>因为都是普通的java bean没有语法错误）最好不用混着用，不利于代码维护！</p>
+<hr>
+<h2 id="MyBatis中的原理"><a href="#MyBatis中的原理" class="headerlink" title="MyBatis中的原理"></a>MyBatis中的原理</h2><figure class="image-box">
+                <a rel=MyBatis中的基本概念 href="http://on3w7gc9m.bkt.clouddn.com/QQ%E5%9B%BE%E7%89%8720171119093655.png" title="MyBatis架图" data-fancybox="images"><img src="http://on3w7gc9m.bkt.clouddn.com/QQ%E5%9B%BE%E7%89%8720171119093655.png" alt="MyBatis架图" title class></a>
+                <p>MyBatis架图</p>
+            </figure>
+<p>输入映射：对于每条Sql语句指定的输入参数的类型（只可以指定Map,基本数据类型(包括String)，以及POJO）<br>输出映射：返回的结果集类型（只可以指定Map,List,基本数据类型(包括String)，以及POJO）</p>
+<h3 id="MyBatis中的执行器"><a href="#MyBatis中的执行器" class="headerlink" title="MyBatis中的执行器"></a>MyBatis中的执行器</h3><blockquote>
+<p>当我们使用MyBatis中的SqlSession执行Sql语句的时候，MyBatis会内部调用Executor接口来执行映射文件中配置好的(也就是通过调用MappedStatement)Sql语句</p>
+</blockquote>
+<ol>
+<li>基本执行器</li>
+<li>缓存执行器</li>
+</ol>
+<h3 id="返回数据库自增主键"><a href="#返回数据库自增主键" class="headerlink" title="返回数据库自增主键"></a>返回数据库自增主键</h3><p>数据库中我们可以使用如下代码，来查询刚刚插入的记录的主键值，会返回1个0<br><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> <span class="keyword">LAST_INSERT_ID</span>;</span><br></pre></td></tr></table></figure></p>
+<p>但是如果我们在MyBatis中配置了如下代码，将会返回刚刚插入的主键记录的值</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">&lt;!-- 方法1 --&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">insert</span> <span class="attr">id</span>=<span class="string">"addStudent"</span> <span class="attr">parameterType</span>=<span class="string">"com.pojo.Student"</span> <span class="attr">keyProperty</span>=<span class="string">"id"</span> <span class="attr">useGeneratedKeys</span>=<span class="string">"true"</span>&gt;</span></span><br><span class="line">		insert into student(name,sex,birthday) values(#&#123;name&#125;, #&#123;sex&#125;, #&#123;birthday&#125;)</span><br><span class="line"><span class="tag">&lt;/<span class="name">insert</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="comment">&lt;!-- 方法2 --&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">insert</span> <span class="attr">id</span>=<span class="string">"addStudent2"</span> <span class="attr">parameterType</span>=<span class="string">"com.pojo.Student"</span> <span class="attr">keyProperty</span>=<span class="string">"id"</span> <span class="attr">useGeneratedKeys</span>=<span class="string">"true"</span>&gt;</span></span><br><span class="line"></span><br><span class="line">		<span class="comment">&lt;!--</span></span><br><span class="line"><span class="comment">			keyProperty指定自增主键的值返回到POJO的哪个属性中</span></span><br><span class="line"><span class="comment">			order指相对于下面insert插入语句的执行顺序</span></span><br><span class="line"><span class="comment">		--&gt;</span></span><br><span class="line">		<span class="tag">&lt;<span class="name">selectKey</span> <span class="attr">keyProperty</span>=<span class="string">"id"</span> <span class="attr">order</span>=<span class="string">"AFTER"</span> <span class="attr">resultType</span>=<span class="string">"java.lang.Integer"</span>&gt;</span></span><br><span class="line">			SELECT LAST_INSERT_ID();</span><br><span class="line">		<span class="tag">&lt;/<span class="name">selectKey</span>&gt;</span></span><br><span class="line">		insert into student(name,sex,birthday) values(#&#123;name&#125;, #&#123;sex&#125;, #&#123;birthday&#125;)</span><br><span class="line"><span class="tag">&lt;/<span class="name">insert</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<a id="more"></a>
+<h3 id="使用UUID生成主键"><a href="#使用UUID生成主键" class="headerlink" title="使用UUID生成主键"></a>使用UUID生成主键</h3><blockquote>
+<p>由于数据库中的主键无法使用字符串进行自动增长，所以当我们使用字符串作为主键的时候，我们需要用到UUID算法，帮助我们生成主键，这里原理就是利用了数据库中的UUID()函数</p>
+</blockquote>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">&lt;!-- 使用UUID主键方式,uuid必须是先生成，然后传入到student对象里面 --&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">insert</span> <span class="attr">id</span>=<span class="string">"addStudent3"</span> <span class="attr">parameterType</span>=<span class="string">"com.pojo.Student"</span>&gt;</span></span><br><span class="line">		<span class="tag">&lt;<span class="name">selectKey</span> <span class="attr">keyProperty</span>=<span class="string">"id"</span> <span class="attr">order</span>=<span class="string">"BEFORE"</span>&gt;</span></span><br><span class="line">			<span class="comment">&lt;!-- 使用数据库的自动生成策略 --&gt;</span></span><br><span class="line">			SELECT UUID()</span><br><span class="line">		<span class="tag">&lt;/<span class="name">selectKey</span>&gt;</span></span><br><span class="line">		insert into student(id,sex,name,birthday) values(#&#123;id&#125;,#&#123;sex&#125;,#&#123;name&#125;,#&#123;birthday&#125;)</span><br><span class="line">	<span class="tag">&lt;/<span class="name">insert</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * 使用UUID生成主键</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@author</span> SiVan</span></span><br><span class="line"><span class="comment"> *</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Demo4</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">		InputStream in = Student.class.getResourceAsStream(<span class="string">"/SqlMapConfig.xml"</span>);</span><br><span class="line">		SqlSessionFactory factory = <span class="keyword">new</span> SqlSessionFactoryBuilder().build(in);</span><br><span class="line">		SqlSession session = factory.openSession();</span><br><span class="line">		Student student = <span class="keyword">new</span> Student();</span><br><span class="line">		student.setBirthday(Timestamp.valueOf(<span class="string">"1997-02-22 10:10:10"</span>));</span><br><span class="line">		student.setName(<span class="string">"吴晓文"</span>);</span><br><span class="line">		student.setSex(<span class="string">"1"</span>);</span><br><span class="line">		student.setId(UUID.randomUUID().toString());</span><br><span class="line">		<span class="keyword">int</span> i = session.insert(<span class="string">"com.dao.StudentDao.addStudent3"</span>,student);</span><br><span class="line">		session.commit();</span><br><span class="line">		session.close();</span><br><span class="line">		System.out.println(student.getId());</span><br><span class="line">		System.out.println(i);</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<hr>
+<h2 id="核心配置文件中引入资源文件"><a href="#核心配置文件中引入资源文件" class="headerlink" title="核心配置文件中引入资源文件"></a>核心配置文件中引入资源文件</h2><blockquote>
+<p>对于MyBatis,有时候我们需要配置参数在额外的资源文件中，下面以JDBC4个参数例子进行配置</p>
+</blockquote>
+<p>编写资源文件 db.properties</p>
+<blockquote>
+<p>注意：后面的参数不可以包含空格</p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">jdbc.driver=com.mysql.jdbc.Driver</span><br><span class="line">jdbc.url=jdbc:mysql://localhost:3306/s59</span><br><span class="line">jdbc.username=root</span><br><span class="line">jdbc.password=root</span><br></pre></td></tr></table></figure>
+<p>在SqlMapConfig文件中进行配置(引入配置文件)：<br><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">configuration</span>&gt;</span></span><br><span class="line">	<span class="comment">&lt;!-- 引入配置文件 --&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">properties</span> <span class="attr">resource</span>=<span class="string">"db.properties"</span>&gt;</span><span class="tag">&lt;/<span class="name">properties</span>&gt;</span></span><br><span class="line"></span><br><span class="line">	<span class="tag">&lt;<span class="name">environments</span> <span class="attr">default</span>=<span class="string">"MySql"</span>&gt;</span></span><br><span class="line">		<span class="tag">&lt;<span class="name">environment</span> <span class="attr">id</span>=<span class="string">"MySql"</span>&gt;</span></span><br><span class="line">			<span class="tag">&lt;<span class="name">transactionManager</span> <span class="attr">type</span>=<span class="string">"JDBC"</span>&gt;</span><span class="tag">&lt;/<span class="name">transactionManager</span>&gt;</span></span><br><span class="line">			<span class="tag">&lt;<span class="name">dataSource</span> <span class="attr">type</span>=<span class="string">"POOLED"</span>&gt;</span></span><br><span class="line">				<span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">"driver"</span> <span class="attr">value</span>=<span class="string">"$&#123;jdbc.driver&#125;"</span>/&gt;</span></span><br><span class="line">				<span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">"username"</span> <span class="attr">value</span>=<span class="string">"$&#123;jdbc.username&#125;"</span>/&gt;</span></span><br><span class="line">				<span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">"password"</span> <span class="attr">value</span>=<span class="string">"$&#123;jdbc.password&#125;"</span>/&gt;</span></span><br><span class="line">				<span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">"url"</span> <span class="attr">value</span>=<span class="string">"$&#123;jdbc.url&#125;"</span>/&gt;</span></span><br><span class="line">			<span class="tag">&lt;/<span class="name">dataSource</span>&gt;</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">		<span class="tag">&lt;/<span class="name">environment</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;/<span class="name">environments</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">mappers</span>&gt;</span></span><br><span class="line">		<span class="tag">&lt;<span class="name">mapper</span> <span class="attr">resource</span>=<span class="string">"com/pojo/Student.xml"</span>/&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">mappers</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">configuration</span>&gt;</span></span><br></pre></td></tr></table></figure></p>
+<hr>
+
+        </div>
+        
+<blockquote class="post-copyright">
+    <div class="content">
+        
+<span class="post-time">
+    最后更新时间：<time datetime="2019-08-26T10:46:59.863Z" itemprop="dateUpdated">2019-08-26 18:46:59</time>
+</span><br>
+
+
+        
+        转载注明出处，原文地址：<a href="/2017/11/22/MyBatis中的基本概念/" target="_blank" rel="external">http://www.sivan.tech/2017/11/22/MyBatis中的基本概念/</a>
+        
+    </div>
+    <footer>
+        <a href="http://www.sivan.tech">
+            <img src="/img/1.jpg" alt="逸如风(yirufeng)">
+            逸如风(yirufeng)
+        </a>
+    </footer>
+</blockquote>
+
+        
+            <div class="page-reward">
+    <a id="rewardBtn" href="javascript:;" class="page-reward-btn waves-effect waves-circle waves-light">赏</a>
+</div>
+
+            
+        
+        <div class="post-footer">
+            
+	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/MyBatis/">MyBatis</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/框架/">框架</a></li></ul>
+
+            <div class="page-share-wrap">
+    
+
+<div class="page-share" id="pageShare">
+    <ul class="reset share-icons">
+      
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://www.sivan.tech/2017/11/22/MyBatis中的基本概念/&title=《MyBatis中的基本概念》 — yirufeng's Blog&pic=http://www.sivan.tech/img/1.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://www.sivan.tech/2017/11/22/MyBatis中的基本概念/&title=《MyBatis中的基本概念》 — yirufeng's Blog&source=前言
+pojo：不按MVC进行分层，只有Java Bean有一些属性，还有get以及set方法
+domain：不按MVC进行分层，只有Java Bean有..." data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http://www.sivan.tech/2017/11/22/MyBatis中的基本概念/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《MyBatis中的基本概念》 — yirufeng's Blog&url=http://www.sivan.tech/2017/11/22/MyBatis中的基本概念/&via=http://www.sivan.tech" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=http://www.sivan.tech/2017/11/22/MyBatis中的基本概念/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+      
+    </ul>
+ </div>
+
+
+
+    <a href="javascript:;" id="shareFab" class="page-share-fab waves-effect waves-circle">
+        <i class="icon icon-share-alt icon-lg"></i>
+    </a>
+</div>
+
+        </div>
+        
+            
+
+
+        
+    </div>
+    
+<nav class="post-nav flex-row flex-justify-between">
+  
+    <div class="prev">
+      <a href="/2017/11/23/微信开发-1/" id="post-prev" class="post-nav-link">
+        <div class="tips"><i class="icon icon-angle-left icon-lg icon-pr"></i> Prev</div>
+        <h4 class="title">微信开发(1)</h4>
+      </a>
+    </div>
+  
+
+  
+    <div class="next">
+      <a href="/2017/11/20/MyBatis两种生成Dao的方式/" id="post-next" class="post-nav-link">
+        <div class="tips">Next <i class="icon icon-angle-right icon-lg icon-pl"></i></div>
+        <h4 class="title">MyBatis中Dao开发的两种方式</h4>
+      </a>
+    </div>
+  
+</nav>
+
+
+    
+    
+        <aside class="post-widget">
+            <nav class="post-toc-wrap" id="post-toc">
+                <strong>目录</strong>
+                <ol class="post-toc"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#前言"><span class="post-toc-number">1.</span> <span class="post-toc-text">前言</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#MyBatis中的原理"><span class="post-toc-number">2.</span> <span class="post-toc-text">MyBatis中的原理</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#MyBatis中的执行器"><span class="post-toc-number">2.1.</span> <span class="post-toc-text">MyBatis中的执行器</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#返回数据库自增主键"><span class="post-toc-number">2.2.</span> <span class="post-toc-text">返回数据库自增主键</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#使用UUID生成主键"><span class="post-toc-number">2.3.</span> <span class="post-toc-text">使用UUID生成主键</span></a></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#核心配置文件中引入资源文件"><span class="post-toc-number">3.</span> <span class="post-toc-text">核心配置文件中引入资源文件</span></a></li></ol>
+            </nav>
+            <div class="toc-bar"><div>
+        </aside>
+    
+</article>
+
+    <div id="reward" class="page-modal reward-lay">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <h3 class="reward-title">
+        <i class="icon icon-quote-left"></i>
+        感谢原作，你的打赏是我的动力！
+        <i class="icon icon-quote-right"></i>
+    </h3>
+    <div class="reward-content">
+        
+        <div class="reward-code">
+            <img id="rewardCode" src="/img/reward-wechat.jpg" alt="打赏二维码">
+        </div>
+        
+        <label class="reward-toggle">
+            <input id="rewardToggle" type="checkbox" class="reward-toggle-check"
+                data-wechat="/img/reward-wechat.jpg" data-alipay="/img/reward-alipay.jpg">
+            <div class="reward-toggle-ctrol">
+                <span class="reward-toggle-item wechat">微信</span>
+                <span class="reward-toggle-label"></span>
+                <span class="reward-toggle-item alipay">支付宝</span>
+            </div>
+        </label>
+        
+    </div>
+</div>
+
+    
+
+</div>
+
+    </main>
+    <footer class="footer ">
+    
+    <div class="top">
+        
+            <p>
+    <span>Links：</span>
+    
+    <span class="blogroll-item">
+        <a href="https://github.com/sivanWu0222" target="_blank">GitHub</a>
+    </span>
+    
+    <span class="blogroll-item">
+        <a href="http://weibo.com/Msingwen0222/home?wvr=5" target="_blank">新浪微博</a>
+    </span>
+    
+    <span class="blogroll-item">
+        <a href="https://www.linkedin.com/in/%E6%99%93%E6%96%87-%E5%90%B4-79057a121/" target="_blank">Linkedin</a>
+    </span>
+    
+    <span class="blogroll-item">
+        <a href="http://wpa.qq.com/msgrd?v=3&amp;uin=1666762170&amp;site=qq&amp;menu=yes" target="_blank">QQ</a>
+    </span>
+    
+    <span class="blogroll-item">
+        <a href="https://zh-cn.facebook.com/people/SiVan-Wu/100014408918389" target="_blank">Facebook</a>
+    </span>
+    
+    <span class="blogroll-item">
+        <a href="https://mail.qq.com/cgi-bin/qm_share?t=qm_mailme&amp;email=xfTz8-Py8-f08vWFtLTrpqqo" target="_blank">Contact</a>
+    </span>
+    
+    <span class="blogroll-item">
+        <a href="https://twitter.com/SiVan_Wu" target="_blank">Twitter</a>
+    </span>
+    
+</p>
+
+        
+    </div>
+    
+    <div class="bottom">
+        <p>
+            <span>
+                逸如风(yirufeng) &copy; 2016 - 2019
+            </span>
+
+           	
+           	<span>
+           		<a href="http://beian.miit.gov.cn/" target="_blank">已实名认证</a>
+           	</span>
+           	
+
+            
+
+            
+
+            
+                
+<span class="site-uv" title="总访客量">
+    <i class="icon icon-user"></i>
+    <i class="busuanzi-value" id="busuanzi_value_site_uv"></i>
+</span>
+
+
+<span class="site-pv" title="总访问量">
+    <i class="icon icon-eye"></i>
+    <i class="busuanzi-value" id="busuanzi_value_site_pv"></i>
+</span>
+
+            
+        </p>
+    </div>
+</footer>
+
+    <div class="mask" id="mask"></div>
+<a href="javascript:;" id="gotop" class="waves-effect waves-circle waves-light"><span class="icon icon-lg icon-chevron-up"></span></a>
+
+
+
+<div class="global-share" id="globalShare">
+    <ul class="reset share-icons">
+      
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://www.sivan.tech/2017/11/22/MyBatis中的基本概念/&title=《MyBatis中的基本概念》 — yirufeng's Blog&pic=http://www.sivan.tech/img/1.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://www.sivan.tech/2017/11/22/MyBatis中的基本概念/&title=《MyBatis中的基本概念》 — yirufeng's Blog&source=前言
+pojo：不按MVC进行分层，只有Java Bean有一些属性，还有get以及set方法
+domain：不按MVC进行分层，只有Java Bean有..." data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http://www.sivan.tech/2017/11/22/MyBatis中的基本概念/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《MyBatis中的基本概念》 — yirufeng's Blog&url=http://www.sivan.tech/2017/11/22/MyBatis中的基本概念/&via=http://www.sivan.tech" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=http://www.sivan.tech/2017/11/22/MyBatis中的基本概念/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+      
+    </ul>
+ </div>
+
+
+<div class="page-modal wx-share" id="wxShare">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAMYAAADGCAAAAACs8KCBAAACI0lEQVR42u3aQVLDMAwFUO5/aZhhCw3/yy0Q+3nV6aSJXhaqZentLV7vn+vr56/XPFqPrky+f9rCwMC4LSN5/DUjv/7Rb69fWfJqMDAwTmAkSfY63Da461fZ3h8DAwOj3Q7O7oyBgYHxrIQ7CyVP3xgYGBgrRWweenIm9me1OAYGxg0ZK42BV3/+pf4GBgbGP2a8l6vdPq70GYuoMDAwtmbkbcXr4rPdPiZBt2UtBgbGroyVjVpOalN2PUCGgYGxNaP9cZuU87SbP73+38DAwLg543e2dzNA0YTAwMA4jDGrDduytm1kDqdFMDAwtmDMDrxWRsHaMjiPAQMD4xxGXhuup9pnHeRhYGCcwEg2fLOydtZmWPkeAwPjBEY0nTEafl1pMxQjaBgYGNsxkiSbrHzILE++xTEcBgbGAYz2aGwWXBt60cjEwMDYmrHSyFwZs2jTdHQfDAyMTRkrw1ttmbpynx8iwcDA2JqRJ9kcnI9uzLaJxSvDwMDYgjFLcHV5GW9AZ+MXGBgYJzDyW7cPe+7QxtJBGwYGxm0ZxSxGnCLXj+dmB38YGBi7MmZDFa9oWOYbwW9+i4GBsTVjdog/2yC2jOS5GBgY5zDWk+wrBsvqRI+BgXEAo02ybdKcNQyGtTgGBsbBjBawcn1eVGNgYGCsh1u0IYMmxA/DYRgYGFszkiI2P2ibBZdvT5dqcQwMjBsyVhoDbaGbJ9/8tWJgYGzN+ABq3hkGOfkXXwAAAABJRU5ErkJggg==" alt="微信分享二维码">
+</div>
+
+
+    
+    <!-- main-js -->
+<script type="text/javascript" src="//cdn.bootcss.com/jquery/2.1.0/jquery.min.js"></script>
+<script type="text/javascript" src="/js/plugins/fastclick.js?v=1.4.2"></script>
+<script type="text/javascript" src="/js/plugins/ios-orientationchange-fix.js?v=1.4.2"></script>
+<script type="text/javascript" src="//cdn.jsdelivr.net/gh/fancyapps/fancybox@3.5.2/dist/jquery.fancybox.min.js"></script>
+
+<script type="text/javascript" src="//cdn.bootcss.com/node-waves/0.7.4/waves.min.js"></script>
+
+<script type="text/javascript" src="/js/method.js?v=1.4.2"></script>
+<script type="text/javascript" src="/js/blog.js?v=1.4.2"></script>
+
+<!-- third-party -->
+
+
+
+
+
+
+<script type="text/javascript" src="/js/plugins/local_search.js?v=1.4.2"></script>
+<script type="text/javascript">
+	var search_path = "search.xml";
+	if (search_path.length === 0) {
+		search_path = "search.xml";
+	}
+	var path = "/" + search_path;
+	searchFunc(path, "local-search-input", "local-search-result");
+</script>
+
+
+
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+    
+    
+
+
+
+<script type="text/javascript" src="https://cdn1.lncld.net/static/js/av-core-mini-0.6.4.js"></script>
+<script type="text/javascript" src="/js/plugins/leancloud_visitors.js?v=1.4.2"></script>
+
+
+
+    <!-- mathjax config similar to math.stackexchange -->
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+        tex2jax: {
+            inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+            processEscapes: true,
+            skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+        }
+    });
+</script>
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for (i=0; i < all.length; i += 1) {
+            all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+    });
+</script>
+
+<script type="text/javascript" src="//cdn.bootcss.com/mathjax/2.7.1/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+
+
+
+    <script>
+    (function() {
+        var OriginTitile = document.title, titleTime;
+        document.addEventListener('visibilitychange', function() {
+            if (document.hidden) {
+                document.title = '死鬼去哪里了！';
+                clearTimeout(titleTime);
+            } else {
+                document.title = '(つェ⊂)咦!又好了!';
+                titleTime = setTimeout(function() {
+                    document.title = OriginTitile;
+                },2000);
+            }
+        });
+    })();
+</script>
+
+
+
+
+
+    
+</body>
+</html>

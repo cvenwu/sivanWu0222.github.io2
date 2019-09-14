@@ -1,0 +1,702 @@
+<!DOCTYPE html>
+<html>
+<head><meta name="generator" content="Hexo 3.9.0">
+    <meta charset="utf-8">
+    
+    
+    <title>微信开发(1) | yirufeng&#39;s Blog | 未来的小幸运 || 致正在努力的我们 ---- 逸如风</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    
+    <meta name="keywords" content="微信开发">
+    <link rel="shortcut icon" href="/img/favicon.ico">
+    <link rel="stylesheet" href="//cdn.jsdelivr.net/gh/fancyapps/fancybox@3.5.2/dist/jquery.fancybox.min.css">
+    <link rel="stylesheet" href="/css/style.css?v=1.4.2">
+    
+    <script type="text/javascript">
+        // Data Center
+        var DC = {
+            reward:	true,
+            lv: JSON.parse('{"enable":true,"app_id":"K2RVtHi7RnmoN6dovlDKafn8-gzGzoHsz","app_key":"Qxmil0oqPFdDUyyIp2i1Xikt","icon":true}'),
+            v: JSON.parse('{"enable":false,"appid":"ACuOJIasBeRLiDe2iUApHj67-gzGzoHsz","appkey":"qbgg4tClrQQmvq8uwlpwA5mA","notify":true,"verify":true,"placeholder":"give me some sugers plz...","avatar":"wavatar"}'),
+            g: JSON.parse('{"enable":false,"lazy":true,"owner":"codefine","repo":"gitment","oauth":{"client_id":null,"client_secret":null},"perPage":10}'),
+            d: JSON.parse('{"app_id":null}')
+        };
+    </script>
+    <script type="text/javascript">
+        window.lazyScripts=[];
+    </script>
+    
+</head>
+
+
+<body>
+    <div id="loading" class="active"></div>
+
+    <aside id="menu" class="">
+  <div class="inner flex-row-vertical">
+    <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menu-off">
+        <i class="icon icon-lg icon-close"></i>
+    </a>
+    <div class="brand-wrap">
+      
+      <img src="/img/brand.jpg" class="brand-bg">
+      
+      <div class="brand">
+        <a href="/" class="avatar waves-effect waves-circle waves-light">
+          <img src="/img/1.jpg">
+        </a>
+        <hgroup class="introduce">
+          <h5 class="nickname">逸如风(yirufeng)</h5>
+          <a href="mailto:yirufeng@foxmail.com" title="yirufeng@foxmail.com" class="mail">
+            
+              <span>y</span>
+            
+              <span>i</span>
+            
+              <span>r</span>
+            
+              <span>u</span>
+            
+              <span>f</span>
+            
+              <span>e</span>
+            
+              <span>n</span>
+            
+              <span>g</span>
+            
+              <span>@</span>
+            
+              <span>f</span>
+            
+              <span>o</span>
+            
+              <span>x</span>
+            
+              <span>m</span>
+            
+              <span>a</span>
+            
+              <span>i</span>
+            
+              <span>l</span>
+            
+              <span>.</span>
+            
+              <span>c</span>
+            
+              <span>o</span>
+            
+              <span>m</span>
+            
+          </a>
+        </hgroup>
+        
+        <ul class="menu-link">
+          
+              <li>
+                <a href="https://github.com/sivanWu0222" target="_blank">
+                  <i class="icon icon-lg icon-github"></i>
+                </a>
+              </li>
+            
+              <li>
+                <a href="https://mail.qq.com/cgi-bin/qm_share?t=qm_mailme&amp;amp;email=xfTz8-Py8-f08vWFtLTrpqqo" target="_blank">
+                  <i class="icon icon-lg icon-envelope"></i>
+                </a>
+              </li>
+            
+        </ul>
+        
+      </div>
+    </div>
+    <div class="scroll-wrap flex-col">
+      <ul class="nav">
+        
+            <li class="">
+              <a href="/"  >
+                <i class="icon icon-lg icon-home"></i>
+                Home
+              </a>
+            </li>
+        
+            <li class="">
+              <a href="/categories"  >
+                <i class="icon icon-lg icon-th-list"></i>
+                Category
+              </a>
+            </li>
+        
+            <li class="">
+              <a href="/research"  >
+                <i class="icon icon-lg icon-mortar-board"></i>
+                Research
+              </a>
+            </li>
+        
+            <li class="">
+              <a href="/tags"  >
+                <i class="icon icon-lg icon-tags"></i>
+                Tag
+              </a>
+            </li>
+        
+            <li class="">
+              <a href="/archives"  >
+                <i class="icon icon-lg icon-archives"></i>
+                Archive
+              </a>
+            </li>
+        
+            <li class="">
+              <a href="/about"  >
+                <i class="icon icon-lg icon-user"></i>
+                About
+              </a>
+            </li>
+        
+            <li class="">
+              <a href="/open-source"  >
+                <i class="icon icon-lg icon-github"></i>
+                Project
+              </a>
+            </li>
+        
+            <li class="">
+              <a href="/demo"  >
+                <i class="icon icon-lg icon-audio-description"></i>
+                Demo
+              </a>
+            </li>
+        
+            <li class="">
+              <a href="/wechat-number"  >
+                <i class="icon icon-lg icon-wechat"></i>
+                公众号
+              </a>
+            </li>
+        
+            <li class="">
+              <a href="http://www.sivan.tech/LeetCodeAlgo/" target="_blank" >
+                <i class="icon icon-lg icon-braille"></i>
+                Leetcode
+              </a>
+            </li>
+        
+            <li class="">
+              <a href="http://resume.sivan.tech/" target="_blank" >
+                <i class="icon icon-lg icon-file-pdf-o"></i>
+                Resume
+              </a>
+            </li>
+        
+      </ul>
+    </div>
+  </div>
+</aside>
+
+    <main id="main">
+        <header class="top-header" id="header">
+    <div class="flex-row clearfix">
+        <a href="javascript:;" class="header-icon pull-left waves-effect waves-circle waves-light on" id="menu-toggle">
+          <i class="icon icon-lg icon-navicon"></i>
+        </a>
+        <div class="flex-col header-title ellipsis">
+            <span>微信开发(1)</span>
+            
+        </div>
+        
+        <a href="javascript:;" id="site_search_btn" class="header-icon pull-right waves-effect waves-circle waves-light">
+            <i class="icon icon-lg icon-search"></i>
+        </a>
+        
+    </div>
+</header>
+<header class="content-header post-header">
+    <img src="/img/s3.jpg" class="header-bg">
+    <div class="container fade-scale">
+        <h1 class="title">微信开发(1)</h1>
+        <h5 class="subtitle">
+            
+                <time datetime="2017-11-23T07:25:22.000Z" itemprop="datePublished" class="page-time">
+  2017-11-23
+</time>
+
+
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/微信/">微信</a><ul class="article-category-list-child"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/微信/开发/">开发</a></li></ul></li></ul>
+
+            
+        </h5>
+        
+    </div>
+    
+
+</header>
+
+<div id="site_search">
+    <div class="search-title clearfix">
+        <span class="pull-left">
+          <i class="icon icon-lg icon-search"></i>
+        </span>
+        <input type="text" id="local-search-input" name="q" results="0" placeholder="search my blog..." class="form-control pull-left"/>
+        <a href="javascript:;" class="close pull-right waves-effect waves-circle waves-light">
+          <i class="icon icon-lg icon-close"></i>
+        </a>
+    </div>
+    <div id="local-search-result"></div>
+</div>
+
+
+<div class="container body-wrap">
+    <article id="post-微信开发-1"
+  class="post-article article-type-post" itemprop="blogPost">
+    <div class="post-card">
+        <h1 class="post-card-title">微信开发(1)</h1>
+        <div class="post-meta">
+            <time class="post-time" title="2017-11-23 15:25:22" datetime="2017-11-23T07:25:22.000Z"  itemprop="datePublished">2017-11-23</time>
+
+            
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/微信/">微信</a><ul class="article-category-list-child"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/微信/开发/">开发</a></li></ul></li></ul>
+
+
+
+            
+	<span id="/2017/11/23/微信开发-1/" class="leancloud_visitors" data-flag-title="微信开发(1)" title="微信开发(1)">
+		
+			<i class="icon icon-eye"></i>
+		
+		<span class="leancloud-visitors-count"></span>
+	</span>
+ 
+
+            
+
+
+            
+        </div>
+        <div class="post-content" id="post-content" itemprop="postContent">
+            
+            <h2 id="前言："><a href="#前言：" class="headerlink" title="前言："></a>前言：</h2><blockquote>
+<p>在我写这篇文章之前，博主就已经看了一下微信公众号以及微信小程序的历史，不得不感叹自己老了！随着最近几年Native App的兴起和衰落，自己本认为可以火的Native App现在逐渐被一些light App所挤占，很大一部分尤以腾讯的微信为平台！</p>
+</blockquote>
+<p>这篇文章主要是记录自己开始微信开发的第一页，也是目前比较紧急的事情，因为要为公司开发一款微信公众号，虽然开发已经过去2个月了，2个月自己也是跌跌撞撞，做了很多自己不擅长的事情，产品需求的分析与设计，界面的设计与编写，产品的架构…..很多自己不敢想象的事情还是做了！</p>
+<h3 id="准备工作"><a href="#准备工作" class="headerlink" title="准备工作"></a>准备工作</h3><ol>
+<li>拥有一款已经注册且通过的认证号或者服务号</li>
+<li>拥有一个独立服务器(自己用的花生壳，可以免费内网映射1G流量)</li>
+<li>….貌似没有了(其实读者应该去看一下开发文档<a href="https://mp.weixin.qq.com/wiki?t=resource/res_main&id=mp1421135319" target="_blank" rel="noopener">文档</a>)</li>
+</ol>
+<hr>
+<h2 id="接入微信公众号"><a href="#接入微信公众号" class="headerlink" title="接入微信公众号"></a>接入微信公众号</h2><blockquote>
+<p>接入微信公众号也就是通俗上的告诉微信服务器，你的服务器就是你自己申请的微信公众号的服务器。(验证服务器是否被微信识别)</p>
+</blockquote>
+<h3 id="如何接入微信公众号"><a href="#如何接入微信公众号" class="headerlink" title="如何接入微信公众号"></a>如何接入微信公众号</h3><blockquote>
+<p>登录微信公众平台-&gt;开发-&gt;开发者工具-&gt;公众平台测试帐号-&gt;接口配置信息-&gt;修改</p>
+</blockquote>
+<ol>
+<li>配置url</li>
+<li>配置token</li>
+</ol>
+<p>流程：</p>
+<ol>
+<li>配置URL和token之后，微信公众号会向配置好的url发送一个get请求，将会携带如下4个参数（token就是我们刚刚配置的）<table><tr><td>signature</td><td>微信加密签名，signature结合了开发者填写的token参数和请求中的timestamp参数、nonce参数。</td></tr><tr><td>timestamp</td><td>时间戳</td></tr><tr><td>nonce</td><td>随机数</td></tr><tr><td>echostr</td><td>随机字符串</td></tr></table></li>
+<li>将token、timestamp、nonce三个参数进行字典序排序(升序)</li>
+<li>将三个参数字符串拼接成一个字符串进行sha1加密(得到的是一个加密后的十六进制字符串)</li>
+<li>开发者获得加密后的字符串可与signature对比，标识该请求来源于微信</li>
+<li>如果请求通过，我们需要返回一个echostr(微信服务器传给我们的)给微信服务器</li>
+</ol>
+<a id="more"></a>
+<p>代码如下</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@date</span> 2017年11月23日 下午2:44:22</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@author</span> SiVan</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">package</span> com.util;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> java.security.MessageDigest;</span><br><span class="line"><span class="keyword">import</span> java.security.NoSuchAlgorithmException;</span><br><span class="line"><span class="keyword">import</span> java.util.Arrays;</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@param</span> signature 微信加密签名，</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@param</span> timestamp 时间戳</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@param</span> nonce	随机数</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@author</span> SiVan</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@time</span> 2017年11月23日 下午2:44:22</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@TODO</span> TODO	请求校验程序的实现</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">CheckUtil</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">	<span class="comment">/*微信测试号接口配置信息的Token，内容要完全一致*/</span></span><br><span class="line">	<span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> String token = <span class="string">"123456"</span>;</span><br><span class="line"></span><br><span class="line">	<span class="comment">/**</span></span><br><span class="line"><span class="comment">	 * 将token，timestamp，nonce 三个参数的内容进行字典序排序，</span></span><br><span class="line"><span class="comment">	 * 拼接成字符串，并且进行SHA-1加密，与signature进行比对，如果一致返回true,否则返回false</span></span><br><span class="line"><span class="comment">	 * <span class="doctag">@param</span> signature 微信加密签名，</span></span><br><span class="line"><span class="comment">	 * <span class="doctag">@param</span> timestamp 时间戳</span></span><br><span class="line"><span class="comment">	 * <span class="doctag">@param</span> nonce	随机数</span></span><br><span class="line"><span class="comment">	 * <span class="doctag">@return</span></span></span><br><span class="line"><span class="comment">	 */</span></span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">boolean</span> <span class="title">check</span><span class="params">(String signature, String timestamp, String nonce)</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">		<span class="comment">/*进行字典序排序*/</span></span><br><span class="line">		String[] params = <span class="keyword">new</span> String[] &#123; token, timestamp, nonce &#125;;</span><br><span class="line">		Arrays.sort(params);</span><br><span class="line"></span><br><span class="line">		<span class="comment">/*排序后的字符串进行拼接*/</span></span><br><span class="line">		StringBuffer sb = <span class="keyword">new</span> StringBuffer();</span><br><span class="line">		sb = sb.append(params[<span class="number">0</span>]).append(params[<span class="number">1</span>]).append(params[<span class="number">2</span>]);</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">		<span class="comment">/*进行加密*/</span></span><br><span class="line">		String cipherText = sb.toString();</span><br><span class="line">		MessageDigest md = <span class="keyword">null</span>;</span><br><span class="line">		<span class="keyword">try</span> &#123;</span><br><span class="line">			md = MessageDigest.getInstance(<span class="string">"SHA-1"</span>);</span><br><span class="line">		&#125; <span class="keyword">catch</span> (NoSuchAlgorithmException e) &#123;</span><br><span class="line">			e.printStackTrace();</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="keyword">byte</span>[] digest = md.digest(cipherText.getBytes());</span><br><span class="line">		cipherText = byteToString(digest);</span><br><span class="line"></span><br><span class="line">		<span class="keyword">return</span> cipherText != <span class="keyword">null</span> ? cipherText.equals(signature.toUpperCase()) : <span class="keyword">false</span>;</span><br><span class="line"></span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="comment">/*字节数组转换为十六进制字符串*/</span></span><br><span class="line">	<span class="function"><span class="keyword">private</span> <span class="keyword">static</span> String <span class="title">byteToString</span><span class="params">(<span class="keyword">byte</span>[] byteArray)</span> </span>&#123;</span><br><span class="line">		String strDigest = <span class="string">""</span>;</span><br><span class="line">		<span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; byteArray.length; i++) &#123;</span><br><span class="line">			strDigest += byteToHexStr(byteArray[i]);</span><br><span class="line">		&#125;</span><br><span class="line"></span><br><span class="line">		<span class="keyword">return</span> strDigest;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="comment">/*字节转换为十六进制字符串*/</span></span><br><span class="line">	<span class="function"><span class="keyword">private</span> <span class="keyword">static</span> String <span class="title">byteToHexStr</span><span class="params">(<span class="keyword">byte</span> mByte)</span> </span>&#123;</span><br><span class="line">		<span class="keyword">char</span>[] Digit = &#123; <span class="string">'0'</span>, <span class="string">'1'</span>, <span class="string">'2'</span>, <span class="string">'3'</span>, <span class="string">'4'</span>, <span class="string">'5'</span>, <span class="string">'6'</span>, <span class="string">'7'</span>, <span class="string">'8'</span>, <span class="string">'9'</span>, <span class="string">'A'</span>, <span class="string">'B'</span>, <span class="string">'C'</span>, <span class="string">'D'</span>, <span class="string">'E'</span>, <span class="string">'F'</span>&#125;;</span><br><span class="line">		<span class="keyword">char</span>[] tempArr = <span class="keyword">new</span> <span class="keyword">char</span>[<span class="number">2</span>];</span><br><span class="line">		tempArr[<span class="number">0</span>] = Digit[(mByte &gt;&gt;&gt; <span class="number">4</span>) &amp; <span class="number">0X0F</span>];</span><br><span class="line">		tempArr[<span class="number">1</span>] = Digit[mByte &amp; <span class="number">0X0F</span>];</span><br><span class="line">		String s = <span class="keyword">new</span> String(tempArr);</span><br><span class="line">		<span class="keyword">return</span> s;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>测试程序：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@date</span> 2017年11月22日 下午8:05:42</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@author</span> SiVan</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">package</span> com.servlet;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> java.io.IOException;</span><br><span class="line"><span class="keyword">import</span> java.security.MessageDigest;</span><br><span class="line"><span class="keyword">import</span> java.security.NoSuchAlgorithmException;</span><br><span class="line"><span class="keyword">import</span> java.util.Arrays;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> javax.servlet.ServletException;</span><br><span class="line"><span class="keyword">import</span> javax.servlet.http.HttpServlet;</span><br><span class="line"><span class="keyword">import</span> javax.servlet.http.HttpServletRequest;</span><br><span class="line"><span class="keyword">import</span> javax.servlet.http.HttpServletResponse;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> com.util.CheckUtil;</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@author</span> SiVan</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@time</span> 2017年11月22日 下午8:05:42</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@TODO</span> TODO 验证消息来自微信服务器</span></span><br><span class="line"><span class="comment"> *</span></span><br><span class="line"><span class="comment"> * 请求</span></span><br><span class="line"><span class="comment"> *</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">SignUtil</span> <span class="keyword">extends</span> <span class="title">HttpServlet</span></span>&#123;</span><br><span class="line">	<span class="comment">/**</span></span><br><span class="line"><span class="comment">	 * 	1）将token、timestamp、nonce三个参数进行字典序排序</span></span><br><span class="line"><span class="comment"></span></span><br><span class="line"><span class="comment">		2）将三个参数字符串拼接成一个字符串进行sha1加密,加密后的字符串是十六进制的</span></span><br><span class="line"><span class="comment"></span></span><br><span class="line"><span class="comment">		3）开发者获得加密后的字符串可与signature对比，标识该请求来源于微信</span></span><br><span class="line"><span class="comment">	 */</span></span><br><span class="line">	<span class="meta">@Override</span></span><br><span class="line">	<span class="function"><span class="keyword">protected</span> <span class="keyword">void</span> <span class="title">doGet</span><span class="params">(HttpServletRequest request, HttpServletResponse response)</span> <span class="keyword">throws</span> ServletException, IOException </span>&#123;</span><br><span class="line"></span><br><span class="line">		checkSign( request,  response);</span><br><span class="line"></span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="comment">/**</span></span><br><span class="line"><span class="comment">	 * <span class="doctag">@param</span> request</span></span><br><span class="line"><span class="comment">	 * <span class="doctag">@param</span> response</span></span><br><span class="line"><span class="comment">	 * <span class="doctag">@throws</span> IOException</span></span><br><span class="line"><span class="comment">	 */</span></span><br><span class="line">	<span class="function"><span class="keyword">private</span> <span class="keyword">void</span> <span class="title">checkSign</span><span class="params">(HttpServletRequest request, HttpServletResponse response)</span> <span class="keyword">throws</span> IOException </span>&#123;</span><br><span class="line">		String signature = request.getParameter(<span class="string">"signature"</span>);</span><br><span class="line">		String timestamp = request.getParameter(<span class="string">"timestamp"</span>);</span><br><span class="line">		String nonce = request.getParameter(<span class="string">"nonce"</span>);</span><br><span class="line">		String echostr = request.getParameter(<span class="string">"echostr"</span>);</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">		<span class="comment">/*验证通过回写echostr*/</span></span><br><span class="line">		<span class="keyword">if</span>( CheckUtil.check(signature, timestamp, nonce))</span><br><span class="line">		&#123;</span><br><span class="line">			response.getWriter().print(echostr);</span><br><span class="line">		&#125;<span class="keyword">else</span>&#123;</span><br><span class="line">			response.getWriter().print(<span class="string">"false"</span>);</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<blockquote>
+<p>注意：url配置的时候需要具体到我们接收参数的地址</p>
+</blockquote>
+<p>请求校验的原因：</p>
+<blockquote>
+<p>为了防止他人向公众号服务器发送恶意请求，需要对每个消息请求进行合法校验，微信服务器向公众号服务器POST消息时，也会在URL后面追加4个参数，分别是signature,timestamp,nonce,echostr，依然是通过校验签名判断消息的真实性！与上面讲的完全一致！</p>
+</blockquote>
+<hr>
+<p>总结：当你点击在配置URL和Token点击提交的时候，如果配置失败，那么请你重新检查一下你的程序，确保你返回了echostr，如果配置成功，那么恭喜你，你的服务器算得上一个微信公众号服务器了2333！</p>
+
+        </div>
+        
+<blockquote class="post-copyright">
+    <div class="content">
+        
+<span class="post-time">
+    最后更新时间：<time datetime="2019-08-26T10:46:59.873Z" itemprop="dateUpdated">2019-08-26 18:46:59</time>
+</span><br>
+
+
+        
+        转载注明出处，原文地址：<a href="/2017/11/23/微信开发-1/" target="_blank" rel="external">http://www.sivan.tech/2017/11/23/微信开发-1/</a>
+        
+    </div>
+    <footer>
+        <a href="http://www.sivan.tech">
+            <img src="/img/1.jpg" alt="逸如风(yirufeng)">
+            逸如风(yirufeng)
+        </a>
+    </footer>
+</blockquote>
+
+        
+            <div class="page-reward">
+    <a id="rewardBtn" href="javascript:;" class="page-reward-btn waves-effect waves-circle waves-light">赏</a>
+</div>
+
+            
+        
+        <div class="post-footer">
+            
+	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/微信开发/">微信开发</a></li></ul>
+
+            <div class="page-share-wrap">
+    
+
+<div class="page-share" id="pageShare">
+    <ul class="reset share-icons">
+      
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://www.sivan.tech/2017/11/23/微信开发-1/&title=《微信开发(1)》 — yirufeng's Blog&pic=http://www.sivan.tech/img/1.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://www.sivan.tech/2017/11/23/微信开发-1/&title=《微信开发(1)》 — yirufeng's Blog&source=前言：
+在我写这篇文章之前，博主就已经看了一下微信公众号以及微信小程序的历史，不得不感叹自己老了！随着最近几年Native App的兴起和衰落，自己本认为..." data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http://www.sivan.tech/2017/11/23/微信开发-1/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《微信开发(1)》 — yirufeng's Blog&url=http://www.sivan.tech/2017/11/23/微信开发-1/&via=http://www.sivan.tech" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=http://www.sivan.tech/2017/11/23/微信开发-1/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+      
+    </ul>
+ </div>
+
+
+
+    <a href="javascript:;" id="shareFab" class="page-share-fab waves-effect waves-circle">
+        <i class="icon icon-share-alt icon-lg"></i>
+    </a>
+</div>
+
+        </div>
+        
+            
+
+
+        
+    </div>
+    
+<nav class="post-nav flex-row flex-justify-between">
+  
+    <div class="prev">
+      <a href="/2017/11/24/dom4j与XStream的使用/" id="post-prev" class="post-nav-link">
+        <div class="tips"><i class="icon icon-angle-left icon-lg icon-pr"></i> Prev</div>
+        <h4 class="title">dom4j与XStream的使用</h4>
+      </a>
+    </div>
+  
+
+  
+    <div class="next">
+      <a href="/2017/11/22/MyBatis中的基本概念/" id="post-next" class="post-nav-link">
+        <div class="tips">Next <i class="icon icon-angle-right icon-lg icon-pl"></i></div>
+        <h4 class="title">MyBatis中的基本概念</h4>
+      </a>
+    </div>
+  
+</nav>
+
+
+    
+    
+        <aside class="post-widget">
+            <nav class="post-toc-wrap" id="post-toc">
+                <strong>目录</strong>
+                <ol class="post-toc"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#前言："><span class="post-toc-number">1.</span> <span class="post-toc-text">前言：</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#准备工作"><span class="post-toc-number">1.1.</span> <span class="post-toc-text">准备工作</span></a></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#接入微信公众号"><span class="post-toc-number">2.</span> <span class="post-toc-text">接入微信公众号</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#如何接入微信公众号"><span class="post-toc-number">2.1.</span> <span class="post-toc-text">如何接入微信公众号</span></a></li></ol></li></ol>
+            </nav>
+            <div class="toc-bar"><div>
+        </aside>
+    
+</article>
+
+    <div id="reward" class="page-modal reward-lay">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <h3 class="reward-title">
+        <i class="icon icon-quote-left"></i>
+        感谢原作，你的打赏是我的动力！
+        <i class="icon icon-quote-right"></i>
+    </h3>
+    <div class="reward-content">
+        
+        <div class="reward-code">
+            <img id="rewardCode" src="/img/reward-wechat.jpg" alt="打赏二维码">
+        </div>
+        
+        <label class="reward-toggle">
+            <input id="rewardToggle" type="checkbox" class="reward-toggle-check"
+                data-wechat="/img/reward-wechat.jpg" data-alipay="/img/reward-alipay.jpg">
+            <div class="reward-toggle-ctrol">
+                <span class="reward-toggle-item wechat">微信</span>
+                <span class="reward-toggle-label"></span>
+                <span class="reward-toggle-item alipay">支付宝</span>
+            </div>
+        </label>
+        
+    </div>
+</div>
+
+    
+
+</div>
+
+    </main>
+    <footer class="footer ">
+    
+    <div class="top">
+        
+            <p>
+    <span>Links：</span>
+    
+    <span class="blogroll-item">
+        <a href="https://github.com/sivanWu0222" target="_blank">GitHub</a>
+    </span>
+    
+    <span class="blogroll-item">
+        <a href="http://weibo.com/Msingwen0222/home?wvr=5" target="_blank">新浪微博</a>
+    </span>
+    
+    <span class="blogroll-item">
+        <a href="https://www.linkedin.com/in/%E6%99%93%E6%96%87-%E5%90%B4-79057a121/" target="_blank">Linkedin</a>
+    </span>
+    
+    <span class="blogroll-item">
+        <a href="http://wpa.qq.com/msgrd?v=3&amp;uin=1666762170&amp;site=qq&amp;menu=yes" target="_blank">QQ</a>
+    </span>
+    
+    <span class="blogroll-item">
+        <a href="https://zh-cn.facebook.com/people/SiVan-Wu/100014408918389" target="_blank">Facebook</a>
+    </span>
+    
+    <span class="blogroll-item">
+        <a href="https://mail.qq.com/cgi-bin/qm_share?t=qm_mailme&amp;email=xfTz8-Py8-f08vWFtLTrpqqo" target="_blank">Contact</a>
+    </span>
+    
+    <span class="blogroll-item">
+        <a href="https://twitter.com/SiVan_Wu" target="_blank">Twitter</a>
+    </span>
+    
+</p>
+
+        
+    </div>
+    
+    <div class="bottom">
+        <p>
+            <span>
+                逸如风(yirufeng) &copy; 2016 - 2019
+            </span>
+
+           	
+           	<span>
+           		<a href="http://beian.miit.gov.cn/" target="_blank">已实名认证</a>
+           	</span>
+           	
+
+            
+
+            
+
+            
+                
+<span class="site-uv" title="总访客量">
+    <i class="icon icon-user"></i>
+    <i class="busuanzi-value" id="busuanzi_value_site_uv"></i>
+</span>
+
+
+<span class="site-pv" title="总访问量">
+    <i class="icon icon-eye"></i>
+    <i class="busuanzi-value" id="busuanzi_value_site_pv"></i>
+</span>
+
+            
+        </p>
+    </div>
+</footer>
+
+    <div class="mask" id="mask"></div>
+<a href="javascript:;" id="gotop" class="waves-effect waves-circle waves-light"><span class="icon icon-lg icon-chevron-up"></span></a>
+
+
+
+<div class="global-share" id="globalShare">
+    <ul class="reset share-icons">
+      
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://www.sivan.tech/2017/11/23/微信开发-1/&title=《微信开发(1)》 — yirufeng's Blog&pic=http://www.sivan.tech/img/1.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://www.sivan.tech/2017/11/23/微信开发-1/&title=《微信开发(1)》 — yirufeng's Blog&source=前言：
+在我写这篇文章之前，博主就已经看了一下微信公众号以及微信小程序的历史，不得不感叹自己老了！随着最近几年Native App的兴起和衰落，自己本认为..." data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http://www.sivan.tech/2017/11/23/微信开发-1/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《微信开发(1)》 — yirufeng's Blog&url=http://www.sivan.tech/2017/11/23/微信开发-1/&via=http://www.sivan.tech" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=http://www.sivan.tech/2017/11/23/微信开发-1/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+      
+    </ul>
+ </div>
+
+
+<div class="page-modal wx-share" id="wxShare">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAMYAAADGCAAAAACs8KCBAAACMklEQVR42u3aS5LDIAwFwNz/0pltFmPnCTmuQm5WqXwwzUIREq9XPN4H4/PTo28ezXb+lNcvBgYGxraM9+lIFpc8OJ85+fSfJ2JgYDyAcR4Wqw8+mjnZiPMZDt/HwMDACIJvNeE7D68YGBgYVzGq4bK6dAwMDIzqIbZTFEuC6U1ncQwMjA0Z+SLuf/2T/gYGBsZWjHdxVINgJ5QXVoWBgTGasdaA7ITLzlWMLyU8DAyM0Yxqc7ETOvvH2i9UDAyMcYy8GZmH2vy3nSSycOMMAwNjBOOecFktqBUaABgYGA9gtJqCSxcpOi3JqAeLgYExiFEtza+dj6sltssuUmBgYAxi5AlZpxh31ZG4VTvEwMDYkJGncdWD5VVH1mibMDAwRjOq4S9J9fJAmWxZ+ZoFBgbGOEb+s2oaV11W/p3DyxYYGBijGWstxs51irX3D7cJAwNjNKOatCVJYTV0JkfWi7upGBgYGzLWLnglI8ncqtvxpdyGgYExlJEX1KqpZB6++y0EDAyM2Yw87VsrqyUFu862YmBgPIdRPUzm1786FzjyBBQDA+MJjOpRNm9k5svKk0IMDIznMNbKZ1VSJ92MUkkMDIzRjE5rs9+YTGZbvGyBgYExjpG3IZOQfdXSkzkL/x4YGBgjGHngu7Pclm8cBgYGRifTXGt/ltNQDAwMjNM2ZzUd7AfZi/83MDAwNmEkh9hOmzNPH1upIQYGxlBG/uM8E8svT6y1PBebmhgYGPsx/gBS8ImH8R5ELAAAAABJRU5ErkJggg==" alt="微信分享二维码">
+</div>
+
+
+    
+    <!-- main-js -->
+<script type="text/javascript" src="//cdn.bootcss.com/jquery/2.1.0/jquery.min.js"></script>
+<script type="text/javascript" src="/js/plugins/fastclick.js?v=1.4.2"></script>
+<script type="text/javascript" src="/js/plugins/ios-orientationchange-fix.js?v=1.4.2"></script>
+<script type="text/javascript" src="//cdn.jsdelivr.net/gh/fancyapps/fancybox@3.5.2/dist/jquery.fancybox.min.js"></script>
+
+<script type="text/javascript" src="//cdn.bootcss.com/node-waves/0.7.4/waves.min.js"></script>
+
+<script type="text/javascript" src="/js/method.js?v=1.4.2"></script>
+<script type="text/javascript" src="/js/blog.js?v=1.4.2"></script>
+
+<!-- third-party -->
+
+
+
+
+
+
+<script type="text/javascript" src="/js/plugins/local_search.js?v=1.4.2"></script>
+<script type="text/javascript">
+	var search_path = "search.xml";
+	if (search_path.length === 0) {
+		search_path = "search.xml";
+	}
+	var path = "/" + search_path;
+	searchFunc(path, "local-search-input", "local-search-result");
+</script>
+
+
+
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+    
+    
+
+
+
+<script type="text/javascript" src="https://cdn1.lncld.net/static/js/av-core-mini-0.6.4.js"></script>
+<script type="text/javascript" src="/js/plugins/leancloud_visitors.js?v=1.4.2"></script>
+
+
+
+    <!-- mathjax config similar to math.stackexchange -->
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+        tex2jax: {
+            inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+            processEscapes: true,
+            skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+        }
+    });
+</script>
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for (i=0; i < all.length; i += 1) {
+            all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+    });
+</script>
+
+<script type="text/javascript" src="//cdn.bootcss.com/mathjax/2.7.1/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+
+
+
+    <script>
+    (function() {
+        var OriginTitile = document.title, titleTime;
+        document.addEventListener('visibilitychange', function() {
+            if (document.hidden) {
+                document.title = '死鬼去哪里了！';
+                clearTimeout(titleTime);
+            } else {
+                document.title = '(つェ⊂)咦!又好了!';
+                titleTime = setTimeout(function() {
+                    document.title = OriginTitile;
+                },2000);
+            }
+        });
+    })();
+</script>
+
+
+
+
+
+    
+</body>
+</html>

@@ -1,0 +1,726 @@
+<!DOCTYPE html>
+<html>
+<head><meta name="generator" content="Hexo 3.9.0">
+    <meta charset="utf-8">
+    
+    
+    <title>[Java]-2 | yirufeng&#39;s Blog | 未来的小幸运 || 致正在努力的我们 ---- 逸如风</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    
+    <meta name="keywords" content="基本数据类型">
+    <link rel="shortcut icon" href="/img/favicon.ico">
+    <link rel="stylesheet" href="//cdn.jsdelivr.net/gh/fancyapps/fancybox@3.5.2/dist/jquery.fancybox.min.css">
+    <link rel="stylesheet" href="/css/style.css?v=1.4.2">
+    
+    <script type="text/javascript">
+        // Data Center
+        var DC = {
+            reward:	true,
+            lv: JSON.parse('{"enable":true,"app_id":"K2RVtHi7RnmoN6dovlDKafn8-gzGzoHsz","app_key":"Qxmil0oqPFdDUyyIp2i1Xikt","icon":true}'),
+            v: JSON.parse('{"enable":false,"appid":"ACuOJIasBeRLiDe2iUApHj67-gzGzoHsz","appkey":"qbgg4tClrQQmvq8uwlpwA5mA","notify":true,"verify":true,"placeholder":"give me some sugers plz...","avatar":"wavatar"}'),
+            g: JSON.parse('{"enable":false,"lazy":true,"owner":"codefine","repo":"gitment","oauth":{"client_id":null,"client_secret":null},"perPage":10}'),
+            d: JSON.parse('{"app_id":null}')
+        };
+    </script>
+    <script type="text/javascript">
+        window.lazyScripts=[];
+    </script>
+    
+</head>
+
+
+<body>
+    <div id="loading" class="active"></div>
+
+    <aside id="menu" class="">
+  <div class="inner flex-row-vertical">
+    <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menu-off">
+        <i class="icon icon-lg icon-close"></i>
+    </a>
+    <div class="brand-wrap">
+      
+      <img src="/img/brand.jpg" class="brand-bg">
+      
+      <div class="brand">
+        <a href="/" class="avatar waves-effect waves-circle waves-light">
+          <img src="/img/1.jpg">
+        </a>
+        <hgroup class="introduce">
+          <h5 class="nickname">逸如风(yirufeng)</h5>
+          <a href="mailto:yirufeng@foxmail.com" title="yirufeng@foxmail.com" class="mail">
+            
+              <span>y</span>
+            
+              <span>i</span>
+            
+              <span>r</span>
+            
+              <span>u</span>
+            
+              <span>f</span>
+            
+              <span>e</span>
+            
+              <span>n</span>
+            
+              <span>g</span>
+            
+              <span>@</span>
+            
+              <span>f</span>
+            
+              <span>o</span>
+            
+              <span>x</span>
+            
+              <span>m</span>
+            
+              <span>a</span>
+            
+              <span>i</span>
+            
+              <span>l</span>
+            
+              <span>.</span>
+            
+              <span>c</span>
+            
+              <span>o</span>
+            
+              <span>m</span>
+            
+          </a>
+        </hgroup>
+        
+        <ul class="menu-link">
+          
+              <li>
+                <a href="https://github.com/sivanWu0222" target="_blank">
+                  <i class="icon icon-lg icon-github"></i>
+                </a>
+              </li>
+            
+              <li>
+                <a href="https://mail.qq.com/cgi-bin/qm_share?t=qm_mailme&amp;amp;email=xfTz8-Py8-f08vWFtLTrpqqo" target="_blank">
+                  <i class="icon icon-lg icon-envelope"></i>
+                </a>
+              </li>
+            
+        </ul>
+        
+      </div>
+    </div>
+    <div class="scroll-wrap flex-col">
+      <ul class="nav">
+        
+            <li class="">
+              <a href="/"  >
+                <i class="icon icon-lg icon-home"></i>
+                Home
+              </a>
+            </li>
+        
+            <li class="">
+              <a href="/categories"  >
+                <i class="icon icon-lg icon-th-list"></i>
+                Category
+              </a>
+            </li>
+        
+            <li class="">
+              <a href="/research"  >
+                <i class="icon icon-lg icon-mortar-board"></i>
+                Research
+              </a>
+            </li>
+        
+            <li class="">
+              <a href="/tags"  >
+                <i class="icon icon-lg icon-tags"></i>
+                Tag
+              </a>
+            </li>
+        
+            <li class="">
+              <a href="/archives"  >
+                <i class="icon icon-lg icon-archives"></i>
+                Archive
+              </a>
+            </li>
+        
+            <li class="">
+              <a href="/about"  >
+                <i class="icon icon-lg icon-user"></i>
+                About
+              </a>
+            </li>
+        
+            <li class="">
+              <a href="/open-source"  >
+                <i class="icon icon-lg icon-github"></i>
+                Project
+              </a>
+            </li>
+        
+            <li class="">
+              <a href="/demo"  >
+                <i class="icon icon-lg icon-audio-description"></i>
+                Demo
+              </a>
+            </li>
+        
+            <li class="">
+              <a href="/wechat-number"  >
+                <i class="icon icon-lg icon-wechat"></i>
+                公众号
+              </a>
+            </li>
+        
+            <li class="">
+              <a href="http://www.sivan.tech/LeetCodeAlgo/" target="_blank" >
+                <i class="icon icon-lg icon-braille"></i>
+                Leetcode
+              </a>
+            </li>
+        
+            <li class="">
+              <a href="http://resume.sivan.tech/" target="_blank" >
+                <i class="icon icon-lg icon-file-pdf-o"></i>
+                Resume
+              </a>
+            </li>
+        
+      </ul>
+    </div>
+  </div>
+</aside>
+
+    <main id="main">
+        <header class="top-header" id="header">
+    <div class="flex-row clearfix">
+        <a href="javascript:;" class="header-icon pull-left waves-effect waves-circle waves-light on" id="menu-toggle">
+          <i class="icon icon-lg icon-navicon"></i>
+        </a>
+        <div class="flex-col header-title ellipsis">
+            <span>[Java]-2</span>
+            
+        </div>
+        
+        <a href="javascript:;" id="site_search_btn" class="header-icon pull-right waves-effect waves-circle waves-light">
+            <i class="icon icon-lg icon-search"></i>
+        </a>
+        
+    </div>
+</header>
+<header class="content-header post-header">
+    <img src="/img/s3.jpg" class="header-bg">
+    <div class="container fade-scale">
+        <h1 class="title">[Java]-2</h1>
+        <h5 class="subtitle">
+            
+                <time datetime="2016-12-10T02:54:43.000Z" itemprop="datePublished" class="page-time">
+  2016-12-10
+</time>
+
+
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/Java/">Java</a><ul class="article-category-list-child"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/Java/基础/">基础</a></li></ul></li></ul>
+
+            
+        </h5>
+        
+    </div>
+    
+
+</header>
+
+<div id="site_search">
+    <div class="search-title clearfix">
+        <span class="pull-left">
+          <i class="icon icon-lg icon-search"></i>
+        </span>
+        <input type="text" id="local-search-input" name="q" results="0" placeholder="search my blog..." class="form-control pull-left"/>
+        <a href="javascript:;" class="close pull-right waves-effect waves-circle waves-light">
+          <i class="icon icon-lg icon-close"></i>
+        </a>
+    </div>
+    <div id="local-search-result"></div>
+</div>
+
+
+<div class="container body-wrap">
+    <article id="post-Java-2"
+  class="post-article article-type-post" itemprop="blogPost">
+    <div class="post-card">
+        <h1 class="post-card-title">[Java]-2</h1>
+        <div class="post-meta">
+            <time class="post-time" title="2016-12-10 10:54:43" datetime="2016-12-10T02:54:43.000Z"  itemprop="datePublished">2016-12-10</time>
+
+            
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/Java/">Java</a><ul class="article-category-list-child"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/Java/基础/">基础</a></li></ul></li></ul>
+
+
+
+            
+	<span id="/2016/12/10/Java-2/" class="leancloud_visitors" data-flag-title="[Java]-2" title="[Java]-2">
+		
+			<i class="icon icon-eye"></i>
+		
+		<span class="leancloud-visitors-count"></span>
+	</span>
+ 
+
+            
+
+
+            
+        </div>
+        <div class="post-content" id="post-content" itemprop="postContent">
+            
+            <h2 id="Java中的基本数据类型"><a href="#Java中的基本数据类型" class="headerlink" title="Java中的基本数据类型"></a>Java中的基本数据类型</h2><h3 id="数值型"><a href="#数值型" class="headerlink" title="数值型"></a>数值型</h3><table><tr align="center"><td>byte</td><td>1字节</td></tr><tr align="center"><td>short  char</td><td>2字节</td></tr><tr align="center"><td>int</td><td>4字节</td></tr><tr align="center"><td>long</td><td>8字节</td></tr><tr align="center"><td>float</td><td>4字节</td></tr><tr align="center"><td>double</td><td>8字节</td></tr></table>
+
+<h3 id="非数值型"><a href="#非数值型" class="headerlink" title="非数值型"></a>非数值型</h3><p>boolean</p>
+<a id="more"></a>
+<h4 id="注意："><a href="#注意：" class="headerlink" title="注意："></a>注意：</h4><blockquote>
+<ol>
+<li>这8种数据类型都是Java的基本数据类型，值得注意的是Java中的int与float字节数相同，但是表示方法不同，从而范围不同， float采用科学计数法</li>
+<li>char类型是数值型中唯一一个无符号位的数据类型，而其他数据类型中，使用二进制对其进行表示的时候，最开始的一位便是符号位，1为负数 0 为正数</li>
+<li>虽然0000 0000 与 1000 0000 都可以代表0，但是计算机中采用补码来表示0</li>
+<li>short与char 的字节数相同，但是因为char无符号位，因此char: 0-65535 short:-32768-32767</li>
+</ol>
+</blockquote>
+<hr>
+<h2 id="Java的基本类型数据转换注意事项"><a href="#Java的基本类型数据转换注意事项" class="headerlink" title="Java的基本类型数据转换注意事项"></a>Java的基本类型数据转换注意事项</h2><blockquote>
+<p>Java中对于数据类型的转换，有着默认的规则，这里将记录一些常用的套路，对于更深层次的研究，请<a href="http://www.sivan0222.cn/2016/12/22/%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B%E6%B3%A8%E6%84%8F%E4%BA%8B%E9%A1%B9/" target="_blank" rel="noopener">移步</a></p>
+</blockquote>
+<ol>
+<li>小类型转换成大类型自动转换，大类型转换成小类型需要进行强转（可能会产生溢出）</li>
+<li>当数据类型所表示的范围无大小之分时，产生精度损失就需要进行强转（例如char和int类型进行转换）</li>
+<li>int以及int类型以下的数据类型运算结果为int</li>
+<li>char类型是数值型中唯一一个没有符号位的数据类型，同时char类型在定义的时候还可以用单个字符来进行定义</li>
+<li>大类型 + 小类型 = 大类型</li>
+<li>float以及double 都采用科学计数法来表示一个数字，虽然float和int所占用字节数相同，long和double所占字节数相同，但是两者表示方法不同，从而所表示的数值范围不同。<strong>Java中的小数类型默认是double类型</strong></li>
+<li><strong>char类型数据可以转换为任意一个数据类型，但是将整数转换为一个char类型的时候，只用到该整数的低16位，其余被忽略。</strong></li>
+<li><strong>将一个浮点型数转换为一个char类型的数字的时候，首先将浮点型数值转换成int类型，然后转换为char类型。如果转换结果适用于目标变量，则隐式转换，否则显式转换</strong></li>
+<li><strong>所有数值操作符都可以用在char类型操作数上，如果另一个操作数是一个数字或字符，那么char类型操作数就会被自动转换成一个数字，如果另一个操作数是一个字符串，字符就会与该字符串相连。</strong></li>
+</ol>
+<hr>
+<h2 id="Java一些语句的注意事项"><a href="#Java一些语句的注意事项" class="headerlink" title="Java一些语句的注意事项"></a>Java一些语句的注意事项</h2><blockquote>
+<p>当采用记事本编程Java的时候，需要使用ctrl + c 退出dos下的死循环，然后dos下键入cls清屏</p>
+<ol>
+<li><strong>switch语句中，条件只能是int以及int一下的数据类型，从JDK1.7开始支持字符串</strong></li>
+<li>switch语句执行，每个case语句一旦触发，没有break时，后面的语句都会得到执行</li>
+<li>Java中 + 号作为被重载的运算符具有两个功能： 第一，如果+号两边都是数字，则计算结果为数字。第二，如果+号两边，出现字符串，则会对字符串进行拼接。</li>
+</ol>
+</blockquote>
+<hr>
+<h2 id="float内存详解"><a href="#float内存详解" class="headerlink" title="float内存详解"></a>float内存详解</h2><blockquote>
+<p>这里将会介绍一些float的内存详解，用来区分int与float，从而更深层次的理解int 与 float为什么会字节数相同，表示的数据类型范围不同，不仅仅是体现在了方法上面</p>
+</blockquote>
+<h3 id="表示方法"><a href="#表示方法" class="headerlink" title="表示方法"></a>表示方法</h3><ol>
+<li>定点数表达法的缺点在于其形式过于僵硬，固定的小数点位置决定了固定位数的整数部分和小数部分，不利于同时表达特别大的数或者特别小的数。</li>
+<li>计算机系统采纳了所谓的浮点数表达方式。这种表达方式利用科学计数法来表达实数，即用一个尾数（Mantissa也叫有效数字 ），一个基数（Base），一个指数（Exponent）以及一个表示正负的符号来表达实数。浮点数利用指数达到了浮动小数点的效果，从而可以灵活地表达更大范围的实数。</li>
+<li>当一个浮点数的尾数为0，不论其阶码为何值，该浮点数的值都为0。当阶码的值为它能表示的最小一个值或更小的值时,不管其尾数为何值，计算机都把该浮点数看成零值,通常称其为机器零，此时该浮点数的所有各位（包括阶码位和尾数位）都清为0值。</li>
+</ol>
+<blockquote>
+<p>Java 平台上的浮点数类型 float 和 double 采纳了 IEEE 754 标准中所定义的单精度 32 位浮点数和双精度 64 位浮点数的格式。<br>在 IEEE 标准中，浮点数是将特定长度的连续字节的所有二进制位分割为特定宽度的符号域，指数域和尾数域三个域，其中保存的值分别用于表示给定二进制浮点数中的符号，指数和尾数。这样，通过尾数和可以调节的指数就可以表达给定的数值了。</p>
+</blockquote>
+<h4 id="表示原理讲解"><a href="#表示原理讲解" class="headerlink" title="表示原理讲解"></a>表示原理讲解</h4><ol>
+<li>第一个域为符号域。其中 0 表示数值为正数，而 1 则表示负数。</li>
+<li>第二个域为指数域，对应于我们之前介绍的二进制科学计数法中的指数部分。其中单精度数为 8 位，双精度数为 11 位。以单精度数为例，8 位的指数为可以表达 0 到 255 之间的 255 个指数值（注：指数8位的最高位都是数值位，没有符号位）。但是，指数可以为正数，也可以为负数。为了处理负指数的情况，实际的指数值按要求需要加上一个偏差（Bias）值作为保存在指数域中的值，单精度数的偏差值为 127（2^7-1），而双精度数的偏差值为1023（2^10-1）。比如，单精度的实际指数值 0 在指数域中将保存为 127；而保存在指数域中的 64 则表示实际的指数值 -63（64-127=-63）。 偏差的引入使得对于单精度数，实际可以表达的指数值的范围就变成 -127（表示小数点需向左移动127位） 到128（表示小数点需向右移动128位） 之间（包含两端）。我们不久还将看到，实际的指数值 -127（全 0）以及 +128（全 1）保留用作特殊值的处理。这样，实际可以表达的有效指数范围就在 -127 和 127 之间。</li>
+<li>第三个域为尾数域，其中单精度数为 23 位长，双精度数为 52 位长。除了我们将要讲到的某些特殊值外，IEEE 标准要求浮点数必须是规范的。这意味着尾数的小数点左侧必须为1，因此我们在保存尾数的时候，可以省略小数点前面这个 1，从而腾出一个二进制位来保存更多的尾数。这样我们实际上用 23 位长的尾数域表达了 24 位的尾数。比如对于单精度数而言，二进制的 1001.101（对应于十进制的 9.625）可以表达为 1.001101 × 2^3，所以实际保存在尾数域中的值为 00110100000000000000000，即去掉小数点左侧的 1，并用 0 在右侧补齐。</li>
+</ol>
+<h5 id="注意"><a href="#注意" class="headerlink" title="注意"></a>注意</h5><p>值得注意的是，对于单精度数，由于我们只有 24 位的尾数（其中一位隐藏），所以可以表达的最大尾数为 2^24- 1 = 16,777,215。特别的，16,777,216 是偶数，所以我们可以通过将它除以 2 并相应地调整指数来保存这个数，这样 16,777,216 同样可以被精确的保存。相反，数值 16,777,217 则无法被精确的保存。由此，我们可以看到单精度的浮点数可以表达的十进制数值中，真正有效的数字不高于 8 位。事实上，对相对误差的数值分析结果显示有效的精度大约为 7.22 位（由于位数不可取小数，所以单精度的精度为7，即可精确到小数点后7位）。参考下面的示例：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line">System.out.println(<span class="number">16777215f</span>);<span class="comment">/*1.6777215E7  */</span></span><br><span class="line">System.out.println(<span class="number">16777216f</span>);<span class="comment">/*1.6777216E7  */</span></span><br><span class="line">System.out.println(<span class="number">16777217f</span>);<span class="comment">/*1.6777216E7  */</span></span><br><span class="line">System.out.println(<span class="number">16777218f</span>);<span class="comment">/*1.6777218E7  */</span></span><br><span class="line">System.out.println(<span class="number">16777219f</span>);<span class="comment">/*1.677722E7  */</span></span><br><span class="line">System.out.println(<span class="number">16777220f</span>);<span class="comment">/*1.677722E7  */</span></span><br><span class="line">System.out.println(<span class="number">16777221f</span>);<span class="comment">/*1.677722E7  */</span></span><br><span class="line">System.out.println(<span class="number">16777222f</span>);<span class="comment">/*1.6777222E7  */</span></span><br><span class="line">System.out.println(<span class="number">16777223f</span>);<span class="comment">/*1.6777224E7  */</span></span><br><span class="line">System.out.println(<span class="number">16777224f</span>);<span class="comment">/*1.6777224E7  */</span></span><br><span class="line">System.out.println(<span class="number">16777225f</span>);<span class="comment">/*1.6777224E7  */</span></span><br><span class="line">System.out.println(<span class="number">16777215f</span>);<span class="comment">/*1.6777215E7*/</span></span><br><span class="line">System.out.println(<span class="number">16777216f</span>);<span class="comment">/*1.6777216E7*/</span></span><br><span class="line">System.out.println(<span class="number">16777217f</span>);<span class="comment">/*1.6777216E7*/</span></span><br><span class="line">System.out.println(<span class="number">16777218f</span>);<span class="comment">/*1.6777218E7*/</span></span><br><span class="line">System.out.println(<span class="number">16777219f</span>);<span class="comment">/*1.677722E7*/</span></span><br><span class="line">System.out.println(<span class="number">16777220f</span>);<span class="comment">/*1.677722E7*/</span></span><br><span class="line">System.out.println(<span class="number">16777221f</span>);<span class="comment">/*1.677722E7*/</span></span><br><span class="line">System.out.println(<span class="number">16777222f</span>);<span class="comment">/*1.6777222E7*/</span></span><br><span class="line">System.out.println(<span class="number">16777223f</span>);<span class="comment">/*1.6777224E7*/</span></span><br><span class="line">System.out.println(<span class="number">16777224f</span>);<span class="comment">/*1.6777224E7*/</span></span><br><span class="line">System.out.println(<span class="number">16777225f</span>);<span class="comment">/*1.6777224E7*/</span></span><br></pre></td></tr></table></figure>
+<p>请看结果推导分析：</p>
+<blockquote>
+<p>111111111111111111111111 16777215f<br>1.11111111111111111111111 刚好是23位，不会丢失精度，能精确表示 0 23+127 11111111111111111111111 0 10010110 11111111111111111111111</p>
+<p>1000000000000000000000000 16777216f<br>1.00000000000000000000000 0 去掉的是0，所以还是能准确表示 0 24+127 00000000000000000000000 0 10010111 00000000000000000000000</p>
+<p>1000000000000000000000001 16777217f<br>1.00000000000000000000000 1 不能准确表示。先试着进位<br>1.00000000000000000000001 由于进位后，结果的最末们不是0，所以直接舍掉<br>1.00000000000000000000000 到这里结果就是16777216f</p>
+<p>1000000000000000000000010 16777218f<br>1.0000000000000000000001 0 去掉的是0，所以还是能准确表示 0 24+127 00000000000000000000001 0 10010111 00000000000000000000001</p>
+<p>1000000000000000000000011 16777219f<br>1.0000000000000000000001 1 不能准确表示。先试着进位<br>1.0000000000000000000010 进位后的结果，最末们为0，所以进位成功 0 24+127 00000000000000000000010 0 10010111 00000000000000000000010<br>1.000000000000000000000100*2^24 16777219f存储在内存中的结</p>
+</blockquote>
+
+        </div>
+        
+<blockquote class="post-copyright">
+    <div class="content">
+        
+<span class="post-time">
+    最后更新时间：<time datetime="2019-08-26T10:46:59.859Z" itemprop="dateUpdated">2019-08-26 18:46:59</time>
+</span><br>
+
+
+        
+        转载注明出处，原文地址：<a href="/2016/12/10/Java-2/" target="_blank" rel="external">http://www.sivan.tech/2016/12/10/Java-2/</a>
+        
+    </div>
+    <footer>
+        <a href="http://www.sivan.tech">
+            <img src="/img/1.jpg" alt="逸如风(yirufeng)">
+            逸如风(yirufeng)
+        </a>
+    </footer>
+</blockquote>
+
+        
+            <div class="page-reward">
+    <a id="rewardBtn" href="javascript:;" class="page-reward-btn waves-effect waves-circle waves-light">赏</a>
+</div>
+
+            
+        
+        <div class="post-footer">
+            
+	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/基本数据类型/">基本数据类型</a></li></ul>
+
+            <div class="page-share-wrap">
+    
+
+<div class="page-share" id="pageShare">
+    <ul class="reset share-icons">
+      
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://www.sivan.tech/2016/12/10/Java-2/&title=《[Java]-2》 — yirufeng's Blog&pic=http://www.sivan.tech/img/1.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://www.sivan.tech/2016/12/10/Java-2/&title=《[Java]-2》 — yirufeng's Blog&source=Java中的基本数据类型数值型byte1字节short  char2字节int4字节long8字节float4字节double8字节
+
+非数值型boolean" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http://www.sivan.tech/2016/12/10/Java-2/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《[Java]-2》 — yirufeng's Blog&url=http://www.sivan.tech/2016/12/10/Java-2/&via=http://www.sivan.tech" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=http://www.sivan.tech/2016/12/10/Java-2/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+      
+    </ul>
+ </div>
+
+
+
+    <a href="javascript:;" id="shareFab" class="page-share-fab waves-effect waves-circle">
+        <i class="icon icon-share-alt icon-lg"></i>
+    </a>
+</div>
+
+        </div>
+        
+            
+
+
+        
+    </div>
+    
+<nav class="post-nav flex-row flex-justify-between">
+  
+    <div class="prev">
+      <a href="/2016/12/14/Java-3/" id="post-prev" class="post-nav-link">
+        <div class="tips"><i class="icon icon-angle-left icon-lg icon-pr"></i> Prev</div>
+        <h4 class="title">[Java]-3</h4>
+      </a>
+    </div>
+  
+
+  
+    <div class="next">
+      <a href="/2016/12/07/Java-1/" id="post-next" class="post-nav-link">
+        <div class="tips">Next <i class="icon icon-angle-right icon-lg icon-pl"></i></div>
+        <h4 class="title">[Java]-1</h4>
+      </a>
+    </div>
+  
+</nav>
+
+
+    
+    
+        <aside class="post-widget">
+            <nav class="post-toc-wrap" id="post-toc">
+                <strong>目录</strong>
+                <ol class="post-toc"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#Java中的基本数据类型"><span class="post-toc-number">1.</span> <span class="post-toc-text">Java中的基本数据类型</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#数值型"><span class="post-toc-number">1.1.</span> <span class="post-toc-text">数值型</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#非数值型"><span class="post-toc-number">1.2.</span> <span class="post-toc-text">非数值型</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#注意："><span class="post-toc-number">1.2.1.</span> <span class="post-toc-text">注意：</span></a></li></ol></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#Java的基本类型数据转换注意事项"><span class="post-toc-number">2.</span> <span class="post-toc-text">Java的基本类型数据转换注意事项</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#Java一些语句的注意事项"><span class="post-toc-number">3.</span> <span class="post-toc-text">Java一些语句的注意事项</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#float内存详解"><span class="post-toc-number">4.</span> <span class="post-toc-text">float内存详解</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#表示方法"><span class="post-toc-number">4.1.</span> <span class="post-toc-text">表示方法</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#表示原理讲解"><span class="post-toc-number">4.1.1.</span> <span class="post-toc-text">表示原理讲解</span></a></li></ol></li></ol></li></ol>
+            </nav>
+            <div class="toc-bar"><div>
+        </aside>
+    
+</article>
+
+    <div id="reward" class="page-modal reward-lay">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <h3 class="reward-title">
+        <i class="icon icon-quote-left"></i>
+        感谢原作，你的打赏是我的动力！
+        <i class="icon icon-quote-right"></i>
+    </h3>
+    <div class="reward-content">
+        
+        <div class="reward-code">
+            <img id="rewardCode" src="/img/reward-wechat.jpg" alt="打赏二维码">
+        </div>
+        
+        <label class="reward-toggle">
+            <input id="rewardToggle" type="checkbox" class="reward-toggle-check"
+                data-wechat="/img/reward-wechat.jpg" data-alipay="/img/reward-alipay.jpg">
+            <div class="reward-toggle-ctrol">
+                <span class="reward-toggle-item wechat">微信</span>
+                <span class="reward-toggle-label"></span>
+                <span class="reward-toggle-item alipay">支付宝</span>
+            </div>
+        </label>
+        
+    </div>
+</div>
+
+    
+
+</div>
+
+    </main>
+    <footer class="footer ">
+    
+    <div class="top">
+        
+            <p>
+    <span>Links：</span>
+    
+    <span class="blogroll-item">
+        <a href="https://github.com/sivanWu0222" target="_blank">GitHub</a>
+    </span>
+    
+    <span class="blogroll-item">
+        <a href="http://weibo.com/Msingwen0222/home?wvr=5" target="_blank">新浪微博</a>
+    </span>
+    
+    <span class="blogroll-item">
+        <a href="https://www.linkedin.com/in/%E6%99%93%E6%96%87-%E5%90%B4-79057a121/" target="_blank">Linkedin</a>
+    </span>
+    
+    <span class="blogroll-item">
+        <a href="http://wpa.qq.com/msgrd?v=3&amp;uin=1666762170&amp;site=qq&amp;menu=yes" target="_blank">QQ</a>
+    </span>
+    
+    <span class="blogroll-item">
+        <a href="https://zh-cn.facebook.com/people/SiVan-Wu/100014408918389" target="_blank">Facebook</a>
+    </span>
+    
+    <span class="blogroll-item">
+        <a href="https://mail.qq.com/cgi-bin/qm_share?t=qm_mailme&amp;email=xfTz8-Py8-f08vWFtLTrpqqo" target="_blank">Contact</a>
+    </span>
+    
+    <span class="blogroll-item">
+        <a href="https://twitter.com/SiVan_Wu" target="_blank">Twitter</a>
+    </span>
+    
+</p>
+
+        
+    </div>
+    
+    <div class="bottom">
+        <p>
+            <span>
+                逸如风(yirufeng) &copy; 2016 - 2019
+            </span>
+
+           	
+           	<span>
+           		<a href="http://beian.miit.gov.cn/" target="_blank">已实名认证</a>
+           	</span>
+           	
+
+            
+
+            
+
+            
+                
+<span class="site-uv" title="总访客量">
+    <i class="icon icon-user"></i>
+    <i class="busuanzi-value" id="busuanzi_value_site_uv"></i>
+</span>
+
+
+<span class="site-pv" title="总访问量">
+    <i class="icon icon-eye"></i>
+    <i class="busuanzi-value" id="busuanzi_value_site_pv"></i>
+</span>
+
+            
+        </p>
+    </div>
+</footer>
+
+    <div class="mask" id="mask"></div>
+<a href="javascript:;" id="gotop" class="waves-effect waves-circle waves-light"><span class="icon icon-lg icon-chevron-up"></span></a>
+
+
+
+<div class="global-share" id="globalShare">
+    <ul class="reset share-icons">
+      
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://www.sivan.tech/2016/12/10/Java-2/&title=《[Java]-2》 — yirufeng's Blog&pic=http://www.sivan.tech/img/1.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://www.sivan.tech/2016/12/10/Java-2/&title=《[Java]-2》 — yirufeng's Blog&source=Java中的基本数据类型数值型byte1字节short  char2字节int4字节long8字节float4字节double8字节
+
+非数值型boolean" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http://www.sivan.tech/2016/12/10/Java-2/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《[Java]-2》 — yirufeng's Blog&url=http://www.sivan.tech/2016/12/10/Java-2/&via=http://www.sivan.tech" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=http://www.sivan.tech/2016/12/10/Java-2/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+      
+    </ul>
+ </div>
+
+
+<div class="page-modal wx-share" id="wxShare">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAK4AAACuCAAAAACKZ2kyAAABwklEQVR42u3ay46DMAwF0P7/TzNSVyN1Gq4dEhjpeIVQGw4byw9erziOdyR3fsfn/W93Lg5cXNxp7jGMT1x+nURuwMXF3c8dJ6/ooDjnjF/1xIaLi/sw7rhkGZ/27TVwcXH/O7dQiBQbKlxc3Gdy8+ZkPATJi5vlvRouLu4EdybpXHW9cL6Li4tb5B7FqK5SZpLXH+fg4uJu4eYL1Hwgcm3R09z34uLiTnATVnVxkgxYq5UMLi7uE7jz65O8oMlPw8XF3cOtlju95UeS1JKiBxcXdz83b2yq69hqCzRW4eLirubmCSVPfL1/FbbBuLi4W7jV9LRuFFKYl+Di4m7hzqCv+uTipPTBxcXdzo3+EP8mL1wKZRYuLu5G7vjovLhJ0lz+xJPNDy4u7jJub7SRj056KfKkPcPFxV3MHR9RLUqSgUvvswxcXNz93N4Qs1fQvIqBi4t7FzePvPTJW5rC0gUXF3cLt5pQZj7ayBe01QUMLi7uCm41eSXvmi9cq60XLi7uTm5v3Jm3QzMtEC4u7pO5vVSVD0wjGy4u7uO5zaVI8Q4uLu5d3OrDeo+cT464uLh7uL2Baa9lSkYkuLi4t3J/AIExTdQdgcs6AAAAAElFTkSuQmCC" alt="微信分享二维码">
+</div>
+
+
+    
+    <!-- main-js -->
+<script type="text/javascript" src="//cdn.bootcss.com/jquery/2.1.0/jquery.min.js"></script>
+<script type="text/javascript" src="/js/plugins/fastclick.js?v=1.4.2"></script>
+<script type="text/javascript" src="/js/plugins/ios-orientationchange-fix.js?v=1.4.2"></script>
+<script type="text/javascript" src="//cdn.jsdelivr.net/gh/fancyapps/fancybox@3.5.2/dist/jquery.fancybox.min.js"></script>
+
+<script type="text/javascript" src="//cdn.bootcss.com/node-waves/0.7.4/waves.min.js"></script>
+
+<script type="text/javascript" src="/js/method.js?v=1.4.2"></script>
+<script type="text/javascript" src="/js/blog.js?v=1.4.2"></script>
+
+<!-- third-party -->
+
+
+
+
+
+
+<script type="text/javascript" src="/js/plugins/local_search.js?v=1.4.2"></script>
+<script type="text/javascript">
+	var search_path = "search.xml";
+	if (search_path.length === 0) {
+		search_path = "search.xml";
+	}
+	var path = "/" + search_path;
+	searchFunc(path, "local-search-input", "local-search-result");
+</script>
+
+
+
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+    
+    
+
+
+
+<script type="text/javascript" src="https://cdn1.lncld.net/static/js/av-core-mini-0.6.4.js"></script>
+<script type="text/javascript" src="/js/plugins/leancloud_visitors.js?v=1.4.2"></script>
+
+
+
+    <!-- mathjax config similar to math.stackexchange -->
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+        tex2jax: {
+            inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+            processEscapes: true,
+            skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+        }
+    });
+</script>
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for (i=0; i < all.length; i += 1) {
+            all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+    });
+</script>
+
+<script type="text/javascript" src="//cdn.bootcss.com/mathjax/2.7.1/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+
+
+
+    <script>
+    (function() {
+        var OriginTitile = document.title, titleTime;
+        document.addEventListener('visibilitychange', function() {
+            if (document.hidden) {
+                document.title = '死鬼去哪里了！';
+                clearTimeout(titleTime);
+            } else {
+                document.title = '(つェ⊂)咦!又好了!';
+                titleTime = setTimeout(function() {
+                    document.title = OriginTitile;
+                },2000);
+            }
+        });
+    })();
+</script>
+
+
+
+
+
+    
+</body>
+</html>

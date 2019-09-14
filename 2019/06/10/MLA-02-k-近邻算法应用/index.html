@@ -1,0 +1,789 @@
+<!DOCTYPE html>
+<html>
+<head><meta name="generator" content="Hexo 3.9.0">
+    <meta charset="utf-8">
+    
+    
+    <title>[MLA-02]k-近邻算法初探 | yirufeng&#39;s Blog | 未来的小幸运 || 致正在努力的我们 ---- 逸如风</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    
+    <meta name="keywords" content="ML,Machine Learning,K近邻算法">
+    <link rel="shortcut icon" href="/img/favicon.ico">
+    <link rel="stylesheet" href="//cdn.jsdelivr.net/gh/fancyapps/fancybox@3.5.2/dist/jquery.fancybox.min.css">
+    <link rel="stylesheet" href="/css/style.css?v=1.4.2">
+    
+    <script type="text/javascript">
+        // Data Center
+        var DC = {
+            reward:	true,
+            lv: JSON.parse('{"enable":true,"app_id":"K2RVtHi7RnmoN6dovlDKafn8-gzGzoHsz","app_key":"Qxmil0oqPFdDUyyIp2i1Xikt","icon":true}'),
+            v: JSON.parse('{"enable":false,"appid":"ACuOJIasBeRLiDe2iUApHj67-gzGzoHsz","appkey":"qbgg4tClrQQmvq8uwlpwA5mA","notify":true,"verify":true,"placeholder":"give me some sugers plz...","avatar":"wavatar"}'),
+            g: JSON.parse('{"enable":false,"lazy":true,"owner":"codefine","repo":"gitment","oauth":{"client_id":null,"client_secret":null},"perPage":10}'),
+            d: JSON.parse('{"app_id":null}')
+        };
+    </script>
+    <script type="text/javascript">
+        window.lazyScripts=[];
+    </script>
+    
+</head>
+
+
+<body>
+    <div id="loading" class="active"></div>
+
+    <aside id="menu" class="">
+  <div class="inner flex-row-vertical">
+    <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menu-off">
+        <i class="icon icon-lg icon-close"></i>
+    </a>
+    <div class="brand-wrap">
+      
+      <img src="/img/brand.jpg" class="brand-bg">
+      
+      <div class="brand">
+        <a href="/" class="avatar waves-effect waves-circle waves-light">
+          <img src="/img/1.jpg">
+        </a>
+        <hgroup class="introduce">
+          <h5 class="nickname">逸如风(yirufeng)</h5>
+          <a href="mailto:yirufeng@foxmail.com" title="yirufeng@foxmail.com" class="mail">
+            
+              <span>y</span>
+            
+              <span>i</span>
+            
+              <span>r</span>
+            
+              <span>u</span>
+            
+              <span>f</span>
+            
+              <span>e</span>
+            
+              <span>n</span>
+            
+              <span>g</span>
+            
+              <span>@</span>
+            
+              <span>f</span>
+            
+              <span>o</span>
+            
+              <span>x</span>
+            
+              <span>m</span>
+            
+              <span>a</span>
+            
+              <span>i</span>
+            
+              <span>l</span>
+            
+              <span>.</span>
+            
+              <span>c</span>
+            
+              <span>o</span>
+            
+              <span>m</span>
+            
+          </a>
+        </hgroup>
+        
+        <ul class="menu-link">
+          
+              <li>
+                <a href="https://github.com/sivanWu0222" target="_blank">
+                  <i class="icon icon-lg icon-github"></i>
+                </a>
+              </li>
+            
+              <li>
+                <a href="https://mail.qq.com/cgi-bin/qm_share?t=qm_mailme&amp;amp;email=xfTz8-Py8-f08vWFtLTrpqqo" target="_blank">
+                  <i class="icon icon-lg icon-envelope"></i>
+                </a>
+              </li>
+            
+        </ul>
+        
+      </div>
+    </div>
+    <div class="scroll-wrap flex-col">
+      <ul class="nav">
+        
+            <li class="">
+              <a href="/"  >
+                <i class="icon icon-lg icon-home"></i>
+                Home
+              </a>
+            </li>
+        
+            <li class="">
+              <a href="/categories"  >
+                <i class="icon icon-lg icon-th-list"></i>
+                Category
+              </a>
+            </li>
+        
+            <li class="">
+              <a href="/research"  >
+                <i class="icon icon-lg icon-mortar-board"></i>
+                Research
+              </a>
+            </li>
+        
+            <li class="">
+              <a href="/tags"  >
+                <i class="icon icon-lg icon-tags"></i>
+                Tag
+              </a>
+            </li>
+        
+            <li class="">
+              <a href="/archives"  >
+                <i class="icon icon-lg icon-archives"></i>
+                Archive
+              </a>
+            </li>
+        
+            <li class="">
+              <a href="/about"  >
+                <i class="icon icon-lg icon-user"></i>
+                About
+              </a>
+            </li>
+        
+            <li class="">
+              <a href="/open-source"  >
+                <i class="icon icon-lg icon-github"></i>
+                Project
+              </a>
+            </li>
+        
+            <li class="">
+              <a href="/demo"  >
+                <i class="icon icon-lg icon-audio-description"></i>
+                Demo
+              </a>
+            </li>
+        
+            <li class="">
+              <a href="/wechat-number"  >
+                <i class="icon icon-lg icon-wechat"></i>
+                公众号
+              </a>
+            </li>
+        
+            <li class="">
+              <a href="http://www.sivan.tech/LeetCodeAlgo/" target="_blank" >
+                <i class="icon icon-lg icon-braille"></i>
+                Leetcode
+              </a>
+            </li>
+        
+            <li class="">
+              <a href="http://resume.sivan.tech/" target="_blank" >
+                <i class="icon icon-lg icon-file-pdf-o"></i>
+                Resume
+              </a>
+            </li>
+        
+      </ul>
+    </div>
+  </div>
+</aside>
+
+    <main id="main">
+        <header class="top-header" id="header">
+    <div class="flex-row clearfix">
+        <a href="javascript:;" class="header-icon pull-left waves-effect waves-circle waves-light on" id="menu-toggle">
+          <i class="icon icon-lg icon-navicon"></i>
+        </a>
+        <div class="flex-col header-title ellipsis">
+            <span>[MLA-02]k-近邻算法初探</span>
+            
+        </div>
+        
+        <a href="javascript:;" id="site_search_btn" class="header-icon pull-right waves-effect waves-circle waves-light">
+            <i class="icon icon-lg icon-search"></i>
+        </a>
+        
+    </div>
+</header>
+<header class="content-header post-header">
+    <img src="/img/s3.jpg" class="header-bg">
+    <div class="container fade-scale">
+        <h1 class="title">[MLA-02]k-近邻算法初探</h1>
+        <h5 class="subtitle">
+            
+                <time datetime="2019-06-10T02:37:26.000Z" itemprop="datePublished" class="page-time">
+  2019-06-10
+</time>
+
+
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/ML/">ML</a><ul class="article-category-list-child"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/ML/k近邻算法/">k近邻算法</a></li></ul></li></ul>
+
+            
+        </h5>
+        
+    </div>
+    
+
+</header>
+
+<div id="site_search">
+    <div class="search-title clearfix">
+        <span class="pull-left">
+          <i class="icon icon-lg icon-search"></i>
+        </span>
+        <input type="text" id="local-search-input" name="q" results="0" placeholder="search my blog..." class="form-control pull-left"/>
+        <a href="javascript:;" class="close pull-right waves-effect waves-circle waves-light">
+          <i class="icon icon-lg icon-close"></i>
+        </a>
+    </div>
+    <div id="local-search-result"></div>
+</div>
+
+
+<div class="container body-wrap">
+    <article id="post-MLA-02-k-近邻算法应用"
+  class="post-article article-type-post" itemprop="blogPost">
+    <div class="post-card">
+        <h1 class="post-card-title">[MLA-02]k-近邻算法初探</h1>
+        <div class="post-meta">
+            <time class="post-time" title="2019-06-10 10:37:26" datetime="2019-06-10T02:37:26.000Z"  itemprop="datePublished">2019-06-10</time>
+
+            
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/ML/">ML</a><ul class="article-category-list-child"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/ML/k近邻算法/">k近邻算法</a></li></ul></li></ul>
+
+
+
+            
+	<span id="/2019/06/10/MLA-02-k-近邻算法应用/" class="leancloud_visitors" data-flag-title="[MLA-02]k-近邻算法初探" title="[MLA-02]k-近邻算法初探">
+		
+			<i class="icon icon-eye"></i>
+		
+		<span class="leancloud-visitors-count"></span>
+	</span>
+ 
+
+            
+
+
+            
+        </div>
+        <div class="post-content" id="post-content" itemprop="postContent">
+            
+            <h2 id="预备知识"><a href="#预备知识" class="headerlink" title="预备知识"></a>预备知识</h2><h3 id="归一化特征值"><a href="#归一化特征值" class="headerlink" title="归一化特征值"></a>归一化特征值</h3><blockquote>
+<p>有时候以为不同特征值的取值范围差距很大，在我们使用K近邻算法计算距离的时候，取值范围差距大的特征值将会对k近邻算法计算出的结果造成很大的影响，因此我们需要对所有特征值进行归一化</p>
+</blockquote>
+<p><strong>机器学习实战一书中给出归一化的公式： newValue = (oldValue - min) / (max - min)</strong></p>
+<p>其中 min 和 max 分别是数据集中该特征值对应的最小值和最大值</p>
+<h2 id="应用"><a href="#应用" class="headerlink" title="应用"></a>应用</h2><h3 id="k近邻算法改进约会网站"><a href="#k近邻算法改进约会网站" class="headerlink" title="k近邻算法改进约会网站"></a>k近邻算法改进约会网站</h3><p>事例来自于机器学习实战一书的2.2，</p>
+<p>步骤如下：</p>
+<ol>
+<li>收集数据</li>
+<li>准备数据：对数据进行处理(包括上面提到的归一化处理)</li>
+<li>分析数据：使用matplotlib画图</li>
+<li>训练算法：此步骤不适用于k近邻算法</li>
+<li>测试算法：使用测试数据进行测试</li>
+<li>使用算法</li>
+</ol>
+<p>测试样本和非测试样本的区别在于：测试样本是已经分类完成的数据，如果预测分类与实际分类不同，则标记为一个错误</p>
+<p>数据集解释：</p>
+<ol>
+<li>每行数据代表1个顾客，其中有4列，分别对应 每年获得的飞行常客里程数， 玩视频游戏所耗时间百分比， 每周消费的冰激淋公升数， 最终的分类</li>
+</ol>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> operator</span><br><span class="line"><span class="keyword">from</span> numpy <span class="keyword">import</span> *</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">file2matrix</span><span class="params">(filename)</span>:</span></span><br><span class="line">    <span class="string">"""</span></span><br><span class="line"><span class="string">    将文本记录转换为Numpy的解析程序</span></span><br><span class="line"><span class="string">    :param filename:</span></span><br><span class="line"><span class="string">    :return:</span></span><br><span class="line"><span class="string">    """</span></span><br><span class="line">    fr = open(filename)</span><br><span class="line">    arrayOlines = fr.readlines()</span><br><span class="line">    numberOfLines = len(arrayOlines)</span><br><span class="line"></span><br><span class="line">    <span class="comment"># 得到文件行数</span></span><br><span class="line">    returnMat = zeros((numberOfLines, <span class="number">3</span>))</span><br><span class="line">    classLabelVector = []</span><br><span class="line">    index = <span class="number">0</span></span><br><span class="line"></span><br><span class="line">    <span class="comment"># 以下三行用于解析文件到数据列表</span></span><br><span class="line">    <span class="keyword">for</span> line <span class="keyword">in</span> arrayOlines:</span><br><span class="line">        line = line.strip()</span><br><span class="line">        listFromLine = line.split(<span class="string">'\t'</span>)</span><br><span class="line">        returnMat[index, :] = listFromLine[<span class="number">0</span>:<span class="number">3</span>]</span><br><span class="line">        classLabelVector.append(int(listFromLine[<span class="number">-1</span>]))</span><br><span class="line">        index += <span class="number">1</span></span><br><span class="line">    <span class="keyword">return</span> returnMat, classLabelVector</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment"># 分析数据</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">plo</span><span class="params">()</span>:</span></span><br><span class="line">    <span class="keyword">import</span> matplotlib</span><br><span class="line">    <span class="keyword">import</span> matplotlib.pyplot <span class="keyword">as</span> plt</span><br><span class="line">    fig = plt.figure()</span><br><span class="line">    ax = fig.add_subplot(<span class="number">111</span>)</span><br><span class="line">    datingDataMat, datingLabels = file2matrix(<span class="string">'data/datingTestSet2.txt'</span>)</span><br><span class="line">    <span class="comment"># ax.scatter(datingDataMat[:, 1], datingDataMat[:, 2])</span></span><br><span class="line">    ax.scatter(datingDataMat[:, <span class="number">1</span>], datingDataMat[:, <span class="number">2</span>], <span class="number">15.0</span>*array(datingLabels), <span class="number">15.0</span>*array(datingLabels))</span><br><span class="line">    plt.show()</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">autoNorm</span><span class="params">(dataSet)</span>:</span></span><br><span class="line">    <span class="comment"># 传入一个0表示按照列取最小值</span></span><br><span class="line">    minVals = dataSet.min(<span class="number">0</span>)</span><br><span class="line">    <span class="comment"># 传入一个0表示按照列取最大值</span></span><br><span class="line">    maxVals = dataSet.max(<span class="number">0</span>)</span><br><span class="line"></span><br><span class="line">    ranges = maxVals - minVals</span><br><span class="line">    normDataSet = zeros(shape(dataSet))</span><br><span class="line">    m = dataSet.shape[<span class="number">0</span>]</span><br><span class="line">    normDataSet = dataSet - tile(minVals, (m, <span class="number">1</span>))</span><br><span class="line">    <span class="comment"># 特征值相除</span></span><br><span class="line">    normDataSet = normDataSet / tile(ranges, (m, <span class="number">1</span>))</span><br><span class="line"></span><br><span class="line">    <span class="comment"># Numpy中矩阵除法需要使用</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> normDataSet, ranges, minVals</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">classify</span><span class="params">(inX, dataSet, labels, k)</span>:</span></span><br><span class="line">    <span class="string">"""</span></span><br><span class="line"><span class="string">    k近邻算法的实现</span></span><br><span class="line"><span class="string">    :param inX: 输入向量</span></span><br><span class="line"><span class="string">    :param dataSet: 输入的训练样本集</span></span><br><span class="line"><span class="string">    :param labels:  标签向量</span></span><br><span class="line"><span class="string">    :param k:   选择最近邻居的数目</span></span><br><span class="line"><span class="string">    :return:    返回k近邻算法执行后分类的结果</span></span><br><span class="line"><span class="string">    """</span></span><br><span class="line">    dataSetSize = dataSet.shape[<span class="number">0</span>]</span><br><span class="line"></span><br><span class="line">    <span class="comment"># 进行距离计算</span></span><br><span class="line">    <span class="comment">## 将其扩展为与标签个数相同的输入数据的矩阵，执行矩阵减操作时，直接对每个对应的元素互相减去</span></span><br><span class="line">    diffMat = tile(inX, (dataSetSize, <span class="number">1</span>)) - dataSet</span><br><span class="line">    sqDiffMat = diffMat ** <span class="number">2</span></span><br><span class="line">    sqDistances = sqDiffMat.sum(axis=<span class="number">1</span>)</span><br><span class="line">    distances = sqDistances ** <span class="number">0.5</span></span><br><span class="line"></span><br><span class="line">    <span class="comment"># 进行统计</span></span><br><span class="line">    sortedDistIndicies = distances.argsort()</span><br><span class="line">    classCount = &#123;&#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment"># 选择距离最小的k个点</span></span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> range(k):</span><br><span class="line">        votellabel = labels[sortedDistIndicies[i]]</span><br><span class="line">        classCount[votellabel] = classCount.get(votellabel, <span class="number">0</span>) + <span class="number">1</span></span><br><span class="line"></span><br><span class="line">    sortedClassCount = sorted(classCount.items(), key=operator.itemgetter(<span class="number">1</span>), reverse=<span class="literal">True</span>)</span><br><span class="line">    <span class="keyword">return</span> sortedClassCount[<span class="number">0</span>][<span class="number">0</span>]</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">datingClassTest</span><span class="params">()</span>:</span></span><br><span class="line">    hoRatio = <span class="number">0.10</span></span><br><span class="line">    datingDataMat, datingLabels = file2matrix(<span class="string">'data/datingTestSet2.txt'</span>)</span><br><span class="line">    normMat, ranges, minVals = autoNorm(datingDataMat)</span><br><span class="line">    m = normMat.shape[<span class="number">0</span>]</span><br><span class="line">    numTestVecs = int(m * hoRatio)</span><br><span class="line">    errorCount = <span class="number">0.0</span></span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> range(numTestVecs):</span><br><span class="line">        classifierResult = classify(normMat[i, :], normMat[numTestVecs:m, :], datingLabels[numTestVecs:m], <span class="number">3</span>)</span><br><span class="line">        print(<span class="string">"The classifier came back with: %d, the real answer is: %d"</span> % (classifierResult, datingLabels[i]))</span><br><span class="line">        <span class="keyword">if</span> (classifierResult != datingLabels[i]):</span><br><span class="line">            errorCount += <span class="number">1.0</span></span><br><span class="line">    print(<span class="string">"The total error rate is %f:"</span> % (errorCount / float(numTestVecs)))</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> __name__ == <span class="string">'__main__'</span>:</span><br><span class="line">    datingClassTest()</span><br></pre></td></tr></table></figure>
+<h3 id="手写数字识别"><a href="#手写数字识别" class="headerlink" title="手写数字识别"></a>手写数字识别</h3><blockquote>
+<p>数据集是每个数字对应成32*32像素的文件，</p>
+</blockquote>
+<p>思路：通过将每个数字对应的文件(32*32像素)转换为(1, 1024)的矩阵，并使用k近邻算法与训练集数据进行计算，选取距离最小的k个元素，并进行统计，得到最终结果。<strong>需要预先对数据进行处理</strong></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> operator</span><br><span class="line"><span class="keyword">from</span> numpy <span class="keyword">import</span> *</span><br><span class="line"><span class="keyword">import</span> os</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">classify</span><span class="params">(inX, dataSet, labels, k)</span>:</span></span><br><span class="line">    <span class="string">"""</span></span><br><span class="line"><span class="string">    k近邻算法的实现</span></span><br><span class="line"><span class="string">    :param inX: 输入向量</span></span><br><span class="line"><span class="string">    :param dataSet: 输入的训练样本集</span></span><br><span class="line"><span class="string">    :param labels:  标签向量</span></span><br><span class="line"><span class="string">    :param k:   选择最近邻居的数目</span></span><br><span class="line"><span class="string">    :return:    返回k近邻算法执行后分类的结果</span></span><br><span class="line"><span class="string">    """</span></span><br><span class="line">    dataSetSize = dataSet.shape[<span class="number">0</span>]</span><br><span class="line"></span><br><span class="line">    <span class="comment"># 进行距离计算</span></span><br><span class="line">    <span class="comment">## 将其扩展为与标签个数相同的输入数据的矩阵，执行矩阵减操作时，直接对每个对应的元素互相减去</span></span><br><span class="line">    diffMat = tile(inX, (dataSetSize, <span class="number">1</span>)) - dataSet</span><br><span class="line">    sqDiffMat = diffMat ** <span class="number">2</span></span><br><span class="line">    sqDistances = sqDiffMat.sum(axis=<span class="number">1</span>)</span><br><span class="line">    distances = sqDistances ** <span class="number">0.5</span></span><br><span class="line"></span><br><span class="line">    <span class="comment"># 进行统计</span></span><br><span class="line">    sortedDistIndicies = distances.argsort()</span><br><span class="line">    classCount = &#123;&#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment"># 选择距离最小的k个点</span></span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> range(k):</span><br><span class="line">        votellabel = labels[sortedDistIndicies[i]]</span><br><span class="line">        classCount[votellabel] = classCount.get(votellabel, <span class="number">0</span>) + <span class="number">1</span></span><br><span class="line"></span><br><span class="line">    sortedClassCount = sorted(classCount.items(), key=operator.itemgetter(<span class="number">1</span>), reverse=<span class="literal">True</span>)</span><br><span class="line">    <span class="keyword">return</span> sortedClassCount[<span class="number">0</span>][<span class="number">0</span>]</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">datingClassTest</span><span class="params">()</span>:</span></span><br><span class="line">    hoRatio = <span class="number">0.10</span></span><br><span class="line">    datingDataMat, datingLabels = file2matrix(<span class="string">'data/datingTestSet2.txt'</span>)</span><br><span class="line">    normMat, ranges, minVals = autoNorm(datingDataMat)</span><br><span class="line">    m = normMat.shape[<span class="number">0</span>]</span><br><span class="line">    numTestVecs = int(m * hoRatio)</span><br><span class="line">    errorCount = <span class="number">0.0</span></span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> range(numTestVecs):</span><br><span class="line">        classifierResult = classify(normMat[i, :], normMat[numTestVecs:m, :], datingLabels[numTestVecs:m], <span class="number">3</span>)</span><br><span class="line">        print(<span class="string">"The classifier came back with: %d, the real answer is: %d"</span> % (classifierResult, datingLabels[i]))</span><br><span class="line">        <span class="keyword">if</span> (classifierResult != datingLabels[i]):</span><br><span class="line">            errorCount += <span class="number">1.0</span></span><br><span class="line">    print(<span class="string">"The total error rate is %f:"</span> % (errorCount / float(numTestVecs)))</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">img2vec</span><span class="params">(imgFile)</span>:</span></span><br><span class="line">    <span class="string">"""</span></span><br><span class="line"><span class="string">    准备数据，将图像文件转换为1*1024的图像</span></span><br><span class="line"><span class="string">    :param imgFile:</span></span><br><span class="line"><span class="string">    :return:</span></span><br><span class="line"><span class="string">    """</span></span><br><span class="line">    vec = zeros((<span class="number">1</span>, <span class="number">1024</span>))</span><br><span class="line">    <span class="keyword">with</span> open(imgFile) <span class="keyword">as</span> f:</span><br><span class="line">        content = f.readlines()</span><br><span class="line">        line_number = len(content)</span><br><span class="line">        <span class="keyword">for</span> line_index <span class="keyword">in</span> range(line_number):</span><br><span class="line">            <span class="keyword">for</span> index <span class="keyword">in</span> range(len(content[line_index].strip())):</span><br><span class="line">                vec[<span class="number">0</span>, line_index*<span class="number">32</span> + index] = content[line_index].strip()[index]</span><br><span class="line">    <span class="keyword">return</span> vec</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">handwritingClassTest</span><span class="params">()</span>:</span></span><br><span class="line">    hwLabels = []</span><br><span class="line">    trainingFileList = os.listdir(<span class="string">'trainingDigits'</span>)</span><br><span class="line"></span><br><span class="line">    <span class="comment"># 获取目录内容</span></span><br><span class="line">    m = len(trainingFileList)</span><br><span class="line">    trainingMat = zeros((m, <span class="number">1024</span>))</span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> range(m):</span><br><span class="line">        <span class="comment"># 从文件名解析分类数字</span></span><br><span class="line">        fileNameStr = trainingFileList[i]</span><br><span class="line">        fileStr = fileNameStr.split(<span class="string">'.'</span>)[<span class="number">0</span>]</span><br><span class="line">        classNumStr = int(fileStr.split(<span class="string">'_'</span>)[<span class="number">0</span>])</span><br><span class="line"></span><br><span class="line">        hwLabels.append(classNumStr)</span><br><span class="line">        trainingMat[i, :] = img2vec(<span class="string">'trainingDigits/%s'</span> % fileNameStr)</span><br><span class="line">        testFileList = os.listdir(<span class="string">'testDigits'</span>)</span><br><span class="line">        errorCount = <span class="number">0.0</span></span><br><span class="line">        mTest = len(testFileList)</span><br><span class="line"></span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> range(mTest):</span><br><span class="line">        fileNameStr = testFileList[i]</span><br><span class="line">        fileStr = fileNameStr.split(<span class="string">'.'</span>)[<span class="number">0</span>]</span><br><span class="line">        classNumStr = int(fileStr.split(<span class="string">'_'</span>)[<span class="number">0</span>])</span><br><span class="line">        vectorUnderTest = img2vec(<span class="string">'testDigits/%s'</span> % fileNameStr)</span><br><span class="line">        classifierResult = classify(vectorUnderTest, trainingMat, hwLabels, <span class="number">3</span>)</span><br><span class="line">        print(<span class="string">'the classifier came back with: %d'</span> % classNumStr)</span><br><span class="line">        <span class="keyword">if</span> (classifierResult != classNumStr):</span><br><span class="line">            errorCount += <span class="number">1.0</span></span><br><span class="line">    print(<span class="string">'the total number of errors is: %d'</span> % errorCount)</span><br><span class="line">    print(<span class="string">'the total error rate is: %f'</span> % (errorCount / float(mTest)))</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> __name__ == <span class="string">'__main__'</span>:</span><br><span class="line">    handwritingClassTest()</span><br></pre></td></tr></table></figure>
+<h2 id="总结："><a href="#总结：" class="headerlink" title="总结："></a>总结：</h2><p>缺陷：</p>
+<ol>
+<li>无法给出任何数据的基础结构信息，也不知道平均实例样本和典型实例样本具有什么特征。</li>
+<li>k近邻算法必须保存全部数据集，如果训练数据集很大，将会需要大量的存储空间对数据进行保存，并且计算需要耗费大量时间，无法做到实时计算。</li>
+</ol>
+<a id="more"></a>
+
+        </div>
+        
+<blockquote class="post-copyright">
+    <div class="content">
+        
+<span class="post-time">
+    最后更新时间：<time datetime="2019-08-26T10:46:59.862Z" itemprop="dateUpdated">2019-08-26 18:46:59</time>
+</span><br>
+
+
+        
+        转载注明出处，原文地址：<a href="/2019/06/10/MLA-02-k-近邻算法应用/" target="_blank" rel="external">http://www.sivan.tech/2019/06/10/MLA-02-k-近邻算法应用/</a>
+        
+    </div>
+    <footer>
+        <a href="http://www.sivan.tech">
+            <img src="/img/1.jpg" alt="逸如风(yirufeng)">
+            逸如风(yirufeng)
+        </a>
+    </footer>
+</blockquote>
+
+        
+            <div class="page-reward">
+    <a id="rewardBtn" href="javascript:;" class="page-reward-btn waves-effect waves-circle waves-light">赏</a>
+</div>
+
+            
+        
+        <div class="post-footer">
+            
+	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/K近邻算法/">K近邻算法</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/ML/">ML</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Machine-Learning/">Machine Learning</a></li></ul>
+
+            <div class="page-share-wrap">
+    
+
+<div class="page-share" id="pageShare">
+    <ul class="reset share-icons">
+      
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://www.sivan.tech/2019/06/10/MLA-02-k-近邻算法应用/&title=《[MLA-02]k-近邻算法初探》 — yirufeng's Blog&pic=http://www.sivan.tech/img/1.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://www.sivan.tech/2019/06/10/MLA-02-k-近邻算法应用/&title=《[MLA-02]k-近邻算法初探》 — yirufeng's Blog&source=预备知识归一化特征值
+有时候以为不同特征值的取值范围差距很大，在我们使用K近邻算法计算距离的时候，取值范围差距大的特征值将会对k近邻算法计算出的结果造成很..." data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http://www.sivan.tech/2019/06/10/MLA-02-k-近邻算法应用/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《[MLA-02]k-近邻算法初探》 — yirufeng's Blog&url=http://www.sivan.tech/2019/06/10/MLA-02-k-近邻算法应用/&via=http://www.sivan.tech" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=http://www.sivan.tech/2019/06/10/MLA-02-k-近邻算法应用/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+      
+    </ul>
+ </div>
+
+
+
+    <a href="javascript:;" id="shareFab" class="page-share-fab waves-effect waves-circle">
+        <i class="icon icon-share-alt icon-lg"></i>
+    </a>
+</div>
+
+        </div>
+        
+            
+
+
+        
+    </div>
+    
+<nav class="post-nav flex-row flex-justify-between">
+  
+    <div class="prev">
+      <a href="/2019/06/10/MLA-03-决策树初探/" id="post-prev" class="post-nav-link">
+        <div class="tips"><i class="icon icon-angle-left icon-lg icon-pr"></i> Prev</div>
+        <h4 class="title">MLA-03-决策树初探</h4>
+      </a>
+    </div>
+  
+
+  
+    <div class="next">
+      <a href="/2019/06/07/MLA-01-k-近邻算法初探/" id="post-next" class="post-nav-link">
+        <div class="tips">Next <i class="icon icon-angle-right icon-lg icon-pl"></i></div>
+        <h4 class="title">[MLA-01]k-近邻算法初探</h4>
+      </a>
+    </div>
+  
+</nav>
+
+
+    
+        <div id="repo">
+    <div class="loading active"></div>
+    <div class="top clearfix">
+        <div class="avatar pull-left"></div>
+        <div class="content pull-left">
+            <p class="name"></p>
+            <p class="description"></p>
+        </div>
+    </div>
+    <ul class="bottom">
+        <li class="star">
+            <span class="icon icon-star"></span>
+            <span class="val">0</span>
+        </li>
+        <li class="fork">
+            <span class="icon icon-code-fork"></span>
+            <span class="val">0</span>
+        </li>
+        <li class="date">
+            <span class="icon icon-clock-o"></span>
+            <span class="val">0000-00-00</span>
+        </li>
+    </ul>
+    <a class="link" href=""></a>
+</div>
+    
+    
+        <aside class="post-widget">
+            <nav class="post-toc-wrap" id="post-toc">
+                <strong>目录</strong>
+                <ol class="post-toc"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#预备知识"><span class="post-toc-number">1.</span> <span class="post-toc-text">预备知识</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#归一化特征值"><span class="post-toc-number">1.1.</span> <span class="post-toc-text">归一化特征值</span></a></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#应用"><span class="post-toc-number">2.</span> <span class="post-toc-text">应用</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#k近邻算法改进约会网站"><span class="post-toc-number">2.1.</span> <span class="post-toc-text">k近邻算法改进约会网站</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#手写数字识别"><span class="post-toc-number">2.2.</span> <span class="post-toc-text">手写数字识别</span></a></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#总结："><span class="post-toc-number">3.</span> <span class="post-toc-text">总结：</span></a></li></ol>
+            </nav>
+            <div class="toc-bar"><div>
+        </aside>
+    
+</article>
+
+    <div id="reward" class="page-modal reward-lay">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <h3 class="reward-title">
+        <i class="icon icon-quote-left"></i>
+        感谢原作，你的打赏是我的动力！
+        <i class="icon icon-quote-right"></i>
+    </h3>
+    <div class="reward-content">
+        
+        <div class="reward-code">
+            <img id="rewardCode" src="/img/reward-wechat.jpg" alt="打赏二维码">
+        </div>
+        
+        <label class="reward-toggle">
+            <input id="rewardToggle" type="checkbox" class="reward-toggle-check"
+                data-wechat="/img/reward-wechat.jpg" data-alipay="/img/reward-alipay.jpg">
+            <div class="reward-toggle-ctrol">
+                <span class="reward-toggle-item wechat">微信</span>
+                <span class="reward-toggle-label"></span>
+                <span class="reward-toggle-item alipay">支付宝</span>
+            </div>
+        </label>
+        
+    </div>
+</div>
+
+    
+
+</div>
+
+    </main>
+    <footer class="footer ">
+    
+    <div class="top">
+        
+            <p>
+    <span>Links：</span>
+    
+    <span class="blogroll-item">
+        <a href="https://github.com/sivanWu0222" target="_blank">GitHub</a>
+    </span>
+    
+    <span class="blogroll-item">
+        <a href="http://weibo.com/Msingwen0222/home?wvr=5" target="_blank">新浪微博</a>
+    </span>
+    
+    <span class="blogroll-item">
+        <a href="https://www.linkedin.com/in/%E6%99%93%E6%96%87-%E5%90%B4-79057a121/" target="_blank">Linkedin</a>
+    </span>
+    
+    <span class="blogroll-item">
+        <a href="http://wpa.qq.com/msgrd?v=3&amp;uin=1666762170&amp;site=qq&amp;menu=yes" target="_blank">QQ</a>
+    </span>
+    
+    <span class="blogroll-item">
+        <a href="https://zh-cn.facebook.com/people/SiVan-Wu/100014408918389" target="_blank">Facebook</a>
+    </span>
+    
+    <span class="blogroll-item">
+        <a href="https://mail.qq.com/cgi-bin/qm_share?t=qm_mailme&amp;email=xfTz8-Py8-f08vWFtLTrpqqo" target="_blank">Contact</a>
+    </span>
+    
+    <span class="blogroll-item">
+        <a href="https://twitter.com/SiVan_Wu" target="_blank">Twitter</a>
+    </span>
+    
+</p>
+
+        
+    </div>
+    
+    <div class="bottom">
+        <p>
+            <span>
+                逸如风(yirufeng) &copy; 2016 - 2019
+            </span>
+
+           	
+           	<span>
+           		<a href="http://beian.miit.gov.cn/" target="_blank">已实名认证</a>
+           	</span>
+           	
+
+            
+
+            
+
+            
+                
+<span class="site-uv" title="总访客量">
+    <i class="icon icon-user"></i>
+    <i class="busuanzi-value" id="busuanzi_value_site_uv"></i>
+</span>
+
+
+<span class="site-pv" title="总访问量">
+    <i class="icon icon-eye"></i>
+    <i class="busuanzi-value" id="busuanzi_value_site_pv"></i>
+</span>
+
+            
+        </p>
+    </div>
+</footer>
+
+    <div class="mask" id="mask"></div>
+<a href="javascript:;" id="gotop" class="waves-effect waves-circle waves-light"><span class="icon icon-lg icon-chevron-up"></span></a>
+
+
+
+<div class="global-share" id="globalShare">
+    <ul class="reset share-icons">
+      
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://www.sivan.tech/2019/06/10/MLA-02-k-近邻算法应用/&title=《[MLA-02]k-近邻算法初探》 — yirufeng's Blog&pic=http://www.sivan.tech/img/1.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://www.sivan.tech/2019/06/10/MLA-02-k-近邻算法应用/&title=《[MLA-02]k-近邻算法初探》 — yirufeng's Blog&source=预备知识归一化特征值
+有时候以为不同特征值的取值范围差距很大，在我们使用K近邻算法计算距离的时候，取值范围差距大的特征值将会对k近邻算法计算出的结果造成很..." data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http://www.sivan.tech/2019/06/10/MLA-02-k-近邻算法应用/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《[MLA-02]k-近邻算法初探》 — yirufeng's Blog&url=http://www.sivan.tech/2019/06/10/MLA-02-k-近邻算法应用/&via=http://www.sivan.tech" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=http://www.sivan.tech/2019/06/10/MLA-02-k-近邻算法应用/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+      
+    </ul>
+ </div>
+
+
+<div class="page-modal wx-share" id="wxShare">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAMYAAADGCAAAAACs8KCBAAACMUlEQVR42u3awU7sMAwFUP7/p+dtkZ4a7o0LUtPT1QiGNCcL49j++oqfz3/P1W+//+RqnfXKV397w4OBgfFYxmf55K9fw5J3Xb03omJgYLyAsQ6OV0sn308Ca/L5hz1jYGBgDBjtNzEwMDAmjPWG1inj3tYxMDAw2ktsXhqbbO7X7+IYGBgPZORV97///Cv9DQwMjEcxPuWThMW8MdmG18s1MTAwjmbstTDXATFPGZPAmqyGgYHxBkY+HpGPec2HxpLDKtwYGBiPZUzK+m35bDIo9sORYWBgHM1oF8rB8+RysyKIgYFxNCNPEPeSxfzKunnEGBgYhzLy9KttErSltzxyRiU2DAyMgxh7F852nKsNsu0YGQYGxhsY7ahEW1zbSzRvaF5iYGAcwShSrq0LbTtskbcBMDAwMPZCZ7LO5ApdB1wMDIwjGJPGYXvp3SvDtQEdAwPjPEZbDisC36ANkA9kXE63YWBgHMdohy32Smz3NjgxMDDew1iHzqRhkJfG2tEKDAwMjLzodm8Brk0Ti+EPDAyMlzE2W4llNWxUHcTAwHgZIwmF80L/pLjW7hMDA+Mkxqd82hNKNjq5Kkc1PwwMjIczJnG6Hti6aUQj+r+BgYFxHCMJspNyW3scmwEXAwPjBYx2MGKylUnaF7UwMTAwMLYGL9qi258GXAwMjOMY+UDGPA3Nr8cYGBhvYLRLtwMZ60CcH9Nt5TYMDIxHMfYGsCaNgcl42aipiYGB8TzGP76y9Rsg2+d2AAAAAElFTkSuQmCC" alt="微信分享二维码">
+</div>
+
+
+    
+    <!-- main-js -->
+<script type="text/javascript" src="//cdn.bootcss.com/jquery/2.1.0/jquery.min.js"></script>
+<script type="text/javascript" src="/js/plugins/fastclick.js?v=1.4.2"></script>
+<script type="text/javascript" src="/js/plugins/ios-orientationchange-fix.js?v=1.4.2"></script>
+<script type="text/javascript" src="//cdn.jsdelivr.net/gh/fancyapps/fancybox@3.5.2/dist/jquery.fancybox.min.js"></script>
+
+<script type="text/javascript" src="//cdn.bootcss.com/node-waves/0.7.4/waves.min.js"></script>
+
+<script type="text/javascript" src="/js/method.js?v=1.4.2"></script>
+<script type="text/javascript" src="/js/blog.js?v=1.4.2"></script>
+
+<!-- third-party -->
+
+
+    <script type="text/javascript">
+    (function() {
+
+        const origin = "ai-distill | MachineLearningPractice"
+        let user, repo;
+        origin.replace(/(\S+)\s{0,1}\|\s{0,1}(\S+)/g, (...rest) => {
+            [user, repo] = [ rest[1], rest[2] ];
+        });
+        if (user && repo) {
+            const url = `//api.github.com/repos/${user}/${repo}?callback=?`;
+            $.getJSON(url, (data) => {
+                updateRepoInPage(data.data);
+            });
+        }
+
+        function updateRepoInPage(data) {
+            const {name, description, html_url: url, stargazers_count: stars, forks, owner: owner, updated_at: update} = data;
+            _loadAvatar(owner.avatar_url).then(avatarUrl => {
+                const avatarBg = `url(${avatarUrl})`;
+                const container = $('#repo');
+                container.click(() => {
+                    window.open(url);
+                });
+
+                //init
+                const loadingItem = container.find('.loading').hide();
+                const topItem = container.find('.top').addClass('active');
+                const bottomItem = container.find('.bottom').addClass('active');
+
+                //avatar
+                const avatarItem = container.find('.avatar');
+                const oldBg = avatarItem.css('background-image');
+                avatarItem.hover(() => {
+                    avatarItem.css('background-image', avatarBg);
+                }, () => {
+                    avatarItem.css('background-image', oldBg);
+                });
+
+                //repo-name
+                const nameItem = container.find('.name').html(name);
+
+                //description
+                const descriptionItem = container.find('.description').html(description);
+
+                //stars
+                const starItem = container.find('.star>.val').html(stars);
+
+                //forks
+                const forkItem = container.find('.fork>.val').html(forks);
+
+                //date
+                const formatDate = update.replace(/T.+/g, '');
+                const dateItem = container.find('.date>.val').html(formatDate);
+            });
+
+            function _loadAvatar(url) {
+                return new Promise((resolve, reject) => {
+                    const img = new Image();
+                    img.onload = () => {
+                        resolve(url);
+                    };
+                    img.src = url;
+                });
+            }
+
+        }
+
+    })();
+</script>
+
+
+
+
+
+<script type="text/javascript" src="/js/plugins/local_search.js?v=1.4.2"></script>
+<script type="text/javascript">
+	var search_path = "search.xml";
+	if (search_path.length === 0) {
+		search_path = "search.xml";
+	}
+	var path = "/" + search_path;
+	searchFunc(path, "local-search-input", "local-search-result");
+</script>
+
+
+
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+    
+    
+
+
+
+<script type="text/javascript" src="https://cdn1.lncld.net/static/js/av-core-mini-0.6.4.js"></script>
+<script type="text/javascript" src="/js/plugins/leancloud_visitors.js?v=1.4.2"></script>
+
+
+
+    <!-- mathjax config similar to math.stackexchange -->
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+        tex2jax: {
+            inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+            processEscapes: true,
+            skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+        }
+    });
+</script>
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for (i=0; i < all.length; i += 1) {
+            all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+    });
+</script>
+
+<script type="text/javascript" src="//cdn.bootcss.com/mathjax/2.7.1/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+
+
+
+    <script>
+    (function() {
+        var OriginTitile = document.title, titleTime;
+        document.addEventListener('visibilitychange', function() {
+            if (document.hidden) {
+                document.title = '死鬼去哪里了！';
+                clearTimeout(titleTime);
+            } else {
+                document.title = '(つェ⊂)咦!又好了!';
+                titleTime = setTimeout(function() {
+                    document.title = OriginTitile;
+                },2000);
+            }
+        });
+    })();
+</script>
+
+
+
+
+
+    
+</body>
+</html>

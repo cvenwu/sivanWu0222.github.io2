@@ -1,0 +1,816 @@
+<!DOCTYPE html>
+<html>
+<head><meta name="generator" content="Hexo 3.9.0">
+    <meta charset="utf-8">
+    
+    
+    <title>C++ primer 中文版 5th edition Unit 5--语句篇 | yirufeng&#39;s Blog | 未来的小幸运 || 致正在努力的我们 ---- 逸如风</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    
+    <meta name="keywords" content="Grammar,C++">
+    <link rel="shortcut icon" href="/img/favicon.ico">
+    <link rel="stylesheet" href="//cdn.jsdelivr.net/gh/fancyapps/fancybox@3.5.2/dist/jquery.fancybox.min.css">
+    <link rel="stylesheet" href="/css/style.css?v=1.4.2">
+    
+    <script type="text/javascript">
+        // Data Center
+        var DC = {
+            reward:	true,
+            lv: JSON.parse('{"enable":true,"app_id":"K2RVtHi7RnmoN6dovlDKafn8-gzGzoHsz","app_key":"Qxmil0oqPFdDUyyIp2i1Xikt","icon":true}'),
+            v: JSON.parse('{"enable":false,"appid":"ACuOJIasBeRLiDe2iUApHj67-gzGzoHsz","appkey":"qbgg4tClrQQmvq8uwlpwA5mA","notify":true,"verify":true,"placeholder":"give me some sugers plz...","avatar":"wavatar"}'),
+            g: JSON.parse('{"enable":false,"lazy":true,"owner":"codefine","repo":"gitment","oauth":{"client_id":null,"client_secret":null},"perPage":10}'),
+            d: JSON.parse('{"app_id":null}')
+        };
+    </script>
+    <script type="text/javascript">
+        window.lazyScripts=[];
+    </script>
+    
+</head>
+
+
+<body>
+    <div id="loading" class="active"></div>
+
+    <aside id="menu" class="">
+  <div class="inner flex-row-vertical">
+    <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menu-off">
+        <i class="icon icon-lg icon-close"></i>
+    </a>
+    <div class="brand-wrap">
+      
+      <img src="/img/brand.jpg" class="brand-bg">
+      
+      <div class="brand">
+        <a href="/" class="avatar waves-effect waves-circle waves-light">
+          <img src="/img/1.jpg">
+        </a>
+        <hgroup class="introduce">
+          <h5 class="nickname">逸如风(yirufeng)</h5>
+          <a href="mailto:yirufeng@foxmail.com" title="yirufeng@foxmail.com" class="mail">
+            
+              <span>y</span>
+            
+              <span>i</span>
+            
+              <span>r</span>
+            
+              <span>u</span>
+            
+              <span>f</span>
+            
+              <span>e</span>
+            
+              <span>n</span>
+            
+              <span>g</span>
+            
+              <span>@</span>
+            
+              <span>f</span>
+            
+              <span>o</span>
+            
+              <span>x</span>
+            
+              <span>m</span>
+            
+              <span>a</span>
+            
+              <span>i</span>
+            
+              <span>l</span>
+            
+              <span>.</span>
+            
+              <span>c</span>
+            
+              <span>o</span>
+            
+              <span>m</span>
+            
+          </a>
+        </hgroup>
+        
+        <ul class="menu-link">
+          
+              <li>
+                <a href="https://github.com/sivanWu0222" target="_blank">
+                  <i class="icon icon-lg icon-github"></i>
+                </a>
+              </li>
+            
+              <li>
+                <a href="https://mail.qq.com/cgi-bin/qm_share?t=qm_mailme&amp;amp;email=xfTz8-Py8-f08vWFtLTrpqqo" target="_blank">
+                  <i class="icon icon-lg icon-envelope"></i>
+                </a>
+              </li>
+            
+        </ul>
+        
+      </div>
+    </div>
+    <div class="scroll-wrap flex-col">
+      <ul class="nav">
+        
+            <li class="">
+              <a href="/"  >
+                <i class="icon icon-lg icon-home"></i>
+                Home
+              </a>
+            </li>
+        
+            <li class="">
+              <a href="/categories"  >
+                <i class="icon icon-lg icon-th-list"></i>
+                Category
+              </a>
+            </li>
+        
+            <li class="">
+              <a href="/research"  >
+                <i class="icon icon-lg icon-mortar-board"></i>
+                Research
+              </a>
+            </li>
+        
+            <li class="">
+              <a href="/tags"  >
+                <i class="icon icon-lg icon-tags"></i>
+                Tag
+              </a>
+            </li>
+        
+            <li class="">
+              <a href="/archives"  >
+                <i class="icon icon-lg icon-archives"></i>
+                Archive
+              </a>
+            </li>
+        
+            <li class="">
+              <a href="/about"  >
+                <i class="icon icon-lg icon-user"></i>
+                About
+              </a>
+            </li>
+        
+            <li class="">
+              <a href="/open-source"  >
+                <i class="icon icon-lg icon-github"></i>
+                Project
+              </a>
+            </li>
+        
+            <li class="">
+              <a href="/demo"  >
+                <i class="icon icon-lg icon-audio-description"></i>
+                Demo
+              </a>
+            </li>
+        
+            <li class="">
+              <a href="/wechat-number"  >
+                <i class="icon icon-lg icon-wechat"></i>
+                公众号
+              </a>
+            </li>
+        
+            <li class="">
+              <a href="http://www.sivan.tech/LeetCodeAlgo/" target="_blank" >
+                <i class="icon icon-lg icon-braille"></i>
+                Leetcode
+              </a>
+            </li>
+        
+            <li class="">
+              <a href="http://resume.sivan.tech/" target="_blank" >
+                <i class="icon icon-lg icon-file-pdf-o"></i>
+                Resume
+              </a>
+            </li>
+        
+      </ul>
+    </div>
+  </div>
+</aside>
+
+    <main id="main">
+        <header class="top-header" id="header">
+    <div class="flex-row clearfix">
+        <a href="javascript:;" class="header-icon pull-left waves-effect waves-circle waves-light on" id="menu-toggle">
+          <i class="icon icon-lg icon-navicon"></i>
+        </a>
+        <div class="flex-col header-title ellipsis">
+            <span>C++ primer 中文版 5th edition Unit 5--语句篇</span>
+            
+        </div>
+        
+        <a href="javascript:;" id="site_search_btn" class="header-icon pull-right waves-effect waves-circle waves-light">
+            <i class="icon icon-lg icon-search"></i>
+        </a>
+        
+    </div>
+</header>
+<header class="content-header post-header">
+    <img src="/img/s3.jpg" class="header-bg">
+    <div class="container fade-scale">
+        <h1 class="title">C++ primer 中文版 5th edition Unit 5--语句篇</h1>
+        <h5 class="subtitle">
+            
+                <time datetime="2018-06-28T11:11:53.000Z" itemprop="datePublished" class="page-time">
+  2018-06-28
+</time>
+
+
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/C/">C++</a><ul class="article-category-list-child"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/C/Grammar/">Grammar</a></li></ul></li></ul>
+
+            
+        </h5>
+        
+    </div>
+    
+
+</header>
+
+<div id="site_search">
+    <div class="search-title clearfix">
+        <span class="pull-left">
+          <i class="icon icon-lg icon-search"></i>
+        </span>
+        <input type="text" id="local-search-input" name="q" results="0" placeholder="search my blog..." class="form-control pull-left"/>
+        <a href="javascript:;" class="close pull-right waves-effect waves-circle waves-light">
+          <i class="icon icon-lg icon-close"></i>
+        </a>
+    </div>
+    <div id="local-search-result"></div>
+</div>
+
+
+<div class="container body-wrap">
+    <article id="post-c-primer-中文版-5th-edition-Unit-5-语句篇"
+  class="post-article article-type-post" itemprop="blogPost">
+    <div class="post-card">
+        <h1 class="post-card-title">C++ primer 中文版 5th edition Unit 5--语句篇</h1>
+        <div class="post-meta">
+            <time class="post-time" title="2018-06-28 19:11:53" datetime="2018-06-28T11:11:53.000Z"  itemprop="datePublished">2018-06-28</time>
+
+            
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/C/">C++</a><ul class="article-category-list-child"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/C/Grammar/">Grammar</a></li></ul></li></ul>
+
+
+
+            
+	<span id="/2018/06/28/c-primer-中文版-5th-edition-Unit-5-语句篇/" class="leancloud_visitors" data-flag-title="C++ primer 中文版 5th edition Unit 5--语句篇" title="C++ primer 中文版 5th edition Unit 5--语句篇">
+		
+			<i class="icon icon-eye"></i>
+		
+		<span class="leancloud-visitors-count"></span>
+	</span>
+ 
+
+            
+
+
+            
+        </div>
+        <div class="post-content" id="post-content" itemprop="postContent">
+            
+            <blockquote>
+<p>对C++中常用的结构和语句进行描述，包括选择结构，顺序结构，循环结构等和一些常用的语句！</p>
+</blockquote>
+<h2 id="空语句"><a href="#空语句" class="headerlink" title="空语句"></a>空语句</h2><blockquote>
+<p>空语句是最简单的语句，只有一个单独的分号</p>
+</blockquote>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">;<span class="comment">//这是一个空语句</span></span><br></pre></td></tr></table></figure>
+<h3 id="使用"><a href="#使用" class="headerlink" title="使用"></a>使用</h3><ol>
+<li>当我们在coding时，语法上需要一条语句而逻辑上并不需要，此时我们应该使用空语句</li>
+<li>当我们在循环的全部工作可以在条件语句中完成时，这时我们就会用到空语句</li>
+</ol>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="comment">/*重复读入数据直至到达文件末尾或者某次输入的值等于sought*/</span></span><br><span class="line">	<span class="keyword">while</span>(<span class="built_in">cin</span> &gt;&gt; s &amp;&amp; s != sought)</span><br><span class="line">		;</span><br></pre></td></tr></table></figure>
+<p>注意事项：</p>
+<ol>
+<li>当我们使用空语句的时候应该加上注释，从而让阅读这段代码的人知道我们是故意省略的</li>
+<li>当使用空语句的时候应该注意分号的位置。</li>
+<li>多余的空语句并非总是乌海的<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">while(iter != svec.end())	;		//由于多了个分号，循环将会变为死循环</span><br><span class="line">	++iter;							//不属于循环的一部分</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<h2 id="悬垂else"><a href="#悬垂else" class="headerlink" title="悬垂else"></a>悬垂else</h2><blockquote>
+<p>当我们遇到if语句多于else语句时，如何确定哪个if语句和哪个else语句匹配，这个问题便称为悬垂else(dangling else)</p>
+</blockquote>
+<p>在那些既有if语句又有if else语句中，这是个普遍的问题，不同语言中解决思路不同，C++中，规定else与离他最近的尚未匹配的if匹配，从而消除程序的二义性</p>
+<a id="more"></a>
+<h2 id="switch语句"><a href="#switch语句" class="headerlink" title="switch语句"></a>switch语句</h2><blockquote>
+<p>switch语句对紧跟在后面的表达式求值，可以是一个初始化的变量声明，然后表达式的值转换成整数类型，与每个case的值进行比较</p>
+</blockquote>
+<p>注意：case标签必须是常量表达式</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">switch</span>(ch)</span><br><span class="line">&#123;</span><br><span class="line">	<span class="keyword">case</span> <span class="number">3.14</span>:	<span class="comment">//错误，case标签不是一个整数</span></span><br><span class="line">	<span class="keyword">case</span> ival:	<span class="comment">//错误，case标签不是一个常量</span></span><br><span class="line">	</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="统计元音字母出现次数"><a href="#统计元音字母出现次数" class="headerlink" title="统计元音字母出现次数"></a>统计元音字母出现次数</h3><blockquote>
+<p>这里有两种写法，重点关注switch语句中的写法</p>
+</blockquote>
+<p>写法一：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><span class="line">#include&lt;iostream&gt;</span><br><span class="line">#include&lt;string&gt;</span><br><span class="line">using namespace std;</span><br><span class="line"></span><br><span class="line">/**</span><br><span class="line"> * 判断单词中元音字母的个数</span><br><span class="line"> * @return [description]</span><br><span class="line"> */</span><br><span class="line"></span><br><span class="line">int main()</span><br><span class="line">&#123;</span><br><span class="line">	unsigned vowelCnt = 0;</span><br><span class="line">	string str;</span><br><span class="line">	cin &gt;&gt; str;</span><br><span class="line">	while ( !str.empty() )</span><br><span class="line">	&#123;</span><br><span class="line">		for (auto s : str)</span><br><span class="line">		&#123;</span><br><span class="line">			switch (s)</span><br><span class="line">			&#123;</span><br><span class="line">				case &apos;a&apos;:</span><br><span class="line">				case &apos;e&apos;:</span><br><span class="line">				case &apos;i&apos;:</span><br><span class="line">				case &apos;o&apos;:</span><br><span class="line">				case &apos;u&apos;:</span><br><span class="line">					vowelCnt++;</span><br><span class="line">					break;</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	cout &lt;&lt; vowelCnt;</span><br><span class="line">	return 0;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<blockquote>
+<p>上面代码中，几个case连在一起没有break语句，只要ch是元音字母，就会执行上面所述的代码</p>
+</blockquote>
+<p>写法二：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line">#include&lt;iostream&gt;</span><br><span class="line">#include&lt;string&gt;</span><br><span class="line">using namespace std;</span><br><span class="line"></span><br><span class="line">/**</span><br><span class="line"> * 得到元音字母个数的另一种写法</span><br><span class="line"> * @return [description]</span><br><span class="line"> */</span><br><span class="line"></span><br><span class="line">int main()</span><br><span class="line">&#123;</span><br><span class="line">  string str;</span><br><span class="line">  unsigned int vowelCnt = 0;</span><br><span class="line">  cin &gt;&gt; str;</span><br><span class="line">  if (!str.empty())</span><br><span class="line">  &#123;</span><br><span class="line">    for (auto s : str)</span><br><span class="line">    &#123;</span><br><span class="line">      switch(s)&#123;</span><br><span class="line">        case &apos;a&apos;: case &apos;e&apos;: case &apos;i&apos;: case &apos;o&apos;: case &apos;u&apos;:   //这里可以放到一行，需要注意一下</span><br><span class="line">          vowelCnt ++;</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">  cout &lt;&lt; vowelCnt &lt;&lt; endl;</span><br><span class="line"></span><br><span class="line">  return 0;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>注意事项：当我们省略case后面的break语句，最好加一段注释说明程序的逻辑</p>
+<h3 id="default标签"><a href="#default标签" class="headerlink" title="default标签"></a>default标签</h3><blockquote>
+<p>我们在switch语句中写出一个空的deafult语句也是有用的，因为我们可以告诉其他人，我们已经考虑到了默认情况</p>
+</blockquote>
+<h2 id="异常语句"><a href="#异常语句" class="headerlink" title="异常语句"></a>异常语句</h2><p>throw表达式：throw引发（raise）异常</p>
+<p>try语句块内声明的变量在块外部无法访问，特别是在catch子句内也无法访问。</p>
+<h3 id="异常的处理过程"><a href="#异常的处理过程" class="headerlink" title="异常的处理过程"></a>异常的处理过程</h3><p>异常发生之后，首先搜索异常附近的函数。没找到匹配的catch语句，终止当前正在寻找的函数的寻找，将会向调用者继续寻找，一步一步进行找，直到找到为止！</p>
+<p>注意：<br>1.try语句块内声明的变量无法在外部访问，特别是在catch子句内部也无法访问<br>2.异常中断了程序的正常流程：当程序遇到异常而中断时，一部分程序不会执行，从而导致对象处于无效或者未完成的状态，如果在发生异常时，进行了正常的清理的程序称作异常安全代码<br>3.没有try语句块时发生异常，系统会调用terminate函数并终止当前程序的执行</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;stdexcept&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * 修改你的程序，使得当第2个数为0时，抛出异常，</span></span><br><span class="line"><span class="comment"> * 先不要设定catch语句，运行程序并真的为除数输入0</span></span><br><span class="line"><span class="comment"> * @return [description]</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">int</span> num1, num2;</span><br><span class="line">    <span class="keyword">while</span>(<span class="built_in">cin</span> &gt;&gt; num1 &gt;&gt; num2)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">try</span> &#123;</span><br><span class="line">            <span class="keyword">if</span>(num2 == <span class="number">0</span>)</span><br><span class="line">                <span class="keyword">throw</span> runtime_error(<span class="string">"Exception：num2 must not be Zero."</span>);</span><br><span class="line">            <span class="keyword">double</span> num3 = <span class="number">1.0</span> * num1 / num2;</span><br><span class="line">            <span class="built_in">cout</span> &lt;&lt; <span class="string">"The result is "</span> &lt;&lt; num3;</span><br><span class="line">            <span class="keyword">break</span>;</span><br><span class="line">        &#125; <span class="keyword">catch</span> (runtime_error err) &#123;</span><br><span class="line">            <span class="built_in">cout</span> &lt;&lt; err.what() &lt;&lt; <span class="string">"\nTry again? Enter y or n"</span> &lt;&lt;<span class="built_in">endl</span>;</span><br><span class="line">            <span class="keyword">char</span> c;</span><br><span class="line">            <span class="built_in">cin</span> &gt;&gt; c;</span><br><span class="line">            <span class="keyword">if</span>(!<span class="built_in">cin</span> || c == <span class="string">'n'</span>)</span><br><span class="line">                <span class="keyword">break</span>;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="what-函数"><a href="#what-函数" class="headerlink" title="what()函数"></a>what()函数</h3><blockquote>
+<p>what函数返回c风格的字符串的内容与异常对象的类型有关，如果异常类型是一个字符串初始值，则返回该字符串，对于其他无初始值的异常类型来说，what返回的内容由编译器决定</p>
+</blockquote>
+
+        </div>
+        
+<blockquote class="post-copyright">
+    <div class="content">
+        
+<span class="post-time">
+    最后更新时间：<time datetime="2019-08-26T10:46:59.868Z" itemprop="dateUpdated">2019-08-26 18:46:59</time>
+</span><br>
+
+
+        
+        转载注明出处，原文地址：<a href="/2018/06/28/c-primer-中文版-5th-edition-Unit-5-语句篇/" target="_blank" rel="external">http://www.sivan.tech/2018/06/28/c-primer-中文版-5th-edition-Unit-5-语句篇/</a>
+        
+    </div>
+    <footer>
+        <a href="http://www.sivan.tech">
+            <img src="/img/1.jpg" alt="逸如风(yirufeng)">
+            逸如风(yirufeng)
+        </a>
+    </footer>
+</blockquote>
+
+        
+            <div class="page-reward">
+    <a id="rewardBtn" href="javascript:;" class="page-reward-btn waves-effect waves-circle waves-light">赏</a>
+</div>
+
+            
+        
+        <div class="post-footer">
+            
+	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/C/">C++</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Grammar/">Grammar</a></li></ul>
+
+            <div class="page-share-wrap">
+    
+
+<div class="page-share" id="pageShare">
+    <ul class="reset share-icons">
+      
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://www.sivan.tech/2018/06/28/c-primer-中文版-5th-edition-Unit-5-语句篇/&title=《C++ primer 中文版 5th edition Unit 5--语句篇》 — yirufeng's Blog&pic=http://www.sivan.tech/img/1.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://www.sivan.tech/2018/06/28/c-primer-中文版-5th-edition-Unit-5-语句篇/&title=《C++ primer 中文版 5th edition Unit 5--语句篇》 — yirufeng's Blog&source=
+对C++中常用的结构和语句进行描述，包括选择结构，顺序结构，循环结构等和一些常用的语句！
+
+空语句
+空语句是最简单的语句，只有一个单独的分号
+
+1;//..." data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http://www.sivan.tech/2018/06/28/c-primer-中文版-5th-edition-Unit-5-语句篇/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《C++ primer 中文版 5th edition Unit 5--语句篇》 — yirufeng's Blog&url=http://www.sivan.tech/2018/06/28/c-primer-中文版-5th-edition-Unit-5-语句篇/&via=http://www.sivan.tech" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=http://www.sivan.tech/2018/06/28/c-primer-中文版-5th-edition-Unit-5-语句篇/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+      
+    </ul>
+ </div>
+
+
+
+    <a href="javascript:;" id="shareFab" class="page-share-fab waves-effect waves-circle">
+        <i class="icon icon-share-alt icon-lg"></i>
+    </a>
+</div>
+
+        </div>
+        
+            
+
+
+        
+    </div>
+    
+<nav class="post-nav flex-row flex-justify-between">
+  
+    <div class="prev">
+      <a href="/2018/06/29/ACM训练-1/" id="post-prev" class="post-nav-link">
+        <div class="tips"><i class="icon icon-angle-left icon-lg icon-pr"></i> Prev</div>
+        <h4 class="title">ACM训练-1</h4>
+      </a>
+    </div>
+  
+
+  
+    <div class="next">
+      <a href="/2018/06/26/c-prime-中文版-prime-5th-edition-Unit-1/" id="post-next" class="post-nav-link">
+        <div class="tips">Next <i class="icon icon-angle-right icon-lg icon-pl"></i></div>
+        <h4 class="title">C++ primer 中文版 5th edition Unit 1</h4>
+      </a>
+    </div>
+  
+</nav>
+
+
+    
+        <div id="repo">
+    <div class="loading active"></div>
+    <div class="top clearfix">
+        <div class="avatar pull-left"></div>
+        <div class="content pull-left">
+            <p class="name"></p>
+            <p class="description"></p>
+        </div>
+    </div>
+    <ul class="bottom">
+        <li class="star">
+            <span class="icon icon-star"></span>
+            <span class="val">0</span>
+        </li>
+        <li class="fork">
+            <span class="icon icon-code-fork"></span>
+            <span class="val">0</span>
+        </li>
+        <li class="date">
+            <span class="icon icon-clock-o"></span>
+            <span class="val">0000-00-00</span>
+        </li>
+    </ul>
+    <a class="link" href=""></a>
+</div>
+    
+    
+        <aside class="post-widget">
+            <nav class="post-toc-wrap" id="post-toc">
+                <strong>目录</strong>
+                <ol class="post-toc"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#空语句"><span class="post-toc-number">1.</span> <span class="post-toc-text">空语句</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#使用"><span class="post-toc-number">1.1.</span> <span class="post-toc-text">使用</span></a></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#悬垂else"><span class="post-toc-number">2.</span> <span class="post-toc-text">悬垂else</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#switch语句"><span class="post-toc-number">3.</span> <span class="post-toc-text">switch语句</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#统计元音字母出现次数"><span class="post-toc-number">3.1.</span> <span class="post-toc-text">统计元音字母出现次数</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#default标签"><span class="post-toc-number">3.2.</span> <span class="post-toc-text">default标签</span></a></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#异常语句"><span class="post-toc-number">4.</span> <span class="post-toc-text">异常语句</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#异常的处理过程"><span class="post-toc-number">4.1.</span> <span class="post-toc-text">异常的处理过程</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#what-函数"><span class="post-toc-number">4.2.</span> <span class="post-toc-text">what()函数</span></a></li></ol></li></ol>
+            </nav>
+            <div class="toc-bar"><div>
+        </aside>
+    
+</article>
+
+    <div id="reward" class="page-modal reward-lay">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <h3 class="reward-title">
+        <i class="icon icon-quote-left"></i>
+        感谢原作，你的打赏是我的动力！
+        <i class="icon icon-quote-right"></i>
+    </h3>
+    <div class="reward-content">
+        
+        <div class="reward-code">
+            <img id="rewardCode" src="/img/reward-wechat.jpg" alt="打赏二维码">
+        </div>
+        
+        <label class="reward-toggle">
+            <input id="rewardToggle" type="checkbox" class="reward-toggle-check"
+                data-wechat="/img/reward-wechat.jpg" data-alipay="/img/reward-alipay.jpg">
+            <div class="reward-toggle-ctrol">
+                <span class="reward-toggle-item wechat">微信</span>
+                <span class="reward-toggle-label"></span>
+                <span class="reward-toggle-item alipay">支付宝</span>
+            </div>
+        </label>
+        
+    </div>
+</div>
+
+    
+
+</div>
+
+    </main>
+    <footer class="footer ">
+    
+    <div class="top">
+        
+            <p>
+    <span>Links：</span>
+    
+    <span class="blogroll-item">
+        <a href="https://github.com/sivanWu0222" target="_blank">GitHub</a>
+    </span>
+    
+    <span class="blogroll-item">
+        <a href="http://weibo.com/Msingwen0222/home?wvr=5" target="_blank">新浪微博</a>
+    </span>
+    
+    <span class="blogroll-item">
+        <a href="https://www.linkedin.com/in/%E6%99%93%E6%96%87-%E5%90%B4-79057a121/" target="_blank">Linkedin</a>
+    </span>
+    
+    <span class="blogroll-item">
+        <a href="http://wpa.qq.com/msgrd?v=3&amp;uin=1666762170&amp;site=qq&amp;menu=yes" target="_blank">QQ</a>
+    </span>
+    
+    <span class="blogroll-item">
+        <a href="https://zh-cn.facebook.com/people/SiVan-Wu/100014408918389" target="_blank">Facebook</a>
+    </span>
+    
+    <span class="blogroll-item">
+        <a href="https://mail.qq.com/cgi-bin/qm_share?t=qm_mailme&amp;email=xfTz8-Py8-f08vWFtLTrpqqo" target="_blank">Contact</a>
+    </span>
+    
+    <span class="blogroll-item">
+        <a href="https://twitter.com/SiVan_Wu" target="_blank">Twitter</a>
+    </span>
+    
+</p>
+
+        
+    </div>
+    
+    <div class="bottom">
+        <p>
+            <span>
+                逸如风(yirufeng) &copy; 2016 - 2019
+            </span>
+
+           	
+           	<span>
+           		<a href="http://beian.miit.gov.cn/" target="_blank">已实名认证</a>
+           	</span>
+           	
+
+            
+
+            
+
+            
+                
+<span class="site-uv" title="总访客量">
+    <i class="icon icon-user"></i>
+    <i class="busuanzi-value" id="busuanzi_value_site_uv"></i>
+</span>
+
+
+<span class="site-pv" title="总访问量">
+    <i class="icon icon-eye"></i>
+    <i class="busuanzi-value" id="busuanzi_value_site_pv"></i>
+</span>
+
+            
+        </p>
+    </div>
+</footer>
+
+    <div class="mask" id="mask"></div>
+<a href="javascript:;" id="gotop" class="waves-effect waves-circle waves-light"><span class="icon icon-lg icon-chevron-up"></span></a>
+
+
+
+<div class="global-share" id="globalShare">
+    <ul class="reset share-icons">
+      
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://www.sivan.tech/2018/06/28/c-primer-中文版-5th-edition-Unit-5-语句篇/&title=《C++ primer 中文版 5th edition Unit 5--语句篇》 — yirufeng's Blog&pic=http://www.sivan.tech/img/1.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://www.sivan.tech/2018/06/28/c-primer-中文版-5th-edition-Unit-5-语句篇/&title=《C++ primer 中文版 5th edition Unit 5--语句篇》 — yirufeng's Blog&source=
+对C++中常用的结构和语句进行描述，包括选择结构，顺序结构，循环结构等和一些常用的语句！
+
+空语句
+空语句是最简单的语句，只有一个单独的分号
+
+1;//..." data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http://www.sivan.tech/2018/06/28/c-primer-中文版-5th-edition-Unit-5-语句篇/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《C++ primer 中文版 5th edition Unit 5--语句篇》 — yirufeng's Blog&url=http://www.sivan.tech/2018/06/28/c-primer-中文版-5th-edition-Unit-5-语句篇/&via=http://www.sivan.tech" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=http://www.sivan.tech/2018/06/28/c-primer-中文版-5th-edition-Unit-5-语句篇/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+      
+    </ul>
+ </div>
+
+
+<div class="page-modal wx-share" id="wxShare">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAN4AAADeCAAAAAB3DOFrAAACsklEQVR42u3awUoEQQwEUP//pxU8CbpuVdKNi7w5LazO9BuhO1by9hZf75/X18/fr0ffPrrP/m7HLjw8PLzR0vPHtOAclqwtXzMeHh7ebV5yGMwOj2Sh+d6erxkPDw/vFXizwvr3l5UfCXh4eHj/iTdb9KxYx8PDw3sdXrsRJ6FDezzka7iSteDh4eHFvFkD7G8/X+/v4eHh4Y266m1jrN2aN/ePVoiHh4d3gZf/8z8bF9gECkkRH90TDw8P7yhvFgHMWvub0YEk5lidPHh4eHglL/82D09z3qxJFg2H4eHh4V3g5U2pfNdNCvG8dJ49/UkYgYeHh7fg5UuZHR6zIYPNUMKTcw8PDw/vKO/UENXsnkXEkMcTeHh4eBd4++ZTXnyfKs03BTceHh7ePV4S2rbNs3w0YRbaRjExHh4e3lHerK3Vlsiboau2YYaHh4d3g5c8eD8isF9u22aL3joeHh7eNV7eKpuV1O0rzhtveHh4eDd4+QbdlsJtVNGmJgdaaHh4eHgjXrGNLqKHvMje/OQPK8TDw8O7wMuX1bbHZnHDrKyPenp4eHh4F3jtwZAvcVYc53+AJyI8PDy8o7xZhNpu8W2LaxPgPgwj8PDw8I7yEkz7yFmokce+0UGFh4eHd43XBgez5lZyh/YwKCYj8PDw8A7xEkYesM6obYybvxQ8PDy8G7xZe34Wqrb3b1f4MMbFw8PDO8qbtfbbw2NTgs9ijqKDh4eHh7dgJNdsRKANZPejYHh4eHj3eLNmVTuA1S7o7G/h4eHh3eDlJW++6bebdfLuhw0zPDw8vGu8diiqHdLa33P4gvDw8PBehpcXuDPYrJ127GDAw8PDO8RrRwfy8LcNPopyHA8PD+8a72wYMTtg8ri2GHrAw8PDu8BrG2B54TtraM0K6yEMDw8Pr+N9ADMiX/RlI1hVAAAAAElFTkSuQmCC" alt="微信分享二维码">
+</div>
+
+
+    
+    <!-- main-js -->
+<script type="text/javascript" src="//cdn.bootcss.com/jquery/2.1.0/jquery.min.js"></script>
+<script type="text/javascript" src="/js/plugins/fastclick.js?v=1.4.2"></script>
+<script type="text/javascript" src="/js/plugins/ios-orientationchange-fix.js?v=1.4.2"></script>
+<script type="text/javascript" src="//cdn.jsdelivr.net/gh/fancyapps/fancybox@3.5.2/dist/jquery.fancybox.min.js"></script>
+
+<script type="text/javascript" src="//cdn.bootcss.com/node-waves/0.7.4/waves.min.js"></script>
+
+<script type="text/javascript" src="/js/method.js?v=1.4.2"></script>
+<script type="text/javascript" src="/js/blog.js?v=1.4.2"></script>
+
+<!-- third-party -->
+
+
+    <script type="text/javascript">
+    (function() {
+
+        const origin = "sivanWu0222 | CppProgramming"
+        let user, repo;
+        origin.replace(/(\S+)\s{0,1}\|\s{0,1}(\S+)/g, (...rest) => {
+            [user, repo] = [ rest[1], rest[2] ];
+        });
+        if (user && repo) {
+            const url = `//api.github.com/repos/${user}/${repo}?callback=?`;
+            $.getJSON(url, (data) => {
+                updateRepoInPage(data.data);
+            });
+        }
+
+        function updateRepoInPage(data) {
+            const {name, description, html_url: url, stargazers_count: stars, forks, owner: owner, updated_at: update} = data;
+            _loadAvatar(owner.avatar_url).then(avatarUrl => {
+                const avatarBg = `url(${avatarUrl})`;
+                const container = $('#repo');
+                container.click(() => {
+                    window.open(url);
+                });
+
+                //init
+                const loadingItem = container.find('.loading').hide();
+                const topItem = container.find('.top').addClass('active');
+                const bottomItem = container.find('.bottom').addClass('active');
+
+                //avatar
+                const avatarItem = container.find('.avatar');
+                const oldBg = avatarItem.css('background-image');
+                avatarItem.hover(() => {
+                    avatarItem.css('background-image', avatarBg);
+                }, () => {
+                    avatarItem.css('background-image', oldBg);
+                });
+
+                //repo-name
+                const nameItem = container.find('.name').html(name);
+
+                //description
+                const descriptionItem = container.find('.description').html(description);
+
+                //stars
+                const starItem = container.find('.star>.val').html(stars);
+
+                //forks
+                const forkItem = container.find('.fork>.val').html(forks);
+
+                //date
+                const formatDate = update.replace(/T.+/g, '');
+                const dateItem = container.find('.date>.val').html(formatDate);
+            });
+
+            function _loadAvatar(url) {
+                return new Promise((resolve, reject) => {
+                    const img = new Image();
+                    img.onload = () => {
+                        resolve(url);
+                    };
+                    img.src = url;
+                });
+            }
+
+        }
+
+    })();
+</script>
+
+
+
+
+
+<script type="text/javascript" src="/js/plugins/local_search.js?v=1.4.2"></script>
+<script type="text/javascript">
+	var search_path = "search.xml";
+	if (search_path.length === 0) {
+		search_path = "search.xml";
+	}
+	var path = "/" + search_path;
+	searchFunc(path, "local-search-input", "local-search-result");
+</script>
+
+
+
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+    
+    
+
+
+
+<script type="text/javascript" src="https://cdn1.lncld.net/static/js/av-core-mini-0.6.4.js"></script>
+<script type="text/javascript" src="/js/plugins/leancloud_visitors.js?v=1.4.2"></script>
+
+
+
+    <!-- mathjax config similar to math.stackexchange -->
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+        tex2jax: {
+            inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+            processEscapes: true,
+            skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+        }
+    });
+</script>
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for (i=0; i < all.length; i += 1) {
+            all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+    });
+</script>
+
+<script type="text/javascript" src="//cdn.bootcss.com/mathjax/2.7.1/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+
+
+
+    <script>
+    (function() {
+        var OriginTitile = document.title, titleTime;
+        document.addEventListener('visibilitychange', function() {
+            if (document.hidden) {
+                document.title = '死鬼去哪里了！';
+                clearTimeout(titleTime);
+            } else {
+                document.title = '(つェ⊂)咦!又好了!';
+                titleTime = setTimeout(function() {
+                    document.title = OriginTitile;
+                },2000);
+            }
+        });
+    })();
+</script>
+
+
+
+
+
+    
+</body>
+</html>

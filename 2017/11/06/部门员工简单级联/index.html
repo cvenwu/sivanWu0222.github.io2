@@ -1,0 +1,698 @@
+<!DOCTYPE html>
+<html>
+<head><meta name="generator" content="Hexo 3.9.0">
+    <meta charset="utf-8">
+    
+    
+    <title>部门员工简单级联 | yirufeng&#39;s Blog | 未来的小幸运 || 致正在努力的我们 ---- 逸如风</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    
+    <meta name="keywords" content="Java,json,Ajax">
+    <link rel="shortcut icon" href="/img/favicon.ico">
+    <link rel="stylesheet" href="//cdn.jsdelivr.net/gh/fancyapps/fancybox@3.5.2/dist/jquery.fancybox.min.css">
+    <link rel="stylesheet" href="/css/style.css?v=1.4.2">
+    
+    <script type="text/javascript">
+        // Data Center
+        var DC = {
+            reward:	true,
+            lv: JSON.parse('{"enable":true,"app_id":"K2RVtHi7RnmoN6dovlDKafn8-gzGzoHsz","app_key":"Qxmil0oqPFdDUyyIp2i1Xikt","icon":true}'),
+            v: JSON.parse('{"enable":false,"appid":"ACuOJIasBeRLiDe2iUApHj67-gzGzoHsz","appkey":"qbgg4tClrQQmvq8uwlpwA5mA","notify":true,"verify":true,"placeholder":"give me some sugers plz...","avatar":"wavatar"}'),
+            g: JSON.parse('{"enable":false,"lazy":true,"owner":"codefine","repo":"gitment","oauth":{"client_id":null,"client_secret":null},"perPage":10}'),
+            d: JSON.parse('{"app_id":null}')
+        };
+    </script>
+    <script type="text/javascript">
+        window.lazyScripts=[];
+    </script>
+    
+</head>
+
+
+<body>
+    <div id="loading" class="active"></div>
+
+    <aside id="menu" class="">
+  <div class="inner flex-row-vertical">
+    <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menu-off">
+        <i class="icon icon-lg icon-close"></i>
+    </a>
+    <div class="brand-wrap">
+      
+      <img src="/img/brand.jpg" class="brand-bg">
+      
+      <div class="brand">
+        <a href="/" class="avatar waves-effect waves-circle waves-light">
+          <img src="/img/1.jpg">
+        </a>
+        <hgroup class="introduce">
+          <h5 class="nickname">逸如风(yirufeng)</h5>
+          <a href="mailto:yirufeng@foxmail.com" title="yirufeng@foxmail.com" class="mail">
+            
+              <span>y</span>
+            
+              <span>i</span>
+            
+              <span>r</span>
+            
+              <span>u</span>
+            
+              <span>f</span>
+            
+              <span>e</span>
+            
+              <span>n</span>
+            
+              <span>g</span>
+            
+              <span>@</span>
+            
+              <span>f</span>
+            
+              <span>o</span>
+            
+              <span>x</span>
+            
+              <span>m</span>
+            
+              <span>a</span>
+            
+              <span>i</span>
+            
+              <span>l</span>
+            
+              <span>.</span>
+            
+              <span>c</span>
+            
+              <span>o</span>
+            
+              <span>m</span>
+            
+          </a>
+        </hgroup>
+        
+        <ul class="menu-link">
+          
+              <li>
+                <a href="https://github.com/sivanWu0222" target="_blank">
+                  <i class="icon icon-lg icon-github"></i>
+                </a>
+              </li>
+            
+              <li>
+                <a href="https://mail.qq.com/cgi-bin/qm_share?t=qm_mailme&amp;amp;email=xfTz8-Py8-f08vWFtLTrpqqo" target="_blank">
+                  <i class="icon icon-lg icon-envelope"></i>
+                </a>
+              </li>
+            
+        </ul>
+        
+      </div>
+    </div>
+    <div class="scroll-wrap flex-col">
+      <ul class="nav">
+        
+            <li class="">
+              <a href="/"  >
+                <i class="icon icon-lg icon-home"></i>
+                Home
+              </a>
+            </li>
+        
+            <li class="">
+              <a href="/categories"  >
+                <i class="icon icon-lg icon-th-list"></i>
+                Category
+              </a>
+            </li>
+        
+            <li class="">
+              <a href="/research"  >
+                <i class="icon icon-lg icon-mortar-board"></i>
+                Research
+              </a>
+            </li>
+        
+            <li class="">
+              <a href="/tags"  >
+                <i class="icon icon-lg icon-tags"></i>
+                Tag
+              </a>
+            </li>
+        
+            <li class="">
+              <a href="/archives"  >
+                <i class="icon icon-lg icon-archives"></i>
+                Archive
+              </a>
+            </li>
+        
+            <li class="">
+              <a href="/about"  >
+                <i class="icon icon-lg icon-user"></i>
+                About
+              </a>
+            </li>
+        
+            <li class="">
+              <a href="/open-source"  >
+                <i class="icon icon-lg icon-github"></i>
+                Project
+              </a>
+            </li>
+        
+            <li class="">
+              <a href="/demo"  >
+                <i class="icon icon-lg icon-audio-description"></i>
+                Demo
+              </a>
+            </li>
+        
+            <li class="">
+              <a href="/wechat-number"  >
+                <i class="icon icon-lg icon-wechat"></i>
+                公众号
+              </a>
+            </li>
+        
+            <li class="">
+              <a href="http://www.sivan.tech/LeetCodeAlgo/" target="_blank" >
+                <i class="icon icon-lg icon-braille"></i>
+                Leetcode
+              </a>
+            </li>
+        
+            <li class="">
+              <a href="http://resume.sivan.tech/" target="_blank" >
+                <i class="icon icon-lg icon-file-pdf-o"></i>
+                Resume
+              </a>
+            </li>
+        
+      </ul>
+    </div>
+  </div>
+</aside>
+
+    <main id="main">
+        <header class="top-header" id="header">
+    <div class="flex-row clearfix">
+        <a href="javascript:;" class="header-icon pull-left waves-effect waves-circle waves-light on" id="menu-toggle">
+          <i class="icon icon-lg icon-navicon"></i>
+        </a>
+        <div class="flex-col header-title ellipsis">
+            <span>部门员工简单级联</span>
+            
+        </div>
+        
+        <a href="javascript:;" id="site_search_btn" class="header-icon pull-right waves-effect waves-circle waves-light">
+            <i class="icon icon-lg icon-search"></i>
+        </a>
+        
+    </div>
+</header>
+<header class="content-header post-header">
+    <img src="/img/s3.jpg" class="header-bg">
+    <div class="container fade-scale">
+        <h1 class="title">部门员工简单级联</h1>
+        <h5 class="subtitle">
+            
+                <time datetime="2017-11-06T09:16:03.000Z" itemprop="datePublished" class="page-time">
+  2017-11-06
+</time>
+
+
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/Java/">Java</a><ul class="article-category-list-child"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/Java/jsp/">jsp</a></li></ul></li></ul>
+
+            
+        </h5>
+        
+    </div>
+    
+
+</header>
+
+<div id="site_search">
+    <div class="search-title clearfix">
+        <span class="pull-left">
+          <i class="icon icon-lg icon-search"></i>
+        </span>
+        <input type="text" id="local-search-input" name="q" results="0" placeholder="search my blog..." class="form-control pull-left"/>
+        <a href="javascript:;" class="close pull-right waves-effect waves-circle waves-light">
+          <i class="icon icon-lg icon-close"></i>
+        </a>
+    </div>
+    <div id="local-search-result"></div>
+</div>
+
+
+<div class="container body-wrap">
+    <article id="post-部门员工简单级联"
+  class="post-article article-type-post" itemprop="blogPost">
+    <div class="post-card">
+        <h1 class="post-card-title">部门员工简单级联</h1>
+        <div class="post-meta">
+            <time class="post-time" title="2017-11-06 17:16:03" datetime="2017-11-06T09:16:03.000Z"  itemprop="datePublished">2017-11-06</time>
+
+            
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/Java/">Java</a><ul class="article-category-list-child"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/Java/jsp/">jsp</a></li></ul></li></ul>
+
+
+
+            
+	<span id="/2017/11/06/部门员工简单级联/" class="leancloud_visitors" data-flag-title="部门员工简单级联" title="部门员工简单级联">
+		
+			<i class="icon icon-eye"></i>
+		
+		<span class="leancloud-visitors-count"></span>
+	</span>
+ 
+
+            
+
+
+            
+        </div>
+        <div class="post-content" id="post-content" itemprop="postContent">
+            
+            <blockquote>
+<p>部门员工级联也就是，通过选择部门，员工也将会随着部门的改变而改变</p>
+</blockquote>
+<blockquote>
+<p>通常我们查到有哪些部门，然后在Java中用集合来表示，但是如何用JavaScript来获取这些值变成了我们的一个短板，解决方法就是采用中间格式，例如json，XML文件等</p>
+</blockquote>
+<h2 id="显示部门"><a href="#显示部门" class="headerlink" title="显示部门"></a>显示部门</h2><blockquote>
+<p>这里我们采用了Hibernate来获取部门，</p>
+</blockquote>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@WebServlet</span>(<span class="string">"/dep.do"</span>)</span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">DepServlet</span> <span class="keyword">extends</span> <span class="title">HttpServlet</span> </span>&#123;</span><br><span class="line">	<span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> <span class="keyword">long</span> serialVersionUID = <span class="number">1L</span>;</span><br><span class="line"></span><br><span class="line">	<span class="keyword">private</span> DepDAO depDao = <span class="keyword">new</span> DepDAO();</span><br><span class="line"></span><br><span class="line">	<span class="function"><span class="keyword">protected</span> <span class="keyword">void</span> <span class="title">service</span><span class="params">(HttpServletRequest request, HttpServletResponse response)</span> <span class="keyword">throws</span> ServletException, IOException </span>&#123;</span><br><span class="line">		response.setContentType(<span class="string">"text/html;charset=utf-8"</span>);</span><br><span class="line">		String method = request.getParameter(<span class="string">"method"</span>);</span><br><span class="line">		<span class="keyword">if</span>(<span class="string">"findAll"</span>.equals(method)) &#123;</span><br><span class="line">			doFindAll(request, response);</span><br><span class="line">		&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="function"><span class="keyword">private</span> <span class="keyword">void</span> <span class="title">doFindAll</span><span class="params">(HttpServletRequest request, HttpServletResponse response)</span> <span class="keyword">throws</span> IOException </span>&#123;</span><br><span class="line">		List&lt;Dep&gt; deps = depDao.findAll();</span><br><span class="line">		StringBuffer sb = <span class="keyword">new</span> StringBuffer();</span><br><span class="line">		sb.append(<span class="string">"["</span>);</span><br><span class="line">		<span class="keyword">for</span> (Dep dep : deps) &#123;</span><br><span class="line">			sb.append(<span class="string">"&#123; 'depId': '"</span> + dep.getDepId() + <span class="string">"', 'depName': '"</span> + dep.getDepName() + <span class="string">"'&#125;,"</span>);</span><br><span class="line">		&#125;</span><br><span class="line">		sb.deleteCharAt(sb.length() - <span class="number">1</span>);</span><br><span class="line">		sb.append(<span class="string">"]"</span>);</span><br><span class="line">		System.out.println(sb);</span><br><span class="line"></span><br><span class="line">		response.getWriter().print(sb.toString());</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>对应 index.jsp 代码如下<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> dep = <span class="built_in">document</span>.getElementById(<span class="string">"dep"</span>);</span><br><span class="line"><span class="keyword">var</span> emp = <span class="built_in">document</span>.getElementById(<span class="string">"emp"</span>);</span><br><span class="line"></span><br><span class="line"><span class="comment">/*----------------		部门		-----------*/</span></span><br><span class="line"><span class="keyword">var</span> request = <span class="keyword">new</span> XMLHttpRequest();</span><br><span class="line">request.open(<span class="string">"get"</span>, <span class="string">"dep.do?method=findAll"</span>);</span><br><span class="line">request.send();</span><br><span class="line">request.onreadystatechange = <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="keyword">if</span>( request.readyState == <span class="number">4</span> &amp;&amp; request.status == <span class="number">200</span>) &#123;</span><br><span class="line">    <span class="keyword">var</span> json = <span class="built_in">eval</span>(request.responseText);</span><br><span class="line">    <span class="keyword">for</span> ( <span class="keyword">var</span> i = <span class="number">0</span>; i &lt; json.length; i++ ) &#123;</span><br><span class="line">      <span class="keyword">var</span> option = <span class="keyword">new</span> Option(json[i].depName, json[i].depId);</span><br><span class="line">      dep.add(option);</span><br><span class="line">    &#125;</span><br><span class="line">    doEmp();</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">dep.onchange = <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">  doEmp();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<a id="more"></a>
+<hr>
+<h2 id="根据选择的部门得到该部门的员工"><a href="#根据选择的部门得到该部门的员工" class="headerlink" title="根据选择的部门得到该部门的员工"></a>根据选择的部门得到该部门的员工</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@WebServlet</span>(<span class="string">"/emp.do"</span>)</span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">EmpServlet</span> <span class="keyword">extends</span> <span class="title">HttpServlet</span> </span>&#123;</span><br><span class="line">	<span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> <span class="keyword">long</span> serialVersionUID = <span class="number">1L</span>;</span><br><span class="line"></span><br><span class="line">	<span class="keyword">private</span> EmpDAO empDao = <span class="keyword">new</span> EmpDAO();</span><br><span class="line"></span><br><span class="line">	<span class="function"><span class="keyword">protected</span> <span class="keyword">void</span> <span class="title">service</span><span class="params">(HttpServletRequest request, HttpServletResponse response)</span> <span class="keyword">throws</span> ServletException, IOException </span>&#123;</span><br><span class="line"></span><br><span class="line">		response.setContentType(<span class="string">"text/html;charset=utf-8"</span>);</span><br><span class="line">		String method = request.getParameter(<span class="string">"method"</span>);</span><br><span class="line">		<span class="keyword">if</span>(<span class="string">"findByDepId"</span>.equals(method)) &#123;</span><br><span class="line">			doFindByDepId(request, response);</span><br><span class="line">		&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="function"><span class="keyword">private</span> <span class="keyword">void</span> <span class="title">doFindByDepId</span><span class="params">(HttpServletRequest request, HttpServletResponse response)</span> <span class="keyword">throws</span> IOException </span>&#123;</span><br><span class="line"></span><br><span class="line">		String depId = request.getParameter(<span class="string">"depId"</span>);</span><br><span class="line">		System.out.println(depId);</span><br><span class="line">		List&lt;Emp&gt; emps = empDao.findByProperty(<span class="string">"dep.depId"</span>, Integer.parseInt(depId));</span><br><span class="line">		StringBuffer sb = <span class="keyword">new</span> StringBuffer(<span class="string">"["</span>);</span><br><span class="line">		<span class="keyword">for</span> (Emp emp : emps) &#123;</span><br><span class="line">			sb.append(<span class="string">"&#123; 'empId': '"</span> + emp.getEmpId() + <span class="string">"', 'empName': '"</span> + emp.getEmpName() + <span class="string">"'&#125;,"</span> );</span><br><span class="line">		&#125;</span><br><span class="line">		sb.deleteCharAt(sb.length() - <span class="number">1</span>);</span><br><span class="line">		sb.append(<span class="string">"]"</span>);</span><br><span class="line">		response.getWriter().print(sb.toString());</span><br><span class="line"></span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>对应index.jsp代码如下<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">doEmp</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">  			<span class="comment">/*首先移除原来有的子节点*/</span></span><br><span class="line">  			<span class="keyword">while</span>(emp.hasChildNodes()) &#123;</span><br><span class="line">  				emp.removeChild(emp.firstChild);</span><br><span class="line">  			&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">  			<span class="comment">/*添加原来的子节点*/</span></span><br><span class="line">  			<span class="keyword">var</span> request2 = <span class="keyword">new</span> XMLHttpRequest();</span><br><span class="line">  			request2.open(<span class="string">"get"</span>, <span class="string">"emp.do?method=findByDepId&amp;depId="</span> + dep.value);</span><br><span class="line">  			request2.send();</span><br><span class="line">  			request2.onreadystatechange = <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">  				<span class="keyword">if</span>( request2.readyState == <span class="number">4</span> &amp;&amp; request2.status == <span class="number">200</span> ) &#123;</span><br><span class="line">            <span class="comment">/*这里将获得的文本按照严格意义转换为js中的数组*/</span></span><br><span class="line">  					<span class="keyword">var</span> empJson = <span class="built_in">eval</span>(request2.responseText);</span><br><span class="line">  					<span class="keyword">for</span> ( <span class="keyword">var</span> i = <span class="number">0</span>; i &lt; empJson.length; i++ )&#123;</span><br><span class="line">  						<span class="keyword">var</span> option = <span class="keyword">new</span> Option(empJson[i].empName, empJson[i].empId);</span><br><span class="line">  						emp.add(option);</span><br><span class="line">  					&#125;</span><br><span class="line">  				&#125;</span><br><span class="line">  			&#125;</span><br><span class="line">  		&#125;</span><br></pre></td></tr></table></figure></p>
+<hr>
+<h2 id="注意事项"><a href="#注意事项" class="headerlink" title="注意事项"></a>注意事项</h2><ol>
+<li>对于每次选择，都需要员工清空，否则，将会累加，员工只会越来越多</li>
+<li>每次必须将获得的请求的响应文本格式化(eval)为js对象，否则将不可以调用js对象的属性<blockquote>
+<p>var empJson = eval(request2.responseText);</p>
+</blockquote>
+</li>
+</ol>
+<hr>
+<p>总代码如下：</p>
+<ol>
+<li>index.jsp<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br></pre></td><td class="code"><pre><span class="line">&lt;%@ page language=<span class="string">"java"</span> <span class="keyword">import</span>=<span class="string">"java.util.*"</span> pageEncoding=<span class="string">"UTF-8"</span>%&gt;</span><br><span class="line">&lt;%</span><br><span class="line">String path = request.getContextPath();</span><br><span class="line">String basePath = request.getScheme()+<span class="string">"://"</span>+request.getServerName()+<span class="string">":"</span>+request.getServerPort()+path+<span class="string">"/"</span>;</span><br><span class="line">%&gt;</span><br><span class="line"></span><br><span class="line">&lt;!DOCTYPE HTML PUBLIC <span class="string">"-//W3C//DTD HTML 4.01 Transitional//EN"</span>&gt;</span><br><span class="line">&lt;html&gt;</span><br><span class="line">  &lt;head&gt;</span><br><span class="line">    &lt;base href=<span class="string">"&lt;%=basePath%&gt;"</span>&gt;</span><br><span class="line"></span><br><span class="line">  &lt;/head&gt;</span><br><span class="line"></span><br><span class="line">  &lt;body&gt;</span><br><span class="line">  	部门：&lt;select id="dep"&gt;&lt;/select&gt;</span><br><span class="line">  	员工：&lt;select id="emp"&gt;&lt;/select&gt;</span><br><span class="line">  &lt;/body&gt;</span><br><span class="line">  &lt;script&gt;</span><br><span class="line">  		<span class="keyword">var</span> dep = document.getElementById(<span class="string">"dep"</span>);</span><br><span class="line">  		<span class="keyword">var</span> emp = document.getElementById(<span class="string">"emp"</span>);</span><br><span class="line"></span><br><span class="line">  		<span class="comment">/*----------------		部门		-----------*/</span></span><br><span class="line">  		<span class="keyword">var</span> request = <span class="keyword">new</span> XMLHttpRequest();</span><br><span class="line">  		request.open(<span class="string">"get"</span>, <span class="string">"dep.do?method=findAll"</span>);</span><br><span class="line">  		request.send();</span><br><span class="line">  		request.onreadystatechange = function() &#123;</span><br><span class="line">  			<span class="keyword">if</span>( request.readyState == <span class="number">4</span> &amp;&amp; request.status == <span class="number">200</span>) &#123;</span><br><span class="line">  				<span class="keyword">var</span> json = eval(request.responseText);</span><br><span class="line">  				<span class="keyword">for</span> ( <span class="keyword">var</span> i = <span class="number">0</span>; i &lt; json.length; i++ ) &#123;</span><br><span class="line">  					<span class="keyword">var</span> option = <span class="keyword">new</span> Option(json[i].depName, json[i].depId);</span><br><span class="line">  					dep.add(option);</span><br><span class="line">  				&#125;</span><br><span class="line">  				doEmp();</span><br><span class="line">  			&#125;</span><br><span class="line"></span><br><span class="line">  		&#125;</span><br><span class="line"></span><br><span class="line">  		dep.onchange = function() &#123;</span><br><span class="line">  			doEmp();</span><br><span class="line">  		&#125;</span><br><span class="line"></span><br><span class="line">  		<span class="comment">/*-----------------		员工		-----------*/</span></span><br><span class="line">  		<span class="function">function <span class="title">doEmp</span><span class="params">()</span> </span>&#123;</span><br><span class="line">  			<span class="comment">/*首先移除原来有的子节点*/</span></span><br><span class="line">  			<span class="keyword">while</span>(emp.hasChildNodes()) &#123;</span><br><span class="line">  				emp.removeChild(emp.firstChild);</span><br><span class="line">  			&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">  			<span class="comment">/*添加原来的子节点*/</span></span><br><span class="line">  			<span class="keyword">var</span> request2 = <span class="keyword">new</span> XMLHttpRequest();</span><br><span class="line">  			request2.open(<span class="string">"get"</span>, <span class="string">"emp.do?method=findByDepId&amp;depId="</span> + dep.value);</span><br><span class="line">  			request2.send();</span><br><span class="line">  			request2.onreadystatechange = function() &#123;</span><br><span class="line">  				<span class="keyword">if</span>( request2.readyState == <span class="number">4</span> &amp;&amp; request2.status == <span class="number">200</span> ) &#123;</span><br><span class="line">  					<span class="keyword">var</span> empJson = eval(request2.responseText);</span><br><span class="line">  					<span class="keyword">for</span> ( <span class="keyword">var</span> i = <span class="number">0</span>; i &lt; empJson.length; i++ )&#123;</span><br><span class="line">  						<span class="keyword">var</span> option = <span class="keyword">new</span> Option(empJson[i].empName, empJson[i].empId);</span><br><span class="line">  						emp.add(option);</span><br><span class="line">  					&#125;</span><br><span class="line">  				&#125;</span><br><span class="line">  			&#125;</span><br><span class="line">  		&#125;</span><br><span class="line"></span><br><span class="line">  &lt;/script&gt;</span><br><span class="line">&lt;/html&gt;</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<hr>
+<h2 id="总结："><a href="#总结：" class="headerlink" title="总结："></a>总结：</h2><p>  对于部门与员工级联，我们首先需要获得部门，然后根据我们当前所选择的部门获得员工，这里需要注意的是，我们采用了ajax进行通信，所以当我们获得员工的时候，需要将获得的员工转换为一个中间格式的文本进行传输，这里我们使用了json!</p>
+
+        </div>
+        
+<blockquote class="post-copyright">
+    <div class="content">
+        
+<span class="post-time">
+    最后更新时间：<time datetime="2019-08-26T10:46:59.881Z" itemprop="dateUpdated">2019-08-26 18:46:59</time>
+</span><br>
+
+
+        
+        转载注明出处，原文地址：<a href="/2017/11/06/部门员工简单级联/" target="_blank" rel="external">http://www.sivan.tech/2017/11/06/部门员工简单级联/</a>
+        
+    </div>
+    <footer>
+        <a href="http://www.sivan.tech">
+            <img src="/img/1.jpg" alt="逸如风(yirufeng)">
+            逸如风(yirufeng)
+        </a>
+    </footer>
+</blockquote>
+
+        
+            <div class="page-reward">
+    <a id="rewardBtn" href="javascript:;" class="page-reward-btn waves-effect waves-circle waves-light">赏</a>
+</div>
+
+            
+        
+        <div class="post-footer">
+            
+	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Ajax/">Ajax</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Java/">Java</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/json/">json</a></li></ul>
+
+            <div class="page-share-wrap">
+    
+
+<div class="page-share" id="pageShare">
+    <ul class="reset share-icons">
+      
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://www.sivan.tech/2017/11/06/部门员工简单级联/&title=《部门员工简单级联》 — yirufeng's Blog&pic=http://www.sivan.tech/img/1.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://www.sivan.tech/2017/11/06/部门员工简单级联/&title=《部门员工简单级联》 — yirufeng's Blog&source=
+部门员工级联也就是，通过选择部门，员工也将会随着部门的改变而改变
+
+
+通常我们查到有哪些部门，然后在Java中用集合来表示，但是如何用JavaScrip..." data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http://www.sivan.tech/2017/11/06/部门员工简单级联/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《部门员工简单级联》 — yirufeng's Blog&url=http://www.sivan.tech/2017/11/06/部门员工简单级联/&via=http://www.sivan.tech" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=http://www.sivan.tech/2017/11/06/部门员工简单级联/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+      
+    </ul>
+ </div>
+
+
+
+    <a href="javascript:;" id="shareFab" class="page-share-fab waves-effect waves-circle">
+        <i class="icon icon-share-alt icon-lg"></i>
+    </a>
+</div>
+
+        </div>
+        
+            
+
+
+        
+    </div>
+    
+<nav class="post-nav flex-row flex-justify-between">
+  
+    <div class="prev">
+      <a href="/2017/11/06/入门Spring/" id="post-prev" class="post-nav-link">
+        <div class="tips"><i class="icon icon-angle-left icon-lg icon-pr"></i> Prev</div>
+        <h4 class="title">一个简单的Spring核心机制和其他方面的认知</h4>
+      </a>
+    </div>
+  
+
+  
+    <div class="next">
+      <a href="/2017/11/06/XML创建与解析/" id="post-next" class="post-nav-link">
+        <div class="tips">Next <i class="icon icon-angle-right icon-lg icon-pl"></i></div>
+        <h4 class="title">XML创建与解析</h4>
+      </a>
+    </div>
+  
+</nav>
+
+
+    
+    
+        <aside class="post-widget">
+            <nav class="post-toc-wrap" id="post-toc">
+                <strong>目录</strong>
+                <ol class="post-toc"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#显示部门"><span class="post-toc-number">1.</span> <span class="post-toc-text">显示部门</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#根据选择的部门得到该部门的员工"><span class="post-toc-number">2.</span> <span class="post-toc-text">根据选择的部门得到该部门的员工</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#注意事项"><span class="post-toc-number">3.</span> <span class="post-toc-text">注意事项</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#总结："><span class="post-toc-number">4.</span> <span class="post-toc-text">总结：</span></a></li></ol>
+            </nav>
+            <div class="toc-bar"><div>
+        </aside>
+    
+</article>
+
+    <div id="reward" class="page-modal reward-lay">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <h3 class="reward-title">
+        <i class="icon icon-quote-left"></i>
+        感谢原作，你的打赏是我的动力！
+        <i class="icon icon-quote-right"></i>
+    </h3>
+    <div class="reward-content">
+        
+        <div class="reward-code">
+            <img id="rewardCode" src="/img/reward-wechat.jpg" alt="打赏二维码">
+        </div>
+        
+        <label class="reward-toggle">
+            <input id="rewardToggle" type="checkbox" class="reward-toggle-check"
+                data-wechat="/img/reward-wechat.jpg" data-alipay="/img/reward-alipay.jpg">
+            <div class="reward-toggle-ctrol">
+                <span class="reward-toggle-item wechat">微信</span>
+                <span class="reward-toggle-label"></span>
+                <span class="reward-toggle-item alipay">支付宝</span>
+            </div>
+        </label>
+        
+    </div>
+</div>
+
+    
+
+</div>
+
+    </main>
+    <footer class="footer ">
+    
+    <div class="top">
+        
+            <p>
+    <span>Links：</span>
+    
+    <span class="blogroll-item">
+        <a href="https://github.com/sivanWu0222" target="_blank">GitHub</a>
+    </span>
+    
+    <span class="blogroll-item">
+        <a href="http://weibo.com/Msingwen0222/home?wvr=5" target="_blank">新浪微博</a>
+    </span>
+    
+    <span class="blogroll-item">
+        <a href="https://www.linkedin.com/in/%E6%99%93%E6%96%87-%E5%90%B4-79057a121/" target="_blank">Linkedin</a>
+    </span>
+    
+    <span class="blogroll-item">
+        <a href="http://wpa.qq.com/msgrd?v=3&amp;uin=1666762170&amp;site=qq&amp;menu=yes" target="_blank">QQ</a>
+    </span>
+    
+    <span class="blogroll-item">
+        <a href="https://zh-cn.facebook.com/people/SiVan-Wu/100014408918389" target="_blank">Facebook</a>
+    </span>
+    
+    <span class="blogroll-item">
+        <a href="https://mail.qq.com/cgi-bin/qm_share?t=qm_mailme&amp;email=xfTz8-Py8-f08vWFtLTrpqqo" target="_blank">Contact</a>
+    </span>
+    
+    <span class="blogroll-item">
+        <a href="https://twitter.com/SiVan_Wu" target="_blank">Twitter</a>
+    </span>
+    
+</p>
+
+        
+    </div>
+    
+    <div class="bottom">
+        <p>
+            <span>
+                逸如风(yirufeng) &copy; 2016 - 2019
+            </span>
+
+           	
+           	<span>
+           		<a href="http://beian.miit.gov.cn/" target="_blank">已实名认证</a>
+           	</span>
+           	
+
+            
+
+            
+
+            
+                
+<span class="site-uv" title="总访客量">
+    <i class="icon icon-user"></i>
+    <i class="busuanzi-value" id="busuanzi_value_site_uv"></i>
+</span>
+
+
+<span class="site-pv" title="总访问量">
+    <i class="icon icon-eye"></i>
+    <i class="busuanzi-value" id="busuanzi_value_site_pv"></i>
+</span>
+
+            
+        </p>
+    </div>
+</footer>
+
+    <div class="mask" id="mask"></div>
+<a href="javascript:;" id="gotop" class="waves-effect waves-circle waves-light"><span class="icon icon-lg icon-chevron-up"></span></a>
+
+
+
+<div class="global-share" id="globalShare">
+    <ul class="reset share-icons">
+      
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://www.sivan.tech/2017/11/06/部门员工简单级联/&title=《部门员工简单级联》 — yirufeng's Blog&pic=http://www.sivan.tech/img/1.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://www.sivan.tech/2017/11/06/部门员工简单级联/&title=《部门员工简单级联》 — yirufeng's Blog&source=
+部门员工级联也就是，通过选择部门，员工也将会随着部门的改变而改变
+
+
+通常我们查到有哪些部门，然后在Java中用集合来表示，但是如何用JavaScrip..." data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http://www.sivan.tech/2017/11/06/部门员工简单级联/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《部门员工简单级联》 — yirufeng's Blog&url=http://www.sivan.tech/2017/11/06/部门员工简单级联/&via=http://www.sivan.tech" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=http://www.sivan.tech/2017/11/06/部门员工简单级联/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+      
+    </ul>
+ </div>
+
+
+<div class="page-modal wx-share" id="wxShare">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAMYAAADGCAAAAACs8KCBAAACKUlEQVR42u3aS2rDQBAFwNz/0s42ECK/120HNK5ZBUeWpmRopj9fX/F6/Fh/ffL789///XlN8pQXLwwMjNsyHpfrenPtI1t8sjcMDIzPYVyHxeTW19/KX0fymjAwMDBaxib45s/FwMDAaG93fcjb3xkDAwNjlsQm+Dy8Jq/mLbk4BgbGDRntJv7z77f0NzAwMG7FeJSrPa617czHaGFgYJzNyAPcphmwaQwUrVAMDIyjGe3DkhGxPO3cF/UwMDDOZiQbysv3yXY3bdE/fwEMDIyjGW0aucEn1+cvBQMD43MYr00m25A6a0w+6cFiYGAczSgGsBbtz9kQxpMwjYGBcTRjlmTOSnKzMY72FWBgYJzHSA5nry2TtcF0NTOCgYFxBKMt8e87pW0JL292YmBgnMpoA27bnmwHKfJEGgMD43MYeUq5STtnR8Y2qcbAwDibkR/j2iNgPtgxG8goHomBgXFbxmxUqx28yFPTGRUDA+Nsxn64YbaJtp1QVw0xMDAOZbRhcT8W1obvoj2AgYFxKKNNYttBsbYJmsMwMDA+h7G5UT6ukV+DgYGBkRTIZi2BvKmwCdxFnQ8DA+PmjDYRbYtrbaG/Hc6oYRgYGLdl7FuPm3HVTTKMgYHxaYzrwv2sVfCOY9+TVBYDAwMjTlBn6fGqhYCBgYExSiyTQtsshX5ZwMXAwLgVIx+tSIJs3rBsA+uwkYmBgXFzRh7y9jdtg3USdjEwMI5mfAPq4APxReSZTAAAAABJRU5ErkJggg==" alt="微信分享二维码">
+</div>
+
+
+    
+    <!-- main-js -->
+<script type="text/javascript" src="//cdn.bootcss.com/jquery/2.1.0/jquery.min.js"></script>
+<script type="text/javascript" src="/js/plugins/fastclick.js?v=1.4.2"></script>
+<script type="text/javascript" src="/js/plugins/ios-orientationchange-fix.js?v=1.4.2"></script>
+<script type="text/javascript" src="//cdn.jsdelivr.net/gh/fancyapps/fancybox@3.5.2/dist/jquery.fancybox.min.js"></script>
+
+<script type="text/javascript" src="//cdn.bootcss.com/node-waves/0.7.4/waves.min.js"></script>
+
+<script type="text/javascript" src="/js/method.js?v=1.4.2"></script>
+<script type="text/javascript" src="/js/blog.js?v=1.4.2"></script>
+
+<!-- third-party -->
+
+
+
+
+
+
+<script type="text/javascript" src="/js/plugins/local_search.js?v=1.4.2"></script>
+<script type="text/javascript">
+	var search_path = "search.xml";
+	if (search_path.length === 0) {
+		search_path = "search.xml";
+	}
+	var path = "/" + search_path;
+	searchFunc(path, "local-search-input", "local-search-result");
+</script>
+
+
+
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+    
+    
+
+
+
+<script type="text/javascript" src="https://cdn1.lncld.net/static/js/av-core-mini-0.6.4.js"></script>
+<script type="text/javascript" src="/js/plugins/leancloud_visitors.js?v=1.4.2"></script>
+
+
+
+    <!-- mathjax config similar to math.stackexchange -->
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+        tex2jax: {
+            inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+            processEscapes: true,
+            skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+        }
+    });
+</script>
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for (i=0; i < all.length; i += 1) {
+            all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+    });
+</script>
+
+<script type="text/javascript" src="//cdn.bootcss.com/mathjax/2.7.1/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+
+
+
+    <script>
+    (function() {
+        var OriginTitile = document.title, titleTime;
+        document.addEventListener('visibilitychange', function() {
+            if (document.hidden) {
+                document.title = '死鬼去哪里了！';
+                clearTimeout(titleTime);
+            } else {
+                document.title = '(つェ⊂)咦!又好了!';
+                titleTime = setTimeout(function() {
+                    document.title = OriginTitile;
+                },2000);
+            }
+        });
+    })();
+</script>
+
+
+
+
+
+    
+</body>
+</html>

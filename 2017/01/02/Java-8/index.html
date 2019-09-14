@@ -1,0 +1,705 @@
+<!DOCTYPE html>
+<html>
+<head><meta name="generator" content="Hexo 3.9.0">
+    <meta charset="utf-8">
+    
+    
+    <title>[Java]-8 | yirufeng&#39;s Blog | 未来的小幸运 || 致正在努力的我们 ---- 逸如风</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    
+    <meta name="keywords" content>
+    <link rel="shortcut icon" href="/img/favicon.ico">
+    <link rel="stylesheet" href="//cdn.jsdelivr.net/gh/fancyapps/fancybox@3.5.2/dist/jquery.fancybox.min.css">
+    <link rel="stylesheet" href="/css/style.css?v=1.4.2">
+    
+    <script type="text/javascript">
+        // Data Center
+        var DC = {
+            reward:	true,
+            lv: JSON.parse('{"enable":true,"app_id":"K2RVtHi7RnmoN6dovlDKafn8-gzGzoHsz","app_key":"Qxmil0oqPFdDUyyIp2i1Xikt","icon":true}'),
+            v: JSON.parse('{"enable":false,"appid":"ACuOJIasBeRLiDe2iUApHj67-gzGzoHsz","appkey":"qbgg4tClrQQmvq8uwlpwA5mA","notify":true,"verify":true,"placeholder":"give me some sugers plz...","avatar":"wavatar"}'),
+            g: JSON.parse('{"enable":false,"lazy":true,"owner":"codefine","repo":"gitment","oauth":{"client_id":null,"client_secret":null},"perPage":10}'),
+            d: JSON.parse('{"app_id":null}')
+        };
+    </script>
+    <script type="text/javascript">
+        window.lazyScripts=[];
+    </script>
+    
+</head>
+
+
+<body>
+    <div id="loading" class="active"></div>
+
+    <aside id="menu" class="">
+  <div class="inner flex-row-vertical">
+    <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menu-off">
+        <i class="icon icon-lg icon-close"></i>
+    </a>
+    <div class="brand-wrap">
+      
+      <img src="/img/brand.jpg" class="brand-bg">
+      
+      <div class="brand">
+        <a href="/" class="avatar waves-effect waves-circle waves-light">
+          <img src="/img/1.jpg">
+        </a>
+        <hgroup class="introduce">
+          <h5 class="nickname">逸如风(yirufeng)</h5>
+          <a href="mailto:yirufeng@foxmail.com" title="yirufeng@foxmail.com" class="mail">
+            
+              <span>y</span>
+            
+              <span>i</span>
+            
+              <span>r</span>
+            
+              <span>u</span>
+            
+              <span>f</span>
+            
+              <span>e</span>
+            
+              <span>n</span>
+            
+              <span>g</span>
+            
+              <span>@</span>
+            
+              <span>f</span>
+            
+              <span>o</span>
+            
+              <span>x</span>
+            
+              <span>m</span>
+            
+              <span>a</span>
+            
+              <span>i</span>
+            
+              <span>l</span>
+            
+              <span>.</span>
+            
+              <span>c</span>
+            
+              <span>o</span>
+            
+              <span>m</span>
+            
+          </a>
+        </hgroup>
+        
+        <ul class="menu-link">
+          
+              <li>
+                <a href="https://github.com/sivanWu0222" target="_blank">
+                  <i class="icon icon-lg icon-github"></i>
+                </a>
+              </li>
+            
+              <li>
+                <a href="https://mail.qq.com/cgi-bin/qm_share?t=qm_mailme&amp;amp;email=xfTz8-Py8-f08vWFtLTrpqqo" target="_blank">
+                  <i class="icon icon-lg icon-envelope"></i>
+                </a>
+              </li>
+            
+        </ul>
+        
+      </div>
+    </div>
+    <div class="scroll-wrap flex-col">
+      <ul class="nav">
+        
+            <li class="">
+              <a href="/"  >
+                <i class="icon icon-lg icon-home"></i>
+                Home
+              </a>
+            </li>
+        
+            <li class="">
+              <a href="/categories"  >
+                <i class="icon icon-lg icon-th-list"></i>
+                Category
+              </a>
+            </li>
+        
+            <li class="">
+              <a href="/research"  >
+                <i class="icon icon-lg icon-mortar-board"></i>
+                Research
+              </a>
+            </li>
+        
+            <li class="">
+              <a href="/tags"  >
+                <i class="icon icon-lg icon-tags"></i>
+                Tag
+              </a>
+            </li>
+        
+            <li class="">
+              <a href="/archives"  >
+                <i class="icon icon-lg icon-archives"></i>
+                Archive
+              </a>
+            </li>
+        
+            <li class="">
+              <a href="/about"  >
+                <i class="icon icon-lg icon-user"></i>
+                About
+              </a>
+            </li>
+        
+            <li class="">
+              <a href="/open-source"  >
+                <i class="icon icon-lg icon-github"></i>
+                Project
+              </a>
+            </li>
+        
+            <li class="">
+              <a href="/demo"  >
+                <i class="icon icon-lg icon-audio-description"></i>
+                Demo
+              </a>
+            </li>
+        
+            <li class="">
+              <a href="/wechat-number"  >
+                <i class="icon icon-lg icon-wechat"></i>
+                公众号
+              </a>
+            </li>
+        
+            <li class="">
+              <a href="http://www.sivan.tech/LeetCodeAlgo/" target="_blank" >
+                <i class="icon icon-lg icon-braille"></i>
+                Leetcode
+              </a>
+            </li>
+        
+            <li class="">
+              <a href="http://resume.sivan.tech/" target="_blank" >
+                <i class="icon icon-lg icon-file-pdf-o"></i>
+                Resume
+              </a>
+            </li>
+        
+      </ul>
+    </div>
+  </div>
+</aside>
+
+    <main id="main">
+        <header class="top-header" id="header">
+    <div class="flex-row clearfix">
+        <a href="javascript:;" class="header-icon pull-left waves-effect waves-circle waves-light on" id="menu-toggle">
+          <i class="icon icon-lg icon-navicon"></i>
+        </a>
+        <div class="flex-col header-title ellipsis">
+            <span>[Java]-8</span>
+            
+        </div>
+        
+        <a href="javascript:;" id="site_search_btn" class="header-icon pull-right waves-effect waves-circle waves-light">
+            <i class="icon icon-lg icon-search"></i>
+        </a>
+        
+    </div>
+</header>
+<header class="content-header post-header">
+    <img src="/img/s3.jpg" class="header-bg">
+    <div class="container fade-scale">
+        <h1 class="title">[Java]-8</h1>
+        <h5 class="subtitle">
+            
+                <time datetime="2017-01-02T02:55:12.000Z" itemprop="datePublished" class="page-time">
+  2017-01-02
+</time>
+
+
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/Java/">Java</a><ul class="article-category-list-child"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/Java/Util基本类的使用/">Util基本类的使用</a></li></ul></li></ul>
+
+            
+        </h5>
+        
+    </div>
+    
+
+</header>
+
+<div id="site_search">
+    <div class="search-title clearfix">
+        <span class="pull-left">
+          <i class="icon icon-lg icon-search"></i>
+        </span>
+        <input type="text" id="local-search-input" name="q" results="0" placeholder="search my blog..." class="form-control pull-left"/>
+        <a href="javascript:;" class="close pull-right waves-effect waves-circle waves-light">
+          <i class="icon icon-lg icon-close"></i>
+        </a>
+    </div>
+    <div id="local-search-result"></div>
+</div>
+
+
+<div class="container body-wrap">
+    <article id="post-Java-8"
+  class="post-article article-type-post" itemprop="blogPost">
+    <div class="post-card">
+        <h1 class="post-card-title">[Java]-8</h1>
+        <div class="post-meta">
+            <time class="post-time" title="2017-01-02 10:55:12" datetime="2017-01-02T02:55:12.000Z"  itemprop="datePublished">2017-01-02</time>
+
+            
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/Java/">Java</a><ul class="article-category-list-child"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/Java/Util基本类的使用/">Util基本类的使用</a></li></ul></li></ul>
+
+
+
+            
+	<span id="/2017/01/02/Java-8/" class="leancloud_visitors" data-flag-title="[Java]-8" title="[Java]-8">
+		
+			<i class="icon icon-eye"></i>
+		
+		<span class="leancloud-visitors-count"></span>
+	</span>
+ 
+
+            
+
+
+            
+        </div>
+        <div class="post-content" id="post-content" itemprop="postContent">
+            
+            <h2 id="Util包"><a href="#Util包" class="headerlink" title="Util包"></a>Util包</h2><h3 id="Random类"><a href="#Random类" class="headerlink" title="Random类"></a>Random类</h3><h4 id="nextInt-方法"><a href="#nextInt-方法" class="headerlink" title="nextInt()方法"></a>nextInt()方法</h4><p>范围只是包含【0，输入的数字）；生成一个输入数字以内的随机整数</p>
+<h4 id="Date-类，SimpleDateFormat类，以及Calendar类"><a href="#Date-类，SimpleDateFormat类，以及Calendar类" class="headerlink" title="Date 类，SimpleDateFormat类，以及Calendar类"></a>Date 类，SimpleDateFormat类，以及Calendar类</h4><blockquote>
+<p>1.Date 类最主要的作用就是获得当前时间，同时这个类里面也具有设置时间以及一些其他的功能，但是由于本身设计的问题，这些方法却遭到众多批评，不建议使用，更推荐使用<br>Calendar 类进行时间和日期的处理。</p>
+<ol start="2">
+<li>由于Date类中，许多方法已经过时，因此现在我们通常用Date来保存时间，而使用Calendar来修改时间</li>
+<li>格式化时间通常使用Date类以及SimpleDateFormat类<br>使用 Date 类的默认无参构造方法创建出的对象就代表当前时间，我们可以直接输出 Date 对象显示当前的时间</li>
+</ol>
+</blockquote>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Test4</span> </span>&#123;</span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">		Date d = <span class="keyword">new</span> Date();</span><br><span class="line">		System.out.println(d);</span><br><span class="line"></span><br><span class="line">		<span class="comment">/*输出 Sat Jan 14 19:13:41 CST 2017*/</span></span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>Sat 代表 Saturday (星期六)， Jan 代表 January (一月)， 14代表 14 号， CST 代表 China Standard Time (中国标准时间，也就是北京时间，东八区)。</p>
+<a id="more"></a>
+<h4 id="格式转换"><a href="#格式转换" class="headerlink" title="格式转换"></a>格式转换</h4><h5 id="将日期格式化，并以字符串形式输出"><a href="#将日期格式化，并以字符串形式输出" class="headerlink" title="将日期格式化，并以字符串形式输出"></a>将日期格式化，并以字符串形式输出</h5><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Test4</span> </span>&#123;</span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">		Date d = <span class="keyword">new</span> Date();</span><br><span class="line">		System.out.println(d);</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">		SimpleDateFormat sdf = <span class="keyword">new</span> SimpleDateFormat(<span class="string">"yyyy年MM月dd号 HH时mm分ss秒"</span>);</span><br><span class="line">		String s = sdf.format(d);</span><br><span class="line">		System.out.println(s);</span><br><span class="line"></span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<blockquote>
+<ol>
+<li>这里年，月，号，时，分，秒 可以自由换符号表示，可以换成 - 等等，也就是分隔符可以自由切换，但是英文字固定</li>
+<li><strong>需要注意的是格式化日期的时候 yyyy代表年份，mm代表分钟，MM代表月份，dd代表号，HH代表24小时制度的时，hh代表12进制的时，ss代表秒</strong></li>
+</ol>
+</blockquote>
+<h5 id="将字符串格式的日期转换为系统默认格式输出"><a href="#将字符串格式的日期转换为系统默认格式输出" class="headerlink" title="将字符串格式的日期转换为系统默认格式输出"></a>将字符串格式的日期转换为系统默认格式输出</h5><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Test</span> </span>&#123;</span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> <span class="keyword">throws</span> ParseException </span>&#123;</span><br><span class="line"></span><br><span class="line">		String s = <span class="string">"2016年12月14号 19时28分34秒"</span>;</span><br><span class="line">		SimpleDateFormat sdf = <span class="keyword">new</span> SimpleDateFormat(<span class="string">"yyyy年MM月dd号 HH时mm分ss秒"</span>);</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">		Date date = sdf.parse(s);</span><br><span class="line">		System.out.println(date);</span><br><span class="line"></span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>将日期格式化系统格式的时候，需要注意声明异常</p>
+</blockquote>
+<hr>
+<h3 id="Calendar类的使用"><a href="#Calendar类的使用" class="headerlink" title="Calendar类的使用"></a>Calendar类的使用</h3><blockquote>
+<p>java.util.Calendar 类是一个抽象类，可以<strong>通过调用 getInstance() 静态方法获取一个 Calendar 对象</strong>，此对象已由当前日期时间初始化，即默认代表当前时间，如 <strong>Calendar c = Calendar.getInstance()</strong>;这里很深刻的体现了<strong>Java设计模式中的单例模式</strong></p>
+</blockquote>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Test4</span> </span>&#123;</span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">		<span class="comment">/*1.得到系统当前时间*/</span></span><br><span class="line">		Date date = <span class="keyword">new</span> Date();</span><br><span class="line">		Calendar calendar = Calendar.getInstance();</span><br><span class="line">		</span><br><span class="line">		<span class="comment">/*2.把要修改的时间给cal,同时进行修改*/</span></span><br><span class="line">		calendar.setTime(date);</span><br><span class="line">		calendar.set(calendar.YEAR, <span class="number">2016</span>);</span><br><span class="line">		calendar.set(calendar.MONTH, <span class="number">11</span>);</span><br><span class="line">		calendar.set(calendar.DATE, <span class="number">31</span>);</span><br><span class="line"></span><br><span class="line">		<span class="comment">/*3.修改完成后转换成Date进行保存*/</span></span><br><span class="line">		date = calendar.getTime();</span><br><span class="line">		System.out.println(date);</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>Calendar修改的时候，需要我们注意几个问题，月份的值是 0-11，而且一个月份的天数超过，则会自动进入下个月</p>
+</blockquote>
+<hr>
+<h2 id="集合"><a href="#集合" class="headerlink" title="集合"></a>集合</h2><blockquote>
+<p>集合长度随时可以改变，动态数组中，增长因子默认为10，大小改变，元素不变，将原先的数组复制到该数组</p>
+</blockquote>
+<figure class="image-box">
+                <a rel=[Java]-8 href="http://on3w7gc9m.bkt.clouddn.com/collcetion.png" title="这里写图片描述" data-fancybox="images"><img src="http://on3w7gc9m.bkt.clouddn.com/collcetion.png" alt="这里写图片描述" title class></a>
+                <p>这里写图片描述</p>
+            </figure>
+<p>Collection 是集合类的根接口，其中下辖子接口 List , Set, Queue.</p>
+<h3 id="动态数组-与-动态链表-区别"><a href="#动态数组-与-动态链表-区别" class="headerlink" title="动态数组 与 动态链表 区别"></a>动态数组 与 动态链表 区别</h3><p>动态数组：增删效率低，查询效率高，<strong>物理（实际的位置）和逻辑（花名册上的位置）均相邻，所以查询效率高</strong></p>
+<p>动态链表：增删效率高，查询效率低，<strong>物理不相邻，逻辑相邻，所以查询效率低</strong></p>
+<h3 id="ArrayList-与-Vector-区别"><a href="#ArrayList-与-Vector-区别" class="headerlink" title="ArrayList 与 Vector 区别"></a>ArrayList 与 Vector 区别</h3><p>ArrayList ： 异步（允许同一时间操作）<br>Vector ： 同步（不允许同一时间操作）</p>
+<h3 id="同步与异步区别"><a href="#同步与异步区别" class="headerlink" title="同步与异步区别"></a>同步与异步区别</h3><p>同步：一个接一个，效率低，安全性高<br>异步：一起，效率高，安全性低</p>
+<hr>
+<h3 id="练习"><a href="#练习" class="headerlink" title="练习"></a>练习</h3><p>例题一： 图书馆借阅时间判断合法性</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Test3</span> </span>&#123;</span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> <span class="keyword">throws</span> ParseException </span>&#123;</span><br><span class="line">		Scanner input = <span class="keyword">new</span> Scanner(System.in);</span><br><span class="line"></span><br><span class="line">		System.out.println(<span class="string">"请输入借书时间："</span>);</span><br><span class="line">		String s = input.nextLine();<span class="comment">/*只能扫描输入一行*/</span></span><br><span class="line"></span><br><span class="line">		System.out.println(<span class="string">"请输入还书时间："</span>);</span><br><span class="line">		String s1 = input.nextLine();</span><br><span class="line"></span><br><span class="line">		SimpleDateFormat sdf = <span class="keyword">new</span> SimpleDateFormat(<span class="string">"yyyy-MM-dd HH-mm-ss"</span>);</span><br><span class="line"></span><br><span class="line">		Date date = sdf.parse(s);</span><br><span class="line"></span><br><span class="line">		Date date1 = sdf.parse(s1);</span><br><span class="line"></span><br><span class="line">		<span class="keyword">if</span>( date.getTime() &gt; date1.getTime() )</span><br><span class="line">			System.out.println(<span class="string">"借书成功！"</span>);</span><br><span class="line">		<span class="keyword">else</span></span><br><span class="line">			System.out.println(<span class="string">"借书失败！"</span>);</span><br><span class="line"></span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+        </div>
+        
+<blockquote class="post-copyright">
+    <div class="content">
+        
+<span class="post-time">
+    最后更新时间：<time datetime="2019-08-26T10:46:59.861Z" itemprop="dateUpdated">2019-08-26 18:46:59</time>
+</span><br>
+
+
+        
+        转载注明出处，原文地址：<a href="/2017/01/02/Java-8/" target="_blank" rel="external">http://www.sivan.tech/2017/01/02/Java-8/</a>
+        
+    </div>
+    <footer>
+        <a href="http://www.sivan.tech">
+            <img src="/img/1.jpg" alt="逸如风(yirufeng)">
+            逸如风(yirufeng)
+        </a>
+    </footer>
+</blockquote>
+
+        
+            <div class="page-reward">
+    <a id="rewardBtn" href="javascript:;" class="page-reward-btn waves-effect waves-circle waves-light">赏</a>
+</div>
+
+            
+        
+        <div class="post-footer">
+            
+            <div class="page-share-wrap">
+    
+
+<div class="page-share" id="pageShare">
+    <ul class="reset share-icons">
+      
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://www.sivan.tech/2017/01/02/Java-8/&title=《[Java]-8》 — yirufeng's Blog&pic=http://www.sivan.tech/img/1.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://www.sivan.tech/2017/01/02/Java-8/&title=《[Java]-8》 — yirufeng's Blog&source=Util包Random类nextInt()方法范围只是包含【0，输入的数字）；生成一个输入数字以内的随机整数
+Date 类，SimpleDateForma..." data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http://www.sivan.tech/2017/01/02/Java-8/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《[Java]-8》 — yirufeng's Blog&url=http://www.sivan.tech/2017/01/02/Java-8/&via=http://www.sivan.tech" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=http://www.sivan.tech/2017/01/02/Java-8/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+      
+    </ul>
+ </div>
+
+
+
+    <a href="javascript:;" id="shareFab" class="page-share-fab waves-effect waves-circle">
+        <i class="icon icon-share-alt icon-lg"></i>
+    </a>
+</div>
+
+        </div>
+        
+            
+
+
+        
+    </div>
+    
+<nav class="post-nav flex-row flex-justify-between">
+  
+    <div class="prev">
+      <a href="/2017/01/15/版本管理工具-Git篇[1]/" id="post-prev" class="post-nav-link">
+        <div class="tips"><i class="icon icon-angle-left icon-lg icon-pr"></i> Prev</div>
+        <h4 class="title">版本管理工具-Git篇[1]</h4>
+      </a>
+    </div>
+  
+
+  
+    <div class="next">
+      <a href="/2016/12/30/Java-7/" id="post-next" class="post-nav-link">
+        <div class="tips">Next <i class="icon icon-angle-right icon-lg icon-pl"></i></div>
+        <h4 class="title">[Java]-7</h4>
+      </a>
+    </div>
+  
+</nav>
+
+
+    
+    
+        <aside class="post-widget">
+            <nav class="post-toc-wrap" id="post-toc">
+                <strong>目录</strong>
+                <ol class="post-toc"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#Util包"><span class="post-toc-number">1.</span> <span class="post-toc-text">Util包</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#Random类"><span class="post-toc-number">1.1.</span> <span class="post-toc-text">Random类</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#nextInt-方法"><span class="post-toc-number">1.1.1.</span> <span class="post-toc-text">nextInt()方法</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#Date-类，SimpleDateFormat类，以及Calendar类"><span class="post-toc-number">1.1.2.</span> <span class="post-toc-text">Date 类，SimpleDateFormat类，以及Calendar类</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#格式转换"><span class="post-toc-number">1.1.3.</span> <span class="post-toc-text">格式转换</span></a></li></ol></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#Calendar类的使用"><span class="post-toc-number">1.2.</span> <span class="post-toc-text">Calendar类的使用</span></a></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#集合"><span class="post-toc-number">2.</span> <span class="post-toc-text">集合</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#动态数组-与-动态链表-区别"><span class="post-toc-number">2.1.</span> <span class="post-toc-text">动态数组 与 动态链表 区别</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#ArrayList-与-Vector-区别"><span class="post-toc-number">2.2.</span> <span class="post-toc-text">ArrayList 与 Vector 区别</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#同步与异步区别"><span class="post-toc-number">2.3.</span> <span class="post-toc-text">同步与异步区别</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#练习"><span class="post-toc-number">2.4.</span> <span class="post-toc-text">练习</span></a></li></ol></li></ol>
+            </nav>
+            <div class="toc-bar"><div>
+        </aside>
+    
+</article>
+
+    <div id="reward" class="page-modal reward-lay">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <h3 class="reward-title">
+        <i class="icon icon-quote-left"></i>
+        感谢原作，你的打赏是我的动力！
+        <i class="icon icon-quote-right"></i>
+    </h3>
+    <div class="reward-content">
+        
+        <div class="reward-code">
+            <img id="rewardCode" src="/img/reward-wechat.jpg" alt="打赏二维码">
+        </div>
+        
+        <label class="reward-toggle">
+            <input id="rewardToggle" type="checkbox" class="reward-toggle-check"
+                data-wechat="/img/reward-wechat.jpg" data-alipay="/img/reward-alipay.jpg">
+            <div class="reward-toggle-ctrol">
+                <span class="reward-toggle-item wechat">微信</span>
+                <span class="reward-toggle-label"></span>
+                <span class="reward-toggle-item alipay">支付宝</span>
+            </div>
+        </label>
+        
+    </div>
+</div>
+
+    
+
+</div>
+
+    </main>
+    <footer class="footer ">
+    
+    <div class="top">
+        
+            <p>
+    <span>Links：</span>
+    
+    <span class="blogroll-item">
+        <a href="https://github.com/sivanWu0222" target="_blank">GitHub</a>
+    </span>
+    
+    <span class="blogroll-item">
+        <a href="http://weibo.com/Msingwen0222/home?wvr=5" target="_blank">新浪微博</a>
+    </span>
+    
+    <span class="blogroll-item">
+        <a href="https://www.linkedin.com/in/%E6%99%93%E6%96%87-%E5%90%B4-79057a121/" target="_blank">Linkedin</a>
+    </span>
+    
+    <span class="blogroll-item">
+        <a href="http://wpa.qq.com/msgrd?v=3&amp;uin=1666762170&amp;site=qq&amp;menu=yes" target="_blank">QQ</a>
+    </span>
+    
+    <span class="blogroll-item">
+        <a href="https://zh-cn.facebook.com/people/SiVan-Wu/100014408918389" target="_blank">Facebook</a>
+    </span>
+    
+    <span class="blogroll-item">
+        <a href="https://mail.qq.com/cgi-bin/qm_share?t=qm_mailme&amp;email=xfTz8-Py8-f08vWFtLTrpqqo" target="_blank">Contact</a>
+    </span>
+    
+    <span class="blogroll-item">
+        <a href="https://twitter.com/SiVan_Wu" target="_blank">Twitter</a>
+    </span>
+    
+</p>
+
+        
+    </div>
+    
+    <div class="bottom">
+        <p>
+            <span>
+                逸如风(yirufeng) &copy; 2016 - 2019
+            </span>
+
+           	
+           	<span>
+           		<a href="http://beian.miit.gov.cn/" target="_blank">已实名认证</a>
+           	</span>
+           	
+
+            
+
+            
+
+            
+                
+<span class="site-uv" title="总访客量">
+    <i class="icon icon-user"></i>
+    <i class="busuanzi-value" id="busuanzi_value_site_uv"></i>
+</span>
+
+
+<span class="site-pv" title="总访问量">
+    <i class="icon icon-eye"></i>
+    <i class="busuanzi-value" id="busuanzi_value_site_pv"></i>
+</span>
+
+            
+        </p>
+    </div>
+</footer>
+
+    <div class="mask" id="mask"></div>
+<a href="javascript:;" id="gotop" class="waves-effect waves-circle waves-light"><span class="icon icon-lg icon-chevron-up"></span></a>
+
+
+
+<div class="global-share" id="globalShare">
+    <ul class="reset share-icons">
+      
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://www.sivan.tech/2017/01/02/Java-8/&title=《[Java]-8》 — yirufeng's Blog&pic=http://www.sivan.tech/img/1.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://www.sivan.tech/2017/01/02/Java-8/&title=《[Java]-8》 — yirufeng's Blog&source=Util包Random类nextInt()方法范围只是包含【0，输入的数字）；生成一个输入数字以内的随机整数
+Date 类，SimpleDateForma..." data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http://www.sivan.tech/2017/01/02/Java-8/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《[Java]-8》 — yirufeng's Blog&url=http://www.sivan.tech/2017/01/02/Java-8/&via=http://www.sivan.tech" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=http://www.sivan.tech/2017/01/02/Java-8/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+      
+    </ul>
+ </div>
+
+
+<div class="page-modal wx-share" id="wxShare">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAK4AAACuCAAAAACKZ2kyAAAByklEQVR42u3aS27DMAwFQN//0inQVRe18ihKcgKMV4EcKxMvCPFzXfH1+r3+fr5bGd+9W1l84eLitrmv4XXHvdsh2bP6fVxc3Ke4efDKw1DnFdyu4+Lifhh3HMjGuyWBDxcX9xu5a9MYXFzcz+d2kpNxOlQtlCzL1XBxcRvcTtBZ9Xl7fRcXF3dRVyIJVfuC1z/74OLiHuEmZY68nLHj0HMl+RAuLu4RblLyqJZQ8wNNq8mKi4vb5s6NWcwR++MduLi4J7lzTZS1QS1q0uDi4h7hlhOPYhozlwK9OWbh4uIe5CbpR7V4mjRmkr9RfhgXF7fNzX9yrk1SbeJecw/g4uIu5eaHjLxQUk2fkteBi4t7klstZ6wayMgTHlxc3JPcVaNUeVM2H8x60/nBxcXdxq2Gm7wtmh90WvVdXFzcDdy5tkde3Kw2U98ER1xc3IPc6nFkLl6WK7i4uLiPcudC1Vzgy0uxhbkPXFzcpdwdLdg8kHXu4uLi7uYmoaf6//KCSL6Oi4t7nruq3JkMWCw+vuDi4j7KXfVUtTWLi4v7LdxkvTPegYuL+wncfOsdgxfjFzRZFsHFxW1wO2WO8TElL7XMDX7h4uJu4P4A+w38MzChY9cAAAAASUVORK5CYII=" alt="微信分享二维码">
+</div>
+
+
+    
+    <!-- main-js -->
+<script type="text/javascript" src="//cdn.bootcss.com/jquery/2.1.0/jquery.min.js"></script>
+<script type="text/javascript" src="/js/plugins/fastclick.js?v=1.4.2"></script>
+<script type="text/javascript" src="/js/plugins/ios-orientationchange-fix.js?v=1.4.2"></script>
+<script type="text/javascript" src="//cdn.jsdelivr.net/gh/fancyapps/fancybox@3.5.2/dist/jquery.fancybox.min.js"></script>
+
+<script type="text/javascript" src="//cdn.bootcss.com/node-waves/0.7.4/waves.min.js"></script>
+
+<script type="text/javascript" src="/js/method.js?v=1.4.2"></script>
+<script type="text/javascript" src="/js/blog.js?v=1.4.2"></script>
+
+<!-- third-party -->
+
+
+
+
+
+
+<script type="text/javascript" src="/js/plugins/local_search.js?v=1.4.2"></script>
+<script type="text/javascript">
+	var search_path = "search.xml";
+	if (search_path.length === 0) {
+		search_path = "search.xml";
+	}
+	var path = "/" + search_path;
+	searchFunc(path, "local-search-input", "local-search-result");
+</script>
+
+
+
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+    
+    
+
+
+
+<script type="text/javascript" src="https://cdn1.lncld.net/static/js/av-core-mini-0.6.4.js"></script>
+<script type="text/javascript" src="/js/plugins/leancloud_visitors.js?v=1.4.2"></script>
+
+
+
+    <!-- mathjax config similar to math.stackexchange -->
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+        tex2jax: {
+            inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+            processEscapes: true,
+            skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+        }
+    });
+</script>
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for (i=0; i < all.length; i += 1) {
+            all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+    });
+</script>
+
+<script type="text/javascript" src="//cdn.bootcss.com/mathjax/2.7.1/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+
+
+
+    <script>
+    (function() {
+        var OriginTitile = document.title, titleTime;
+        document.addEventListener('visibilitychange', function() {
+            if (document.hidden) {
+                document.title = '死鬼去哪里了！';
+                clearTimeout(titleTime);
+            } else {
+                document.title = '(つェ⊂)咦!又好了!';
+                titleTime = setTimeout(function() {
+                    document.title = OriginTitile;
+                },2000);
+            }
+        });
+    })();
+</script>
+
+
+
+
+
+    
+</body>
+</html>

@@ -1,0 +1,826 @@
+<!DOCTYPE html>
+<html>
+<head><meta name="generator" content="Hexo 3.9.0">
+    <meta charset="utf-8">
+    
+    
+    <title>Hibernate中的知识点 | yirufeng&#39;s Blog | 未来的小幸运 || 致正在努力的我们 ---- 逸如风</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    
+    <meta name="keywords" content="Java,Hibernate">
+    <link rel="shortcut icon" href="/img/favicon.ico">
+    <link rel="stylesheet" href="//cdn.jsdelivr.net/gh/fancyapps/fancybox@3.5.2/dist/jquery.fancybox.min.css">
+    <link rel="stylesheet" href="/css/style.css?v=1.4.2">
+    
+    <script type="text/javascript">
+        // Data Center
+        var DC = {
+            reward:	true,
+            lv: JSON.parse('{"enable":true,"app_id":"K2RVtHi7RnmoN6dovlDKafn8-gzGzoHsz","app_key":"Qxmil0oqPFdDUyyIp2i1Xikt","icon":true}'),
+            v: JSON.parse('{"enable":false,"appid":"ACuOJIasBeRLiDe2iUApHj67-gzGzoHsz","appkey":"qbgg4tClrQQmvq8uwlpwA5mA","notify":true,"verify":true,"placeholder":"give me some sugers plz...","avatar":"wavatar"}'),
+            g: JSON.parse('{"enable":false,"lazy":true,"owner":"codefine","repo":"gitment","oauth":{"client_id":null,"client_secret":null},"perPage":10}'),
+            d: JSON.parse('{"app_id":null}')
+        };
+    </script>
+    <script type="text/javascript">
+        window.lazyScripts=[];
+    </script>
+    
+</head>
+
+
+<body>
+    <div id="loading" class="active"></div>
+
+    <aside id="menu" class="">
+  <div class="inner flex-row-vertical">
+    <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menu-off">
+        <i class="icon icon-lg icon-close"></i>
+    </a>
+    <div class="brand-wrap">
+      
+      <img src="/img/brand.jpg" class="brand-bg">
+      
+      <div class="brand">
+        <a href="/" class="avatar waves-effect waves-circle waves-light">
+          <img src="/img/1.jpg">
+        </a>
+        <hgroup class="introduce">
+          <h5 class="nickname">逸如风(yirufeng)</h5>
+          <a href="mailto:yirufeng@foxmail.com" title="yirufeng@foxmail.com" class="mail">
+            
+              <span>y</span>
+            
+              <span>i</span>
+            
+              <span>r</span>
+            
+              <span>u</span>
+            
+              <span>f</span>
+            
+              <span>e</span>
+            
+              <span>n</span>
+            
+              <span>g</span>
+            
+              <span>@</span>
+            
+              <span>f</span>
+            
+              <span>o</span>
+            
+              <span>x</span>
+            
+              <span>m</span>
+            
+              <span>a</span>
+            
+              <span>i</span>
+            
+              <span>l</span>
+            
+              <span>.</span>
+            
+              <span>c</span>
+            
+              <span>o</span>
+            
+              <span>m</span>
+            
+          </a>
+        </hgroup>
+        
+        <ul class="menu-link">
+          
+              <li>
+                <a href="https://github.com/sivanWu0222" target="_blank">
+                  <i class="icon icon-lg icon-github"></i>
+                </a>
+              </li>
+            
+              <li>
+                <a href="https://mail.qq.com/cgi-bin/qm_share?t=qm_mailme&amp;amp;email=xfTz8-Py8-f08vWFtLTrpqqo" target="_blank">
+                  <i class="icon icon-lg icon-envelope"></i>
+                </a>
+              </li>
+            
+        </ul>
+        
+      </div>
+    </div>
+    <div class="scroll-wrap flex-col">
+      <ul class="nav">
+        
+            <li class="">
+              <a href="/"  >
+                <i class="icon icon-lg icon-home"></i>
+                Home
+              </a>
+            </li>
+        
+            <li class="">
+              <a href="/categories"  >
+                <i class="icon icon-lg icon-th-list"></i>
+                Category
+              </a>
+            </li>
+        
+            <li class="">
+              <a href="/research"  >
+                <i class="icon icon-lg icon-mortar-board"></i>
+                Research
+              </a>
+            </li>
+        
+            <li class="">
+              <a href="/tags"  >
+                <i class="icon icon-lg icon-tags"></i>
+                Tag
+              </a>
+            </li>
+        
+            <li class="">
+              <a href="/archives"  >
+                <i class="icon icon-lg icon-archives"></i>
+                Archive
+              </a>
+            </li>
+        
+            <li class="">
+              <a href="/about"  >
+                <i class="icon icon-lg icon-user"></i>
+                About
+              </a>
+            </li>
+        
+            <li class="">
+              <a href="/open-source"  >
+                <i class="icon icon-lg icon-github"></i>
+                Project
+              </a>
+            </li>
+        
+            <li class="">
+              <a href="/demo"  >
+                <i class="icon icon-lg icon-audio-description"></i>
+                Demo
+              </a>
+            </li>
+        
+            <li class="">
+              <a href="/wechat-number"  >
+                <i class="icon icon-lg icon-wechat"></i>
+                公众号
+              </a>
+            </li>
+        
+            <li class="">
+              <a href="http://www.sivan.tech/LeetCodeAlgo/" target="_blank" >
+                <i class="icon icon-lg icon-braille"></i>
+                Leetcode
+              </a>
+            </li>
+        
+            <li class="">
+              <a href="http://resume.sivan.tech/" target="_blank" >
+                <i class="icon icon-lg icon-file-pdf-o"></i>
+                Resume
+              </a>
+            </li>
+        
+      </ul>
+    </div>
+  </div>
+</aside>
+
+    <main id="main">
+        <header class="top-header" id="header">
+    <div class="flex-row clearfix">
+        <a href="javascript:;" class="header-icon pull-left waves-effect waves-circle waves-light on" id="menu-toggle">
+          <i class="icon icon-lg icon-navicon"></i>
+        </a>
+        <div class="flex-col header-title ellipsis">
+            <span>Hibernate中的知识点</span>
+            
+        </div>
+        
+        <a href="javascript:;" id="site_search_btn" class="header-icon pull-right waves-effect waves-circle waves-light">
+            <i class="icon icon-lg icon-search"></i>
+        </a>
+        
+    </div>
+</header>
+<header class="content-header post-header">
+    <img src="/img/s3.jpg" class="header-bg">
+    <div class="container fade-scale">
+        <h1 class="title">Hibernate中的知识点</h1>
+        <h5 class="subtitle">
+            
+                <time datetime="2017-11-13T08:49:12.000Z" itemprop="datePublished" class="page-time">
+  2017-11-13
+</time>
+
+
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/框架/">框架</a><ul class="article-category-list-child"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/框架/Hibernate/">Hibernate</a></li></ul></li></ul>
+
+            
+        </h5>
+        
+    </div>
+    
+
+</header>
+
+<div id="site_search">
+    <div class="search-title clearfix">
+        <span class="pull-left">
+          <i class="icon icon-lg icon-search"></i>
+        </span>
+        <input type="text" id="local-search-input" name="q" results="0" placeholder="search my blog..." class="form-control pull-left"/>
+        <a href="javascript:;" class="close pull-right waves-effect waves-circle waves-light">
+          <i class="icon icon-lg icon-close"></i>
+        </a>
+    </div>
+    <div id="local-search-result"></div>
+</div>
+
+
+<div class="container body-wrap">
+    <article id="post-Hibernate中的知识点"
+  class="post-article article-type-post" itemprop="blogPost">
+    <div class="post-card">
+        <h1 class="post-card-title">Hibernate中的知识点</h1>
+        <div class="post-meta">
+            <time class="post-time" title="2017-11-13 16:49:12" datetime="2017-11-13T08:49:12.000Z"  itemprop="datePublished">2017-11-13</time>
+
+            
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/框架/">框架</a><ul class="article-category-list-child"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/框架/Hibernate/">Hibernate</a></li></ul></li></ul>
+
+
+
+            
+	<span id="/2017/11/13/Hibernate中的知识点/" class="leancloud_visitors" data-flag-title="Hibernate中的知识点" title="Hibernate中的知识点">
+		
+			<i class="icon icon-eye"></i>
+		
+		<span class="leancloud-visitors-count"></span>
+	</span>
+ 
+
+            
+
+
+            
+        </div>
+        <div class="post-content" id="post-content" itemprop="postContent">
+            
+            <h2 id="持久化类-Persistent-Object-简称PO"><a href="#持久化类-Persistent-Object-简称PO" class="headerlink" title="持久化类(Persistent Object 简称PO)"></a>持久化类(Persistent Object 简称PO)</h2><blockquote>
+<p>持久化类就是一个Java类，当这个类与表建立了映射关系(通过XML配置文件)</p>
+</blockquote>
+<p>PO = POJO(JavaBean) + XML配置文件</p>
+<h3 id="JavaBean规范："><a href="#JavaBean规范：" class="headerlink" title="JavaBean规范："></a>JavaBean规范：</h3><ol>
+<li>必须有构造方法，如果没有无参的需要自己加上一个无参构造方法</li>
+<li>属性必须私有，并且必须提供set以及get方法</li>
+</ol>
+<h3 id="PO编写规则"><a href="#PO编写规则" class="headerlink" title="PO编写规则"></a>PO编写规则</h3><ol>
+<li>提供一个无参的public修饰符的构造器（因为底层要通过反射创建对象）</li>
+<li>提供一个标识属性，映射表的主键字段（唯一标识ID,也就是所说的OId）</li>
+<li>所有属性提供public访问控制符的set以及get方法</li>
+<li>标识属性应尽量使用基本类型的包装类</li>
+</ol>
+<h3 id="持久化类的三种状态"><a href="#持久化类的三种状态" class="headerlink" title="持久化类的三种状态"></a>持久化类的三种状态</h3><ol>
+<li>瞬时态<blockquote>
+<p>刚创建的对象，没有被持久化到数据库（没有持久化表示OId,OId就是数据库中的主键，也就是唯一区分JavaBean对象的属性），没有被纳入Session管理（没有缓存到Session中）</p>
+</blockquote>
+</li>
+</ol>
+<ol start="2">
+<li>持久态<blockquote>
+<p>存在于数据库中（有唯一标识OId），并且被Session进行管理（缓存到了Session中）</p>
+</blockquote>
+</li>
+</ol>
+<p>注意事项：<br>持久态的对象有更新数据库的能力，示例如下(正常情况下，我们需要执行session.update()方法进行修改，但是这里是由于session的一级缓存，所以持久态对象在不执行session.update()方法的时候依然具有更新数据库的能力)</p>
+<blockquote>
+</blockquote>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="keyword">import</span> org.hibernate.Session;</span><br><span class="line"><span class="keyword">import</span> org.hibernate.Transaction;</span><br><span class="line"><span class="keyword">import</span> org.junit.Test;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> com.itheima.domain.User;</span><br><span class="line"><span class="keyword">import</span> com.itheima.util.HibernateUtils;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Demo2</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">	<span class="meta">@Test</span></span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">run</span><span class="params">()</span> </span>&#123;</span><br><span class="line">		Session session = HibernateUtils.getSession();</span><br><span class="line">		Transaction transaction = session.beginTransaction();</span><br><span class="line"></span><br><span class="line">		User user = session.get(User.class, <span class="number">18</span>);</span><br><span class="line">		user.setName(<span class="string">"wxwddd"</span>);</span><br><span class="line"></span><br><span class="line">		transaction.commit();</span><br><span class="line">		session.close();</span><br><span class="line"></span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<a id="more"></a>
+<ol start="3">
+<li>脱管态<blockquote>
+<p>存在于数据库中（有唯一标识OId），没有被Session进行管理（没有被Session进行缓存）</p>
+</blockquote>
+</li>
+</ol>
+<p>下面代码的注意事项：</p>
+<blockquote>
+<p>当我们session执行save方法的时候，其实session已经从连接那里取得了id值，因此当我们执行save方法的时候，user对象将会得到一个session获取到的id，并且缓存到session中，尽管事务没有提交</p>
+</blockquote>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> java.io.Serializable;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> org.hibernate.Hibernate;</span><br><span class="line"><span class="keyword">import</span> org.hibernate.Session;</span><br><span class="line"><span class="keyword">import</span> org.hibernate.Transaction;</span><br><span class="line"><span class="keyword">import</span> org.junit.Test;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> com.itheima.domain.User;</span><br><span class="line"><span class="keyword">import</span> com.itheima.util.HibernateUtils;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Demo1</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">	<span class="meta">@Test</span></span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">run</span><span class="params">()</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">		Session session = HibernateUtils.getSession();</span><br><span class="line">		Transaction transaction = session.beginTransaction();</span><br><span class="line">		User user = <span class="keyword">new</span> User();</span><br><span class="line">		user.setAge(<span class="number">29</span>);</span><br><span class="line">		user.setName(<span class="string">"wxw"</span>);</span><br><span class="line">		<span class="comment">/*</span></span><br><span class="line"><span class="comment">      这里其实已经获取到了id值，因为session已经与数据库连接上了</span></span><br><span class="line"><span class="comment">      当session执行save方法的时候，将会把user对象缓存到session中，尽管这时还没有提交事务</span></span><br><span class="line"><span class="comment">    */</span></span><br><span class="line">		Serializable s = session.save(user);</span><br><span class="line">    <span class="comment">/*此时user已经成为了持久态，既进入了缓存，又得到了OId*/</span></span><br><span class="line"></span><br><span class="line">		System.out.println(s);</span><br><span class="line">		System.out.println(user.getId());</span><br><span class="line">		transaction.commit();</span><br><span class="line">		session.close();</span><br><span class="line"></span><br><span class="line">    <span class="comment">/*此时user依然存在，但是session不存在，此时变成了脱管态*/</span></span><br><span class="line"></span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">`</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>三个状态的转换</p>
+</blockquote>
+<figure class="image-box">
+                <a rel=Hibernate中的知识点 href="http://on3w7gc9m.bkt.clouddn.com/01-%E4%B8%89%E4%B8%AA%E7%8A%B6%E6%80%81%E8%BD%AC%E6%8D%A2.bmp" title="" data-fancybox="images"><img src="http://on3w7gc9m.bkt.clouddn.com/01-%E4%B8%89%E4%B8%AA%E7%8A%B6%E6%80%81%E8%BD%AC%E6%8D%A2.bmp" alt title class></a>
+                <p></p>
+            </figure>
+<hr>
+<h2 id="主键"><a href="#主键" class="headerlink" title="主键"></a>主键</h2><h3 id="自然主键"><a href="#自然主键" class="headerlink" title="自然主键"></a>自然主键</h3><blockquote>
+<p>当我们创建表结构的时候，有的时候表结构中就有唯一可以确定某个记录的时候，则该列称为自然主键，但是我们在开发中一般不会采用自然主键，因为自然主键可以能随着规则被打破而受到影响</p>
+</blockquote>
+<h3 id="代理主键"><a href="#代理主键" class="headerlink" title="代理主键"></a>代理主键</h3><blockquote>
+<p>既然自然主键不可以用来充当主键，所以在表结构定义的时候，我们一般加上一列用来唯一区分每一条记录，称为代理主键！</p>
+</blockquote>
+<h3 id="主键的生成策略"><a href="#主键的生成策略" class="headerlink" title="主键的生成策略"></a>主键的生成策略</h3><ol>
+<li>increment 适合于short int long 作为主键，不是使用数据库的自动增长机制，一般不建议使用<blockquote>
+<p>先找数据库中id的最大值，然后给最大值+1，作为下一条记录的主键，Hibernate执行代码如下</p>
+</blockquote>
+</li>
+</ol>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">Hibernate:</span><br><span class="line">    <span class="keyword">select</span></span><br><span class="line">        <span class="keyword">max</span>(<span class="keyword">id</span>)</span><br><span class="line">    <span class="keyword">from</span></span><br><span class="line">        <span class="keyword">User</span></span><br><span class="line">Hibernate:</span><br><span class="line">    <span class="keyword">insert</span></span><br><span class="line">    <span class="keyword">into</span></span><br><span class="line">        <span class="keyword">User</span></span><br><span class="line">        (<span class="keyword">name</span>, age, <span class="keyword">id</span>)</span><br><span class="line">    <span class="keyword">values</span></span><br><span class="line">        (?, ?, ?)</span><br></pre></td></tr></table></figure>
+<p>使用increment在并发访问的情况下，由于多个人并发查询最大值的时候极有可能相同，因此在插入的时候将会产生问题！</p>
+<ol start="2">
+<li><p>identity 适用于short int long作为主键，并且使用该生成策略的时候，要求数据库的主键必须可以自动增长！因为该策略采用了数据库底层的自动增长机制！所以对于oracle这种不可以自动增长的数据库，是不可以采用这种策略的！</p>
+<blockquote>
+<p>不经常使用，因为如果中途更换数据库，这个策略将不会适用于oracle数据库</p>
+</blockquote>
+</li>
+<li><p>sequence 适用于short int long作为主键，底层采用的是序列增长的方式</p>
+<blockquote>
+<p>只支持oracle数据库，也支持DB2数据库，因为oracle自动增长使用的是序列进行自动增长,不支持MySQL数据库</p>
+</blockquote>
+</li>
+<li><p>uuid 适用于char varchar 数据类型，使用随机的字符串作为主键</p>
+</li>
+<li><p>native 本地策略，根据底层数据库的不同，自动选择适用于该种数据库的生成策略 (适用于 short int long 数据类型)</p>
+<blockquote>
+<p>如果本地使用MySQL数据库，将会使用identity，如果使用oracle，将会使用sequence</p>
+</blockquote>
+</li>
+<li><p>assigned 主键自己进行维护，不使用Hibernate框架进行维护</p>
+</li>
+</ol>
+<hr>
+<h2 id="Hibernate中的缓存"><a href="#Hibernate中的缓存" class="headerlink" title="Hibernate中的缓存"></a>Hibernate中的缓存</h2><h3 id="Session级别的缓存-一级缓存"><a href="#Session级别的缓存-一级缓存" class="headerlink" title="Session级别的缓存(一级缓存)"></a>Session级别的缓存(一级缓存)</h3><blockquote>
+<p>Hibernate内部采用了缓存机制，就是说将数据存放到一块单独的内存空间中，以便增强我们操控数据的效率</p>
+</blockquote>
+<ol>
+<li>一级缓存是Session级别的，不可以卸载的，一级缓存的生命周期与session一致</li>
+<li>session内部存放了很多集合，用来存放缓存的数据</li>
+</ol>
+<h4 id="Session中的快照机制"><a href="#Session中的快照机制" class="headerlink" title="Session中的快照机制"></a>Session中的快照机制</h4><blockquote>
+<p>正是因为Session中快照机制的存在，所以我们的持久化对象才有操纵数据库的能力<br>Session中可以划分为两个区域，一个缓存区域，一个快照区域</p>
+</blockquote>
+<p>当我们执行查询方法的时候，数据将会缓存到Hibernate中的缓存区，和快照区域，但是当我们修改数据的时候，缓存区域的数据进行修改，快照区域的数据不会进行修改，但是当我们使用事务进行提交的时候，事务会自动判别快照区域与内存区域的数据，并对其进行比较，如果两者一致，则不进行修改，如果两者不一致，则进行修改！</p>
+<h3 id="SessionFactory级别的缓存-二级缓存"><a href="#SessionFactory级别的缓存-二级缓存" class="headerlink" title="SessionFactory级别的缓存(二级缓存)"></a>SessionFactory级别的缓存(二级缓存)</h3><blockquote>
+<p>由于Session生命周期的短暂，所以Hibernate也提供了二级缓存，二级缓存默认没有开启，需要手动配置才可以使用，二级缓存可以在多个session中共享数据，有点类似于我们进程与线程</p>
+</blockquote>
+<hr>
+<h2 id="Hibernate中的事务"><a href="#Hibernate中的事务" class="headerlink" title="Hibernate中的事务"></a>Hibernate中的事务</h2><h3 id="事务的4个特性："><a href="#事务的4个特性：" class="headerlink" title="事务的4个特性："></a>事务的4个特性：</h3><ol>
+<li>原子性（atomicity）：一个事务是一个不可分割的工作单位，事务中包括的诸操作要么都做，要么都不做。</li>
+<li>隔离性（isolation）：一个事务的执行不能被其他事务干扰。即一个事务内部的操作及使用的数据对并发的其他事务是隔离的，并发执行的各个事务之间不能互相干扰。</li>
+<li>一致性（consistency）：事务必须是使数据库从一个一致性状态变到另一个一致性状态。一致性与原子性是密切相关的。</li>
+<li>持久性（durability）：持久性也称永久性（permanence），指一个事务一旦提交，它对数据库中数据的改变就应该是永久性的。接下来的其他操作或故障不应该对其有任何影响。</li>
+</ol>
+<h3 id="并发事务引发的问题（隔离性所引发的问题）"><a href="#并发事务引发的问题（隔离性所引发的问题）" class="headerlink" title="并发事务引发的问题（隔离性所引发的问题）"></a>并发事务引发的问题（隔离性所引发的问题）</h3><ol>
+<li>脏读：一个事务读取了另一个事务未提交的数据</li>
+<li>不可重复读：一个事务读到了另一个事务更新之后的数据，导致多次查询结果不一致</li>
+<li>虚读（幻读）：一个事务读到了另一个事务新增之后的数据，导致多次查询结果不一致<blockquote>
+<p>不可重复读与虚读违背了事务的一致性，多个事务读取同一个数据，读取到的数据应该是一致的，也就是事务的一致性！</p>
+</blockquote>
+</li>
+</ol>
+<h3 id="避免并发事务引发的问题"><a href="#避免并发事务引发的问题" class="headerlink" title="避免并发事务引发的问题"></a>避免并发事务引发的问题</h3><blockquote>
+<p>通过设置隔离级别来避免事务并发所引起的问题</p>
+</blockquote>
+<ol>
+<li>read-uncommited 读未提交 脏读，不可重复读，虚读都有可能发生</li>
+<li>read-commited 读已提交 避免了脏读，但是不可重复读，虚读都有可能发生</li>
+<li>repeatable read 重复读  不可重复读，但是虚读有可能发生</li>
+<li>Serializable 串行化 以上情况都可以避免，但是效率低，有点类似于线程的同步</li>
+</ol>
+<p>MySQL 默认隔离级别为 repeatable read ,可以避免脏读和不可以重复读，而幻读则发生几率很低，忽略不计<br>oracle 默认隔离级别为 read-commited</p>
+<h3 id="Hibernate核心配置文件配置事务隔离级别"><a href="#Hibernate核心配置文件配置事务隔离级别" class="headerlink" title="Hibernate核心配置文件配置事务隔离级别"></a>Hibernate核心配置文件配置事务隔离级别</h3><blockquote>
+<p>通过设置hibernate.connection.isolation</p>
+</blockquote>
+<ol>
+<li>read-uncommited   值为1</li>
+<li>read-commited 值为2</li>
+<li>repeatable read 值为4</li>
+<li>serializable 值为8</li>
+</ol>
+<hr>
+<h2 id="丢失更新问题"><a href="#丢失更新问题" class="headerlink" title="丢失更新问题"></a>丢失更新问题</h2><blockquote>
+<p>上面讲的脏读，不可重复读，幻读，都是针对Hibernate中读取数据因数据库不同隔离级别而产生的问题，而丢失更新则是对数据库进行修改所产生的问题</p>
+</blockquote>
+<h3 id="丢失更新问题的产生"><a href="#丢失更新问题的产生" class="headerlink" title="丢失更新问题的产生"></a>丢失更新问题的产生</h3><blockquote>
+<p>丢失更新问题的产生很简单，就是当我们访问数据库的时候，两个人分别获取到了同一条数据，并且内容一致，但是一个人修改了自己读取到的数据的一个字段，另一个人修改了自己读取到的数据的另一个字段，结果可想而知，也就是修改了一个字段，并没有两个字段都进行修改，也就产生了丢失更新的问题</p>
+</blockquote>
+<p>如图所示：<br><figure class="image-box">
+                <a rel=Hibernate中的知识点 href="http://on3w7gc9m.bkt.clouddn.com/QQ%E5%9B%BE%E7%89%8720171116161731.png" title="" data-fancybox="images"><img src="http://on3w7gc9m.bkt.clouddn.com/QQ%E5%9B%BE%E7%89%8720171116161731.png" alt title class></a>
+                <p></p>
+            </figure></p>
+<h3 id="解决丢失更新问题"><a href="#解决丢失更新问题" class="headerlink" title="解决丢失更新问题"></a>解决丢失更新问题</h3><ol>
+<li>悲观锁（不常用），采用数据库的锁机制进行操作，对于我们每次操作，数据库都会在sql语句后面加上for update，操作完成之后，再把锁进行释放，效率很低</li>
+<li>乐观锁：JavaBean属性添加一个新的属性(version)<blockquote>
+<p>数据库首先查询数据，然后进行修改，提交的时候，将会比较版本号是否与查出的版本号一致，如果不一致，将会报错，否则根据版本号与主键值进行修改</p>
+</blockquote>
+</li>
+</ol>
+<h4 id="悲观锁的使用"><a href="#悲观锁的使用" class="headerlink" title="悲观锁的使用"></a>悲观锁的使用</h4><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">session.get(Customer.class, <span class="number">1</span>, LockMode.UPGRADE);</span><br></pre></td></tr></table></figure>
+<h4 id="乐观锁的使用"><a href="#乐观锁的使用" class="headerlink" title="乐观锁的使用"></a>乐观锁的使用</h4><ol>
+<li>JavaBean中添加version属性，并且设置相应的set以及get方法</li>
+<li>在映射文件中 添加 如下代码<blockquote>
+<version name="version">
+</version></blockquote>
+</li>
+</ol>
+<hr>
+
+        </div>
+        
+<blockquote class="post-copyright">
+    <div class="content">
+        
+<span class="post-time">
+    最后更新时间：<time datetime="2019-08-26T10:46:59.858Z" itemprop="dateUpdated">2019-08-26 18:46:59</time>
+</span><br>
+
+
+        
+        转载注明出处，原文地址：<a href="/2017/11/13/Hibernate中的知识点/" target="_blank" rel="external">http://www.sivan.tech/2017/11/13/Hibernate中的知识点/</a>
+        
+    </div>
+    <footer>
+        <a href="http://www.sivan.tech">
+            <img src="/img/1.jpg" alt="逸如风(yirufeng)">
+            逸如风(yirufeng)
+        </a>
+    </footer>
+</blockquote>
+
+        
+            <div class="page-reward">
+    <a id="rewardBtn" href="javascript:;" class="page-reward-btn waves-effect waves-circle waves-light">赏</a>
+</div>
+
+            
+        
+        <div class="post-footer">
+            
+	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Hibernate/">Hibernate</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Java/">Java</a></li></ul>
+
+            <div class="page-share-wrap">
+    
+
+<div class="page-share" id="pageShare">
+    <ul class="reset share-icons">
+      
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://www.sivan.tech/2017/11/13/Hibernate中的知识点/&title=《Hibernate中的知识点》 — yirufeng's Blog&pic=http://www.sivan.tech/img/1.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://www.sivan.tech/2017/11/13/Hibernate中的知识点/&title=《Hibernate中的知识点》 — yirufeng's Blog&source=持久化类(Persistent Object 简称PO)
+持久化类就是一个Java类，当这个类与表建立了映射关系(通过XML配置文件)
+
+PO = POJ..." data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http://www.sivan.tech/2017/11/13/Hibernate中的知识点/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《Hibernate中的知识点》 — yirufeng's Blog&url=http://www.sivan.tech/2017/11/13/Hibernate中的知识点/&via=http://www.sivan.tech" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=http://www.sivan.tech/2017/11/13/Hibernate中的知识点/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+      
+    </ul>
+ </div>
+
+
+
+    <a href="javascript:;" id="shareFab" class="page-share-fab waves-effect waves-circle">
+        <i class="icon icon-share-alt icon-lg"></i>
+    </a>
+</div>
+
+        </div>
+        
+            
+
+
+        
+    </div>
+    
+<nav class="post-nav flex-row flex-justify-between">
+  
+    <div class="prev">
+      <a href="/2017/11/18/入门Mybatis/" id="post-prev" class="post-nav-link">
+        <div class="tips"><i class="icon icon-angle-left icon-lg icon-pr"></i> Prev</div>
+        <h4 class="title">入门Mybatis</h4>
+      </a>
+    </div>
+  
+
+  
+    <div class="next">
+      <a href="/2017/11/13/理解Hibernate中的SessionFactory/" id="post-next" class="post-nav-link">
+        <div class="tips">Next <i class="icon icon-angle-right icon-lg icon-pl"></i></div>
+        <h4 class="title">理解Hibernate中的SessionFactory与Session</h4>
+      </a>
+    </div>
+  
+</nav>
+
+
+    
+    
+        <aside class="post-widget">
+            <nav class="post-toc-wrap" id="post-toc">
+                <strong>目录</strong>
+                <ol class="post-toc"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#持久化类-Persistent-Object-简称PO"><span class="post-toc-number">1.</span> <span class="post-toc-text">持久化类(Persistent Object 简称PO)</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#JavaBean规范："><span class="post-toc-number">1.1.</span> <span class="post-toc-text">JavaBean规范：</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#PO编写规则"><span class="post-toc-number">1.2.</span> <span class="post-toc-text">PO编写规则</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#持久化类的三种状态"><span class="post-toc-number">1.3.</span> <span class="post-toc-text">持久化类的三种状态</span></a></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#主键"><span class="post-toc-number">2.</span> <span class="post-toc-text">主键</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#自然主键"><span class="post-toc-number">2.1.</span> <span class="post-toc-text">自然主键</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#代理主键"><span class="post-toc-number">2.2.</span> <span class="post-toc-text">代理主键</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#主键的生成策略"><span class="post-toc-number">2.3.</span> <span class="post-toc-text">主键的生成策略</span></a></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#Hibernate中的缓存"><span class="post-toc-number">3.</span> <span class="post-toc-text">Hibernate中的缓存</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#Session级别的缓存-一级缓存"><span class="post-toc-number">3.1.</span> <span class="post-toc-text">Session级别的缓存(一级缓存)</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#Session中的快照机制"><span class="post-toc-number">3.1.1.</span> <span class="post-toc-text">Session中的快照机制</span></a></li></ol></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#SessionFactory级别的缓存-二级缓存"><span class="post-toc-number">3.2.</span> <span class="post-toc-text">SessionFactory级别的缓存(二级缓存)</span></a></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#Hibernate中的事务"><span class="post-toc-number">4.</span> <span class="post-toc-text">Hibernate中的事务</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#事务的4个特性："><span class="post-toc-number">4.1.</span> <span class="post-toc-text">事务的4个特性：</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#并发事务引发的问题（隔离性所引发的问题）"><span class="post-toc-number">4.2.</span> <span class="post-toc-text">并发事务引发的问题（隔离性所引发的问题）</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#避免并发事务引发的问题"><span class="post-toc-number">4.3.</span> <span class="post-toc-text">避免并发事务引发的问题</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#Hibernate核心配置文件配置事务隔离级别"><span class="post-toc-number">4.4.</span> <span class="post-toc-text">Hibernate核心配置文件配置事务隔离级别</span></a></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#丢失更新问题"><span class="post-toc-number">5.</span> <span class="post-toc-text">丢失更新问题</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#丢失更新问题的产生"><span class="post-toc-number">5.1.</span> <span class="post-toc-text">丢失更新问题的产生</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#解决丢失更新问题"><span class="post-toc-number">5.2.</span> <span class="post-toc-text">解决丢失更新问题</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#悲观锁的使用"><span class="post-toc-number">5.2.1.</span> <span class="post-toc-text">悲观锁的使用</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#乐观锁的使用"><span class="post-toc-number">5.2.2.</span> <span class="post-toc-text">乐观锁的使用</span></a></li></ol></li></ol></li></ol>
+            </nav>
+            <div class="toc-bar"><div>
+        </aside>
+    
+</article>
+
+    <div id="reward" class="page-modal reward-lay">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <h3 class="reward-title">
+        <i class="icon icon-quote-left"></i>
+        感谢原作，你的打赏是我的动力！
+        <i class="icon icon-quote-right"></i>
+    </h3>
+    <div class="reward-content">
+        
+        <div class="reward-code">
+            <img id="rewardCode" src="/img/reward-wechat.jpg" alt="打赏二维码">
+        </div>
+        
+        <label class="reward-toggle">
+            <input id="rewardToggle" type="checkbox" class="reward-toggle-check"
+                data-wechat="/img/reward-wechat.jpg" data-alipay="/img/reward-alipay.jpg">
+            <div class="reward-toggle-ctrol">
+                <span class="reward-toggle-item wechat">微信</span>
+                <span class="reward-toggle-label"></span>
+                <span class="reward-toggle-item alipay">支付宝</span>
+            </div>
+        </label>
+        
+    </div>
+</div>
+
+    
+
+</div>
+
+    </main>
+    <footer class="footer ">
+    
+    <div class="top">
+        
+            <p>
+    <span>Links：</span>
+    
+    <span class="blogroll-item">
+        <a href="https://github.com/sivanWu0222" target="_blank">GitHub</a>
+    </span>
+    
+    <span class="blogroll-item">
+        <a href="http://weibo.com/Msingwen0222/home?wvr=5" target="_blank">新浪微博</a>
+    </span>
+    
+    <span class="blogroll-item">
+        <a href="https://www.linkedin.com/in/%E6%99%93%E6%96%87-%E5%90%B4-79057a121/" target="_blank">Linkedin</a>
+    </span>
+    
+    <span class="blogroll-item">
+        <a href="http://wpa.qq.com/msgrd?v=3&amp;uin=1666762170&amp;site=qq&amp;menu=yes" target="_blank">QQ</a>
+    </span>
+    
+    <span class="blogroll-item">
+        <a href="https://zh-cn.facebook.com/people/SiVan-Wu/100014408918389" target="_blank">Facebook</a>
+    </span>
+    
+    <span class="blogroll-item">
+        <a href="https://mail.qq.com/cgi-bin/qm_share?t=qm_mailme&amp;email=xfTz8-Py8-f08vWFtLTrpqqo" target="_blank">Contact</a>
+    </span>
+    
+    <span class="blogroll-item">
+        <a href="https://twitter.com/SiVan_Wu" target="_blank">Twitter</a>
+    </span>
+    
+</p>
+
+        
+    </div>
+    
+    <div class="bottom">
+        <p>
+            <span>
+                逸如风(yirufeng) &copy; 2016 - 2019
+            </span>
+
+           	
+           	<span>
+           		<a href="http://beian.miit.gov.cn/" target="_blank">已实名认证</a>
+           	</span>
+           	
+
+            
+
+            
+
+            
+                
+<span class="site-uv" title="总访客量">
+    <i class="icon icon-user"></i>
+    <i class="busuanzi-value" id="busuanzi_value_site_uv"></i>
+</span>
+
+
+<span class="site-pv" title="总访问量">
+    <i class="icon icon-eye"></i>
+    <i class="busuanzi-value" id="busuanzi_value_site_pv"></i>
+</span>
+
+            
+        </p>
+    </div>
+</footer>
+
+    <div class="mask" id="mask"></div>
+<a href="javascript:;" id="gotop" class="waves-effect waves-circle waves-light"><span class="icon icon-lg icon-chevron-up"></span></a>
+
+
+
+<div class="global-share" id="globalShare">
+    <ul class="reset share-icons">
+      
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://www.sivan.tech/2017/11/13/Hibernate中的知识点/&title=《Hibernate中的知识点》 — yirufeng's Blog&pic=http://www.sivan.tech/img/1.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://www.sivan.tech/2017/11/13/Hibernate中的知识点/&title=《Hibernate中的知识点》 — yirufeng's Blog&source=持久化类(Persistent Object 简称PO)
+持久化类就是一个Java类，当这个类与表建立了映射关系(通过XML配置文件)
+
+PO = POJ..." data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http://www.sivan.tech/2017/11/13/Hibernate中的知识点/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《Hibernate中的知识点》 — yirufeng's Blog&url=http://www.sivan.tech/2017/11/13/Hibernate中的知识点/&via=http://www.sivan.tech" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=http://www.sivan.tech/2017/11/13/Hibernate中的知识点/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+      
+    </ul>
+ </div>
+
+
+<div class="page-modal wx-share" id="wxShare">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAMYAAADGCAAAAACs8KCBAAACNElEQVR42u3azW7EMAhF4Xn/l063lUZJzwWnkvHxqprmx18WCAyfD17Xr3X3y/fv3//l937eWDJkyNiWcT2u583xVz7z+HtvqTJkyDiAcfdics3dlWRD5K7nvcmQIUPG3TUoCIJ7O59PhgwZMjijs4n+E2TIkHEOg6duafn6nCbyK5fV4jJkyNiQUdvE//z9Sn9DhgwZWzGucKXpWtpyKO5KhgwZoxk8wNWO9fnoRpp0ypAh4xzG8w3pyAVvWK461JMhQ8aZjFqRybdLRjHiFoIMGTKOZ/AX8OZBf9gCVc8yZMgYykiHJNLiNk03l02LyJAhY3MGKhRLh2JrxzKCaREZMmQMYvA0sR9A+3kdSj1lyJAxjkHCWf9Ijid8tTEOGTJkzGZ0jtjiiF5qggbtBxkyZBzA4KkeCX+du4qfSYYMGaMZ6dhErd1YGzJLhzNkyJAxlcHTOPJoXna2vnd6bidDhoxtGekmOq3HWjqISlkZMmSMZnSakW9shVwZT47IkCFjEGNZK3HROAUpp1ELU4YMGYMYtYCbFrrpAV/QTJUhQ8YxDP4yckyWHuSRIhlluDJkyBjEuMLVSex4oRsHbhkyZIxm8JW2MPnIRa0jGfdpZciQsTmjNlRR+06rxsLQcZsMGTLGMfrTVrX0MU37/ihlZciQIQOH1Fp5HITXWqdUhgwZhzHSNiR/b/ppZMiQcQ6DhMJa2ZkG6HREQ4YMGScweMjjD02DOC+JW01NGTJk7Mf4AQWdk2ElPUU8AAAAAElFTkSuQmCC" alt="微信分享二维码">
+</div>
+
+
+    
+    <!-- main-js -->
+<script type="text/javascript" src="//cdn.bootcss.com/jquery/2.1.0/jquery.min.js"></script>
+<script type="text/javascript" src="/js/plugins/fastclick.js?v=1.4.2"></script>
+<script type="text/javascript" src="/js/plugins/ios-orientationchange-fix.js?v=1.4.2"></script>
+<script type="text/javascript" src="//cdn.jsdelivr.net/gh/fancyapps/fancybox@3.5.2/dist/jquery.fancybox.min.js"></script>
+
+<script type="text/javascript" src="//cdn.bootcss.com/node-waves/0.7.4/waves.min.js"></script>
+
+<script type="text/javascript" src="/js/method.js?v=1.4.2"></script>
+<script type="text/javascript" src="/js/blog.js?v=1.4.2"></script>
+
+<!-- third-party -->
+
+
+
+
+
+
+<script type="text/javascript" src="/js/plugins/local_search.js?v=1.4.2"></script>
+<script type="text/javascript">
+	var search_path = "search.xml";
+	if (search_path.length === 0) {
+		search_path = "search.xml";
+	}
+	var path = "/" + search_path;
+	searchFunc(path, "local-search-input", "local-search-result");
+</script>
+
+
+
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+    
+    
+
+
+
+<script type="text/javascript" src="https://cdn1.lncld.net/static/js/av-core-mini-0.6.4.js"></script>
+<script type="text/javascript" src="/js/plugins/leancloud_visitors.js?v=1.4.2"></script>
+
+
+
+    <!-- mathjax config similar to math.stackexchange -->
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+        tex2jax: {
+            inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+            processEscapes: true,
+            skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+        }
+    });
+</script>
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for (i=0; i < all.length; i += 1) {
+            all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+    });
+</script>
+
+<script type="text/javascript" src="//cdn.bootcss.com/mathjax/2.7.1/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+
+
+
+    <script>
+    (function() {
+        var OriginTitile = document.title, titleTime;
+        document.addEventListener('visibilitychange', function() {
+            if (document.hidden) {
+                document.title = '死鬼去哪里了！';
+                clearTimeout(titleTime);
+            } else {
+                document.title = '(つェ⊂)咦!又好了!';
+                titleTime = setTimeout(function() {
+                    document.title = OriginTitile;
+                },2000);
+            }
+        });
+    })();
+</script>
+
+
+
+
+
+    
+</body>
+</html>

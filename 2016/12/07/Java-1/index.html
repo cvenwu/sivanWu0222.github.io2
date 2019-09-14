@@ -1,0 +1,719 @@
+<!DOCTYPE html>
+<html>
+<head><meta name="generator" content="Hexo 3.9.0">
+    <meta charset="utf-8">
+    
+    
+    <title>[Java]-1 | yirufeng&#39;s Blog | 未来的小幸运 || 致正在努力的我们 ---- 逸如风</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    
+    <meta name="keywords" content="Java,JDK">
+    <link rel="shortcut icon" href="/img/favicon.ico">
+    <link rel="stylesheet" href="//cdn.jsdelivr.net/gh/fancyapps/fancybox@3.5.2/dist/jquery.fancybox.min.css">
+    <link rel="stylesheet" href="/css/style.css?v=1.4.2">
+    
+    <script type="text/javascript">
+        // Data Center
+        var DC = {
+            reward:	true,
+            lv: JSON.parse('{"enable":true,"app_id":"K2RVtHi7RnmoN6dovlDKafn8-gzGzoHsz","app_key":"Qxmil0oqPFdDUyyIp2i1Xikt","icon":true}'),
+            v: JSON.parse('{"enable":false,"appid":"ACuOJIasBeRLiDe2iUApHj67-gzGzoHsz","appkey":"qbgg4tClrQQmvq8uwlpwA5mA","notify":true,"verify":true,"placeholder":"give me some sugers plz...","avatar":"wavatar"}'),
+            g: JSON.parse('{"enable":false,"lazy":true,"owner":"codefine","repo":"gitment","oauth":{"client_id":null,"client_secret":null},"perPage":10}'),
+            d: JSON.parse('{"app_id":null}')
+        };
+    </script>
+    <script type="text/javascript">
+        window.lazyScripts=[];
+    </script>
+    
+</head>
+
+
+<body>
+    <div id="loading" class="active"></div>
+
+    <aside id="menu" class="">
+  <div class="inner flex-row-vertical">
+    <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menu-off">
+        <i class="icon icon-lg icon-close"></i>
+    </a>
+    <div class="brand-wrap">
+      
+      <img src="/img/brand.jpg" class="brand-bg">
+      
+      <div class="brand">
+        <a href="/" class="avatar waves-effect waves-circle waves-light">
+          <img src="/img/1.jpg">
+        </a>
+        <hgroup class="introduce">
+          <h5 class="nickname">逸如风(yirufeng)</h5>
+          <a href="mailto:yirufeng@foxmail.com" title="yirufeng@foxmail.com" class="mail">
+            
+              <span>y</span>
+            
+              <span>i</span>
+            
+              <span>r</span>
+            
+              <span>u</span>
+            
+              <span>f</span>
+            
+              <span>e</span>
+            
+              <span>n</span>
+            
+              <span>g</span>
+            
+              <span>@</span>
+            
+              <span>f</span>
+            
+              <span>o</span>
+            
+              <span>x</span>
+            
+              <span>m</span>
+            
+              <span>a</span>
+            
+              <span>i</span>
+            
+              <span>l</span>
+            
+              <span>.</span>
+            
+              <span>c</span>
+            
+              <span>o</span>
+            
+              <span>m</span>
+            
+          </a>
+        </hgroup>
+        
+        <ul class="menu-link">
+          
+              <li>
+                <a href="https://github.com/sivanWu0222" target="_blank">
+                  <i class="icon icon-lg icon-github"></i>
+                </a>
+              </li>
+            
+              <li>
+                <a href="https://mail.qq.com/cgi-bin/qm_share?t=qm_mailme&amp;amp;email=xfTz8-Py8-f08vWFtLTrpqqo" target="_blank">
+                  <i class="icon icon-lg icon-envelope"></i>
+                </a>
+              </li>
+            
+        </ul>
+        
+      </div>
+    </div>
+    <div class="scroll-wrap flex-col">
+      <ul class="nav">
+        
+            <li class="">
+              <a href="/"  >
+                <i class="icon icon-lg icon-home"></i>
+                Home
+              </a>
+            </li>
+        
+            <li class="">
+              <a href="/categories"  >
+                <i class="icon icon-lg icon-th-list"></i>
+                Category
+              </a>
+            </li>
+        
+            <li class="">
+              <a href="/research"  >
+                <i class="icon icon-lg icon-mortar-board"></i>
+                Research
+              </a>
+            </li>
+        
+            <li class="">
+              <a href="/tags"  >
+                <i class="icon icon-lg icon-tags"></i>
+                Tag
+              </a>
+            </li>
+        
+            <li class="">
+              <a href="/archives"  >
+                <i class="icon icon-lg icon-archives"></i>
+                Archive
+              </a>
+            </li>
+        
+            <li class="">
+              <a href="/about"  >
+                <i class="icon icon-lg icon-user"></i>
+                About
+              </a>
+            </li>
+        
+            <li class="">
+              <a href="/open-source"  >
+                <i class="icon icon-lg icon-github"></i>
+                Project
+              </a>
+            </li>
+        
+            <li class="">
+              <a href="/demo"  >
+                <i class="icon icon-lg icon-audio-description"></i>
+                Demo
+              </a>
+            </li>
+        
+            <li class="">
+              <a href="/wechat-number"  >
+                <i class="icon icon-lg icon-wechat"></i>
+                公众号
+              </a>
+            </li>
+        
+            <li class="">
+              <a href="http://www.sivan.tech/LeetCodeAlgo/" target="_blank" >
+                <i class="icon icon-lg icon-braille"></i>
+                Leetcode
+              </a>
+            </li>
+        
+            <li class="">
+              <a href="http://resume.sivan.tech/" target="_blank" >
+                <i class="icon icon-lg icon-file-pdf-o"></i>
+                Resume
+              </a>
+            </li>
+        
+      </ul>
+    </div>
+  </div>
+</aside>
+
+    <main id="main">
+        <header class="top-header" id="header">
+    <div class="flex-row clearfix">
+        <a href="javascript:;" class="header-icon pull-left waves-effect waves-circle waves-light on" id="menu-toggle">
+          <i class="icon icon-lg icon-navicon"></i>
+        </a>
+        <div class="flex-col header-title ellipsis">
+            <span>[Java]-1</span>
+            
+        </div>
+        
+        <a href="javascript:;" id="site_search_btn" class="header-icon pull-right waves-effect waves-circle waves-light">
+            <i class="icon icon-lg icon-search"></i>
+        </a>
+        
+    </div>
+</header>
+<header class="content-header post-header">
+    <img src="/img/s3.jpg" class="header-bg">
+    <div class="container fade-scale">
+        <h1 class="title">[Java]-1</h1>
+        <h5 class="subtitle">
+            
+                <time datetime="2016-12-07T02:54:38.000Z" itemprop="datePublished" class="page-time">
+  2016-12-07
+</time>
+
+
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/Java/">Java</a><ul class="article-category-list-child"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/Java/基础/">基础</a></li></ul></li></ul>
+
+            
+        </h5>
+        
+    </div>
+    
+
+</header>
+
+<div id="site_search">
+    <div class="search-title clearfix">
+        <span class="pull-left">
+          <i class="icon icon-lg icon-search"></i>
+        </span>
+        <input type="text" id="local-search-input" name="q" results="0" placeholder="search my blog..." class="form-control pull-left"/>
+        <a href="javascript:;" class="close pull-right waves-effect waves-circle waves-light">
+          <i class="icon icon-lg icon-close"></i>
+        </a>
+    </div>
+    <div id="local-search-result"></div>
+</div>
+
+
+<div class="container body-wrap">
+    <article id="post-Java-1"
+  class="post-article article-type-post" itemprop="blogPost">
+    <div class="post-card">
+        <h1 class="post-card-title">[Java]-1</h1>
+        <div class="post-meta">
+            <time class="post-time" title="2016-12-07 10:54:38" datetime="2016-12-07T02:54:38.000Z"  itemprop="datePublished">2016-12-07</time>
+
+            
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/Java/">Java</a><ul class="article-category-list-child"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/Java/基础/">基础</a></li></ul></li></ul>
+
+
+
+            
+	<span id="/2016/12/07/Java-1/" class="leancloud_visitors" data-flag-title="[Java]-1" title="[Java]-1">
+		
+			<i class="icon icon-eye"></i>
+		
+		<span class="leancloud-visitors-count"></span>
+	</span>
+ 
+
+            
+
+
+            
+        </div>
+        <div class="post-content" id="post-content" itemprop="postContent">
+            
+            <h2 id="程序"><a href="#程序" class="headerlink" title="程序"></a>程序</h2><ol>
+<li>编译执行 ：例如我们所说的C/C++</li>
+<li>解释执行</li>
+</ol>
+<hr>
+<h2 id="Java应用开发方向"><a href="#Java应用开发方向" class="headerlink" title="Java应用开发方向:"></a>Java应用开发方向:</h2><ol>
+<li>JAVA SE:桌面应用程序开发，是JAVA基础！</li>
+<li>JAVA EE:web开发 jsp(Java Server Pages)也是网站开发，但是具有高大上，生命周期长，安全稳定的优点</li>
+<li>JAVA ME: 移动端开发(手机)，物联网移动应用程序开发</li>
+</ol>
+<a id="more"></a>
+<hr>
+<h2 id="JAVA组成："><a href="#JAVA组成：" class="headerlink" title="JAVA组成："></a>JAVA组成：</h2><ol>
+<li>JVM:（JAVA虚拟机），JAVA的核心组件，JAVA实现跨平台的前提条件</li>
+<li>JRE:(JAVA运行时环境)，是java程序运行的充分必备条件.(JRE=JVM+LIB(基本类库))，JRE可从官网下载，面向客户，而不是开发者</li>
+<li>JDK:(JAVA，面向程序员，JDK=JRE+LIB(类库,比JRE的LIB更加强大)+编译器<br>JAVA程序(.java)—–(.class)—-&gt;虚拟机(虚拟机面向的对象根据自己电脑系统来决定)——–&gt;OS(操作系统)</li>
+</ol>
+<blockquote>
+<p>虚拟机：程序虚拟出来的机器，如果一个java程序在windows下执行，虚拟机是for windows ,在linux下执行，虚拟机是for linux，也就是说字节码可以跨平台，但是虚拟机不可以跨平台，而且虚拟机不识别源代码</p>
+</blockquote>
+<p>缺点:由于有JVM存在而使得JAVA程序运行效率低</p>
+<p>优点：虚拟机的垃圾收集机制；开发效率高；安全性高</p>
+<hr>
+<h2 id="部署开发环境"><a href="#部署开发环境" class="headerlink" title="部署开发环境:"></a>部署开发环境:</h2><h3 id="安装JDK"><a href="#安装JDK" class="headerlink" title="安装JDK"></a>安装JDK</h3><h4 id="配置环境变量-在操作系统中注册Java这个软件"><a href="#配置环境变量-在操作系统中注册Java这个软件" class="headerlink" title="配置环境变量(在操作系统中注册Java这个软件)"></a>配置环境变量(在操作系统中注册Java这个软件)</h4><p>１．新建环境变量(在下面的系统变量新建) JAVA_HOME: (值就是存放jdk的目录)(JAVA_HOME小写也可以，因为在windows系统中是不区分大小写的，大小写只是为了兼容linux系统)</p>
+<p>２．找到Path: 按下HOME键使光标移到最左边，添加 %JAVA_HOME%\bin; (末尾的分号是用来隔开后面的文件)</p>
+<blockquote>
+<p>Ｐａｔｈ：配到ＪＤＫ下的ｂｉｎ目录<br>ＣＬＡＳＳＰＡＴＨ：ｌｉｂ目录　＋　当前目录（用点号表示）<br>Path目录讲解：可以存放一些我们在dos下可以执行的东西，例如我们把QQ启动程序放到Path中，便可以在dos窗口下输入QQ，就可以启动QQ，同理Path对JAVA也是这样处理的，因为我们需要执行JAVA以及JAVAC命令</p>
+</blockquote>
+<p>３．新建CLASSPATH(作用是为了找到lib目录，同时也是为了可以运行自己写的类而进行配置): 值是 %JAVA_HOME%\lib;. (末尾必须是分号点号)</p>
+<blockquote>
+<p>如果我们写ＪＡＶＡ程序出现乱码，只需要把中文改成英文就可以了</p>
+</blockquote>
+<hr>
+<h2 id="JDK目录功能-里面包含include文件夹，说明JAVA是可以调用C语言的"><a href="#JDK目录功能-里面包含include文件夹，说明JAVA是可以调用C语言的" class="headerlink" title="JDK目录功能(里面包含include文件夹，说明JAVA是可以调用C语言的):"></a>JDK目录功能(里面包含include文件夹，说明JAVA是可以调用C语言的):</h2><ol>
+<li>bin：存放二进制文件（可执行文件）</li>
+<li>lib：类库文件、</li>
+<li>jre：JAVA运行时环境</li>
+<li>sample：一些简单例子</li>
+<li>src.zip：源代码</li>
+</ol>
+<hr>
+<h2 id="测试"><a href="#测试" class="headerlink" title="测试"></a>测试</h2><p>验证JAVA环境搭配好的方法:在DOS窗口下，输入javac 正常输出配置信息，便成功！</p>
+<h3 id="注意事项："><a href="#注意事项：" class="headerlink" title="注意事项："></a>注意事项：</h3><blockquote>
+<p>在验证JAVA开发环境的时候，也就是验证Java环境变量是否正确设置在系统上的时候，请注意：JRE的命令是嵌入在系统中的，例如，java.exe<br>会复制到system32文件夹中，因此该命令可以随处运行，从而不能够作为验证环境变量正确配置的标志</p>
+</blockquote>
+<h3 id="WinRAR对JAR文件的关联："><a href="#WinRAR对JAR文件的关联：" class="headerlink" title="WinRAR对JAR文件的关联："></a>WinRAR对JAR文件的关联：</h3><blockquote>
+<p>WinRAR以及JRE安装之后都需要设置其对JAR文件的关联，不同的是通过关联使用JRE操作JAR文件之后会尝试运行这个文件，而WinRAR则会把它当作压缩包文件。所以要使计算机能够正确运行JAR文件，必须在WinRAR等压缩软件之后安装JRE环境。</p>
+</blockquote>
+<h3 id="编写代码并测试"><a href="#编写代码并测试" class="headerlink" title="编写代码并测试:"></a>编写代码并测试:</h3><ol>
+<li>编写源程序代码</li>
+<li>编译（例如 javac Test.java）（目的一是为了检查是否有错误，而是生成字节码(.class)文件(二进制文件)，可以在虚拟机上直接运行，而源代码是不可以的！）</li>
+<li>运行( java Test)</li>
+</ol>
+
+        </div>
+        
+<blockquote class="post-copyright">
+    <div class="content">
+        
+<span class="post-time">
+    最后更新时间：<time datetime="2019-08-26T10:46:59.859Z" itemprop="dateUpdated">2019-08-26 18:46:59</time>
+</span><br>
+
+
+        
+        转载注明出处，原文地址：<a href="/2016/12/07/Java-1/" target="_blank" rel="external">http://www.sivan.tech/2016/12/07/Java-1/</a>
+        
+    </div>
+    <footer>
+        <a href="http://www.sivan.tech">
+            <img src="/img/1.jpg" alt="逸如风(yirufeng)">
+            逸如风(yirufeng)
+        </a>
+    </footer>
+</blockquote>
+
+        
+            <div class="page-reward">
+    <a id="rewardBtn" href="javascript:;" class="page-reward-btn waves-effect waves-circle waves-light">赏</a>
+</div>
+
+            
+        
+        <div class="post-footer">
+            
+	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/JDK/">JDK</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Java/">Java</a></li></ul>
+
+            <div class="page-share-wrap">
+    
+
+<div class="page-share" id="pageShare">
+    <ul class="reset share-icons">
+      
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://www.sivan.tech/2016/12/07/Java-1/&title=《[Java]-1》 — yirufeng's Blog&pic=http://www.sivan.tech/img/1.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://www.sivan.tech/2016/12/07/Java-1/&title=《[Java]-1》 — yirufeng's Blog&source=程序
+编译执行 ：例如我们所说的C/C++
+解释执行
+
+
+Java应用开发方向:
+JAVA SE:桌面应用程序开发，是JAVA基础！
+JAVA EE:we..." data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http://www.sivan.tech/2016/12/07/Java-1/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《[Java]-1》 — yirufeng's Blog&url=http://www.sivan.tech/2016/12/07/Java-1/&via=http://www.sivan.tech" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=http://www.sivan.tech/2016/12/07/Java-1/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+      
+    </ul>
+ </div>
+
+
+
+    <a href="javascript:;" id="shareFab" class="page-share-fab waves-effect waves-circle">
+        <i class="icon icon-share-alt icon-lg"></i>
+    </a>
+</div>
+
+        </div>
+        
+            
+
+
+        
+    </div>
+    
+<nav class="post-nav flex-row flex-justify-between">
+  
+    <div class="prev">
+      <a href="/2016/12/10/Java-2/" id="post-prev" class="post-nav-link">
+        <div class="tips"><i class="icon icon-angle-left icon-lg icon-pr"></i> Prev</div>
+        <h4 class="title">[Java]-2</h4>
+      </a>
+    </div>
+  
+
+  
+</nav>
+
+
+    
+    
+        <aside class="post-widget">
+            <nav class="post-toc-wrap" id="post-toc">
+                <strong>目录</strong>
+                <ol class="post-toc"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#程序"><span class="post-toc-number">1.</span> <span class="post-toc-text">程序</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#Java应用开发方向"><span class="post-toc-number">2.</span> <span class="post-toc-text">Java应用开发方向:</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#JAVA组成："><span class="post-toc-number">3.</span> <span class="post-toc-text">JAVA组成：</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#部署开发环境"><span class="post-toc-number">4.</span> <span class="post-toc-text">部署开发环境:</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#安装JDK"><span class="post-toc-number">4.1.</span> <span class="post-toc-text">安装JDK</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#配置环境变量-在操作系统中注册Java这个软件"><span class="post-toc-number">4.1.1.</span> <span class="post-toc-text">配置环境变量(在操作系统中注册Java这个软件)</span></a></li></ol></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#JDK目录功能-里面包含include文件夹，说明JAVA是可以调用C语言的"><span class="post-toc-number">5.</span> <span class="post-toc-text">JDK目录功能(里面包含include文件夹，说明JAVA是可以调用C语言的):</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#测试"><span class="post-toc-number">6.</span> <span class="post-toc-text">测试</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#注意事项："><span class="post-toc-number">6.1.</span> <span class="post-toc-text">注意事项：</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#WinRAR对JAR文件的关联："><span class="post-toc-number">6.2.</span> <span class="post-toc-text">WinRAR对JAR文件的关联：</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#编写代码并测试"><span class="post-toc-number">6.3.</span> <span class="post-toc-text">编写代码并测试:</span></a></li></ol></li></ol>
+            </nav>
+            <div class="toc-bar"><div>
+        </aside>
+    
+</article>
+
+    <div id="reward" class="page-modal reward-lay">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <h3 class="reward-title">
+        <i class="icon icon-quote-left"></i>
+        感谢原作，你的打赏是我的动力！
+        <i class="icon icon-quote-right"></i>
+    </h3>
+    <div class="reward-content">
+        
+        <div class="reward-code">
+            <img id="rewardCode" src="/img/reward-wechat.jpg" alt="打赏二维码">
+        </div>
+        
+        <label class="reward-toggle">
+            <input id="rewardToggle" type="checkbox" class="reward-toggle-check"
+                data-wechat="/img/reward-wechat.jpg" data-alipay="/img/reward-alipay.jpg">
+            <div class="reward-toggle-ctrol">
+                <span class="reward-toggle-item wechat">微信</span>
+                <span class="reward-toggle-label"></span>
+                <span class="reward-toggle-item alipay">支付宝</span>
+            </div>
+        </label>
+        
+    </div>
+</div>
+
+    
+
+</div>
+
+    </main>
+    <footer class="footer ">
+    
+    <div class="top">
+        
+            <p>
+    <span>Links：</span>
+    
+    <span class="blogroll-item">
+        <a href="https://github.com/sivanWu0222" target="_blank">GitHub</a>
+    </span>
+    
+    <span class="blogroll-item">
+        <a href="http://weibo.com/Msingwen0222/home?wvr=5" target="_blank">新浪微博</a>
+    </span>
+    
+    <span class="blogroll-item">
+        <a href="https://www.linkedin.com/in/%E6%99%93%E6%96%87-%E5%90%B4-79057a121/" target="_blank">Linkedin</a>
+    </span>
+    
+    <span class="blogroll-item">
+        <a href="http://wpa.qq.com/msgrd?v=3&amp;uin=1666762170&amp;site=qq&amp;menu=yes" target="_blank">QQ</a>
+    </span>
+    
+    <span class="blogroll-item">
+        <a href="https://zh-cn.facebook.com/people/SiVan-Wu/100014408918389" target="_blank">Facebook</a>
+    </span>
+    
+    <span class="blogroll-item">
+        <a href="https://mail.qq.com/cgi-bin/qm_share?t=qm_mailme&amp;email=xfTz8-Py8-f08vWFtLTrpqqo" target="_blank">Contact</a>
+    </span>
+    
+    <span class="blogroll-item">
+        <a href="https://twitter.com/SiVan_Wu" target="_blank">Twitter</a>
+    </span>
+    
+</p>
+
+        
+    </div>
+    
+    <div class="bottom">
+        <p>
+            <span>
+                逸如风(yirufeng) &copy; 2016 - 2019
+            </span>
+
+           	
+           	<span>
+           		<a href="http://beian.miit.gov.cn/" target="_blank">已实名认证</a>
+           	</span>
+           	
+
+            
+
+            
+
+            
+                
+<span class="site-uv" title="总访客量">
+    <i class="icon icon-user"></i>
+    <i class="busuanzi-value" id="busuanzi_value_site_uv"></i>
+</span>
+
+
+<span class="site-pv" title="总访问量">
+    <i class="icon icon-eye"></i>
+    <i class="busuanzi-value" id="busuanzi_value_site_pv"></i>
+</span>
+
+            
+        </p>
+    </div>
+</footer>
+
+    <div class="mask" id="mask"></div>
+<a href="javascript:;" id="gotop" class="waves-effect waves-circle waves-light"><span class="icon icon-lg icon-chevron-up"></span></a>
+
+
+
+<div class="global-share" id="globalShare">
+    <ul class="reset share-icons">
+      
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://www.sivan.tech/2016/12/07/Java-1/&title=《[Java]-1》 — yirufeng's Blog&pic=http://www.sivan.tech/img/1.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://www.sivan.tech/2016/12/07/Java-1/&title=《[Java]-1》 — yirufeng's Blog&source=程序
+编译执行 ：例如我们所说的C/C++
+解释执行
+
+
+Java应用开发方向:
+JAVA SE:桌面应用程序开发，是JAVA基础！
+JAVA EE:we..." data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http://www.sivan.tech/2016/12/07/Java-1/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《[Java]-1》 — yirufeng's Blog&url=http://www.sivan.tech/2016/12/07/Java-1/&via=http://www.sivan.tech" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=http://www.sivan.tech/2016/12/07/Java-1/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+      
+    </ul>
+ </div>
+
+
+<div class="page-modal wx-share" id="wxShare">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAK4AAACuCAAAAACKZ2kyAAAByElEQVR42u3aS46DMBAFQO5/6Yw02wTntdsYIpVXESJQZtHqj48jXq//9X5lvN7vPLuyeOHi4ra5+SvP7k/uybd0dg8uLu5+7jh4zQWj6idIAiguLu7TuON0Z/y0s23g4uL+OndtvYWLi/t8brW1Mde7SDa/rFbDxcVtcDtBZ9XvC/u7uLi4Re6ruJICZlXw+vAcXFzcLdykzZGMWscjls5mjioCFxf3Am51FJqnQZ3CCRcXdyc3p+THszoJ0JdwiYuLu4Wbv7jT4EiCWrlFi4uLexm3mrLMHcaaO6r1AY2Li7uFO9cKSeJiHtqSbRxVFi4ubpvbD1KrjmtMjlpxcXGXcqtJRj4K7ZRJp0/DxcW9iTuXoHQSl7xFgouLu587h6iWQ/nBrNPJDy4u7sXcvPDIk5vJ9CX/NLi4uBdz81bIeMRyxGvuWAYuLu5+brWh2SpgigsXF/cubr8ZWn1CdYSzuHeLi4u7aCVNk2TsOhccy5vBxcVtc6vBK2+P5ltKruPi4u7nJq+svjgPiJfEVFxc3I2VQv9f4w/x5S24uLiP5M4lQJ0ruLi4d3ELw86AmBc/1ZIJFxd3D7czZE1KnepIBhcX91buH2eeBhwTG4t8AAAAAElFTkSuQmCC" alt="微信分享二维码">
+</div>
+
+
+    
+    <!-- main-js -->
+<script type="text/javascript" src="//cdn.bootcss.com/jquery/2.1.0/jquery.min.js"></script>
+<script type="text/javascript" src="/js/plugins/fastclick.js?v=1.4.2"></script>
+<script type="text/javascript" src="/js/plugins/ios-orientationchange-fix.js?v=1.4.2"></script>
+<script type="text/javascript" src="//cdn.jsdelivr.net/gh/fancyapps/fancybox@3.5.2/dist/jquery.fancybox.min.js"></script>
+
+<script type="text/javascript" src="//cdn.bootcss.com/node-waves/0.7.4/waves.min.js"></script>
+
+<script type="text/javascript" src="/js/method.js?v=1.4.2"></script>
+<script type="text/javascript" src="/js/blog.js?v=1.4.2"></script>
+
+<!-- third-party -->
+
+
+
+
+
+
+<script type="text/javascript" src="/js/plugins/local_search.js?v=1.4.2"></script>
+<script type="text/javascript">
+	var search_path = "search.xml";
+	if (search_path.length === 0) {
+		search_path = "search.xml";
+	}
+	var path = "/" + search_path;
+	searchFunc(path, "local-search-input", "local-search-result");
+</script>
+
+
+
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+    
+    
+
+
+
+<script type="text/javascript" src="https://cdn1.lncld.net/static/js/av-core-mini-0.6.4.js"></script>
+<script type="text/javascript" src="/js/plugins/leancloud_visitors.js?v=1.4.2"></script>
+
+
+
+    <!-- mathjax config similar to math.stackexchange -->
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+        tex2jax: {
+            inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+            processEscapes: true,
+            skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+        }
+    });
+</script>
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for (i=0; i < all.length; i += 1) {
+            all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+    });
+</script>
+
+<script type="text/javascript" src="//cdn.bootcss.com/mathjax/2.7.1/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+
+
+
+    <script>
+    (function() {
+        var OriginTitile = document.title, titleTime;
+        document.addEventListener('visibilitychange', function() {
+            if (document.hidden) {
+                document.title = '死鬼去哪里了！';
+                clearTimeout(titleTime);
+            } else {
+                document.title = '(つェ⊂)咦!又好了!';
+                titleTime = setTimeout(function() {
+                    document.title = OriginTitile;
+                },2000);
+            }
+        });
+    })();
+</script>
+
+
+
+
+
+    
+</body>
+</html>

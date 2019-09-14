@@ -1,0 +1,817 @@
+<!DOCTYPE html>
+<html>
+<head><meta name="generator" content="Hexo 3.9.0">
+    <meta charset="utf-8">
+    
+    
+    <title>[MLA-01]k-近邻算法初探 | yirufeng&#39;s Blog | 未来的小幸运 || 致正在努力的我们 ---- 逸如风</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    
+    <meta name="keywords" content="ML,Machine Learning,K近邻算法">
+    <link rel="shortcut icon" href="/img/favicon.ico">
+    <link rel="stylesheet" href="//cdn.jsdelivr.net/gh/fancyapps/fancybox@3.5.2/dist/jquery.fancybox.min.css">
+    <link rel="stylesheet" href="/css/style.css?v=1.4.2">
+    
+    <script type="text/javascript">
+        // Data Center
+        var DC = {
+            reward:	true,
+            lv: JSON.parse('{"enable":true,"app_id":"K2RVtHi7RnmoN6dovlDKafn8-gzGzoHsz","app_key":"Qxmil0oqPFdDUyyIp2i1Xikt","icon":true}'),
+            v: JSON.parse('{"enable":false,"appid":"ACuOJIasBeRLiDe2iUApHj67-gzGzoHsz","appkey":"qbgg4tClrQQmvq8uwlpwA5mA","notify":true,"verify":true,"placeholder":"give me some sugers plz...","avatar":"wavatar"}'),
+            g: JSON.parse('{"enable":false,"lazy":true,"owner":"codefine","repo":"gitment","oauth":{"client_id":null,"client_secret":null},"perPage":10}'),
+            d: JSON.parse('{"app_id":null}')
+        };
+    </script>
+    <script type="text/javascript">
+        window.lazyScripts=[];
+    </script>
+    
+</head>
+
+
+<body>
+    <div id="loading" class="active"></div>
+
+    <aside id="menu" class="">
+  <div class="inner flex-row-vertical">
+    <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menu-off">
+        <i class="icon icon-lg icon-close"></i>
+    </a>
+    <div class="brand-wrap">
+      
+      <img src="/img/brand.jpg" class="brand-bg">
+      
+      <div class="brand">
+        <a href="/" class="avatar waves-effect waves-circle waves-light">
+          <img src="/img/1.jpg">
+        </a>
+        <hgroup class="introduce">
+          <h5 class="nickname">逸如风(yirufeng)</h5>
+          <a href="mailto:yirufeng@foxmail.com" title="yirufeng@foxmail.com" class="mail">
+            
+              <span>y</span>
+            
+              <span>i</span>
+            
+              <span>r</span>
+            
+              <span>u</span>
+            
+              <span>f</span>
+            
+              <span>e</span>
+            
+              <span>n</span>
+            
+              <span>g</span>
+            
+              <span>@</span>
+            
+              <span>f</span>
+            
+              <span>o</span>
+            
+              <span>x</span>
+            
+              <span>m</span>
+            
+              <span>a</span>
+            
+              <span>i</span>
+            
+              <span>l</span>
+            
+              <span>.</span>
+            
+              <span>c</span>
+            
+              <span>o</span>
+            
+              <span>m</span>
+            
+          </a>
+        </hgroup>
+        
+        <ul class="menu-link">
+          
+              <li>
+                <a href="https://github.com/sivanWu0222" target="_blank">
+                  <i class="icon icon-lg icon-github"></i>
+                </a>
+              </li>
+            
+              <li>
+                <a href="https://mail.qq.com/cgi-bin/qm_share?t=qm_mailme&amp;amp;email=xfTz8-Py8-f08vWFtLTrpqqo" target="_blank">
+                  <i class="icon icon-lg icon-envelope"></i>
+                </a>
+              </li>
+            
+        </ul>
+        
+      </div>
+    </div>
+    <div class="scroll-wrap flex-col">
+      <ul class="nav">
+        
+            <li class="">
+              <a href="/"  >
+                <i class="icon icon-lg icon-home"></i>
+                Home
+              </a>
+            </li>
+        
+            <li class="">
+              <a href="/categories"  >
+                <i class="icon icon-lg icon-th-list"></i>
+                Category
+              </a>
+            </li>
+        
+            <li class="">
+              <a href="/research"  >
+                <i class="icon icon-lg icon-mortar-board"></i>
+                Research
+              </a>
+            </li>
+        
+            <li class="">
+              <a href="/tags"  >
+                <i class="icon icon-lg icon-tags"></i>
+                Tag
+              </a>
+            </li>
+        
+            <li class="">
+              <a href="/archives"  >
+                <i class="icon icon-lg icon-archives"></i>
+                Archive
+              </a>
+            </li>
+        
+            <li class="">
+              <a href="/about"  >
+                <i class="icon icon-lg icon-user"></i>
+                About
+              </a>
+            </li>
+        
+            <li class="">
+              <a href="/open-source"  >
+                <i class="icon icon-lg icon-github"></i>
+                Project
+              </a>
+            </li>
+        
+            <li class="">
+              <a href="/demo"  >
+                <i class="icon icon-lg icon-audio-description"></i>
+                Demo
+              </a>
+            </li>
+        
+            <li class="">
+              <a href="/wechat-number"  >
+                <i class="icon icon-lg icon-wechat"></i>
+                公众号
+              </a>
+            </li>
+        
+            <li class="">
+              <a href="http://www.sivan.tech/LeetCodeAlgo/" target="_blank" >
+                <i class="icon icon-lg icon-braille"></i>
+                Leetcode
+              </a>
+            </li>
+        
+            <li class="">
+              <a href="http://resume.sivan.tech/" target="_blank" >
+                <i class="icon icon-lg icon-file-pdf-o"></i>
+                Resume
+              </a>
+            </li>
+        
+      </ul>
+    </div>
+  </div>
+</aside>
+
+    <main id="main">
+        <header class="top-header" id="header">
+    <div class="flex-row clearfix">
+        <a href="javascript:;" class="header-icon pull-left waves-effect waves-circle waves-light on" id="menu-toggle">
+          <i class="icon icon-lg icon-navicon"></i>
+        </a>
+        <div class="flex-col header-title ellipsis">
+            <span>[MLA-01]k-近邻算法初探</span>
+            
+        </div>
+        
+        <a href="javascript:;" id="site_search_btn" class="header-icon pull-right waves-effect waves-circle waves-light">
+            <i class="icon icon-lg icon-search"></i>
+        </a>
+        
+    </div>
+</header>
+<header class="content-header post-header">
+    <img src="/img/s3.jpg" class="header-bg">
+    <div class="container fade-scale">
+        <h1 class="title">[MLA-01]k-近邻算法初探</h1>
+        <h5 class="subtitle">
+            
+                <time datetime="2019-06-07T02:37:26.000Z" itemprop="datePublished" class="page-time">
+  2019-06-07
+</time>
+
+
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/ML/">ML</a><ul class="article-category-list-child"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/ML/k近邻算法/">k近邻算法</a></li></ul></li></ul>
+
+            
+        </h5>
+        
+    </div>
+    
+
+</header>
+
+<div id="site_search">
+    <div class="search-title clearfix">
+        <span class="pull-left">
+          <i class="icon icon-lg icon-search"></i>
+        </span>
+        <input type="text" id="local-search-input" name="q" results="0" placeholder="search my blog..." class="form-control pull-left"/>
+        <a href="javascript:;" class="close pull-right waves-effect waves-circle waves-light">
+          <i class="icon icon-lg icon-close"></i>
+        </a>
+    </div>
+    <div id="local-search-result"></div>
+</div>
+
+
+<div class="container body-wrap">
+    <article id="post-MLA-01-k-近邻算法初探"
+  class="post-article article-type-post" itemprop="blogPost">
+    <div class="post-card">
+        <h1 class="post-card-title">[MLA-01]k-近邻算法初探</h1>
+        <div class="post-meta">
+            <time class="post-time" title="2019-06-07 10:37:26" datetime="2019-06-07T02:37:26.000Z"  itemprop="datePublished">2019-06-07</time>
+
+            
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/ML/">ML</a><ul class="article-category-list-child"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/ML/k近邻算法/">k近邻算法</a></li></ul></li></ul>
+
+
+
+            
+	<span id="/2019/06/07/MLA-01-k-近邻算法初探/" class="leancloud_visitors" data-flag-title="[MLA-01]k-近邻算法初探" title="[MLA-01]k-近邻算法初探">
+		
+			<i class="icon icon-eye"></i>
+		
+		<span class="leancloud-visitors-count"></span>
+	</span>
+ 
+
+            
+
+
+            
+        </div>
+        <div class="post-content" id="post-content" itemprop="postContent">
+            
+            <h1 id="了解"><a href="#了解" class="headerlink" title="了解"></a>了解</h1><p>k 邻近算法是《机器学习实战》中第一个讲到的机器学习算法，也是最容易理解的算法，不需要很多背景知识即可理解和上手。</p>
+<h2 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h2><blockquote>
+<p>k-近邻算法采用测量不同特征值之间的距离进行分类</p>
+</blockquote>
+<p>优点：精度高，对异常值不敏感，无数据输入确定<br>缺点：计算复杂度高，空间复杂度高<br>适用数据范围：数值型和标称型</p>
+<h2 id="需要了解的一些知识"><a href="#需要了解的一些知识" class="headerlink" title="需要了解的一些知识"></a>需要了解的一些知识</h2><ul>
+<li>k邻近算法只适用于分类算法(预测的值是离散的而不是连续的)</li>
+<li>k邻近算法属于监督学习</li>
+</ul>
+<h1 id="原理"><a href="#原理" class="headerlink" title="原理"></a>原理</h1><p>对于要预测的某个数据点，从已带有标签的数据中选择k个距离该数据点最近的数据，并对其标签进行统计，频率最大的便是该数据点的标签，也就是我们预测的结果</p>
+<blockquote>
+<p>书上的解释：存在一个样本数据集合，也称作训练样本集，并且样本集中每个数据都存在标签，即我们知道样本集中每个数据与所属分类的对应关系。输入没有标签的数据后，将新数据的每个特征值与样本集中每个数据特征进行比较，然后算法提取样本集中特征最相似数据(最近邻)的分类标签。一般来说，只选择样本数据集中前k个最相似的数据。最后选择k个最相似数据中出现次数最多的分类，作为新数据的分类。</p>
+</blockquote>
+<h1 id="一般流程"><a href="#一般流程" class="headerlink" title="一般流程"></a>一般流程</h1><ol>
+<li>收集数据</li>
+<li>准备数据：计算距离所需要的数值，最好是结构化的数据格式</li>
+<li>分析数据</li>
+<li>训练算法：此步骤不适用于k近邻算法</li>
+<li>测试算法：计算错误率</li>
+<li>使用算法：首先需要输入样本数据和结构化的输出结果，然后运行k近邻算判定输入数据分别属于哪个分类，最后应用对计算出的分类执行后续的处理</li>
+</ol>
+<h1 id="实现"><a href="#实现" class="headerlink" title="实现"></a>实现</h1><p>对每个未知类别属性的数据集中的每个点依次执行如下操作：</p>
+<ol>
+<li>计算已知类别数据集中点与当前点之间的距离</li>
+<li>按照距离从小到大进行排序</li>
+<li>选取与当前点距离最小的k个点</li>
+<li>确定前k个点所在类别的出现频率</li>
+<li>返回前k个点出现频率最高的类别作为当前点的预测分类</li>
+</ol>
+<h2 id="准备数据"><a href="#准备数据" class="headerlink" title="准备数据"></a>准备数据</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 导入科学计算包</span></span><br><span class="line"><span class="keyword">from</span> numpy <span class="keyword">import</span> *</span><br><span class="line"><span class="comment"># 导入运算符模块，k近邻算法执行排序操作时将会使用这个模块提供的函数</span></span><br><span class="line"><span class="keyword">import</span> operator</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">createDataSet</span><span class="params">()</span>:</span></span><br><span class="line">    group = array([[<span class="number">1.0</span>, <span class="number">1.1</span>], [<span class="number">1.0</span>, <span class="number">1.0</span>], [<span class="number">0</span>, <span class="number">0</span>], [<span class="number">0</span>, <span class="number">0.1</span>]])</span><br><span class="line">    labels = [<span class="string">'A'</span>, <span class="string">'A'</span>, <span class="string">'B'</span>, <span class="string">'B'</span>]</span><br><span class="line">    <span class="keyword">return</span> group, labels</span><br></pre></td></tr></table></figure>
+<h2 id="实现KNN分类算法"><a href="#实现KNN分类算法" class="headerlink" title="实现KNN分类算法"></a>实现KNN分类算法</h2><blockquote>
+<p>采用欧式距离公式计算两个数据点之间的距离，从小到大排序，确定前k个最小距离元素所对应的分类</p>
+</blockquote>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">classify</span><span class="params">(inX, dataSet, labels, k)</span>:</span></span><br><span class="line">  <span class="string">"""</span></span><br><span class="line"><span class="string">  根据欧式距离公式计算出的距离从小到大排序，返回前k个元素</span></span><br><span class="line"><span class="string">  :param inX: 用于分类的输入向量</span></span><br><span class="line"><span class="string">  :param dataSet: 输入的训练样本集</span></span><br><span class="line"><span class="string">  :param labels: 标签向量</span></span><br><span class="line"><span class="string">  :param k: 标签向量元素的个数或训练集中数据的行数</span></span><br><span class="line"><span class="string">  :return:</span></span><br><span class="line"><span class="string">  """</span></span><br><span class="line">  dataSetSize = dataSet.shape[<span class="number">0</span>]</span><br><span class="line">  <span class="comment"># 距离计算</span></span><br><span class="line">  diffMat = tile(inX, (dataSetSize, <span class="number">1</span>)) - dataSet</span><br><span class="line">  sqDiffMat = diffMat ** <span class="number">2</span></span><br><span class="line">  sqDistances = sqDiffMat.sum(axis=<span class="number">1</span>)</span><br><span class="line">  distances = sqDistances ** <span class="number">0.5</span></span><br><span class="line">  sortedDistIndicies = distances.argsort()</span><br><span class="line">  classCount = &#123;&#125;</span><br><span class="line">  <span class="comment"># 以下两行，选择距离最小的k个点</span></span><br><span class="line">  <span class="keyword">for</span> i <span class="keyword">in</span> range(k):</span><br><span class="line">      votellabel = labels[sortedDistIndicies[i]]</span><br><span class="line">      classCount[votellabel] = classCount.get(votellabel, <span class="number">0</span>) + <span class="number">1</span></span><br><span class="line">      sortedClassCount = sorted(classCount.items(), key=operator.itemgetter(<span class="number">1</span>), reverse=<span class="literal">True</span>)</span><br><span class="line">  <span class="keyword">return</span> sortedClassCount[<span class="number">0</span>][<span class="number">0</span>]</span><br></pre></td></tr></table></figure>
+<h3 id="numpy中的tile-方法"><a href="#numpy中的tile-方法" class="headerlink" title="numpy中的tile()方法"></a>numpy中的tile()方法</h3><blockquote>
+<p>的功能是重复某个数组。比如tile(A,n)，功能是将数组A重复n次，构成一个新的数组<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">num = [<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>]</span><br><span class="line">tile(num, <span class="number">2</span>) <span class="comment"># 返回一个数组，将num重复两次</span></span><br><span class="line">tile(num, (<span class="number">1</span>, <span class="number">2</span>)) <span class="comment"># 返回一个1行并且将num重复两次的矩阵</span></span><br><span class="line">tile(num, (<span class="number">2</span>, <span class="number">3</span>)) <span class="comment"># 返回一个两行并且每行将num重复3次的矩阵</span></span><br></pre></td></tr></table></figure></p>
+</blockquote>
+<p>结果是：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">[<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>]</span><br><span class="line">[[<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>]]</span><br><span class="line">[[<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>], [<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>]]</span><br></pre></td></tr></table></figure>
+<h3 id="字典使用get-方法"><a href="#字典使用get-方法" class="headerlink" title="字典使用get()方法"></a>字典使用get()方法</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">classCount[votellabel] = classCount.get(votellabel, <span class="number">0</span>) + <span class="number">1</span></span><br></pre></td></tr></table></figure>
+<p>作用：从classCount字典中获取votellabel的元素，如果不存在返回0</p>
+<h3 id="operator模块的itemgetter-方法"><a href="#operator模块的itemgetter-方法" class="headerlink" title="operator模块的itemgetter()方法"></a>operator模块的itemgetter()方法</h3><blockquote>
+<p>operator模块提供的itemgetter函数用于获取对象的哪些维的数据</p>
+</blockquote>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sortedClassCount = sorted(classCount.items(), key=operator.itemgetter(<span class="number">1</span>), reverse=<span class="literal">True</span>)</span><br></pre></td></tr></table></figure>
+<p>operator.itemgetter函数<del>获取的不是值</del>，而是<strong>定义了一个函数</strong>，通过该函数作用到对象上才能获取值。</p>
+<h2 id="测试分类器"><a href="#测试分类器" class="headerlink" title="测试分类器"></a>测试分类器</h2><blockquote>
+<p>k近邻算法的错误率在0-1之间， 错误率=错误次数/测试执行的总数</p>
+</blockquote>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">group, labels = createDataSet()</span><br><span class="line">print(classify([<span class="number">0</span>, <span class="number">0</span>], group, labels, <span class="number">3</span>))</span><br></pre></td></tr></table></figure>
+<h1 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h1><p>上面就是一个简单的分类器的简单实现，采用欧式距离公式计算两个数据点的距离</p>
+<h2 id="k近邻算法的缺点"><a href="#k近邻算法的缺点" class="headerlink" title="k近邻算法的缺点"></a>k近邻算法的缺点</h2><ol>
+<li>如果期望k近邻算法能够表现优秀，我们必须有接近实际数据的训练样本集</li>
+<li>由于必须对数据集中的每个数据计算距离值，在实际使用中(如需要实时计算或数据量超级大时)可能非常耗时</li>
+<li>无法给出任何数据的基础结构信息，因此我们无法知晓平均实例样本和典型实例样本具有什么特征</li>
+<li>k近邻算法可以很好的完成分类任务，但是最大的缺点就是无法给出数据的内在含义</li>
+</ol>
+<a id="more"></a>
+
+        </div>
+        
+<blockquote class="post-copyright">
+    <div class="content">
+        
+<span class="post-time">
+    最后更新时间：<time datetime="2019-08-26T10:46:59.862Z" itemprop="dateUpdated">2019-08-26 18:46:59</time>
+</span><br>
+
+
+        
+        转载注明出处，原文地址：<a href="/2019/06/07/MLA-01-k-近邻算法初探/" target="_blank" rel="external">http://www.sivan.tech/2019/06/07/MLA-01-k-近邻算法初探/</a>
+        
+    </div>
+    <footer>
+        <a href="http://www.sivan.tech">
+            <img src="/img/1.jpg" alt="逸如风(yirufeng)">
+            逸如风(yirufeng)
+        </a>
+    </footer>
+</blockquote>
+
+        
+            <div class="page-reward">
+    <a id="rewardBtn" href="javascript:;" class="page-reward-btn waves-effect waves-circle waves-light">赏</a>
+</div>
+
+            
+        
+        <div class="post-footer">
+            
+	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/K近邻算法/">K近邻算法</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/ML/">ML</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Machine-Learning/">Machine Learning</a></li></ul>
+
+            <div class="page-share-wrap">
+    
+
+<div class="page-share" id="pageShare">
+    <ul class="reset share-icons">
+      
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://www.sivan.tech/2019/06/07/MLA-01-k-近邻算法初探/&title=《[MLA-01]k-近邻算法初探》 — yirufeng's Blog&pic=http://www.sivan.tech/img/1.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://www.sivan.tech/2019/06/07/MLA-01-k-近邻算法初探/&title=《[MLA-01]k-近邻算法初探》 — yirufeng's Blog&source=了解k 邻近算法是《机器学习实战》中第一个讲到的机器学习算法，也是最容易理解的算法，不需要很多背景知识即可理解和上手。
+概述
+k-近邻算法采用测量不同特征..." data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http://www.sivan.tech/2019/06/07/MLA-01-k-近邻算法初探/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《[MLA-01]k-近邻算法初探》 — yirufeng's Blog&url=http://www.sivan.tech/2019/06/07/MLA-01-k-近邻算法初探/&via=http://www.sivan.tech" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=http://www.sivan.tech/2019/06/07/MLA-01-k-近邻算法初探/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+      
+    </ul>
+ </div>
+
+
+
+    <a href="javascript:;" id="shareFab" class="page-share-fab waves-effect waves-circle">
+        <i class="icon icon-share-alt icon-lg"></i>
+    </a>
+</div>
+
+        </div>
+        
+            
+
+
+        
+    </div>
+    
+<nav class="post-nav flex-row flex-justify-between">
+  
+    <div class="prev">
+      <a href="/2019/06/10/MLA-02-k-近邻算法应用/" id="post-prev" class="post-nav-link">
+        <div class="tips"><i class="icon icon-angle-left icon-lg icon-pr"></i> Prev</div>
+        <h4 class="title">[MLA-02]k-近邻算法初探</h4>
+      </a>
+    </div>
+  
+
+  
+    <div class="next">
+      <a href="/2019/05/17/使用Flask实现一个简单的图书管理/" id="post-next" class="post-nav-link">
+        <div class="tips">Next <i class="icon icon-angle-right icon-lg icon-pl"></i></div>
+        <h4 class="title">使用Flask实现一个简单的图书管理</h4>
+      </a>
+    </div>
+  
+</nav>
+
+
+    
+        <div id="repo">
+    <div class="loading active"></div>
+    <div class="top clearfix">
+        <div class="avatar pull-left"></div>
+        <div class="content pull-left">
+            <p class="name"></p>
+            <p class="description"></p>
+        </div>
+    </div>
+    <ul class="bottom">
+        <li class="star">
+            <span class="icon icon-star"></span>
+            <span class="val">0</span>
+        </li>
+        <li class="fork">
+            <span class="icon icon-code-fork"></span>
+            <span class="val">0</span>
+        </li>
+        <li class="date">
+            <span class="icon icon-clock-o"></span>
+            <span class="val">0000-00-00</span>
+        </li>
+    </ul>
+    <a class="link" href=""></a>
+</div>
+    
+    
+        <aside class="post-widget">
+            <nav class="post-toc-wrap" id="post-toc">
+                <strong>目录</strong>
+                <ol class="post-toc"><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#了解"><span class="post-toc-number">1.</span> <span class="post-toc-text">了解</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#概述"><span class="post-toc-number">1.1.</span> <span class="post-toc-text">概述</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#需要了解的一些知识"><span class="post-toc-number">1.2.</span> <span class="post-toc-text">需要了解的一些知识</span></a></li></ol></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#原理"><span class="post-toc-number">2.</span> <span class="post-toc-text">原理</span></a></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#一般流程"><span class="post-toc-number">3.</span> <span class="post-toc-text">一般流程</span></a></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#实现"><span class="post-toc-number">4.</span> <span class="post-toc-text">实现</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#准备数据"><span class="post-toc-number">4.1.</span> <span class="post-toc-text">准备数据</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#实现KNN分类算法"><span class="post-toc-number">4.2.</span> <span class="post-toc-text">实现KNN分类算法</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#numpy中的tile-方法"><span class="post-toc-number">4.2.1.</span> <span class="post-toc-text">numpy中的tile()方法</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#字典使用get-方法"><span class="post-toc-number">4.2.2.</span> <span class="post-toc-text">字典使用get()方法</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#operator模块的itemgetter-方法"><span class="post-toc-number">4.2.3.</span> <span class="post-toc-text">operator模块的itemgetter()方法</span></a></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#测试分类器"><span class="post-toc-number">4.3.</span> <span class="post-toc-text">测试分类器</span></a></li></ol></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#总结"><span class="post-toc-number">5.</span> <span class="post-toc-text">总结</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#k近邻算法的缺点"><span class="post-toc-number">5.1.</span> <span class="post-toc-text">k近邻算法的缺点</span></a></li></ol></li></ol>
+            </nav>
+            <div class="toc-bar"><div>
+        </aside>
+    
+</article>
+
+    <div id="reward" class="page-modal reward-lay">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <h3 class="reward-title">
+        <i class="icon icon-quote-left"></i>
+        感谢原作，你的打赏是我的动力！
+        <i class="icon icon-quote-right"></i>
+    </h3>
+    <div class="reward-content">
+        
+        <div class="reward-code">
+            <img id="rewardCode" src="/img/reward-wechat.jpg" alt="打赏二维码">
+        </div>
+        
+        <label class="reward-toggle">
+            <input id="rewardToggle" type="checkbox" class="reward-toggle-check"
+                data-wechat="/img/reward-wechat.jpg" data-alipay="/img/reward-alipay.jpg">
+            <div class="reward-toggle-ctrol">
+                <span class="reward-toggle-item wechat">微信</span>
+                <span class="reward-toggle-label"></span>
+                <span class="reward-toggle-item alipay">支付宝</span>
+            </div>
+        </label>
+        
+    </div>
+</div>
+
+    
+
+</div>
+
+    </main>
+    <footer class="footer ">
+    
+    <div class="top">
+        
+            <p>
+    <span>Links：</span>
+    
+    <span class="blogroll-item">
+        <a href="https://github.com/sivanWu0222" target="_blank">GitHub</a>
+    </span>
+    
+    <span class="blogroll-item">
+        <a href="http://weibo.com/Msingwen0222/home?wvr=5" target="_blank">新浪微博</a>
+    </span>
+    
+    <span class="blogroll-item">
+        <a href="https://www.linkedin.com/in/%E6%99%93%E6%96%87-%E5%90%B4-79057a121/" target="_blank">Linkedin</a>
+    </span>
+    
+    <span class="blogroll-item">
+        <a href="http://wpa.qq.com/msgrd?v=3&amp;uin=1666762170&amp;site=qq&amp;menu=yes" target="_blank">QQ</a>
+    </span>
+    
+    <span class="blogroll-item">
+        <a href="https://zh-cn.facebook.com/people/SiVan-Wu/100014408918389" target="_blank">Facebook</a>
+    </span>
+    
+    <span class="blogroll-item">
+        <a href="https://mail.qq.com/cgi-bin/qm_share?t=qm_mailme&amp;email=xfTz8-Py8-f08vWFtLTrpqqo" target="_blank">Contact</a>
+    </span>
+    
+    <span class="blogroll-item">
+        <a href="https://twitter.com/SiVan_Wu" target="_blank">Twitter</a>
+    </span>
+    
+</p>
+
+        
+    </div>
+    
+    <div class="bottom">
+        <p>
+            <span>
+                逸如风(yirufeng) &copy; 2016 - 2019
+            </span>
+
+           	
+           	<span>
+           		<a href="http://beian.miit.gov.cn/" target="_blank">已实名认证</a>
+           	</span>
+           	
+
+            
+
+            
+
+            
+                
+<span class="site-uv" title="总访客量">
+    <i class="icon icon-user"></i>
+    <i class="busuanzi-value" id="busuanzi_value_site_uv"></i>
+</span>
+
+
+<span class="site-pv" title="总访问量">
+    <i class="icon icon-eye"></i>
+    <i class="busuanzi-value" id="busuanzi_value_site_pv"></i>
+</span>
+
+            
+        </p>
+    </div>
+</footer>
+
+    <div class="mask" id="mask"></div>
+<a href="javascript:;" id="gotop" class="waves-effect waves-circle waves-light"><span class="icon icon-lg icon-chevron-up"></span></a>
+
+
+
+<div class="global-share" id="globalShare">
+    <ul class="reset share-icons">
+      
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://www.sivan.tech/2019/06/07/MLA-01-k-近邻算法初探/&title=《[MLA-01]k-近邻算法初探》 — yirufeng's Blog&pic=http://www.sivan.tech/img/1.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://www.sivan.tech/2019/06/07/MLA-01-k-近邻算法初探/&title=《[MLA-01]k-近邻算法初探》 — yirufeng's Blog&source=了解k 邻近算法是《机器学习实战》中第一个讲到的机器学习算法，也是最容易理解的算法，不需要很多背景知识即可理解和上手。
+概述
+k-近邻算法采用测量不同特征..." data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http://www.sivan.tech/2019/06/07/MLA-01-k-近邻算法初探/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《[MLA-01]k-近邻算法初探》 — yirufeng's Blog&url=http://www.sivan.tech/2019/06/07/MLA-01-k-近邻算法初探/&via=http://www.sivan.tech" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=http://www.sivan.tech/2019/06/07/MLA-01-k-近邻算法初探/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+      
+    </ul>
+ </div>
+
+
+<div class="page-modal wx-share" id="wxShare">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAMYAAADGCAAAAACs8KCBAAACMElEQVR42u3aQW7DQAgF0Nz/0uk2UpXJB5xWM35eWanl8LogDPB4xNfz5fr9yfrz17++PpN8y8UXBgbGtozn8qoy1uFW2UlsGBgY92Gsg3h3nzyfh9v7LgwMDIx1WHmZOEnHGBgYGFcl0OTz9b/g3xIuBgbGJoy8dJsXi+s23NfP4hgYGBsy8q77399/Zb6BgYGxFeNZvKrts+rw4Nm6MDAwzmbkCa5XMubvyd/wtrjEwMA4lNFLgnnTP0/Z+agAAwPjboz5gkXSbuuVmKPkjoGBcSgjSbKTAWSerPNnHr3fCgwMjCMYvTQ6Xx2rvhMDA+MOjCRdVhNfdTEiCfRDkYqBgXE0Y16W9ZpxeVrPn8HAwDibkR81509WMYWBAQYGxqGMcjOr2O6vLlvkY4DytggGBsa2jORAOx9AVhdYJ61ADAyMUxl5w6t3Js5HAjnyQ4WLgYFxHKM6Kli/qLquOlnIKPQLMTAwtmUkpV4y2uwtoSapNjrKYmBgHM1IDqt52dc7GPdC/7A5goGBcSijd4CcN+mScKPxAwYGxg0YedBXLXVN3o+BgXFPRn7fa8/loeddtcLvAwYGxraM+apEdWA5GW1iYGDck9EbbVaLucnR9OI5LQYGxraM6uixGvQkRAwMDIxJyyw/oF5b9r1N1hgYGBjFSnP9TJ5Sm11DDAwMjLiVVi0r8wgvS7gYGBhbMSbLXvk6RbWUzJM4BgbG2YxJyusFnSflfLEDAwPjUMYPM7qTYSIV5sQAAAAASUVORK5CYII=" alt="微信分享二维码">
+</div>
+
+
+    
+    <!-- main-js -->
+<script type="text/javascript" src="//cdn.bootcss.com/jquery/2.1.0/jquery.min.js"></script>
+<script type="text/javascript" src="/js/plugins/fastclick.js?v=1.4.2"></script>
+<script type="text/javascript" src="/js/plugins/ios-orientationchange-fix.js?v=1.4.2"></script>
+<script type="text/javascript" src="//cdn.jsdelivr.net/gh/fancyapps/fancybox@3.5.2/dist/jquery.fancybox.min.js"></script>
+
+<script type="text/javascript" src="//cdn.bootcss.com/node-waves/0.7.4/waves.min.js"></script>
+
+<script type="text/javascript" src="/js/method.js?v=1.4.2"></script>
+<script type="text/javascript" src="/js/blog.js?v=1.4.2"></script>
+
+<!-- third-party -->
+
+
+    <script type="text/javascript">
+    (function() {
+
+        const origin = "ai-distill | MachineLearningPractice"
+        let user, repo;
+        origin.replace(/(\S+)\s{0,1}\|\s{0,1}(\S+)/g, (...rest) => {
+            [user, repo] = [ rest[1], rest[2] ];
+        });
+        if (user && repo) {
+            const url = `//api.github.com/repos/${user}/${repo}?callback=?`;
+            $.getJSON(url, (data) => {
+                updateRepoInPage(data.data);
+            });
+        }
+
+        function updateRepoInPage(data) {
+            const {name, description, html_url: url, stargazers_count: stars, forks, owner: owner, updated_at: update} = data;
+            _loadAvatar(owner.avatar_url).then(avatarUrl => {
+                const avatarBg = `url(${avatarUrl})`;
+                const container = $('#repo');
+                container.click(() => {
+                    window.open(url);
+                });
+
+                //init
+                const loadingItem = container.find('.loading').hide();
+                const topItem = container.find('.top').addClass('active');
+                const bottomItem = container.find('.bottom').addClass('active');
+
+                //avatar
+                const avatarItem = container.find('.avatar');
+                const oldBg = avatarItem.css('background-image');
+                avatarItem.hover(() => {
+                    avatarItem.css('background-image', avatarBg);
+                }, () => {
+                    avatarItem.css('background-image', oldBg);
+                });
+
+                //repo-name
+                const nameItem = container.find('.name').html(name);
+
+                //description
+                const descriptionItem = container.find('.description').html(description);
+
+                //stars
+                const starItem = container.find('.star>.val').html(stars);
+
+                //forks
+                const forkItem = container.find('.fork>.val').html(forks);
+
+                //date
+                const formatDate = update.replace(/T.+/g, '');
+                const dateItem = container.find('.date>.val').html(formatDate);
+            });
+
+            function _loadAvatar(url) {
+                return new Promise((resolve, reject) => {
+                    const img = new Image();
+                    img.onload = () => {
+                        resolve(url);
+                    };
+                    img.src = url;
+                });
+            }
+
+        }
+
+    })();
+</script>
+
+
+
+
+
+<script type="text/javascript" src="/js/plugins/local_search.js?v=1.4.2"></script>
+<script type="text/javascript">
+	var search_path = "search.xml";
+	if (search_path.length === 0) {
+		search_path = "search.xml";
+	}
+	var path = "/" + search_path;
+	searchFunc(path, "local-search-input", "local-search-result");
+</script>
+
+
+
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+    
+    
+
+
+
+<script type="text/javascript" src="https://cdn1.lncld.net/static/js/av-core-mini-0.6.4.js"></script>
+<script type="text/javascript" src="/js/plugins/leancloud_visitors.js?v=1.4.2"></script>
+
+
+
+    <!-- mathjax config similar to math.stackexchange -->
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+        tex2jax: {
+            inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+            processEscapes: true,
+            skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+        }
+    });
+</script>
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for (i=0; i < all.length; i += 1) {
+            all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+    });
+</script>
+
+<script type="text/javascript" src="//cdn.bootcss.com/mathjax/2.7.1/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+
+
+
+    <script>
+    (function() {
+        var OriginTitile = document.title, titleTime;
+        document.addEventListener('visibilitychange', function() {
+            if (document.hidden) {
+                document.title = '死鬼去哪里了！';
+                clearTimeout(titleTime);
+            } else {
+                document.title = '(つェ⊂)咦!又好了!';
+                titleTime = setTimeout(function() {
+                    document.title = OriginTitile;
+                },2000);
+            }
+        });
+    })();
+</script>
+
+
+
+
+
+    
+</body>
+</html>

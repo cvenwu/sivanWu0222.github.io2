@@ -1,0 +1,733 @@
+<!DOCTYPE html>
+<html>
+<head><meta name="generator" content="Hexo 3.9.0">
+    <meta charset="utf-8">
+    
+    
+    <title>[Java]-7 | yirufeng&#39;s Blog | 未来的小幸运 || 致正在努力的我们 ---- 逸如风</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    
+    <meta name="keywords" content>
+    <link rel="shortcut icon" href="/img/favicon.ico">
+    <link rel="stylesheet" href="//cdn.jsdelivr.net/gh/fancyapps/fancybox@3.5.2/dist/jquery.fancybox.min.css">
+    <link rel="stylesheet" href="/css/style.css?v=1.4.2">
+    
+    <script type="text/javascript">
+        // Data Center
+        var DC = {
+            reward:	true,
+            lv: JSON.parse('{"enable":true,"app_id":"K2RVtHi7RnmoN6dovlDKafn8-gzGzoHsz","app_key":"Qxmil0oqPFdDUyyIp2i1Xikt","icon":true}'),
+            v: JSON.parse('{"enable":false,"appid":"ACuOJIasBeRLiDe2iUApHj67-gzGzoHsz","appkey":"qbgg4tClrQQmvq8uwlpwA5mA","notify":true,"verify":true,"placeholder":"give me some sugers plz...","avatar":"wavatar"}'),
+            g: JSON.parse('{"enable":false,"lazy":true,"owner":"codefine","repo":"gitment","oauth":{"client_id":null,"client_secret":null},"perPage":10}'),
+            d: JSON.parse('{"app_id":null}')
+        };
+    </script>
+    <script type="text/javascript">
+        window.lazyScripts=[];
+    </script>
+    
+</head>
+
+
+<body>
+    <div id="loading" class="active"></div>
+
+    <aside id="menu" class="">
+  <div class="inner flex-row-vertical">
+    <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menu-off">
+        <i class="icon icon-lg icon-close"></i>
+    </a>
+    <div class="brand-wrap">
+      
+      <img src="/img/brand.jpg" class="brand-bg">
+      
+      <div class="brand">
+        <a href="/" class="avatar waves-effect waves-circle waves-light">
+          <img src="/img/1.jpg">
+        </a>
+        <hgroup class="introduce">
+          <h5 class="nickname">逸如风(yirufeng)</h5>
+          <a href="mailto:yirufeng@foxmail.com" title="yirufeng@foxmail.com" class="mail">
+            
+              <span>y</span>
+            
+              <span>i</span>
+            
+              <span>r</span>
+            
+              <span>u</span>
+            
+              <span>f</span>
+            
+              <span>e</span>
+            
+              <span>n</span>
+            
+              <span>g</span>
+            
+              <span>@</span>
+            
+              <span>f</span>
+            
+              <span>o</span>
+            
+              <span>x</span>
+            
+              <span>m</span>
+            
+              <span>a</span>
+            
+              <span>i</span>
+            
+              <span>l</span>
+            
+              <span>.</span>
+            
+              <span>c</span>
+            
+              <span>o</span>
+            
+              <span>m</span>
+            
+          </a>
+        </hgroup>
+        
+        <ul class="menu-link">
+          
+              <li>
+                <a href="https://github.com/sivanWu0222" target="_blank">
+                  <i class="icon icon-lg icon-github"></i>
+                </a>
+              </li>
+            
+              <li>
+                <a href="https://mail.qq.com/cgi-bin/qm_share?t=qm_mailme&amp;amp;email=xfTz8-Py8-f08vWFtLTrpqqo" target="_blank">
+                  <i class="icon icon-lg icon-envelope"></i>
+                </a>
+              </li>
+            
+        </ul>
+        
+      </div>
+    </div>
+    <div class="scroll-wrap flex-col">
+      <ul class="nav">
+        
+            <li class="">
+              <a href="/"  >
+                <i class="icon icon-lg icon-home"></i>
+                Home
+              </a>
+            </li>
+        
+            <li class="">
+              <a href="/categories"  >
+                <i class="icon icon-lg icon-th-list"></i>
+                Category
+              </a>
+            </li>
+        
+            <li class="">
+              <a href="/research"  >
+                <i class="icon icon-lg icon-mortar-board"></i>
+                Research
+              </a>
+            </li>
+        
+            <li class="">
+              <a href="/tags"  >
+                <i class="icon icon-lg icon-tags"></i>
+                Tag
+              </a>
+            </li>
+        
+            <li class="">
+              <a href="/archives"  >
+                <i class="icon icon-lg icon-archives"></i>
+                Archive
+              </a>
+            </li>
+        
+            <li class="">
+              <a href="/about"  >
+                <i class="icon icon-lg icon-user"></i>
+                About
+              </a>
+            </li>
+        
+            <li class="">
+              <a href="/open-source"  >
+                <i class="icon icon-lg icon-github"></i>
+                Project
+              </a>
+            </li>
+        
+            <li class="">
+              <a href="/demo"  >
+                <i class="icon icon-lg icon-audio-description"></i>
+                Demo
+              </a>
+            </li>
+        
+            <li class="">
+              <a href="/wechat-number"  >
+                <i class="icon icon-lg icon-wechat"></i>
+                公众号
+              </a>
+            </li>
+        
+            <li class="">
+              <a href="http://www.sivan.tech/LeetCodeAlgo/" target="_blank" >
+                <i class="icon icon-lg icon-braille"></i>
+                Leetcode
+              </a>
+            </li>
+        
+            <li class="">
+              <a href="http://resume.sivan.tech/" target="_blank" >
+                <i class="icon icon-lg icon-file-pdf-o"></i>
+                Resume
+              </a>
+            </li>
+        
+      </ul>
+    </div>
+  </div>
+</aside>
+
+    <main id="main">
+        <header class="top-header" id="header">
+    <div class="flex-row clearfix">
+        <a href="javascript:;" class="header-icon pull-left waves-effect waves-circle waves-light on" id="menu-toggle">
+          <i class="icon icon-lg icon-navicon"></i>
+        </a>
+        <div class="flex-col header-title ellipsis">
+            <span>[Java]-7</span>
+            
+        </div>
+        
+        <a href="javascript:;" id="site_search_btn" class="header-icon pull-right waves-effect waves-circle waves-light">
+            <i class="icon icon-lg icon-search"></i>
+        </a>
+        
+    </div>
+</header>
+<header class="content-header post-header">
+    <img src="/img/s3.jpg" class="header-bg">
+    <div class="container fade-scale">
+        <h1 class="title">[Java]-7</h1>
+        <h5 class="subtitle">
+            
+                <time datetime="2016-12-30T02:55:06.000Z" itemprop="datePublished" class="page-time">
+  2016-12-30
+</time>
+
+
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/Java/">Java</a><ul class="article-category-list-child"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/Java/基础/">基础</a></li></ul></li></ul>
+
+            
+        </h5>
+        
+    </div>
+    
+
+</header>
+
+<div id="site_search">
+    <div class="search-title clearfix">
+        <span class="pull-left">
+          <i class="icon icon-lg icon-search"></i>
+        </span>
+        <input type="text" id="local-search-input" name="q" results="0" placeholder="search my blog..." class="form-control pull-left"/>
+        <a href="javascript:;" class="close pull-right waves-effect waves-circle waves-light">
+          <i class="icon icon-lg icon-close"></i>
+        </a>
+    </div>
+    <div id="local-search-result"></div>
+</div>
+
+
+<div class="container body-wrap">
+    <article id="post-Java-7"
+  class="post-article article-type-post" itemprop="blogPost">
+    <div class="post-card">
+        <h1 class="post-card-title">[Java]-7</h1>
+        <div class="post-meta">
+            <time class="post-time" title="2016-12-30 10:55:06" datetime="2016-12-30T02:55:06.000Z"  itemprop="datePublished">2016-12-30</time>
+
+            
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/Java/">Java</a><ul class="article-category-list-child"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/Java/基础/">基础</a></li></ul></li></ul>
+
+
+
+            
+	<span id="/2016/12/30/Java-7/" class="leancloud_visitors" data-flag-title="[Java]-7" title="[Java]-7">
+		
+			<i class="icon icon-eye"></i>
+		
+		<span class="leancloud-visitors-count"></span>
+	</span>
+ 
+
+            
+
+
+            
+        </div>
+        <div class="post-content" id="post-content" itemprop="postContent">
+            
+            <h2 id="Java中类与类之间的转换"><a href="#Java中类与类之间的转换" class="headerlink" title="Java中类与类之间的转换"></a>Java中类与类之间的转换</h2><blockquote>
+<p><strong>类与类之间的转换如果要强转，则必须要有继承关系</strong>。否则，编译器会报出，ClassCastException异常</p>
+</blockquote>
+<h3 id="包装类之间的转换"><a href="#包装类之间的转换" class="headerlink" title="包装类之间的转换"></a>包装类之间的转换</h3><blockquote>
+<p>思路是：将包装类进行拆箱，转换成基础数据类型之后，再进行转换，最后进行装箱</p>
+</blockquote>
+<p>例如：Integer与Double的转换</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Test</span> </span>&#123;</span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span></span></span><br><span class="line"><span class="function">	</span>&#123;</span><br><span class="line">		Integer a = <span class="number">10</span>;</span><br><span class="line">		<span class="keyword">int</span> b = a;</span><br><span class="line">		<span class="keyword">double</span> m = b;</span><br><span class="line">		Double c = m;</span><br><span class="line">		System.out.println(c);</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<a id="more"></a>
+<hr>
+<h2 id="String类详解"><a href="#String类详解" class="headerlink" title="String类详解"></a>String类详解</h2><blockquote>
+<ol>
+<li>String类也是Java中的lang包中的一个类，众所周知，lang包中的所有类都不需要导入就可以使用，<strong>String类与System,Scanner类一样，都是Java中的一个预定义类型，而且String类是一个引用类型，任何Java类型都可以将变量表示为引用类型。使用引用类型声明的变量都是引用变量，引用在一个对象里。</strong></li>
+<li>String 类中 hashcode根据内容而生成（<strong>生成方式不同，即使生成内容相同，也不能说地址相同）</strong></li>
+<li>字节是计算机存储信息的基本单位，1 个字节等于 8 位， gbk 编码中 1 个汉字字符存储需要 2 个字节，1 个英文字符存储需要 1 个字节。所以我们看到上面的程序运行结果中，每个汉字对应两个字节值，如“学”对应 “-47 -89” ，而英文字母 “J” 对应 “74” 。同时，我们还发现汉字对应的字节值为负数，原因在于每个字节是 8 位，最大值不能超过 127，而汉字转换为字节后超过127，如果超过就会溢出，以负数的形式显示。</li>
+</ol>
+</blockquote>
+<p>例如 ： 代码如下</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Test</span> </span>&#123;</span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">		Object object = <span class="keyword">new</span> Object();</span><br><span class="line">		System.out.println(object.hashCode());</span><br><span class="line">		Integer integer = <span class="keyword">new</span> Integer(<span class="number">7051261</span>);</span><br><span class="line">		System.out.println(integer.hashCode());</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="创建的两种形式"><a href="#创建的两种形式" class="headerlink" title="创建的两种形式"></a>创建的两种形式</h3><ol>
+<li>常量池中创建（内容唯一，不允许重复出现，在编译的时候就可以确定）</li>
+<li>堆中创建（在JVM中只存在一个堆，但是在运行时才可以确定）<br><strong>在堆中创建的时候，一般做两件事：第一，检查常量池是否存在与其相同的。第二，如果有则直接复制过来，如果没有，在堆中新建，并且保存常量池</strong></li>
+</ol>
+<blockquote>
+<ol>
+<li>从大体上来讲，Java中的内存分为 常量池，堆，以及栈（存放引用，也就是我们常说的遥控器，花名册），关于进一步内存详解，<a href="http://www.cnblogs.com/xiohao/p/4296088.html" target="_blank" rel="noopener">请移步</a></li>
+<li>一旦一个字符串在内存中创建，则这个字符串将不可改变。如果需要一个可以改变的字符串，我们可以使用StringBuffer或者StringBuilder（后面章节中会讲到）。</li>
+</ol>
+</blockquote>
+<h3 id="区别"><a href="#区别" class="headerlink" title="区别"></a>区别</h3><blockquote>
+<ol>
+<li><strong>常量池中创建的 String 对象创建后则不能被修改，是不可变的，所谓的修改其实是创建了新的副本，则会在常量池中产生一个副本，所指向的内存空间不同</strong></li>
+<li>另外需要注意的是 ： String类中重写了equals方法，比较的是内容是否相同，而 == 判断的是地址是否相同，也就是哈希码是否相同</li>
+<li>常量在编译中就可以确定，但是变量在运行时才可以确定</li>
+</ol>
+</blockquote>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Test</span> </span>&#123;</span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">		<span class="comment">/*编译时就已经创建，并且放在常量池中*/</span></span><br><span class="line">		String str = <span class="string">"hello"</span>;</span><br><span class="line"></span><br><span class="line">		<span class="comment">/*执行时才会确定，因此放到堆中*/</span></span><br><span class="line">		String str2 = <span class="keyword">new</span> String(<span class="string">"hello"</span>);</span><br><span class="line">		String s = <span class="string">"a"</span> + <span class="string">"bc"</span>;<span class="comment">/* 等同于 String s = "abc";  //编译的时候这里会进行优化 s = abc*/</span></span><br><span class="line">		String s4 = s + str ;<span class="comment">/*运行时确定的值放堆中 */</span></span><br><span class="line"></span><br><span class="line">		System.out.println(str == str2);       <span class="comment">/*false*/</span></span><br><span class="line">		System.out.println(str.equals(str2));  <span class="comment">/*true*/</span></span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="常用方法"><a href="#常用方法" class="headerlink" title="常用方法"></a>常用方法</h3><figure class="image-box">
+                <a rel=[Java]-7 href="http://img.mukewang.com/53d9f7d200010bb007780366.jpg" title="字符串中的方法" data-fancybox="images"><img src="http://img.mukewang.com/53d9f7d200010bb007780366.jpg" alt="字符串中的方法" title class></a>
+                <p>字符串中的方法</p>
+            </figure>
+<h3 id="使用注意事项"><a href="#使用注意事项" class="headerlink" title="使用注意事项"></a>使用注意事项</h3><ol>
+<li>使用方法并没有赋值，因此结果仍然不变</li>
+<li>使用charAt 方法的时候不要越界</li>
+<li>使用 indexOf 进行字符或字符串查找时，如果匹配返回位置索引；如果没有匹配结果，返回 -1</li>
+<li>使用 substring(beginIndex , endIndex) 进行字符串截取时，包括 beginIndex 位置的字符，不包括 endIndex 位置的字符，因此如果只是截取之后的字符，直接使用 subString(int beginIndex)</li>
+<li><strong>数组中，length是属性，而String类中，length()是方法，</strong></li>
+<li>intern() 方法是将字符串对象放入到常量池中，如果已经存在，则返回池中的字符串。</li>
+<li>String类中的trim()方法去除的是前后两端的空白字符，包括字符’ ‘,’\t’,’\r’,’\n’</li>
+</ol>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Test</span> </span>&#123;</span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">		String s = <span class="string">"a"</span>;</span><br><span class="line">		s = s.concat(<span class="string">"bc"</span>);</span><br><span class="line">		System.out.println(s.equals(<span class="string">"abc"</span>));</span><br><span class="line">		String s2 = <span class="string">"abc"</span>;</span><br><span class="line">		System.out.println(s==s2);</span><br><span class="line"></span><br><span class="line">		System.out.println(s2.startsWith(<span class="string">"ab"</span>));<span class="comment">/*是否以小写ab开头*/</span></span><br><span class="line">		System.out.println(<span class="string">"ABC"</span>.equals(s2));</span><br><span class="line">		System.out.println(<span class="string">"ABC"</span>.equalsIgnoreCase(s2));<span class="comment">/*忽略大小写，看是否匹配，具体查看API*/</span></span><br><span class="line"></span><br><span class="line">		String s11 = <span class="string">"hello"</span>;</span><br><span class="line">		String s12 = s11.concat(<span class="string">" world"</span>);</span><br><span class="line">		System.out.println(s11);<span class="comment">/*hello*/</span></span><br><span class="line">		System.out.println(s12);<span class="comment">/*hello world*/</span></span><br><span class="line">		String s13 = <span class="keyword">new</span> String(<span class="string">"indei"</span>);</span><br><span class="line">		s13.intern();</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><strong>这里讲述了转义符，以及replaceAll方法的使用，”.” 号作为通配符，指的是所有的</strong></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Test11</span> </span>&#123;</span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">		String s = <span class="string">"http://www.baidu.com"</span>;</span><br><span class="line">		String s1 = s;</span><br><span class="line">		s = s.replaceAll(<span class="string">"\\."</span>, <span class="string">" "</span>);		</span><br><span class="line">		<span class="comment">/*这里使用双\转义，使用两个\，首先对一个\进行转译，然后只有一个\.  再通过\对点号进行转义*/</span></span><br><span class="line"></span><br><span class="line">		System.out.println(s);	<span class="comment">/*http://www baidu com*/</span></span><br><span class="line">		System.out.println(s1); <span class="comment">/*http://www.baidu.com*/</span></span><br><span class="line"></span><br><span class="line">		s1 = s1.replace(<span class="string">"."</span>, <span class="string">""</span>);</span><br><span class="line">		System.out.println();   <span class="comment">/*输出为空*/</span></span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="trim方法"><a href="#trim方法" class="headerlink" title="trim方法"></a>trim方法</h3><p>使用trim 方法需要注意，只能去掉首尾两个地方的空格，不可以去掉其他地方的空格</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Test</span> </span>&#123;</span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">		String  s = <span class="string">"  hello world!  "</span>;</span><br><span class="line"></span><br><span class="line">		System.out.println(s.trim());</span><br><span class="line">		<span class="comment">/*hello world!*/</span></span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="contact方法：拼接字符串"><a href="#contact方法：拼接字符串" class="headerlink" title="contact方法：拼接字符串"></a>contact方法：拼接字符串</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Test16</span> </span>&#123;</span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">		String s = <span class="string">"abc"</span>;</span><br><span class="line">		s = s + <span class="string">"de"</span>;</span><br><span class="line">		s = s + <span class="string">"fg"</span>;</span><br><span class="line">		System.out.println(s);</span><br><span class="line">		StringBuffer sb = <span class="keyword">new</span> StringBuffer(<span class="string">"abc"</span>);</span><br><span class="line">		sb.append(<span class="string">"de"</span>);</span><br><span class="line">		System.out.println(sb);</span><br><span class="line"></span><br><span class="line">		String s2 = sb.toString();</span><br><span class="line">		System.out.println(s2);</span><br><span class="line"></span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>从代码中我们可以看到，当频繁操作字符串时，就会额外产生很多临时变量。<strong>容易产生很多垃圾内存</strong>。使用 StringBuilder 或 StringBuffer 就可以避免这个问题。至于 StringBuilder 和StringBuffer ，它们基本相似，不同之处，<strong>StringBuffer 是线程安全的，而 StringBuilder 则没有实现线程安全功能，所以性能略高</strong>。因此一般情况下，<strong>如果需要创建一个内容可变的字符串对象，应优先考虑使用 StringBuilder 类。</strong></p>
+<hr>
+<p>练习一：</p>
+<blockquote>
+<p>判断邮件格式以及Java源代码文件名是否合法</p>
+</blockquote>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">HelloWorld</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">	        <span class="comment">/*Java文件名*/</span></span><br><span class="line">			String fileName = <span class="string">"HelloWorld.java"</span>;</span><br><span class="line">		    <span class="comment">/* 邮箱*/</span></span><br><span class="line">			String email = <span class="string">"laurenyang@imooc.com"</span>;</span><br><span class="line"></span><br><span class="line">			<span class="comment">/* 判断.java文件名是否正确：合法的文件名应该以.java结尾*/</span></span><br><span class="line">		    <span class="comment">/*</span></span><br><span class="line"><span class="comment">		    参考步骤：</span></span><br><span class="line"><span class="comment">		    1、获取文件名中最后一次出现"."号的位置</span></span><br><span class="line"><span class="comment">		    2、根据"."号的位置，获取文件的后缀</span></span><br><span class="line"><span class="comment">		    3、判断"."号位置及文件后缀名</span></span><br><span class="line"><span class="comment">		    */</span></span><br><span class="line">		    <span class="comment">/*获取文件名中最后一次出现"."号的位置*/</span></span><br><span class="line">			<span class="keyword">int</span> index = fileName.lastIndexOf(<span class="string">'.'</span>);</span><br><span class="line"></span><br><span class="line">		    <span class="comment">/* 获取文件的后缀*/</span></span><br><span class="line">			String prefix = fileName.substring(index + <span class="number">1</span>, fileName.length());</span><br><span class="line">		    System.out.println(prefix.equals(<span class="string">"java"</span>));</span><br><span class="line">			<span class="comment">/* 判断必须包含"."号，且不能出现在首位，同时后缀名为"java"*/</span></span><br><span class="line">			<span class="keyword">if</span> (    index != -<span class="number">1</span> &amp;&amp; index != <span class="number">0</span> &amp;&amp;     prefix.equals(<span class="string">"java"</span>)  ) &#123;</span><br><span class="line">				System.out.println(<span class="string">"Java文件名正确"</span>);</span><br><span class="line">			&#125; <span class="keyword">else</span> &#123;</span><br><span class="line">				System.out.println(<span class="string">"Java文件名无效"</span>);</span><br><span class="line">			&#125;</span><br><span class="line"></span><br><span class="line">		    <span class="comment">/* 判断邮箱格式是否正确：合法的邮箱名中至少要包含"@", 并且"@"是在"."之前*/</span></span><br><span class="line">		     <span class="comment">/*</span></span><br><span class="line"><span class="comment">		    参考步骤：</span></span><br><span class="line"><span class="comment">		    1、获取文件名中"@"符号的位置</span></span><br><span class="line"><span class="comment">		    2、获取邮箱中"."号的位置</span></span><br><span class="line"><span class="comment">		    3、判断必须包含"@"符号，且"@"必须在"."之前</span></span><br><span class="line"><span class="comment">		    */</span></span><br><span class="line">		    <span class="comment">/* 获取邮箱中"@"符号的位置*/</span></span><br><span class="line">				<span class="keyword">int</span> index2 = email.indexOf(<span class="string">'@'</span>);</span><br><span class="line"></span><br><span class="line">		    <span class="comment">/* 获取邮箱中"."号的位置*/</span></span><br><span class="line">			<span class="keyword">int</span> index3 = email.indexOf(<span class="string">'.'</span>);</span><br><span class="line"></span><br><span class="line">			<span class="comment">/*判断必须包含"@"符号，且"@"必须在"."之前*/</span></span><br><span class="line">			<span class="keyword">if</span> (index2 != -<span class="number">1</span> &amp;&amp; index3 &gt; index2) &#123;</span><br><span class="line">				System.out.println(<span class="string">"邮箱格式正确"</span>);</span><br><span class="line">			&#125; <span class="keyword">else</span> &#123;</span><br><span class="line">				System.out.println(<span class="string">"邮箱格式无效"</span>);</span><br><span class="line">			&#125;</span><br><span class="line">&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>练习二：</p>
+<blockquote>
+<p>生成随机验证码</p>
+</blockquote>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Prac</span> </span>&#123;</span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span></span></span><br><span class="line"><span class="function">	</span>&#123;</span><br><span class="line"></span><br><span class="line">		<span class="comment">/*方法一：自己写*/</span></span><br><span class="line">		String s1 = <span class="string">"abcdefghijklmnopqrstuvwxyz0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ"</span>;</span><br><span class="line">		<span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; <span class="number">4</span>; i++)</span><br><span class="line">		&#123;</span><br><span class="line">			System.out.print(s1.charAt((<span class="keyword">int</span>)(Math.random() * <span class="number">63</span> )));</span><br><span class="line">		&#125;</span><br><span class="line"></span><br><span class="line">		<span class="comment">/*方法二：推荐使用的方法*/</span></span><br><span class="line">		String s = <span class="string">"abcdefghijklmnopqrstuvwxyz"</span>;</span><br><span class="line">		Random random = <span class="keyword">new</span> Random();</span><br><span class="line">		<span class="keyword">char</span>[] chs = <span class="keyword">new</span> <span class="keyword">char</span>[<span class="number">4</span>];</span><br><span class="line">		<span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; <span class="number">4</span>; i++) &#123;</span><br><span class="line">			<span class="keyword">char</span> ch = s.charAt(random.nextInt(<span class="number">26</span>));</span><br><span class="line">			chs[i] = ch;</span><br><span class="line">		&#125;</span><br><span class="line">		String code = <span class="keyword">new</span> String(chs);</span><br><span class="line">		System.out.println(code);</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>注意：方法二将验证码保存了，方法与用户输入进行比对，然而方法一只是完成了生成验证码的任务，没有按照用户体验考虑</p>
+<h2 id="String与基本数据类型之间的转换"><a href="#String与基本数据类型之间的转换" class="headerlink" title="String与基本数据类型之间的转换"></a>String与基本数据类型之间的转换</h2><h3 id="String与int-类型之间的转换"><a href="#String与int-类型之间的转换" class="headerlink" title="String与int 类型之间的转换"></a>String与int 类型之间的转换</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Test</span> </span>&#123;</span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">		System.out.println(<span class="string">'a'</span> + <span class="string">'b'</span>);<span class="comment">/*这里返回的是a与b的Ascii码的和*/</span></span><br><span class="line">		<span class="comment">/*整数转字符串*/</span></span><br><span class="line">		<span class="comment">/*方法一*/</span></span><br><span class="line">		<span class="keyword">int</span> a = <span class="number">10</span>;</span><br><span class="line">		String s = a + <span class="string">""</span>;</span><br><span class="line">		</span><br><span class="line">		<span class="comment">/*方法二*/</span></span><br><span class="line">		Integer i = a;</span><br><span class="line">		String s1 = i.toString();</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">		<span class="comment">/*字符串转整数*/</span></span><br><span class="line">		<span class="keyword">int</span> a1 = Integer.parseInt(s);</span><br><span class="line">		System.out.println(a1);</span><br><span class="line"></span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+        </div>
+        
+<blockquote class="post-copyright">
+    <div class="content">
+        
+<span class="post-time">
+    最后更新时间：<time datetime="2019-08-26T10:46:59.860Z" itemprop="dateUpdated">2019-08-26 18:46:59</time>
+</span><br>
+
+
+        
+        转载注明出处，原文地址：<a href="/2016/12/30/Java-7/" target="_blank" rel="external">http://www.sivan.tech/2016/12/30/Java-7/</a>
+        
+    </div>
+    <footer>
+        <a href="http://www.sivan.tech">
+            <img src="/img/1.jpg" alt="逸如风(yirufeng)">
+            逸如风(yirufeng)
+        </a>
+    </footer>
+</blockquote>
+
+        
+            <div class="page-reward">
+    <a id="rewardBtn" href="javascript:;" class="page-reward-btn waves-effect waves-circle waves-light">赏</a>
+</div>
+
+            
+        
+        <div class="post-footer">
+            
+            <div class="page-share-wrap">
+    
+
+<div class="page-share" id="pageShare">
+    <ul class="reset share-icons">
+      
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://www.sivan.tech/2016/12/30/Java-7/&title=《[Java]-7》 — yirufeng's Blog&pic=http://www.sivan.tech/img/1.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://www.sivan.tech/2016/12/30/Java-7/&title=《[Java]-7》 — yirufeng's Blog&source=Java中类与类之间的转换
+类与类之间的转换如果要强转，则必须要有继承关系。否则，编译器会报出，ClassCastException异常
+
+包装类之间的转..." data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http://www.sivan.tech/2016/12/30/Java-7/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《[Java]-7》 — yirufeng's Blog&url=http://www.sivan.tech/2016/12/30/Java-7/&via=http://www.sivan.tech" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=http://www.sivan.tech/2016/12/30/Java-7/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+      
+    </ul>
+ </div>
+
+
+
+    <a href="javascript:;" id="shareFab" class="page-share-fab waves-effect waves-circle">
+        <i class="icon icon-share-alt icon-lg"></i>
+    </a>
+</div>
+
+        </div>
+        
+            
+
+
+        
+    </div>
+    
+<nav class="post-nav flex-row flex-justify-between">
+  
+    <div class="prev">
+      <a href="/2017/01/02/Java-8/" id="post-prev" class="post-nav-link">
+        <div class="tips"><i class="icon icon-angle-left icon-lg icon-pr"></i> Prev</div>
+        <h4 class="title">[Java]-8</h4>
+      </a>
+    </div>
+  
+
+  
+    <div class="next">
+      <a href="/2016/12/25/Windows常用命令/" id="post-next" class="post-nav-link">
+        <div class="tips">Next <i class="icon icon-angle-right icon-lg icon-pl"></i></div>
+        <h4 class="title">Windows常用命令</h4>
+      </a>
+    </div>
+  
+</nav>
+
+
+    
+    
+        <aside class="post-widget">
+            <nav class="post-toc-wrap" id="post-toc">
+                <strong>目录</strong>
+                <ol class="post-toc"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#Java中类与类之间的转换"><span class="post-toc-number">1.</span> <span class="post-toc-text">Java中类与类之间的转换</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#包装类之间的转换"><span class="post-toc-number">1.1.</span> <span class="post-toc-text">包装类之间的转换</span></a></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#String类详解"><span class="post-toc-number">2.</span> <span class="post-toc-text">String类详解</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#创建的两种形式"><span class="post-toc-number">2.1.</span> <span class="post-toc-text">创建的两种形式</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#区别"><span class="post-toc-number">2.2.</span> <span class="post-toc-text">区别</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#常用方法"><span class="post-toc-number">2.3.</span> <span class="post-toc-text">常用方法</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#使用注意事项"><span class="post-toc-number">2.4.</span> <span class="post-toc-text">使用注意事项</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#trim方法"><span class="post-toc-number">2.5.</span> <span class="post-toc-text">trim方法</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#contact方法：拼接字符串"><span class="post-toc-number">2.6.</span> <span class="post-toc-text">contact方法：拼接字符串</span></a></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#String与基本数据类型之间的转换"><span class="post-toc-number">3.</span> <span class="post-toc-text">String与基本数据类型之间的转换</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#String与int-类型之间的转换"><span class="post-toc-number">3.1.</span> <span class="post-toc-text">String与int 类型之间的转换</span></a></li></ol></li></ol>
+            </nav>
+            <div class="toc-bar"><div>
+        </aside>
+    
+</article>
+
+    <div id="reward" class="page-modal reward-lay">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <h3 class="reward-title">
+        <i class="icon icon-quote-left"></i>
+        感谢原作，你的打赏是我的动力！
+        <i class="icon icon-quote-right"></i>
+    </h3>
+    <div class="reward-content">
+        
+        <div class="reward-code">
+            <img id="rewardCode" src="/img/reward-wechat.jpg" alt="打赏二维码">
+        </div>
+        
+        <label class="reward-toggle">
+            <input id="rewardToggle" type="checkbox" class="reward-toggle-check"
+                data-wechat="/img/reward-wechat.jpg" data-alipay="/img/reward-alipay.jpg">
+            <div class="reward-toggle-ctrol">
+                <span class="reward-toggle-item wechat">微信</span>
+                <span class="reward-toggle-label"></span>
+                <span class="reward-toggle-item alipay">支付宝</span>
+            </div>
+        </label>
+        
+    </div>
+</div>
+
+    
+
+</div>
+
+    </main>
+    <footer class="footer ">
+    
+    <div class="top">
+        
+            <p>
+    <span>Links：</span>
+    
+    <span class="blogroll-item">
+        <a href="https://github.com/sivanWu0222" target="_blank">GitHub</a>
+    </span>
+    
+    <span class="blogroll-item">
+        <a href="http://weibo.com/Msingwen0222/home?wvr=5" target="_blank">新浪微博</a>
+    </span>
+    
+    <span class="blogroll-item">
+        <a href="https://www.linkedin.com/in/%E6%99%93%E6%96%87-%E5%90%B4-79057a121/" target="_blank">Linkedin</a>
+    </span>
+    
+    <span class="blogroll-item">
+        <a href="http://wpa.qq.com/msgrd?v=3&amp;uin=1666762170&amp;site=qq&amp;menu=yes" target="_blank">QQ</a>
+    </span>
+    
+    <span class="blogroll-item">
+        <a href="https://zh-cn.facebook.com/people/SiVan-Wu/100014408918389" target="_blank">Facebook</a>
+    </span>
+    
+    <span class="blogroll-item">
+        <a href="https://mail.qq.com/cgi-bin/qm_share?t=qm_mailme&amp;email=xfTz8-Py8-f08vWFtLTrpqqo" target="_blank">Contact</a>
+    </span>
+    
+    <span class="blogroll-item">
+        <a href="https://twitter.com/SiVan_Wu" target="_blank">Twitter</a>
+    </span>
+    
+</p>
+
+        
+    </div>
+    
+    <div class="bottom">
+        <p>
+            <span>
+                逸如风(yirufeng) &copy; 2016 - 2019
+            </span>
+
+           	
+           	<span>
+           		<a href="http://beian.miit.gov.cn/" target="_blank">已实名认证</a>
+           	</span>
+           	
+
+            
+
+            
+
+            
+                
+<span class="site-uv" title="总访客量">
+    <i class="icon icon-user"></i>
+    <i class="busuanzi-value" id="busuanzi_value_site_uv"></i>
+</span>
+
+
+<span class="site-pv" title="总访问量">
+    <i class="icon icon-eye"></i>
+    <i class="busuanzi-value" id="busuanzi_value_site_pv"></i>
+</span>
+
+            
+        </p>
+    </div>
+</footer>
+
+    <div class="mask" id="mask"></div>
+<a href="javascript:;" id="gotop" class="waves-effect waves-circle waves-light"><span class="icon icon-lg icon-chevron-up"></span></a>
+
+
+
+<div class="global-share" id="globalShare">
+    <ul class="reset share-icons">
+      
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://www.sivan.tech/2016/12/30/Java-7/&title=《[Java]-7》 — yirufeng's Blog&pic=http://www.sivan.tech/img/1.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://www.sivan.tech/2016/12/30/Java-7/&title=《[Java]-7》 — yirufeng's Blog&source=Java中类与类之间的转换
+类与类之间的转换如果要强转，则必须要有继承关系。否则，编译器会报出，ClassCastException异常
+
+包装类之间的转..." data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http://www.sivan.tech/2016/12/30/Java-7/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《[Java]-7》 — yirufeng's Blog&url=http://www.sivan.tech/2016/12/30/Java-7/&via=http://www.sivan.tech" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=http://www.sivan.tech/2016/12/30/Java-7/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+      
+    </ul>
+ </div>
+
+
+<div class="page-modal wx-share" id="wxShare">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAK4AAACuCAAAAACKZ2kyAAABwUlEQVR42u3aQY7DIAwF0N7/0p31qErqbwNtpccqQoS8dmFhm8ejPJ4X437N6/zVzOKBi4s75j5vR4V7P//6ravnyp+Ci4t7knsVMSpbV9bX939jw8XF/UruVRC8X9l7CxcX97e46Q+ozODi4n4bt5LepKlO+u7iXA0XF3fArVcp9z1vqe/i4uK2uM9wTJorvS/+2wEXF/cId1LISMNcfbc3K3FxcTdz60lOL5npXbZ4E8JwcXE3c9MwtK9lEhRHcHFxD3LT61ZrL3IFjRZcXNzN3Eqxox6AKgeUesPmMvnBxcX9KHfygUoRJL72gYuLe4Q72S5tkc6PSri4uOe59VAyaaikZZEg+uLi4m7gpi2TtZc2FsddXFzcpdw0vamXWetXQt/M4+LifpSbBrJeITUomOLi4n6UW5+vpDrB8WV3TxgXFzfk1o8dvUtXy9bg4uJu5vYKHPNiRzNNwsXFPcLttUh7R5b4msWgoYuLizvnToJX7zpXJZAFuRouLu42bhpoSsXNVvKzoOuCi4t7nDsplfYKr7i4uL/IXVzUuBfi4uIe5K4NOmngC1bi4uIe4fYyjrQF2wt8o/ouLi5uh/sHXRQBLwjhA8QAAAAASUVORK5CYII=" alt="微信分享二维码">
+</div>
+
+
+    
+    <!-- main-js -->
+<script type="text/javascript" src="//cdn.bootcss.com/jquery/2.1.0/jquery.min.js"></script>
+<script type="text/javascript" src="/js/plugins/fastclick.js?v=1.4.2"></script>
+<script type="text/javascript" src="/js/plugins/ios-orientationchange-fix.js?v=1.4.2"></script>
+<script type="text/javascript" src="//cdn.jsdelivr.net/gh/fancyapps/fancybox@3.5.2/dist/jquery.fancybox.min.js"></script>
+
+<script type="text/javascript" src="//cdn.bootcss.com/node-waves/0.7.4/waves.min.js"></script>
+
+<script type="text/javascript" src="/js/method.js?v=1.4.2"></script>
+<script type="text/javascript" src="/js/blog.js?v=1.4.2"></script>
+
+<!-- third-party -->
+
+
+
+
+
+
+<script type="text/javascript" src="/js/plugins/local_search.js?v=1.4.2"></script>
+<script type="text/javascript">
+	var search_path = "search.xml";
+	if (search_path.length === 0) {
+		search_path = "search.xml";
+	}
+	var path = "/" + search_path;
+	searchFunc(path, "local-search-input", "local-search-result");
+</script>
+
+
+
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+    
+    
+
+
+
+<script type="text/javascript" src="https://cdn1.lncld.net/static/js/av-core-mini-0.6.4.js"></script>
+<script type="text/javascript" src="/js/plugins/leancloud_visitors.js?v=1.4.2"></script>
+
+
+
+    <!-- mathjax config similar to math.stackexchange -->
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+        tex2jax: {
+            inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+            processEscapes: true,
+            skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+        }
+    });
+</script>
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for (i=0; i < all.length; i += 1) {
+            all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+    });
+</script>
+
+<script type="text/javascript" src="//cdn.bootcss.com/mathjax/2.7.1/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+
+
+
+    <script>
+    (function() {
+        var OriginTitile = document.title, titleTime;
+        document.addEventListener('visibilitychange', function() {
+            if (document.hidden) {
+                document.title = '死鬼去哪里了！';
+                clearTimeout(titleTime);
+            } else {
+                document.title = '(つェ⊂)咦!又好了!';
+                titleTime = setTimeout(function() {
+                    document.title = OriginTitile;
+                },2000);
+            }
+        });
+    })();
+</script>
+
+
+
+
+
+    
+</body>
+</html>

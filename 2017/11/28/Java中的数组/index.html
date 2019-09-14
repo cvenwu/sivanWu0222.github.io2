@@ -1,0 +1,725 @@
+<!DOCTYPE html>
+<html>
+<head><meta name="generator" content="Hexo 3.9.0">
+    <meta charset="utf-8">
+    
+    
+    <title>详解Java中的数组内存 | yirufeng&#39;s Blog | 未来的小幸运 || 致正在努力的我们 ---- 逸如风</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    
+    <meta name="keywords" content="Java,数组">
+    <link rel="shortcut icon" href="/img/favicon.ico">
+    <link rel="stylesheet" href="//cdn.jsdelivr.net/gh/fancyapps/fancybox@3.5.2/dist/jquery.fancybox.min.css">
+    <link rel="stylesheet" href="/css/style.css?v=1.4.2">
+    
+    <script type="text/javascript">
+        // Data Center
+        var DC = {
+            reward:	true,
+            lv: JSON.parse('{"enable":true,"app_id":"K2RVtHi7RnmoN6dovlDKafn8-gzGzoHsz","app_key":"Qxmil0oqPFdDUyyIp2i1Xikt","icon":true}'),
+            v: JSON.parse('{"enable":false,"appid":"ACuOJIasBeRLiDe2iUApHj67-gzGzoHsz","appkey":"qbgg4tClrQQmvq8uwlpwA5mA","notify":true,"verify":true,"placeholder":"give me some sugers plz...","avatar":"wavatar"}'),
+            g: JSON.parse('{"enable":false,"lazy":true,"owner":"codefine","repo":"gitment","oauth":{"client_id":null,"client_secret":null},"perPage":10}'),
+            d: JSON.parse('{"app_id":null}')
+        };
+    </script>
+    <script type="text/javascript">
+        window.lazyScripts=[];
+    </script>
+    
+</head>
+
+
+<body>
+    <div id="loading" class="active"></div>
+
+    <aside id="menu" class="">
+  <div class="inner flex-row-vertical">
+    <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menu-off">
+        <i class="icon icon-lg icon-close"></i>
+    </a>
+    <div class="brand-wrap">
+      
+      <img src="/img/brand.jpg" class="brand-bg">
+      
+      <div class="brand">
+        <a href="/" class="avatar waves-effect waves-circle waves-light">
+          <img src="/img/1.jpg">
+        </a>
+        <hgroup class="introduce">
+          <h5 class="nickname">逸如风(yirufeng)</h5>
+          <a href="mailto:yirufeng@foxmail.com" title="yirufeng@foxmail.com" class="mail">
+            
+              <span>y</span>
+            
+              <span>i</span>
+            
+              <span>r</span>
+            
+              <span>u</span>
+            
+              <span>f</span>
+            
+              <span>e</span>
+            
+              <span>n</span>
+            
+              <span>g</span>
+            
+              <span>@</span>
+            
+              <span>f</span>
+            
+              <span>o</span>
+            
+              <span>x</span>
+            
+              <span>m</span>
+            
+              <span>a</span>
+            
+              <span>i</span>
+            
+              <span>l</span>
+            
+              <span>.</span>
+            
+              <span>c</span>
+            
+              <span>o</span>
+            
+              <span>m</span>
+            
+          </a>
+        </hgroup>
+        
+        <ul class="menu-link">
+          
+              <li>
+                <a href="https://github.com/sivanWu0222" target="_blank">
+                  <i class="icon icon-lg icon-github"></i>
+                </a>
+              </li>
+            
+              <li>
+                <a href="https://mail.qq.com/cgi-bin/qm_share?t=qm_mailme&amp;amp;email=xfTz8-Py8-f08vWFtLTrpqqo" target="_blank">
+                  <i class="icon icon-lg icon-envelope"></i>
+                </a>
+              </li>
+            
+        </ul>
+        
+      </div>
+    </div>
+    <div class="scroll-wrap flex-col">
+      <ul class="nav">
+        
+            <li class="">
+              <a href="/"  >
+                <i class="icon icon-lg icon-home"></i>
+                Home
+              </a>
+            </li>
+        
+            <li class="">
+              <a href="/categories"  >
+                <i class="icon icon-lg icon-th-list"></i>
+                Category
+              </a>
+            </li>
+        
+            <li class="">
+              <a href="/research"  >
+                <i class="icon icon-lg icon-mortar-board"></i>
+                Research
+              </a>
+            </li>
+        
+            <li class="">
+              <a href="/tags"  >
+                <i class="icon icon-lg icon-tags"></i>
+                Tag
+              </a>
+            </li>
+        
+            <li class="">
+              <a href="/archives"  >
+                <i class="icon icon-lg icon-archives"></i>
+                Archive
+              </a>
+            </li>
+        
+            <li class="">
+              <a href="/about"  >
+                <i class="icon icon-lg icon-user"></i>
+                About
+              </a>
+            </li>
+        
+            <li class="">
+              <a href="/open-source"  >
+                <i class="icon icon-lg icon-github"></i>
+                Project
+              </a>
+            </li>
+        
+            <li class="">
+              <a href="/demo"  >
+                <i class="icon icon-lg icon-audio-description"></i>
+                Demo
+              </a>
+            </li>
+        
+            <li class="">
+              <a href="/wechat-number"  >
+                <i class="icon icon-lg icon-wechat"></i>
+                公众号
+              </a>
+            </li>
+        
+            <li class="">
+              <a href="http://www.sivan.tech/LeetCodeAlgo/" target="_blank" >
+                <i class="icon icon-lg icon-braille"></i>
+                Leetcode
+              </a>
+            </li>
+        
+            <li class="">
+              <a href="http://resume.sivan.tech/" target="_blank" >
+                <i class="icon icon-lg icon-file-pdf-o"></i>
+                Resume
+              </a>
+            </li>
+        
+      </ul>
+    </div>
+  </div>
+</aside>
+
+    <main id="main">
+        <header class="top-header" id="header">
+    <div class="flex-row clearfix">
+        <a href="javascript:;" class="header-icon pull-left waves-effect waves-circle waves-light on" id="menu-toggle">
+          <i class="icon icon-lg icon-navicon"></i>
+        </a>
+        <div class="flex-col header-title ellipsis">
+            <span>详解Java中的数组内存</span>
+            
+        </div>
+        
+        <a href="javascript:;" id="site_search_btn" class="header-icon pull-right waves-effect waves-circle waves-light">
+            <i class="icon icon-lg icon-search"></i>
+        </a>
+        
+    </div>
+</header>
+<header class="content-header post-header">
+    <img src="/img/s3.jpg" class="header-bg">
+    <div class="container fade-scale">
+        <h1 class="title">详解Java中的数组内存</h1>
+        <h5 class="subtitle">
+            
+                <time datetime="2017-11-28T05:38:35.000Z" itemprop="datePublished" class="page-time">
+  2017-11-28
+</time>
+
+
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/Java/">Java</a><ul class="article-category-list-child"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/Java/数组/">数组</a></li></ul></li></ul>
+
+            
+        </h5>
+        
+    </div>
+    
+
+</header>
+
+<div id="site_search">
+    <div class="search-title clearfix">
+        <span class="pull-left">
+          <i class="icon icon-lg icon-search"></i>
+        </span>
+        <input type="text" id="local-search-input" name="q" results="0" placeholder="search my blog..." class="form-control pull-left"/>
+        <a href="javascript:;" class="close pull-right waves-effect waves-circle waves-light">
+          <i class="icon icon-lg icon-close"></i>
+        </a>
+    </div>
+    <div id="local-search-result"></div>
+</div>
+
+
+<div class="container body-wrap">
+    <article id="post-Java中的数组"
+  class="post-article article-type-post" itemprop="blogPost">
+    <div class="post-card">
+        <h1 class="post-card-title">详解Java中的数组内存</h1>
+        <div class="post-meta">
+            <time class="post-time" title="2017-11-28 13:38:35" datetime="2017-11-28T05:38:35.000Z"  itemprop="datePublished">2017-11-28</time>
+
+            
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/Java/">Java</a><ul class="article-category-list-child"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/Java/数组/">数组</a></li></ul></li></ul>
+
+
+
+            
+	<span id="/2017/11/28/Java中的数组/" class="leancloud_visitors" data-flag-title="详解Java中的数组内存" title="详解Java中的数组内存">
+		
+			<i class="icon icon-eye"></i>
+		
+		<span class="leancloud-visitors-count"></span>
+	</span>
+ 
+
+            
+
+
+            
+        </div>
+        <div class="post-content" id="post-content" itemprop="postContent">
+            
+            <h2 id="你了解数组么？"><a href="#你了解数组么？" class="headerlink" title="你了解数组么？"></a>你了解数组么？</h2><blockquote>
+<p>Java中，声明一个数组的过程中，内存将会如何分配<br>Java数组初始化一共有多少种方式<br>基本类型数组和引用类型数组之间，初始化时内存分配机制有什么区别</p>
+</blockquote>
+<p>当我们使用Java数组之前，必须先对数组进行初始化（否则无法使用），当数组的所有元素都被分配了合适的内存空间，并指定了初始值时，数组初始化完成。程序以后将无法改变数组内存的大小以及位置。</p>
+<hr>
+<h2 id="数组初始化的两种方式"><a href="#数组初始化的两种方式" class="headerlink" title="数组初始化的两种方式"></a>数组初始化的两种方式</h2><p>数组是静态的</p>
+<blockquote>
+<p>这里由于Java语言是典型的静态语言，因此Java的数组是静态的，即当数组被初始化之后，长度将不可以改变。而JavaScript则是动态语言，数组长度可以改变</p>
+</blockquote>
+<h3 id="静态初始化："><a href="#静态初始化：" class="headerlink" title="静态初始化："></a>静态初始化：</h3><blockquote>
+<p>初始化时由程序员显式指定每个数组元素的初始值，由系统决定数组的长度！</p>
+</blockquote>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">String[] num1= <span class="keyword">new</span> String[] &#123;<span class="string">"1"</span>,<span class="string">"2"</span>&#125;;</span><br></pre></td></tr></table></figure>
+<h3 id="动态初始化："><a href="#动态初始化：" class="headerlink" title="动态初始化："></a>动态初始化：</h3><blockquote>
+<p>初始化时程序只指定数组长度，由系统为数组元素分配初始值！</p>
+</blockquote>
+<p>初始值分配规则：</p>
+<ol>
+<li>整数类型：byte short int long 数组元素默认值为0</li>
+<li>浮点类型：float double 数组元素默认值为0.0</li>
+<li>字符类型：char ，数组元素默认值为’\u0000’</li>
+<li>布尔类型：boolean，数组元素的默认值为false</li>
+<li>引用类型(类，接口，数组)：数组元素默认值为null</li>
+</ol>
+<p>注意事项：</p>
+<ol>
+<li>在我们初始化数组的时候，不可以同时声明数组的长度和给定数组元素的内容</li>
+<li>一旦数组元素初始化完成，内存分配即结束，此时程序只可以改变数组元素的值，而不可以改变数组的长度</li>
+<li>Java中的数组变量是一种引用类型的变量，数组变量本身并不是数组本身，只是指向堆内存数组对象而已！</li>
+</ol>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">String[] num2 = <span class="keyword">new</span> String[<span class="number">2</span>];</span><br></pre></td></tr></table></figure>
+<p>此时，内存示意图如下：<br><figure class="image-box">
+                <a rel=详解Java中的数组内存 href="http://on3w7gc9m.bkt.clouddn.com/QQ%E5%9B%BE%E7%89%8720171128140438.png" title="" data-fancybox="images"><img src="http://on3w7gc9m.bkt.clouddn.com/QQ%E5%9B%BE%E7%89%8720171128140438.png" alt title class></a>
+                <p></p>
+            </figure></p>
+<p>不管采用了数组初始化的哪种方式，一旦数组初始化完成，数组的长度将无法改变！</p>
+<p>对于Java程序中所有的引用变量，都不需要经过初始化操作，需要初始化的是该引用变量所引用的对象！</p>
+<a id="more"></a>
+<hr>
+<h2 id="数组初始化的类型"><a href="#数组初始化的类型" class="headerlink" title="数组初始化的类型"></a>数组初始化的类型</h2><h3 id="基本类型数组的初始化"><a href="#基本类型数组的初始化" class="headerlink" title="基本类型数组的初始化"></a>基本类型数组的初始化</h3><blockquote>
+<p>对于基本类型数组而言，数组元素的值直接存储在对应的数组元素中</p>
+</blockquote>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/*定义一个int[]类型的数组*/</span></span><br><span class="line"><span class="keyword">int</span>[] iArr;</span><br><span class="line"><span class="comment">/*静态初始化数组*/</span></span><br><span class="line">iArr = <span class="keyword">new</span> <span class="keyword">int</span>[] &#123;<span class="number">2</span>, <span class="number">5</span>, -<span class="number">12</span>, <span class="number">20</span>&#125;;</span><br></pre></td></tr></table></figure>
+<p>注意：</p>
+<ol>
+<li>基本类型的值存储在栈内存中(这句话是完全错误的)，例如上面的iArr数组，都存储在堆内存中。事实上是局部变量是保存在栈内存里保存的，不管是基本类型的变量，还是引用类型的变量，都是存储在各自的方法栈区中，但引用类型变量所引用的对象则总是存储在堆内存中！</li>
+<li>Java中，堆内存中的对象不允许直接访问，为了访问堆内存中的对象，通常只能通过引用变量进行访问。(<strong>体现了Java的健壮性，避免程序crash</strong>)<blockquote>
+<p>事实上，引用变量实际上就是一个指针，只要程序通过引用变量访问属性，或者通过引用变量来调用方法，则该引用变量将会由它所引用的对象替代！</p>
+</blockquote>
+</li>
+</ol>
+<h3 id="引用类型数组的初始化"><a href="#引用类型数组的初始化" class="headerlink" title="引用类型数组的初始化"></a>引用类型数组的初始化</h3><blockquote>
+<p>引用类型数组的数组元素依然是引用类型的，因此数组元素里存储的还是引用，它指向另一块内存，这块内存里面存储了该引用变量所引用的对象！</p>
+</blockquote>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Person</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">	<span class="comment">/*年龄*/</span></span><br><span class="line">	<span class="keyword">public</span> <span class="keyword">int</span> age;</span><br><span class="line">	<span class="comment">/*身高*/</span></span><br><span class="line">	<span class="keyword">public</span> <span class="keyword">double</span> height;</span><br><span class="line"></span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">info</span><span class="params">()</span> </span>&#123;</span><br><span class="line">		System.out.println(<span class="string">"我的年龄是："</span> + age + <span class="string">"，我的身高是："</span> + height);</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">ReferenceArrayTest</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">		<span class="comment">/*定义一个students数组变量*/</span></span><br><span class="line">		Person[] students;</span><br><span class="line"></span><br><span class="line">		students = <span class="keyword">new</span> Person[<span class="number">2</span>];</span><br><span class="line">		System.out.println(<span class="string">"students所引用的数组长度是："</span> + students.length);</span><br><span class="line"></span><br><span class="line">		Person zhang = <span class="keyword">new</span> Person();</span><br><span class="line">		zhang.age = <span class="number">15</span>;</span><br><span class="line">		zhang.height = <span class="number">158</span>;</span><br><span class="line"></span><br><span class="line">		Person lee = <span class="keyword">new</span> Person();</span><br><span class="line">		lee.age = <span class="number">16</span>;</span><br><span class="line">		lee.height = <span class="number">161</span>;</span><br><span class="line">		students[<span class="number">0</span>] = zhang;</span><br><span class="line">		students[<span class="number">1</span>] = lee;</span><br><span class="line"></span><br><span class="line">		lee.info();</span><br><span class="line">		students[<span class="number">1</span>].info();</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>对于上面这段代码，内存分配如下：<br><figure class="image-box">
+                <a rel=详解Java中的数组内存 href="http://on3w7gc9m.bkt.clouddn.com/QQ%E5%9B%BE%E7%89%8720171128151129.png" title="" data-fancybox="images"><img src="http://on3w7gc9m.bkt.clouddn.com/QQ%E5%9B%BE%E7%89%8720171128151129.png" alt title class></a>
+                <p></p>
+            </figure></p>
+<p>最后的内存如下：<br><figure class="image-box">
+                <a rel=详解Java中的数组内存 href="http://on3w7gc9m.bkt.clouddn.com/QQ%E5%9B%BE%E7%89%8720171128152246.png" title="" data-fancybox="images"><img src="http://on3w7gc9m.bkt.clouddn.com/QQ%E5%9B%BE%E7%89%8720171128152246.png" alt title class></a>
+                <p></p>
+            </figure></p>
+<p>注意事项：<br>  对于引用类型的数组而言，它的数组元素其实就是一个引用类型的变量，因此可以指向任何有效的内存(有效指的是强类型的约束,比如Person类型的数组，数组中每个元素的类型都相当于Person类型的变量)</p>
+
+        </div>
+        
+<blockquote class="post-copyright">
+    <div class="content">
+        
+<span class="post-time">
+    最后更新时间：<time datetime="2019-08-26T10:46:59.861Z" itemprop="dateUpdated">2019-08-26 18:46:59</time>
+</span><br>
+
+
+        
+        转载注明出处，原文地址：<a href="/2017/11/28/Java中的数组/" target="_blank" rel="external">http://www.sivan.tech/2017/11/28/Java中的数组/</a>
+        
+    </div>
+    <footer>
+        <a href="http://www.sivan.tech">
+            <img src="/img/1.jpg" alt="逸如风(yirufeng)">
+            逸如风(yirufeng)
+        </a>
+    </footer>
+</blockquote>
+
+        
+            <div class="page-reward">
+    <a id="rewardBtn" href="javascript:;" class="page-reward-btn waves-effect waves-circle waves-light">赏</a>
+</div>
+
+            
+        
+        <div class="post-footer">
+            
+	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Java/">Java</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/数组/">数组</a></li></ul>
+
+            <div class="page-share-wrap">
+    
+
+<div class="page-share" id="pageShare">
+    <ul class="reset share-icons">
+      
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://www.sivan.tech/2017/11/28/Java中的数组/&title=《详解Java中的数组内存》 — yirufeng's Blog&pic=http://www.sivan.tech/img/1.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://www.sivan.tech/2017/11/28/Java中的数组/&title=《详解Java中的数组内存》 — yirufeng's Blog&source=你了解数组么？
+Java中，声明一个数组的过程中，内存将会如何分配Java数组初始化一共有多少种方式基本类型数组和引用类型数组之间，初始化时内存分配机制有..." data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http://www.sivan.tech/2017/11/28/Java中的数组/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《详解Java中的数组内存》 — yirufeng's Blog&url=http://www.sivan.tech/2017/11/28/Java中的数组/&via=http://www.sivan.tech" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=http://www.sivan.tech/2017/11/28/Java中的数组/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+      
+    </ul>
+ </div>
+
+
+
+    <a href="javascript:;" id="shareFab" class="page-share-fab waves-effect waves-circle">
+        <i class="icon icon-share-alt icon-lg"></i>
+    </a>
+</div>
+
+        </div>
+        
+            
+
+
+        
+    </div>
+    
+<nav class="post-nav flex-row flex-justify-between">
+  
+    <div class="prev">
+      <a href="/2017/11/30/js中取消事件冒泡的两种方式/" id="post-prev" class="post-nav-link">
+        <div class="tips"><i class="icon icon-angle-left icon-lg icon-pr"></i> Prev</div>
+        <h4 class="title">js中取消事件冒泡的两种方式</h4>
+      </a>
+    </div>
+  
+
+  
+    <div class="next">
+      <a href="/2017/11/24/dom4j与XStream的使用/" id="post-next" class="post-nav-link">
+        <div class="tips">Next <i class="icon icon-angle-right icon-lg icon-pl"></i></div>
+        <h4 class="title">dom4j与XStream的使用</h4>
+      </a>
+    </div>
+  
+</nav>
+
+
+    
+    
+        <aside class="post-widget">
+            <nav class="post-toc-wrap" id="post-toc">
+                <strong>目录</strong>
+                <ol class="post-toc"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#你了解数组么？"><span class="post-toc-number">1.</span> <span class="post-toc-text">你了解数组么？</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#数组初始化的两种方式"><span class="post-toc-number">2.</span> <span class="post-toc-text">数组初始化的两种方式</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#静态初始化："><span class="post-toc-number">2.1.</span> <span class="post-toc-text">静态初始化：</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#动态初始化："><span class="post-toc-number">2.2.</span> <span class="post-toc-text">动态初始化：</span></a></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#数组初始化的类型"><span class="post-toc-number">3.</span> <span class="post-toc-text">数组初始化的类型</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#基本类型数组的初始化"><span class="post-toc-number">3.1.</span> <span class="post-toc-text">基本类型数组的初始化</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#引用类型数组的初始化"><span class="post-toc-number">3.2.</span> <span class="post-toc-text">引用类型数组的初始化</span></a></li></ol></li></ol>
+            </nav>
+            <div class="toc-bar"><div>
+        </aside>
+    
+</article>
+
+    <div id="reward" class="page-modal reward-lay">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <h3 class="reward-title">
+        <i class="icon icon-quote-left"></i>
+        感谢原作，你的打赏是我的动力！
+        <i class="icon icon-quote-right"></i>
+    </h3>
+    <div class="reward-content">
+        
+        <div class="reward-code">
+            <img id="rewardCode" src="/img/reward-wechat.jpg" alt="打赏二维码">
+        </div>
+        
+        <label class="reward-toggle">
+            <input id="rewardToggle" type="checkbox" class="reward-toggle-check"
+                data-wechat="/img/reward-wechat.jpg" data-alipay="/img/reward-alipay.jpg">
+            <div class="reward-toggle-ctrol">
+                <span class="reward-toggle-item wechat">微信</span>
+                <span class="reward-toggle-label"></span>
+                <span class="reward-toggle-item alipay">支付宝</span>
+            </div>
+        </label>
+        
+    </div>
+</div>
+
+    
+
+</div>
+
+    </main>
+    <footer class="footer ">
+    
+    <div class="top">
+        
+            <p>
+    <span>Links：</span>
+    
+    <span class="blogroll-item">
+        <a href="https://github.com/sivanWu0222" target="_blank">GitHub</a>
+    </span>
+    
+    <span class="blogroll-item">
+        <a href="http://weibo.com/Msingwen0222/home?wvr=5" target="_blank">新浪微博</a>
+    </span>
+    
+    <span class="blogroll-item">
+        <a href="https://www.linkedin.com/in/%E6%99%93%E6%96%87-%E5%90%B4-79057a121/" target="_blank">Linkedin</a>
+    </span>
+    
+    <span class="blogroll-item">
+        <a href="http://wpa.qq.com/msgrd?v=3&amp;uin=1666762170&amp;site=qq&amp;menu=yes" target="_blank">QQ</a>
+    </span>
+    
+    <span class="blogroll-item">
+        <a href="https://zh-cn.facebook.com/people/SiVan-Wu/100014408918389" target="_blank">Facebook</a>
+    </span>
+    
+    <span class="blogroll-item">
+        <a href="https://mail.qq.com/cgi-bin/qm_share?t=qm_mailme&amp;email=xfTz8-Py8-f08vWFtLTrpqqo" target="_blank">Contact</a>
+    </span>
+    
+    <span class="blogroll-item">
+        <a href="https://twitter.com/SiVan_Wu" target="_blank">Twitter</a>
+    </span>
+    
+</p>
+
+        
+    </div>
+    
+    <div class="bottom">
+        <p>
+            <span>
+                逸如风(yirufeng) &copy; 2016 - 2019
+            </span>
+
+           	
+           	<span>
+           		<a href="http://beian.miit.gov.cn/" target="_blank">已实名认证</a>
+           	</span>
+           	
+
+            
+
+            
+
+            
+                
+<span class="site-uv" title="总访客量">
+    <i class="icon icon-user"></i>
+    <i class="busuanzi-value" id="busuanzi_value_site_uv"></i>
+</span>
+
+
+<span class="site-pv" title="总访问量">
+    <i class="icon icon-eye"></i>
+    <i class="busuanzi-value" id="busuanzi_value_site_pv"></i>
+</span>
+
+            
+        </p>
+    </div>
+</footer>
+
+    <div class="mask" id="mask"></div>
+<a href="javascript:;" id="gotop" class="waves-effect waves-circle waves-light"><span class="icon icon-lg icon-chevron-up"></span></a>
+
+
+
+<div class="global-share" id="globalShare">
+    <ul class="reset share-icons">
+      
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://www.sivan.tech/2017/11/28/Java中的数组/&title=《详解Java中的数组内存》 — yirufeng's Blog&pic=http://www.sivan.tech/img/1.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://www.sivan.tech/2017/11/28/Java中的数组/&title=《详解Java中的数组内存》 — yirufeng's Blog&source=你了解数组么？
+Java中，声明一个数组的过程中，内存将会如何分配Java数组初始化一共有多少种方式基本类型数组和引用类型数组之间，初始化时内存分配机制有..." data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http://www.sivan.tech/2017/11/28/Java中的数组/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《详解Java中的数组内存》 — yirufeng's Blog&url=http://www.sivan.tech/2017/11/28/Java中的数组/&via=http://www.sivan.tech" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=http://www.sivan.tech/2017/11/28/Java中的数组/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+      
+    </ul>
+ </div>
+
+
+<div class="page-modal wx-share" id="wxShare">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAMYAAADGCAAAAACs8KCBAAACJUlEQVR42u3aQbKjMAwFwNz/0pkTBJ5k86ewmlUqJOBmIWRJn098fC+P61/+utr1XT5PHBgYGK9lJEtMzlbvkpzNHx8GBsYExnVYrN54178KIRsDAwPj8nOSCF6Trr/BwMDA6AXcKjgh/Yf3BgYGxqsY+Ta1Vw7rBdNH9uIYGBgvZOSL+PvPj/Q3MDAwXsX4Fo9qutYL5eVVYWBgHM3oNSBXwuWu1BMDA2MOoxr48sZAvu1cKc9hYGBMYEQnFtK+3vhFtc2AgYFxNmN9MGtlCCwJplHpDQMD42hGHo/zYJp/03uIP2EYGBhjGJuHG+LwmqenGBgY0xi9VmWeaPZKbNWiHgYGxtmMJC2rJnC9x1FtANx0YjEwMI5jVHPJXgMgKdX1incYGBjTGHl6V92y7koToyCOgYFxECNpMa4H4mqimTdZf+7FMTAwjmOsNBGrjYTelW8eCgYGxhhGNXT2hjDWm6M39UIMDIzjGDlmZcBr11jYTSqJgYExjFHdiFYTvmrzICrDYWBgDGD0xh2qgxdJ0b/Z38DAwBjAyDexvSRvafoj+S8GBsahjG/xqKaDeSivbnSj3TYGBsYRjA3RelPL84mkEwMD4yRGHmR74bXXDCgnnRgYGAMY+QjXehK58gYo7MUxMDAGM/Y2PnsNzkKHAQMDYyQjbzrmgOrVtr03MDAwXsWoJnl59MuLa/kQBgYGxjRGb1nJonsb43zpGBgYAxj/AKyNS6n32aohAAAAAElFTkSuQmCC" alt="微信分享二维码">
+</div>
+
+
+    
+    <!-- main-js -->
+<script type="text/javascript" src="//cdn.bootcss.com/jquery/2.1.0/jquery.min.js"></script>
+<script type="text/javascript" src="/js/plugins/fastclick.js?v=1.4.2"></script>
+<script type="text/javascript" src="/js/plugins/ios-orientationchange-fix.js?v=1.4.2"></script>
+<script type="text/javascript" src="//cdn.jsdelivr.net/gh/fancyapps/fancybox@3.5.2/dist/jquery.fancybox.min.js"></script>
+
+<script type="text/javascript" src="//cdn.bootcss.com/node-waves/0.7.4/waves.min.js"></script>
+
+<script type="text/javascript" src="/js/method.js?v=1.4.2"></script>
+<script type="text/javascript" src="/js/blog.js?v=1.4.2"></script>
+
+<!-- third-party -->
+
+
+
+
+
+
+<script type="text/javascript" src="/js/plugins/local_search.js?v=1.4.2"></script>
+<script type="text/javascript">
+	var search_path = "search.xml";
+	if (search_path.length === 0) {
+		search_path = "search.xml";
+	}
+	var path = "/" + search_path;
+	searchFunc(path, "local-search-input", "local-search-result");
+</script>
+
+
+
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+    
+    
+
+
+
+<script type="text/javascript" src="https://cdn1.lncld.net/static/js/av-core-mini-0.6.4.js"></script>
+<script type="text/javascript" src="/js/plugins/leancloud_visitors.js?v=1.4.2"></script>
+
+
+
+    <!-- mathjax config similar to math.stackexchange -->
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+        tex2jax: {
+            inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+            processEscapes: true,
+            skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+        }
+    });
+</script>
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for (i=0; i < all.length; i += 1) {
+            all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+    });
+</script>
+
+<script type="text/javascript" src="//cdn.bootcss.com/mathjax/2.7.1/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+
+
+
+    <script>
+    (function() {
+        var OriginTitile = document.title, titleTime;
+        document.addEventListener('visibilitychange', function() {
+            if (document.hidden) {
+                document.title = '死鬼去哪里了！';
+                clearTimeout(titleTime);
+            } else {
+                document.title = '(つェ⊂)咦!又好了!';
+                titleTime = setTimeout(function() {
+                    document.title = OriginTitile;
+                },2000);
+            }
+        });
+    })();
+</script>
+
+
+
+
+
+    
+</body>
+</html>

@@ -1,0 +1,697 @@
+<!DOCTYPE html>
+<html>
+<head><meta name="generator" content="Hexo 3.9.0">
+    <meta charset="utf-8">
+    
+    
+    <title>与pydoc的初次邂逅 | yirufeng&#39;s Blog | 未来的小幸运 || 致正在努力的我们 ---- 逸如风</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    
+    <meta name="keywords" content="Python,pydoc">
+    <link rel="shortcut icon" href="/img/favicon.ico">
+    <link rel="stylesheet" href="//cdn.jsdelivr.net/gh/fancyapps/fancybox@3.5.2/dist/jquery.fancybox.min.css">
+    <link rel="stylesheet" href="/css/style.css?v=1.4.2">
+    
+    <script type="text/javascript">
+        // Data Center
+        var DC = {
+            reward:	true,
+            lv: JSON.parse('{"enable":true,"app_id":"K2RVtHi7RnmoN6dovlDKafn8-gzGzoHsz","app_key":"Qxmil0oqPFdDUyyIp2i1Xikt","icon":true}'),
+            v: JSON.parse('{"enable":false,"appid":"ACuOJIasBeRLiDe2iUApHj67-gzGzoHsz","appkey":"qbgg4tClrQQmvq8uwlpwA5mA","notify":true,"verify":true,"placeholder":"give me some sugers plz...","avatar":"wavatar"}'),
+            g: JSON.parse('{"enable":false,"lazy":true,"owner":"codefine","repo":"gitment","oauth":{"client_id":null,"client_secret":null},"perPage":10}'),
+            d: JSON.parse('{"app_id":null}')
+        };
+    </script>
+    <script type="text/javascript">
+        window.lazyScripts=[];
+    </script>
+    
+</head>
+
+
+<body>
+    <div id="loading" class="active"></div>
+
+    <aside id="menu" class="">
+  <div class="inner flex-row-vertical">
+    <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menu-off">
+        <i class="icon icon-lg icon-close"></i>
+    </a>
+    <div class="brand-wrap">
+      
+      <img src="/img/brand.jpg" class="brand-bg">
+      
+      <div class="brand">
+        <a href="/" class="avatar waves-effect waves-circle waves-light">
+          <img src="/img/1.jpg">
+        </a>
+        <hgroup class="introduce">
+          <h5 class="nickname">逸如风(yirufeng)</h5>
+          <a href="mailto:yirufeng@foxmail.com" title="yirufeng@foxmail.com" class="mail">
+            
+              <span>y</span>
+            
+              <span>i</span>
+            
+              <span>r</span>
+            
+              <span>u</span>
+            
+              <span>f</span>
+            
+              <span>e</span>
+            
+              <span>n</span>
+            
+              <span>g</span>
+            
+              <span>@</span>
+            
+              <span>f</span>
+            
+              <span>o</span>
+            
+              <span>x</span>
+            
+              <span>m</span>
+            
+              <span>a</span>
+            
+              <span>i</span>
+            
+              <span>l</span>
+            
+              <span>.</span>
+            
+              <span>c</span>
+            
+              <span>o</span>
+            
+              <span>m</span>
+            
+          </a>
+        </hgroup>
+        
+        <ul class="menu-link">
+          
+              <li>
+                <a href="https://github.com/sivanWu0222" target="_blank">
+                  <i class="icon icon-lg icon-github"></i>
+                </a>
+              </li>
+            
+              <li>
+                <a href="https://mail.qq.com/cgi-bin/qm_share?t=qm_mailme&amp;amp;email=xfTz8-Py8-f08vWFtLTrpqqo" target="_blank">
+                  <i class="icon icon-lg icon-envelope"></i>
+                </a>
+              </li>
+            
+        </ul>
+        
+      </div>
+    </div>
+    <div class="scroll-wrap flex-col">
+      <ul class="nav">
+        
+            <li class="">
+              <a href="/"  >
+                <i class="icon icon-lg icon-home"></i>
+                Home
+              </a>
+            </li>
+        
+            <li class="">
+              <a href="/categories"  >
+                <i class="icon icon-lg icon-th-list"></i>
+                Category
+              </a>
+            </li>
+        
+            <li class="">
+              <a href="/research"  >
+                <i class="icon icon-lg icon-mortar-board"></i>
+                Research
+              </a>
+            </li>
+        
+            <li class="">
+              <a href="/tags"  >
+                <i class="icon icon-lg icon-tags"></i>
+                Tag
+              </a>
+            </li>
+        
+            <li class="">
+              <a href="/archives"  >
+                <i class="icon icon-lg icon-archives"></i>
+                Archive
+              </a>
+            </li>
+        
+            <li class="">
+              <a href="/about"  >
+                <i class="icon icon-lg icon-user"></i>
+                About
+              </a>
+            </li>
+        
+            <li class="">
+              <a href="/open-source"  >
+                <i class="icon icon-lg icon-github"></i>
+                Project
+              </a>
+            </li>
+        
+            <li class="">
+              <a href="/demo"  >
+                <i class="icon icon-lg icon-audio-description"></i>
+                Demo
+              </a>
+            </li>
+        
+            <li class="">
+              <a href="/wechat-number"  >
+                <i class="icon icon-lg icon-wechat"></i>
+                公众号
+              </a>
+            </li>
+        
+            <li class="">
+              <a href="http://www.sivan.tech/LeetCodeAlgo/" target="_blank" >
+                <i class="icon icon-lg icon-braille"></i>
+                Leetcode
+              </a>
+            </li>
+        
+            <li class="">
+              <a href="http://resume.sivan.tech/" target="_blank" >
+                <i class="icon icon-lg icon-file-pdf-o"></i>
+                Resume
+              </a>
+            </li>
+        
+      </ul>
+    </div>
+  </div>
+</aside>
+
+    <main id="main">
+        <header class="top-header" id="header">
+    <div class="flex-row clearfix">
+        <a href="javascript:;" class="header-icon pull-left waves-effect waves-circle waves-light on" id="menu-toggle">
+          <i class="icon icon-lg icon-navicon"></i>
+        </a>
+        <div class="flex-col header-title ellipsis">
+            <span>与pydoc的初次邂逅</span>
+            
+        </div>
+        
+        <a href="javascript:;" id="site_search_btn" class="header-icon pull-right waves-effect waves-circle waves-light">
+            <i class="icon icon-lg icon-search"></i>
+        </a>
+        
+    </div>
+</header>
+<header class="content-header post-header">
+    <img src="/img/s3.jpg" class="header-bg">
+    <div class="container fade-scale">
+        <h1 class="title">与pydoc的初次邂逅</h1>
+        <h5 class="subtitle">
+            
+                <time datetime="2017-05-11T06:02:58.000Z" itemprop="datePublished" class="page-time">
+  2017-05-11
+</time>
+
+
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/Python/">Python</a><ul class="article-category-list-child"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/Python/pydoc/">pydoc</a></li></ul></li></ul>
+
+            
+        </h5>
+        
+    </div>
+    
+
+</header>
+
+<div id="site_search">
+    <div class="search-title clearfix">
+        <span class="pull-left">
+          <i class="icon icon-lg icon-search"></i>
+        </span>
+        <input type="text" id="local-search-input" name="q" results="0" placeholder="search my blog..." class="form-control pull-left"/>
+        <a href="javascript:;" class="close pull-right waves-effect waves-circle waves-light">
+          <i class="icon icon-lg icon-close"></i>
+        </a>
+    </div>
+    <div id="local-search-result"></div>
+</div>
+
+
+<div class="container body-wrap">
+    <article id="post-与pydoc的初次邂逅"
+  class="post-article article-type-post" itemprop="blogPost">
+    <div class="post-card">
+        <h1 class="post-card-title">与pydoc的初次邂逅</h1>
+        <div class="post-meta">
+            <time class="post-time" title="2017-05-11 14:02:58" datetime="2017-05-11T06:02:58.000Z"  itemprop="datePublished">2017-05-11</time>
+
+            
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/Python/">Python</a><ul class="article-category-list-child"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/Python/pydoc/">pydoc</a></li></ul></li></ul>
+
+
+
+            
+	<span id="/2017/05/11/与pydoc的初次邂逅/" class="leancloud_visitors" data-flag-title="与pydoc的初次邂逅" title="与pydoc的初次邂逅">
+		
+			<i class="icon icon-eye"></i>
+		
+		<span class="leancloud-visitors-count"></span>
+	</span>
+ 
+
+            
+
+
+            
+        </div>
+        <div class="post-content" id="post-content" itemprop="postContent">
+            
+            <blockquote>
+<p>对于初学者而言，学习一门新的编程语言，最渴求的便是遇到问题时，希望能有个帮助文档来指点迷津，pydoc就是这样一个例子，不仅仅可以帮助我们获得所需的信息，还进一步根据用户体验来在浏览器呈现帮助文档</p>
+</blockquote>
+<blockquote>
+<p>pydoc是Python自带的模块，主要用于从python模块中自动生成文档，这些文档可以基于文本呈现的、也可以生成WEB 页面的，还可以在服务器上以浏览器的方式呈现！</p>
+</blockquote>
+<h2 id="学习查看python中的帮助信息"><a href="#学习查看python中的帮助信息" class="headerlink" title="学习查看python中的帮助信息"></a>学习查看python中的帮助信息</h2><blockquote>
+<p>对于Python而言，倘若我们学会查看帮助信息，便是学会了如何运用Python，接下来我们只需将Python运用自如即可</p>
+</blockquote>
+<h3 id="使用Python自带的Idle来查看帮助信息"><a href="#使用Python自带的Idle来查看帮助信息" class="headerlink" title="使用Python自带的Idle来查看帮助信息"></a>使用Python自带的Idle来查看帮助信息</h3><blockquote>
+<p>使用Idle查看帮助信息，我们将会采用help()函数来查看，</p>
+</blockquote>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#查看python所有的modules</span></span><br><span class="line">help(<span class="string">"modules"</span>)         </span><br><span class="line"></span><br><span class="line"><span class="comment">#单看python所有的modules中包含指定字符串的modules</span></span><br><span class="line">help(<span class="string">"modules yourstr"</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment">#查看python中常见的topics</span></span><br><span class="line">help(<span class="string">"topics"</span>)          </span><br><span class="line"></span><br><span class="line"><span class="comment">#查看python标准库中的module</span></span><br><span class="line"><span class="keyword">import</span> os.path + help(<span class="string">"os.path"</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment">#查看python内置的类型</span></span><br><span class="line">help(<span class="string">"list"</span>)         </span><br><span class="line"></span><br><span class="line"><span class="comment">#查看python类型的成员方法</span></span><br><span class="line">help(<span class="string">"str.find"</span>)    </span><br><span class="line"></span><br><span class="line"><span class="comment">#查看python内置函数</span></span><br><span class="line">help(<span class="string">"open"</span>)</span><br></pre></td></tr></table></figure>
+<a id="more"></a>
+<figure class="image-box">
+                <a rel=与pydoc的初次邂逅 href="http://on3w7gc9m.bkt.clouddn.com/%E4%B8%8Epython%E7%9A%84%E5%88%9D%E6%AC%A1%E9%82%82%E9%80%851.png" title="Idle查看帮助信息" data-fancybox="images"><img src="http://on3w7gc9m.bkt.clouddn.com/%E4%B8%8Epython%E7%9A%84%E5%88%9D%E6%AC%A1%E9%82%82%E9%80%851.png" alt="Idle查看帮助信息" title class></a>
+                <p>Idle查看帮助信息</p>
+            </figure>
+<hr>
+<h3 id="使用Windows命令行界面来查看帮助信息"><a href="#使用Windows命令行界面来查看帮助信息" class="headerlink" title="使用Windows命令行界面来查看帮助信息"></a>使用Windows命令行界面来查看帮助信息</h3><p>打开cmd，键入 <code> python -m pydoc <modulename>  </modulename></code> ,请将命令中的<modulename> 替换成你需要查找的信息，例如， 将 <modulename>  替换成 print  ，将会显示出print函数的详细信息</modulename></modulename></p>
+<p><a rel=与pydoc的初次邂逅 href="http://on3w7gc9m.bkt.clouddn.com/%E4%B8%8Epython%E7%9A%84%E5%88%9D%E6%AC%A1%E9%82%82%E9%80%852.png" title="CMD下查看帮助信息" data-fancybox="images"><img src="http://on3w7gc9m.bkt.clouddn.com/%E4%B8%8Epython%E7%9A%84%E5%88%9D%E6%AC%A1%E9%82%82%E9%80%852.png" alt="CMD下查看帮助信息"></a></p>
+<hr>
+<h3 id="使用浏览器来查看Python帮助信息"><a href="#使用浏览器来查看Python帮助信息" class="headerlink" title="使用浏览器来查看Python帮助信息"></a>使用浏览器来查看Python帮助信息</h3><blockquote>
+<p>Python 可以通过浏览器来查看 Python的帮助信息，不需要连网，这是我最喜爱的一种方式，不仅提升了用户体验，还更方便</p>
+</blockquote>
+<ol>
+<li>打开cmd，键入 <code> python -m pydoc -b </code></li>
+<li>命令完成后，回车，等待浏览器自动打开</li>
+<li>在输入框中键入所要查询的内容即可查询</li>
+<li>如果想要关闭服务器，请输入 q 即可</li>
+</ol>
+<figure class="image-box">
+                <a rel=与pydoc的初次邂逅 href="http://on3w7gc9m.bkt.clouddn.com/%E4%B8%8Epython%E7%9A%84%E5%88%9D%E6%AC%A1%E9%82%82%E9%80%853.png" title="浏览器下查看帮助信息" data-fancybox="images"><img src="http://on3w7gc9m.bkt.clouddn.com/%E4%B8%8Epython%E7%9A%84%E5%88%9D%E6%AC%A1%E9%82%82%E9%80%853.png" alt="浏览器下查看帮助信息" title class></a>
+                <p>浏览器下查看帮助信息</p>
+            </figure>
+<hr>
+
+        </div>
+        
+<blockquote class="post-copyright">
+    <div class="content">
+        
+<span class="post-time">
+    最后更新时间：<time datetime="2019-08-26T10:46:59.870Z" itemprop="dateUpdated">2019-08-26 18:46:59</time>
+</span><br>
+
+
+        
+        转载注明出处，原文地址：<a href="/2017/05/11/与pydoc的初次邂逅/" target="_blank" rel="external">http://www.sivan.tech/2017/05/11/与pydoc的初次邂逅/</a>
+        
+    </div>
+    <footer>
+        <a href="http://www.sivan.tech">
+            <img src="/img/1.jpg" alt="逸如风(yirufeng)">
+            逸如风(yirufeng)
+        </a>
+    </footer>
+</blockquote>
+
+        
+            <div class="page-reward">
+    <a id="rewardBtn" href="javascript:;" class="page-reward-btn waves-effect waves-circle waves-light">赏</a>
+</div>
+
+            
+        
+        <div class="post-footer">
+            
+	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Python/">Python</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/pydoc/">pydoc</a></li></ul>
+
+            <div class="page-share-wrap">
+    
+
+<div class="page-share" id="pageShare">
+    <ul class="reset share-icons">
+      
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://www.sivan.tech/2017/05/11/与pydoc的初次邂逅/&title=《与pydoc的初次邂逅》 — yirufeng's Blog&pic=http://www.sivan.tech/img/1.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://www.sivan.tech/2017/05/11/与pydoc的初次邂逅/&title=《与pydoc的初次邂逅》 — yirufeng's Blog&source=
+对于初学者而言，学习一门新的编程语言，最渴求的便是遇到问题时，希望能有个帮助文档来指点迷津，pydoc就是这样一个例子，不仅仅可以帮助我们获得所需的信息..." data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http://www.sivan.tech/2017/05/11/与pydoc的初次邂逅/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《与pydoc的初次邂逅》 — yirufeng's Blog&url=http://www.sivan.tech/2017/05/11/与pydoc的初次邂逅/&via=http://www.sivan.tech" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=http://www.sivan.tech/2017/05/11/与pydoc的初次邂逅/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+      
+    </ul>
+ </div>
+
+
+
+    <a href="javascript:;" id="shareFab" class="page-share-fab waves-effect waves-circle">
+        <i class="icon icon-share-alt icon-lg"></i>
+    </a>
+</div>
+
+        </div>
+        
+            
+
+
+        
+    </div>
+    
+<nav class="post-nav flex-row flex-justify-between">
+  
+    <div class="prev">
+      <a href="/2017/05/12/浅谈SQL中的Where语句/" id="post-prev" class="post-nav-link">
+        <div class="tips"><i class="icon icon-angle-left icon-lg icon-pr"></i> Prev</div>
+        <h4 class="title">浅谈SQL中的数据过滤</h4>
+      </a>
+    </div>
+  
+
+  
+    <div class="next">
+      <a href="/2017/05/10/认识Python中的转义字符/" id="post-next" class="post-nav-link">
+        <div class="tips">Next <i class="icon icon-angle-right icon-lg icon-pl"></i></div>
+        <h4 class="title">认识Python中的转义字符</h4>
+      </a>
+    </div>
+  
+</nav>
+
+
+    
+    
+        <aside class="post-widget">
+            <nav class="post-toc-wrap" id="post-toc">
+                <strong>目录</strong>
+                <ol class="post-toc"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#学习查看python中的帮助信息"><span class="post-toc-number">1.</span> <span class="post-toc-text">学习查看python中的帮助信息</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#使用Python自带的Idle来查看帮助信息"><span class="post-toc-number">1.1.</span> <span class="post-toc-text">使用Python自带的Idle来查看帮助信息</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#使用Windows命令行界面来查看帮助信息"><span class="post-toc-number">1.2.</span> <span class="post-toc-text">使用Windows命令行界面来查看帮助信息</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#使用浏览器来查看Python帮助信息"><span class="post-toc-number">1.3.</span> <span class="post-toc-text">使用浏览器来查看Python帮助信息</span></a></li></ol></li></ol>
+            </nav>
+            <div class="toc-bar"><div>
+        </aside>
+    
+</article>
+
+    <div id="reward" class="page-modal reward-lay">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <h3 class="reward-title">
+        <i class="icon icon-quote-left"></i>
+        感谢原作，你的打赏是我的动力！
+        <i class="icon icon-quote-right"></i>
+    </h3>
+    <div class="reward-content">
+        
+        <div class="reward-code">
+            <img id="rewardCode" src="/img/reward-wechat.jpg" alt="打赏二维码">
+        </div>
+        
+        <label class="reward-toggle">
+            <input id="rewardToggle" type="checkbox" class="reward-toggle-check"
+                data-wechat="/img/reward-wechat.jpg" data-alipay="/img/reward-alipay.jpg">
+            <div class="reward-toggle-ctrol">
+                <span class="reward-toggle-item wechat">微信</span>
+                <span class="reward-toggle-label"></span>
+                <span class="reward-toggle-item alipay">支付宝</span>
+            </div>
+        </label>
+        
+    </div>
+</div>
+
+    
+
+</div>
+
+    </main>
+    <footer class="footer ">
+    
+    <div class="top">
+        
+            <p>
+    <span>Links：</span>
+    
+    <span class="blogroll-item">
+        <a href="https://github.com/sivanWu0222" target="_blank">GitHub</a>
+    </span>
+    
+    <span class="blogroll-item">
+        <a href="http://weibo.com/Msingwen0222/home?wvr=5" target="_blank">新浪微博</a>
+    </span>
+    
+    <span class="blogroll-item">
+        <a href="https://www.linkedin.com/in/%E6%99%93%E6%96%87-%E5%90%B4-79057a121/" target="_blank">Linkedin</a>
+    </span>
+    
+    <span class="blogroll-item">
+        <a href="http://wpa.qq.com/msgrd?v=3&amp;uin=1666762170&amp;site=qq&amp;menu=yes" target="_blank">QQ</a>
+    </span>
+    
+    <span class="blogroll-item">
+        <a href="https://zh-cn.facebook.com/people/SiVan-Wu/100014408918389" target="_blank">Facebook</a>
+    </span>
+    
+    <span class="blogroll-item">
+        <a href="https://mail.qq.com/cgi-bin/qm_share?t=qm_mailme&amp;email=xfTz8-Py8-f08vWFtLTrpqqo" target="_blank">Contact</a>
+    </span>
+    
+    <span class="blogroll-item">
+        <a href="https://twitter.com/SiVan_Wu" target="_blank">Twitter</a>
+    </span>
+    
+</p>
+
+        
+    </div>
+    
+    <div class="bottom">
+        <p>
+            <span>
+                逸如风(yirufeng) &copy; 2016 - 2019
+            </span>
+
+           	
+           	<span>
+           		<a href="http://beian.miit.gov.cn/" target="_blank">已实名认证</a>
+           	</span>
+           	
+
+            
+
+            
+
+            
+                
+<span class="site-uv" title="总访客量">
+    <i class="icon icon-user"></i>
+    <i class="busuanzi-value" id="busuanzi_value_site_uv"></i>
+</span>
+
+
+<span class="site-pv" title="总访问量">
+    <i class="icon icon-eye"></i>
+    <i class="busuanzi-value" id="busuanzi_value_site_pv"></i>
+</span>
+
+            
+        </p>
+    </div>
+</footer>
+
+    <div class="mask" id="mask"></div>
+<a href="javascript:;" id="gotop" class="waves-effect waves-circle waves-light"><span class="icon icon-lg icon-chevron-up"></span></a>
+
+
+
+<div class="global-share" id="globalShare">
+    <ul class="reset share-icons">
+      
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://www.sivan.tech/2017/05/11/与pydoc的初次邂逅/&title=《与pydoc的初次邂逅》 — yirufeng's Blog&pic=http://www.sivan.tech/img/1.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://www.sivan.tech/2017/05/11/与pydoc的初次邂逅/&title=《与pydoc的初次邂逅》 — yirufeng's Blog&source=
+对于初学者而言，学习一门新的编程语言，最渴求的便是遇到问题时，希望能有个帮助文档来指点迷津，pydoc就是这样一个例子，不仅仅可以帮助我们获得所需的信息..." data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http://www.sivan.tech/2017/05/11/与pydoc的初次邂逅/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《与pydoc的初次邂逅》 — yirufeng's Blog&url=http://www.sivan.tech/2017/05/11/与pydoc的初次邂逅/&via=http://www.sivan.tech" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=http://www.sivan.tech/2017/05/11/与pydoc的初次邂逅/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+      
+    </ul>
+ </div>
+
+
+<div class="page-modal wx-share" id="wxShare">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAMYAAADGCAAAAACs8KCBAAACJUlEQVR42u3aQY4iMRAEQP7/6dkHjGAyy2altqNPCAHt6ENSLtfrFV8/v67kM+8+n/zC6xsXBgbGYxnJ7d+9kyM/LzS57x93wcDAuIDx7pafXye/ky936V4YGBgYcQi2i/tcOGJgYGDMGCsbzrzExMDAwJhtYmclYLLcz49v814cAwPjgYw8KP//66+cb2BgYDyK8VNebaTODhXqVWFgYBzN2Fvq5WXfN0pPDAyMsxn58ETyTt44m33mDyoGBsZxjHaca9a+zxc6uwsGBsbZjHzcYaWtnwd6+3AxMDDuYbThmA9krDyUYswCAwPjGkYex20TrV10Hu4YGBg3MNqN64bgi9eQH6NiYGDcwJgNjOaN/l3/A9HMCAYGxtGMz0tvR8RmoxKzwwYMDIyzGUkRNmvcr4/A5m0+DAyMsxm7Srd8u9u2+6M2HAYGxtGMPHDbAG2XNWvqYWBg3MBoi8L22HK2GU42ulG7DQMD4wjGrsJuFprJ48vjHgMD4wZGu8Q8EGdNtHaYDAMD4wZG3txvi7Zk/GI9mjEwMG5j5DG6Tl2J+7omxcDAeCBjtqDZQEYSpkW8rjxjDAyMRzHacYrZ2EQbsknhOBsKwcDAeC4jD9mVreau9+uZEQwMjIMYu4JvVjLm/wDRsAUGBsb1jPxQc/0IISk9MTAwMNqQbbe1s5Dd9r+BgYHxKEZ7GDCL3V3FIgYGxm2MPPLyH2qHJ2bfwsDAuIDxD8mmIuB/mg3FAAAAAElFTkSuQmCC" alt="微信分享二维码">
+</div>
+
+
+    
+    <!-- main-js -->
+<script type="text/javascript" src="//cdn.bootcss.com/jquery/2.1.0/jquery.min.js"></script>
+<script type="text/javascript" src="/js/plugins/fastclick.js?v=1.4.2"></script>
+<script type="text/javascript" src="/js/plugins/ios-orientationchange-fix.js?v=1.4.2"></script>
+<script type="text/javascript" src="//cdn.jsdelivr.net/gh/fancyapps/fancybox@3.5.2/dist/jquery.fancybox.min.js"></script>
+
+<script type="text/javascript" src="//cdn.bootcss.com/node-waves/0.7.4/waves.min.js"></script>
+
+<script type="text/javascript" src="/js/method.js?v=1.4.2"></script>
+<script type="text/javascript" src="/js/blog.js?v=1.4.2"></script>
+
+<!-- third-party -->
+
+
+
+
+
+
+<script type="text/javascript" src="/js/plugins/local_search.js?v=1.4.2"></script>
+<script type="text/javascript">
+	var search_path = "search.xml";
+	if (search_path.length === 0) {
+		search_path = "search.xml";
+	}
+	var path = "/" + search_path;
+	searchFunc(path, "local-search-input", "local-search-result");
+</script>
+
+
+
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+    
+    
+
+
+
+<script type="text/javascript" src="https://cdn1.lncld.net/static/js/av-core-mini-0.6.4.js"></script>
+<script type="text/javascript" src="/js/plugins/leancloud_visitors.js?v=1.4.2"></script>
+
+
+
+    <!-- mathjax config similar to math.stackexchange -->
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+        tex2jax: {
+            inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+            processEscapes: true,
+            skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+        }
+    });
+</script>
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for (i=0; i < all.length; i += 1) {
+            all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+    });
+</script>
+
+<script type="text/javascript" src="//cdn.bootcss.com/mathjax/2.7.1/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+
+
+
+    <script>
+    (function() {
+        var OriginTitile = document.title, titleTime;
+        document.addEventListener('visibilitychange', function() {
+            if (document.hidden) {
+                document.title = '死鬼去哪里了！';
+                clearTimeout(titleTime);
+            } else {
+                document.title = '(つェ⊂)咦!又好了!';
+                titleTime = setTimeout(function() {
+                    document.title = OriginTitile;
+                },2000);
+            }
+        });
+    })();
+</script>
+
+
+
+
+
+    
+</body>
+</html>

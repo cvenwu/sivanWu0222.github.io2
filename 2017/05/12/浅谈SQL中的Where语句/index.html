@@ -1,0 +1,730 @@
+<!DOCTYPE html>
+<html>
+<head><meta name="generator" content="Hexo 3.9.0">
+    <meta charset="utf-8">
+    
+    
+    <title>浅谈SQL中的数据过滤 | yirufeng&#39;s Blog | 未来的小幸运 || 致正在努力的我们 ---- 逸如风</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    
+    <meta name="keywords" content="Algorithm,Java">
+    <link rel="shortcut icon" href="/img/favicon.ico">
+    <link rel="stylesheet" href="//cdn.jsdelivr.net/gh/fancyapps/fancybox@3.5.2/dist/jquery.fancybox.min.css">
+    <link rel="stylesheet" href="/css/style.css?v=1.4.2">
+    
+    <script type="text/javascript">
+        // Data Center
+        var DC = {
+            reward:	true,
+            lv: JSON.parse('{"enable":true,"app_id":"K2RVtHi7RnmoN6dovlDKafn8-gzGzoHsz","app_key":"Qxmil0oqPFdDUyyIp2i1Xikt","icon":true}'),
+            v: JSON.parse('{"enable":false,"appid":"ACuOJIasBeRLiDe2iUApHj67-gzGzoHsz","appkey":"qbgg4tClrQQmvq8uwlpwA5mA","notify":true,"verify":true,"placeholder":"give me some sugers plz...","avatar":"wavatar"}'),
+            g: JSON.parse('{"enable":false,"lazy":true,"owner":"codefine","repo":"gitment","oauth":{"client_id":null,"client_secret":null},"perPage":10}'),
+            d: JSON.parse('{"app_id":null}')
+        };
+    </script>
+    <script type="text/javascript">
+        window.lazyScripts=[];
+    </script>
+    
+</head>
+
+
+<body>
+    <div id="loading" class="active"></div>
+
+    <aside id="menu" class="">
+  <div class="inner flex-row-vertical">
+    <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menu-off">
+        <i class="icon icon-lg icon-close"></i>
+    </a>
+    <div class="brand-wrap">
+      
+      <img src="/img/brand.jpg" class="brand-bg">
+      
+      <div class="brand">
+        <a href="/" class="avatar waves-effect waves-circle waves-light">
+          <img src="/img/1.jpg">
+        </a>
+        <hgroup class="introduce">
+          <h5 class="nickname">逸如风(yirufeng)</h5>
+          <a href="mailto:yirufeng@foxmail.com" title="yirufeng@foxmail.com" class="mail">
+            
+              <span>y</span>
+            
+              <span>i</span>
+            
+              <span>r</span>
+            
+              <span>u</span>
+            
+              <span>f</span>
+            
+              <span>e</span>
+            
+              <span>n</span>
+            
+              <span>g</span>
+            
+              <span>@</span>
+            
+              <span>f</span>
+            
+              <span>o</span>
+            
+              <span>x</span>
+            
+              <span>m</span>
+            
+              <span>a</span>
+            
+              <span>i</span>
+            
+              <span>l</span>
+            
+              <span>.</span>
+            
+              <span>c</span>
+            
+              <span>o</span>
+            
+              <span>m</span>
+            
+          </a>
+        </hgroup>
+        
+        <ul class="menu-link">
+          
+              <li>
+                <a href="https://github.com/sivanWu0222" target="_blank">
+                  <i class="icon icon-lg icon-github"></i>
+                </a>
+              </li>
+            
+              <li>
+                <a href="https://mail.qq.com/cgi-bin/qm_share?t=qm_mailme&amp;amp;email=xfTz8-Py8-f08vWFtLTrpqqo" target="_blank">
+                  <i class="icon icon-lg icon-envelope"></i>
+                </a>
+              </li>
+            
+        </ul>
+        
+      </div>
+    </div>
+    <div class="scroll-wrap flex-col">
+      <ul class="nav">
+        
+            <li class="">
+              <a href="/"  >
+                <i class="icon icon-lg icon-home"></i>
+                Home
+              </a>
+            </li>
+        
+            <li class="">
+              <a href="/categories"  >
+                <i class="icon icon-lg icon-th-list"></i>
+                Category
+              </a>
+            </li>
+        
+            <li class="">
+              <a href="/research"  >
+                <i class="icon icon-lg icon-mortar-board"></i>
+                Research
+              </a>
+            </li>
+        
+            <li class="">
+              <a href="/tags"  >
+                <i class="icon icon-lg icon-tags"></i>
+                Tag
+              </a>
+            </li>
+        
+            <li class="">
+              <a href="/archives"  >
+                <i class="icon icon-lg icon-archives"></i>
+                Archive
+              </a>
+            </li>
+        
+            <li class="">
+              <a href="/about"  >
+                <i class="icon icon-lg icon-user"></i>
+                About
+              </a>
+            </li>
+        
+            <li class="">
+              <a href="/open-source"  >
+                <i class="icon icon-lg icon-github"></i>
+                Project
+              </a>
+            </li>
+        
+            <li class="">
+              <a href="/demo"  >
+                <i class="icon icon-lg icon-audio-description"></i>
+                Demo
+              </a>
+            </li>
+        
+            <li class="">
+              <a href="/wechat-number"  >
+                <i class="icon icon-lg icon-wechat"></i>
+                公众号
+              </a>
+            </li>
+        
+            <li class="">
+              <a href="http://www.sivan.tech/LeetCodeAlgo/" target="_blank" >
+                <i class="icon icon-lg icon-braille"></i>
+                Leetcode
+              </a>
+            </li>
+        
+            <li class="">
+              <a href="http://resume.sivan.tech/" target="_blank" >
+                <i class="icon icon-lg icon-file-pdf-o"></i>
+                Resume
+              </a>
+            </li>
+        
+      </ul>
+    </div>
+  </div>
+</aside>
+
+    <main id="main">
+        <header class="top-header" id="header">
+    <div class="flex-row clearfix">
+        <a href="javascript:;" class="header-icon pull-left waves-effect waves-circle waves-light on" id="menu-toggle">
+          <i class="icon icon-lg icon-navicon"></i>
+        </a>
+        <div class="flex-col header-title ellipsis">
+            <span>浅谈SQL中的数据过滤</span>
+            
+        </div>
+        
+        <a href="javascript:;" id="site_search_btn" class="header-icon pull-right waves-effect waves-circle waves-light">
+            <i class="icon icon-lg icon-search"></i>
+        </a>
+        
+    </div>
+</header>
+<header class="content-header post-header">
+    <img src="/img/s3.jpg" class="header-bg">
+    <div class="container fade-scale">
+        <h1 class="title">浅谈SQL中的数据过滤</h1>
+        <h5 class="subtitle">
+            
+                <time datetime="2017-05-12T02:19:32.000Z" itemprop="datePublished" class="page-time">
+  2017-05-12
+</time>
+
+
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/Algorithm/">Algorithm</a><ul class="article-category-list-child"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/Algorithm/策略/">策略</a></li></ul></li></ul>
+
+            
+        </h5>
+        
+    </div>
+    
+
+</header>
+
+<div id="site_search">
+    <div class="search-title clearfix">
+        <span class="pull-left">
+          <i class="icon icon-lg icon-search"></i>
+        </span>
+        <input type="text" id="local-search-input" name="q" results="0" placeholder="search my blog..." class="form-control pull-left"/>
+        <a href="javascript:;" class="close pull-right waves-effect waves-circle waves-light">
+          <i class="icon icon-lg icon-close"></i>
+        </a>
+    </div>
+    <div id="local-search-result"></div>
+</div>
+
+
+<div class="container body-wrap">
+    <article id="post-浅谈SQL中的Where语句"
+  class="post-article article-type-post" itemprop="blogPost">
+    <div class="post-card">
+        <h1 class="post-card-title">浅谈SQL中的数据过滤</h1>
+        <div class="post-meta">
+            <time class="post-time" title="2017-05-12 10:19:32" datetime="2017-05-12T02:19:32.000Z"  itemprop="datePublished">2017-05-12</time>
+
+            
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/Algorithm/">Algorithm</a><ul class="article-category-list-child"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/Algorithm/策略/">策略</a></li></ul></li></ul>
+
+
+
+            
+	<span id="/2017/05/12/浅谈SQL中的Where语句/" class="leancloud_visitors" data-flag-title="浅谈SQL中的数据过滤" title="浅谈SQL中的数据过滤">
+		
+			<i class="icon icon-eye"></i>
+		
+		<span class="leancloud-visitors-count"></span>
+	</span>
+ 
+
+            
+
+
+            
+        </div>
+        <div class="post-content" id="post-content" itemprop="postContent">
+            
+            <h1 id="SQL中的WHERE子句"><a href="#SQL中的WHERE子句" class="headerlink" title="SQL中的WHERE子句"></a>SQL中的WHERE子句</h1><blockquote>
+<p>对于数据库中的表，我们经常使用SQL语句进行操作，对于数据量爆炸的今天，倘若需要对用户数据进行验证，如果不加过滤，去索引表中的所有行，<br>无疑拉低了用户的体验！如今，我们经常使用WHERE子句对数据进行过滤，以便得到我们所需要的数据</p>
+</blockquote>
+<h2 id="不采用过滤的缺点"><a href="#不采用过滤的缺点" class="headerlink" title="不采用过滤的缺点"></a>不采用过滤的缺点</h2><ol>
+<li>倘若我们不使用WHERE子句对数据进行过滤，将会检索大量无用的数据，并且增加服务器的负载</li>
+<li>我们通常可以从服务器端获得我们所需要的数据，如果将全部数据(未过滤)传给用户，并让用户进行过滤，不仅仅大大的增加了网络的带宽，还给用户<br>的体验带来了极大的不方便之处</li>
+</ol>
+<h3 id="值得自己思考的问题："><a href="#值得自己思考的问题：" class="headerlink" title="值得自己思考的问题："></a>值得自己思考的问题：</h3><ol>
+<li>如果数据在用户层过滤，增加了用户的不方便和网络带宽</li>
+<li>如果数据在服务器上进行过滤，面对的用户很多，数据量又很大，服务器如果全部处理数据，难免会崩掉！！！<br>综上所述，在用户层和服务器层过滤数据各有好坏，那么现在的数据过滤如何解决，值得自己探索和深思！！！</li>
+</ol>
+<a id="more"></a>
+<hr>
+<h1 id="数据过滤"><a href="#数据过滤" class="headerlink" title="数据过滤"></a>数据过滤</h1><h2 id="BETWEEN-AND-子句"><a href="#BETWEEN-AND-子句" class="headerlink" title="BETWEEN AND 子句"></a>BETWEEN AND 子句</h2><blockquote>
+<p>开始学习使用 BETWEEN AND 关键字：如果在BETWEEN AND 关键字中使用字符串，我们需要注意，<br>BETWEEN “A1” AND “b1” 意思是，从 A1(对于那些前面为A1(报错A1本身)后面有其他的将会被选择到，例如A11) 开始<br>匹配到 b1(对于那些前面为b1的不会被选择到(不包括b1))</p>
+</blockquote>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> USER.id, USER.U, USER.P</span><br><span class="line"><span class="keyword">FROM</span> <span class="keyword">USER</span></span><br><span class="line"><span class="keyword">WHERE</span> USER.U <span class="keyword">BETWEEN</span> <span class="string">"A1"</span> <span class="keyword">AND</span> <span class="string">"b1"</span>;</span><br></pre></td></tr></table></figure>
+<hr>
+<h2 id="IN操作符"><a href="#IN操作符" class="headerlink" title="IN操作符"></a>IN操作符</h2><blockquote>
+<p>其实SQL语句中对数据进行过滤除了可以使用已有的AND,OR运算符，其实IN操作符可以替换OR操作符</p>
+</blockquote>
+<p>IN操作符用来指定条件范围，范围中的每个条件都可以进行匹配，IN取合法值由逗号分隔的清单，全都括在圆括号中</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> USER.id, USER.U, USER.P</span><br><span class="line"><span class="keyword">FROM</span> <span class="keyword">USER</span></span><br><span class="line"><span class="keyword">WHERE</span> USER.id  <span class="keyword">IN</span> (<span class="number">5</span>, <span class="number">6</span>, <span class="number">7</span>)</span><br></pre></td></tr></table></figure>
+<p>上面这句SQL语句等同于下面这句<br><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> USER.id, USER.U, USER.P</span><br><span class="line"><span class="keyword">FROM</span> <span class="keyword">USER</span></span><br><span class="line"><span class="keyword">WHERE</span> USER.id  = <span class="number">5</span> <span class="keyword">or</span> USER.id  = <span class="number">6</span> <span class="keyword">or</span> USER.id  = <span class="number">7</span>;</span><br></pre></td></tr></table></figure></p>
+<h3 id="使用IN操作符的好处"><a href="#使用IN操作符的好处" class="headerlink" title="使用IN操作符的好处"></a>使用IN操作符的好处</h3><ol>
+<li>在使用长的合法选项清单时， IN操作符的语法更清楚且更直观</li>
+<li>在使用IN时，计算的次序更容易管理（因为使用的操作符更少）</li>
+<li><font color="red">IN操作符一般比OR操作符执行更快</font></li>
+<li>IN的最大有点是可以包含SELECT语句，使得能够更动态的创立WHERE子句！</li>
+</ol>
+<hr>
+<h2 id="采用-NOT-操作符"><a href="#采用-NOT-操作符" class="headerlink" title="采用 NOT 操作符"></a>采用 NOT 操作符</h2><blockquote>
+<p>WHERE子句中的NOT操作符有且只有一个功能，那就是否定它之后所有跟的任何条件</p>
+</blockquote>
+<ul>
+<li>MySQL中的NOT：MySQL支持使用NOT对IN,BETWEEN 和 EXISTS子句取反</li>
+<li>在与IN操作符联合使用的时候，NOT使找出与条件列表不匹配的行非常简单</li>
+</ul>
+<hr>
+<h2 id="采用-LIKE-操作符"><a href="#采用-LIKE-操作符" class="headerlink" title="采用 LIKE 操作符"></a>采用 LIKE 操作符</h2><ol>
+<li>% 操作符（任何字符出现任意次数），如果写成 ‘%HET’, 是会区分大小写的，要注意的是 % 也可以匹配0个字符</li>
+</ol>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> userinfo.U, userinfo.P</span><br><span class="line"><span class="keyword">FROM</span> userinfo</span><br><span class="line"><span class="keyword">WHERE</span> userinfo.U <span class="keyword">LIKE</span> <span class="string">'%A1%'</span>;		 <span class="comment">-- 也会找到字段U值为A1的</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> userinfo.U, userinfo.P</span><br><span class="line"><span class="keyword">FROM</span> userinfo</span><br><span class="line"><span class="keyword">WHERE</span> userinfo.P <span class="keyword">LIKE</span> <span class="string">'%'</span>				<span class="comment">-- 这里将不会匹配 USERINFO.P 值为null的，尽管使用了通配符</span></span><br></pre></td></tr></table></figure>
+<ol start="2">
+<li>_ 操作符  只能匹配一个字符</li>
+</ol>
+<h3 id="通配符的使用技巧："><a href="#通配符的使用技巧：" class="headerlink" title="通配符的使用技巧："></a>通配符的使用技巧：</h3><ol>
+<li>不要过度使用通配符，如果其他操作符能达到相同的目的，应该使用其他操作符</li>
+<li>在确实需要使用通配符时，除非绝对有必要，否则不要把他们用在搜索模式的开始处，把通配符至于搜索模式的开始处，搜索起来是最慢的</li>
+<li>注意通配符的位置，如果放错地方，可能不会返回想要的数据</li>
+</ol>
+<hr>
+<h2 id="采用-DISTINCT-子句"><a href="#采用-DISTINCT-子句" class="headerlink" title="采用 DISTINCT 子句"></a>采用 DISTINCT 子句</h2><blockquote>
+<p>对于重复的数据，如果我们想返回唯一不同的值，可以使用DISTINCT关键字来进行检索</p>
+</blockquote>
+<h3 id="注意事项-不能部分使用-DISTINCT-关键字-："><a href="#注意事项-不能部分使用-DISTINCT-关键字-：" class="headerlink" title="注意事项(不能部分使用 DISTINCT 关键字)："></a>注意事项(不能部分使用 DISTINCT 关键字)：</h3><p>使用DISTINCT关键字必须放在列名开头，请注意DISTINCT关键字应用于所有列，而不仅是前置它的列，下面这句代码的意思是:对于要检索的字段，除非每行所对应记录的字段都相同，否则都会被检索出来，也就是如果要检索的字段（两行完全相同，将只有一行输出，如果部分相同将全部输出）<br>– 不能部分使用DISTINCT关键字</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span>  <span class="keyword">DISTINCT</span>   U,  P</span><br><span class="line"><span class="keyword">FROM</span> <span class="keyword">USER</span></span><br></pre></td></tr></table></figure>
+<hr>
+<h2 id="空值检查"><a href="#空值检查" class="headerlink" title="空值检查"></a>空值检查</h2><blockquote>
+<p>创建表的时候，我们将会指定其中的列是否可以包含值，如果一个列不包含值，称其为包含空值NULL</p>
+</blockquote>
+<p>NULL : 无值，它与字段包含0，空字符串或仅仅包含空格不同</p>
+<p>检索USER 表的 P字段是否为空<br><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> USER.id, USER.U, USER.P</span><br><span class="line"><span class="keyword">FROM</span> <span class="keyword">USER</span></span><br><span class="line"><span class="keyword">WHERE</span> USER.P <span class="keyword">IS</span> <span class="literal">NULL</span>;</span><br></pre></td></tr></table></figure></p>
+<h3 id="NULL与不匹配"><a href="#NULL与不匹配" class="headerlink" title="NULL与不匹配"></a>NULL与不匹配</h3><blockquote>
+<p>在我们通过过滤选择出不具有特定值的行的时候，我们可能希望返回具有NULL值的行，但是，不行，因为未知具有特殊的含义，数据库不知道他们是否匹配，所以在匹配过滤或不不匹配过滤的时候将不会返回</p>
+</blockquote>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> USER.ID, USER.U, USER.P</span><br><span class="line"><span class="keyword">FROM</span> <span class="keyword">USER</span></span><br><span class="line"><span class="keyword">WHERE</span> USER.P != <span class="string">'5'</span>  <span class="comment"># 这里将不会返回P字段为NULL值的行</span></span><br></pre></td></tr></table></figure>
+<p><font color="red">过滤数据的时候，我们一定要验证返回数据中确实给出了被过滤列具有NULL的行</font>，将SQL语句改为如下<br><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> USER.ID, USER.U, USER.P</span><br><span class="line"><span class="keyword">FROM</span> <span class="keyword">USER</span></span><br><span class="line"><span class="keyword">WHERE</span> USER.P != <span class="string">'5'</span> <span class="keyword">OR</span> USER.P <span class="keyword">IS</span> <span class="literal">NULL</span> <span class="comment"># 这里将会返回P字段为NULL值的行</span></span><br></pre></td></tr></table></figure></p>
+
+        </div>
+        
+<blockquote class="post-copyright">
+    <div class="content">
+        
+<span class="post-time">
+    最后更新时间：<time datetime="2019-08-26T10:46:59.876Z" itemprop="dateUpdated">2019-08-26 18:46:59</time>
+</span><br>
+
+
+        
+        转载注明出处，原文地址：<a href="/2017/05/12/浅谈SQL中的Where语句/" target="_blank" rel="external">http://www.sivan.tech/2017/05/12/浅谈SQL中的Where语句/</a>
+        
+    </div>
+    <footer>
+        <a href="http://www.sivan.tech">
+            <img src="/img/1.jpg" alt="逸如风(yirufeng)">
+            逸如风(yirufeng)
+        </a>
+    </footer>
+</blockquote>
+
+        
+            <div class="page-reward">
+    <a id="rewardBtn" href="javascript:;" class="page-reward-btn waves-effect waves-circle waves-light">赏</a>
+</div>
+
+            
+        
+        <div class="post-footer">
+            
+	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Algorithm/">Algorithm</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Java/">Java</a></li></ul>
+
+            <div class="page-share-wrap">
+    
+
+<div class="page-share" id="pageShare">
+    <ul class="reset share-icons">
+      
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://www.sivan.tech/2017/05/12/浅谈SQL中的Where语句/&title=《浅谈SQL中的数据过滤》 — yirufeng's Blog&pic=http://www.sivan.tech/img/1.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://www.sivan.tech/2017/05/12/浅谈SQL中的Where语句/&title=《浅谈SQL中的数据过滤》 — yirufeng's Blog&source=SQL中的WHERE子句
+对于数据库中的表，我们经常使用SQL语句进行操作，对于数据量爆炸的今天，倘若需要对用户数据进行验证，如果不加过滤，去索引表中的所..." data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http://www.sivan.tech/2017/05/12/浅谈SQL中的Where语句/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《浅谈SQL中的数据过滤》 — yirufeng's Blog&url=http://www.sivan.tech/2017/05/12/浅谈SQL中的Where语句/&via=http://www.sivan.tech" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=http://www.sivan.tech/2017/05/12/浅谈SQL中的Where语句/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+      
+    </ul>
+ </div>
+
+
+
+    <a href="javascript:;" id="shareFab" class="page-share-fab waves-effect waves-circle">
+        <i class="icon icon-share-alt icon-lg"></i>
+    </a>
+</div>
+
+        </div>
+        
+            
+
+
+        
+    </div>
+    
+<nav class="post-nav flex-row flex-justify-between">
+  
+    <div class="prev">
+      <a href="/2017/05/14/浅谈MySQL中的正则表达式/" id="post-prev" class="post-nav-link">
+        <div class="tips"><i class="icon icon-angle-left icon-lg icon-pr"></i> Prev</div>
+        <h4 class="title">浅谈MySQL中的正则表达式</h4>
+      </a>
+    </div>
+  
+
+  
+    <div class="next">
+      <a href="/2017/05/11/与pydoc的初次邂逅/" id="post-next" class="post-nav-link">
+        <div class="tips">Next <i class="icon icon-angle-right icon-lg icon-pl"></i></div>
+        <h4 class="title">与pydoc的初次邂逅</h4>
+      </a>
+    </div>
+  
+</nav>
+
+
+    
+    
+        <aside class="post-widget">
+            <nav class="post-toc-wrap" id="post-toc">
+                <strong>目录</strong>
+                <ol class="post-toc"><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#SQL中的WHERE子句"><span class="post-toc-number">1.</span> <span class="post-toc-text">SQL中的WHERE子句</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#不采用过滤的缺点"><span class="post-toc-number">1.1.</span> <span class="post-toc-text">不采用过滤的缺点</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#值得自己思考的问题："><span class="post-toc-number">1.1.1.</span> <span class="post-toc-text">值得自己思考的问题：</span></a></li></ol></li></ol></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#数据过滤"><span class="post-toc-number">2.</span> <span class="post-toc-text">数据过滤</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#BETWEEN-AND-子句"><span class="post-toc-number">2.1.</span> <span class="post-toc-text">BETWEEN AND 子句</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#IN操作符"><span class="post-toc-number">2.2.</span> <span class="post-toc-text">IN操作符</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#使用IN操作符的好处"><span class="post-toc-number">2.2.1.</span> <span class="post-toc-text">使用IN操作符的好处</span></a></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#采用-NOT-操作符"><span class="post-toc-number">2.3.</span> <span class="post-toc-text">采用 NOT 操作符</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#采用-LIKE-操作符"><span class="post-toc-number">2.4.</span> <span class="post-toc-text">采用 LIKE 操作符</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#通配符的使用技巧："><span class="post-toc-number">2.4.1.</span> <span class="post-toc-text">通配符的使用技巧：</span></a></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#采用-DISTINCT-子句"><span class="post-toc-number">2.5.</span> <span class="post-toc-text">采用 DISTINCT 子句</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#注意事项-不能部分使用-DISTINCT-关键字-："><span class="post-toc-number">2.5.1.</span> <span class="post-toc-text">注意事项(不能部分使用 DISTINCT 关键字)：</span></a></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#空值检查"><span class="post-toc-number">2.6.</span> <span class="post-toc-text">空值检查</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#NULL与不匹配"><span class="post-toc-number">2.6.1.</span> <span class="post-toc-text">NULL与不匹配</span></a></li></ol></li></ol></li></ol>
+            </nav>
+            <div class="toc-bar"><div>
+        </aside>
+    
+</article>
+
+    <div id="reward" class="page-modal reward-lay">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <h3 class="reward-title">
+        <i class="icon icon-quote-left"></i>
+        感谢原作，你的打赏是我的动力！
+        <i class="icon icon-quote-right"></i>
+    </h3>
+    <div class="reward-content">
+        
+        <div class="reward-code">
+            <img id="rewardCode" src="/img/reward-wechat.jpg" alt="打赏二维码">
+        </div>
+        
+        <label class="reward-toggle">
+            <input id="rewardToggle" type="checkbox" class="reward-toggle-check"
+                data-wechat="/img/reward-wechat.jpg" data-alipay="/img/reward-alipay.jpg">
+            <div class="reward-toggle-ctrol">
+                <span class="reward-toggle-item wechat">微信</span>
+                <span class="reward-toggle-label"></span>
+                <span class="reward-toggle-item alipay">支付宝</span>
+            </div>
+        </label>
+        
+    </div>
+</div>
+
+    
+
+</div>
+
+    </main>
+    <footer class="footer ">
+    
+    <div class="top">
+        
+            <p>
+    <span>Links：</span>
+    
+    <span class="blogroll-item">
+        <a href="https://github.com/sivanWu0222" target="_blank">GitHub</a>
+    </span>
+    
+    <span class="blogroll-item">
+        <a href="http://weibo.com/Msingwen0222/home?wvr=5" target="_blank">新浪微博</a>
+    </span>
+    
+    <span class="blogroll-item">
+        <a href="https://www.linkedin.com/in/%E6%99%93%E6%96%87-%E5%90%B4-79057a121/" target="_blank">Linkedin</a>
+    </span>
+    
+    <span class="blogroll-item">
+        <a href="http://wpa.qq.com/msgrd?v=3&amp;uin=1666762170&amp;site=qq&amp;menu=yes" target="_blank">QQ</a>
+    </span>
+    
+    <span class="blogroll-item">
+        <a href="https://zh-cn.facebook.com/people/SiVan-Wu/100014408918389" target="_blank">Facebook</a>
+    </span>
+    
+    <span class="blogroll-item">
+        <a href="https://mail.qq.com/cgi-bin/qm_share?t=qm_mailme&amp;email=xfTz8-Py8-f08vWFtLTrpqqo" target="_blank">Contact</a>
+    </span>
+    
+    <span class="blogroll-item">
+        <a href="https://twitter.com/SiVan_Wu" target="_blank">Twitter</a>
+    </span>
+    
+</p>
+
+        
+    </div>
+    
+    <div class="bottom">
+        <p>
+            <span>
+                逸如风(yirufeng) &copy; 2016 - 2019
+            </span>
+
+           	
+           	<span>
+           		<a href="http://beian.miit.gov.cn/" target="_blank">已实名认证</a>
+           	</span>
+           	
+
+            
+
+            
+
+            
+                
+<span class="site-uv" title="总访客量">
+    <i class="icon icon-user"></i>
+    <i class="busuanzi-value" id="busuanzi_value_site_uv"></i>
+</span>
+
+
+<span class="site-pv" title="总访问量">
+    <i class="icon icon-eye"></i>
+    <i class="busuanzi-value" id="busuanzi_value_site_pv"></i>
+</span>
+
+            
+        </p>
+    </div>
+</footer>
+
+    <div class="mask" id="mask"></div>
+<a href="javascript:;" id="gotop" class="waves-effect waves-circle waves-light"><span class="icon icon-lg icon-chevron-up"></span></a>
+
+
+
+<div class="global-share" id="globalShare">
+    <ul class="reset share-icons">
+      
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://www.sivan.tech/2017/05/12/浅谈SQL中的Where语句/&title=《浅谈SQL中的数据过滤》 — yirufeng's Blog&pic=http://www.sivan.tech/img/1.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://www.sivan.tech/2017/05/12/浅谈SQL中的Where语句/&title=《浅谈SQL中的数据过滤》 — yirufeng's Blog&source=SQL中的WHERE子句
+对于数据库中的表，我们经常使用SQL语句进行操作，对于数据量爆炸的今天，倘若需要对用户数据进行验证，如果不加过滤，去索引表中的所..." data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http://www.sivan.tech/2017/05/12/浅谈SQL中的Where语句/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《浅谈SQL中的数据过滤》 — yirufeng's Blog&url=http://www.sivan.tech/2017/05/12/浅谈SQL中的Where语句/&via=http://www.sivan.tech" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=http://www.sivan.tech/2017/05/12/浅谈SQL中的Where语句/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+      
+    </ul>
+ </div>
+
+
+<div class="page-modal wx-share" id="wxShare">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAMYAAADGCAAAAACs8KCBAAACJElEQVR42u3aUXIiMQwEUO5/6ewFyGy3lKQK+80XRcD240ORJb1e8fMVPM+f/G615P0fezAwMD6W0R6u3biFJT/Kmx0xMDAuYHy3/fPr52/lmHYvDAwMjGTp56PkK+T7YmBgYLTLbQ7xvA4GBgbG5hKbX0pnV9l8LwwMjNsYedX971//Sn8DAwPjoxhf5fOczOVX1uSvxakwMDCOZrRXzX1Ts00N8/NgYGCcytgMNyRlsrZw1g6QvWYxGwMD46MYUTwetTbzpDBvixaXWwwMjOMY+WhpW+hPEsRZ+oiBgXEbY5aibQpzyaFXYRcDA+MgRpsItm3IzWDEL+azGBgYH8vIA2UbUvMfJSnevdkdAwPjMkZe7k/amXl+2l5ro5kRDAyMIxht+awt97dZ3B6MgYFxKiMv+reBdVbCGyaUGBgYhzLyAllS/JqF6fb9N6thYGBcw8hD7b5V2Qbl/4RgDAyMoxmz5drC3CYdzIczMDAwbmC028zmH362bLe6Q2NgYHwsY3NxbS+f+UGHeS4GBsZxjHyEYlPuz4trdZMVAwPjGsam3dgOiiVHL/4BYGBgHMqYtQH2DchNaxMDA+M2xqx8NpvF2l9f84COgYFxHmNTMtsMW+wDLgYGxm2MWWk+OXoelFfNUQwMDIw4gOafaVsOw2ocBgYGRpxKbg4a/YgYGBgXMJJj7VsIbWOgTg0xMDAOZbQhb9NczL81G/jAwMA4jvEPOKkD8QbKdfgAAAAASUVORK5CYII=" alt="微信分享二维码">
+</div>
+
+
+    
+    <!-- main-js -->
+<script type="text/javascript" src="//cdn.bootcss.com/jquery/2.1.0/jquery.min.js"></script>
+<script type="text/javascript" src="/js/plugins/fastclick.js?v=1.4.2"></script>
+<script type="text/javascript" src="/js/plugins/ios-orientationchange-fix.js?v=1.4.2"></script>
+<script type="text/javascript" src="//cdn.jsdelivr.net/gh/fancyapps/fancybox@3.5.2/dist/jquery.fancybox.min.js"></script>
+
+<script type="text/javascript" src="//cdn.bootcss.com/node-waves/0.7.4/waves.min.js"></script>
+
+<script type="text/javascript" src="/js/method.js?v=1.4.2"></script>
+<script type="text/javascript" src="/js/blog.js?v=1.4.2"></script>
+
+<!-- third-party -->
+
+
+
+
+
+
+<script type="text/javascript" src="/js/plugins/local_search.js?v=1.4.2"></script>
+<script type="text/javascript">
+	var search_path = "search.xml";
+	if (search_path.length === 0) {
+		search_path = "search.xml";
+	}
+	var path = "/" + search_path;
+	searchFunc(path, "local-search-input", "local-search-result");
+</script>
+
+
+
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+    
+    
+
+
+
+<script type="text/javascript" src="https://cdn1.lncld.net/static/js/av-core-mini-0.6.4.js"></script>
+<script type="text/javascript" src="/js/plugins/leancloud_visitors.js?v=1.4.2"></script>
+
+
+
+    <!-- mathjax config similar to math.stackexchange -->
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+        tex2jax: {
+            inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+            processEscapes: true,
+            skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+        }
+    });
+</script>
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for (i=0; i < all.length; i += 1) {
+            all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+    });
+</script>
+
+<script type="text/javascript" src="//cdn.bootcss.com/mathjax/2.7.1/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+
+
+
+    <script>
+    (function() {
+        var OriginTitile = document.title, titleTime;
+        document.addEventListener('visibilitychange', function() {
+            if (document.hidden) {
+                document.title = '死鬼去哪里了！';
+                clearTimeout(titleTime);
+            } else {
+                document.title = '(つェ⊂)咦!又好了!';
+                titleTime = setTimeout(function() {
+                    document.title = OriginTitile;
+                },2000);
+            }
+        });
+    })();
+</script>
+
+
+
+
+
+    
+</body>
+</html>

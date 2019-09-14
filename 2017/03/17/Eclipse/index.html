@@ -1,0 +1,727 @@
+<!DOCTYPE html>
+<html>
+<head><meta name="generator" content="Hexo 3.9.0">
+    <meta charset="utf-8">
+    
+    
+    <title>Eclipse工具讲解（中文语言包的安装，活用workspace，添加新的JDK环境） | yirufeng&#39;s Blog | 未来的小幸运 || 致正在努力的我们 ---- 逸如风</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    
+    <meta name="keywords" content="Eclipse,Tools">
+    <link rel="shortcut icon" href="/img/favicon.ico">
+    <link rel="stylesheet" href="//cdn.jsdelivr.net/gh/fancyapps/fancybox@3.5.2/dist/jquery.fancybox.min.css">
+    <link rel="stylesheet" href="/css/style.css?v=1.4.2">
+    
+    <script type="text/javascript">
+        // Data Center
+        var DC = {
+            reward:	true,
+            lv: JSON.parse('{"enable":true,"app_id":"K2RVtHi7RnmoN6dovlDKafn8-gzGzoHsz","app_key":"Qxmil0oqPFdDUyyIp2i1Xikt","icon":true}'),
+            v: JSON.parse('{"enable":false,"appid":"ACuOJIasBeRLiDe2iUApHj67-gzGzoHsz","appkey":"qbgg4tClrQQmvq8uwlpwA5mA","notify":true,"verify":true,"placeholder":"give me some sugers plz...","avatar":"wavatar"}'),
+            g: JSON.parse('{"enable":false,"lazy":true,"owner":"codefine","repo":"gitment","oauth":{"client_id":null,"client_secret":null},"perPage":10}'),
+            d: JSON.parse('{"app_id":null}')
+        };
+    </script>
+    <script type="text/javascript">
+        window.lazyScripts=[];
+    </script>
+    
+</head>
+
+
+<body>
+    <div id="loading" class="active"></div>
+
+    <aside id="menu" class="">
+  <div class="inner flex-row-vertical">
+    <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menu-off">
+        <i class="icon icon-lg icon-close"></i>
+    </a>
+    <div class="brand-wrap">
+      
+      <img src="/img/brand.jpg" class="brand-bg">
+      
+      <div class="brand">
+        <a href="/" class="avatar waves-effect waves-circle waves-light">
+          <img src="/img/1.jpg">
+        </a>
+        <hgroup class="introduce">
+          <h5 class="nickname">逸如风(yirufeng)</h5>
+          <a href="mailto:yirufeng@foxmail.com" title="yirufeng@foxmail.com" class="mail">
+            
+              <span>y</span>
+            
+              <span>i</span>
+            
+              <span>r</span>
+            
+              <span>u</span>
+            
+              <span>f</span>
+            
+              <span>e</span>
+            
+              <span>n</span>
+            
+              <span>g</span>
+            
+              <span>@</span>
+            
+              <span>f</span>
+            
+              <span>o</span>
+            
+              <span>x</span>
+            
+              <span>m</span>
+            
+              <span>a</span>
+            
+              <span>i</span>
+            
+              <span>l</span>
+            
+              <span>.</span>
+            
+              <span>c</span>
+            
+              <span>o</span>
+            
+              <span>m</span>
+            
+          </a>
+        </hgroup>
+        
+        <ul class="menu-link">
+          
+              <li>
+                <a href="https://github.com/sivanWu0222" target="_blank">
+                  <i class="icon icon-lg icon-github"></i>
+                </a>
+              </li>
+            
+              <li>
+                <a href="https://mail.qq.com/cgi-bin/qm_share?t=qm_mailme&amp;amp;email=xfTz8-Py8-f08vWFtLTrpqqo" target="_blank">
+                  <i class="icon icon-lg icon-envelope"></i>
+                </a>
+              </li>
+            
+        </ul>
+        
+      </div>
+    </div>
+    <div class="scroll-wrap flex-col">
+      <ul class="nav">
+        
+            <li class="">
+              <a href="/"  >
+                <i class="icon icon-lg icon-home"></i>
+                Home
+              </a>
+            </li>
+        
+            <li class="">
+              <a href="/categories"  >
+                <i class="icon icon-lg icon-th-list"></i>
+                Category
+              </a>
+            </li>
+        
+            <li class="">
+              <a href="/research"  >
+                <i class="icon icon-lg icon-mortar-board"></i>
+                Research
+              </a>
+            </li>
+        
+            <li class="">
+              <a href="/tags"  >
+                <i class="icon icon-lg icon-tags"></i>
+                Tag
+              </a>
+            </li>
+        
+            <li class="">
+              <a href="/archives"  >
+                <i class="icon icon-lg icon-archives"></i>
+                Archive
+              </a>
+            </li>
+        
+            <li class="">
+              <a href="/about"  >
+                <i class="icon icon-lg icon-user"></i>
+                About
+              </a>
+            </li>
+        
+            <li class="">
+              <a href="/open-source"  >
+                <i class="icon icon-lg icon-github"></i>
+                Project
+              </a>
+            </li>
+        
+            <li class="">
+              <a href="/demo"  >
+                <i class="icon icon-lg icon-audio-description"></i>
+                Demo
+              </a>
+            </li>
+        
+            <li class="">
+              <a href="/wechat-number"  >
+                <i class="icon icon-lg icon-wechat"></i>
+                公众号
+              </a>
+            </li>
+        
+            <li class="">
+              <a href="http://www.sivan.tech/LeetCodeAlgo/" target="_blank" >
+                <i class="icon icon-lg icon-braille"></i>
+                Leetcode
+              </a>
+            </li>
+        
+            <li class="">
+              <a href="http://resume.sivan.tech/" target="_blank" >
+                <i class="icon icon-lg icon-file-pdf-o"></i>
+                Resume
+              </a>
+            </li>
+        
+      </ul>
+    </div>
+  </div>
+</aside>
+
+    <main id="main">
+        <header class="top-header" id="header">
+    <div class="flex-row clearfix">
+        <a href="javascript:;" class="header-icon pull-left waves-effect waves-circle waves-light on" id="menu-toggle">
+          <i class="icon icon-lg icon-navicon"></i>
+        </a>
+        <div class="flex-col header-title ellipsis">
+            <span>Eclipse工具讲解（中文语言包的安装，活用workspace，添加新的JDK环境）</span>
+            
+        </div>
+        
+        <a href="javascript:;" id="site_search_btn" class="header-icon pull-right waves-effect waves-circle waves-light">
+            <i class="icon icon-lg icon-search"></i>
+        </a>
+        
+    </div>
+</header>
+<header class="content-header post-header">
+    <img src="/img/s3.jpg" class="header-bg">
+    <div class="container fade-scale">
+        <h1 class="title">Eclipse工具讲解（中文语言包的安装，活用workspace，添加新的JDK环境）</h1>
+        <h5 class="subtitle">
+            
+                <time datetime="2017-03-17T02:55:40.000Z" itemprop="datePublished" class="page-time">
+  2017-03-17
+</time>
+
+
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/Tools/">Tools</a></li></ul>
+
+            
+        </h5>
+        
+    </div>
+    
+
+</header>
+
+<div id="site_search">
+    <div class="search-title clearfix">
+        <span class="pull-left">
+          <i class="icon icon-lg icon-search"></i>
+        </span>
+        <input type="text" id="local-search-input" name="q" results="0" placeholder="search my blog..." class="form-control pull-left"/>
+        <a href="javascript:;" class="close pull-right waves-effect waves-circle waves-light">
+          <i class="icon icon-lg icon-close"></i>
+        </a>
+    </div>
+    <div id="local-search-result"></div>
+</div>
+
+
+<div class="container body-wrap">
+    <article id="post-Eclipse"
+  class="post-article article-type-post" itemprop="blogPost">
+    <div class="post-card">
+        <h1 class="post-card-title">Eclipse工具讲解（中文语言包的安装，活用workspace，添加新的JDK环境）</h1>
+        <div class="post-meta">
+            <time class="post-time" title="2017-03-17 10:55:40" datetime="2017-03-17T02:55:40.000Z"  itemprop="datePublished">2017-03-17</time>
+
+            
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/Tools/">Tools</a></li></ul>
+
+
+
+            
+	<span id="/2017/03/17/Eclipse/" class="leancloud_visitors" data-flag-title="Eclipse工具讲解（中文语言包的安装，活用workspace，添加新的JDK环境）" title="Eclipse工具讲解（中文语言包的安装，活用workspace，添加新的JDK环境）">
+		
+			<i class="icon icon-eye"></i>
+		
+		<span class="leancloud-visitors-count"></span>
+	</span>
+ 
+
+            
+
+
+            
+        </div>
+        <div class="post-content" id="post-content" itemprop="postContent">
+            
+            <h2 id="中文语言包的安装"><a href="#中文语言包的安装" class="headerlink" title="中文语言包的安装"></a>中文语言包的安装</h2><h3 id="准备工作"><a href="#准备工作" class="headerlink" title="准备工作"></a>准备工作</h3><blockquote>
+<ol>
+<li>安装好的Eclipse，可以去网上下载，免费，下载<a href="https://www.eclipse.org/downloads/" target="_blank" rel="noopener">Eclipse</a></li>
+<li>有网络环境</li>
+</ol>
+</blockquote>
+<a id="more"></a>
+<h3 id="下载中文语言包"><a href="#下载中文语言包" class="headerlink" title="下载中文语言包"></a>下载中文语言包</h3><ol>
+<li>进入<a href="http://www.eclipse.org/babel/downloads.php" target="_blank" rel="noopener">语言包下载</a></li>
+<li>找到自己所对应的Eclipse版本，并且点击，进入语言包界面</li>
+<li>找到Language: Chinese (Simplified) 栏目</li>
+<li>下载该栏目下所有文件</li>
+</ol>
+<h3 id="解压缩中文语言包"><a href="#解压缩中文语言包" class="headerlink" title="解压缩中文语言包"></a>解压缩中文语言包</h3><ol>
+<li>将所下载的压缩包解压到一个文件中</li>
+<li>解压后的文件有两个子目录，features 和 plugins ，复制到Eclipse的安装目录，提示是否覆盖，选择是，打开Eclipse即可看到中文界面的Eclipse</li>
+</ol>
+<hr>
+<h2 id="添加新的JDK环境"><a href="#添加新的JDK环境" class="headerlink" title="添加新的JDK环境"></a>添加新的JDK环境</h2><blockquote>
+<p>Eclipse的成功运行需要Java运行环境的支持，才能够启动运行，并且Eclipse启动后，会把当前Java执行环境当作Eclipse的默认开发环境</p>
+</blockquote>
+<ol>
+<li>选择 Window–&gt;Preferences–&gt;Java选项卡–&gt;Installed JREs –&gt;Add</li>
+<li>选择 Standard VM</li>
+<li>弹出的新界面，点击Directory，找到JDK安装路径，点击finish</li>
+</ol>
+<p>注意：这里也可以点击 Variables 设置JRE环境的内存参数，在缺省VM参数的编辑框，写入 “-xmx200M”参数就可以为虚拟机添加内存，可以避免大型应用程序因为内存不足而无法运行</p>
+<hr>
+<h2 id="为项目添加类库"><a href="#为项目添加类库" class="headerlink" title="为项目添加类库"></a>为项目添加类库</h2><blockquote>
+<ol>
+<li>一个大型项目的开发，需要几个或多个JAR文件的支持，比如数据库连接的类库等等</li>
+<li>构建路径就是把各个类库设置到CLASSPATH类路径当中，是一个环境变量，这样，在编译源文件时才能够找到引用的其他JAR文件中的API</li>
+</ol>
+</blockquote>
+<h3 id="方法一："><a href="#方法一：" class="headerlink" title="方法一："></a>方法一：</h3><p>自己新建一个文件夹 lib ，然后把所有用到的JAR文件复制粘贴过来</p>
+<h3 id="方法二："><a href="#方法二：" class="headerlink" title="方法二："></a>方法二：</h3><blockquote>
+<p>对于重复使用的类库，不需要每次添加，直接添加到用户的类库中就可以</p>
+</blockquote>
+<ol>
+<li>选择Window –&gt; Preferences–&gt; Java –&gt; Build Path –&gt; user libraries</li>
+<li>选择import ，点击自己所存放类库的位置就可以</li>
+</ol>
+<hr>
+<h2 id="安装界面设计器（WindowBuilder插件）"><a href="#安装界面设计器（WindowBuilder插件）" class="headerlink" title="安装界面设计器（WindowBuilder插件）"></a>安装界面设计器（WindowBuilder插件）</h2><blockquote>
+<p>由于Java Swing开发桌面应用程序比较灵活，由于API众多，因此开发难度增大，而且Swing为了实现跨平台的应用程序，使得程序员不得不边运行程序，边进行界面设计，因此这里介绍一个插件，帮助大家快速开发桌面应用程序</p>
+</blockquote>
+<h3 id="离线安装"><a href="#离线安装" class="headerlink" title="离线安装"></a>离线安装</h3><ol>
+<li>进入 <a href="http://www.eclipse.org/windowbuilder/download.php" target="_blank" rel="noopener">WindowBuilder下载界面</a></li>
+<li>找到对应版本的Eclipse，选择 Release Version下的 Zipped Update Site （离线安装）</li>
+<li>将压缩包中的文件解压，并覆盖Eclipse文件夹下的同名文件夹</li>
+</ol>
+<h3 id="在线安装"><a href="#在线安装" class="headerlink" title="在线安装"></a>在线安装</h3><ol>
+<li>进入 <a href="http://www.eclipse.org/windowbuilder/download.php" target="_blank" rel="noopener">WindowBuilder下载界面</a></li>
+<li>找到对应版本的Eclipse，选择 Release Version下的Update Site 的link选项，点击，复制进入新界面的网址</li>
+<li>打开Eclipse</li>
+<li>点击 Help–&gt;Install new software–&gt; Add –&gt;输入名称（WindowBuilder），输入位置 （把复制的网址粘贴）</li>
+<li>点击确定，然后选择出来的WindowBuilder，然后一路next</li>
+</ol>
+
+        </div>
+        
+<blockquote class="post-copyright">
+    <div class="content">
+        
+<span class="post-time">
+    最后更新时间：<time datetime="2019-08-26T10:46:59.858Z" itemprop="dateUpdated">2019-08-26 18:46:59</time>
+</span><br>
+
+
+        
+        转载注明出处，原文地址：<a href="/2017/03/17/Eclipse/" target="_blank" rel="external">http://www.sivan.tech/2017/03/17/Eclipse/</a>
+        
+    </div>
+    <footer>
+        <a href="http://www.sivan.tech">
+            <img src="/img/1.jpg" alt="逸如风(yirufeng)">
+            逸如风(yirufeng)
+        </a>
+    </footer>
+</blockquote>
+
+        
+            <div class="page-reward">
+    <a id="rewardBtn" href="javascript:;" class="page-reward-btn waves-effect waves-circle waves-light">赏</a>
+</div>
+
+            
+        
+        <div class="post-footer">
+            
+	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Eclipse/">Eclipse</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Tools/">Tools</a></li></ul>
+
+            <div class="page-share-wrap">
+    
+
+<div class="page-share" id="pageShare">
+    <ul class="reset share-icons">
+      
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://www.sivan.tech/2017/03/17/Eclipse/&title=《Eclipse工具讲解（中文语言包的安装，活用workspace，添加新的JDK环境）》 — yirufeng's Blog&pic=https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1490613337&di=df2b2469e26db5ccf65d7d8cba8f789d&imgtype=jpg&er=1&src=http://cms.csdnimg.cn/article/201303/08/5139976ab7cec.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://www.sivan.tech/2017/03/17/Eclipse/&title=《Eclipse工具讲解（中文语言包的安装，活用workspace，添加新的JDK环境）》 — yirufeng's Blog&source=中文语言包的安装准备工作
+
+安装好的Eclipse，可以去网上下载，免费，下载Eclipse
+有网络环境
+
+" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http://www.sivan.tech/2017/03/17/Eclipse/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《Eclipse工具讲解（中文语言包的安装，活用workspace，添加新的JDK环境）》 — yirufeng's Blog&url=http://www.sivan.tech/2017/03/17/Eclipse/&via=http://www.sivan.tech" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=http://www.sivan.tech/2017/03/17/Eclipse/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+      
+    </ul>
+ </div>
+
+
+
+    <a href="javascript:;" id="shareFab" class="page-share-fab waves-effect waves-circle">
+        <i class="icon icon-share-alt icon-lg"></i>
+    </a>
+</div>
+
+        </div>
+        
+            
+
+
+        
+    </div>
+    
+<nav class="post-nav flex-row flex-justify-between">
+  
+    <div class="prev">
+      <a href="/2017/03/22/泛型/" id="post-prev" class="post-nav-link">
+        <div class="tips"><i class="icon icon-angle-left icon-lg icon-pr"></i> Prev</div>
+        <h4 class="title">泛型</h4>
+      </a>
+    </div>
+  
+
+  
+    <div class="next">
+      <a href="/2017/03/09/文件输入输出流/" id="post-next" class="post-nav-link">
+        <div class="tips">Next <i class="icon icon-angle-right icon-lg icon-pl"></i></div>
+        <h4 class="title">文件输入输出流</h4>
+      </a>
+    </div>
+  
+</nav>
+
+
+    
+    
+        <aside class="post-widget">
+            <nav class="post-toc-wrap" id="post-toc">
+                <strong>目录</strong>
+                <ol class="post-toc"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#中文语言包的安装"><span class="post-toc-number">1.</span> <span class="post-toc-text">中文语言包的安装</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#准备工作"><span class="post-toc-number">1.1.</span> <span class="post-toc-text">准备工作</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#下载中文语言包"><span class="post-toc-number">1.2.</span> <span class="post-toc-text">下载中文语言包</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#解压缩中文语言包"><span class="post-toc-number">1.3.</span> <span class="post-toc-text">解压缩中文语言包</span></a></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#添加新的JDK环境"><span class="post-toc-number">2.</span> <span class="post-toc-text">添加新的JDK环境</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#为项目添加类库"><span class="post-toc-number">3.</span> <span class="post-toc-text">为项目添加类库</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#方法一："><span class="post-toc-number">3.1.</span> <span class="post-toc-text">方法一：</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#方法二："><span class="post-toc-number">3.2.</span> <span class="post-toc-text">方法二：</span></a></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#安装界面设计器（WindowBuilder插件）"><span class="post-toc-number">4.</span> <span class="post-toc-text">安装界面设计器（WindowBuilder插件）</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#离线安装"><span class="post-toc-number">4.1.</span> <span class="post-toc-text">离线安装</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#在线安装"><span class="post-toc-number">4.2.</span> <span class="post-toc-text">在线安装</span></a></li></ol></li></ol>
+            </nav>
+            <div class="toc-bar"><div>
+        </aside>
+    
+</article>
+
+    <div id="reward" class="page-modal reward-lay">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <h3 class="reward-title">
+        <i class="icon icon-quote-left"></i>
+        感谢原作，你的打赏是我的动力！
+        <i class="icon icon-quote-right"></i>
+    </h3>
+    <div class="reward-content">
+        
+        <div class="reward-code">
+            <img id="rewardCode" src="/img/reward-wechat.jpg" alt="打赏二维码">
+        </div>
+        
+        <label class="reward-toggle">
+            <input id="rewardToggle" type="checkbox" class="reward-toggle-check"
+                data-wechat="/img/reward-wechat.jpg" data-alipay="/img/reward-alipay.jpg">
+            <div class="reward-toggle-ctrol">
+                <span class="reward-toggle-item wechat">微信</span>
+                <span class="reward-toggle-label"></span>
+                <span class="reward-toggle-item alipay">支付宝</span>
+            </div>
+        </label>
+        
+    </div>
+</div>
+
+    
+
+</div>
+
+    </main>
+    <footer class="footer ">
+    
+    <div class="top">
+        
+            <p>
+    <span>Links：</span>
+    
+    <span class="blogroll-item">
+        <a href="https://github.com/sivanWu0222" target="_blank">GitHub</a>
+    </span>
+    
+    <span class="blogroll-item">
+        <a href="http://weibo.com/Msingwen0222/home?wvr=5" target="_blank">新浪微博</a>
+    </span>
+    
+    <span class="blogroll-item">
+        <a href="https://www.linkedin.com/in/%E6%99%93%E6%96%87-%E5%90%B4-79057a121/" target="_blank">Linkedin</a>
+    </span>
+    
+    <span class="blogroll-item">
+        <a href="http://wpa.qq.com/msgrd?v=3&amp;uin=1666762170&amp;site=qq&amp;menu=yes" target="_blank">QQ</a>
+    </span>
+    
+    <span class="blogroll-item">
+        <a href="https://zh-cn.facebook.com/people/SiVan-Wu/100014408918389" target="_blank">Facebook</a>
+    </span>
+    
+    <span class="blogroll-item">
+        <a href="https://mail.qq.com/cgi-bin/qm_share?t=qm_mailme&amp;email=xfTz8-Py8-f08vWFtLTrpqqo" target="_blank">Contact</a>
+    </span>
+    
+    <span class="blogroll-item">
+        <a href="https://twitter.com/SiVan_Wu" target="_blank">Twitter</a>
+    </span>
+    
+</p>
+
+        
+    </div>
+    
+    <div class="bottom">
+        <p>
+            <span>
+                逸如风(yirufeng) &copy; 2016 - 2019
+            </span>
+
+           	
+           	<span>
+           		<a href="http://beian.miit.gov.cn/" target="_blank">已实名认证</a>
+           	</span>
+           	
+
+            
+
+            
+
+            
+                
+<span class="site-uv" title="总访客量">
+    <i class="icon icon-user"></i>
+    <i class="busuanzi-value" id="busuanzi_value_site_uv"></i>
+</span>
+
+
+<span class="site-pv" title="总访问量">
+    <i class="icon icon-eye"></i>
+    <i class="busuanzi-value" id="busuanzi_value_site_pv"></i>
+</span>
+
+            
+        </p>
+    </div>
+</footer>
+
+    <div class="mask" id="mask"></div>
+<a href="javascript:;" id="gotop" class="waves-effect waves-circle waves-light"><span class="icon icon-lg icon-chevron-up"></span></a>
+
+
+
+<div class="global-share" id="globalShare">
+    <ul class="reset share-icons">
+      
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://www.sivan.tech/2017/03/17/Eclipse/&title=《Eclipse工具讲解（中文语言包的安装，活用workspace，添加新的JDK环境）》 — yirufeng's Blog&pic=https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1490613337&di=df2b2469e26db5ccf65d7d8cba8f789d&imgtype=jpg&er=1&src=http://cms.csdnimg.cn/article/201303/08/5139976ab7cec.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://www.sivan.tech/2017/03/17/Eclipse/&title=《Eclipse工具讲解（中文语言包的安装，活用workspace，添加新的JDK环境）》 — yirufeng's Blog&source=中文语言包的安装准备工作
+
+安装好的Eclipse，可以去网上下载，免费，下载Eclipse
+有网络环境
+
+" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http://www.sivan.tech/2017/03/17/Eclipse/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《Eclipse工具讲解（中文语言包的安装，活用workspace，添加新的JDK环境）》 — yirufeng's Blog&url=http://www.sivan.tech/2017/03/17/Eclipse/&via=http://www.sivan.tech" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=http://www.sivan.tech/2017/03/17/Eclipse/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+      
+    </ul>
+ </div>
+
+
+<div class="page-modal wx-share" id="wxShare">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAK4AAACuCAAAAACKZ2kyAAABwElEQVR42u3aQY6DMAwF0N7/0sx2pAr4tknaSi+rqkB4bCzb8esVr+Nk/b/6fmf+z8MLFxd3zD0u1/Urz3Z4v+fsqdyAi4u7n3sWMSa43v43z+Li4n4lN9n0OokZfSouLu6PcPPAh4uL+1vcauMjCU/V9OjhWg0XF3fAzbuU634v6e/i4uK2uEdxJSlL/mz57bi4uFu41cImSVbysqr3Xlxc3NXc+UFInsrkCU0UwnBxcT/EzYuWydVCgwYXF3cjd56I9EJeeQgMFxd3I7d6LJqnL9djGfmIJy4u7k5ufkSab5q/cjT2gYuLu5hbLXLyMNRLdG4CJS4u7hZuDkrGrfJhrLxViouLu5NbBeUt0STdKQcyXFzcLdxqy6PaKHmq2VqIdri4uAu4zePPwVBFuWGKi4v7IW5SJ+VPVVseN7UaLi7uRm71dy+0JYHv5h5cXNzF3KO4eoMaeYuknCXh4uIu4OareQg6ngppfgwuLu6Y+1TwSu7sjXPh4uJ+ilstinrN0wdSGVxc3K/nTpomvUYtLi7ud3KTAun16BqlOLi4uANuHnTyoiUfvMgPcnBxcfdwJxXHpNlR3Q0XF3cL9w9OceIx/Jb5LQAAAABJRU5ErkJggg==" alt="微信分享二维码">
+</div>
+
+
+    
+    <!-- main-js -->
+<script type="text/javascript" src="//cdn.bootcss.com/jquery/2.1.0/jquery.min.js"></script>
+<script type="text/javascript" src="/js/plugins/fastclick.js?v=1.4.2"></script>
+<script type="text/javascript" src="/js/plugins/ios-orientationchange-fix.js?v=1.4.2"></script>
+<script type="text/javascript" src="//cdn.jsdelivr.net/gh/fancyapps/fancybox@3.5.2/dist/jquery.fancybox.min.js"></script>
+
+<script type="text/javascript" src="//cdn.bootcss.com/node-waves/0.7.4/waves.min.js"></script>
+
+<script type="text/javascript" src="/js/method.js?v=1.4.2"></script>
+<script type="text/javascript" src="/js/blog.js?v=1.4.2"></script>
+
+<!-- third-party -->
+
+
+
+
+
+
+<script type="text/javascript" src="/js/plugins/local_search.js?v=1.4.2"></script>
+<script type="text/javascript">
+	var search_path = "search.xml";
+	if (search_path.length === 0) {
+		search_path = "search.xml";
+	}
+	var path = "/" + search_path;
+	searchFunc(path, "local-search-input", "local-search-result");
+</script>
+
+
+
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+    
+    
+
+
+
+<script type="text/javascript" src="https://cdn1.lncld.net/static/js/av-core-mini-0.6.4.js"></script>
+<script type="text/javascript" src="/js/plugins/leancloud_visitors.js?v=1.4.2"></script>
+
+
+
+    <!-- mathjax config similar to math.stackexchange -->
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+        tex2jax: {
+            inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+            processEscapes: true,
+            skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+        }
+    });
+</script>
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for (i=0; i < all.length; i += 1) {
+            all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+    });
+</script>
+
+<script type="text/javascript" src="//cdn.bootcss.com/mathjax/2.7.1/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+
+
+
+    <script>
+    (function() {
+        var OriginTitile = document.title, titleTime;
+        document.addEventListener('visibilitychange', function() {
+            if (document.hidden) {
+                document.title = '死鬼去哪里了！';
+                clearTimeout(titleTime);
+            } else {
+                document.title = '(つェ⊂)咦!又好了!';
+                titleTime = setTimeout(function() {
+                    document.title = OriginTitile;
+                },2000);
+            }
+        });
+    })();
+</script>
+
+
+
+
+
+    
+</body>
+</html>

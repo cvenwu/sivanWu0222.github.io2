@@ -1,0 +1,786 @@
+<!DOCTYPE html>
+<html>
+<head><meta name="generator" content="Hexo 3.9.0">
+    <meta charset="utf-8">
+    
+    
+    <title>二部图的最大匹配(算法分析与设计教程系列) | yirufeng&#39;s Blog | 未来的小幸运 || 致正在努力的我们 ---- 逸如风</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    
+    <meta name="keywords" content="Algorithm,匈牙利树">
+    <link rel="shortcut icon" href="/img/favicon.ico">
+    <link rel="stylesheet" href="//cdn.jsdelivr.net/gh/fancyapps/fancybox@3.5.2/dist/jquery.fancybox.min.css">
+    <link rel="stylesheet" href="/css/style.css?v=1.4.2">
+    
+    <script type="text/javascript">
+        // Data Center
+        var DC = {
+            reward:	true,
+            lv: JSON.parse('{"enable":true,"app_id":"K2RVtHi7RnmoN6dovlDKafn8-gzGzoHsz","app_key":"Qxmil0oqPFdDUyyIp2i1Xikt","icon":true}'),
+            v: JSON.parse('{"enable":false,"appid":"ACuOJIasBeRLiDe2iUApHj67-gzGzoHsz","appkey":"qbgg4tClrQQmvq8uwlpwA5mA","notify":true,"verify":true,"placeholder":"give me some sugers plz...","avatar":"wavatar"}'),
+            g: JSON.parse('{"enable":false,"lazy":true,"owner":"codefine","repo":"gitment","oauth":{"client_id":null,"client_secret":null},"perPage":10}'),
+            d: JSON.parse('{"app_id":null}')
+        };
+    </script>
+    <script type="text/javascript">
+        window.lazyScripts=[];
+    </script>
+    
+</head>
+
+
+<body>
+    <div id="loading" class="active"></div>
+
+    <aside id="menu" class="">
+  <div class="inner flex-row-vertical">
+    <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menu-off">
+        <i class="icon icon-lg icon-close"></i>
+    </a>
+    <div class="brand-wrap">
+      
+      <img src="/img/brand.jpg" class="brand-bg">
+      
+      <div class="brand">
+        <a href="/" class="avatar waves-effect waves-circle waves-light">
+          <img src="/img/1.jpg">
+        </a>
+        <hgroup class="introduce">
+          <h5 class="nickname">逸如风(yirufeng)</h5>
+          <a href="mailto:yirufeng@foxmail.com" title="yirufeng@foxmail.com" class="mail">
+            
+              <span>y</span>
+            
+              <span>i</span>
+            
+              <span>r</span>
+            
+              <span>u</span>
+            
+              <span>f</span>
+            
+              <span>e</span>
+            
+              <span>n</span>
+            
+              <span>g</span>
+            
+              <span>@</span>
+            
+              <span>f</span>
+            
+              <span>o</span>
+            
+              <span>x</span>
+            
+              <span>m</span>
+            
+              <span>a</span>
+            
+              <span>i</span>
+            
+              <span>l</span>
+            
+              <span>.</span>
+            
+              <span>c</span>
+            
+              <span>o</span>
+            
+              <span>m</span>
+            
+          </a>
+        </hgroup>
+        
+        <ul class="menu-link">
+          
+              <li>
+                <a href="https://github.com/sivanWu0222" target="_blank">
+                  <i class="icon icon-lg icon-github"></i>
+                </a>
+              </li>
+            
+              <li>
+                <a href="https://mail.qq.com/cgi-bin/qm_share?t=qm_mailme&amp;amp;email=xfTz8-Py8-f08vWFtLTrpqqo" target="_blank">
+                  <i class="icon icon-lg icon-envelope"></i>
+                </a>
+              </li>
+            
+        </ul>
+        
+      </div>
+    </div>
+    <div class="scroll-wrap flex-col">
+      <ul class="nav">
+        
+            <li class="">
+              <a href="/"  >
+                <i class="icon icon-lg icon-home"></i>
+                Home
+              </a>
+            </li>
+        
+            <li class="">
+              <a href="/categories"  >
+                <i class="icon icon-lg icon-th-list"></i>
+                Category
+              </a>
+            </li>
+        
+            <li class="">
+              <a href="/research"  >
+                <i class="icon icon-lg icon-mortar-board"></i>
+                Research
+              </a>
+            </li>
+        
+            <li class="">
+              <a href="/tags"  >
+                <i class="icon icon-lg icon-tags"></i>
+                Tag
+              </a>
+            </li>
+        
+            <li class="">
+              <a href="/archives"  >
+                <i class="icon icon-lg icon-archives"></i>
+                Archive
+              </a>
+            </li>
+        
+            <li class="">
+              <a href="/about"  >
+                <i class="icon icon-lg icon-user"></i>
+                About
+              </a>
+            </li>
+        
+            <li class="">
+              <a href="/open-source"  >
+                <i class="icon icon-lg icon-github"></i>
+                Project
+              </a>
+            </li>
+        
+            <li class="">
+              <a href="/demo"  >
+                <i class="icon icon-lg icon-audio-description"></i>
+                Demo
+              </a>
+            </li>
+        
+            <li class="">
+              <a href="/wechat-number"  >
+                <i class="icon icon-lg icon-wechat"></i>
+                公众号
+              </a>
+            </li>
+        
+            <li class="">
+              <a href="http://www.sivan.tech/LeetCodeAlgo/" target="_blank" >
+                <i class="icon icon-lg icon-braille"></i>
+                Leetcode
+              </a>
+            </li>
+        
+            <li class="">
+              <a href="http://resume.sivan.tech/" target="_blank" >
+                <i class="icon icon-lg icon-file-pdf-o"></i>
+                Resume
+              </a>
+            </li>
+        
+      </ul>
+    </div>
+  </div>
+</aside>
+
+    <main id="main">
+        <header class="top-header" id="header">
+    <div class="flex-row clearfix">
+        <a href="javascript:;" class="header-icon pull-left waves-effect waves-circle waves-light on" id="menu-toggle">
+          <i class="icon icon-lg icon-navicon"></i>
+        </a>
+        <div class="flex-col header-title ellipsis">
+            <span>二部图的最大匹配(算法分析与设计教程系列)</span>
+            
+        </div>
+        
+        <a href="javascript:;" id="site_search_btn" class="header-icon pull-right waves-effect waves-circle waves-light">
+            <i class="icon icon-lg icon-search"></i>
+        </a>
+        
+    </div>
+</header>
+<header class="content-header post-header">
+    <img src="/img/s3.jpg" class="header-bg">
+    <div class="container fade-scale">
+        <h1 class="title">二部图的最大匹配(算法分析与设计教程系列)</h1>
+        <h5 class="subtitle">
+            
+                <time datetime="2019-03-04T11:43:30.000Z" itemprop="datePublished" class="page-time">
+  2019-03-04
+</time>
+
+
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/算法分析与设计教程/">算法分析与设计教程</a><ul class="article-category-list-child"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/算法分析与设计教程/Chapter-7/">Chapter 7</a><ul class="article-category-list-child"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/算法分析与设计教程/Chapter-7/7-3-二部图的最大匹配问题/">7.3 二部图的最大匹配问题</a></li></ul></li></ul></li></ul>
+
+            
+        </h5>
+        
+    </div>
+    
+
+</header>
+
+<div id="site_search">
+    <div class="search-title clearfix">
+        <span class="pull-left">
+          <i class="icon icon-lg icon-search"></i>
+        </span>
+        <input type="text" id="local-search-input" name="q" results="0" placeholder="search my blog..." class="form-control pull-left"/>
+        <a href="javascript:;" class="close pull-right waves-effect waves-circle waves-light">
+          <i class="icon icon-lg icon-close"></i>
+        </a>
+    </div>
+    <div id="local-search-result"></div>
+</div>
+
+
+<div class="container body-wrap">
+    <article id="post-二部图的最大匹配-算法分析与设计教程系列"
+  class="post-article article-type-post" itemprop="blogPost">
+    <div class="post-card">
+        <h1 class="post-card-title">二部图的最大匹配(算法分析与设计教程系列)</h1>
+        <div class="post-meta">
+            <time class="post-time" title="2019-03-04 19:43:30" datetime="2019-03-04T11:43:30.000Z"  itemprop="datePublished">2019-03-04</time>
+
+            
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/算法分析与设计教程/">算法分析与设计教程</a><ul class="article-category-list-child"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/算法分析与设计教程/Chapter-7/">Chapter 7</a><ul class="article-category-list-child"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/算法分析与设计教程/Chapter-7/7-3-二部图的最大匹配问题/">7.3 二部图的最大匹配问题</a></li></ul></li></ul></li></ul>
+
+
+
+            
+	<span id="/2019/03/04/二部图的最大匹配-算法分析与设计教程系列/" class="leancloud_visitors" data-flag-title="二部图的最大匹配(算法分析与设计教程系列)" title="二部图的最大匹配(算法分析与设计教程系列)">
+		
+			<i class="icon icon-eye"></i>
+		
+		<span class="leancloud-visitors-count"></span>
+	</span>
+ 
+
+            
+
+
+            
+        </div>
+        <div class="post-content" id="post-content" itemprop="postContent">
+            
+            <h2 id="引言"><a href="#引言" class="headerlink" title="引言"></a>引言</h2><p>如果有4个申请读研的学生($s_i$)与4位导师($t_i$)；假设每个导师最多只能招收一名学生，下图表示学生与所申请导师之间的关系；如何分配学生导师以尽可能满足学生的志愿</p>
+<figure class="image-box">
+                <a rel=二部图的最大匹配(算法分析与设计教程系列) href="https://github.com/algorithm-skill/AlgorithmAnalysisAndDesignTutorial/blob/master/%E7%AC%AC7%E7%AB%A0/7.3%E4%BA%8C%E9%83%A8%E5%9B%BE%E7%9A%84%E6%9C%80%E5%A4%A7%E5%8C%B9%E9%85%8D%E9%97%AE%E9%A2%98/%E4%BA%8C%E9%83%A8%E5%9B%BE%E4%BE%8B%E5%AD%90.png?raw=true" title="Demo" data-fancybox="images"><img src="https://github.com/algorithm-skill/AlgorithmAnalysisAndDesignTutorial/blob/master/%E7%AC%AC7%E7%AB%A0/7.3%E4%BA%8C%E9%83%A8%E5%9B%BE%E7%9A%84%E6%9C%80%E5%A4%A7%E5%8C%B9%E9%85%8D%E9%97%AE%E9%A2%98/%E4%BA%8C%E9%83%A8%E5%9B%BE%E4%BE%8B%E5%AD%90.png?raw=true" alt="Demo" title class></a>
+                <p>Demo</p>
+            </figure>
+<p>与此类问题类似的就是求二部图的最大匹配的问题</p>
+<h2 id="相关概念"><a href="#相关概念" class="headerlink" title="相关概念"></a>相关概念</h2><h3 id="匹配与最大匹配"><a href="#匹配与最大匹配" class="headerlink" title="匹配与最大匹配"></a>匹配与最大匹配</h3><p>设图G=&lt;V,E&gt;是一个无向图，如果存在边集M为E的子集，并且使得边集M中的所有边都没有公共结点，那么称边集M是无向图G的一个<strong>匹配</strong>；在一个无向图G中边数最多的匹配称为无向图的<strong>最大匹配</strong></p>
+<p>已经匹配过的边称为<strong>匹配边</strong>，未匹配的边叫<strong>自由边</strong>，匹配边的两个顶点叫<strong>饱和点</strong>，其他的点叫做<strong>自由点</strong>，如果V中所有的顶点都是饱和点，则称边集M是无向图的<strong>完美匹配</strong></p>
+<h3 id="交错轨道，交错回路，增广路径"><a href="#交错轨道，交错回路，增广路径" class="headerlink" title="交错轨道，交错回路，增广路径"></a>交错轨道，交错回路，增广路径</h3><p>交错轨道：一条已匹配过的边和自由边组成的简单路径叫做交错轨道</p>
+<p>交错回路：起点和终点相同的交错轨道</p>
+<p>增广路径：起点和终点均自由的交错轨道</p>
+<p>交错回路的边数一定为偶数</p>
+<p>如果交错轨道p是边集M的增广路径，则p的边数一定为奇数，一定不会成为交错回路(因为起点和终点都要自由)</p>
+<p>注意：如果边集M是无向图G的一个匹配，那么交错轨道p是边集M的一条增广路径，操作$M⊕p = (M \cup p)-(M \cap p)=(M-p) \cup (p-M)​$，(<strong>异或运算：相同的去掉，不同的加上；通过异或扩大匹配</strong>)说明$M⊕p​$是无向图的一个新匹配</p>
+<h3 id="两个定理"><a href="#两个定理" class="headerlink" title="两个定理"></a>两个定理</h3><ol>
+<li>无向图G的匹配M是无向图G的最大匹配，当且仅当在G中不包含匹配M的增广路径</li>
+<li>设M是无向图G的一个匹配，并且交错轨道p是匹配M的一条增广路径，那么$M⊕p$即是该无向图G的一个大小为$|M⊕p| = |M| + 1$的匹配</li>
+</ol>
+<h3 id="二部图"><a href="#二部图" class="headerlink" title="二部图"></a>二部图</h3><p>如果无向图G=&lt;V,E&gt;的结点集V可以分为两个子集X和Y，并且满足子集X与子集Y的交集为空集，子集X与子集Y的并集为结点集V，并且无向图G中任意一条边的两个端点，一个在X中，一个在Y中，那么就称图G是一个二部图或者偶图！</p>
+<h4 id="定理"><a href="#定理" class="headerlink" title="定理"></a>定理</h4><p><strong>(判定是否是二部图)</strong>无向图G是一个二部图，当且仅当该图没有长度为奇数的回路</p>
+<p>注意：如果是二部图才可以利用下面所讲的匈牙利树算法来寻找这个二部图的最大匹配！</p>
+<h2 id="匈牙利算法"><a href="#匈牙利算法" class="headerlink" title="匈牙利算法"></a>匈牙利算法</h2><h3 id="最大匹配的匈牙利算法步骤"><a href="#最大匹配的匈牙利算法步骤" class="headerlink" title="最大匹配的匈牙利算法步骤"></a>最大匹配的匈牙利算法步骤</h3><ol>
+<li>从一个初始匹配M开始</li>
+<li>每次找一条增广交错路径p</li>
+<li>令M &lt;- M⊕E(P)，其中E(P)是p的边集</li>
+<li>直到不存在增广交错路径为止</li>
+</ol>
+<p>书上的描述：首先从一个空匹配M开始，在无向图G中寻找匹配M的一条增广路径p，然后执行M⊕p的操作，这实际上是反转增光路径p中边的作用，即将增广路径p中已经匹配过的边变成自由的边，同时将自由的边变成已经匹配过的边，从而可以得到一个新的匹配M，通过这样一种操作，可以使得这个新的匹配M比旧的匹配边数多1，重复以上操作，直到二部图G不包含匹配M的增广路径为止，此时宾士二部图G的最大匹配。</p>
+<p><strong>结论：如果在检索增广路径的过程中，检索到一颗匈牙利树，就可以永久地将其从二部图G中删去，而不会影响检索！</strong></p>
+<a id="more"></a>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br><span class="line">137</span><br><span class="line">138</span><br><span class="line">139</span><br><span class="line">140</span><br><span class="line">141</span><br><span class="line">142</span><br><span class="line">143</span><br><span class="line">144</span><br><span class="line">145</span><br><span class="line">146</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/*下面是构造二部图的最大匹配算法用到的数据类型和数据结构*/</span></span><br><span class="line">NODE node[n];               <span class="comment">/*结点的邻接表*/</span></span><br><span class="line"><span class="keyword">int</span> match[n];               <span class="comment">/*与该元素对应结点匹配的结点编号*/</span></span><br><span class="line"><span class="keyword">int</span> path[n];                <span class="comment">/*与该元素对应结点在交错轨道树上的父结点的编号*/</span></span><br><span class="line">BOOL block[n];              <span class="comment">/*该元素对应结点在交错轨道树上的阻塞标志*/</span></span><br><span class="line"><span class="keyword">typedef</span> <span class="class"><span class="keyword">struct</span> <span class="title">qnode</span> &#123;</span>      <span class="comment">/*广度优先搜索队列元素*/</span></span><br><span class="line">    <span class="keyword">int</span> v;                  <span class="comment">/*结点的编号*/</span></span><br><span class="line">    <span class="keyword">int</span> tag;                <span class="comment">/*结点在交错轨道树上的作用标记*/</span></span><br><span class="line">    <span class="class"><span class="keyword">struct</span> <span class="title">qnode</span> *<span class="title">next</span>;</span>     <span class="comment">/*下一个待搜索的元素*/</span></span><br><span class="line">&#125; QNODE;</span><br><span class="line"><span class="keyword">typedef</span> <span class="class"><span class="keyword">struct</span> &#123;</span>            <span class="comment">/*搜索队列*/</span></span><br><span class="line">    QNODE *head;            <span class="comment">/*队列的头指针*/</span></span><br><span class="line">    QNODE *tair;            <span class="comment">/*队列的尾指针*/</span></span><br><span class="line">&#125; QNODE;</span><br><span class="line"></span><br><span class="line">bipartite_match(NODE node[], <span class="keyword">int</span> match[], <span class="keyword">int</span> n1, <span class="keyword">int</span> n)</span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">int</span> root;</span><br><span class="line">    <span class="keyword">int</span> i;</span><br><span class="line">    <span class="keyword">int</span> j;</span><br><span class="line">    <span class="keyword">int</span> t;</span><br><span class="line">    <span class="keyword">int</span> path[n];</span><br><span class="line">    BOOL block[n], flag = TRUE;</span><br><span class="line">    <span class="keyword">for</span>(i = <span class="number">0</span>; i &lt; n; i++)                      <span class="comment">/*匹配M初始化为空集*/</span></span><br><span class="line">        match[i] = <span class="number">-1</span>;</span><br><span class="line">    <span class="keyword">while</span>(flag)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">for</span>(root = <span class="number">0</span>; root &lt; n1; root++)        <span class="comment">/*检索自由的xvertex结点*/</span></span><br><span class="line">            <span class="keyword">if</span>(match[r] == <span class="number">-1</span>)</span><br><span class="line">                <span class="keyword">break</span>;</span><br><span class="line">        <span class="keyword">if</span>(r &gt;= n1)</span><br><span class="line">            <span class="keyword">break</span>;                              <span class="comment">/*如果不存在自由的xvertex结点，就退出循环*/</span></span><br><span class="line">        <span class="keyword">for</span>(i = n1; i &lt; n; i++)</span><br><span class="line">            <span class="keyword">if</span>(match[r] == <span class="number">-1</span>)</span><br><span class="line">                <span class="keyword">break</span>;</span><br><span class="line">        <span class="keyword">if</span>(r &gt;= n)</span><br><span class="line">            <span class="keyword">break</span>;</span><br><span class="line">        <span class="keyword">if</span>(!(hungbfs(r, t, node, match, path, block, n)))</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="keyword">for</span>(i = <span class="number">0</span>; i &lt; n; i++)              <span class="comment">/*删除匈牙利树*/</span></span><br><span class="line">            &#123;</span><br><span class="line">                <span class="keyword">if</span>(block[i])</span><br><span class="line">                &#123;</span><br><span class="line">                    v = i;</span><br><span class="line">                    delete_edge(v, path[v]);</span><br><span class="line">                    <span class="keyword">while</span>(path[v] != <span class="number">-1</span>)</span><br><span class="line">                    &#123;</span><br><span class="line">                        v = path[v];</span><br><span class="line">                        delete_edge(v, path[v]);</span><br><span class="line">                    &#125;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">else</span>&#123;                                   <span class="comment">/*反转增广路径边的作用*/</span></span><br><span class="line">            <span class="keyword">while</span>((t != <span class="number">1</span>) &amp;&amp; (path[t] != <span class="number">-1</span>))</span><br><span class="line">            &#123;</span><br><span class="line">                match[t] = path[t];</span><br><span class="line">                match[path[t]] = t;</span><br><span class="line">                t = path[path[t]];</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function">BOOL <span class="title">hungbfs</span><span class="params">(<span class="keyword">int</span> r, <span class="keyword">int</span> &amp;t, NODE node[], <span class="keyword">int</span> match[], <span class="keyword">int</span> path[], BOOL block[], <span class="keyword">int</span> n)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">int</span> i;</span><br><span class="line">    <span class="keyword">int</span> j;</span><br><span class="line">    <span class="keyword">int</span> v;</span><br><span class="line">    <span class="keyword">int</span> w;</span><br><span class="line">    <span class="keyword">int</span> tag;</span><br><span class="line">    BOOL flag1;</span><br><span class="line">    BOOL flag = FALSE, *a = <span class="keyword">new</span> BOOL[n];</span><br><span class="line">    NODE *p = node[r].next;</span><br><span class="line">    QNODE *p1;</span><br><span class="line">    QUEUE <span class="built_in">queue</span>;</span><br><span class="line">    initial_Q(<span class="built_in">queue</span>);                       <span class="comment">/*初始化广度优先搜索队列*/</span></span><br><span class="line">    <span class="keyword">for</span>(i = <span class="number">0</span>; i &lt; n; i++)                  <span class="comment">/*初始化*/</span></span><br><span class="line">    &#123;</span><br><span class="line">        <span class="comment">/* code */</span></span><br><span class="line">        a[i] = FALSE;</span><br><span class="line">        block[i] = FALSE;</span><br><span class="line">        path[i] = <span class="number">-1</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    a[root] = TRUE;</span><br><span class="line">    <span class="keyword">while</span>(p != <span class="literal">NULL</span>)                        <span class="comment">/*生成树的第一层结点*/</span></span><br><span class="line">    &#123;</span><br><span class="line">        p1 = <span class="keyword">new</span> NODE;</span><br><span class="line">        p1-&gt;v = p-&gt;v;</span><br><span class="line">        p1-&gt;tag = <span class="number">0</span>;</span><br><span class="line">        path[p-&gt;v] = root;</span><br><span class="line">        a[p-&gt;v] = TRUE;</span><br><span class="line">        append_Q[<span class="built_in">queue</span>, p1];</span><br><span class="line">        p = p-&gt;next;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">while</span>(!empty(<span class="built_in">queue</span>))&#123;</span><br><span class="line">        <span class="comment">/* code */</span></span><br><span class="line">        p1 = delete_Q(<span class="built_in">queue</span>;                <span class="comment">/*取下搜索队列中的队首元素*/</span></span><br><span class="line">        w = p1-&gt;v;                          <span class="comment">/*此元素的结点编号保存在变量w中*/</span></span><br><span class="line">        tag = p1-&gt;tag;                      <span class="comment">/*此元素的结点标志保存在变量tag中*/</span></span><br><span class="line">        <span class="keyword">delete</span> p1;</span><br><span class="line">        <span class="keyword">if</span>(!flag)</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="keyword">if</span>(tag == <span class="number">0</span>)                    <span class="comment">/*tag等于0时的处理*/</span></span><br><span class="line">            &#123;</span><br><span class="line">                <span class="keyword">if</span>(match[w] == <span class="number">-1</span>)          <span class="comment">/*如果结点w是自由的结点，那么存在着增广路径*/</span></span><br><span class="line">                &#123;</span><br><span class="line">                    flag = TRUE;</span><br><span class="line">                    t = w;                  <span class="comment">/*结点t为增广路径的端点*/</span></span><br><span class="line">                &#125;</span><br><span class="line">                <span class="keyword">else</span></span><br><span class="line">                &#123;</span><br><span class="line">                    v = match[w];</span><br><span class="line">                    p1 = <span class="keyword">new</span> NODE;</span><br><span class="line">                    p1-&gt;v = v;</span><br><span class="line">                    p1-&gt;tag = <span class="number">1</span>;</span><br><span class="line">                    a[v] = TRUE;</span><br><span class="line">                    append_Q[<span class="built_in">queue</span>, p1];</span><br><span class="line">                    path[v] = w;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">else</span>                            <span class="comment">/*tag等于1时的处理*/</span></span><br><span class="line">            &#123;</span><br><span class="line">                p = node[w].next;</span><br><span class="line">                flag1 = FALSE;</span><br><span class="line">                <span class="keyword">while</span>(p != <span class="literal">NULL</span>)&#123;</span><br><span class="line">                    v = p-&gt;v;</span><br><span class="line">                    <span class="keyword">if</span>(!a[v])</span><br><span class="line">                    &#123;</span><br><span class="line">                        p1 = <span class="keyword">new</span> NODE;</span><br><span class="line">                        P1-&gt;v = v;</span><br><span class="line">                        a[v] = TRUE;</span><br><span class="line">                        p1-&gt;tag = <span class="number">0</span>;</span><br><span class="line">                        path[v] = w;</span><br><span class="line">                        append_Q[<span class="built_in">queue</span>, p1];</span><br><span class="line">                        flag1 = TRUE;</span><br><span class="line">                    &#125;</span><br><span class="line">                    p = p-&gt;next;</span><br><span class="line">                &#125;</span><br><span class="line">                <span class="keyword">if</span>(!flag1)</span><br><span class="line">                    block[w] = TRUE; </span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> flag;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+        </div>
+        
+<blockquote class="post-copyright">
+    <div class="content">
+        
+<span class="post-time">
+    最后更新时间：<time datetime="2019-08-26T10:46:59.871Z" itemprop="dateUpdated">2019-08-26 18:46:59</time>
+</span><br>
+
+
+        
+        转载注明出处，原文地址：<a href="/2019/03/04/二部图的最大匹配-算法分析与设计教程系列/" target="_blank" rel="external">http://www.sivan.tech/2019/03/04/二部图的最大匹配-算法分析与设计教程系列/</a>
+        
+    </div>
+    <footer>
+        <a href="http://www.sivan.tech">
+            <img src="/img/1.jpg" alt="逸如风(yirufeng)">
+            逸如风(yirufeng)
+        </a>
+    </footer>
+</blockquote>
+
+        
+            <div class="page-reward">
+    <a id="rewardBtn" href="javascript:;" class="page-reward-btn waves-effect waves-circle waves-light">赏</a>
+</div>
+
+            
+        
+        <div class="post-footer">
+            
+	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Algorithm/">Algorithm</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/匈牙利树/">匈牙利树</a></li></ul>
+
+            <div class="page-share-wrap">
+    
+
+<div class="page-share" id="pageShare">
+    <ul class="reset share-icons">
+      
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://www.sivan.tech/2019/03/04/二部图的最大匹配-算法分析与设计教程系列/&title=《二部图的最大匹配(算法分析与设计教程系列)》 — yirufeng's Blog&pic=http://www.sivan.tech/img/1.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://www.sivan.tech/2019/03/04/二部图的最大匹配-算法分析与设计教程系列/&title=《二部图的最大匹配(算法分析与设计教程系列)》 — yirufeng's Blog&source=引言如果有4个申请读研的学生($s_i$)与4位导师($t_i$)；假设每个导师最多只能招收一名学生，下图表示学生与所申请导师之间的关系；如何分配学生导师..." data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http://www.sivan.tech/2019/03/04/二部图的最大匹配-算法分析与设计教程系列/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《二部图的最大匹配(算法分析与设计教程系列)》 — yirufeng's Blog&url=http://www.sivan.tech/2019/03/04/二部图的最大匹配-算法分析与设计教程系列/&via=http://www.sivan.tech" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=http://www.sivan.tech/2019/03/04/二部图的最大匹配-算法分析与设计教程系列/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+      
+    </ul>
+ </div>
+
+
+
+    <a href="javascript:;" id="shareFab" class="page-share-fab waves-effect waves-circle">
+        <i class="icon icon-share-alt icon-lg"></i>
+    </a>
+</div>
+
+        </div>
+        
+            
+
+
+        
+    </div>
+    
+<nav class="post-nav flex-row flex-justify-between">
+  
+    <div class="prev">
+      <a href="/2019/03/16/雷达安装问题-贪心算法/" id="post-prev" class="post-nav-link">
+        <div class="tips"><i class="icon icon-angle-left icon-lg icon-pr"></i> Prev</div>
+        <h4 class="title">雷达安装问题(贪心算法)</h4>
+      </a>
+    </div>
+  
+
+  
+    <div class="next">
+      <a href="/2019/03/02/贪心算法-1(二部图的最大匹配(算法分析与设计教程系列)/" id="post-next" class="post-nav-link">
+        <div class="tips">Next <i class="icon icon-angle-right icon-lg icon-pl"></i></div>
+        <h4 class="title">贪心算法的思想以及概念</h4>
+      </a>
+    </div>
+  
+</nav>
+
+
+    
+        <div id="repo">
+    <div class="loading active"></div>
+    <div class="top clearfix">
+        <div class="avatar pull-left"></div>
+        <div class="content pull-left">
+            <p class="name"></p>
+            <p class="description"></p>
+        </div>
+    </div>
+    <ul class="bottom">
+        <li class="star">
+            <span class="icon icon-star"></span>
+            <span class="val">0</span>
+        </li>
+        <li class="fork">
+            <span class="icon icon-code-fork"></span>
+            <span class="val">0</span>
+        </li>
+        <li class="date">
+            <span class="icon icon-clock-o"></span>
+            <span class="val">0000-00-00</span>
+        </li>
+    </ul>
+    <a class="link" href=""></a>
+</div>
+    
+    
+        <aside class="post-widget">
+            <nav class="post-toc-wrap" id="post-toc">
+                <strong>目录</strong>
+                <ol class="post-toc"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#引言"><span class="post-toc-number">1.</span> <span class="post-toc-text">引言</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#相关概念"><span class="post-toc-number">2.</span> <span class="post-toc-text">相关概念</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#匹配与最大匹配"><span class="post-toc-number">2.1.</span> <span class="post-toc-text">匹配与最大匹配</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#交错轨道，交错回路，增广路径"><span class="post-toc-number">2.2.</span> <span class="post-toc-text">交错轨道，交错回路，增广路径</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#两个定理"><span class="post-toc-number">2.3.</span> <span class="post-toc-text">两个定理</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#二部图"><span class="post-toc-number">2.4.</span> <span class="post-toc-text">二部图</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#定理"><span class="post-toc-number">2.4.1.</span> <span class="post-toc-text">定理</span></a></li></ol></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#匈牙利算法"><span class="post-toc-number">3.</span> <span class="post-toc-text">匈牙利算法</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#最大匹配的匈牙利算法步骤"><span class="post-toc-number">3.1.</span> <span class="post-toc-text">最大匹配的匈牙利算法步骤</span></a></li></ol></li></ol>
+            </nav>
+            <div class="toc-bar"><div>
+        </aside>
+    
+</article>
+
+    <div id="reward" class="page-modal reward-lay">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <h3 class="reward-title">
+        <i class="icon icon-quote-left"></i>
+        感谢原作，你的打赏是我的动力！
+        <i class="icon icon-quote-right"></i>
+    </h3>
+    <div class="reward-content">
+        
+        <div class="reward-code">
+            <img id="rewardCode" src="/img/reward-wechat.jpg" alt="打赏二维码">
+        </div>
+        
+        <label class="reward-toggle">
+            <input id="rewardToggle" type="checkbox" class="reward-toggle-check"
+                data-wechat="/img/reward-wechat.jpg" data-alipay="/img/reward-alipay.jpg">
+            <div class="reward-toggle-ctrol">
+                <span class="reward-toggle-item wechat">微信</span>
+                <span class="reward-toggle-label"></span>
+                <span class="reward-toggle-item alipay">支付宝</span>
+            </div>
+        </label>
+        
+    </div>
+</div>
+
+    
+
+</div>
+
+    </main>
+    <footer class="footer ">
+    
+    <div class="top">
+        
+            <p>
+    <span>Links：</span>
+    
+    <span class="blogroll-item">
+        <a href="https://github.com/sivanWu0222" target="_blank">GitHub</a>
+    </span>
+    
+    <span class="blogroll-item">
+        <a href="http://weibo.com/Msingwen0222/home?wvr=5" target="_blank">新浪微博</a>
+    </span>
+    
+    <span class="blogroll-item">
+        <a href="https://www.linkedin.com/in/%E6%99%93%E6%96%87-%E5%90%B4-79057a121/" target="_blank">Linkedin</a>
+    </span>
+    
+    <span class="blogroll-item">
+        <a href="http://wpa.qq.com/msgrd?v=3&amp;uin=1666762170&amp;site=qq&amp;menu=yes" target="_blank">QQ</a>
+    </span>
+    
+    <span class="blogroll-item">
+        <a href="https://zh-cn.facebook.com/people/SiVan-Wu/100014408918389" target="_blank">Facebook</a>
+    </span>
+    
+    <span class="blogroll-item">
+        <a href="https://mail.qq.com/cgi-bin/qm_share?t=qm_mailme&amp;email=xfTz8-Py8-f08vWFtLTrpqqo" target="_blank">Contact</a>
+    </span>
+    
+    <span class="blogroll-item">
+        <a href="https://twitter.com/SiVan_Wu" target="_blank">Twitter</a>
+    </span>
+    
+</p>
+
+        
+    </div>
+    
+    <div class="bottom">
+        <p>
+            <span>
+                逸如风(yirufeng) &copy; 2016 - 2019
+            </span>
+
+           	
+           	<span>
+           		<a href="http://beian.miit.gov.cn/" target="_blank">已实名认证</a>
+           	</span>
+           	
+
+            
+
+            
+
+            
+                
+<span class="site-uv" title="总访客量">
+    <i class="icon icon-user"></i>
+    <i class="busuanzi-value" id="busuanzi_value_site_uv"></i>
+</span>
+
+
+<span class="site-pv" title="总访问量">
+    <i class="icon icon-eye"></i>
+    <i class="busuanzi-value" id="busuanzi_value_site_pv"></i>
+</span>
+
+            
+        </p>
+    </div>
+</footer>
+
+    <div class="mask" id="mask"></div>
+<a href="javascript:;" id="gotop" class="waves-effect waves-circle waves-light"><span class="icon icon-lg icon-chevron-up"></span></a>
+
+
+
+<div class="global-share" id="globalShare">
+    <ul class="reset share-icons">
+      
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://www.sivan.tech/2019/03/04/二部图的最大匹配-算法分析与设计教程系列/&title=《二部图的最大匹配(算法分析与设计教程系列)》 — yirufeng's Blog&pic=http://www.sivan.tech/img/1.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://www.sivan.tech/2019/03/04/二部图的最大匹配-算法分析与设计教程系列/&title=《二部图的最大匹配(算法分析与设计教程系列)》 — yirufeng's Blog&source=引言如果有4个申请读研的学生($s_i$)与4位导师($t_i$)；假设每个导师最多只能招收一名学生，下图表示学生与所申请导师之间的关系；如何分配学生导师..." data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http://www.sivan.tech/2019/03/04/二部图的最大匹配-算法分析与设计教程系列/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《二部图的最大匹配(算法分析与设计教程系列)》 — yirufeng's Blog&url=http://www.sivan.tech/2019/03/04/二部图的最大匹配-算法分析与设计教程系列/&via=http://www.sivan.tech" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=http://www.sivan.tech/2019/03/04/二部图的最大匹配-算法分析与设计教程系列/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+      
+    </ul>
+ </div>
+
+
+<div class="page-modal wx-share" id="wxShare">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAPYAAAD2CAAAAADAeSUUAAADKklEQVR42u3aQW7jMBAEwPz/09rrBoGl7qEMWHTpZDi2xKIPk+nhz098Hf9df99/9frVt17d/+/r5G7J/YcXNjY29kPYx+l1Tsq3Kbl/vnHJfS62HhsbG3s7dlJUku2YFbNkC9pPXhixsbGxv56dPHJWkGarwsbGxsbOg557qUlTtLIebGxs7O9hz0KfhLEeErWt0c1ZGjY2NvbHs/Op6Oe/fst8GxsbG/uD2cfCNYvyZxt988qxsbGxN2LfNazN/+lPNq5tTobtEzY2NvZ27DbWyUkte2Ul5+9jY2Nj78peaQZm44F8QcM2I346NjY29tPZKw9rwUmxfMdRnpdZGjY2NvYW7HsbibwUrdTVvFxFYwlsbGzsh7PXQ//ZSCBvZlaeiI2Njf097DZkT0L8pBzOPj9rUX69g42Njb01O/8Xv20MZiPeWety8XRsbGzs7djJEm8I4kdFaNZBYGNjY38PO4/+V04AtdFVPpZYOU6EjY2NvR87j3LWD9bctfT8ntjY2Ni7svPWYhY55QPjvJS2bRI2Njb23uy2aN01GMg3fTZyqH9zbGxs7IezZ+3EcXrVMf1olDv7wbCxsbF3Ys8ipHYp63HSXX/FxsbG3o/dMpKiNSsws8M67SQk6sCwsbGxH8XOQ5/zjWibjSQGao8BFa0RNjY29nbsBNkei2yPWubR/+y4569vYWNjY2/EbktIjpkVm3ZQkbco2NjY2N/GTga37xgVr4yQ21ExNjY29h7sWYlaYbflp22WonAKGxsbezv2SgC0UnLaoKrd1osmBBsbG3sLdjtebQ9lvjvibxuSKEvDxsbGfhR7JZppC9Is+p8FUhc/DDY2NvZG7Nkt2jZgVrrysGkYS2FjY2NvwT7Kq21F2oM7s8M3SSGsl4KNjY39EHYbHq03A0m5auP+ZOuHeGxsbOyHsPMgfjb0nQFmP8k5+6IDw8bGxn44O28z8iKRLyUvhytDaGxsbGzstqTlw9r2KbNmCRsbGxt71gDM4qT2OFG9BmxsbOzt2LNS1C40ahKWxw/RFmBjY2NvxG4DmjxImh39SRqMtsQuHdnBxsbG/lz2P72Ftan9UT0xAAAAAElFTkSuQmCC" alt="微信分享二维码">
+</div>
+
+
+    
+    <!-- main-js -->
+<script type="text/javascript" src="//cdn.bootcss.com/jquery/2.1.0/jquery.min.js"></script>
+<script type="text/javascript" src="/js/plugins/fastclick.js?v=1.4.2"></script>
+<script type="text/javascript" src="/js/plugins/ios-orientationchange-fix.js?v=1.4.2"></script>
+<script type="text/javascript" src="//cdn.jsdelivr.net/gh/fancyapps/fancybox@3.5.2/dist/jquery.fancybox.min.js"></script>
+
+<script type="text/javascript" src="//cdn.bootcss.com/node-waves/0.7.4/waves.min.js"></script>
+
+<script type="text/javascript" src="/js/method.js?v=1.4.2"></script>
+<script type="text/javascript" src="/js/blog.js?v=1.4.2"></script>
+
+<!-- third-party -->
+
+
+    <script type="text/javascript">
+    (function() {
+
+        const origin = "algorithm-skill | AlgorithmAnalysisAndDesignTutorial"
+        let user, repo;
+        origin.replace(/(\S+)\s{0,1}\|\s{0,1}(\S+)/g, (...rest) => {
+            [user, repo] = [ rest[1], rest[2] ];
+        });
+        if (user && repo) {
+            const url = `//api.github.com/repos/${user}/${repo}?callback=?`;
+            $.getJSON(url, (data) => {
+                updateRepoInPage(data.data);
+            });
+        }
+
+        function updateRepoInPage(data) {
+            const {name, description, html_url: url, stargazers_count: stars, forks, owner: owner, updated_at: update} = data;
+            _loadAvatar(owner.avatar_url).then(avatarUrl => {
+                const avatarBg = `url(${avatarUrl})`;
+                const container = $('#repo');
+                container.click(() => {
+                    window.open(url);
+                });
+
+                //init
+                const loadingItem = container.find('.loading').hide();
+                const topItem = container.find('.top').addClass('active');
+                const bottomItem = container.find('.bottom').addClass('active');
+
+                //avatar
+                const avatarItem = container.find('.avatar');
+                const oldBg = avatarItem.css('background-image');
+                avatarItem.hover(() => {
+                    avatarItem.css('background-image', avatarBg);
+                }, () => {
+                    avatarItem.css('background-image', oldBg);
+                });
+
+                //repo-name
+                const nameItem = container.find('.name').html(name);
+
+                //description
+                const descriptionItem = container.find('.description').html(description);
+
+                //stars
+                const starItem = container.find('.star>.val').html(stars);
+
+                //forks
+                const forkItem = container.find('.fork>.val').html(forks);
+
+                //date
+                const formatDate = update.replace(/T.+/g, '');
+                const dateItem = container.find('.date>.val').html(formatDate);
+            });
+
+            function _loadAvatar(url) {
+                return new Promise((resolve, reject) => {
+                    const img = new Image();
+                    img.onload = () => {
+                        resolve(url);
+                    };
+                    img.src = url;
+                });
+            }
+
+        }
+
+    })();
+</script>
+
+
+
+
+
+<script type="text/javascript" src="/js/plugins/local_search.js?v=1.4.2"></script>
+<script type="text/javascript">
+	var search_path = "search.xml";
+	if (search_path.length === 0) {
+		search_path = "search.xml";
+	}
+	var path = "/" + search_path;
+	searchFunc(path, "local-search-input", "local-search-result");
+</script>
+
+
+
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+    
+    
+
+
+
+<script type="text/javascript" src="https://cdn1.lncld.net/static/js/av-core-mini-0.6.4.js"></script>
+<script type="text/javascript" src="/js/plugins/leancloud_visitors.js?v=1.4.2"></script>
+
+
+
+    <!-- mathjax config similar to math.stackexchange -->
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+        tex2jax: {
+            inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+            processEscapes: true,
+            skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+        }
+    });
+</script>
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for (i=0; i < all.length; i += 1) {
+            all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+    });
+</script>
+
+<script type="text/javascript" src="//cdn.bootcss.com/mathjax/2.7.1/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+
+
+
+    <script>
+    (function() {
+        var OriginTitile = document.title, titleTime;
+        document.addEventListener('visibilitychange', function() {
+            if (document.hidden) {
+                document.title = '死鬼去哪里了！';
+                clearTimeout(titleTime);
+            } else {
+                document.title = '(つェ⊂)咦!又好了!';
+                titleTime = setTimeout(function() {
+                    document.title = OriginTitile;
+                },2000);
+            }
+        });
+    })();
+</script>
+
+
+
+
+
+    
+</body>
+</html>

@@ -1,0 +1,693 @@
+<!DOCTYPE html>
+<html>
+<head><meta name="generator" content="Hexo 3.9.0">
+    <meta charset="utf-8">
+    
+    
+    <title>浅谈Java中的文件和编码 | yirufeng&#39;s Blog | 未来的小幸运 || 致正在努力的我们 ---- 逸如风</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    
+    <meta name="keywords" content="Java,File">
+    <link rel="shortcut icon" href="/img/favicon.ico">
+    <link rel="stylesheet" href="//cdn.jsdelivr.net/gh/fancyapps/fancybox@3.5.2/dist/jquery.fancybox.min.css">
+    <link rel="stylesheet" href="/css/style.css?v=1.4.2">
+    
+    <script type="text/javascript">
+        // Data Center
+        var DC = {
+            reward:	true,
+            lv: JSON.parse('{"enable":true,"app_id":"K2RVtHi7RnmoN6dovlDKafn8-gzGzoHsz","app_key":"Qxmil0oqPFdDUyyIp2i1Xikt","icon":true}'),
+            v: JSON.parse('{"enable":false,"appid":"ACuOJIasBeRLiDe2iUApHj67-gzGzoHsz","appkey":"qbgg4tClrQQmvq8uwlpwA5mA","notify":true,"verify":true,"placeholder":"give me some sugers plz...","avatar":"wavatar"}'),
+            g: JSON.parse('{"enable":false,"lazy":true,"owner":"codefine","repo":"gitment","oauth":{"client_id":null,"client_secret":null},"perPage":10}'),
+            d: JSON.parse('{"app_id":null}')
+        };
+    </script>
+    <script type="text/javascript">
+        window.lazyScripts=[];
+    </script>
+    
+</head>
+
+
+<body>
+    <div id="loading" class="active"></div>
+
+    <aside id="menu" class="">
+  <div class="inner flex-row-vertical">
+    <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menu-off">
+        <i class="icon icon-lg icon-close"></i>
+    </a>
+    <div class="brand-wrap">
+      
+      <img src="/img/brand.jpg" class="brand-bg">
+      
+      <div class="brand">
+        <a href="/" class="avatar waves-effect waves-circle waves-light">
+          <img src="/img/1.jpg">
+        </a>
+        <hgroup class="introduce">
+          <h5 class="nickname">逸如风(yirufeng)</h5>
+          <a href="mailto:yirufeng@foxmail.com" title="yirufeng@foxmail.com" class="mail">
+            
+              <span>y</span>
+            
+              <span>i</span>
+            
+              <span>r</span>
+            
+              <span>u</span>
+            
+              <span>f</span>
+            
+              <span>e</span>
+            
+              <span>n</span>
+            
+              <span>g</span>
+            
+              <span>@</span>
+            
+              <span>f</span>
+            
+              <span>o</span>
+            
+              <span>x</span>
+            
+              <span>m</span>
+            
+              <span>a</span>
+            
+              <span>i</span>
+            
+              <span>l</span>
+            
+              <span>.</span>
+            
+              <span>c</span>
+            
+              <span>o</span>
+            
+              <span>m</span>
+            
+          </a>
+        </hgroup>
+        
+        <ul class="menu-link">
+          
+              <li>
+                <a href="https://github.com/sivanWu0222" target="_blank">
+                  <i class="icon icon-lg icon-github"></i>
+                </a>
+              </li>
+            
+              <li>
+                <a href="https://mail.qq.com/cgi-bin/qm_share?t=qm_mailme&amp;amp;email=xfTz8-Py8-f08vWFtLTrpqqo" target="_blank">
+                  <i class="icon icon-lg icon-envelope"></i>
+                </a>
+              </li>
+            
+        </ul>
+        
+      </div>
+    </div>
+    <div class="scroll-wrap flex-col">
+      <ul class="nav">
+        
+            <li class="">
+              <a href="/"  >
+                <i class="icon icon-lg icon-home"></i>
+                Home
+              </a>
+            </li>
+        
+            <li class="">
+              <a href="/categories"  >
+                <i class="icon icon-lg icon-th-list"></i>
+                Category
+              </a>
+            </li>
+        
+            <li class="">
+              <a href="/research"  >
+                <i class="icon icon-lg icon-mortar-board"></i>
+                Research
+              </a>
+            </li>
+        
+            <li class="">
+              <a href="/tags"  >
+                <i class="icon icon-lg icon-tags"></i>
+                Tag
+              </a>
+            </li>
+        
+            <li class="">
+              <a href="/archives"  >
+                <i class="icon icon-lg icon-archives"></i>
+                Archive
+              </a>
+            </li>
+        
+            <li class="">
+              <a href="/about"  >
+                <i class="icon icon-lg icon-user"></i>
+                About
+              </a>
+            </li>
+        
+            <li class="">
+              <a href="/open-source"  >
+                <i class="icon icon-lg icon-github"></i>
+                Project
+              </a>
+            </li>
+        
+            <li class="">
+              <a href="/demo"  >
+                <i class="icon icon-lg icon-audio-description"></i>
+                Demo
+              </a>
+            </li>
+        
+            <li class="">
+              <a href="/wechat-number"  >
+                <i class="icon icon-lg icon-wechat"></i>
+                公众号
+              </a>
+            </li>
+        
+            <li class="">
+              <a href="http://www.sivan.tech/LeetCodeAlgo/" target="_blank" >
+                <i class="icon icon-lg icon-braille"></i>
+                Leetcode
+              </a>
+            </li>
+        
+            <li class="">
+              <a href="http://resume.sivan.tech/" target="_blank" >
+                <i class="icon icon-lg icon-file-pdf-o"></i>
+                Resume
+              </a>
+            </li>
+        
+      </ul>
+    </div>
+  </div>
+</aside>
+
+    <main id="main">
+        <header class="top-header" id="header">
+    <div class="flex-row clearfix">
+        <a href="javascript:;" class="header-icon pull-left waves-effect waves-circle waves-light on" id="menu-toggle">
+          <i class="icon icon-lg icon-navicon"></i>
+        </a>
+        <div class="flex-col header-title ellipsis">
+            <span>浅谈Java中的文件和编码</span>
+            
+        </div>
+        
+        <a href="javascript:;" id="site_search_btn" class="header-icon pull-right waves-effect waves-circle waves-light">
+            <i class="icon icon-lg icon-search"></i>
+        </a>
+        
+    </div>
+</header>
+<header class="content-header post-header">
+    <img src="/img/s3.jpg" class="header-bg">
+    <div class="container fade-scale">
+        <h1 class="title">浅谈Java中的文件和编码</h1>
+        <h5 class="subtitle">
+            
+                <time datetime="2017-05-09T10:08:08.000Z" itemprop="datePublished" class="page-time">
+  2017-05-09
+</time>
+
+
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/Java/">Java</a><ul class="article-category-list-child"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/Java/File/">File</a></li></ul></li></ul>
+
+            
+        </h5>
+        
+    </div>
+    
+
+</header>
+
+<div id="site_search">
+    <div class="search-title clearfix">
+        <span class="pull-left">
+          <i class="icon icon-lg icon-search"></i>
+        </span>
+        <input type="text" id="local-search-input" name="q" results="0" placeholder="search my blog..." class="form-control pull-left"/>
+        <a href="javascript:;" class="close pull-right waves-effect waves-circle waves-light">
+          <i class="icon icon-lg icon-close"></i>
+        </a>
+    </div>
+    <div id="local-search-result"></div>
+</div>
+
+
+<div class="container body-wrap">
+    <article id="post-浅谈Java中的文件和编码"
+  class="post-article article-type-post" itemprop="blogPost">
+    <div class="post-card">
+        <h1 class="post-card-title">浅谈Java中的文件和编码</h1>
+        <div class="post-meta">
+            <time class="post-time" title="2017-05-09 18:08:08" datetime="2017-05-09T10:08:08.000Z"  itemprop="datePublished">2017-05-09</time>
+
+            
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/Java/">Java</a><ul class="article-category-list-child"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/Java/File/">File</a></li></ul></li></ul>
+
+
+
+            
+	<span id="/2017/05/09/浅谈Java中的文件和编码/" class="leancloud_visitors" data-flag-title="浅谈Java中的文件和编码" title="浅谈Java中的文件和编码">
+		
+			<i class="icon icon-eye"></i>
+		
+		<span class="leancloud-visitors-count"></span>
+	</span>
+ 
+
+            
+
+
+            
+        </div>
+        <div class="post-content" id="post-content" itemprop="postContent">
+            
+            <blockquote>
+<p>前言：许多编程语言文件操作都极其类似，Java也不尽相同，文件操作，只能获取文件（目录）的信息（名称，大小等），却不能用于文件的访问</p>
+</blockquote>
+<h1 id="File类讲解"><a href="#File类讲解" class="headerlink" title="File类讲解"></a>File类讲解</h1><h2 id="如何创建指定文件"><a href="#如何创建指定文件" class="headerlink" title="如何创建指定文件"></a>如何创建指定文件</h2><blockquote>
+<p>我们可以使用提供的createNewFile()方法来创建给定文件名的文件，但是如果我们写文件名的时候没有写上后缀，那么创建的文件也是没有后缀的</p>
+</blockquote>
+<p>假使我们创建一个 我爱学习.txt在E盘符下</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">CreateFile</span> </span>&#123;</span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">		File file = <span class="keyword">new</span> File(<span class="string">"E:\\我爱学习.txt"</span>);</span><br><span class="line">    <span class="comment">/*下面这行代码也可以创建指定文件*/</span></span><br><span class="line">  <span class="comment">/*  File file = new File("E:","我爱学习.txt");  */</span></span><br><span class="line">		<span class="comment">/*首先判断文件是否存在*/</span></span><br><span class="line">		<span class="keyword">if</span>(!file.exists())&#123;</span><br><span class="line">			<span class="keyword">try</span> &#123;</span><br><span class="line">				file.createNewFile();</span><br><span class="line">			&#125; <span class="keyword">catch</span> (IOException e) &#123;</span><br><span class="line">				e.printStackTrace();</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<a id="more"></a>
+<hr>
+<h2 id="File类中的mkdir-与-mkdirs的区别"><a href="#File类中的mkdir-与-mkdirs的区别" class="headerlink" title="File类中的mkdir 与 mkdirs的区别"></a>File类中的mkdir 与 mkdirs的区别</h2><ol>
+<li>mkdir 只能创建一个已有目录的直接子目录</li>
+<li>mkdirs 可以创建多个目录（也就是说，倘若创建目录的时候，上一级目录不存在，上一级目录也会创建）</li>
+</ol>
+<h3 id="使用mkdir-创建一个目录"><a href="#使用mkdir-创建一个目录" class="headerlink" title="使用mkdir()创建一个目录"></a>使用mkdir()创建一个目录</h3><blockquote>
+<p>如果这里《我爱学习》目录不存在，那么就不会创建《学习也爱我》的目录</p>
+</blockquote>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">CreateFile</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">		File file = <span class="keyword">new</span> File(<span class="string">"E:\\我爱学习\\学习也爱我"</span>);</span><br><span class="line">		<span class="keyword">if</span>(!file.exists())&#123;</span><br><span class="line">			System.out.println(file.mkdir());</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="使用mkdirs-创建一个目录"><a href="#使用mkdirs-创建一个目录" class="headerlink" title="使用mkdirs()创建一个目录"></a>使用mkdirs()创建一个目录</h3><blockquote>
+<p>如果这里《我爱学习》目录不存在，那么先会自动创建《我爱学习》的目录，然后自动创建《学习也爱我》的目录<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">CreateFile</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">		File file = <span class="keyword">new</span> File(<span class="string">"E:\\我爱学习\\学习也爱我"</span>);</span><br><span class="line">		<span class="keyword">if</span>(!file.exists())&#123;</span><br><span class="line">			System.out.println(file.mkdir());</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+</blockquote>
+<hr>
+<h2 id="文件目录的遍历"><a href="#文件目录的遍历" class="headerlink" title="文件目录的遍历"></a>文件目录的遍历</h2><blockquote>
+<p>这里采用递归遍历文件和目录</p>
+</blockquote>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">FindFile</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">		File file = <span class="keyword">new</span> File(<span class="string">"E:\\navicat"</span>);</span><br><span class="line">		printYourFile(file);</span><br><span class="line"></span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">printYourFile</span><span class="params">(File file)</span></span></span><br><span class="line"><span class="function">	</span>&#123;</span><br><span class="line">		File[] files = file.listFiles();</span><br><span class="line">		<span class="keyword">for</span> (File file2 : files) &#123;</span><br><span class="line">			<span class="keyword">if</span>(file2.isFile())&#123;</span><br><span class="line">				System.out.println(file2.getAbsolutePath());</span><br><span class="line">			&#125;<span class="keyword">else</span>&#123;</span><br><span class="line">				System.out.println(file2.getAbsolutePath());</span><br><span class="line">				printYourFile(file2);</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<hr>
+<h2 id="文件编码的问题"><a href="#文件编码的问题" class="headerlink" title="文件编码的问题"></a>文件编码的问题</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> java.io.UnsupportedEncodingException;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">EncodeDemo</span> </span>&#123;</span><br><span class="line">  <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> <span class="keyword">throws</span> Exception </span>&#123;    </span><br><span class="line"></span><br><span class="line">    String s = <span class="string">"简书ABC"</span>;</span><br><span class="line">    <span class="keyword">byte</span>[] bt1 = s.getBytes();</span><br><span class="line">    <span class="comment">//此处将字符串转换成字节序列用的是项目默认编码gbk</span></span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">byte</span> b: bt1)&#123;</span><br><span class="line">    <span class="comment">//把字节转换成了int，以16进制显示</span></span><br><span class="line">        System.out.print(Integer.toHexString(b&amp;<span class="number">0xff</span>)+<span class="string">"  "</span>);</span><br><span class="line">    <span class="comment">//（bc  f2）简（ca  e9）书（41）A（42）B（43）C</span></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    System.out.println();</span><br><span class="line">    <span class="comment">//gbk编码，中文占用2个字节，英文占用1个字节。</span></span><br><span class="line">    <span class="keyword">byte</span>[] bt2 = s.getBytes(<span class="string">"gbk"</span>);</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">byte</span> b: bt2)&#123;</span><br><span class="line">        System.out.print(Integer.toHexString(b&amp;<span class="number">0xff</span>)+<span class="string">"  "</span>);</span><br><span class="line">    <span class="comment">//（bc  f2）简（ca  e9）书（41）A（42）B（43）C</span></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    System.out.println();</span><br><span class="line">    <span class="comment">//utf-8编码，中文占用3个字节，英文占用1个字节。</span></span><br><span class="line">    <span class="keyword">byte</span>[] bt3 = s.getBytes(<span class="string">"utf-8"</span>);</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">byte</span> b: bt3)&#123;</span><br><span class="line">        System.out.print(Integer.toHexString(b&amp;<span class="number">0xff</span>)+<span class="string">"  "</span>);</span><br><span class="line">    <span class="comment">//（e7  ae  80）简（e4  b9  a6）书（41）A（42）B（43）C        </span></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    System.out.println();</span><br><span class="line">    <span class="comment">//java采用双字节编码，即utf-16be编码</span></span><br><span class="line">    <span class="keyword">byte</span>[] bt4 = s.getBytes(<span class="string">"utf-16be"</span>);</span><br><span class="line">    <span class="comment">//utf-16be编码，中文占用2个字节，英文占用2个字节。</span></span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">byte</span> b: bt4)&#123;</span><br><span class="line">        System.out.print(Integer.toHexString(b&amp;<span class="number">0xff</span>)+<span class="string">"  "</span>);</span><br><span class="line">    <span class="comment">//（7b  80）简（4e  66）书（0  41）A（0  42）B（0  43）C</span></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    System.out.println();</span><br><span class="line">    <span class="comment">/*</span></span><br><span class="line"><span class="comment">    当字节序列使用某种编码时</span></span><br><span class="line"><span class="comment">    此时想把字节序列转变为字符串</span></span><br><span class="line"><span class="comment">    也需要使用这种编码形式</span></span><br><span class="line"><span class="comment">    否则会出现乱码。</span></span><br><span class="line"><span class="comment">    */</span></span><br><span class="line">    String str1 = <span class="keyword">new</span> String(bt4);<span class="comment">//此时为项目默认编码gbk</span></span><br><span class="line">    System.out.println(str1);<span class="comment">//&#123;?Nf A B C</span></span><br><span class="line"></span><br><span class="line">    String str2 = <span class="keyword">new</span> String(bt4,<span class="string">"utf-16be"</span>);</span><br><span class="line">    System.out.println(str2);<span class="comment">//简书ABC</span></span><br><span class="line">    &#125;    </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+        </div>
+        
+<blockquote class="post-copyright">
+    <div class="content">
+        
+<span class="post-time">
+    最后更新时间：<time datetime="2019-08-26T10:46:59.876Z" itemprop="dateUpdated">2019-08-26 18:46:59</time>
+</span><br>
+
+
+        
+        转载注明出处，原文地址：<a href="/2017/05/09/浅谈Java中的文件和编码/" target="_blank" rel="external">http://www.sivan.tech/2017/05/09/浅谈Java中的文件和编码/</a>
+        
+    </div>
+    <footer>
+        <a href="http://www.sivan.tech">
+            <img src="/img/1.jpg" alt="逸如风(yirufeng)">
+            逸如风(yirufeng)
+        </a>
+    </footer>
+</blockquote>
+
+        
+            <div class="page-reward">
+    <a id="rewardBtn" href="javascript:;" class="page-reward-btn waves-effect waves-circle waves-light">赏</a>
+</div>
+
+            
+        
+        <div class="post-footer">
+            
+	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/File/">File</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Java/">Java</a></li></ul>
+
+            <div class="page-share-wrap">
+    
+
+<div class="page-share" id="pageShare">
+    <ul class="reset share-icons">
+      
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://www.sivan.tech/2017/05/09/浅谈Java中的文件和编码/&title=《浅谈Java中的文件和编码》 — yirufeng's Blog&pic=http://www.sivan.tech/img/1.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://www.sivan.tech/2017/05/09/浅谈Java中的文件和编码/&title=《浅谈Java中的文件和编码》 — yirufeng's Blog&source=
+前言：许多编程语言文件操作都极其类似，Java也不尽相同，文件操作，只能获取文件（目录）的信息（名称，大小等），却不能用于文件的访问
+
+File类讲解如..." data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http://www.sivan.tech/2017/05/09/浅谈Java中的文件和编码/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《浅谈Java中的文件和编码》 — yirufeng's Blog&url=http://www.sivan.tech/2017/05/09/浅谈Java中的文件和编码/&via=http://www.sivan.tech" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=http://www.sivan.tech/2017/05/09/浅谈Java中的文件和编码/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+      
+    </ul>
+ </div>
+
+
+
+    <a href="javascript:;" id="shareFab" class="page-share-fab waves-effect waves-circle">
+        <i class="icon icon-share-alt icon-lg"></i>
+    </a>
+</div>
+
+        </div>
+        
+            
+
+
+        
+    </div>
+    
+<nav class="post-nav flex-row flex-justify-between">
+  
+    <div class="prev">
+      <a href="/2017/05/10/认识Python中的转义字符/" id="post-prev" class="post-nav-link">
+        <div class="tips"><i class="icon icon-angle-left icon-lg icon-pr"></i> Prev</div>
+        <h4 class="title">认识Python中的转义字符</h4>
+      </a>
+    </div>
+  
+
+  
+    <div class="next">
+      <a href="/2017/05/08/认识线程/" id="post-next" class="post-nav-link">
+        <div class="tips">Next <i class="icon icon-angle-right icon-lg icon-pl"></i></div>
+        <h4 class="title">认识线程</h4>
+      </a>
+    </div>
+  
+</nav>
+
+
+    
+    
+        <aside class="post-widget">
+            <nav class="post-toc-wrap" id="post-toc">
+                <strong>目录</strong>
+                <ol class="post-toc"><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#File类讲解"><span class="post-toc-number">1.</span> <span class="post-toc-text">File类讲解</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#如何创建指定文件"><span class="post-toc-number">1.1.</span> <span class="post-toc-text">如何创建指定文件</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#File类中的mkdir-与-mkdirs的区别"><span class="post-toc-number">1.2.</span> <span class="post-toc-text">File类中的mkdir 与 mkdirs的区别</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#使用mkdir-创建一个目录"><span class="post-toc-number">1.2.1.</span> <span class="post-toc-text">使用mkdir()创建一个目录</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#使用mkdirs-创建一个目录"><span class="post-toc-number">1.2.2.</span> <span class="post-toc-text">使用mkdirs()创建一个目录</span></a></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#文件目录的遍历"><span class="post-toc-number">1.3.</span> <span class="post-toc-text">文件目录的遍历</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#文件编码的问题"><span class="post-toc-number">1.4.</span> <span class="post-toc-text">文件编码的问题</span></a></li></ol></li></ol>
+            </nav>
+            <div class="toc-bar"><div>
+        </aside>
+    
+</article>
+
+    <div id="reward" class="page-modal reward-lay">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <h3 class="reward-title">
+        <i class="icon icon-quote-left"></i>
+        感谢原作，你的打赏是我的动力！
+        <i class="icon icon-quote-right"></i>
+    </h3>
+    <div class="reward-content">
+        
+        <div class="reward-code">
+            <img id="rewardCode" src="/img/reward-wechat.jpg" alt="打赏二维码">
+        </div>
+        
+        <label class="reward-toggle">
+            <input id="rewardToggle" type="checkbox" class="reward-toggle-check"
+                data-wechat="/img/reward-wechat.jpg" data-alipay="/img/reward-alipay.jpg">
+            <div class="reward-toggle-ctrol">
+                <span class="reward-toggle-item wechat">微信</span>
+                <span class="reward-toggle-label"></span>
+                <span class="reward-toggle-item alipay">支付宝</span>
+            </div>
+        </label>
+        
+    </div>
+</div>
+
+    
+
+</div>
+
+    </main>
+    <footer class="footer ">
+    
+    <div class="top">
+        
+            <p>
+    <span>Links：</span>
+    
+    <span class="blogroll-item">
+        <a href="https://github.com/sivanWu0222" target="_blank">GitHub</a>
+    </span>
+    
+    <span class="blogroll-item">
+        <a href="http://weibo.com/Msingwen0222/home?wvr=5" target="_blank">新浪微博</a>
+    </span>
+    
+    <span class="blogroll-item">
+        <a href="https://www.linkedin.com/in/%E6%99%93%E6%96%87-%E5%90%B4-79057a121/" target="_blank">Linkedin</a>
+    </span>
+    
+    <span class="blogroll-item">
+        <a href="http://wpa.qq.com/msgrd?v=3&amp;uin=1666762170&amp;site=qq&amp;menu=yes" target="_blank">QQ</a>
+    </span>
+    
+    <span class="blogroll-item">
+        <a href="https://zh-cn.facebook.com/people/SiVan-Wu/100014408918389" target="_blank">Facebook</a>
+    </span>
+    
+    <span class="blogroll-item">
+        <a href="https://mail.qq.com/cgi-bin/qm_share?t=qm_mailme&amp;email=xfTz8-Py8-f08vWFtLTrpqqo" target="_blank">Contact</a>
+    </span>
+    
+    <span class="blogroll-item">
+        <a href="https://twitter.com/SiVan_Wu" target="_blank">Twitter</a>
+    </span>
+    
+</p>
+
+        
+    </div>
+    
+    <div class="bottom">
+        <p>
+            <span>
+                逸如风(yirufeng) &copy; 2016 - 2019
+            </span>
+
+           	
+           	<span>
+           		<a href="http://beian.miit.gov.cn/" target="_blank">已实名认证</a>
+           	</span>
+           	
+
+            
+
+            
+
+            
+                
+<span class="site-uv" title="总访客量">
+    <i class="icon icon-user"></i>
+    <i class="busuanzi-value" id="busuanzi_value_site_uv"></i>
+</span>
+
+
+<span class="site-pv" title="总访问量">
+    <i class="icon icon-eye"></i>
+    <i class="busuanzi-value" id="busuanzi_value_site_pv"></i>
+</span>
+
+            
+        </p>
+    </div>
+</footer>
+
+    <div class="mask" id="mask"></div>
+<a href="javascript:;" id="gotop" class="waves-effect waves-circle waves-light"><span class="icon icon-lg icon-chevron-up"></span></a>
+
+
+
+<div class="global-share" id="globalShare">
+    <ul class="reset share-icons">
+      
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://www.sivan.tech/2017/05/09/浅谈Java中的文件和编码/&title=《浅谈Java中的文件和编码》 — yirufeng's Blog&pic=http://www.sivan.tech/img/1.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://www.sivan.tech/2017/05/09/浅谈Java中的文件和编码/&title=《浅谈Java中的文件和编码》 — yirufeng's Blog&source=
+前言：许多编程语言文件操作都极其类似，Java也不尽相同，文件操作，只能获取文件（目录）的信息（名称，大小等），却不能用于文件的访问
+
+File类讲解如..." data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http://www.sivan.tech/2017/05/09/浅谈Java中的文件和编码/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《浅谈Java中的文件和编码》 — yirufeng's Blog&url=http://www.sivan.tech/2017/05/09/浅谈Java中的文件和编码/&via=http://www.sivan.tech" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=http://www.sivan.tech/2017/05/09/浅谈Java中的文件和编码/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+      
+    </ul>
+ </div>
+
+
+<div class="page-modal wx-share" id="wxShare">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAN4AAADeCAAAAAB3DOFrAAACsUlEQVR42u3awW4bMQwEUP//T7eX3lLbM6SUGO3zyQi8a70NINFDPh7x61fwen3t1/fPPvP1G19fe+CFh4eHd3Tpzz6TLzF5/+zO+Xqerg0PDw/vGm+2ob/exPOtPLl2dsDg4eHhfQIv2dbzx9Fu/Xh4eHj/Ni8plxP8hx4MeHh4/z2v3YjzInhfsieP9UDWgoeHhzfpVRW3/tn3V/p7eHh4eIcGAvJQNSmvk9J5v84/d8PDw8O7wGvL2TwOaMvcWcmerBMPDw/vBq8tZNvS9tQ4V9tgw8PDw7vN2wQBecA6i26TRxw9dDw8PLw1L9+U82J3Ez20D+UNEg8PD+8Cb4NswXl53X57XdHj4eHhLXjJmNSmGdYW7ptj6S/3xMPDw7vAmwUQeRmdxwr74DgaHcDDw8M7xJstfTMQcCrArccU8PDw8Na8WTsqL23beCJ5BMWBhIeHh3eBN9vE208mJXtSUufh75uZMjw8PLxDvDaAOBtebFpiq+MBDw8P71sqz9lA6qkoNh9TwMPDw7vBm41A5Vt5XijPxgjeHEJ4eHh438g7O3TVtsGSlURRMh4eHt4F3mwL3rSy8qW3r9XvBjw8PLxDvHaLbwOLthzfF9x4eHh4p3izEYF80KoNc9tvfHN/PDw8vMu8TZSwj32TWKEdycLDw8O7x5sFDflWPlvcLFYushM8PDy8Ba+9UV3allHvgQkyPDw8vMu82V/ahtaw2T/69+Dh4eHd4M3aVHmPadbab6Php9fi4eHhXeDtG1GbOCNZUFuyP06dLXh4eHgX2vN59JCvIeHVxwYeHh7eNV67KbdR7CzwPXam4eHh4f0orz1OWkweOkR/x8PDw/sAXhv1Ju20zbdfPPfw8PDw1jnnHjbDzNpseHh4ePd4s1/0eQHdDmztjzE8PDy8a7zftr8/pM/Gug0AAAAASUVORK5CYII=" alt="微信分享二维码">
+</div>
+
+
+    
+    <!-- main-js -->
+<script type="text/javascript" src="//cdn.bootcss.com/jquery/2.1.0/jquery.min.js"></script>
+<script type="text/javascript" src="/js/plugins/fastclick.js?v=1.4.2"></script>
+<script type="text/javascript" src="/js/plugins/ios-orientationchange-fix.js?v=1.4.2"></script>
+<script type="text/javascript" src="//cdn.jsdelivr.net/gh/fancyapps/fancybox@3.5.2/dist/jquery.fancybox.min.js"></script>
+
+<script type="text/javascript" src="//cdn.bootcss.com/node-waves/0.7.4/waves.min.js"></script>
+
+<script type="text/javascript" src="/js/method.js?v=1.4.2"></script>
+<script type="text/javascript" src="/js/blog.js?v=1.4.2"></script>
+
+<!-- third-party -->
+
+
+
+
+
+
+<script type="text/javascript" src="/js/plugins/local_search.js?v=1.4.2"></script>
+<script type="text/javascript">
+	var search_path = "search.xml";
+	if (search_path.length === 0) {
+		search_path = "search.xml";
+	}
+	var path = "/" + search_path;
+	searchFunc(path, "local-search-input", "local-search-result");
+</script>
+
+
+
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+    
+    
+
+
+
+<script type="text/javascript" src="https://cdn1.lncld.net/static/js/av-core-mini-0.6.4.js"></script>
+<script type="text/javascript" src="/js/plugins/leancloud_visitors.js?v=1.4.2"></script>
+
+
+
+    <!-- mathjax config similar to math.stackexchange -->
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+        tex2jax: {
+            inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+            processEscapes: true,
+            skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+        }
+    });
+</script>
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for (i=0; i < all.length; i += 1) {
+            all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+    });
+</script>
+
+<script type="text/javascript" src="//cdn.bootcss.com/mathjax/2.7.1/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+
+
+
+    <script>
+    (function() {
+        var OriginTitile = document.title, titleTime;
+        document.addEventListener('visibilitychange', function() {
+            if (document.hidden) {
+                document.title = '死鬼去哪里了！';
+                clearTimeout(titleTime);
+            } else {
+                document.title = '(つェ⊂)咦!又好了!';
+                titleTime = setTimeout(function() {
+                    document.title = OriginTitile;
+                },2000);
+            }
+        });
+    })();
+</script>
+
+
+
+
+
+    
+</body>
+</html>

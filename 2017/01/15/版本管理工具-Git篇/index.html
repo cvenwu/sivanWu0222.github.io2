@@ -1,0 +1,706 @@
+<!DOCTYPE html>
+<html>
+<head><meta name="generator" content="Hexo 3.9.0">
+    <meta charset="utf-8">
+    
+    
+    <title>版本管理工具-Git篇[1] | yirufeng&#39;s Blog | 未来的小幸运 || 致正在努力的我们 ---- 逸如风</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    
+    <meta name="keywords" content="git,GitHub,版本管理工具">
+    <link rel="shortcut icon" href="/img/favicon.ico">
+    <link rel="stylesheet" href="//cdn.jsdelivr.net/gh/fancyapps/fancybox@3.5.2/dist/jquery.fancybox.min.css">
+    <link rel="stylesheet" href="/css/style.css?v=1.4.2">
+    
+    <script type="text/javascript">
+        // Data Center
+        var DC = {
+            reward:	true,
+            lv: JSON.parse('{"enable":true,"app_id":"K2RVtHi7RnmoN6dovlDKafn8-gzGzoHsz","app_key":"Qxmil0oqPFdDUyyIp2i1Xikt","icon":true}'),
+            v: JSON.parse('{"enable":false,"appid":"ACuOJIasBeRLiDe2iUApHj67-gzGzoHsz","appkey":"qbgg4tClrQQmvq8uwlpwA5mA","notify":true,"verify":true,"placeholder":"give me some sugers plz...","avatar":"wavatar"}'),
+            g: JSON.parse('{"enable":false,"lazy":true,"owner":"codefine","repo":"gitment","oauth":{"client_id":null,"client_secret":null},"perPage":10}'),
+            d: JSON.parse('{"app_id":null}')
+        };
+    </script>
+    <script type="text/javascript">
+        window.lazyScripts=[];
+    </script>
+    
+</head>
+
+
+<body>
+    <div id="loading" class="active"></div>
+
+    <aside id="menu" class="">
+  <div class="inner flex-row-vertical">
+    <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menu-off">
+        <i class="icon icon-lg icon-close"></i>
+    </a>
+    <div class="brand-wrap">
+      
+      <img src="/img/brand.jpg" class="brand-bg">
+      
+      <div class="brand">
+        <a href="/" class="avatar waves-effect waves-circle waves-light">
+          <img src="/img/1.jpg">
+        </a>
+        <hgroup class="introduce">
+          <h5 class="nickname">逸如风(yirufeng)</h5>
+          <a href="mailto:yirufeng@foxmail.com" title="yirufeng@foxmail.com" class="mail">
+            
+              <span>y</span>
+            
+              <span>i</span>
+            
+              <span>r</span>
+            
+              <span>u</span>
+            
+              <span>f</span>
+            
+              <span>e</span>
+            
+              <span>n</span>
+            
+              <span>g</span>
+            
+              <span>@</span>
+            
+              <span>f</span>
+            
+              <span>o</span>
+            
+              <span>x</span>
+            
+              <span>m</span>
+            
+              <span>a</span>
+            
+              <span>i</span>
+            
+              <span>l</span>
+            
+              <span>.</span>
+            
+              <span>c</span>
+            
+              <span>o</span>
+            
+              <span>m</span>
+            
+          </a>
+        </hgroup>
+        
+        <ul class="menu-link">
+          
+              <li>
+                <a href="https://github.com/sivanWu0222" target="_blank">
+                  <i class="icon icon-lg icon-github"></i>
+                </a>
+              </li>
+            
+              <li>
+                <a href="https://mail.qq.com/cgi-bin/qm_share?t=qm_mailme&amp;amp;email=xfTz8-Py8-f08vWFtLTrpqqo" target="_blank">
+                  <i class="icon icon-lg icon-envelope"></i>
+                </a>
+              </li>
+            
+        </ul>
+        
+      </div>
+    </div>
+    <div class="scroll-wrap flex-col">
+      <ul class="nav">
+        
+            <li class="">
+              <a href="/"  >
+                <i class="icon icon-lg icon-home"></i>
+                Home
+              </a>
+            </li>
+        
+            <li class="">
+              <a href="/categories"  >
+                <i class="icon icon-lg icon-th-list"></i>
+                Category
+              </a>
+            </li>
+        
+            <li class="">
+              <a href="/research"  >
+                <i class="icon icon-lg icon-mortar-board"></i>
+                Research
+              </a>
+            </li>
+        
+            <li class="">
+              <a href="/tags"  >
+                <i class="icon icon-lg icon-tags"></i>
+                Tag
+              </a>
+            </li>
+        
+            <li class="">
+              <a href="/archives"  >
+                <i class="icon icon-lg icon-archives"></i>
+                Archive
+              </a>
+            </li>
+        
+            <li class="">
+              <a href="/about"  >
+                <i class="icon icon-lg icon-user"></i>
+                About
+              </a>
+            </li>
+        
+            <li class="">
+              <a href="/open-source"  >
+                <i class="icon icon-lg icon-github"></i>
+                Project
+              </a>
+            </li>
+        
+            <li class="">
+              <a href="/demo"  >
+                <i class="icon icon-lg icon-audio-description"></i>
+                Demo
+              </a>
+            </li>
+        
+            <li class="">
+              <a href="/wechat-number"  >
+                <i class="icon icon-lg icon-wechat"></i>
+                公众号
+              </a>
+            </li>
+        
+            <li class="">
+              <a href="http://www.sivan.tech/LeetCodeAlgo/" target="_blank" >
+                <i class="icon icon-lg icon-braille"></i>
+                Leetcode
+              </a>
+            </li>
+        
+            <li class="">
+              <a href="http://resume.sivan.tech/" target="_blank" >
+                <i class="icon icon-lg icon-file-pdf-o"></i>
+                Resume
+              </a>
+            </li>
+        
+      </ul>
+    </div>
+  </div>
+</aside>
+
+    <main id="main">
+        <header class="top-header" id="header">
+    <div class="flex-row clearfix">
+        <a href="javascript:;" class="header-icon pull-left waves-effect waves-circle waves-light on" id="menu-toggle">
+          <i class="icon icon-lg icon-navicon"></i>
+        </a>
+        <div class="flex-col header-title ellipsis">
+            <span>版本管理工具-Git篇[1]</span>
+            
+        </div>
+        
+        <a href="javascript:;" id="site_search_btn" class="header-icon pull-right waves-effect waves-circle waves-light">
+            <i class="icon icon-lg icon-search"></i>
+        </a>
+        
+    </div>
+</header>
+<header class="content-header post-header">
+    <img src="/img/s3.jpg" class="header-bg">
+    <div class="container fade-scale">
+        <h1 class="title">版本管理工具-Git篇[1]</h1>
+        <h5 class="subtitle">
+            
+                <time datetime="2017-01-15T02:56:21.000Z" itemprop="datePublished" class="page-time">
+  2017-01-15
+</time>
+
+
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/git/">git</a><ul class="article-category-list-child"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/git/入门/">入门</a></li></ul></li></ul>
+
+            
+        </h5>
+        
+    </div>
+    
+
+</header>
+
+<div id="site_search">
+    <div class="search-title clearfix">
+        <span class="pull-left">
+          <i class="icon icon-lg icon-search"></i>
+        </span>
+        <input type="text" id="local-search-input" name="q" results="0" placeholder="search my blog..." class="form-control pull-left"/>
+        <a href="javascript:;" class="close pull-right waves-effect waves-circle waves-light">
+          <i class="icon icon-lg icon-close"></i>
+        </a>
+    </div>
+    <div id="local-search-result"></div>
+</div>
+
+
+<div class="container body-wrap">
+    <article id="post-版本管理工具-Git篇"
+  class="post-article article-type-post" itemprop="blogPost">
+    <div class="post-card">
+        <h1 class="post-card-title">版本管理工具-Git篇[1]</h1>
+        <div class="post-meta">
+            <time class="post-time" title="2017-01-15 10:56:21" datetime="2017-01-15T02:56:21.000Z"  itemprop="datePublished">2017-01-15</time>
+
+            
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/git/">git</a><ul class="article-category-list-child"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/git/入门/">入门</a></li></ul></li></ul>
+
+
+
+            
+	<span id="/2017/01/15/版本管理工具-Git篇/" class="leancloud_visitors" data-flag-title="版本管理工具-Git篇[1]" title="版本管理工具-Git篇[1]">
+		
+			<i class="icon icon-eye"></i>
+		
+		<span class="leancloud-visitors-count"></span>
+	</span>
+ 
+
+            
+
+
+            
+        </div>
+        <div class="post-content" id="post-content" itemprop="postContent">
+            
+            <h2 id="版本管理工具的介绍"><a href="#版本管理工具的介绍" class="headerlink" title="版本管理工具的介绍"></a>版本管理工具的介绍</h2><p>作用：备份文件，与U盘等备份文件相比，可以随时随地，项目中经常使用。</p>
+<h3 id="版本管理工具可以记录历史"><a href="#版本管理工具可以记录历史" class="headerlink" title="版本管理工具可以记录历史"></a>版本管理工具可以记录历史</h3><p>网盘 u盘 保存了文件的最新状态，而不会记录修改的历史纪录，而版本管理工具对每次的修改都会进行备份，并且保留了时间和修改人，可以让我们回溯，如果不小心删除版本管理工具中的备份时，我们可以通过历史纪录对其进行找回，因此使用版本管理工具无需担心，而且使用版本管理工具，可以多端共享，例如我们经常所说的云盘，而且只要提交一次，我们就可以在任何地方通过版本管理工具对提交的代码进行下载。尤其对于，一些经常需要分开工作的工作人员比较实用</p>
+<a id="more"></a>
+<h3 id="历史"><a href="#历史" class="headerlink" title="历史"></a>历史</h3><ol>
+<li><p>CVS： 版本管理工具始祖，也是被第一个大规模使用的版本管理工具。由荷兰一所大学教授所开发，由于当时三个人分开工作，为了便于一起协调，创建了CVS。集中式的工具，放到中心服务器上，需要联网</p>
+</li>
+<li><p>SVN： 2000年诞生，也是集中式的工具</p>
+</li>
+<li><p>git： 2005年诞生，Geek社区主流工具，分布式工具！</p>
+</li>
+<li><p>Github： 程序员社区，托管代码基于Git操作。大牛多在这里！！！</p>
+</li>
+</ol>
+<h3 id="集中式-与-分布式-区别"><a href="#集中式-与-分布式-区别" class="headerlink" title="集中式 与 分布式 区别"></a>集中式 与 分布式 区别</h3><ol>
+<li>集中式需要放到中心服务器上，并且操作需要联网，不方便</li>
+<li>分布式则是只要有版本库，就可以在不联网的前提下，快速完成文件提交，记录查看，以及删除等操作，效率高！</li>
+</ol>
+<hr>
+<h2 id="初探Git"><a href="#初探Git" class="headerlink" title="初探Git"></a>初探Git</h2><h3 id="Git-下载-与-安装"><a href="#Git-下载-与-安装" class="headerlink" title="Git 下载 与 安装"></a>Git 下载 与 安装</h3><h4 id="Linux下的安装"><a href="#Linux下的安装" class="headerlink" title="Linux下的安装"></a>Linux下的安装</h4><blockquote>
+<p>打开终端 执行 yum install git 然后键入 yes 等待既可以安装完成 Git</p>
+</blockquote>
+<h2 id="入门Github"><a href="#入门Github" class="headerlink" title="入门Github"></a>入门Github</h2><blockquote>
+<p>GitHub由于下载比较难，推荐离线安装包安装</p>
+</blockquote>
+<h3 id="Linux下检出项目到本地"><a href="#Linux下检出项目到本地" class="headerlink" title="Linux下检出项目到本地"></a>Linux下检出项目到本地</h3><blockquote>
+<p>使用 git clone Github上的仓库地址</p>
+<ol>
+<li>首先创建一个 目录，用来存放 我们检出的项目，使用命令 mkdir Test</li>
+<li>接下来，进入到Test目录，然后 git clone Github上的仓库地址，就可以了</li>
+</ol>
+</blockquote>
+<h3 id="Linux下提交项目"><a href="#Linux下提交项目" class="headerlink" title="Linux下提交项目"></a>Linux下提交项目</h3><blockquote>
+<p>再修改之后，只停留到了本地，没有交到Github维护，因此我们需要同步到Github</p>
+</blockquote>
+<ol>
+<li>首先使用 git status 查看工作区的状态</li>
+<li>对于未跟踪的文件，使用git add 文件名（不包括文件类型），进行跟踪</li>
+<li>然后键入 git commit 命令，并对修改进行描述，这里提交的是提交到了本地的仓库，并没有提交给Github维护</li>
+<li>键入git push，输入Github账户和密码，然后成功提交给Github进行维护</li>
+</ol>
+<h3 id="Windows下检出并提交项目"><a href="#Windows下检出并提交项目" class="headerlink" title="Windows下检出并提交项目"></a>Windows下检出并提交项目</h3><ol>
+<li>首先进入GitHub官方主页，并进入项目所对应的仓库主页，然后点击 open in desktop，选择本地的一个目录，此时检出完成，只需要我们对其进行修改</li>
+<li>修改之后，首先要做的提交修改的东东，并对修改的东西进行一个修改说明</li>
+<li>之后进行同步就可以了</li>
+</ol>
+
+        </div>
+        
+<blockquote class="post-copyright">
+    <div class="content">
+        
+<span class="post-time">
+    最后更新时间：<time datetime="2019-08-26T10:46:59.876Z" itemprop="dateUpdated">2019-08-26 18:46:59</time>
+</span><br>
+
+
+        
+        转载注明出处，原文地址：<a href="/2017/01/15/版本管理工具-Git篇/" target="_blank" rel="external">http://www.sivan.tech/2017/01/15/版本管理工具-Git篇/</a>
+        
+    </div>
+    <footer>
+        <a href="http://www.sivan.tech">
+            <img src="/img/1.jpg" alt="逸如风(yirufeng)">
+            逸如风(yirufeng)
+        </a>
+    </footer>
+</blockquote>
+
+        
+            <div class="page-reward">
+    <a id="rewardBtn" href="javascript:;" class="page-reward-btn waves-effect waves-circle waves-light">赏</a>
+</div>
+
+            
+        
+        <div class="post-footer">
+            
+	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/GitHub/">GitHub</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/git/">git</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/版本管理工具/">版本管理工具</a></li></ul>
+
+            <div class="page-share-wrap">
+    
+
+<div class="page-share" id="pageShare">
+    <ul class="reset share-icons">
+      
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://www.sivan.tech/2017/01/15/版本管理工具-Git篇/&title=《版本管理工具-Git篇[1]》 — yirufeng's Blog&pic=http://www.sivan.tech/img/1.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://www.sivan.tech/2017/01/15/版本管理工具-Git篇/&title=《版本管理工具-Git篇[1]》 — yirufeng's Blog&source=版本管理工具的介绍作用：备份文件，与U盘等备份文件相比，可以随时随地，项目中经常使用。
+版本管理工具可以记录历史网盘 u盘 保存了文件的最新状态，而不会记..." data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http://www.sivan.tech/2017/01/15/版本管理工具-Git篇/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《版本管理工具-Git篇[1]》 — yirufeng's Blog&url=http://www.sivan.tech/2017/01/15/版本管理工具-Git篇/&via=http://www.sivan.tech" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=http://www.sivan.tech/2017/01/15/版本管理工具-Git篇/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+      
+    </ul>
+ </div>
+
+
+
+    <a href="javascript:;" id="shareFab" class="page-share-fab waves-effect waves-circle">
+        <i class="icon icon-share-alt icon-lg"></i>
+    </a>
+</div>
+
+        </div>
+        
+            
+
+
+        
+    </div>
+    
+<nav class="post-nav flex-row flex-justify-between">
+  
+    <div class="prev">
+      <a href="/2017/03/09/文件输入输出流/" id="post-prev" class="post-nav-link">
+        <div class="tips"><i class="icon icon-angle-left icon-lg icon-pr"></i> Prev</div>
+        <h4 class="title">文件输入输出流</h4>
+      </a>
+    </div>
+  
+
+  
+    <div class="next">
+      <a href="/2017/01/15/版本管理工具-Git篇[1]/" id="post-next" class="post-nav-link">
+        <div class="tips">Next <i class="icon icon-angle-right icon-lg icon-pl"></i></div>
+        <h4 class="title">版本管理工具-Git篇[1]</h4>
+      </a>
+    </div>
+  
+</nav>
+
+
+    
+    
+        <aside class="post-widget">
+            <nav class="post-toc-wrap" id="post-toc">
+                <strong>目录</strong>
+                <ol class="post-toc"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#版本管理工具的介绍"><span class="post-toc-number">1.</span> <span class="post-toc-text">版本管理工具的介绍</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#版本管理工具可以记录历史"><span class="post-toc-number">1.1.</span> <span class="post-toc-text">版本管理工具可以记录历史</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#历史"><span class="post-toc-number">1.2.</span> <span class="post-toc-text">历史</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#集中式-与-分布式-区别"><span class="post-toc-number">1.3.</span> <span class="post-toc-text">集中式 与 分布式 区别</span></a></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#初探Git"><span class="post-toc-number">2.</span> <span class="post-toc-text">初探Git</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#Git-下载-与-安装"><span class="post-toc-number">2.1.</span> <span class="post-toc-text">Git 下载 与 安装</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#Linux下的安装"><span class="post-toc-number">2.1.1.</span> <span class="post-toc-text">Linux下的安装</span></a></li></ol></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#入门Github"><span class="post-toc-number">3.</span> <span class="post-toc-text">入门Github</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#Linux下检出项目到本地"><span class="post-toc-number">3.1.</span> <span class="post-toc-text">Linux下检出项目到本地</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#Linux下提交项目"><span class="post-toc-number">3.2.</span> <span class="post-toc-text">Linux下提交项目</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#Windows下检出并提交项目"><span class="post-toc-number">3.3.</span> <span class="post-toc-text">Windows下检出并提交项目</span></a></li></ol></li></ol>
+            </nav>
+            <div class="toc-bar"><div>
+        </aside>
+    
+</article>
+
+    <div id="reward" class="page-modal reward-lay">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <h3 class="reward-title">
+        <i class="icon icon-quote-left"></i>
+        感谢原作，你的打赏是我的动力！
+        <i class="icon icon-quote-right"></i>
+    </h3>
+    <div class="reward-content">
+        
+        <div class="reward-code">
+            <img id="rewardCode" src="/img/reward-wechat.jpg" alt="打赏二维码">
+        </div>
+        
+        <label class="reward-toggle">
+            <input id="rewardToggle" type="checkbox" class="reward-toggle-check"
+                data-wechat="/img/reward-wechat.jpg" data-alipay="/img/reward-alipay.jpg">
+            <div class="reward-toggle-ctrol">
+                <span class="reward-toggle-item wechat">微信</span>
+                <span class="reward-toggle-label"></span>
+                <span class="reward-toggle-item alipay">支付宝</span>
+            </div>
+        </label>
+        
+    </div>
+</div>
+
+    
+
+</div>
+
+    </main>
+    <footer class="footer ">
+    
+    <div class="top">
+        
+            <p>
+    <span>Links：</span>
+    
+    <span class="blogroll-item">
+        <a href="https://github.com/sivanWu0222" target="_blank">GitHub</a>
+    </span>
+    
+    <span class="blogroll-item">
+        <a href="http://weibo.com/Msingwen0222/home?wvr=5" target="_blank">新浪微博</a>
+    </span>
+    
+    <span class="blogroll-item">
+        <a href="https://www.linkedin.com/in/%E6%99%93%E6%96%87-%E5%90%B4-79057a121/" target="_blank">Linkedin</a>
+    </span>
+    
+    <span class="blogroll-item">
+        <a href="http://wpa.qq.com/msgrd?v=3&amp;uin=1666762170&amp;site=qq&amp;menu=yes" target="_blank">QQ</a>
+    </span>
+    
+    <span class="blogroll-item">
+        <a href="https://zh-cn.facebook.com/people/SiVan-Wu/100014408918389" target="_blank">Facebook</a>
+    </span>
+    
+    <span class="blogroll-item">
+        <a href="https://mail.qq.com/cgi-bin/qm_share?t=qm_mailme&amp;email=xfTz8-Py8-f08vWFtLTrpqqo" target="_blank">Contact</a>
+    </span>
+    
+    <span class="blogroll-item">
+        <a href="https://twitter.com/SiVan_Wu" target="_blank">Twitter</a>
+    </span>
+    
+</p>
+
+        
+    </div>
+    
+    <div class="bottom">
+        <p>
+            <span>
+                逸如风(yirufeng) &copy; 2016 - 2019
+            </span>
+
+           	
+           	<span>
+           		<a href="http://beian.miit.gov.cn/" target="_blank">已实名认证</a>
+           	</span>
+           	
+
+            
+
+            
+
+            
+                
+<span class="site-uv" title="总访客量">
+    <i class="icon icon-user"></i>
+    <i class="busuanzi-value" id="busuanzi_value_site_uv"></i>
+</span>
+
+
+<span class="site-pv" title="总访问量">
+    <i class="icon icon-eye"></i>
+    <i class="busuanzi-value" id="busuanzi_value_site_pv"></i>
+</span>
+
+            
+        </p>
+    </div>
+</footer>
+
+    <div class="mask" id="mask"></div>
+<a href="javascript:;" id="gotop" class="waves-effect waves-circle waves-light"><span class="icon icon-lg icon-chevron-up"></span></a>
+
+
+
+<div class="global-share" id="globalShare">
+    <ul class="reset share-icons">
+      
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://www.sivan.tech/2017/01/15/版本管理工具-Git篇/&title=《版本管理工具-Git篇[1]》 — yirufeng's Blog&pic=http://www.sivan.tech/img/1.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://www.sivan.tech/2017/01/15/版本管理工具-Git篇/&title=《版本管理工具-Git篇[1]》 — yirufeng's Blog&source=版本管理工具的介绍作用：备份文件，与U盘等备份文件相比，可以随时随地，项目中经常使用。
+版本管理工具可以记录历史网盘 u盘 保存了文件的最新状态，而不会记..." data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http://www.sivan.tech/2017/01/15/版本管理工具-Git篇/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《版本管理工具-Git篇[1]》 — yirufeng's Blog&url=http://www.sivan.tech/2017/01/15/版本管理工具-Git篇/&via=http://www.sivan.tech" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=http://www.sivan.tech/2017/01/15/版本管理工具-Git篇/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+      
+    </ul>
+ </div>
+
+
+<div class="page-modal wx-share" id="wxShare">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAMYAAADGCAAAAACs8KCBAAACM0lEQVR42u3aQU4DMQwFUO5/6bJFgkm/7SnSJC+rqkCSl4VxYn99xeP1Y1x9vx6//ypf5baBgYHxWEayfP59ssX5/H+sgoGBcQDjauH176zneRVHvi4GBgbGero8sVt/nhwfBgYGRjJdkg5WgzIGBgbGmlFN1/Ira7Ld9fHdfBfHwMB4IKMaKP/z80fqGxgYGI9iTJ7D8mCalDPzIPvHbBgYGFszqo/+1aJjdbbJfjAwME5g5OEyafOaXFnzdrTy2WBgYDyQUX3uLzzTtzDrFS8DMQYGxtaMyRbXBzFJH0cFAAwMjO0YSVpWTR97xch802+6RTAwMDZlVNssJq0S+ZHdVsLEwMB4OKOaijUDYjGVbLZlYGBgHMBIAvG9T2zzKzEGBsY5jMkT2KRUkF+Sy7UODAyMjRh5+tW7yiZJZ+9QMDAwzmHkz/p5waAXrKuNZVEDKwYGxhaM/Pksby2tHkE5sP7+KQYGxgGMu577k4Ry0qJxeRAYGBhbM5IL5/qbXrPXRxpbMTAwDmDkl9VqkbL3iFb+N4CBgXEMoxcuJ4WEapB9U4PFwMDYmtF86iq2YuTpY7nYiYGBsSljchFNkry82aJ3KBgYGCcw8pEni70ZksBabfLAwMDYiZEE2erUvTavXqKJgYFxDqMa+O5KGatp3+XqGBgYGEG5cdKoMS8hYGBgYFRTtySY9oLsm0ssBgbG1oxPtFBUL7d5IRMDA+M0Rh7y8o1+4mJ8Q1ETAwPjeYxvZJ+TYSfH5VwAAAAASUVORK5CYII=" alt="微信分享二维码">
+</div>
+
+
+    
+    <!-- main-js -->
+<script type="text/javascript" src="//cdn.bootcss.com/jquery/2.1.0/jquery.min.js"></script>
+<script type="text/javascript" src="/js/plugins/fastclick.js?v=1.4.2"></script>
+<script type="text/javascript" src="/js/plugins/ios-orientationchange-fix.js?v=1.4.2"></script>
+<script type="text/javascript" src="//cdn.jsdelivr.net/gh/fancyapps/fancybox@3.5.2/dist/jquery.fancybox.min.js"></script>
+
+<script type="text/javascript" src="//cdn.bootcss.com/node-waves/0.7.4/waves.min.js"></script>
+
+<script type="text/javascript" src="/js/method.js?v=1.4.2"></script>
+<script type="text/javascript" src="/js/blog.js?v=1.4.2"></script>
+
+<!-- third-party -->
+
+
+
+
+
+
+<script type="text/javascript" src="/js/plugins/local_search.js?v=1.4.2"></script>
+<script type="text/javascript">
+	var search_path = "search.xml";
+	if (search_path.length === 0) {
+		search_path = "search.xml";
+	}
+	var path = "/" + search_path;
+	searchFunc(path, "local-search-input", "local-search-result");
+</script>
+
+
+
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+    
+    
+
+
+
+<script type="text/javascript" src="https://cdn1.lncld.net/static/js/av-core-mini-0.6.4.js"></script>
+<script type="text/javascript" src="/js/plugins/leancloud_visitors.js?v=1.4.2"></script>
+
+
+
+    <!-- mathjax config similar to math.stackexchange -->
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+        tex2jax: {
+            inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+            processEscapes: true,
+            skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+        }
+    });
+</script>
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for (i=0; i < all.length; i += 1) {
+            all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+    });
+</script>
+
+<script type="text/javascript" src="//cdn.bootcss.com/mathjax/2.7.1/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+
+
+
+    <script>
+    (function() {
+        var OriginTitile = document.title, titleTime;
+        document.addEventListener('visibilitychange', function() {
+            if (document.hidden) {
+                document.title = '死鬼去哪里了！';
+                clearTimeout(titleTime);
+            } else {
+                document.title = '(つェ⊂)咦!又好了!';
+                titleTime = setTimeout(function() {
+                    document.title = OriginTitile;
+                },2000);
+            }
+        });
+    })();
+</script>
+
+
+
+
+
+    
+</body>
+</html>

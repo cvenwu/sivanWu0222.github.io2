@@ -1,0 +1,821 @@
+<!DOCTYPE html>
+<html>
+<head><meta name="generator" content="Hexo 3.9.0">
+    <meta charset="utf-8">
+    
+    
+    <title>贪心算法的思想以及概念 | yirufeng&#39;s Blog | 未来的小幸运 || 致正在努力的我们 ---- 逸如风</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    
+    <meta name="keywords" content="Algorithm">
+    <link rel="shortcut icon" href="/img/favicon.ico">
+    <link rel="stylesheet" href="//cdn.jsdelivr.net/gh/fancyapps/fancybox@3.5.2/dist/jquery.fancybox.min.css">
+    <link rel="stylesheet" href="/css/style.css?v=1.4.2">
+    
+    <script type="text/javascript">
+        // Data Center
+        var DC = {
+            reward:	true,
+            lv: JSON.parse('{"enable":true,"app_id":"K2RVtHi7RnmoN6dovlDKafn8-gzGzoHsz","app_key":"Qxmil0oqPFdDUyyIp2i1Xikt","icon":true}'),
+            v: JSON.parse('{"enable":false,"appid":"ACuOJIasBeRLiDe2iUApHj67-gzGzoHsz","appkey":"qbgg4tClrQQmvq8uwlpwA5mA","notify":true,"verify":true,"placeholder":"give me some sugers plz...","avatar":"wavatar"}'),
+            g: JSON.parse('{"enable":false,"lazy":true,"owner":"codefine","repo":"gitment","oauth":{"client_id":null,"client_secret":null},"perPage":10}'),
+            d: JSON.parse('{"app_id":null}')
+        };
+    </script>
+    <script type="text/javascript">
+        window.lazyScripts=[];
+    </script>
+    
+</head>
+
+
+<body>
+    <div id="loading" class="active"></div>
+
+    <aside id="menu" class="">
+  <div class="inner flex-row-vertical">
+    <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menu-off">
+        <i class="icon icon-lg icon-close"></i>
+    </a>
+    <div class="brand-wrap">
+      
+      <img src="/img/brand.jpg" class="brand-bg">
+      
+      <div class="brand">
+        <a href="/" class="avatar waves-effect waves-circle waves-light">
+          <img src="/img/1.jpg">
+        </a>
+        <hgroup class="introduce">
+          <h5 class="nickname">逸如风(yirufeng)</h5>
+          <a href="mailto:yirufeng@foxmail.com" title="yirufeng@foxmail.com" class="mail">
+            
+              <span>y</span>
+            
+              <span>i</span>
+            
+              <span>r</span>
+            
+              <span>u</span>
+            
+              <span>f</span>
+            
+              <span>e</span>
+            
+              <span>n</span>
+            
+              <span>g</span>
+            
+              <span>@</span>
+            
+              <span>f</span>
+            
+              <span>o</span>
+            
+              <span>x</span>
+            
+              <span>m</span>
+            
+              <span>a</span>
+            
+              <span>i</span>
+            
+              <span>l</span>
+            
+              <span>.</span>
+            
+              <span>c</span>
+            
+              <span>o</span>
+            
+              <span>m</span>
+            
+          </a>
+        </hgroup>
+        
+        <ul class="menu-link">
+          
+              <li>
+                <a href="https://github.com/sivanWu0222" target="_blank">
+                  <i class="icon icon-lg icon-github"></i>
+                </a>
+              </li>
+            
+              <li>
+                <a href="https://mail.qq.com/cgi-bin/qm_share?t=qm_mailme&amp;amp;email=xfTz8-Py8-f08vWFtLTrpqqo" target="_blank">
+                  <i class="icon icon-lg icon-envelope"></i>
+                </a>
+              </li>
+            
+        </ul>
+        
+      </div>
+    </div>
+    <div class="scroll-wrap flex-col">
+      <ul class="nav">
+        
+            <li class="">
+              <a href="/"  >
+                <i class="icon icon-lg icon-home"></i>
+                Home
+              </a>
+            </li>
+        
+            <li class="">
+              <a href="/categories"  >
+                <i class="icon icon-lg icon-th-list"></i>
+                Category
+              </a>
+            </li>
+        
+            <li class="">
+              <a href="/research"  >
+                <i class="icon icon-lg icon-mortar-board"></i>
+                Research
+              </a>
+            </li>
+        
+            <li class="">
+              <a href="/tags"  >
+                <i class="icon icon-lg icon-tags"></i>
+                Tag
+              </a>
+            </li>
+        
+            <li class="">
+              <a href="/archives"  >
+                <i class="icon icon-lg icon-archives"></i>
+                Archive
+              </a>
+            </li>
+        
+            <li class="">
+              <a href="/about"  >
+                <i class="icon icon-lg icon-user"></i>
+                About
+              </a>
+            </li>
+        
+            <li class="">
+              <a href="/open-source"  >
+                <i class="icon icon-lg icon-github"></i>
+                Project
+              </a>
+            </li>
+        
+            <li class="">
+              <a href="/demo"  >
+                <i class="icon icon-lg icon-audio-description"></i>
+                Demo
+              </a>
+            </li>
+        
+            <li class="">
+              <a href="/wechat-number"  >
+                <i class="icon icon-lg icon-wechat"></i>
+                公众号
+              </a>
+            </li>
+        
+            <li class="">
+              <a href="http://www.sivan.tech/LeetCodeAlgo/" target="_blank" >
+                <i class="icon icon-lg icon-braille"></i>
+                Leetcode
+              </a>
+            </li>
+        
+            <li class="">
+              <a href="http://resume.sivan.tech/" target="_blank" >
+                <i class="icon icon-lg icon-file-pdf-o"></i>
+                Resume
+              </a>
+            </li>
+        
+      </ul>
+    </div>
+  </div>
+</aside>
+
+    <main id="main">
+        <header class="top-header" id="header">
+    <div class="flex-row clearfix">
+        <a href="javascript:;" class="header-icon pull-left waves-effect waves-circle waves-light on" id="menu-toggle">
+          <i class="icon icon-lg icon-navicon"></i>
+        </a>
+        <div class="flex-col header-title ellipsis">
+            <span>贪心算法的思想以及概念</span>
+            
+        </div>
+        
+        <a href="javascript:;" id="site_search_btn" class="header-icon pull-right waves-effect waves-circle waves-light">
+            <i class="icon icon-lg icon-search"></i>
+        </a>
+        
+    </div>
+</header>
+<header class="content-header post-header">
+    <img src="/img/s3.jpg" class="header-bg">
+    <div class="container fade-scale">
+        <h1 class="title">贪心算法的思想以及概念</h1>
+        <h5 class="subtitle">
+            
+                <time datetime="2019-03-02T13:41:52.000Z" itemprop="datePublished" class="page-time">
+  2019-03-02
+</time>
+
+
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/算法分析与设计教程/">算法分析与设计教程</a><ul class="article-category-list-child"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/算法分析与设计教程/Chapter-3/">Chapter 3</a></li></ul></li></ul>
+
+            
+        </h5>
+        
+    </div>
+    
+
+</header>
+
+<div id="site_search">
+    <div class="search-title clearfix">
+        <span class="pull-left">
+          <i class="icon icon-lg icon-search"></i>
+        </span>
+        <input type="text" id="local-search-input" name="q" results="0" placeholder="search my blog..." class="form-control pull-left"/>
+        <a href="javascript:;" class="close pull-right waves-effect waves-circle waves-light">
+          <i class="icon icon-lg icon-close"></i>
+        </a>
+    </div>
+    <div id="local-search-result"></div>
+</div>
+
+
+<div class="container body-wrap">
+    <article id="post-贪心算法-1(二部图的最大匹配(算法分析与设计教程系列)"
+  class="post-article article-type-post" itemprop="blogPost">
+    <div class="post-card">
+        <h1 class="post-card-title">贪心算法的思想以及概念</h1>
+        <div class="post-meta">
+            <time class="post-time" title="2019-03-02 21:41:52" datetime="2019-03-02T13:41:52.000Z"  itemprop="datePublished">2019-03-02</time>
+
+            
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/算法分析与设计教程/">算法分析与设计教程</a><ul class="article-category-list-child"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/算法分析与设计教程/Chapter-3/">Chapter 3</a></li></ul></li></ul>
+
+
+
+            
+	<span id="/2019/03/02/贪心算法-1(二部图的最大匹配(算法分析与设计教程系列)/" class="leancloud_visitors" data-flag-title="贪心算法的思想以及概念" title="贪心算法的思想以及概念">
+		
+			<i class="icon icon-eye"></i>
+		
+		<span class="leancloud-visitors-count"></span>
+	</span>
+ 
+
+            
+
+
+            
+        </div>
+        <div class="post-content" id="post-content" itemprop="postContent">
+            
+            <h2 id="目标"><a href="#目标" class="headerlink" title="目标"></a>目标</h2><ol>
+<li>理解贪心算法的基本概念以及实现机制</li>
+<li>掌握贪心算法设计的基本思想，理解贪心算法的基本设计原理</li>
+<li>掌握使用贪心策略来解决背包问题、单源点最短路径问题以及最小成本生成树问题等各类问题</li>
+<li>掌握如何分析使用贪心算法求解的最优化问题的时间复杂度与空间复杂度</li>
+<li>如何运用数学归纳法证明求解此问题所使用的贪心算法得出的解就是最优解(难点)</li>
+</ol>
+<h2 id="学习指南"><a href="#学习指南" class="headerlink" title="学习指南"></a>学习指南</h2><blockquote>
+<p>在我们设计算法解决一个实际问题之前，</p>
+<ol>
+<li>必须首先分析这个实际问题具有哪些特质</li>
+<li>然后依据这些特征选择相应的算法进行求解，往往会获得事半功倍的效果</li>
+</ol>
+</blockquote>
+<p>针对每个可以使用贪心算法进行求解的问题</p>
+<ol>
+<li>首先熟练掌握贪心策略的设计思路</li>
+<li>将其转化为贪心算法</li>
+<li>最后用数学归纳法证明按照贪心算法求出的贪心解就是这个最优解</li>
+</ol>
+<p>注意：这个证明过程是必要的，如果不对贪心算法求解的过程进行证明，只能说明根据这个贪心策略设计的贪心算法得到的解仅仅只是贪心解，并不能说明是最优解！</p>
+<h3 id="贪心法证明最优解"><a href="#贪心法证明最优解" class="headerlink" title="贪心法证明最优解"></a>贪心法证明最优解</h3><ol>
+<li>按步骤归纳：例如活动选择问题</li>
+<li>按规模归纳：例如装载问题</li>
+<li>交换论证：例如最小延迟调度</li>
+</ol>
+<h2 id="基本概念"><a href="#基本概念" class="headerlink" title="基本概念"></a>基本概念</h2><blockquote>
+<p>当有这样一类问题，有n个输入，而它的解就是由这n个输入的某个子集组成，只是这个子集必须满足某些实现给定的条件。</p>
+</blockquote>
+<p>这些必须满足的条件称为<strong>约束条件</strong></p>
+<p>将满足这些约束条件的子集称为该问题的<strong>可行解</strong></p>
+<p>由于可行解不止一个，为了衡量可行解的优劣，通常会预先给定一些标准，一般以函数形式给出，称为<strong>目标函数</strong></p>
+<p>使得目标函数取得极值得可行解称为<strong>最优解</strong></p>
+<p>注意：根据约束条件与目标函数的数学模型的特性或求解问题方法的不同，可以细划分为如下类：</p>
+<ol>
+<li>整数规划问题</li>
+<li>线性规划问题</li>
+<li>非线性规划问题</li>
+<li>动态规划问题</li>
+</ol>
+<p>尽管各类规划问题都有一些相应的求解方法，但是对于其中某些问题，我们仍然可以使用一种更为直接的方法进行求解，就是<strong>贪心算法</strong></p>
+<h2 id="基本思想"><a href="#基本思想" class="headerlink" title="基本思想"></a>基本思想</h2><blockquote>
+<p>贪心算法是一种改进了的分级处理方法</p>
+</blockquote>
+<p>首先根据优化问题的要求，选取一种度量标准，然后按照这种量度标准对这n个输入进行排序，并且按照排好的顺序依次输入每一个量。如果这个输入与当前已经构成的在这种量度意义下的部分最优解组成在一起不可能产生一个可行解，那么我们就不把该输入纳入到这一部分最优解中，这种能够得到某种量度意义下的最优解分级处理方法叫做贪心算法。</p>
+<p>注意：将目标函数作为量度标准产生的贪心解也并不一定就是原问题的最优解！</p>
+<p><strong>采用贪心算法设计求解原优化问题的最优解的核心问题就是选择能够产生优化问题最优解的最优量度标准</strong>，如果我们可以选择出最优量度标准，那么用贪心算法解决这个问题就会特别有效！</p>
+<a id="more"></a>
+<h2 id="实现机制"><a href="#实现机制" class="headerlink" title="实现机制"></a>实现机制</h2><p>贪心算法总是做出在当前看来是最好的选择(局部最优)，也就是说贪心算法并不是从整体最优上加以考虑。当然，我们希望贪心算法求得的最终结果也是整体最优的！</p>
+<h2 id="设计思想"><a href="#设计思想" class="headerlink" title="设计思想"></a>设计思想</h2><blockquote>
+<p>贪心算法通常用于解决具有最大值或者最小值的最优化问题</p>
+</blockquote>
+<p>从某一个初始状态开始，依据当前局部的但却不一定是全局的最优策略，并且需要满足问题给出的约束条件，从而能够确保目标函数的值增加最快或者最慢，选择一个可以最快达到问题要求的输入元素，以便尽可能的构成问题的局部最优解！</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">greedy(S,n)</span><br><span class="line">&#123;</span><br><span class="line">    solution = Ø;				<span class="comment">//将初始可行解集设置为空集</span></span><br><span class="line">    <span class="keyword">for</span> (i = <span class="number">1</span>; i &lt; n; i++)		</span><br><span class="line">    &#123;</span><br><span class="line">        x = select(S);</span><br><span class="line">        <span class="keyword">if</span>(feasible(solution, x))</span><br><span class="line">            solution = <span class="keyword">union</span>(solution, x);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> solution;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>​    开始时，我们将初始可行解集设置为空集，然后采用select按照某种量度标准，从集合S中选择一个输入元素x,并且使用feasible进行判断，在可行解集中添加一个新元素x以后，是否可以组成新的可行解，如果可以，就把x加入到可行解集solution中，同时将其从原来的集合S中删去，如果不行，舍弃元素x,重新从原集合S中选择另一个元素y作为新的输入元素，重复前面的步骤，直到找出一个满足原优化问题的可行解为止！</p>
+<p><strong>在设计贪心算法时，其困难在于证明所设计的算法就是真正解决这个问题的最优算法！</strong></p>
+<h3 id="适用于贪心法求解的问题具有的两个重要性质"><a href="#适用于贪心法求解的问题具有的两个重要性质" class="headerlink" title="适用于贪心法求解的问题具有的两个重要性质"></a>适用于贪心法求解的问题具有的两个重要性质</h3><ol>
+<li>贪心选择性质：待求解最优化问题的全局最优解，可以通过一连串的局部最优选择来实现</li>
+<li>最优子结构性质：一个待求解的最优化问题的最优解中包含子问题的最优解</li>
+</ol>
+
+        </div>
+        
+<blockquote class="post-copyright">
+    <div class="content">
+        
+<span class="post-time">
+    最后更新时间：<time datetime="2019-08-26T10:46:59.881Z" itemprop="dateUpdated">2019-08-26 18:46:59</time>
+</span><br>
+
+
+        
+        转载注明出处，原文地址：<a href="/2019/03/02/贪心算法-1(二部图的最大匹配(算法分析与设计教程系列)/" target="_blank" rel="external">http://www.sivan.tech/2019/03/02/贪心算法-1(二部图的最大匹配(算法分析与设计教程系列)/</a>
+        
+    </div>
+    <footer>
+        <a href="http://www.sivan.tech">
+            <img src="/img/1.jpg" alt="逸如风(yirufeng)">
+            逸如风(yirufeng)
+        </a>
+    </footer>
+</blockquote>
+
+        
+            <div class="page-reward">
+    <a id="rewardBtn" href="javascript:;" class="page-reward-btn waves-effect waves-circle waves-light">赏</a>
+</div>
+
+            
+        
+        <div class="post-footer">
+            
+	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Algorithm/">Algorithm</a></li></ul>
+
+            <div class="page-share-wrap">
+    
+
+<div class="page-share" id="pageShare">
+    <ul class="reset share-icons">
+      
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://www.sivan.tech/2019/03/02/贪心算法-1(二部图的最大匹配(算法分析与设计教程系列)/&title=《贪心算法的思想以及概念》 — yirufeng's Blog&pic=http://www.sivan.tech/img/1.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://www.sivan.tech/2019/03/02/贪心算法-1(二部图的最大匹配(算法分析与设计教程系列)/&title=《贪心算法的思想以及概念》 — yirufeng's Blog&source=目标
+理解贪心算法的基本概念以及实现机制
+掌握贪心算法设计的基本思想，理解贪心算法的基本设计原理
+掌握使用贪心策略来解决背包问题、单源点最短路径问题以及最..." data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http://www.sivan.tech/2019/03/02/贪心算法-1(二部图的最大匹配(算法分析与设计教程系列)/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《贪心算法的思想以及概念》 — yirufeng's Blog&url=http://www.sivan.tech/2019/03/02/贪心算法-1(二部图的最大匹配(算法分析与设计教程系列)/&via=http://www.sivan.tech" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=http://www.sivan.tech/2019/03/02/贪心算法-1(二部图的最大匹配(算法分析与设计教程系列)/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+      
+    </ul>
+ </div>
+
+
+
+    <a href="javascript:;" id="shareFab" class="page-share-fab waves-effect waves-circle">
+        <i class="icon icon-share-alt icon-lg"></i>
+    </a>
+</div>
+
+        </div>
+        
+            
+
+
+        
+    </div>
+    
+<nav class="post-nav flex-row flex-justify-between">
+  
+    <div class="prev">
+      <a href="/2019/03/04/二部图的最大匹配-算法分析与设计教程系列/" id="post-prev" class="post-nav-link">
+        <div class="tips"><i class="icon icon-angle-left icon-lg icon-pr"></i> Prev</div>
+        <h4 class="title">二部图的最大匹配(算法分析与设计教程系列)</h4>
+      </a>
+    </div>
+  
+
+  
+    <div class="next">
+      <a href="/2019/03/01/Windows-7-Service-Pack-1-and-all-applicable-updates-are-required-to-install-Python-3-6-4-64-bit/" id="post-next" class="post-nav-link">
+        <div class="tips">Next <i class="icon icon-angle-right icon-lg icon-pl"></i></div>
+        <h4 class="title">Windows 7 Service Pack 1 and all applicable updates are required to install Python 3.6.4(64-bit)</h4>
+      </a>
+    </div>
+  
+</nav>
+
+
+    
+        <div id="repo">
+    <div class="loading active"></div>
+    <div class="top clearfix">
+        <div class="avatar pull-left"></div>
+        <div class="content pull-left">
+            <p class="name"></p>
+            <p class="description"></p>
+        </div>
+    </div>
+    <ul class="bottom">
+        <li class="star">
+            <span class="icon icon-star"></span>
+            <span class="val">0</span>
+        </li>
+        <li class="fork">
+            <span class="icon icon-code-fork"></span>
+            <span class="val">0</span>
+        </li>
+        <li class="date">
+            <span class="icon icon-clock-o"></span>
+            <span class="val">0000-00-00</span>
+        </li>
+    </ul>
+    <a class="link" href=""></a>
+</div>
+    
+    
+        <aside class="post-widget">
+            <nav class="post-toc-wrap" id="post-toc">
+                <strong>目录</strong>
+                <ol class="post-toc"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#目标"><span class="post-toc-number">1.</span> <span class="post-toc-text">目标</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#学习指南"><span class="post-toc-number">2.</span> <span class="post-toc-text">学习指南</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#贪心法证明最优解"><span class="post-toc-number">2.1.</span> <span class="post-toc-text">贪心法证明最优解</span></a></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#基本概念"><span class="post-toc-number">3.</span> <span class="post-toc-text">基本概念</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#基本思想"><span class="post-toc-number">4.</span> <span class="post-toc-text">基本思想</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#实现机制"><span class="post-toc-number">5.</span> <span class="post-toc-text">实现机制</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#设计思想"><span class="post-toc-number">6.</span> <span class="post-toc-text">设计思想</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#适用于贪心法求解的问题具有的两个重要性质"><span class="post-toc-number">6.1.</span> <span class="post-toc-text">适用于贪心法求解的问题具有的两个重要性质</span></a></li></ol></li></ol>
+            </nav>
+            <div class="toc-bar"><div>
+        </aside>
+    
+</article>
+
+    <div id="reward" class="page-modal reward-lay">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <h3 class="reward-title">
+        <i class="icon icon-quote-left"></i>
+        感谢原作，你的打赏是我的动力！
+        <i class="icon icon-quote-right"></i>
+    </h3>
+    <div class="reward-content">
+        
+        <div class="reward-code">
+            <img id="rewardCode" src="/img/reward-wechat.jpg" alt="打赏二维码">
+        </div>
+        
+        <label class="reward-toggle">
+            <input id="rewardToggle" type="checkbox" class="reward-toggle-check"
+                data-wechat="/img/reward-wechat.jpg" data-alipay="/img/reward-alipay.jpg">
+            <div class="reward-toggle-ctrol">
+                <span class="reward-toggle-item wechat">微信</span>
+                <span class="reward-toggle-label"></span>
+                <span class="reward-toggle-item alipay">支付宝</span>
+            </div>
+        </label>
+        
+    </div>
+</div>
+
+    
+
+</div>
+
+    </main>
+    <footer class="footer ">
+    
+    <div class="top">
+        
+            <p>
+    <span>Links：</span>
+    
+    <span class="blogroll-item">
+        <a href="https://github.com/sivanWu0222" target="_blank">GitHub</a>
+    </span>
+    
+    <span class="blogroll-item">
+        <a href="http://weibo.com/Msingwen0222/home?wvr=5" target="_blank">新浪微博</a>
+    </span>
+    
+    <span class="blogroll-item">
+        <a href="https://www.linkedin.com/in/%E6%99%93%E6%96%87-%E5%90%B4-79057a121/" target="_blank">Linkedin</a>
+    </span>
+    
+    <span class="blogroll-item">
+        <a href="http://wpa.qq.com/msgrd?v=3&amp;uin=1666762170&amp;site=qq&amp;menu=yes" target="_blank">QQ</a>
+    </span>
+    
+    <span class="blogroll-item">
+        <a href="https://zh-cn.facebook.com/people/SiVan-Wu/100014408918389" target="_blank">Facebook</a>
+    </span>
+    
+    <span class="blogroll-item">
+        <a href="https://mail.qq.com/cgi-bin/qm_share?t=qm_mailme&amp;email=xfTz8-Py8-f08vWFtLTrpqqo" target="_blank">Contact</a>
+    </span>
+    
+    <span class="blogroll-item">
+        <a href="https://twitter.com/SiVan_Wu" target="_blank">Twitter</a>
+    </span>
+    
+</p>
+
+        
+    </div>
+    
+    <div class="bottom">
+        <p>
+            <span>
+                逸如风(yirufeng) &copy; 2016 - 2019
+            </span>
+
+           	
+           	<span>
+           		<a href="http://beian.miit.gov.cn/" target="_blank">已实名认证</a>
+           	</span>
+           	
+
+            
+
+            
+
+            
+                
+<span class="site-uv" title="总访客量">
+    <i class="icon icon-user"></i>
+    <i class="busuanzi-value" id="busuanzi_value_site_uv"></i>
+</span>
+
+
+<span class="site-pv" title="总访问量">
+    <i class="icon icon-eye"></i>
+    <i class="busuanzi-value" id="busuanzi_value_site_pv"></i>
+</span>
+
+            
+        </p>
+    </div>
+</footer>
+
+    <div class="mask" id="mask"></div>
+<a href="javascript:;" id="gotop" class="waves-effect waves-circle waves-light"><span class="icon icon-lg icon-chevron-up"></span></a>
+
+
+
+<div class="global-share" id="globalShare">
+    <ul class="reset share-icons">
+      
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://www.sivan.tech/2019/03/02/贪心算法-1(二部图的最大匹配(算法分析与设计教程系列)/&title=《贪心算法的思想以及概念》 — yirufeng's Blog&pic=http://www.sivan.tech/img/1.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://www.sivan.tech/2019/03/02/贪心算法-1(二部图的最大匹配(算法分析与设计教程系列)/&title=《贪心算法的思想以及概念》 — yirufeng's Blog&source=目标
+理解贪心算法的基本概念以及实现机制
+掌握贪心算法设计的基本思想，理解贪心算法的基本设计原理
+掌握使用贪心策略来解决背包问题、单源点最短路径问题以及最..." data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http://www.sivan.tech/2019/03/02/贪心算法-1(二部图的最大匹配(算法分析与设计教程系列)/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《贪心算法的思想以及概念》 — yirufeng's Blog&url=http://www.sivan.tech/2019/03/02/贪心算法-1(二部图的最大匹配(算法分析与设计教程系列)/&via=http://www.sivan.tech" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=http://www.sivan.tech/2019/03/02/贪心算法-1(二部图的最大匹配(算法分析与设计教程系列)/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+      
+    </ul>
+ </div>
+
+
+<div class="page-modal wx-share" id="wxShare">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAQ4AAAEOCAAAAABd2qZ5AAAD5ElEQVR42u3aQW7jQAwEQP//01kgpwUMS93kKMmhdDIM2Z4pHejm8PWKr6/v6//X7++8v07euX79/luzVR2+cODAgQNHsNVPV3LP9afybecbTojz9ePAgQMHjic42qW0HHnRvd7w9VbboosDBw4cOH6X4zrv5NFrFu029Dhw4MCB4+9z5IVw06qbBT8cOHDgwPEXOGZtvtnikki2D3iP90px4MCBA8f9mocF7++/fny+AwcOHDhwPDam0Maq9hhpM7hwszscOHDgwLHmyKPUZmNt2WsfwKwFWSRaHDhw4MARc1yXxgNFq2SdDTq0h14fSzUOHDhw4DjEsR9iyOtUMl7Qluf9g8GBAwcOHKc4ZotLCPaNv1UqLR8eDhw4cOA4xXGq0LYHRcnS2zGLvFR/vAcHDhw4cKw52tOWtj2XF9HZIMW+zOPAgQMHjrMc+dDbbGyuXXrecMzDYdHKxIEDBw4chzhOFchZuEpAzw5AROENBw4cOHCMOPKiuNlw21g8e6SUx0UcOHDgwLHnyD/Qtv/aQJh/W16S8wdZTHbgwIEDB454WmAW3majbLMmY/4gZ8MWOHDgwIFjz5EPBCRxaxa9ZqN4mxj58R0cOHDgwHGII9nGZtHt9+f3z+JZ1BzEgQMHDhzrRtcTRW4WpdrRirbFGaHjwIEDB44FR3501DbsZkdHs/UcG6fAgQMHDhwLjnbsoG0gJmMK+fjCWSYcOHDgwPEEx35MoW3h5c3BPAS+Rlf0WRw4cODAUe60OOyP222zY6FT5XzW3Kz/d+DAgQMHjqDe5SXz7PHPpik5C2bRQ8KBAwcOHAuOWfusbckluO3R0f7Y7OYUDgcOHDhwlBxtc+3Gdb3EGdAsvN2cwuHAgQMHjgVHXlBblDxBzn4lx4pCHQ4cOHDgONQfe64xtwlUydI34fPjr+DAgQMHjjVHPjqwHz6YFeM2yLUjFzencDhw4MCBI+bIl74ZSthsaTP6ln8DDhw4cOD4GY42SuVxa3MolUS1BPdmSA4HDhw4cBzlmC1uxjSLYbPRBxw4cODA8TMcSeMsD0ibsYbZmELOhwMHDhw4nubIt5cf5MxKb846Iy5+CwcOHDhwLDi+yisfPmhjW1J0Z6xFFMSBAwcOHGuOVX0uC2qLuDnWyr8fBw4cOHA8wZEX132E2xfCZLhh00bEgQMHDhynONoimi+irfDtsVP9ryEptDhw4MCB40c4khG3tlheb+zU8Fwe9nDgwIEDx29xtBCb9t8sXubtQhw4cODA8QRHG8xyvtlxVM43K/8f78SBAwcOHGuO/UDDrIjO4tzmns1BGg4cOHDgCDj+AfWnfU+vfffLAAAAAElFTkSuQmCC" alt="微信分享二维码">
+</div>
+
+
+    
+    <!-- main-js -->
+<script type="text/javascript" src="//cdn.bootcss.com/jquery/2.1.0/jquery.min.js"></script>
+<script type="text/javascript" src="/js/plugins/fastclick.js?v=1.4.2"></script>
+<script type="text/javascript" src="/js/plugins/ios-orientationchange-fix.js?v=1.4.2"></script>
+<script type="text/javascript" src="//cdn.jsdelivr.net/gh/fancyapps/fancybox@3.5.2/dist/jquery.fancybox.min.js"></script>
+
+<script type="text/javascript" src="//cdn.bootcss.com/node-waves/0.7.4/waves.min.js"></script>
+
+<script type="text/javascript" src="/js/method.js?v=1.4.2"></script>
+<script type="text/javascript" src="/js/blog.js?v=1.4.2"></script>
+
+<!-- third-party -->
+
+
+    <script type="text/javascript">
+    (function() {
+
+        const origin = "algorithm-skill | AlgorithmAnalysisAndDesignTutorial"
+        let user, repo;
+        origin.replace(/(\S+)\s{0,1}\|\s{0,1}(\S+)/g, (...rest) => {
+            [user, repo] = [ rest[1], rest[2] ];
+        });
+        if (user && repo) {
+            const url = `//api.github.com/repos/${user}/${repo}?callback=?`;
+            $.getJSON(url, (data) => {
+                updateRepoInPage(data.data);
+            });
+        }
+
+        function updateRepoInPage(data) {
+            const {name, description, html_url: url, stargazers_count: stars, forks, owner: owner, updated_at: update} = data;
+            _loadAvatar(owner.avatar_url).then(avatarUrl => {
+                const avatarBg = `url(${avatarUrl})`;
+                const container = $('#repo');
+                container.click(() => {
+                    window.open(url);
+                });
+
+                //init
+                const loadingItem = container.find('.loading').hide();
+                const topItem = container.find('.top').addClass('active');
+                const bottomItem = container.find('.bottom').addClass('active');
+
+                //avatar
+                const avatarItem = container.find('.avatar');
+                const oldBg = avatarItem.css('background-image');
+                avatarItem.hover(() => {
+                    avatarItem.css('background-image', avatarBg);
+                }, () => {
+                    avatarItem.css('background-image', oldBg);
+                });
+
+                //repo-name
+                const nameItem = container.find('.name').html(name);
+
+                //description
+                const descriptionItem = container.find('.description').html(description);
+
+                //stars
+                const starItem = container.find('.star>.val').html(stars);
+
+                //forks
+                const forkItem = container.find('.fork>.val').html(forks);
+
+                //date
+                const formatDate = update.replace(/T.+/g, '');
+                const dateItem = container.find('.date>.val').html(formatDate);
+            });
+
+            function _loadAvatar(url) {
+                return new Promise((resolve, reject) => {
+                    const img = new Image();
+                    img.onload = () => {
+                        resolve(url);
+                    };
+                    img.src = url;
+                });
+            }
+
+        }
+
+    })();
+</script>
+
+
+
+
+
+<script type="text/javascript" src="/js/plugins/local_search.js?v=1.4.2"></script>
+<script type="text/javascript">
+	var search_path = "search.xml";
+	if (search_path.length === 0) {
+		search_path = "search.xml";
+	}
+	var path = "/" + search_path;
+	searchFunc(path, "local-search-input", "local-search-result");
+</script>
+
+
+
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+    
+    
+
+
+
+<script type="text/javascript" src="https://cdn1.lncld.net/static/js/av-core-mini-0.6.4.js"></script>
+<script type="text/javascript" src="/js/plugins/leancloud_visitors.js?v=1.4.2"></script>
+
+
+
+    <!-- mathjax config similar to math.stackexchange -->
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+        tex2jax: {
+            inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+            processEscapes: true,
+            skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+        }
+    });
+</script>
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for (i=0; i < all.length; i += 1) {
+            all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+    });
+</script>
+
+<script type="text/javascript" src="//cdn.bootcss.com/mathjax/2.7.1/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+
+
+
+    <script>
+    (function() {
+        var OriginTitile = document.title, titleTime;
+        document.addEventListener('visibilitychange', function() {
+            if (document.hidden) {
+                document.title = '死鬼去哪里了！';
+                clearTimeout(titleTime);
+            } else {
+                document.title = '(つェ⊂)咦!又好了!';
+                titleTime = setTimeout(function() {
+                    document.title = OriginTitile;
+                },2000);
+            }
+        });
+    })();
+</script>
+
+
+
+
+
+    
+</body>
+</html>

@@ -1,0 +1,857 @@
+<!DOCTYPE html>
+<html>
+<head><meta name="generator" content="Hexo 3.9.0">
+    <meta charset="utf-8">
+    
+    
+    <title>算法引论 | yirufeng&#39;s Blog | 未来的小幸运 || 致正在努力的我们 ---- 逸如风</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    
+    <meta name="keywords" content="Algorithm">
+    <link rel="shortcut icon" href="/img/favicon.ico">
+    <link rel="stylesheet" href="//cdn.jsdelivr.net/gh/fancyapps/fancybox@3.5.2/dist/jquery.fancybox.min.css">
+    <link rel="stylesheet" href="/css/style.css?v=1.4.2">
+    
+    <script type="text/javascript">
+        // Data Center
+        var DC = {
+            reward:	true,
+            lv: JSON.parse('{"enable":true,"app_id":"K2RVtHi7RnmoN6dovlDKafn8-gzGzoHsz","app_key":"Qxmil0oqPFdDUyyIp2i1Xikt","icon":true}'),
+            v: JSON.parse('{"enable":false,"appid":"ACuOJIasBeRLiDe2iUApHj67-gzGzoHsz","appkey":"qbgg4tClrQQmvq8uwlpwA5mA","notify":true,"verify":true,"placeholder":"give me some sugers plz...","avatar":"wavatar"}'),
+            g: JSON.parse('{"enable":false,"lazy":true,"owner":"codefine","repo":"gitment","oauth":{"client_id":null,"client_secret":null},"perPage":10}'),
+            d: JSON.parse('{"app_id":null}')
+        };
+    </script>
+    <script type="text/javascript">
+        window.lazyScripts=[];
+    </script>
+    
+</head>
+
+
+<body>
+    <div id="loading" class="active"></div>
+
+    <aside id="menu" class="">
+  <div class="inner flex-row-vertical">
+    <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menu-off">
+        <i class="icon icon-lg icon-close"></i>
+    </a>
+    <div class="brand-wrap">
+      
+      <img src="/img/brand.jpg" class="brand-bg">
+      
+      <div class="brand">
+        <a href="/" class="avatar waves-effect waves-circle waves-light">
+          <img src="/img/1.jpg">
+        </a>
+        <hgroup class="introduce">
+          <h5 class="nickname">逸如风(yirufeng)</h5>
+          <a href="mailto:yirufeng@foxmail.com" title="yirufeng@foxmail.com" class="mail">
+            
+              <span>y</span>
+            
+              <span>i</span>
+            
+              <span>r</span>
+            
+              <span>u</span>
+            
+              <span>f</span>
+            
+              <span>e</span>
+            
+              <span>n</span>
+            
+              <span>g</span>
+            
+              <span>@</span>
+            
+              <span>f</span>
+            
+              <span>o</span>
+            
+              <span>x</span>
+            
+              <span>m</span>
+            
+              <span>a</span>
+            
+              <span>i</span>
+            
+              <span>l</span>
+            
+              <span>.</span>
+            
+              <span>c</span>
+            
+              <span>o</span>
+            
+              <span>m</span>
+            
+          </a>
+        </hgroup>
+        
+        <ul class="menu-link">
+          
+              <li>
+                <a href="https://github.com/sivanWu0222" target="_blank">
+                  <i class="icon icon-lg icon-github"></i>
+                </a>
+              </li>
+            
+              <li>
+                <a href="https://mail.qq.com/cgi-bin/qm_share?t=qm_mailme&amp;amp;email=xfTz8-Py8-f08vWFtLTrpqqo" target="_blank">
+                  <i class="icon icon-lg icon-envelope"></i>
+                </a>
+              </li>
+            
+        </ul>
+        
+      </div>
+    </div>
+    <div class="scroll-wrap flex-col">
+      <ul class="nav">
+        
+            <li class="">
+              <a href="/"  >
+                <i class="icon icon-lg icon-home"></i>
+                Home
+              </a>
+            </li>
+        
+            <li class="">
+              <a href="/categories"  >
+                <i class="icon icon-lg icon-th-list"></i>
+                Category
+              </a>
+            </li>
+        
+            <li class="">
+              <a href="/research"  >
+                <i class="icon icon-lg icon-mortar-board"></i>
+                Research
+              </a>
+            </li>
+        
+            <li class="">
+              <a href="/tags"  >
+                <i class="icon icon-lg icon-tags"></i>
+                Tag
+              </a>
+            </li>
+        
+            <li class="">
+              <a href="/archives"  >
+                <i class="icon icon-lg icon-archives"></i>
+                Archive
+              </a>
+            </li>
+        
+            <li class="">
+              <a href="/about"  >
+                <i class="icon icon-lg icon-user"></i>
+                About
+              </a>
+            </li>
+        
+            <li class="">
+              <a href="/open-source"  >
+                <i class="icon icon-lg icon-github"></i>
+                Project
+              </a>
+            </li>
+        
+            <li class="">
+              <a href="/demo"  >
+                <i class="icon icon-lg icon-audio-description"></i>
+                Demo
+              </a>
+            </li>
+        
+            <li class="">
+              <a href="/wechat-number"  >
+                <i class="icon icon-lg icon-wechat"></i>
+                公众号
+              </a>
+            </li>
+        
+            <li class="">
+              <a href="http://www.sivan.tech/LeetCodeAlgo/" target="_blank" >
+                <i class="icon icon-lg icon-braille"></i>
+                Leetcode
+              </a>
+            </li>
+        
+            <li class="">
+              <a href="http://resume.sivan.tech/" target="_blank" >
+                <i class="icon icon-lg icon-file-pdf-o"></i>
+                Resume
+              </a>
+            </li>
+        
+      </ul>
+    </div>
+  </div>
+</aside>
+
+    <main id="main">
+        <header class="top-header" id="header">
+    <div class="flex-row clearfix">
+        <a href="javascript:;" class="header-icon pull-left waves-effect waves-circle waves-light on" id="menu-toggle">
+          <i class="icon icon-lg icon-navicon"></i>
+        </a>
+        <div class="flex-col header-title ellipsis">
+            <span>算法引论</span>
+            
+        </div>
+        
+        <a href="javascript:;" id="site_search_btn" class="header-icon pull-right waves-effect waves-circle waves-light">
+            <i class="icon icon-lg icon-search"></i>
+        </a>
+        
+    </div>
+</header>
+<header class="content-header post-header">
+    <img src="/img/s3.jpg" class="header-bg">
+    <div class="container fade-scale">
+        <h1 class="title">算法引论</h1>
+        <h5 class="subtitle">
+            
+                <time datetime="2019-02-28T00:45:02.000Z" itemprop="datePublished" class="page-time">
+  2019-02-28
+</time>
+
+
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/算法分析与设计教程/">算法分析与设计教程</a><ul class="article-category-list-child"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/算法分析与设计教程/Chapter-1/">Chapter 1</a></li></ul></li></ul>
+
+            
+        </h5>
+        
+    </div>
+    
+
+</header>
+
+<div id="site_search">
+    <div class="search-title clearfix">
+        <span class="pull-left">
+          <i class="icon icon-lg icon-search"></i>
+        </span>
+        <input type="text" id="local-search-input" name="q" results="0" placeholder="search my blog..." class="form-control pull-left"/>
+        <a href="javascript:;" class="close pull-right waves-effect waves-circle waves-light">
+          <i class="icon icon-lg icon-close"></i>
+        </a>
+    </div>
+    <div id="local-search-result"></div>
+</div>
+
+
+<div class="container body-wrap">
+    <article id="post-算法引论(算法分析与设计教程系列)"
+  class="post-article article-type-post" itemprop="blogPost">
+    <div class="post-card">
+        <h1 class="post-card-title">算法引论</h1>
+        <div class="post-meta">
+            <time class="post-time" title="2019-02-28 08:45:02" datetime="2019-02-28T00:45:02.000Z"  itemprop="datePublished">2019-02-28</time>
+
+            
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/算法分析与设计教程/">算法分析与设计教程</a><ul class="article-category-list-child"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/算法分析与设计教程/Chapter-1/">Chapter 1</a></li></ul></li></ul>
+
+
+
+            
+	<span id="/2019/02/28/算法引论(算法分析与设计教程系列)/" class="leancloud_visitors" data-flag-title="算法引论" title="算法引论">
+		
+			<i class="icon icon-eye"></i>
+		
+		<span class="leancloud-visitors-count"></span>
+	</span>
+ 
+
+            
+
+
+            
+        </div>
+        <div class="post-content" id="post-content" itemprop="postContent">
+            
+            <h2 id="学习目标"><a href="#学习目标" class="headerlink" title="学习目标"></a>学习目标</h2><ol>
+<li>掌握与计算机算法相关的各个名词、术语的含义</li>
+<li>了解时间复杂度和空间复杂度的基本概念</li>
+<li>理解计算机算法的5个重要特征</li>
+<li>了解计算机算法涉及的5个基本内容</li>
+<li>掌握计算机频率计数和估算算法时间复杂度的基本方法</li>
+</ol>
+<hr>
+<h2 id="算法的基本概念"><a href="#算法的基本概念" class="headerlink" title="算法的基本概念"></a>算法的基本概念</h2><blockquote>
+<p>只能笼统的将算法定义为解决某个确定问题的一种特殊的方法。若对算法做稍许详细一些的非形式化描述，那么算法就是一组有穷的规则，它规定了解决某一特定类型问题的一系列计算方法！</p>
+</blockquote>
+<h3 id="算法的重要特性"><a href="#算法的重要特性" class="headerlink" title="算法的重要特性"></a>算法的重要特性</h3><blockquote>
+<ol>
+<li><p>确定性</p>
+<p>算法的每一种运算都必须要有明确的定义，每一种运算应该执行怎样的动作必须是清楚地，即没有二义性的！</p>
+<p>例如算法中不允许有”将1或2与某个确定的数相加”之类的运算</p>
+</li>
+<li><p>能行性</p>
+<p>一个算法能行指的是算法中有待实现的运算都是基本的运算，即每种运算至少原理上可以由人用纸和笔在有限时间内完成。</p>
+<p>整数运算时能行性的一个例子，而实数运算不行，因为实数可能有无限长！</p>
+</li>
+<li><p>输入</p>
+<p>每个算法有0个或多个输入，是在算法开始之前给定的，取自特定的对象集合！</p>
+</li>
+<li><p>输出</p>
+<p>每个算法产生一个或多个输出，这些输出是同输入有某种特定关系的量！</p>
+</li>
+<li><p>有限性</p>
+<p>任何一个算法总在执行有限步的运算之后就停止执行，仅仅满足前面4条特性的一组规则称之为计算过程，不能称之为算法，例如操作操作系统！</p>
+<p><strong>不能把任何在有限步内就停机的算法投入计算机中运行，而只能把那些在相当有限步内停机的算法投入计算机中运行。总而言之，应尽可能避免无益耗费计算机的宝贵资源</strong></p>
+</li>
+</ol>
+</blockquote>
+<h3 id="算法的基本内容"><a href="#算法的基本内容" class="headerlink" title="算法的基本内容"></a>算法的基本内容</h3><blockquote>
+<p>为了制定一个算法，一般需要经过设计、确认、分析、编码、检查、调试、计时等阶段</p>
+</blockquote>
+<ol>
+<li><p>设计算法：使读者学会已经被实践证明的有用的一些基本设计策略</p>
+</li>
+<li><p>表示算法：基本采用结构程序设计的方式将设计的算法表示出来</p>
+</li>
+<li><p>确认算法(Algorithm Validation)(确认算法 = 设计正确 + 程序证明)</p>
+<p>算法确认：设计出一个算法以后，就应证明它对于所有可能合法的输入都可以给出正确的答案。</p>
+<p>确认的目的在于使我们确信这个算法将可以正确无误的工作，而与所采用的程序设计语言无关！</p>
+<p>程序证明：在将程序投入到计算机上执行以前，实际上还应该证明该程序是正确的，也就是证明该程序对于所有可能的合法输入都能得到正确的结果。</p>
+</li>
+<li><p>分析算法(Algorithm Analysis)</p>
+<p>算法分析：对于每个算法需要多少时间和存储空间作定量分析。</p>
+<p>作用：可以预计所设计的算法可以在怎样的环境中有效的执行，可以知道在最好、最坏及平均情况下执行得怎样，还可以使读者对于解决同一问题的不同算法执行的有效性作出比较判断</p>
+</li>
+<li><p>测试程序(测试程序 = 调试程序 + 作时空分布图)</p>
+<p>调试程序：在抽象数据集上执行程序，以确定是否会产生错误的结果，如果产生错误的结果，就修改源程序</p>
+<p>局限性：调试只能指出有错误，而不能指出程序不存在错误。</p>
+<p>作时空分布图：首先使用各种给定的数据执行调试认为是正确的程序，然后测定为计算出正确的结果所花的时间和空间，以印证以前所做的分析是否正确和支出实现最优化的有效逻辑位置。</p>
+</li>
+</ol>
+<hr>
+<a id="more"></a>
+<h2 id="算法分析"><a href="#算法分析" class="headerlink" title="算法分析"></a>算法分析</h2><h3 id="计算时间的渐进表示"><a href="#计算时间的渐进表示" class="headerlink" title="计算时间的渐进表示"></a>计算时间的渐进表示</h3><h3 id="常用的整数求和公式"><a href="#常用的整数求和公式" class="headerlink" title="常用的整数求和公式"></a>常用的整数求和公式</h3><blockquote>
+<p>以下公式i的取值范围都是从1到n</p>
+</blockquote>
+<p>$$<br>\sum_{i=1}^n{i} = n(n + 1) / 2 = \theta(n^2)<br>$$</p>
+<p>$$<br>\sum_{i=1}^n{(i^2)} = n(n + 1)(2n + 1) / 6 = \theta(n^3)<br>$$</p>
+<p>$$<br>\sum_{i=1}^n{i^k} = n^{(k+1)}/(k+1) + n^k/2 + 低次项 = \theta(n^{(k+1)})<br>$$</p>
+<h3 id="作时空性能分布图"><a href="#作时空性能分布图" class="headerlink" title="作时空性能分布图"></a>作时空性能分布图</h3><blockquote>
+<p>事后测试是在对算法进行了设计、确认、事前分析、编码及调试以后所要做的工作，以确定程序所耗费的精确时间和空间，也就是作时空性能分布图。事后测试与所使用的数字计算机密切相关！</p>
+</blockquote>
+<h4 id="关于噪声"><a href="#关于噪声" class="headerlink" title="关于噪声"></a>关于噪声</h4><p>注意：如果在一台时钟精确度不高的计算机上运行耗时很小的程序，那么所得到的计时图只不过是一些”噪声”，这样，时间分布性能将会完全淹没在”噪声”中。</p>
+<h5 id="解决方案"><a href="#解决方案" class="headerlink" title="解决方案"></a>解决方案</h5><ol>
+<li>增加输入规模，直至得到算法所需的可靠的时间总量</li>
+<li>取足够大的r，将该算法重复执行r次，然后用总时间除以r次</li>
+</ol>
+<h4 id="如何作出时间性能分布图"><a href="#如何作出时间性能分布图" class="headerlink" title="如何作出时间性能分布图"></a>如何作出时间性能分布图</h4><ol>
+<li><p>对于事前分析为θ(g(n))<strong>(意思就是有限个对n的不同取值带入g(n)求和之后， g(n)既是这个和的上界，也是这个和的下届)</strong>计算时间的算法，应该按照输入不断增大其规模的数据集，再利用这些数据集在数字计算机上运行程序，从而得到算法消耗的时间，进而画出这一数量级的时间曲线，倘若这条曲线和事前分析的曲线形状吻合，那么就印证了事前分析的结论！</p>
+<p>注意：</p>
+<ol>
+<li>O是上界符号，存在正常量c和n0，使得对所有n≥n0，有0≤f(n)≤cg(n)</li>
+<li>Ω是下界符号，存在正常量c和n0，使得对所有n≥n0，有0≤cg(n)≤f(n)</li>
+<li>Θ是同阶记号，存在正常量c1、c2和n0，使得对所有n≥n0，有c1 <em> g(n)≤f(n)≤c2 </em> g(n)</li>
+<li>o是低阶记号，对任意正常量c＞0，存在常量n0＞0，使得对所有n≥n0，有0≤f(n)&lt;cg(n)</li>
+</ol>
+</li>
+<li><p>对于事前分析为O(g(n))<strong>(公式为g(n)的表达式)</strong>计算时间的算法，就应该首先在各种数据集规模的范围内分别按照最好情况，最坏情况以及平均情况的数据集独立运行程序，然后做出各种情况的时间曲线，进而根据这些曲线来分析最优的有效逻辑位置。</p>
+</li>
+</ol>
+<p>注意：如果为了解决某一问题，分别设计了多种具有同一数量级的不同算法，或者为了加快某种算法的速度，在同一数量级情况下做了一些改进，那么，只要在输入相同数据集的情况下作出它们的时间分布图就可以比较出哪一个算法的运行效率高一些！</p>
+<hr>
+<h2 id="最优算法概述"><a href="#最优算法概述" class="headerlink" title="最优算法概述"></a>最优算法概述</h2><blockquote>
+<p>在最优算法中，没有考虑空间复杂度，主要原因在于，只要是在一个合理的范围内使用空间，则对于时间的考虑应该比对于空间的考虑更加重要</p>
+</blockquote>
+<ol>
+<li>对于同一个求解问题，存在两个不同算法，在上述意义下都是最优的，那么如果要确定这两个算法中哪一个是真正最优的，<strong>就必须进一步对这两个算法的时间复杂度表达式中的高阶项常数因子进行进一步的比较。</strong>一般说来，常数因子小的算法要优于常数因子大的算法！</li>
+<li>另一方面要注意关于时间复杂度渐进阶的确定，与数据规模n及常数因子c的选取有关，<strong>当数据规模小时，时间复杂度阶低的算法不一定比时间复杂度阶高的算法更有效！</strong></li>
+</ol>
+
+        </div>
+        
+<blockquote class="post-copyright">
+    <div class="content">
+        
+<span class="post-time">
+    最后更新时间：<time datetime="2019-08-26T10:46:59.878Z" itemprop="dateUpdated">2019-08-26 18:46:59</time>
+</span><br>
+
+
+        
+        转载注明出处，原文地址：<a href="/2019/02/28/算法引论(算法分析与设计教程系列)/" target="_blank" rel="external">http://www.sivan.tech/2019/02/28/算法引论(算法分析与设计教程系列)/</a>
+        
+    </div>
+    <footer>
+        <a href="http://www.sivan.tech">
+            <img src="/img/1.jpg" alt="逸如风(yirufeng)">
+            逸如风(yirufeng)
+        </a>
+    </footer>
+</blockquote>
+
+        
+            <div class="page-reward">
+    <a id="rewardBtn" href="javascript:;" class="page-reward-btn waves-effect waves-circle waves-light">赏</a>
+</div>
+
+            
+        
+        <div class="post-footer">
+            
+	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Algorithm/">Algorithm</a></li></ul>
+
+            <div class="page-share-wrap">
+    
+
+<div class="page-share" id="pageShare">
+    <ul class="reset share-icons">
+      
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://www.sivan.tech/2019/02/28/算法引论(算法分析与设计教程系列)/&title=《算法引论》 — yirufeng's Blog&pic=http://www.sivan.tech/img/1.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://www.sivan.tech/2019/02/28/算法引论(算法分析与设计教程系列)/&title=《算法引论》 — yirufeng's Blog&source=学习目标
+掌握与计算机算法相关的各个名词、术语的含义
+了解时间复杂度和空间复杂度的基本概念
+理解计算机算法的5个重要特征
+了解计算机算法涉及的5个基本内容..." data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http://www.sivan.tech/2019/02/28/算法引论(算法分析与设计教程系列)/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《算法引论》 — yirufeng's Blog&url=http://www.sivan.tech/2019/02/28/算法引论(算法分析与设计教程系列)/&via=http://www.sivan.tech" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=http://www.sivan.tech/2019/02/28/算法引论(算法分析与设计教程系列)/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+      
+    </ul>
+ </div>
+
+
+
+    <a href="javascript:;" id="shareFab" class="page-share-fab waves-effect waves-circle">
+        <i class="icon icon-share-alt icon-lg"></i>
+    </a>
+</div>
+
+        </div>
+        
+            
+
+
+        
+    </div>
+    
+<nav class="post-nav flex-row flex-justify-between">
+  
+    <div class="prev">
+      <a href="/2019/03/01/Windows-7-Service-Pack-1-and-all-applicable-updates-are-required-to-install-Python-3-6-4-64-bit/" id="post-prev" class="post-nav-link">
+        <div class="tips"><i class="icon icon-angle-left icon-lg icon-pr"></i> Prev</div>
+        <h4 class="title">Windows 7 Service Pack 1 and all applicable updates are required to install Python 3.6.4(64-bit)</h4>
+      </a>
+    </div>
+  
+
+  
+    <div class="next">
+      <a href="/2019/02/07/关于Visual-Studio-Code-控制台无法输入-以及-乱码/" id="post-next" class="post-nav-link">
+        <div class="tips">Next <i class="icon icon-angle-right icon-lg icon-pl"></i></div>
+        <h4 class="title">关于Visual Studio Code 控制台无法输入 以及 乱码</h4>
+      </a>
+    </div>
+  
+</nav>
+
+
+    
+        <div id="repo">
+    <div class="loading active"></div>
+    <div class="top clearfix">
+        <div class="avatar pull-left"></div>
+        <div class="content pull-left">
+            <p class="name"></p>
+            <p class="description"></p>
+        </div>
+    </div>
+    <ul class="bottom">
+        <li class="star">
+            <span class="icon icon-star"></span>
+            <span class="val">0</span>
+        </li>
+        <li class="fork">
+            <span class="icon icon-code-fork"></span>
+            <span class="val">0</span>
+        </li>
+        <li class="date">
+            <span class="icon icon-clock-o"></span>
+            <span class="val">0000-00-00</span>
+        </li>
+    </ul>
+    <a class="link" href=""></a>
+</div>
+    
+    
+        <aside class="post-widget">
+            <nav class="post-toc-wrap" id="post-toc">
+                <strong>目录</strong>
+                <ol class="post-toc"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#学习目标"><span class="post-toc-number">1.</span> <span class="post-toc-text">学习目标</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#算法的基本概念"><span class="post-toc-number">2.</span> <span class="post-toc-text">算法的基本概念</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#算法的重要特性"><span class="post-toc-number">2.1.</span> <span class="post-toc-text">算法的重要特性</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#算法的基本内容"><span class="post-toc-number">2.2.</span> <span class="post-toc-text">算法的基本内容</span></a></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#算法分析"><span class="post-toc-number">3.</span> <span class="post-toc-text">算法分析</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#计算时间的渐进表示"><span class="post-toc-number">3.1.</span> <span class="post-toc-text">计算时间的渐进表示</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#常用的整数求和公式"><span class="post-toc-number">3.2.</span> <span class="post-toc-text">常用的整数求和公式</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#作时空性能分布图"><span class="post-toc-number">3.3.</span> <span class="post-toc-text">作时空性能分布图</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#关于噪声"><span class="post-toc-number">3.3.1.</span> <span class="post-toc-text">关于噪声</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#如何作出时间性能分布图"><span class="post-toc-number">3.3.2.</span> <span class="post-toc-text">如何作出时间性能分布图</span></a></li></ol></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#最优算法概述"><span class="post-toc-number">4.</span> <span class="post-toc-text">最优算法概述</span></a></li></ol>
+            </nav>
+            <div class="toc-bar"><div>
+        </aside>
+    
+</article>
+
+    <div id="reward" class="page-modal reward-lay">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <h3 class="reward-title">
+        <i class="icon icon-quote-left"></i>
+        感谢原作，你的打赏是我的动力！
+        <i class="icon icon-quote-right"></i>
+    </h3>
+    <div class="reward-content">
+        
+        <div class="reward-code">
+            <img id="rewardCode" src="/img/reward-wechat.jpg" alt="打赏二维码">
+        </div>
+        
+        <label class="reward-toggle">
+            <input id="rewardToggle" type="checkbox" class="reward-toggle-check"
+                data-wechat="/img/reward-wechat.jpg" data-alipay="/img/reward-alipay.jpg">
+            <div class="reward-toggle-ctrol">
+                <span class="reward-toggle-item wechat">微信</span>
+                <span class="reward-toggle-label"></span>
+                <span class="reward-toggle-item alipay">支付宝</span>
+            </div>
+        </label>
+        
+    </div>
+</div>
+
+    
+
+</div>
+
+    </main>
+    <footer class="footer ">
+    
+    <div class="top">
+        
+            <p>
+    <span>Links：</span>
+    
+    <span class="blogroll-item">
+        <a href="https://github.com/sivanWu0222" target="_blank">GitHub</a>
+    </span>
+    
+    <span class="blogroll-item">
+        <a href="http://weibo.com/Msingwen0222/home?wvr=5" target="_blank">新浪微博</a>
+    </span>
+    
+    <span class="blogroll-item">
+        <a href="https://www.linkedin.com/in/%E6%99%93%E6%96%87-%E5%90%B4-79057a121/" target="_blank">Linkedin</a>
+    </span>
+    
+    <span class="blogroll-item">
+        <a href="http://wpa.qq.com/msgrd?v=3&amp;uin=1666762170&amp;site=qq&amp;menu=yes" target="_blank">QQ</a>
+    </span>
+    
+    <span class="blogroll-item">
+        <a href="https://zh-cn.facebook.com/people/SiVan-Wu/100014408918389" target="_blank">Facebook</a>
+    </span>
+    
+    <span class="blogroll-item">
+        <a href="https://mail.qq.com/cgi-bin/qm_share?t=qm_mailme&amp;email=xfTz8-Py8-f08vWFtLTrpqqo" target="_blank">Contact</a>
+    </span>
+    
+    <span class="blogroll-item">
+        <a href="https://twitter.com/SiVan_Wu" target="_blank">Twitter</a>
+    </span>
+    
+</p>
+
+        
+    </div>
+    
+    <div class="bottom">
+        <p>
+            <span>
+                逸如风(yirufeng) &copy; 2016 - 2019
+            </span>
+
+           	
+           	<span>
+           		<a href="http://beian.miit.gov.cn/" target="_blank">已实名认证</a>
+           	</span>
+           	
+
+            
+
+            
+
+            
+                
+<span class="site-uv" title="总访客量">
+    <i class="icon icon-user"></i>
+    <i class="busuanzi-value" id="busuanzi_value_site_uv"></i>
+</span>
+
+
+<span class="site-pv" title="总访问量">
+    <i class="icon icon-eye"></i>
+    <i class="busuanzi-value" id="busuanzi_value_site_pv"></i>
+</span>
+
+            
+        </p>
+    </div>
+</footer>
+
+    <div class="mask" id="mask"></div>
+<a href="javascript:;" id="gotop" class="waves-effect waves-circle waves-light"><span class="icon icon-lg icon-chevron-up"></span></a>
+
+
+
+<div class="global-share" id="globalShare">
+    <ul class="reset share-icons">
+      
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://www.sivan.tech/2019/02/28/算法引论(算法分析与设计教程系列)/&title=《算法引论》 — yirufeng's Blog&pic=http://www.sivan.tech/img/1.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://www.sivan.tech/2019/02/28/算法引论(算法分析与设计教程系列)/&title=《算法引论》 — yirufeng's Blog&source=学习目标
+掌握与计算机算法相关的各个名词、术语的含义
+了解时间复杂度和空间复杂度的基本概念
+理解计算机算法的5个重要特征
+了解计算机算法涉及的5个基本内容..." data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http://www.sivan.tech/2019/02/28/算法引论(算法分析与设计教程系列)/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《算法引论》 — yirufeng's Blog&url=http://www.sivan.tech/2019/02/28/算法引论(算法分析与设计教程系列)/&via=http://www.sivan.tech" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=http://www.sivan.tech/2019/02/28/算法引论(算法分析与设计教程系列)/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+      
+    </ul>
+ </div>
+
+
+<div class="page-modal wx-share" id="wxShare">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAN4AAADeCAAAAAB3DOFrAAACw0lEQVR42u3a0W7bMAwF0P7/T3fAngYsdu8lrWQDjp+KOJF1VECUSX59xdf37+vq8z/vfl9cychX49zP4YELDw8PbzT1+2klgL8fn3x+/512EV8sAR4eHt4xXrJlJ5t1cjdf0PsljgIYHh4e3kd597/Kj7ybUISHh4f3f/Hy1MD+iNwuNx4eHt77ee0B936EfFHydMbxXAseHh5ezGsLYP/C3wfre3h4eHiLpEAbJNoC2FNp38vZ4uHh4R3gtQnZ2Ta9b0eYHdbx8PDwzvHaBO791p88pk0ctMW2H0bGw8PDW/BmjU3tY9qDchI2kkIaHh4e3gnerEVgVuBvS1Z5owAeHh7eO3mbFO1TW/xmKYssCB4eHt5DvD0+b4rKl2aTgKiTuXh4eHglL9m+86kkqYc2nOSjvVgCPDw8vAO82RG5bZxK2ghmcaxNcODh4eHtebOtvG0v2Be08kP2i7iHh4eH9yhvlmJ4qgy2+WYRQvDw8PAO8PaF/zYwJNNtC3J4eHh4n+K1gaEta7VH+RmgTubi4eHhxbzZETbZoDfNUptS2Q/1PTw8PLw1r21+mrVhtQFgn0q+zFXj4eHhrXmzV/pkIWYp3Rnvh5CAh4eHd5iXT24WGJJFaYPK5fh4eHh4h3mzB7eJ1zZVkScj8PDw8N7JO5eMaJOzyUm4KMjh4eHhHePtt+xn3/1nvQ8vRsbDw8M7wMtf72cH39nmPrs7/D/g4eHhlbw8lZBv6Emwyb+zafzCw8PDO81LrlmTVh5C2rvDbjI8PDy8BS+/koNsC96HkzxU4OHh4T3La8tgyfv+bHWTX7XhBA8PD+8cLwkGm8jTJnkfK8Xh4eHhfZTXTj3/pOXVZTA8PDy8j/KSqeelrHvMLMGxCgx4eHh4MW9Wmpodu2dtAXnaFw8PD+80ry2AtemATWIiPxsPmwbw8PDwOt4vLViSl4wNqw4AAAAASUVORK5CYII=" alt="微信分享二维码">
+</div>
+
+
+    
+    <!-- main-js -->
+<script type="text/javascript" src="//cdn.bootcss.com/jquery/2.1.0/jquery.min.js"></script>
+<script type="text/javascript" src="/js/plugins/fastclick.js?v=1.4.2"></script>
+<script type="text/javascript" src="/js/plugins/ios-orientationchange-fix.js?v=1.4.2"></script>
+<script type="text/javascript" src="//cdn.jsdelivr.net/gh/fancyapps/fancybox@3.5.2/dist/jquery.fancybox.min.js"></script>
+
+<script type="text/javascript" src="//cdn.bootcss.com/node-waves/0.7.4/waves.min.js"></script>
+
+<script type="text/javascript" src="/js/method.js?v=1.4.2"></script>
+<script type="text/javascript" src="/js/blog.js?v=1.4.2"></script>
+
+<!-- third-party -->
+
+
+    <script type="text/javascript">
+    (function() {
+
+        const origin = "algorithm-skill | AlgorithmAnalysisAndDesignTutorial"
+        let user, repo;
+        origin.replace(/(\S+)\s{0,1}\|\s{0,1}(\S+)/g, (...rest) => {
+            [user, repo] = [ rest[1], rest[2] ];
+        });
+        if (user && repo) {
+            const url = `//api.github.com/repos/${user}/${repo}?callback=?`;
+            $.getJSON(url, (data) => {
+                updateRepoInPage(data.data);
+            });
+        }
+
+        function updateRepoInPage(data) {
+            const {name, description, html_url: url, stargazers_count: stars, forks, owner: owner, updated_at: update} = data;
+            _loadAvatar(owner.avatar_url).then(avatarUrl => {
+                const avatarBg = `url(${avatarUrl})`;
+                const container = $('#repo');
+                container.click(() => {
+                    window.open(url);
+                });
+
+                //init
+                const loadingItem = container.find('.loading').hide();
+                const topItem = container.find('.top').addClass('active');
+                const bottomItem = container.find('.bottom').addClass('active');
+
+                //avatar
+                const avatarItem = container.find('.avatar');
+                const oldBg = avatarItem.css('background-image');
+                avatarItem.hover(() => {
+                    avatarItem.css('background-image', avatarBg);
+                }, () => {
+                    avatarItem.css('background-image', oldBg);
+                });
+
+                //repo-name
+                const nameItem = container.find('.name').html(name);
+
+                //description
+                const descriptionItem = container.find('.description').html(description);
+
+                //stars
+                const starItem = container.find('.star>.val').html(stars);
+
+                //forks
+                const forkItem = container.find('.fork>.val').html(forks);
+
+                //date
+                const formatDate = update.replace(/T.+/g, '');
+                const dateItem = container.find('.date>.val').html(formatDate);
+            });
+
+            function _loadAvatar(url) {
+                return new Promise((resolve, reject) => {
+                    const img = new Image();
+                    img.onload = () => {
+                        resolve(url);
+                    };
+                    img.src = url;
+                });
+            }
+
+        }
+
+    })();
+</script>
+
+
+
+
+
+<script type="text/javascript" src="/js/plugins/local_search.js?v=1.4.2"></script>
+<script type="text/javascript">
+	var search_path = "search.xml";
+	if (search_path.length === 0) {
+		search_path = "search.xml";
+	}
+	var path = "/" + search_path;
+	searchFunc(path, "local-search-input", "local-search-result");
+</script>
+
+
+
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+    
+    
+
+
+
+<script type="text/javascript" src="https://cdn1.lncld.net/static/js/av-core-mini-0.6.4.js"></script>
+<script type="text/javascript" src="/js/plugins/leancloud_visitors.js?v=1.4.2"></script>
+
+
+
+    <!-- mathjax config similar to math.stackexchange -->
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+        tex2jax: {
+            inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+            processEscapes: true,
+            skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+        }
+    });
+</script>
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for (i=0; i < all.length; i += 1) {
+            all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+    });
+</script>
+
+<script type="text/javascript" src="//cdn.bootcss.com/mathjax/2.7.1/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+
+
+
+    <script>
+    (function() {
+        var OriginTitile = document.title, titleTime;
+        document.addEventListener('visibilitychange', function() {
+            if (document.hidden) {
+                document.title = '死鬼去哪里了！';
+                clearTimeout(titleTime);
+            } else {
+                document.title = '(つェ⊂)咦!又好了!';
+                titleTime = setTimeout(function() {
+                    document.title = OriginTitile;
+                },2000);
+            }
+        });
+    })();
+</script>
+
+
+
+
+
+    
+</body>
+</html>

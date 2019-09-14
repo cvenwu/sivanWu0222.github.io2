@@ -1,0 +1,764 @@
+<!DOCTYPE html>
+<html>
+<head><meta name="generator" content="Hexo 3.9.0">
+    <meta charset="utf-8">
+    
+    
+    <title>数据类型注意事项 | yirufeng&#39;s Blog | 未来的小幸运 || 致正在努力的我们 ---- 逸如风</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    
+    <meta name="keywords" content="Java,数据类型">
+    <link rel="shortcut icon" href="/img/favicon.ico">
+    <link rel="stylesheet" href="//cdn.jsdelivr.net/gh/fancyapps/fancybox@3.5.2/dist/jquery.fancybox.min.css">
+    <link rel="stylesheet" href="/css/style.css?v=1.4.2">
+    
+    <script type="text/javascript">
+        // Data Center
+        var DC = {
+            reward:	true,
+            lv: JSON.parse('{"enable":true,"app_id":"K2RVtHi7RnmoN6dovlDKafn8-gzGzoHsz","app_key":"Qxmil0oqPFdDUyyIp2i1Xikt","icon":true}'),
+            v: JSON.parse('{"enable":false,"appid":"ACuOJIasBeRLiDe2iUApHj67-gzGzoHsz","appkey":"qbgg4tClrQQmvq8uwlpwA5mA","notify":true,"verify":true,"placeholder":"give me some sugers plz...","avatar":"wavatar"}'),
+            g: JSON.parse('{"enable":false,"lazy":true,"owner":"codefine","repo":"gitment","oauth":{"client_id":null,"client_secret":null},"perPage":10}'),
+            d: JSON.parse('{"app_id":null}')
+        };
+    </script>
+    <script type="text/javascript">
+        window.lazyScripts=[];
+    </script>
+    
+</head>
+
+
+<body>
+    <div id="loading" class="active"></div>
+
+    <aside id="menu" class="">
+  <div class="inner flex-row-vertical">
+    <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menu-off">
+        <i class="icon icon-lg icon-close"></i>
+    </a>
+    <div class="brand-wrap">
+      
+      <img src="/img/brand.jpg" class="brand-bg">
+      
+      <div class="brand">
+        <a href="/" class="avatar waves-effect waves-circle waves-light">
+          <img src="/img/1.jpg">
+        </a>
+        <hgroup class="introduce">
+          <h5 class="nickname">逸如风(yirufeng)</h5>
+          <a href="mailto:yirufeng@foxmail.com" title="yirufeng@foxmail.com" class="mail">
+            
+              <span>y</span>
+            
+              <span>i</span>
+            
+              <span>r</span>
+            
+              <span>u</span>
+            
+              <span>f</span>
+            
+              <span>e</span>
+            
+              <span>n</span>
+            
+              <span>g</span>
+            
+              <span>@</span>
+            
+              <span>f</span>
+            
+              <span>o</span>
+            
+              <span>x</span>
+            
+              <span>m</span>
+            
+              <span>a</span>
+            
+              <span>i</span>
+            
+              <span>l</span>
+            
+              <span>.</span>
+            
+              <span>c</span>
+            
+              <span>o</span>
+            
+              <span>m</span>
+            
+          </a>
+        </hgroup>
+        
+        <ul class="menu-link">
+          
+              <li>
+                <a href="https://github.com/sivanWu0222" target="_blank">
+                  <i class="icon icon-lg icon-github"></i>
+                </a>
+              </li>
+            
+              <li>
+                <a href="https://mail.qq.com/cgi-bin/qm_share?t=qm_mailme&amp;amp;email=xfTz8-Py8-f08vWFtLTrpqqo" target="_blank">
+                  <i class="icon icon-lg icon-envelope"></i>
+                </a>
+              </li>
+            
+        </ul>
+        
+      </div>
+    </div>
+    <div class="scroll-wrap flex-col">
+      <ul class="nav">
+        
+            <li class="">
+              <a href="/"  >
+                <i class="icon icon-lg icon-home"></i>
+                Home
+              </a>
+            </li>
+        
+            <li class="">
+              <a href="/categories"  >
+                <i class="icon icon-lg icon-th-list"></i>
+                Category
+              </a>
+            </li>
+        
+            <li class="">
+              <a href="/research"  >
+                <i class="icon icon-lg icon-mortar-board"></i>
+                Research
+              </a>
+            </li>
+        
+            <li class="">
+              <a href="/tags"  >
+                <i class="icon icon-lg icon-tags"></i>
+                Tag
+              </a>
+            </li>
+        
+            <li class="">
+              <a href="/archives"  >
+                <i class="icon icon-lg icon-archives"></i>
+                Archive
+              </a>
+            </li>
+        
+            <li class="">
+              <a href="/about"  >
+                <i class="icon icon-lg icon-user"></i>
+                About
+              </a>
+            </li>
+        
+            <li class="">
+              <a href="/open-source"  >
+                <i class="icon icon-lg icon-github"></i>
+                Project
+              </a>
+            </li>
+        
+            <li class="">
+              <a href="/demo"  >
+                <i class="icon icon-lg icon-audio-description"></i>
+                Demo
+              </a>
+            </li>
+        
+            <li class="">
+              <a href="/wechat-number"  >
+                <i class="icon icon-lg icon-wechat"></i>
+                公众号
+              </a>
+            </li>
+        
+            <li class="">
+              <a href="http://www.sivan.tech/LeetCodeAlgo/" target="_blank" >
+                <i class="icon icon-lg icon-braille"></i>
+                Leetcode
+              </a>
+            </li>
+        
+            <li class="">
+              <a href="http://resume.sivan.tech/" target="_blank" >
+                <i class="icon icon-lg icon-file-pdf-o"></i>
+                Resume
+              </a>
+            </li>
+        
+      </ul>
+    </div>
+  </div>
+</aside>
+
+    <main id="main">
+        <header class="top-header" id="header">
+    <div class="flex-row clearfix">
+        <a href="javascript:;" class="header-icon pull-left waves-effect waves-circle waves-light on" id="menu-toggle">
+          <i class="icon icon-lg icon-navicon"></i>
+        </a>
+        <div class="flex-col header-title ellipsis">
+            <span>数据类型注意事项</span>
+            
+        </div>
+        
+        <a href="javascript:;" id="site_search_btn" class="header-icon pull-right waves-effect waves-circle waves-light">
+            <i class="icon icon-lg icon-search"></i>
+        </a>
+        
+    </div>
+</header>
+<header class="content-header post-header">
+    <img src="/img/s3.jpg" class="header-bg">
+    <div class="container fade-scale">
+        <h1 class="title">数据类型注意事项</h1>
+        <h5 class="subtitle">
+            
+                <time datetime="2016-12-22T02:56:59.000Z" itemprop="datePublished" class="page-time">
+  2016-12-22
+</time>
+
+
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/Java/">Java</a><ul class="article-category-list-child"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/Java/基础/">基础</a></li></ul></li></ul>
+
+            
+        </h5>
+        
+    </div>
+    
+
+</header>
+
+<div id="site_search">
+    <div class="search-title clearfix">
+        <span class="pull-left">
+          <i class="icon icon-lg icon-search"></i>
+        </span>
+        <input type="text" id="local-search-input" name="q" results="0" placeholder="search my blog..." class="form-control pull-left"/>
+        <a href="javascript:;" class="close pull-right waves-effect waves-circle waves-light">
+          <i class="icon icon-lg icon-close"></i>
+        </a>
+    </div>
+    <div id="local-search-result"></div>
+</div>
+
+
+<div class="container body-wrap">
+    <article id="post-数据类型注意事项"
+  class="post-article article-type-post" itemprop="blogPost">
+    <div class="post-card">
+        <h1 class="post-card-title">数据类型注意事项</h1>
+        <div class="post-meta">
+            <time class="post-time" title="2016-12-22 10:56:59" datetime="2016-12-22T02:56:59.000Z"  itemprop="datePublished">2016-12-22</time>
+
+            
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/Java/">Java</a><ul class="article-category-list-child"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/Java/基础/">基础</a></li></ul></li></ul>
+
+
+
+            
+	<span id="/2016/12/22/数据类型注意事项/" class="leancloud_visitors" data-flag-title="数据类型注意事项" title="数据类型注意事项">
+		
+			<i class="icon icon-eye"></i>
+		
+		<span class="leancloud-visitors-count"></span>
+	</span>
+ 
+
+            
+
+
+            
+        </div>
+        <div class="post-content" id="post-content" itemprop="postContent">
+            
+            <h2 id="例题1："><a href="#例题1：" class="headerlink" title="例题1："></a>例题1：</h2><blockquote>
+<p>给出如下一段代码，判断会输出什么</p>
+</blockquote>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Second</span> </span>&#123;</span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span></span></span><br><span class="line"><span class="function">	</span>&#123;</span><br><span class="line"></span><br><span class="line">		<span class="keyword">byte</span> a = <span class="number">1</span>;</span><br><span class="line">		<span class="keyword">byte</span> b = <span class="number">1</span>;</span><br><span class="line">		<span class="keyword">byte</span> c = a + b;                     <span class="comment">/*1*/</span></span><br><span class="line">		<span class="keyword">byte</span> d = (<span class="keyword">byte</span>)a + (<span class="keyword">byte</span>)b;         <span class="comment">/*2*/</span></span><br><span class="line">		System.out.println(c);</span><br><span class="line">		System.out.println(d);</span><br><span class="line"></span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="结果："><a href="#结果：" class="headerlink" title="结果："></a>结果：</h3><blockquote>
+<p>其实，这里什么都不会输出，并且会报错</p>
+</blockquote>
+<h3 id="原因分析："><a href="#原因分析：" class="headerlink" title="原因分析："></a>原因分析：</h3><blockquote>
+<p>这里有一条规律，JAVA中 int以及int以下的类型进行运算，结果是int类型，这个程序中，注释标为1和2的地方都是byte类型经过加法运算，所以最终结果是int类型，而且int转byte是不可以自动转换的，需要进行强制转换</p>
+</blockquote>
+<h3 id="总结一下："><a href="#总结一下：" class="headerlink" title="总结一下："></a>总结一下：</h3><ol>
+<li>int及int以下的类型，经过运算结果仍为intl类型</li>
+<li>JAVA是一种强类型语言，大类型转小类型强转，小转大自动转</li>
+</ol>
+<a id="more"></a>
+<hr>
+<h2 id="例题2："><a href="#例题2：" class="headerlink" title="例题2："></a>例题2：</h2><blockquote>
+<p>给出如下一段代码，判断会输出什么</p>
+</blockquote>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Test</span></span>&#123;</span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span></span></span><br><span class="line"><span class="function">	</span>&#123;</span><br><span class="line">		<span class="keyword">short</span> s = <span class="number">10</span>;</span><br><span class="line">		<span class="keyword">short</span> s2 = <span class="number">20</span>;</span><br><span class="line">		<span class="keyword">char</span> ch = s + s2;</span><br><span class="line">		System.out.println(ch);</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="结果：-1"><a href="#结果：-1" class="headerlink" title="结果："></a>结果：</h3><blockquote>
+<p>这里会报错</p>
+</blockquote>
+<h3 id="原因分析：-1"><a href="#原因分析：-1" class="headerlink" title="原因分析："></a>原因分析：</h3><blockquote>
+<p>首先要明确，int 与 char[^footnote]：是无法转换的，而且char类型取值范围与int无大小之分，因此这里会报错</p>
+</blockquote>
+<h3 id="总结一下：-1"><a href="#总结一下：-1" class="headerlink" title="总结一下："></a>总结一下：</h3><ul>
+<li>没有大小之分的数据类型，通过转换，精度出现损失的时候，需要进行强转</li>
+<li>char的取值范围从0开始，而其他6个基本数值型则从负数开始</li>
+</ul>
+<hr>
+<h2 id="例题3："><a href="#例题3：" class="headerlink" title="例题3："></a>例题3：</h2><blockquote>
+<p>给出如下一段代码，判断会输出什么</p>
+</blockquote>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Second</span> </span>&#123;</span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span></span></span><br><span class="line"><span class="function">	</span>&#123;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">		<span class="keyword">byte</span> b  = <span class="number">10</span>;</span><br><span class="line">		<span class="keyword">short</span> s = b;</span><br><span class="line">		System.out.println(s);</span><br><span class="line"></span><br><span class="line">		<span class="keyword">byte</span> b2 = s;</span><br><span class="line">		System.out.println(b2);</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="结果：-2"><a href="#结果：-2" class="headerlink" title="结果："></a>结果：</h3><blockquote>
+<p>依然会报错</p>
+</blockquote>
+<h3 id="原因分析：-2"><a href="#原因分析：-2" class="headerlink" title="原因分析："></a>原因分析：</h3><blockquote>
+<p>short类型转换为byte需要进行强制转换，因为会有精度损失</p>
+</blockquote>
+<hr>
+<h2 id="例题4："><a href="#例题4：" class="headerlink" title="例题4："></a>例题4：</h2><blockquote>
+<p>给出如下一段代码，判断会输出什么</p>
+</blockquote>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Second</span> </span>&#123;</span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span></span></span><br><span class="line"><span class="function">	</span>&#123;</span><br><span class="line">		<span class="keyword">byte</span> b = -<span class="number">10</span>;</span><br><span class="line">		<span class="keyword">char</span> ch = b;</span><br><span class="line">		System.out.println(ch);</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="结果：-3"><a href="#结果：-3" class="headerlink" title="结果："></a>结果：</h3><blockquote>
+<p>报错</p>
+</blockquote>
+<h3 id="原因："><a href="#原因：" class="headerlink" title="原因："></a>原因：</h3><blockquote>
+<p>byte与char无大小之分，需要进行强转</p>
+</blockquote>
+<hr>
+<h2 id="例题5"><a href="#例题5" class="headerlink" title="例题5"></a>例题5</h2><blockquote>
+<p>给出如下一段代码，判断会输出什么</p>
+</blockquote>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Second</span> </span>&#123;</span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span></span></span><br><span class="line"><span class="function">	</span>&#123;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">		<span class="keyword">short</span> s = <span class="number">10</span>;</span><br><span class="line">		<span class="keyword">char</span> ch = (<span class="keyword">char</span>)s;</span><br><span class="line">		System.out.println(ch + <span class="number">1</span> - <span class="number">1</span> );</span><br><span class="line"></span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="结果：-4"><a href="#结果：-4" class="headerlink" title="结果："></a>结果：</h3><blockquote>
+<p>程序可以正常运行，因为自己在写的时候特意加上了<strong>（char）</strong></p>
+</blockquote>
+<h3 id="原因分析：-3"><a href="#原因分析：-3" class="headerlink" title="原因分析："></a>原因分析：</h3><blockquote>
+<p>因为short 类型是有符号的，而char类型是无符号的，因此尽管char类型与short类型字节数相同，但是在这里还是不能进行强转的</p>
+</blockquote>
+<p>问题来了：<strong>为什么输出的时候ch + 1 - 1就会输出一个数字呢</strong>（直接用ch输出看不到效果，因为输出的是字符）</p>
+<hr>
+<h2 id="例题6"><a href="#例题6" class="headerlink" title="例题6"></a>例题6</h2><blockquote>
+<p>给出如下一段代码，判断会输出什么</p>
+</blockquote>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Second</span></span></span><br><span class="line">	public static void main(String[] args)</span><br><span class="line">	&#123;</span><br><span class="line">		<span class="keyword">long</span> l = <span class="number">100</span>;</span><br><span class="line">		<span class="keyword">float</span> f = l;</span><br><span class="line">		System.out.println(f);</span><br><span class="line"></span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="结果：-5"><a href="#结果：-5" class="headerlink" title="结果："></a>结果：</h3><blockquote>
+<p>正常输出 100.0</p>
+</blockquote>
+<h3 id="原因分析：-4"><a href="#原因分析：-4" class="headerlink" title="原因分析："></a>原因分析：</h3><blockquote>
+<p>JAVA数据类型中，虽然long比float的字节数多，但是他们表示的方法不同，long采用的是二进制，而float采用的是科学计数法，因此float虽然字节数少，但是范围较long还要大些</p>
+</blockquote>
+<hr>
+<h2 id="例题7"><a href="#例题7" class="headerlink" title="例题7"></a>例题7</h2><blockquote>
+<p>给出如下一段代码，判断会输出什么</p>
+</blockquote>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Second</span> </span>&#123;</span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span></span></span><br><span class="line"><span class="function">	</span>&#123;</span><br><span class="line">		<span class="keyword">float</span> f = <span class="number">10.0f</span>/<span class="number">0</span>;</span><br><span class="line">		System.out.println(f);</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="结果：-6"><a href="#结果：-6" class="headerlink" title="结果："></a>结果：</h3><blockquote>
+<p>infinity</p>
+</blockquote>
+<h3 id="原因：-1"><a href="#原因：-1" class="headerlink" title="原因："></a>原因：</h3><blockquote>
+<p>这里进行计算的时候，将0转换成0.0，因此结果是Infinity</p>
+</blockquote>
+<hr>
+<h2 id="例题8"><a href="#例题8" class="headerlink" title="例题8"></a>例题8</h2><blockquote>
+<p>给出如下一段代码，判断会输出什么</p>
+</blockquote>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Second</span> </span>&#123;</span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span></span></span><br><span class="line"><span class="function">	</span>&#123;</span><br><span class="line">		<span class="keyword">long</span> a  = <span class="number">10</span>;</span><br><span class="line">		<span class="keyword">int</span> b = <span class="number">20</span>;</span><br><span class="line">		<span class="keyword">int</span> c = a + b;</span><br><span class="line">		System.out.println(c);</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="结果：-7"><a href="#结果：-7" class="headerlink" title="结果："></a>结果：</h3><blockquote>
+<p>报错</p>
+</blockquote>
+<h3 id="原因分析：-5"><a href="#原因分析：-5" class="headerlink" title="原因分析："></a>原因分析：</h3><blockquote>
+<p>int 与 int以上的类型进行运算，结果仍为大类型</p>
+</blockquote>
+<hr>
+<p>总结：关于数据类型的注意事项，上面一些题目，都需要注意</p>
+
+        </div>
+        
+<blockquote class="post-copyright">
+    <div class="content">
+        
+<span class="post-time">
+    最后更新时间：<time datetime="2019-08-26T10:46:59.874Z" itemprop="dateUpdated">2019-08-26 18:46:59</time>
+</span><br>
+
+
+        
+        转载注明出处，原文地址：<a href="/2016/12/22/数据类型注意事项/" target="_blank" rel="external">http://www.sivan.tech/2016/12/22/数据类型注意事项/</a>
+        
+    </div>
+    <footer>
+        <a href="http://www.sivan.tech">
+            <img src="/img/1.jpg" alt="逸如风(yirufeng)">
+            逸如风(yirufeng)
+        </a>
+    </footer>
+</blockquote>
+
+        
+            <div class="page-reward">
+    <a id="rewardBtn" href="javascript:;" class="page-reward-btn waves-effect waves-circle waves-light">赏</a>
+</div>
+
+            
+        
+        <div class="post-footer">
+            
+	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Java/">Java</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/数据类型/">数据类型</a></li></ul>
+
+            <div class="page-share-wrap">
+    
+
+<div class="page-share" id="pageShare">
+    <ul class="reset share-icons">
+      
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://www.sivan.tech/2016/12/22/数据类型注意事项/&title=《数据类型注意事项》 — yirufeng's Blog&pic=http://www.sivan.tech/img/1.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://www.sivan.tech/2016/12/22/数据类型注意事项/&title=《数据类型注意事项》 — yirufeng's Blog&source=例题1：
+给出如下一段代码，判断会输出什么
+
+12345678910111213public class Second &#123;	public sta..." data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http://www.sivan.tech/2016/12/22/数据类型注意事项/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《数据类型注意事项》 — yirufeng's Blog&url=http://www.sivan.tech/2016/12/22/数据类型注意事项/&via=http://www.sivan.tech" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=http://www.sivan.tech/2016/12/22/数据类型注意事项/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+      
+    </ul>
+ </div>
+
+
+
+    <a href="javascript:;" id="shareFab" class="page-share-fab waves-effect waves-circle">
+        <i class="icon icon-share-alt icon-lg"></i>
+    </a>
+</div>
+
+        </div>
+        
+            
+
+
+        
+    </div>
+    
+<nav class="post-nav flex-row flex-justify-between">
+  
+    <div class="prev">
+      <a href="/2016/12/22/Java-怪题-1/" id="post-prev" class="post-nav-link">
+        <div class="tips"><i class="icon icon-angle-left icon-lg icon-pr"></i> Prev</div>
+        <h4 class="title">[Java]-怪题-1</h4>
+      </a>
+    </div>
+  
+
+  
+    <div class="next">
+      <a href="/2016/12/17/Java-4/" id="post-next" class="post-nav-link">
+        <div class="tips">Next <i class="icon icon-angle-right icon-lg icon-pl"></i></div>
+        <h4 class="title">[Java]-4</h4>
+      </a>
+    </div>
+  
+</nav>
+
+
+    
+    
+        <aside class="post-widget">
+            <nav class="post-toc-wrap" id="post-toc">
+                <strong>目录</strong>
+                <ol class="post-toc"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#例题1："><span class="post-toc-number">1.</span> <span class="post-toc-text">例题1：</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#结果："><span class="post-toc-number">1.1.</span> <span class="post-toc-text">结果：</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#原因分析："><span class="post-toc-number">1.2.</span> <span class="post-toc-text">原因分析：</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#总结一下："><span class="post-toc-number">1.3.</span> <span class="post-toc-text">总结一下：</span></a></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#例题2："><span class="post-toc-number">2.</span> <span class="post-toc-text">例题2：</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#结果：-1"><span class="post-toc-number">2.1.</span> <span class="post-toc-text">结果：</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#原因分析：-1"><span class="post-toc-number">2.2.</span> <span class="post-toc-text">原因分析：</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#总结一下：-1"><span class="post-toc-number">2.3.</span> <span class="post-toc-text">总结一下：</span></a></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#例题3："><span class="post-toc-number">3.</span> <span class="post-toc-text">例题3：</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#结果：-2"><span class="post-toc-number">3.1.</span> <span class="post-toc-text">结果：</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#原因分析：-2"><span class="post-toc-number">3.2.</span> <span class="post-toc-text">原因分析：</span></a></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#例题4："><span class="post-toc-number">4.</span> <span class="post-toc-text">例题4：</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#结果：-3"><span class="post-toc-number">4.1.</span> <span class="post-toc-text">结果：</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#原因："><span class="post-toc-number">4.2.</span> <span class="post-toc-text">原因：</span></a></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#例题5"><span class="post-toc-number">5.</span> <span class="post-toc-text">例题5</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#结果：-4"><span class="post-toc-number">5.1.</span> <span class="post-toc-text">结果：</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#原因分析：-3"><span class="post-toc-number">5.2.</span> <span class="post-toc-text">原因分析：</span></a></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#例题6"><span class="post-toc-number">6.</span> <span class="post-toc-text">例题6</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#结果：-5"><span class="post-toc-number">6.1.</span> <span class="post-toc-text">结果：</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#原因分析：-4"><span class="post-toc-number">6.2.</span> <span class="post-toc-text">原因分析：</span></a></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#例题7"><span class="post-toc-number">7.</span> <span class="post-toc-text">例题7</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#结果：-6"><span class="post-toc-number">7.1.</span> <span class="post-toc-text">结果：</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#原因：-1"><span class="post-toc-number">7.2.</span> <span class="post-toc-text">原因：</span></a></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#例题8"><span class="post-toc-number">8.</span> <span class="post-toc-text">例题8</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#结果：-7"><span class="post-toc-number">8.1.</span> <span class="post-toc-text">结果：</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#原因分析：-5"><span class="post-toc-number">8.2.</span> <span class="post-toc-text">原因分析：</span></a></li></ol></li></ol>
+            </nav>
+            <div class="toc-bar"><div>
+        </aside>
+    
+</article>
+
+    <div id="reward" class="page-modal reward-lay">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <h3 class="reward-title">
+        <i class="icon icon-quote-left"></i>
+        感谢原作，你的打赏是我的动力！
+        <i class="icon icon-quote-right"></i>
+    </h3>
+    <div class="reward-content">
+        
+        <div class="reward-code">
+            <img id="rewardCode" src="/img/reward-wechat.jpg" alt="打赏二维码">
+        </div>
+        
+        <label class="reward-toggle">
+            <input id="rewardToggle" type="checkbox" class="reward-toggle-check"
+                data-wechat="/img/reward-wechat.jpg" data-alipay="/img/reward-alipay.jpg">
+            <div class="reward-toggle-ctrol">
+                <span class="reward-toggle-item wechat">微信</span>
+                <span class="reward-toggle-label"></span>
+                <span class="reward-toggle-item alipay">支付宝</span>
+            </div>
+        </label>
+        
+    </div>
+</div>
+
+    
+
+</div>
+
+    </main>
+    <footer class="footer ">
+    
+    <div class="top">
+        
+            <p>
+    <span>Links：</span>
+    
+    <span class="blogroll-item">
+        <a href="https://github.com/sivanWu0222" target="_blank">GitHub</a>
+    </span>
+    
+    <span class="blogroll-item">
+        <a href="http://weibo.com/Msingwen0222/home?wvr=5" target="_blank">新浪微博</a>
+    </span>
+    
+    <span class="blogroll-item">
+        <a href="https://www.linkedin.com/in/%E6%99%93%E6%96%87-%E5%90%B4-79057a121/" target="_blank">Linkedin</a>
+    </span>
+    
+    <span class="blogroll-item">
+        <a href="http://wpa.qq.com/msgrd?v=3&amp;uin=1666762170&amp;site=qq&amp;menu=yes" target="_blank">QQ</a>
+    </span>
+    
+    <span class="blogroll-item">
+        <a href="https://zh-cn.facebook.com/people/SiVan-Wu/100014408918389" target="_blank">Facebook</a>
+    </span>
+    
+    <span class="blogroll-item">
+        <a href="https://mail.qq.com/cgi-bin/qm_share?t=qm_mailme&amp;email=xfTz8-Py8-f08vWFtLTrpqqo" target="_blank">Contact</a>
+    </span>
+    
+    <span class="blogroll-item">
+        <a href="https://twitter.com/SiVan_Wu" target="_blank">Twitter</a>
+    </span>
+    
+</p>
+
+        
+    </div>
+    
+    <div class="bottom">
+        <p>
+            <span>
+                逸如风(yirufeng) &copy; 2016 - 2019
+            </span>
+
+           	
+           	<span>
+           		<a href="http://beian.miit.gov.cn/" target="_blank">已实名认证</a>
+           	</span>
+           	
+
+            
+
+            
+
+            
+                
+<span class="site-uv" title="总访客量">
+    <i class="icon icon-user"></i>
+    <i class="busuanzi-value" id="busuanzi_value_site_uv"></i>
+</span>
+
+
+<span class="site-pv" title="总访问量">
+    <i class="icon icon-eye"></i>
+    <i class="busuanzi-value" id="busuanzi_value_site_pv"></i>
+</span>
+
+            
+        </p>
+    </div>
+</footer>
+
+    <div class="mask" id="mask"></div>
+<a href="javascript:;" id="gotop" class="waves-effect waves-circle waves-light"><span class="icon icon-lg icon-chevron-up"></span></a>
+
+
+
+<div class="global-share" id="globalShare">
+    <ul class="reset share-icons">
+      
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://www.sivan.tech/2016/12/22/数据类型注意事项/&title=《数据类型注意事项》 — yirufeng's Blog&pic=http://www.sivan.tech/img/1.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://www.sivan.tech/2016/12/22/数据类型注意事项/&title=《数据类型注意事项》 — yirufeng's Blog&source=例题1：
+给出如下一段代码，判断会输出什么
+
+12345678910111213public class Second &#123;	public sta..." data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http://www.sivan.tech/2016/12/22/数据类型注意事项/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《数据类型注意事项》 — yirufeng's Blog&url=http://www.sivan.tech/2016/12/22/数据类型注意事项/&via=http://www.sivan.tech" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=http://www.sivan.tech/2016/12/22/数据类型注意事项/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+      
+    </ul>
+ </div>
+
+
+<div class="page-modal wx-share" id="wxShare">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAMYAAADGCAAAAACs8KCBAAACNElEQVR42u3aQXLDIBBEUd//0srWi4j8buS4gM8qpcISj8WEmeH1wuN6G+9PxjPJHPL8sSFDhoxlGddwjBc3/uR4od13b6kyZMg4gDFeBJlDAi7Zju67MmTIkDF/EOyey5AhQ0b3On4c5G/+QsCVIUPGggySTM6UxsZLJzMfy8VlyJCxIKNbxP/8/ZH+hgwZMpZiXOEghTby/i683r5NhgwZWzN4gOMHMpLiduW5P9YjQ4aMrRnjstf4eVdE4+U5Hu5lyJCxN2Mm8KVBeZy4kq2JI70MGTI2Ysxc4UoX0f2q3EUZMmQszkgvPaQFta6UFifJMmTIOIaRJpY8OKaLK1uYMmTI2JqRBtbPBdD0QtgvnVgZMmRsx+DBlwdT3hJIGwBom2TIkLEdIy2xpQF35izHGwwyZMjYm8GLbjyxDI5xE2mwDBkyzmHMLzr9ZNrIRI0KGTJkHMDoyvr8wgQ//PH7trcnXBkyZBzJ6Epy3eUMHrLjgCtDhoxlGWnhjBTdusZnes3iNheXIUPGAYxnD3b8bQ+c8WTIkHEMY75YRspkBE/+GZRZtQwZMpZl8OZiF6B5EstbpDJkyDiBcYUjTVzTmd11DRkyZOzN6MJcWj7rgnUa9GXIkLE3gwfZrp2QNhXIGuL+hgwZMrZg8CSWJ6XpcXAm9MuQIUMGYTyVHnctBBkyZMiYKXXxtgFvBjwccGXIkLEIIy2cpeU2vllkvgwZMk5jpEGTF9c+fYFDhgwZBzB+AKiGvCq0e1nEAAAAAElFTkSuQmCC" alt="微信分享二维码">
+</div>
+
+
+    
+    <!-- main-js -->
+<script type="text/javascript" src="//cdn.bootcss.com/jquery/2.1.0/jquery.min.js"></script>
+<script type="text/javascript" src="/js/plugins/fastclick.js?v=1.4.2"></script>
+<script type="text/javascript" src="/js/plugins/ios-orientationchange-fix.js?v=1.4.2"></script>
+<script type="text/javascript" src="//cdn.jsdelivr.net/gh/fancyapps/fancybox@3.5.2/dist/jquery.fancybox.min.js"></script>
+
+<script type="text/javascript" src="//cdn.bootcss.com/node-waves/0.7.4/waves.min.js"></script>
+
+<script type="text/javascript" src="/js/method.js?v=1.4.2"></script>
+<script type="text/javascript" src="/js/blog.js?v=1.4.2"></script>
+
+<!-- third-party -->
+
+
+
+
+
+
+<script type="text/javascript" src="/js/plugins/local_search.js?v=1.4.2"></script>
+<script type="text/javascript">
+	var search_path = "search.xml";
+	if (search_path.length === 0) {
+		search_path = "search.xml";
+	}
+	var path = "/" + search_path;
+	searchFunc(path, "local-search-input", "local-search-result");
+</script>
+
+
+
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+    
+    
+
+
+
+<script type="text/javascript" src="https://cdn1.lncld.net/static/js/av-core-mini-0.6.4.js"></script>
+<script type="text/javascript" src="/js/plugins/leancloud_visitors.js?v=1.4.2"></script>
+
+
+
+    <!-- mathjax config similar to math.stackexchange -->
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+        tex2jax: {
+            inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+            processEscapes: true,
+            skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+        }
+    });
+</script>
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for (i=0; i < all.length; i += 1) {
+            all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+    });
+</script>
+
+<script type="text/javascript" src="//cdn.bootcss.com/mathjax/2.7.1/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+
+
+
+    <script>
+    (function() {
+        var OriginTitile = document.title, titleTime;
+        document.addEventListener('visibilitychange', function() {
+            if (document.hidden) {
+                document.title = '死鬼去哪里了！';
+                clearTimeout(titleTime);
+            } else {
+                document.title = '(つェ⊂)咦!又好了!';
+                titleTime = setTimeout(function() {
+                    document.title = OriginTitile;
+                },2000);
+            }
+        });
+    })();
+</script>
+
+
+
+
+
+    
+</body>
+</html>

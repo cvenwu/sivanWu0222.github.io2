@@ -1,0 +1,695 @@
+<!DOCTYPE html>
+<html>
+<head><meta name="generator" content="Hexo 3.9.0">
+    <meta charset="utf-8">
+    
+    
+    <title>解决MySql 8小时自动关闭的问题 | yirufeng&#39;s Blog | 未来的小幸运 || 致正在努力的我们 ---- 逸如风</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    
+    <meta name="keywords" content="Hibernate,MySql">
+    <link rel="shortcut icon" href="/img/favicon.ico">
+    <link rel="stylesheet" href="//cdn.jsdelivr.net/gh/fancyapps/fancybox@3.5.2/dist/jquery.fancybox.min.css">
+    <link rel="stylesheet" href="/css/style.css?v=1.4.2">
+    
+    <script type="text/javascript">
+        // Data Center
+        var DC = {
+            reward:	true,
+            lv: JSON.parse('{"enable":true,"app_id":"K2RVtHi7RnmoN6dovlDKafn8-gzGzoHsz","app_key":"Qxmil0oqPFdDUyyIp2i1Xikt","icon":true}'),
+            v: JSON.parse('{"enable":false,"appid":"ACuOJIasBeRLiDe2iUApHj67-gzGzoHsz","appkey":"qbgg4tClrQQmvq8uwlpwA5mA","notify":true,"verify":true,"placeholder":"give me some sugers plz...","avatar":"wavatar"}'),
+            g: JSON.parse('{"enable":false,"lazy":true,"owner":"codefine","repo":"gitment","oauth":{"client_id":null,"client_secret":null},"perPage":10}'),
+            d: JSON.parse('{"app_id":null}')
+        };
+    </script>
+    <script type="text/javascript">
+        window.lazyScripts=[];
+    </script>
+    
+</head>
+
+
+<body>
+    <div id="loading" class="active"></div>
+
+    <aside id="menu" class="">
+  <div class="inner flex-row-vertical">
+    <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menu-off">
+        <i class="icon icon-lg icon-close"></i>
+    </a>
+    <div class="brand-wrap">
+      
+      <img src="/img/brand.jpg" class="brand-bg">
+      
+      <div class="brand">
+        <a href="/" class="avatar waves-effect waves-circle waves-light">
+          <img src="/img/1.jpg">
+        </a>
+        <hgroup class="introduce">
+          <h5 class="nickname">逸如风(yirufeng)</h5>
+          <a href="mailto:yirufeng@foxmail.com" title="yirufeng@foxmail.com" class="mail">
+            
+              <span>y</span>
+            
+              <span>i</span>
+            
+              <span>r</span>
+            
+              <span>u</span>
+            
+              <span>f</span>
+            
+              <span>e</span>
+            
+              <span>n</span>
+            
+              <span>g</span>
+            
+              <span>@</span>
+            
+              <span>f</span>
+            
+              <span>o</span>
+            
+              <span>x</span>
+            
+              <span>m</span>
+            
+              <span>a</span>
+            
+              <span>i</span>
+            
+              <span>l</span>
+            
+              <span>.</span>
+            
+              <span>c</span>
+            
+              <span>o</span>
+            
+              <span>m</span>
+            
+          </a>
+        </hgroup>
+        
+        <ul class="menu-link">
+          
+              <li>
+                <a href="https://github.com/sivanWu0222" target="_blank">
+                  <i class="icon icon-lg icon-github"></i>
+                </a>
+              </li>
+            
+              <li>
+                <a href="https://mail.qq.com/cgi-bin/qm_share?t=qm_mailme&amp;amp;email=xfTz8-Py8-f08vWFtLTrpqqo" target="_blank">
+                  <i class="icon icon-lg icon-envelope"></i>
+                </a>
+              </li>
+            
+        </ul>
+        
+      </div>
+    </div>
+    <div class="scroll-wrap flex-col">
+      <ul class="nav">
+        
+            <li class="">
+              <a href="/"  >
+                <i class="icon icon-lg icon-home"></i>
+                Home
+              </a>
+            </li>
+        
+            <li class="">
+              <a href="/categories"  >
+                <i class="icon icon-lg icon-th-list"></i>
+                Category
+              </a>
+            </li>
+        
+            <li class="">
+              <a href="/research"  >
+                <i class="icon icon-lg icon-mortar-board"></i>
+                Research
+              </a>
+            </li>
+        
+            <li class="">
+              <a href="/tags"  >
+                <i class="icon icon-lg icon-tags"></i>
+                Tag
+              </a>
+            </li>
+        
+            <li class="">
+              <a href="/archives"  >
+                <i class="icon icon-lg icon-archives"></i>
+                Archive
+              </a>
+            </li>
+        
+            <li class="">
+              <a href="/about"  >
+                <i class="icon icon-lg icon-user"></i>
+                About
+              </a>
+            </li>
+        
+            <li class="">
+              <a href="/open-source"  >
+                <i class="icon icon-lg icon-github"></i>
+                Project
+              </a>
+            </li>
+        
+            <li class="">
+              <a href="/demo"  >
+                <i class="icon icon-lg icon-audio-description"></i>
+                Demo
+              </a>
+            </li>
+        
+            <li class="">
+              <a href="/wechat-number"  >
+                <i class="icon icon-lg icon-wechat"></i>
+                公众号
+              </a>
+            </li>
+        
+            <li class="">
+              <a href="http://www.sivan.tech/LeetCodeAlgo/" target="_blank" >
+                <i class="icon icon-lg icon-braille"></i>
+                Leetcode
+              </a>
+            </li>
+        
+            <li class="">
+              <a href="http://resume.sivan.tech/" target="_blank" >
+                <i class="icon icon-lg icon-file-pdf-o"></i>
+                Resume
+              </a>
+            </li>
+        
+      </ul>
+    </div>
+  </div>
+</aside>
+
+    <main id="main">
+        <header class="top-header" id="header">
+    <div class="flex-row clearfix">
+        <a href="javascript:;" class="header-icon pull-left waves-effect waves-circle waves-light on" id="menu-toggle">
+          <i class="icon icon-lg icon-navicon"></i>
+        </a>
+        <div class="flex-col header-title ellipsis">
+            <span>解决MySql 8小时自动关闭的问题</span>
+            
+        </div>
+        
+        <a href="javascript:;" id="site_search_btn" class="header-icon pull-right waves-effect waves-circle waves-light">
+            <i class="icon icon-lg icon-search"></i>
+        </a>
+        
+    </div>
+</header>
+<header class="content-header post-header">
+    <img src="/img/s3.jpg" class="header-bg">
+    <div class="container fade-scale">
+        <h1 class="title">解决MySql 8小时自动关闭的问题</h1>
+        <h5 class="subtitle">
+            
+                <time datetime="2017-10-28T02:08:04.000Z" itemprop="datePublished" class="page-time">
+  2017-10-28
+</time>
+
+
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/MySql/">MySql</a><ul class="article-category-list-child"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/MySql/8小时/">8小时</a></li></ul></li></ul>
+
+            
+        </h5>
+        
+    </div>
+    
+
+</header>
+
+<div id="site_search">
+    <div class="search-title clearfix">
+        <span class="pull-left">
+          <i class="icon icon-lg icon-search"></i>
+        </span>
+        <input type="text" id="local-search-input" name="q" results="0" placeholder="search my blog..." class="form-control pull-left"/>
+        <a href="javascript:;" class="close pull-right waves-effect waves-circle waves-light">
+          <i class="icon icon-lg icon-close"></i>
+        </a>
+    </div>
+    <div id="local-search-result"></div>
+</div>
+
+
+<div class="container body-wrap">
+    <article id="post-解决MySql-8小时自动关闭的问题"
+  class="post-article article-type-post" itemprop="blogPost">
+    <div class="post-card">
+        <h1 class="post-card-title">解决MySql 8小时自动关闭的问题</h1>
+        <div class="post-meta">
+            <time class="post-time" title="2017-10-28 10:08:04" datetime="2017-10-28T02:08:04.000Z"  itemprop="datePublished">2017-10-28</time>
+
+            
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/MySql/">MySql</a><ul class="article-category-list-child"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/MySql/8小时/">8小时</a></li></ul></li></ul>
+
+
+
+            
+	<span id="/2017/10/28/解决MySql-8小时自动关闭的问题/" class="leancloud_visitors" data-flag-title="解决MySql 8小时自动关闭的问题" title="解决MySql 8小时自动关闭的问题">
+		
+			<i class="icon icon-eye"></i>
+		
+		<span class="leancloud-visitors-count"></span>
+	</span>
+ 
+
+            
+
+
+            
+        </div>
+        <div class="post-content" id="post-content" itemprop="postContent">
+            
+            <h2 id="前言："><a href="#前言：" class="headerlink" title="前言："></a>前言：</h2><blockquote>
+<p>记得自己之前在服务器上部署了一个很low的假期签到系统，每次叫大家签到都是晚上，很大程度上讲，时间已经过了将近16个小时，每次第二天叫大家签到的时候，很多人，都发了同一个问题给我，服务器报了连接异常，后来听到身边的大牛才知道，原来MySql如果配置不当，连接空闲超过8小时，MySql将会关闭该连接，但是我们服务器认为连接还是存在的，因此还会访问，所以就会出现异常情况</p>
+</blockquote>
+<blockquote>
+<p>也有一部分原因自己是知道的，因为自己采用了c3p0数据源，所以才会出现这个情况，而dbcp则不会出现如此情况！</p>
+</blockquote>
+<hr>
+<h2 id="查询当前数据库连接超时时间"><a href="#查询当前数据库连接超时时间" class="headerlink" title="查询当前数据库连接超时时间"></a>查询当前数据库连接超时时间</h2><blockquote>
+<p>mysql 命令行中 键入如下命令</p>
+</blockquote>
+<p>SHOW GLOBAL VARIABLES LIKE ‘wait_timeout’;</p>
+<blockquote>
+<p>结果如下</p>
+</blockquote>
+<p><a rel=解决MySql 8小时自动关闭的问题 href="http://on3w7gc9m.bkt.clouddn.com/QQ%E5%9B%BE%E7%89%8720171030103053.png" title="" data-fancybox="images"><img src="http://on3w7gc9m.bkt.clouddn.com/QQ%E5%9B%BE%E7%89%8720171030103053.png"></a></p>
+<p>超时时间为28800秒，换算下来也就是8小时</p>
+<hr>
+<h2 id="解决方法"><a href="#解决方法" class="headerlink" title="解决方法"></a>解决方法</h2><h3 id="方法一："><a href="#方法一：" class="headerlink" title="方法一："></a>方法一：</h3><blockquote>
+<p>这个也是自己之前的方法：也就是采用一个简单的定时器，每隔7小时定时查一下数据库，不让连接自动关闭，</p>
+</blockquote>
+<h3 id="方法二："><a href="#方法二：" class="headerlink" title="方法二："></a>方法二：</h3><blockquote>
+<p>每次当我们连接到数据库中的时候，url可改为：<br>jdbc:mysql://localhost:3306/test?user=root&amp;password=root&amp;useUnicode=true&amp;characterEncoding=utf8&amp;autoReconnect=true&amp;failOverReadOnly=false</p>
+</blockquote>
+<a id="more"></a>
+<p>通过设置autoReconnect 和 failOverReadOnly 来进行连接异常时的重新设置</p>
+<blockquote>
+<p>具体参数如下图</p>
+</blockquote>
+<table><tbody><tr bgcolor="#cedee7"><td align="center" width="85">参数名称</td><td align="center" width="200">参数说明</td><td align="center" width="50">缺省值</td><td align="center" width="80">最低版本要求</td></tr><tr bgcolor="#ffffff"><td>user</td><td>数据库用户名（用于连接数据库）</td><td>&nbsp;</td><td>所有版本</td></tr><tr bgcolor="#ffffff"><td>password</td><td>用户密码（用于连接数据库）</td><td>&nbsp;</td><td>所有版本</td></tr><tr bgcolor="#ffffff"><td>useUnicode</td><td>是否使用Unicode字符集，如果参数characterEncoding设置为gb2312或gbk，本参数值必须设置为true</td><td>false</td><td>1.1g</td></tr><tr bgcolor="#ffffff"><td>characterEncoding</td><td>当useUnicode设置为true时，指定字符编码。比如可设置为gb2312或gbk</td><td>false</td><td>1.1g</td></tr><tr bgcolor="#ffffff"><td>autoReconnect</td><td>当数据库连接异常中断时，是否自动重新连接？</td><td>false</td><td>1.1</td></tr><tr bgcolor="#ffffff"><td>autoReconnectForPools</td><td>是否使用针对数据库连接池的重连策略</td><td>false</td><td>3.1.3</td></tr><tr bgcolor="#ffffff"><td>failOverReadOnly</td><td>自动重连成功后，连接是否设置为只读？</td><td>true</td><td>3.0.12</td></tr><tr bgcolor="#ffffff"><td>maxReconnects</td><td>autoReconnect设置为true时，重试连接的次数</td><td>3</td><td>1.1</td></tr><tr bgcolor="#ffffff"><td>initialTimeout</td><td>autoReconnect设置为true时，两次重连之间的时间间隔，单位：秒</td><td>2</td><td>1.1</td></tr><tr bgcolor="#ffffff"><td>connectTimeout</td><td>和数据库服务器建立socket连接时的超时，单位：毫秒。 0表示永不超时，适用于JDK 1.4及更高版本</td><td>0</td><td>3.0.1</td></tr><tr bgcolor="#ffffff"><td>socketTimeout</td><td>socket操作（读写）超时，单位：毫秒。 0表示永不超时</td><td>0</td><td>3.0.1</td></tr></tbody></table>
+
+<h3 id="方法三：连接池文件配置"><a href="#方法三：连接池文件配置" class="headerlink" title="方法三：连接池文件配置"></a>方法三：连接池文件配置</h3><blockquote>
+<p>由于自己没有使用c3p0配置文件，如果有c3p0配置文件，建议在cep0配置文件中进行如下配置</p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br></pre></td><td class="code"><pre><span class="line">&lt;c3p0-config&gt;</span><br><span class="line">&lt;default-config&gt;</span><br><span class="line">&lt;!--当连接池中的连接耗尽的时候c3p0一次同时获取的连接数。Default: 3 --&gt;</span><br><span class="line">&lt;property name=&quot;acquireIncrement&quot;&gt;3&lt;/property&gt;</span><br><span class="line"></span><br><span class="line">&lt;!--定义在从数据库获取新连接失败后重复尝试的次数。Default: 30 --&gt;</span><br><span class="line">&lt;property name=&quot;acquireRetryAttempts&quot;&gt;30&lt;/property&gt;</span><br><span class="line"></span><br><span class="line">&lt;!--两次连接中间隔时间，单位毫秒。Default: 1000 --&gt;</span><br><span class="line">&lt;property name=&quot;acquireRetryDelay&quot;&gt;1000&lt;/property&gt;</span><br><span class="line"></span><br><span class="line">&lt;!--连接关闭时默认将所有未提交的操作回滚。Default: false --&gt;</span><br><span class="line">&lt;property name=&quot;autoCommitOnClose&quot;&gt;false&lt;/property&gt;</span><br><span class="line"></span><br><span class="line">&lt;!--c3p0将建一张名为Test的空表，并使用其自带的查询语句进行测试。如果定义了这个参数 那么</span><br><span class="line">属性preferredTestQuery将被忽略。你不能在这张Test表上进行任何操作，它将只供c3p0测试</span><br><span class="line">使用。Default: null--&gt;</span><br><span class="line">&lt;property name=&quot;automaticTestTable&quot;&gt;Test&lt;/property&gt;</span><br><span class="line"></span><br><span class="line">&lt;!--获取连接失败将会引起所有等待连接池来获取连接的线程抛出异常。但是数据源仍有效</span><br><span class="line">保留，并在下次调用getConnection()的时候继续尝试获取连接。如果设为true，那么在尝试</span><br><span class="line">获取连接失败后该数据源将申明已断开并永久关闭。Default: false--&gt;</span><br><span class="line">&lt;property name=&quot;breakAfterAcquireFailure&quot;&gt;false&lt;/property&gt;</span><br><span class="line"></span><br><span class="line">&lt;!--当连接池用完时客户端调用getConnection()后等待获取新连接的时间，超时后将 抛出</span><br><span class="line">SQLException,如设为0则无限期等待。单位毫秒。Default: 0 --&gt;</span><br><span class="line">&lt;property name=&quot;checkoutTimeout&quot;&gt;100&lt;/property&gt;</span><br><span class="line"></span><br><span class="line">&lt;!--通过实现ConnectionTester或QueryConnectionTester的 类来 测试连接。类名需制定全路径。</span><br><span class="line">Default: com.mchange.v2.c3p0.impl.DefaultConnectionTester--&gt;</span><br><span class="line">&lt;property name=&quot;connectionTesterClassName&quot;&gt;&lt;/property&gt;</span><br><span class="line"></span><br><span class="line">&lt;!--指定c3p0 libraries的路径，如果（通常都是这样）在本地即可获得那么无需设置，默认null即可</span><br><span class="line">Default: null--&gt;</span><br><span class="line">&lt;property name=&quot;factoryClassLocation&quot;&gt;null&lt;/property&gt;</span><br><span class="line"></span><br><span class="line">&lt;!--Strongly disrecommended. Setting this to true may lead to subtle and bizarre bugs.</span><br><span class="line">（文档原文）作者强烈建议不使用的一个属性--&gt;</span><br><span class="line">&lt;property name=&quot;forceIgnoreUnresolvedTransactions&quot;&gt;false&lt;/property&gt;</span><br><span class="line"></span><br><span class="line">&lt;!--每60秒检查所有连接池中的空闲连接。Default: 0 --&gt;</span><br><span class="line">&lt;property name=&quot;idleConnectionTestPeriod&quot;&gt;60&lt;/property&gt;</span><br><span class="line"></span><br><span class="line">&lt;!--初始化时获取三个连接，取值应在minPoolSize与maxPoolSize之间。 Default: 3 --&gt;</span><br><span class="line">&lt;property name=&quot;initialPoolSize&quot;&gt;3&lt;/property&gt;</span><br><span class="line"></span><br><span class="line">&lt;!--最大空闲时间,60秒内未使用则连接被丢弃。若为0则永不丢弃。Default: 0 --&gt;</span><br><span class="line">&lt;property name=&quot;maxIdleTime&quot;&gt;60&lt;/property&gt;</span><br><span class="line"></span><br><span class="line">&lt;!--连接池中保留的最大连接数。Default: 15 --&gt;</span><br><span class="line">&lt;property name=&quot;maxPoolSize&quot;&gt;15&lt;/property&gt;</span><br><span class="line"></span><br><span class="line">&lt;!--JDBC的标准参数，用以控制数据源内加载的PreparedStatements数量。但 由于预缓存的statements</span><br><span class="line">属于单个connection而不是整个连接池。所以设置这个参数需要考虑到多方面的因素。</span><br><span class="line">如果maxStatements与maxStatementsPerConnection均为0，则缓存被关闭。Default: 0--&gt;</span><br><span class="line">&lt;property name=&quot;maxStatements&quot;&gt;100&lt;/property&gt;</span><br><span class="line"></span><br><span class="line">&lt;!--maxStatementsPerConnection定义了连接池内单个连接所 拥有的最大缓存statements数。Default: 0 --&gt;</span><br><span class="line">&lt;property name=&quot;maxStatementsPerConnection&quot;&gt;&lt;/property&gt;</span><br><span class="line"></span><br><span class="line">&lt;!--c3p0是异步操作的，缓慢的JDBC操作通过帮助进程完成。扩展这些操作可以有效的提升性 能</span><br><span class="line">通过多线程实现多个操作同时被执行。Default: 3--&gt;</span><br><span class="line">&lt;property name=&quot;numHelperThreads&quot;&gt;3&lt;/property&gt;</span><br><span class="line"></span><br><span class="line">&lt;!--当用户调用getConnection()时使root用户成为去获取连接的用户。主要用于 连接池连接非c3p0</span><br><span class="line">的数据源时。Default: null--&gt;</span><br><span class="line">&lt;property name=&quot;overrideDefaultUser&quot;&gt;root&lt;/property&gt;</span><br><span class="line"></span><br><span class="line">&lt;!--与overrideDefaultUser参数对应使用的一个参数。Default: null--&gt;</span><br><span class="line">&lt;property name=&quot;overrideDefaultPassword&quot;&gt;password&lt;/property&gt;</span><br><span class="line"></span><br><span class="line">&lt;!--密码。Default: null--&gt;</span><br><span class="line">&lt;property name=&quot;password&quot;&gt;&lt;/property&gt;</span><br><span class="line"></span><br><span class="line">&lt;!--定义所有连接测试都执行的测试语句。在使用连接测试的情况下这个一显著提高测试速度。注意：</span><br><span class="line">测试的表必须在初始数据源的时候就存在。Default: null--&gt;</span><br><span class="line">&lt;property name=&quot;preferredTestQuery&quot;&gt;select id from test where id=1&lt;/property&gt;</span><br><span class="line"></span><br><span class="line">&lt;!--用户修改系统配置参数执行前最多等待300秒。Default: 300 --&gt;</span><br><span class="line">&lt;property name=&quot;propertyCycle&quot;&gt;300&lt;/property&gt;</span><br><span class="line"></span><br><span class="line">&lt;!--因性能消耗大请只在需要的时候使用它。如果设为true那么在每个connection提交 的</span><br><span class="line">时候都将校验其有效性。建议使用idleConnectionTestPeriod或automaticTestTable</span><br><span class="line">等方法来提升连接测试的性能。Default: false --&gt;</span><br><span class="line">&lt;property name=&quot;testConnectionOnCheckout&quot;&gt;false&lt;/property&gt;</span><br><span class="line"></span><br><span class="line">&lt;!--如果设为true那么在取得连接的同时将校验连接的有效性。Default: false --&gt;</span><br><span class="line">&lt;property name=&quot;testConnectionOnCheckin&quot;&gt;true&lt;/property&gt;</span><br><span class="line"></span><br><span class="line">&lt;!--用户名。Default: null--&gt;</span><br><span class="line">&lt;property name=&quot;user&quot;&gt;root&lt;/property&gt;</span><br><span class="line"></span><br><span class="line">&lt;!--早期的c3p0版本对JDBC接口采用动态反射代理。在早期版本用途广泛的情况下这个参数</span><br><span class="line">允许用户恢复到动态反射代理以解决不稳定的故障。最新的非反射代理更快并且已经开始</span><br><span class="line">广泛的被使用，所以这个参数未必有用。现在原先的动态反射与新的非反射代理同时受到</span><br><span class="line">支持，但今后可能的版本可能不支持动态反射代理。Default: false--&gt;</span><br><span class="line">&lt;property name=&quot;usesTraditionalReflectiveProxies&quot;&gt;false&lt;/property&gt;</span><br><span class="line"></span><br><span class="line">&lt;property name=&quot;automaticTestTable&quot;&gt;con_test&lt;/property&gt;</span><br><span class="line">&lt;property name=&quot;checkoutTimeout&quot;&gt;30000&lt;/property&gt;</span><br><span class="line">&lt;property name=&quot;idleConnectionTestPeriod&quot;&gt;30&lt;/property&gt;</span><br><span class="line">&lt;property name=&quot;initialPoolSize&quot;&gt;10&lt;/property&gt;</span><br><span class="line">&lt;property name=&quot;maxIdleTime&quot;&gt;30&lt;/property&gt;</span><br><span class="line">&lt;property name=&quot;maxPoolSize&quot;&gt;25&lt;/property&gt;</span><br><span class="line">&lt;property name=&quot;minPoolSize&quot;&gt;10&lt;/property&gt;</span><br><span class="line">&lt;property name=&quot;maxStatements&quot;&gt;0&lt;/property&gt;</span><br><span class="line">&lt;user-overrides user=&quot;swaldman&quot;&gt;</span><br><span class="line">&lt;/user-overrides&gt;</span><br><span class="line">&lt;/default-config&gt;</span><br><span class="line">&lt;named-config name=&quot;dumbTestConfig&quot;&gt;</span><br><span class="line">&lt;property name=&quot;maxStatements&quot;&gt;200&lt;/property&gt;</span><br><span class="line">&lt;user-overrides user=&quot;poop&quot;&gt;</span><br><span class="line">&lt;property name=&quot;maxStatements&quot;&gt;300&lt;/property&gt;</span><br><span class="line">&lt;/user-overrides&gt;</span><br><span class="line">&lt;/named-config&gt;</span><br><span class="line">&lt;/c3p0-config&gt;</span><br></pre></td></tr></table></figure>
+
+        </div>
+        
+<blockquote class="post-copyright">
+    <div class="content">
+        
+<span class="post-time">
+    最后更新时间：<time datetime="2019-08-26T10:46:59.880Z" itemprop="dateUpdated">2019-08-26 18:46:59</time>
+</span><br>
+
+
+        
+        转载注明出处，原文地址：<a href="/2017/10/28/解决MySql-8小时自动关闭的问题/" target="_blank" rel="external">http://www.sivan.tech/2017/10/28/解决MySql-8小时自动关闭的问题/</a>
+        
+    </div>
+    <footer>
+        <a href="http://www.sivan.tech">
+            <img src="/img/1.jpg" alt="逸如风(yirufeng)">
+            逸如风(yirufeng)
+        </a>
+    </footer>
+</blockquote>
+
+        
+            <div class="page-reward">
+    <a id="rewardBtn" href="javascript:;" class="page-reward-btn waves-effect waves-circle waves-light">赏</a>
+</div>
+
+            
+        
+        <div class="post-footer">
+            
+	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Hibernate/">Hibernate</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/MySql/">MySql</a></li></ul>
+
+            <div class="page-share-wrap">
+    
+
+<div class="page-share" id="pageShare">
+    <ul class="reset share-icons">
+      
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://www.sivan.tech/2017/10/28/解决MySql-8小时自动关闭的问题/&title=《解决MySql 8小时自动关闭的问题》 — yirufeng's Blog&pic=http://www.sivan.tech/img/1.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://www.sivan.tech/2017/10/28/解决MySql-8小时自动关闭的问题/&title=《解决MySql 8小时自动关闭的问题》 — yirufeng's Blog&source=前言：
+记得自己之前在服务器上部署了一个很low的假期签到系统，每次叫大家签到都是晚上，很大程度上讲，时间已经过了将近16个小时，每次第二天叫大家签到的时..." data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http://www.sivan.tech/2017/10/28/解决MySql-8小时自动关闭的问题/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《解决MySql 8小时自动关闭的问题》 — yirufeng's Blog&url=http://www.sivan.tech/2017/10/28/解决MySql-8小时自动关闭的问题/&via=http://www.sivan.tech" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=http://www.sivan.tech/2017/10/28/解决MySql-8小时自动关闭的问题/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+      
+    </ul>
+ </div>
+
+
+
+    <a href="javascript:;" id="shareFab" class="page-share-fab waves-effect waves-circle">
+        <i class="icon icon-share-alt icon-lg"></i>
+    </a>
+</div>
+
+        </div>
+        
+            
+
+
+        
+    </div>
+    
+<nav class="post-nav flex-row flex-justify-between">
+  
+    <div class="prev">
+      <a href="/2017/10/30/使用json级联改变部门员工/" id="post-prev" class="post-nav-link">
+        <div class="tips"><i class="icon icon-angle-left icon-lg icon-pr"></i> Prev</div>
+        <h4 class="title">使用json级联改变部门员工</h4>
+      </a>
+    </div>
+  
+
+  
+    <div class="next">
+      <a href="/2017/10/26/Spring中使用注解/" id="post-next" class="post-nav-link">
+        <div class="tips">Next <i class="icon icon-angle-right icon-lg icon-pl"></i></div>
+        <h4 class="title">Spring中使用注解</h4>
+      </a>
+    </div>
+  
+</nav>
+
+
+    
+    
+        <aside class="post-widget">
+            <nav class="post-toc-wrap" id="post-toc">
+                <strong>目录</strong>
+                <ol class="post-toc"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#前言："><span class="post-toc-number">1.</span> <span class="post-toc-text">前言：</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#查询当前数据库连接超时时间"><span class="post-toc-number">2.</span> <span class="post-toc-text">查询当前数据库连接超时时间</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#解决方法"><span class="post-toc-number">3.</span> <span class="post-toc-text">解决方法</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#方法一："><span class="post-toc-number">3.1.</span> <span class="post-toc-text">方法一：</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#方法二："><span class="post-toc-number">3.2.</span> <span class="post-toc-text">方法二：</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#方法三：连接池文件配置"><span class="post-toc-number">3.3.</span> <span class="post-toc-text">方法三：连接池文件配置</span></a></li></ol></li></ol>
+            </nav>
+            <div class="toc-bar"><div>
+        </aside>
+    
+</article>
+
+    <div id="reward" class="page-modal reward-lay">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <h3 class="reward-title">
+        <i class="icon icon-quote-left"></i>
+        感谢原作，你的打赏是我的动力！
+        <i class="icon icon-quote-right"></i>
+    </h3>
+    <div class="reward-content">
+        
+        <div class="reward-code">
+            <img id="rewardCode" src="/img/reward-wechat.jpg" alt="打赏二维码">
+        </div>
+        
+        <label class="reward-toggle">
+            <input id="rewardToggle" type="checkbox" class="reward-toggle-check"
+                data-wechat="/img/reward-wechat.jpg" data-alipay="/img/reward-alipay.jpg">
+            <div class="reward-toggle-ctrol">
+                <span class="reward-toggle-item wechat">微信</span>
+                <span class="reward-toggle-label"></span>
+                <span class="reward-toggle-item alipay">支付宝</span>
+            </div>
+        </label>
+        
+    </div>
+</div>
+
+    
+
+</div>
+
+    </main>
+    <footer class="footer ">
+    
+    <div class="top">
+        
+            <p>
+    <span>Links：</span>
+    
+    <span class="blogroll-item">
+        <a href="https://github.com/sivanWu0222" target="_blank">GitHub</a>
+    </span>
+    
+    <span class="blogroll-item">
+        <a href="http://weibo.com/Msingwen0222/home?wvr=5" target="_blank">新浪微博</a>
+    </span>
+    
+    <span class="blogroll-item">
+        <a href="https://www.linkedin.com/in/%E6%99%93%E6%96%87-%E5%90%B4-79057a121/" target="_blank">Linkedin</a>
+    </span>
+    
+    <span class="blogroll-item">
+        <a href="http://wpa.qq.com/msgrd?v=3&amp;uin=1666762170&amp;site=qq&amp;menu=yes" target="_blank">QQ</a>
+    </span>
+    
+    <span class="blogroll-item">
+        <a href="https://zh-cn.facebook.com/people/SiVan-Wu/100014408918389" target="_blank">Facebook</a>
+    </span>
+    
+    <span class="blogroll-item">
+        <a href="https://mail.qq.com/cgi-bin/qm_share?t=qm_mailme&amp;email=xfTz8-Py8-f08vWFtLTrpqqo" target="_blank">Contact</a>
+    </span>
+    
+    <span class="blogroll-item">
+        <a href="https://twitter.com/SiVan_Wu" target="_blank">Twitter</a>
+    </span>
+    
+</p>
+
+        
+    </div>
+    
+    <div class="bottom">
+        <p>
+            <span>
+                逸如风(yirufeng) &copy; 2016 - 2019
+            </span>
+
+           	
+           	<span>
+           		<a href="http://beian.miit.gov.cn/" target="_blank">已实名认证</a>
+           	</span>
+           	
+
+            
+
+            
+
+            
+                
+<span class="site-uv" title="总访客量">
+    <i class="icon icon-user"></i>
+    <i class="busuanzi-value" id="busuanzi_value_site_uv"></i>
+</span>
+
+
+<span class="site-pv" title="总访问量">
+    <i class="icon icon-eye"></i>
+    <i class="busuanzi-value" id="busuanzi_value_site_pv"></i>
+</span>
+
+            
+        </p>
+    </div>
+</footer>
+
+    <div class="mask" id="mask"></div>
+<a href="javascript:;" id="gotop" class="waves-effect waves-circle waves-light"><span class="icon icon-lg icon-chevron-up"></span></a>
+
+
+
+<div class="global-share" id="globalShare">
+    <ul class="reset share-icons">
+      
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://www.sivan.tech/2017/10/28/解决MySql-8小时自动关闭的问题/&title=《解决MySql 8小时自动关闭的问题》 — yirufeng's Blog&pic=http://www.sivan.tech/img/1.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://www.sivan.tech/2017/10/28/解决MySql-8小时自动关闭的问题/&title=《解决MySql 8小时自动关闭的问题》 — yirufeng's Blog&source=前言：
+记得自己之前在服务器上部署了一个很low的假期签到系统，每次叫大家签到都是晚上，很大程度上讲，时间已经过了将近16个小时，每次第二天叫大家签到的时..." data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http://www.sivan.tech/2017/10/28/解决MySql-8小时自动关闭的问题/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《解决MySql 8小时自动关闭的问题》 — yirufeng's Blog&url=http://www.sivan.tech/2017/10/28/解决MySql-8小时自动关闭的问题/&via=http://www.sivan.tech" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=http://www.sivan.tech/2017/10/28/解决MySql-8小时自动关闭的问题/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+      
+    </ul>
+ </div>
+
+
+<div class="page-modal wx-share" id="wxShare">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAN4AAADeCAAAAAB3DOFrAAACt0lEQVR42u3awW7jMAwE0Pz/T3eBPfXidIYSm13g+RS4raOnAhYx5OsVX19/r++fv19P959+8+n5yTNfGxceHh7eaOnvF5TfmS09f0K+Zjw8PLxtXnIY5MfG07I2vuUHCx4eHt5HeU/LfX+/PR6SbcLDw8P7f3l5OV6XwsH34uHh4X2Wly8xeVnPotvkmYtZCx4eHt6kD1U0wD77eb2/h4eHhzd6NbejAO3RkscZw7Xh4eHhLfBO4tpZc+vk7BoOH+Dh4eFd5bWRa8uYxbtJMR1tEx4eHt4aLz8S8lI4L7Lb+0VjDA8PD2+Bd5KC5iFC8t4+GRQYtsHw8PDwRrw2t2hL27ujAPXoAB4eHt4CL4lHk4fOwtb8mDmKifHw8PCu8tritS18Z+MCydOijcDDw8Nb5iUBbnswtK/+WXjxuOl4eHh4v8g7aeTngDb8rQt9PDw8vF/hnQ+Jzn56PkbwyvcDDw8P7xLvJDCdHSQtrG7I4eHh4S3wTgrZ4gUdhwv5cVUU5Xh4eHhXeckr+ySMyMOOWWvthxXi4eHhrfHuNrRmAW57CEVlNx4eHt4Cr30dt2V0vnHvi/sk2I3CCDw8PLxLvNkj8hGB95vSblBbXuPh4eFt82btqLyhNRuimv0b8PDw8DZ4J22tWZg7K7XbRh0eHh7eHm925QfArHRO7rQBCh4eHt4tXh4rFIFp/HJvRxPqWBkPDw9vgXcXc9ISGyYo5fgCHh4e3jnvq7zOl9sOJSTs6H+Fh4eHd4nXBhDnAwTtgm6V3Xh4eHh3eXk8miCTv5q1r4bfgoeHh7fGawvc/HfaEvxWVYyHh4f3r/Hy0ajZMNZsyOBxsgwPDw/vQ7w2pJgNKLRDDD+cAnh4eHhrvJMwYhbI5mV6sqGP68TDw8Nb4J0srg0d8gMpKZpPthsPDw9vxPsDm2LQdZGPeFQAAAAASUVORK5CYII=" alt="微信分享二维码">
+</div>
+
+
+    
+    <!-- main-js -->
+<script type="text/javascript" src="//cdn.bootcss.com/jquery/2.1.0/jquery.min.js"></script>
+<script type="text/javascript" src="/js/plugins/fastclick.js?v=1.4.2"></script>
+<script type="text/javascript" src="/js/plugins/ios-orientationchange-fix.js?v=1.4.2"></script>
+<script type="text/javascript" src="//cdn.jsdelivr.net/gh/fancyapps/fancybox@3.5.2/dist/jquery.fancybox.min.js"></script>
+
+<script type="text/javascript" src="//cdn.bootcss.com/node-waves/0.7.4/waves.min.js"></script>
+
+<script type="text/javascript" src="/js/method.js?v=1.4.2"></script>
+<script type="text/javascript" src="/js/blog.js?v=1.4.2"></script>
+
+<!-- third-party -->
+
+
+
+
+
+
+<script type="text/javascript" src="/js/plugins/local_search.js?v=1.4.2"></script>
+<script type="text/javascript">
+	var search_path = "search.xml";
+	if (search_path.length === 0) {
+		search_path = "search.xml";
+	}
+	var path = "/" + search_path;
+	searchFunc(path, "local-search-input", "local-search-result");
+</script>
+
+
+
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+    
+    
+
+
+
+<script type="text/javascript" src="https://cdn1.lncld.net/static/js/av-core-mini-0.6.4.js"></script>
+<script type="text/javascript" src="/js/plugins/leancloud_visitors.js?v=1.4.2"></script>
+
+
+
+    <!-- mathjax config similar to math.stackexchange -->
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+        tex2jax: {
+            inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+            processEscapes: true,
+            skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+        }
+    });
+</script>
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for (i=0; i < all.length; i += 1) {
+            all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+    });
+</script>
+
+<script type="text/javascript" src="//cdn.bootcss.com/mathjax/2.7.1/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+
+
+
+    <script>
+    (function() {
+        var OriginTitile = document.title, titleTime;
+        document.addEventListener('visibilitychange', function() {
+            if (document.hidden) {
+                document.title = '死鬼去哪里了！';
+                clearTimeout(titleTime);
+            } else {
+                document.title = '(つェ⊂)咦!又好了!';
+                titleTime = setTimeout(function() {
+                    document.title = OriginTitile;
+                },2000);
+            }
+        });
+    })();
+</script>
+
+
+
+
+
+    
+</body>
+</html>
