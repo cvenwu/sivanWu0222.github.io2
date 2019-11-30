@@ -223,7 +223,7 @@
         <h5 class="subtitle">
             
                 <a href="javascript:;" style="color: #fff; margin-right: 4px;">
-                  <i class="icon icon-map-marker icon-1x">Zhuzhou, China</i>
+                  <i class="icon icon-map-marker icon-1x">Wuhan, China</i>
               </a><a href="https://github.com/sivanWu0222" style="color: #fff; margin-right: 4px;">
                   <i class="icon icon-github icon-1x">sivanWu0222</i>
               </a>
@@ -250,6 +250,527 @@
 
     <div class="container body-wrap">
         <ul class="post-list">
+        
+            <li class="post-list-item fade">
+                <article id="post-入门Spring"
+  class="article-card article-type-post" itemprop="blogPost">
+  
+    
+    
+    
+        
+
+
+  
+    <h3 class="post-title re-title" itemprop="name">
+      <a class="post-title-link" href="/2017/11/06/入门Spring/">一个简单的Spring核心机制和其他方面的认知</a>
+    </h3>
+  
+
+
+
+    
+    <div class="post-meta">
+        <time class="post-time" title="2017-11-06 17:41:03" datetime="2017-11-06T09:41:03.000Z"  itemprop="datePublished">2017-11-06</time>
+
+        
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/框架/">框架</a><ul class="article-category-list-child"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/框架/Spring/">Spring</a></li></ul></li></ul>
+
+
+
+        
+	<span id="/2017/11/06/入门Spring/" class="leancloud_visitors" data-flag-title="一个简单的Spring核心机制和其他方面的认知" title="一个简单的Spring核心机制和其他方面的认知">
+		
+			<i class="icon icon-eye"></i>
+		
+		<span class="leancloud-visitors-count"></span>
+	</span>
+ 
+
+        
+
+
+        
+        
+    </div>
+    
+    <div class="post-content" id="post-content" itemprop="postContent">
+    
+    
+        <h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><blockquote>
+<p>最近开始了解Spring，很多人都在告诉我需要使用Spring的时候，我们需要配置很多东西，很大一部分是在XML里面完成，而且还发现Spring可以通过我们配置的XML文件来创建对象，事实上就是这么做的，就好比如我们需要一把刀的时候，只需要去市场就可以买到，而不需要我们自己造了！感觉瞬间现代化了！</p>
+</blockquote>
+<hr>
+<h2 id="一个简单的Spring核心机制"><a href="#一个简单的Spring核心机制" class="headerlink" title="一个简单的Spring核心机制"></a>一个简单的Spring核心机制</h2><blockquote>
+<p>Spring里面融合的思想有很多，最核心的便是IOC, 也就是 Inverse of control，通过Spring自己带的一个容器，将我们所需要的对象创造出来，而不需要我们手工创造，极大的减少了代码的耦合！</p>
+</blockquote>
+<h3 id="手工实现一个简单的Spring核心机制"><a href="#手工实现一个简单的Spring核心机制" class="headerlink" title="手工实现一个简单的Spring核心机制"></a>手工实现一个简单的Spring核心机制</h3><blockquote>
+<p>Spring 如何帮助我们创建对象呢？答案便是我们通过配置XML文件，Spring会帮助我们通过配置好的XML文件，进行对象的创建！</p>
+</blockquote>
+<ol>
+<li>手动配置XML文件</li>
+<li>通过我们自己写的一个SpringUtils来对XML文件进行解析，创建对象</li>
+</ol>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?xml version="1.0" encoding="UTF-8"?&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">beans</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">bean</span> <span class="attr">id</span>=<span class="string">"student"</span> <span class="attr">name</span>=<span class="string">"com.pojo.Student"</span>&gt;</span><span class="tag">&lt;/<span class="name">bean</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">beans</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="keyword">import</span> org.dom4j.Document;</span><br><span class="line"><span class="keyword">import</span> org.dom4j.DocumentException;</span><br><span class="line"><span class="keyword">import</span> org.dom4j.Element;</span><br><span class="line"><span class="keyword">import</span> org.dom4j.io.SAXReader;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">SpringUtils</span> </span>&#123;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">static</span> Object <span class="title">getElement</span><span class="params">(String id)</span> <span class="keyword">throws</span> DocumentException, ClassNotFoundException, InstantiationException, IllegalAccessException </span>&#123;</span><br><span class="line">		SAXReader reader = <span class="keyword">new</span> SAXReader();</span><br><span class="line">		Document document = reader.read(<span class="string">"src/beans.xml"</span>);</span><br><span class="line">		Element element = (Element) document.selectSingleNode(<span class="string">"beans/bean[@id='"</span> + id + <span class="string">"']"</span>);</span><br><span class="line">		String name = element.attributeValue(<span class="string">"name"</span>);</span><br><span class="line">		Class c = Class.forName(name);</span><br><span class="line">		<span class="keyword">return</span> c.newInstance();</span><br><span class="line"></span><br><span class="line">		<span class="comment">/*上面的代码等效为如下代码</span></span><br><span class="line"><span class="comment">		return Class.forName(((Element)new SAXReader().read("src/beans.xml").selectSingleNode("beans/bean[@id='"+ id + "']")).attributeValue("name")).newInstance();</span></span><br><span class="line"><span class="comment">    */</span></span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+    
+    <a href="/2017/11/06/入门Spring/" class="post-more waves-effect waves-button">
+        more
+    </a>
+    </div>
+</article>
+
+<div class="post-footer">
+    
+	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Java/">Java</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Spring/">Spring</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/XML/">XML</a></li></ul>
+
+</div>
+
+
+            </li>
+        
+            <li class="post-list-item fade">
+                <article id="post-部门员工简单级联"
+  class="article-card article-type-post" itemprop="blogPost">
+  
+    
+    
+    
+        
+
+
+  
+    <h3 class="post-title re-title" itemprop="name">
+      <a class="post-title-link" href="/2017/11/06/部门员工简单级联/">部门员工简单级联</a>
+    </h3>
+  
+
+
+
+    
+    <div class="post-meta">
+        <time class="post-time" title="2017-11-06 17:16:03" datetime="2017-11-06T09:16:03.000Z"  itemprop="datePublished">2017-11-06</time>
+
+        
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/Java/">Java</a><ul class="article-category-list-child"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/Java/jsp/">jsp</a></li></ul></li></ul>
+
+
+
+        
+	<span id="/2017/11/06/部门员工简单级联/" class="leancloud_visitors" data-flag-title="部门员工简单级联" title="部门员工简单级联">
+		
+			<i class="icon icon-eye"></i>
+		
+		<span class="leancloud-visitors-count"></span>
+	</span>
+ 
+
+        
+
+
+        
+        
+    </div>
+    
+    <div class="post-content" id="post-content" itemprop="postContent">
+    
+    
+        <blockquote>
+<p>部门员工级联也就是，通过选择部门，员工也将会随着部门的改变而改变</p>
+</blockquote>
+<blockquote>
+<p>通常我们查到有哪些部门，然后在Java中用集合来表示，但是如何用JavaScript来获取这些值变成了我们的一个短板，解决方法就是采用中间格式，例如json，XML文件等</p>
+</blockquote>
+<h2 id="显示部门"><a href="#显示部门" class="headerlink" title="显示部门"></a>显示部门</h2><blockquote>
+<p>这里我们采用了Hibernate来获取部门，</p>
+</blockquote>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@WebServlet</span>(<span class="string">"/dep.do"</span>)</span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">DepServlet</span> <span class="keyword">extends</span> <span class="title">HttpServlet</span> </span>&#123;</span><br><span class="line">	<span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> <span class="keyword">long</span> serialVersionUID = <span class="number">1L</span>;</span><br><span class="line"></span><br><span class="line">	<span class="keyword">private</span> DepDAO depDao = <span class="keyword">new</span> DepDAO();</span><br><span class="line"></span><br><span class="line">	<span class="function"><span class="keyword">protected</span> <span class="keyword">void</span> <span class="title">service</span><span class="params">(HttpServletRequest request, HttpServletResponse response)</span> <span class="keyword">throws</span> ServletException, IOException </span>&#123;</span><br><span class="line">		response.setContentType(<span class="string">"text/html;charset=utf-8"</span>);</span><br><span class="line">		String method = request.getParameter(<span class="string">"method"</span>);</span><br><span class="line">		<span class="keyword">if</span>(<span class="string">"findAll"</span>.equals(method)) &#123;</span><br><span class="line">			doFindAll(request, response);</span><br><span class="line">		&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="function"><span class="keyword">private</span> <span class="keyword">void</span> <span class="title">doFindAll</span><span class="params">(HttpServletRequest request, HttpServletResponse response)</span> <span class="keyword">throws</span> IOException </span>&#123;</span><br><span class="line">		List&lt;Dep&gt; deps = depDao.findAll();</span><br><span class="line">		StringBuffer sb = <span class="keyword">new</span> StringBuffer();</span><br><span class="line">		sb.append(<span class="string">"["</span>);</span><br><span class="line">		<span class="keyword">for</span> (Dep dep : deps) &#123;</span><br><span class="line">			sb.append(<span class="string">"&#123; 'depId': '"</span> + dep.getDepId() + <span class="string">"', 'depName': '"</span> + dep.getDepName() + <span class="string">"'&#125;,"</span>);</span><br><span class="line">		&#125;</span><br><span class="line">		sb.deleteCharAt(sb.length() - <span class="number">1</span>);</span><br><span class="line">		sb.append(<span class="string">"]"</span>);</span><br><span class="line">		System.out.println(sb);</span><br><span class="line"></span><br><span class="line">		response.getWriter().print(sb.toString());</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>对应 index.jsp 代码如下<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> dep = <span class="built_in">document</span>.getElementById(<span class="string">"dep"</span>);</span><br><span class="line"><span class="keyword">var</span> emp = <span class="built_in">document</span>.getElementById(<span class="string">"emp"</span>);</span><br><span class="line"></span><br><span class="line"><span class="comment">/*----------------		部门		-----------*/</span></span><br><span class="line"><span class="keyword">var</span> request = <span class="keyword">new</span> XMLHttpRequest();</span><br><span class="line">request.open(<span class="string">"get"</span>, <span class="string">"dep.do?method=findAll"</span>);</span><br><span class="line">request.send();</span><br><span class="line">request.onreadystatechange = <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="keyword">if</span>( request.readyState == <span class="number">4</span> &amp;&amp; request.status == <span class="number">200</span>) &#123;</span><br><span class="line">    <span class="keyword">var</span> json = <span class="built_in">eval</span>(request.responseText);</span><br><span class="line">    <span class="keyword">for</span> ( <span class="keyword">var</span> i = <span class="number">0</span>; i &lt; json.length; i++ ) &#123;</span><br><span class="line">      <span class="keyword">var</span> option = <span class="keyword">new</span> Option(json[i].depName, json[i].depId);</span><br><span class="line">      dep.add(option);</span><br><span class="line">    &#125;</span><br><span class="line">    doEmp();</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">dep.onchange = <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">  doEmp();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+    
+    <a href="/2017/11/06/部门员工简单级联/" class="post-more waves-effect waves-button">
+        more
+    </a>
+    </div>
+</article>
+
+<div class="post-footer">
+    
+	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Ajax/">Ajax</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Java/">Java</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/json/">json</a></li></ul>
+
+</div>
+
+
+            </li>
+        
+            <li class="post-list-item fade">
+                <article id="post-XML创建与解析"
+  class="article-card article-type-post" itemprop="blogPost">
+  
+    
+    
+    
+        
+
+
+  
+    <h3 class="post-title re-title" itemprop="name">
+      <a class="post-title-link" href="/2017/11/06/XML创建与解析/">XML创建与解析</a>
+    </h3>
+  
+
+
+
+    
+    <div class="post-meta">
+        <time class="post-time" title="2017-11-06 08:49:50" datetime="2017-11-06T00:49:50.000Z"  itemprop="datePublished">2017-11-06</time>
+
+        
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/Java/">Java</a><ul class="article-category-list-child"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/Java/XML/">XML</a></li></ul></li></ul>
+
+
+
+        
+	<span id="/2017/11/06/XML创建与解析/" class="leancloud_visitors" data-flag-title="XML创建与解析" title="XML创建与解析">
+		
+			<i class="icon icon-eye"></i>
+		
+		<span class="leancloud-visitors-count"></span>
+	</span>
+ 
+
+        
+
+
+        
+        
+    </div>
+    
+    <div class="post-content" id="post-content" itemprop="postContent">
+    
+    
+        <h2 id="前言："><a href="#前言：" class="headerlink" title="前言："></a>前言：</h2><blockquote>
+<p>这里记录自己之前使用dom进行写XML，使用SAX 进行读取XML</p>
+</blockquote>
+<h3 id="两者异同点"><a href="#两者异同点" class="headerlink" title="两者异同点"></a>两者异同点</h3><ol>
+<li>dom解析是基于文档的，如果解析一个XML文件，将会把文件的所有内容加载到内存中，方便反复查询，虽然效率高，但是占内存，尤其是XML文件很大的时候</li>
+<li>sax(simple API for xml)解析xml的另一种方法，是一个基于事件流的解析，当我们使用XML进行解析的时候，用到哪里，就读到哪里，如果没有保存，数据将会丢失</li>
+</ol>
+<hr>
+<h2 id="创建一个简单的XML文档"><a href="#创建一个简单的XML文档" class="headerlink" title="创建一个简单的XML文档"></a>创建一个简单的XML文档</h2><ol>
+<li>生成一个空白的XML文档</li>
+<li>添加根节点和属性</li>
+<li>根节点下面添加子节点和属性</li>
+<li>对在JVM中生成的XML文档保存到本机</li>
+</ol>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="keyword">import</span> java.io.File;</span><br><span class="line"><span class="keyword">import</span> java.io.FileNotFoundException;</span><br><span class="line"><span class="keyword">import</span> java.io.FileOutputStream;</span><br><span class="line"><span class="keyword">import</span> java.io.IOException;</span><br><span class="line"><span class="keyword">import</span> java.io.UnsupportedEncodingException;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> org.dom4j.Document;</span><br><span class="line"><span class="keyword">import</span> org.dom4j.DocumentHelper;</span><br><span class="line"><span class="keyword">import</span> org.dom4j.Element;</span><br><span class="line"><span class="keyword">import</span> org.dom4j.io.XMLWriter;</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * 创建XML文档，并且保存到d:/classes.xml</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@author</span> SiVan</span></span><br><span class="line"><span class="comment"> *</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">CreateDocument</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> <span class="keyword">throws</span> IOException </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/*创建一个XML文档*/</span></span><br><span class="line">		Document document = DocumentHelper.createDocument();</span><br><span class="line"></span><br><span class="line">		<span class="comment">/*创建根节点*/</span></span><br><span class="line">		Element element = document.addElement(<span class="string">"classes"</span>);</span><br><span class="line">		element.addAttribute(<span class="string">"id"</span>, <span class="string">"1"</span>);</span><br><span class="line">		element.addAttribute(<span class="string">"name"</span>, <span class="string">"root"</span>);</span><br><span class="line">		element.setText(<span class="string">"总班级"</span>);</span><br><span class="line"></span><br><span class="line">		<span class="comment">/*创建子节点*/</span></span><br><span class="line">		Element element2 = element.addElement(<span class="string">"class"</span>);</span><br><span class="line">		element2.addAttribute(<span class="string">"name"</span>, <span class="string">"班级1"</span>);</span><br><span class="line">		element2.addAttribute(<span class="string">"id"</span>, <span class="string">"01"</span>);</span><br><span class="line">		element2.setText(<span class="string">"第1个班级"</span>);</span><br><span class="line"></span><br><span class="line">		Element element3 = element.addElement(<span class="string">"class"</span>);</span><br><span class="line">		element3.addAttribute(<span class="string">"name"</span>, <span class="string">"班级2"</span>);</span><br><span class="line">		element3.addAttribute(<span class="string">"id"</span>, <span class="string">"02"</span>);</span><br><span class="line">		element3.setText(<span class="string">"第2个班级"</span>);</span><br><span class="line"></span><br><span class="line">    <span class="comment">/*将创建的XML文档保存到本机*/</span></span><br><span class="line">		XMLWriter writer = <span class="keyword">new</span> XMLWriter(<span class="keyword">new</span> FileOutputStream(<span class="keyword">new</span> File(<span class="string">"d:/classes.xml"</span>)));</span><br><span class="line">		writer.write(document);</span><br><span class="line"></span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+    
+    <a href="/2017/11/06/XML创建与解析/" class="post-more waves-effect waves-button">
+        more
+    </a>
+    </div>
+</article>
+
+<div class="post-footer">
+    
+	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Java/">Java</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/XML/">XML</a></li></ul>
+
+</div>
+
+
+            </li>
+        
+            <li class="post-list-item fade">
+                <article id="post-几种MD5使用的方法"
+  class="article-card article-type-post" itemprop="blogPost">
+  
+    
+    
+    
+        
+
+
+  
+    <h3 class="post-title re-title" itemprop="name">
+      <a class="post-title-link" href="/2017/10/30/几种MD5使用的方法/">几种MD5使用的方法</a>
+    </h3>
+  
+
+
+
+    
+    <div class="post-meta">
+        <time class="post-time" title="2017-10-30 11:38:51" datetime="2017-10-30T03:38:51.000Z"  itemprop="datePublished">2017-10-30</time>
+
+        
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/Java/">Java</a><ul class="article-category-list-child"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/Java/Security/">Security</a></li></ul></li></ul>
+
+
+
+        
+	<span id="/2017/10/30/几种MD5使用的方法/" class="leancloud_visitors" data-flag-title="几种MD5使用的方法" title="几种MD5使用的方法">
+		
+			<i class="icon icon-eye"></i>
+		
+		<span class="leancloud-visitors-count"></span>
+	</span>
+ 
+
+        
+
+
+        
+        
+    </div>
+    
+    <div class="post-content" id="post-content" itemprop="postContent">
+    
+    
+        <h2 id="前言："><a href="#前言：" class="headerlink" title="前言："></a>前言：</h2><p>由于MD5加密技术是一项单向的加密技术，不可以进行逆转，所以即使当我们知道加密后的数据也无法还原。安全性较高。</p>
+<hr>
+<h2 id="几种MD5的使用方法"><a href="#几种MD5的使用方法" class="headerlink" title="几种MD5的使用方法"></a>几种MD5的使用方法</h2><h3 id="方法一：（按照书上实例的方法）"><a href="#方法一：（按照书上实例的方法）" class="headerlink" title="方法一：（按照书上实例的方法）"></a>方法一：（按照书上实例的方法）</h3><blockquote>
+<p>MD5 加密以后生成byte数组，但是由于我们通常在数据库中保存以字符串的形式保存数据，所以我们经常会将转换以后的byte数组转换为字符串</p>
+</blockquote>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@date</span> 2017年10月30日 上午11:13:12</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@author</span> SiVan</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">package</span> com.md5;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> java.security.MessageDigest;</span><br><span class="line"><span class="keyword">import</span> java.security.NoSuchAlgorithmException;</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@author</span> SiVan</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@time</span> 2017年10月30日 上午11:13:12</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@TODO</span> TODO	md5加密</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Test</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">	<span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">byte</span>[] encryptMD5(<span class="keyword">byte</span>[] data) <span class="keyword">throws</span> NoSuchAlgorithmException &#123;</span><br><span class="line"></span><br><span class="line">		<span class="comment">/*指定加密算法*/</span></span><br><span class="line">		MessageDigest digest = MessageDigest.getInstance(<span class="string">"MD5"</span>);</span><br><span class="line">		<span class="comment">/*进行加密*/</span></span><br><span class="line">		digest.update(data);</span><br><span class="line"></span><br><span class="line">		<span class="comment">/*返回加密后的byte数组*/</span></span><br><span class="line">		<span class="keyword">return</span> digest.digest();</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="comment">/**</span></span><br><span class="line"><span class="comment">	 *</span></span><br><span class="line"><span class="comment">	 * <span class="doctag">@param</span> data</span></span><br><span class="line"><span class="comment">	 * <span class="doctag">@return</span> 将加密后的byte 转换为 字符串</span></span><br><span class="line"><span class="comment">	 * <span class="doctag">@throws</span> NoSuchAlgorithmException</span></span><br><span class="line"><span class="comment">	 */</span></span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">static</span> String <span class="title">encryptMD5toString</span><span class="params">(<span class="keyword">byte</span>[] data)</span> <span class="keyword">throws</span> NoSuchAlgorithmException </span>&#123;</span><br><span class="line">		String str = <span class="string">""</span>;</span><br><span class="line">		String str16;</span><br><span class="line">		<span class="keyword">for</span> ( <span class="keyword">int</span> i = <span class="number">0</span>; i &lt; data.length; i++ )&#123;</span><br><span class="line">			str16 = Integer.toHexString(<span class="number">0xFF</span> &amp; data[i]);</span><br><span class="line">			<span class="comment">/*如果长度为1，前位补0*/</span></span><br><span class="line">			<span class="keyword">if</span> (str16.length() == <span class="number">1</span>) &#123;</span><br><span class="line">				str = str + <span class="string">"0"</span> + str16;</span><br><span class="line">			&#125; <span class="keyword">else</span> &#123;</span><br><span class="line">				str = str + str16;</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="keyword">return</span> str;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> <span class="keyword">throws</span> NoSuchAlgorithmException </span>&#123;</span><br><span class="line">		String st = <span class="string">"admin"</span>;</span><br><span class="line">		System.out.println(encryptMD5toString(encryptMD5(st.getBytes())));</span><br><span class="line">		System.out.println(encryptMD5(st.getBytes()));</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+    
+    <a href="/2017/10/30/几种MD5使用的方法/" class="post-more waves-effect waves-button">
+        more
+    </a>
+    </div>
+</article>
+
+<div class="post-footer">
+    
+	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Java/">Java</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/MD5/">MD5</a></li></ul>
+
+</div>
+
+
+            </li>
+        
+            <li class="post-list-item fade">
+                <article id="post-使用json级联改变部门员工"
+  class="article-card article-type-post" itemprop="blogPost">
+  
+    
+    
+    
+        
+
+
+  
+    <h3 class="post-title re-title" itemprop="name">
+      <a class="post-title-link" href="/2017/10/30/使用json级联改变部门员工/">使用json级联改变部门员工</a>
+    </h3>
+  
+
+
+
+    
+    <div class="post-meta">
+        <time class="post-time" title="2017-10-30 09:55:07" datetime="2017-10-30T01:55:07.000Z"  itemprop="datePublished">2017-10-30</time>
+
+        
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/json/">json</a><ul class="article-category-list-child"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/json/级联/">级联</a></li></ul></li></ul>
+
+
+
+        
+	<span id="/2017/10/30/使用json级联改变部门员工/" class="leancloud_visitors" data-flag-title="使用json级联改变部门员工" title="使用json级联改变部门员工">
+		
+			<i class="icon icon-eye"></i>
+		
+		<span class="leancloud-visitors-count"></span>
+	</span>
+ 
+
+        
+
+
+        
+        
+    </div>
+    
+    <div class="post-content" id="post-content" itemprop="postContent">
+    
+    
+        <blockquote>
+<p>这里使用Hibernate + json + Ajax + 级联改变部门员工</p>
+</blockquote>
+<h2 id="基本的页面编写："><a href="#基本的页面编写：" class="headerlink" title="基本的页面编写："></a>基本的页面编写：</h2><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="tag">&lt;<span class="name">%@</span> <span class="attr">page</span> <span class="attr">language</span>=<span class="string">"java"</span> <span class="attr">import</span>=<span class="string">"java.util.*"</span> <span class="attr">pageEncoding</span>=<span class="string">"UTF-8"</span>%&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">%</span></span></span><br><span class="line"><span class="tag"><span class="attr">String</span> <span class="attr">path</span> = <span class="string">request.getContextPath();</span></span></span><br><span class="line"><span class="tag"><span class="attr">String</span> <span class="attr">basePath</span> = <span class="string">request.getScheme()+</span>"<span class="attr">:</span>//"+<span class="attr">request.getServerName</span>()+"<span class="attr">:</span>"+<span class="attr">request.getServerPort</span>()+<span class="attr">path</span>+"/";</span></span><br><span class="line"><span class="tag">%&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="meta">&lt;!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">html</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">head</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;/<span class="name">head</span>&gt;</span></span><br><span class="line"></span><br><span class="line">  <span class="tag">&lt;<span class="name">body</span>&gt;</span></span><br><span class="line">  	部门：<span class="tag">&lt;<span class="name">select</span> <span class="attr">id</span>=<span class="string">"dep"</span>&gt;</span><span class="tag">&lt;/<span class="name">select</span>&gt;</span></span><br><span class="line">  	员工：<span class="tag">&lt;<span class="name">select</span> <span class="attr">id</span>=<span class="string">"emp"</span>&gt;</span><span class="tag">&lt;/<span class="name">select</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;/<span class="name">body</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">html</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<hr>
+<h2 id="servlet的生成"><a href="#servlet的生成" class="headerlink" title="servlet的生成"></a>servlet的生成</h2><blockquote>
+<p>DepServlet<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="keyword">import</span> java.io.IOException;</span><br><span class="line"><span class="keyword">import</span> java.util.List;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> javax.servlet.ServletException;</span><br><span class="line"><span class="keyword">import</span> javax.servlet.annotation.WebServlet;</span><br><span class="line"><span class="keyword">import</span> javax.servlet.http.HttpServlet;</span><br><span class="line"><span class="keyword">import</span> javax.servlet.http.HttpServletRequest;</span><br><span class="line"><span class="keyword">import</span> javax.servlet.http.HttpServletResponse;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> com.dao.DepDAO;</span><br><span class="line"><span class="keyword">import</span> com.pojo.Dep;</span><br><span class="line"><span class="meta">@WebServlet</span>(<span class="string">"/dep.do"</span>)</span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">DepServlet</span> <span class="keyword">extends</span> <span class="title">HttpServlet</span> </span>&#123;</span><br><span class="line">	<span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> <span class="keyword">long</span> serialVersionUID = <span class="number">1L</span>;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">	<span class="keyword">private</span> DepDAO depDao = <span class="keyword">new</span> DepDAO();</span><br><span class="line"></span><br><span class="line">	<span class="function"><span class="keyword">protected</span> <span class="keyword">void</span> <span class="title">service</span><span class="params">(HttpServletRequest request, HttpServletResponse response)</span> <span class="keyword">throws</span> ServletException, IOException </span>&#123;</span><br><span class="line"></span><br><span class="line">		response.setContentType(<span class="string">"text/html;charset=utf-8"</span>);</span><br><span class="line"></span><br><span class="line">		String method = request.getParameter(<span class="string">"method"</span>);</span><br><span class="line">		<span class="keyword">if</span> ( <span class="string">"dep"</span>.equals(method) ) &#123;</span><br><span class="line">			doDep(request, response);</span><br><span class="line">		&#125;</span><br><span class="line"></span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="comment">/**</span></span><br><span class="line"><span class="comment">	 * <span class="doctag">@throws</span> IOException</span></span><br><span class="line"><span class="comment">	 *</span></span><br><span class="line"><span class="comment">	 */</span></span><br><span class="line">	<span class="function"><span class="keyword">private</span> <span class="keyword">void</span> <span class="title">doDep</span><span class="params">(HttpServletRequest request, HttpServletResponse response)</span> <span class="keyword">throws</span> IOException </span>&#123;</span><br><span class="line">		List&lt;Dep&gt; list = depDao.findAll();</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">		<span class="comment">/*将list转换为json格式的数据*/</span></span><br><span class="line">		StringBuffer sb = <span class="keyword">new</span> StringBuffer();</span><br><span class="line">		sb.append(<span class="string">"["</span>);</span><br><span class="line">		<span class="keyword">for</span> (Dep dep : list) &#123;</span><br><span class="line">			sb.append(<span class="string">"&#123; 'depId': '"</span> + dep.getDepId() + <span class="string">"', 'depName': '"</span> + dep.getDepName() + <span class="string">"' &#125;,"</span> );</span><br><span class="line">		&#125;</span><br><span class="line">		sb.deleteCharAt(sb.length() - <span class="number">1</span>);</span><br><span class="line">		sb.append(<span class="string">"]"</span>);</span><br><span class="line">		response.getWriter().print(sb.toString());</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+</blockquote>
+    
+    <a href="/2017/10/30/使用json级联改变部门员工/" class="post-more waves-effect waves-button">
+        more
+    </a>
+    </div>
+</article>
+
+<div class="post-footer">
+    
+	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Hibernate/">Hibernate</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/json/">json</a></li></ul>
+
+</div>
+
+
+            </li>
+        
+            <li class="post-list-item fade">
+                <article id="post-解决MySql-8小时自动关闭的问题"
+  class="article-card article-type-post" itemprop="blogPost">
+  
+    
+    
+    
+        
+
+
+  
+    <h3 class="post-title re-title" itemprop="name">
+      <a class="post-title-link" href="/2017/10/28/解决MySql-8小时自动关闭的问题/">解决MySql 8小时自动关闭的问题</a>
+    </h3>
+  
+
+
+
+    
+    <div class="post-meta">
+        <time class="post-time" title="2017-10-28 10:08:04" datetime="2017-10-28T02:08:04.000Z"  itemprop="datePublished">2017-10-28</time>
+
+        
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/MySql/">MySql</a><ul class="article-category-list-child"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/MySql/8小时/">8小时</a></li></ul></li></ul>
+
+
+
+        
+	<span id="/2017/10/28/解决MySql-8小时自动关闭的问题/" class="leancloud_visitors" data-flag-title="解决MySql 8小时自动关闭的问题" title="解决MySql 8小时自动关闭的问题">
+		
+			<i class="icon icon-eye"></i>
+		
+		<span class="leancloud-visitors-count"></span>
+	</span>
+ 
+
+        
+
+
+        
+        
+    </div>
+    
+    <div class="post-content" id="post-content" itemprop="postContent">
+    
+    
+        <h2 id="前言："><a href="#前言：" class="headerlink" title="前言："></a>前言：</h2><blockquote>
+<p>记得自己之前在服务器上部署了一个很low的假期签到系统，每次叫大家签到都是晚上，很大程度上讲，时间已经过了将近16个小时，每次第二天叫大家签到的时候，很多人，都发了同一个问题给我，服务器报了连接异常，后来听到身边的大牛才知道，原来MySql如果配置不当，连接空闲超过8小时，MySql将会关闭该连接，但是我们服务器认为连接还是存在的，因此还会访问，所以就会出现异常情况</p>
+</blockquote>
+<blockquote>
+<p>也有一部分原因自己是知道的，因为自己采用了c3p0数据源，所以才会出现这个情况，而dbcp则不会出现如此情况！</p>
+</blockquote>
+<hr>
+<h2 id="查询当前数据库连接超时时间"><a href="#查询当前数据库连接超时时间" class="headerlink" title="查询当前数据库连接超时时间"></a>查询当前数据库连接超时时间</h2><blockquote>
+<p>mysql 命令行中 键入如下命令</p>
+</blockquote>
+<p>SHOW GLOBAL VARIABLES LIKE ‘wait_timeout’;</p>
+<blockquote>
+<p>结果如下</p>
+</blockquote>
+<p><img src="http://on3w7gc9m.bkt.clouddn.com/QQ%E5%9B%BE%E7%89%8720171030103053.png"></p   class="index-item-img">
+<p>超时时间为28800秒，换算下来也就是8小时</p>
+<hr>
+<h2 id="解决方法"><a href="#解决方法" class="headerlink" title="解决方法"></a>解决方法</h2><h3 id="方法一："><a href="#方法一：" class="headerlink" title="方法一："></a>方法一：</h3><blockquote>
+<p>这个也是自己之前的方法：也就是采用一个简单的定时器，每隔7小时定时查一下数据库，不让连接自动关闭，</p>
+</blockquote>
+<h3 id="方法二："><a href="#方法二：" class="headerlink" title="方法二："></a>方法二：</h3><blockquote>
+<p>每次当我们连接到数据库中的时候，url可改为：<br>jdbc:mysql://localhost:3306/test?user=root&amp;password=root&amp;useUnicode=true&amp;characterEncoding=utf8&amp;autoReconnect=true&amp;failOverReadOnly=false</p>
+</blockquote>
+    
+    <a href="/2017/10/28/解决MySql-8小时自动关闭的问题/" class="post-more waves-effect waves-button">
+        more
+    </a>
+    </div>
+</article>
+
+<div class="post-footer">
+    
+	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Hibernate/">Hibernate</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/MySql/">MySql</a></li></ul>
+
+</div>
+
+
+            </li>
+        
+            <li class="post-list-item fade">
+                <article id="post-Spring中使用注解"
+  class="article-card article-type-post" itemprop="blogPost">
+  
+    
+    
+    
+        
+
+
+  
+    <h3 class="post-title re-title" itemprop="name">
+      <a class="post-title-link" href="/2017/10/26/Spring中使用注解/">Spring中使用注解</a>
+    </h3>
+  
+
+
+
+    
+    <div class="post-meta">
+        <time class="post-time" title="2017-10-26 10:51:29" datetime="2017-10-26T02:51:29.000Z"  itemprop="datePublished">2017-10-26</time>
+
+        
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/框架/">框架</a><ul class="article-category-list-child"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/框架/Spring/">Spring</a></li></ul></li></ul>
+
+
+
+        
+	<span id="/2017/10/26/Spring中使用注解/" class="leancloud_visitors" data-flag-title="Spring中使用注解" title="Spring中使用注解">
+		
+			<i class="icon icon-eye"></i>
+		
+		<span class="leancloud-visitors-count"></span>
+	</span>
+ 
+
+        
+
+
+        
+        
+    </div>
+    
+    <div class="post-content" id="post-content" itemprop="postContent">
+    
+    
+        <h2 id="使用注解进行实例Bean"><a href="#使用注解进行实例Bean" class="headerlink" title="使用注解进行实例Bean"></a>使用注解进行实例Bean</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> org.springframework.stereotype.Component;</span><br><span class="line"></span><br><span class="line"><span class="meta">@Component</span>(value=<span class="string">"user1"</span>)</span><br><span class="line"><span class="comment">/*类似于&lt;bean id="user1" class="com.pojo.User"&gt;&lt;/bean&gt;*/</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">User</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">add</span><span class="params">()</span> </span>&#123;</span><br><span class="line">		System.out.println(<span class="string">"user----------add--------"</span>);</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="测试"><a href="#测试" class="headerlink" title="测试"></a>测试</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> org.springframework.context.support.ClassPathXmlApplicationContext;</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * 使用注解进行装载Bean</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@author</span> SiVan</span></span><br><span class="line"><span class="comment"> *</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Test</span> </span>&#123;</span><br><span class="line">	<span class="meta">@org</span>.junit.Test</span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">add</span><span class="params">()</span> </span>&#123;</span><br><span class="line">		ApplicationContext context = <span class="keyword">new</span> ClassPathXmlApplicationContext(<span class="string">"bean1.xml"</span>);</span><br><span class="line">		User user = (User)context.getBean(<span class="string">"user1"</span>);</span><br><span class="line">		System.out.println(user);</span><br><span class="line">		user.add();</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<hr>
+<h2 id="使用注解创建单实例-多实例"><a href="#使用注解创建单实例-多实例" class="headerlink" title="使用注解创建单实例/多实例"></a>使用注解创建单实例/多实例</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> org.springframework.context.annotation.Scope;</span><br><span class="line"><span class="keyword">import</span> org.springframework.stereotype.Component;</span><br><span class="line"></span><br><span class="line"><span class="meta">@Component</span>(value=<span class="string">"user1"</span>)</span><br><span class="line"><span class="meta">@Scope</span>(value=<span class="string">"prototype"</span>)     <span class="comment">/*指令多实例*/</span></span><br><span class="line"><span class="comment">/*指定单实例 @Scope(value="singleton")*/</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">User</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">add</span><span class="params">()</span> </span>&#123;</span><br><span class="line">		System.out.println(<span class="string">"user----------add--------"</span>);</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<hr>
+<h2 id="注意事项"><a href="#注意事项" class="headerlink" title="注意事项"></a>注意事项</h2><h3 id="NoSuchBeanDefinitionException"><a href="#NoSuchBeanDefinitionException" class="headerlink" title="NoSuchBeanDefinitionException"></a>NoSuchBeanDefinitionException</h3><blockquote>
+<p>由于配置文件的包名路径没有写对，所以没有搜索到，确保配置文件类的路径正确</p>
+</blockquote>
+    
+    <a href="/2017/10/26/Spring中使用注解/" class="post-more waves-effect waves-button">
+        more
+    </a>
+    </div>
+</article>
+
+<div class="post-footer">
+    
+	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Java/">Java</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Spring/">Spring</a></li></ul>
+
+</div>
+
+
+            </li>
         
             <li class="post-list-item fade">
                 <article id="post-一种优雅的策略-递归"
@@ -493,584 +1014,11 @@
 
             </li>
         
-            <li class="post-list-item fade">
-                <article id="post-了解类的加载，连接和初始化"
-  class="article-card article-type-post" itemprop="blogPost">
-  
-    
-    
-    
-        
-
-
-  
-    <h3 class="post-title re-title" itemprop="name">
-      <a class="post-title-link" href="/2017/10/13/了解类的加载，连接和初始化/">了解类的加载，连接和初始化</a>
-    </h3>
-  
-
-
-
-    
-    <div class="post-meta">
-        <time class="post-time" title="2017-10-13 23:00:19" datetime="2017-10-13T15:00:19.000Z"  itemprop="datePublished">2017-10-13</time>
-
-        
-	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/Java/">Java</a><ul class="article-category-list-child"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/Java/Class/">Class</a></li></ul></li></ul>
-
-
-
-        
-	<span id="/2017/10/13/了解类的加载，连接和初始化/" class="leancloud_visitors" data-flag-title="了解类的加载，连接和初始化" title="了解类的加载，连接和初始化">
-		
-			<i class="icon icon-eye"></i>
-		
-		<span class="leancloud-visitors-count"></span>
-	</span>
- 
-
-        
-
-
-        
-        
-    </div>
-    
-    <div class="post-content" id="post-content" itemprop="postContent">
-    
-    
-        <h2 id="引言："><a href="#引言：" class="headerlink" title="引言："></a>引言：</h2><p>首先附上三段代码：</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">A</span> </span>&#123;</span><br><span class="line">	<span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">int</span> a = <span class="number">6</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">ATest1</span> </span>&#123;</span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">		A a = <span class="keyword">new</span> A();</span><br><span class="line">		a.a++;</span><br><span class="line">		System.out.println(a.a);</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">ATest2</span> </span>&#123;</span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">		A b = <span class="keyword">new</span> A();</span><br><span class="line">		System.out.println(b.a);</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<blockquote>
-<p>当我们运行完 ATest1 之后 再次运行 ATest2 将会发现 静态变量a的值仍是6，因为在 JVM 中，第一次运行JVM会自动结束，因此对静态变量A保存的数据将会全部丢失，第二次运行JVM将会重新初始化变量，所以值仍为6</p>
-</blockquote>
-<p>结论：</p>
-<ol>
-<li>每次运行某个Java程序，命令将会启动一个JVM进程，并且该程序中的线程将处于同一个进程中，都使用该JVM内存区</li>
-<li>倘若系统出现一些情况，JVM进程将会被终止<blockquote>
-<ol>
-<li>程序运行到最后结束</li>
-<li>程序运行中遇到错误或者未捕获的异常</li>
-<li>程序中使用System.exit() 或 Runtime.getRuntime().exit() 将会结束程序</li>
-<li>JVM被平台终止</li>
-</ol>
-</blockquote>
-</li>
-</ol>
-    
-    <a href="/2017/10/13/了解类的加载，连接和初始化/" class="post-more waves-effect waves-button">
-        more
-    </a>
-    </div>
-</article>
-
-<div class="post-footer">
-    
-	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Class/">Class</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Java/">Java</a></li></ul>
-
-</div>
-
-
-            </li>
-        
-            <li class="post-list-item fade">
-                <article id="post-无框架使用ali开源连接池Druid"
-  class="article-card article-type-post" itemprop="blogPost">
-  
-    
-    
-    
-        
-
-
-  
-    <h3 class="post-title re-title" itemprop="name">
-      <a class="post-title-link" href="/2017/10/11/无框架使用ali开源连接池Druid/">无框架使用alibaba开源代码连接池Druid</a>
-    </h3>
-  
-
-
-
-    
-    <div class="post-meta">
-        <time class="post-time" title="2017-10-11 21:50:52" datetime="2017-10-11T13:50:52.000Z"  itemprop="datePublished">2017-10-11</time>
-
-        
-	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/开源软件/">开源软件</a><ul class="article-category-list-child"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/开源软件/Druid/">Druid</a></li></ul></li></ul>
-
-
-
-        
-	<span id="/2017/10/11/无框架使用ali开源连接池Druid/" class="leancloud_visitors" data-flag-title="无框架使用alibaba开源代码连接池Druid" title="无框架使用alibaba开源代码连接池Druid">
-		
-			<i class="icon icon-eye"></i>
-		
-		<span class="leancloud-visitors-count"></span>
-	</span>
- 
-
-        
-
-
-        
-        
-    </div>
-    
-    <div class="post-content" id="post-content" itemprop="postContent">
-    
-    
-        <blockquote>
-<p>Druid是Java语言中最好的数据库连接池。Druid能够提供强大的监控和扩展功能。–温少(alibaba开源Druid负责人)</p>
-</blockquote>
-<h2 id="准备工作"><a href="#准备工作" class="headerlink" title="准备工作"></a>准备工作</h2><ol>
-<li><a href="https://github.com/sivanWu0222/Druid-Test/blob/master/druid-1.1.4.jar" target="_blank" rel="noopener">下载核心jar包</a></li>
-<li>下载log4j的<a href="https://github.com/sivanWu0222/Druid-Test/blob/master/log4j-1.2.9.jar" target="_blank" rel="noopener">jar包</a>以及<a href="https://github.com/sivanWu0222/Druid-Test/blob/master/log4j.properties" target="_blank" rel="noopener">配置文件</a></li>
-<li>拷贝对应的数据库驱动jar包到工作空间中(由于所druid可以跨数据库进行开发，因此我们需要将我们自己使用的数据库驱动拷贝到工作空间中)</li>
-</ol>
-<hr>
-<h2 id="使用druid实现连接到数据库"><a href="#使用druid实现连接到数据库" class="headerlink" title="使用druid实现连接到数据库"></a>使用druid实现连接到数据库</h2><ol>
-<li>WEB-INF下新建一个文件,命名为 db_server.properties ,配置如下<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">driverClassName=com.mysql.jdbc.Driver</span><br><span class="line">url=jdbc:mysql://127.0.0.1:3306/master</span><br><span class="line">username=root</span><br><span class="line">password=root</span><br><span class="line">filters=stat</span><br><span class="line">initialSize=2</span><br><span class="line">maxActive=300</span><br><span class="line">maxWait=60000</span><br><span class="line">timeBetweenEvictionRunsMillis=60000</span><br><span class="line">minEvictableIdleTimeMillis=300000</span><br><span class="line">validationQuery=SELECT 1</span><br><span class="line">testWhileIdle=true</span><br><span class="line">testOnBorrow=false</span><br><span class="line">testOnReturn=false</span><br><span class="line">poolPreparedStatements=false</span><br><span class="line">maxPoolPreparedStatementPerConnectionSize=200</span><br></pre></td></tr></table></figure>
-</li>
-</ol>
-<blockquote>
-<p>注意修改自己的数据库用户名，密码以及url和driverClassName</p>
-</blockquote>
-<ol start="2">
-<li>创建一个连接池工具管理类，命名为DBPoolConnection.java</li>
-</ol>
-    
-    <a href="/2017/10/11/无框架使用ali开源连接池Druid/" class="post-more waves-effect waves-button">
-        more
-    </a>
-    </div>
-</article>
-
-<div class="post-footer">
-    
-	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Java/">Java</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Web/">Web</a></li></ul>
-
-</div>
-
-
-            </li>
-        
-            <li class="post-list-item fade">
-                <article id="post-彻底理解int类型的取值范围"
-  class="article-card article-type-post" itemprop="blogPost">
-  
-    
-    
-    
-        
-
-
-  
-    <h3 class="post-title re-title" itemprop="name">
-      <a class="post-title-link" href="/2017/10/01/彻底理解int类型的取值范围/">彻底理解int类型的取值范围</a>
-    </h3>
-  
-
-
-
-    
-    <div class="post-meta">
-        <time class="post-time" title="2017-10-01 16:01:07" datetime="2017-10-01T08:01:07.000Z"  itemprop="datePublished">2017-10-01</time>
-
-        
-	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/计算机基本知识/">计算机基本知识</a></li></ul>
-
-
-
-        
-	<span id="/2017/10/01/彻底理解int类型的取值范围/" class="leancloud_visitors" data-flag-title="彻底理解int类型的取值范围" title="彻底理解int类型的取值范围">
-		
-			<i class="icon icon-eye"></i>
-		
-		<span class="leancloud-visitors-count"></span>
-	</span>
- 
-
-        
-
-
-        
-        
-    </div>
-    
-    <div class="post-content" id="post-content" itemprop="postContent">
-    
-    
-        <blockquote>
-<p>今天在看一道题目的时候，遇到了一个问题，就是关于数据类型最值的问题，这里介绍下int类型的取值范围，并且如何理解int取值范围</p>
-</blockquote>
-<h2 id="基本计算机知识"><a href="#基本计算机知识" class="headerlink" title="基本计算机知识"></a>基本计算机知识</h2><blockquote>
-<p>在我们了解今天的话题之前，我们需要了解如下的知识：</p>
-<ol>
-<li>原码，补码，反码 ~~~~这都是什么鬼？<br>举个最简单例子:<br>例如 : 数字5的二进制 可以表示为（默认是32位机器） ,这里就是原码（<strong>第一位是符号位，0为正数，1为负数</strong>）<pre><code>0000 0000 0000 0000 0000 0000 0000 0101
-</code></pre>对应反码为 0111 1111 1111 1111 1111 1111 1111  1010 ，反码计算规则：对于符号位其他的位取反就可以（也就是把0替换成1，把1替换成0）<br>对应补码的计算规则为 （反码 + 1 )， 也就是 0111 1111 1111 1111 1111 1111 1111 1011</li>
-<li>正数在计算机中如何表示？负数呢？<br>计算机中，正数用原码表示，负数用补码(原码取反(符号位不变),然后加上1)表示</li>
-<li>c语言中的位数如何知道？<br>最直接体现是由编译器自己决定的，但其实并没有这么简单，还收到OS影响，只有在OS支持下我们才可以由编译器决定！</li>
-</ol>
-</blockquote>
-    
-    <a href="/2017/10/01/彻底理解int类型的取值范围/" class="post-more waves-effect waves-button">
-        more
-    </a>
-    </div>
-</article>
-
-<div class="post-footer">
-    
-	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/C/">C</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/OS/">OS</a></li></ul>
-
-</div>
-
-
-            </li>
-        
-            <li class="post-list-item fade">
-                <article id="post-MySQL存储引擎的选择"
-  class="article-card article-type-post" itemprop="blogPost">
-  
-    
-    
-    
-        
-
-
-  
-    <h3 class="post-title re-title" itemprop="name">
-      <a class="post-title-link" href="/2017/09/20/MySQL存储引擎的选择/">MySQL存储引擎的选择</a>
-    </h3>
-  
-
-
-
-    
-    <div class="post-meta">
-        <time class="post-time" title="2017-09-20 22:55:35" datetime="2017-09-20T14:55:35.000Z"  itemprop="datePublished">2017-09-20</time>
-
-        
-	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/MySQL/">MySQL</a><ul class="article-category-list-child"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/MySQL/SQL/">SQL</a></li></ul></li></ul>
-
-
-
-        
-	<span id="/2017/09/20/MySQL存储引擎的选择/" class="leancloud_visitors" data-flag-title="MySQL存储引擎的选择" title="MySQL存储引擎的选择">
-		
-			<i class="icon icon-eye"></i>
-		
-		<span class="leancloud-visitors-count"></span>
-	</span>
- 
-
-        
-
-
-        
-        
-    </div>
-    
-    <div class="post-content" id="post-content" itemprop="postContent">
-    
-    
-        <h2 id="了解存储引擎"><a href="#了解存储引擎" class="headerlink" title="了解存储引擎"></a>了解存储引擎</h2><blockquote>
-<p>存储引擎其实就是数据在数据库中的存放方式，通过什么样的方式存储数据效率更高，对于应用的优化有着举足轻重的作用，尤其是对于我们这样海量数据的时代，能够高效的处理海量数据就已经很不易了！</p>
-</blockquote>
-<p>MySQL5.0 支持如下存储引擎：</p>
-<ol>
-<li>MyISAM</li>
-<li>InnoDB</li>
-<li>BDB</li>
-<li>MEMORY</li>
-<li>MERGE</li>
-<li>EXAMPLE</li>
-<li>NDB Cluster</li>
-<li>ARCHIVE</li>
-<li>CSV</li>
-<li>BLACKHOLE</li>
-<li>FEDERATED<blockquote>
-<p>如此多的存储引擎，却只有InnoDB和BDB提供事务安全表，其他存储引擎都是非事务安全表</p>
-</blockquote>
-</li>
-</ol>
-<h3 id="选择存储引擎"><a href="#选择存储引擎" class="headerlink" title="选择存储引擎"></a>选择存储引擎</h3><blockquote>
-<p>当我们在创建表的时候没有指定存储引擎，系统将会使用默认存储引擎，MySQL5.5(包含5.5)之前默认存储引擎为MyISAM,之后便改为了InnoDB,如果要修改存储引擎，可以在创建表的SQL语句中进行设置。</p>
-</blockquote>
-<p>查看当前数据库支持的存储引擎，可以使用如下命令<br><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SHOW</span> <span class="keyword">ENGINES</span> \G</span><br></pre></td></tr></table></figure></p>
-<p>或者<br><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SHOW</span> <span class="keyword">VARIABLES</span> <span class="keyword">LIKE</span> <span class="string">'have%'</span>;</span><br></pre></td></tr></table></figure></p>
-<figure class="image-box">
-                <img src="http://on3w7gc9m.bkt.clouddn.com/QQ%E5%9B%BE%E7%89%8720170913144228.png" alt title class="index-item-img">
-                <p></p>
-            </figure>
-<blockquote>
-<p>图片中显示 value 显示为 “DISABLED” 的记录表示支持该存储引擎，但是数据库启动的时候被禁用</p>
-</blockquote>
-<h4 id="创建表的时候指定存储引擎"><a href="#创建表的时候指定存储引擎" class="headerlink" title="创建表的时候指定存储引擎"></a>创建表的时候指定存储引擎</h4><blockquote>
-<p>创建表可以指定存储引擎，例如下面的SQL语句</p>
-</blockquote>
-<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">CREATE</span> <span class="keyword">TABLE</span> ai (</span><br><span class="line">  i <span class="built_in">BIGINT</span>(<span class="number">20</span>) <span class="keyword">NOT</span> <span class="literal">NULL</span> AUTO_INCREMENT,</span><br><span class="line">  PRIMARY <span class="keyword">KEY</span>(i)</span><br><span class="line">) <span class="keyword">ENGINE</span> = MyISAM <span class="keyword">DEFAULT</span> <span class="keyword">CHARSET</span> = UTF8;</span><br></pre></td></tr></table></figure>
-<figure class="image-box">
-                <img src="http://on3w7gc9m.bkt.clouddn.com/QQ%E5%9B%BE%E7%89%8720170913145307.png" alt title class="index-item-img">
-                <p></p>
-            </figure>
-<h4 id="修改存储引擎"><a href="#修改存储引擎" class="headerlink" title="修改存储引擎"></a>修改存储引擎</h4><blockquote>
-<p>也可以使用ALTER TABLE 语句进行存储引擎的修改，将一个已经存在的表修改成其他存储引擎<br><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">ALTER</span> <span class="keyword">TABLE</span> ai <span class="keyword">ENGINE</span> = <span class="keyword">InnoDB</span>;</span><br></pre></td></tr></table></figure></p>
-</blockquote>
-    
-    <a href="/2017/09/20/MySQL存储引擎的选择/" class="post-more waves-effect waves-button">
-        more
-    </a>
-    </div>
-</article>
-
-<div class="post-footer">
-    
-	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/MySQL/">MySQL</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/数据库/">数据库</a></li></ul>
-
-</div>
-
-
-            </li>
-        
-            <li class="post-list-item fade">
-                <article id="post-Java全球化与格式化"
-  class="article-card article-type-post" itemprop="blogPost">
-  
-    
-    
-    
-        
-
-
-  
-    <h3 class="post-title re-title" itemprop="name">
-      <a class="post-title-link" href="/2017/07/19/Java全球化与格式化/">Java全球化与格式化</a>
-    </h3>
-  
-
-
-
-    
-    <div class="post-meta">
-        <time class="post-time" title="2017-07-19 22:38:55" datetime="2017-07-19T14:38:55.000Z"  itemprop="datePublished">2017-07-19</time>
-
-        
-	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/Java/">Java</a><ul class="article-category-list-child"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/Java/Internationalization/">Internationalization</a></li></ul></li></ul>
-
-
-
-        
-	<span id="/2017/07/19/Java全球化与格式化/" class="leancloud_visitors" data-flag-title="Java全球化与格式化" title="Java全球化与格式化">
-		
-			<i class="icon icon-eye"></i>
-		
-		<span class="leancloud-visitors-count"></span>
-	</span>
- 
-
-        
-
-
-        
-        
-    </div>
-    
-    <div class="post-content" id="post-content" itemprop="postContent">
-    
-    
-        <blockquote>
-<p>最近几年，随着软件蔓延全球的趋势，全球化的脚步不断前进，全球化就意味着我们必须根据不同用户所在的不同地域使用不同的语言，其中最简单的就是根据用户所在地区进行相应语言的设置，也就是本地化，因此全球化离不开本地化！</p>
-</blockquote>
-<h2 id="Java中的全球化"><a href="#Java中的全球化" class="headerlink" title="Java中的全球化"></a>Java中的全球化</h2><blockquote>
-<p>最近几年，随着JDK版本的的深入，Java也不断升级，提供了对不同国家和不同地区的支持！</p>
-</blockquote>
-<h3 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h3><p>将程序中的标签，提示等信息放在资源文件中，根据用户所在的地区进行相应的选择，其中每个资源文件采用key—-value形式进行配对，每个资源文件中的key不变，随着地区进行value的改变</p>
-<h3 id="用到的类"><a href="#用到的类" class="headerlink" title="用到的类"></a>用到的类</h3><ol>
-<li>java.util.Locale         加载国家、资源语言包</li>
-<li>java.util.ResourceBundle   封装特定国家、地区环境</li>
-<li>java.text.MessageFormat    对带占位符的字符串进行格式化</li>
-</ol>
-<h3 id="资源文件命名规范"><a href="#资源文件命名规范" class="headerlink" title="资源文件命名规范"></a>资源文件命名规范</h3><blockquote>
-<p>对于不同语言资源文件的配置，我们也有一套规范</p>
-</blockquote>
-<ol>
-<li>值通常采用 Key —– value 形式进行使用</li>
-<li>资源文件通常采用 propertyname_language.properties 的文件名形式进行命名</li>
-</ol>
-<h3 id="获取Java支持的国家和语言"><a href="#获取Java支持的国家和语言" class="headerlink" title="获取Java支持的国家和语言"></a>获取Java支持的国家和语言</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * 事实上JAVA不可能支持所有国家和地区，如果需要获取JAVA支持的国家和地区，</span></span><br><span class="line"><span class="comment"> * 则可以调用Locale类的getAvailableLocales()方法，返回一个Locale数组</span></span><br><span class="line"><span class="comment"> * 包含了支持的国家和地区，</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">GetSupportClassAndArea</span> </span>&#123;</span><br><span class="line">  <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">    Locale[] locales = Locale.getAvailableLocales();</span><br><span class="line">    <span class="keyword">for</span> (Locale locale : locales) &#123;</span><br><span class="line">      System.out.println(locale.getDisplayCountry() + <span class="string">"="</span> +   locale.getCountry() + <span class="string">"\t"</span> + locale.getLanguage() + <span class="string">"="</span> + locale.getDisplayLanguage());</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-    
-    <a href="/2017/07/19/Java全球化与格式化/" class="post-more waves-effect waves-button">
-        more
-    </a>
-    </div>
-</article>
-
-<div class="post-footer">
-    
-	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Internationalization/">Internationalization</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Java/">Java</a></li></ul>
-
-</div>
-
-
-            </li>
-        
-            <li class="post-list-item fade">
-                <article id="post-C3P0连接池的使用"
-  class="article-card article-type-post" itemprop="blogPost">
-  
-    
-    
-    
-        
-
-
-  
-    <h3 class="post-title re-title" itemprop="name">
-      <a class="post-title-link" href="/2017/07/07/C3P0连接池的使用/">C3P0连接池的使用</a>
-    </h3>
-  
-
-
-
-    
-    <div class="post-meta">
-        <time class="post-time" title="2017-07-07 12:42:40" datetime="2017-07-07T04:42:40.000Z"  itemprop="datePublished">2017-07-07</time>
-
-        
-	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/Java/">Java</a></li></ul>
-
-
-
-        
-	<span id="/2017/07/07/C3P0连接池的使用/" class="leancloud_visitors" data-flag-title="C3P0连接池的使用" title="C3P0连接池的使用">
-		
-			<i class="icon icon-eye"></i>
-		
-		<span class="leancloud-visitors-count"></span>
-	</span>
- 
-
-        
-
-
-        
-        
-    </div>
-    
-    <div class="post-content" id="post-content" itemprop="postContent">
-    
-    
-        <blockquote>
-<p>C3P0作为JDBC一个开源的连接池之一，有自己的很大优点，与DBCP相比，C3P0可以自动回收空闲连接，它实现了数据源和JNDI绑定，并且支持JDBC3规范和JDBC2的标准扩展，甚至Hibernate 和 Spring 都采用它作为JDBC的连接池</p>
-</blockquote>
-<hr>
-<h2 id="前提："><a href="#前提：" class="headerlink" title="前提："></a>前提：</h2><ol>
-<li>导入两个<a href="https://github.com/sivanWu0222/JavaExercises/tree/master/JavaJY/13/WebContent/WEB-INF/lib" target="_blank" rel="noopener">Jar包</a></li>
-</ol>
-<hr>
-<h2 id="使用方法一："><a href="#使用方法一：" class="headerlink" title="使用方法一："></a>使用方法一：</h2><blockquote>
-<p>不采用封装，直接进行使用，对于一些连接数据库所需要的参数写在了mysql.ini配置文件中，包括driver,url,user,pass 四个配置选项，采用 windows配置文件的格式（键值对）进行配置</p>
-</blockquote>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="keyword">import</span> java.beans.PropertyVetoException;</span><br><span class="line"><span class="keyword">import</span> java.io.FileInputStream;</span><br><span class="line"><span class="keyword">import</span> java.io.IOException;</span><br><span class="line"><span class="keyword">import</span> java.sql.Connection;</span><br><span class="line"><span class="keyword">import</span> java.sql.SQLException;</span><br><span class="line"><span class="keyword">import</span> java.util.Properties;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> com.mchange.v2.c3p0.ComboPooledDataSource;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">ToUseC3p0</span> </span>&#123;</span><br><span class="line">	</span><br><span class="line">	</span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span></span>&#123;</span><br><span class="line">		</span><br><span class="line">		<span class="comment">/*初始化数据库连接参数*/</span></span><br><span class="line">		Properties props = <span class="keyword">new</span> Properties();</span><br><span class="line">		<span class="keyword">try</span> &#123;</span><br><span class="line">			props.load(<span class="keyword">new</span> FileInputStream(<span class="string">"mysql.ini"</span>));</span><br><span class="line">		&#125; <span class="keyword">catch</span> (IOException e1) &#123;</span><br><span class="line">			</span><br><span class="line">			e1.printStackTrace();</span><br><span class="line">		&#125;</span><br><span class="line">		String driver = props.getProperty(<span class="string">"driver"</span>);</span><br><span class="line">		String user = props.getProperty(<span class="string">"user"</span>);</span><br><span class="line">		String pass = props.getProperty(<span class="string">"pass"</span>);</span><br><span class="line">		String url = props.getProperty(<span class="string">"url"</span>);</span><br><span class="line">		</span><br><span class="line">		ComboPooledDataSource cpds = <span class="keyword">new</span> ComboPooledDataSource();</span><br><span class="line">		<span class="keyword">try</span> &#123;</span><br><span class="line">			cpds.setDriverClass(driver);</span><br><span class="line">		&#125; <span class="keyword">catch</span> (PropertyVetoException e) &#123;</span><br><span class="line">			</span><br><span class="line">			e.printStackTrace();</span><br><span class="line">		&#125;</span><br><span class="line">		cpds.setJdbcUrl(url);</span><br><span class="line">		cpds.setUser(user);</span><br><span class="line">		cpds.setPassword(pass);</span><br><span class="line">		</span><br><span class="line">		</span><br><span class="line">		</span><br><span class="line">		<span class="comment">/*获得连接，使用连接，然后释放连接*/</span></span><br><span class="line">		Connection conn = <span class="keyword">null</span>;</span><br><span class="line">		<span class="keyword">try</span> &#123;</span><br><span class="line">			 conn = cpds.getConnection();</span><br><span class="line">		&#125; <span class="keyword">catch</span> (SQLException e) &#123;</span><br><span class="line">			</span><br><span class="line">			e.printStackTrace();</span><br><span class="line">		&#125;<span class="keyword">finally</span> &#123;</span><br><span class="line">			<span class="keyword">try</span> &#123;</span><br><span class="line">				conn.close(); </span><br><span class="line">										</span><br><span class="line">				<span class="comment">/*这里并没有真正释放连接，而是将连接归还到连接池中*/</span></span><br><span class="line">			&#125; <span class="keyword">catch</span> (SQLException e) &#123;</span><br><span class="line">				</span><br><span class="line">				e.printStackTrace();</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line">		</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<hr>
-    
-    <a href="/2017/07/07/C3P0连接池的使用/" class="post-more waves-effect waves-button">
-        more
-    </a>
-    </div>
-</article>
-
-<div class="post-footer">
-    
-	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/C3P0/">C3P0</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Java/">Java</a></li></ul>
-
-</div>
-
-
-            </li>
-        
-            <li class="post-list-item fade">
-                <article id="post-Algorithm-冒泡排序"
-  class="article-card article-type-post" itemprop="blogPost">
-  
-    
-    
-    
-        
-
-
-  
-    <h3 class="post-title re-title" itemprop="name">
-      <a class="post-title-link" href="/2017/05/22/Algorithm-冒泡排序/">Algorithm-冒泡排序</a>
-    </h3>
-  
-
-
-
-    
-    <div class="post-meta">
-        <time class="post-time" title="2017-05-22 20:36:47" datetime="2017-05-22T12:36:47.000Z"  itemprop="datePublished">2017-05-22</time>
-
-        
-	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/Algorithm/">Algorithm</a><ul class="article-category-list-child"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/Algorithm/BubbleSort/">BubbleSort</a></li></ul></li></ul>
-
-
-
-        
-	<span id="/2017/05/22/Algorithm-冒泡排序/" class="leancloud_visitors" data-flag-title="Algorithm-冒泡排序" title="Algorithm-冒泡排序">
-		
-			<i class="icon icon-eye"></i>
-		
-		<span class="leancloud-visitors-count"></span>
-	</span>
- 
-
-        
-
-
-        
-        
-    </div>
-    
-    <div class="post-content" id="post-content" itemprop="postContent">
-    
-    
-        <h1 id="冒泡排序"><a href="#冒泡排序" class="headerlink" title="冒泡排序"></a>冒泡排序</h1><blockquote>
-<p>这里假定冒泡排序是整形数组，并且以升序排列</p>
-</blockquote>
-<ol>
-<li><p>冒牌排序需要我们遍历几次数组，每次遍历中，需要比较相邻的两个元素，如果按降序排列，则互换，否则保持不变！由于较小的值像“气泡”一样逐渐浮向顶部，而较大的值沉向底部，所以称为冒泡排序或者下沉排序。</p>
-</li>
-<li><p>特征：假设一共有n个元素，第m次遍历之后，最后的m个元素顺序已经确定</p>
-</li>
-<li>时间复杂度：最大为o(n*n)，最小为o(1)</li>
-</ol>
-<hr>
-<h2 id="初始的冒泡排序："><a href="#初始的冒泡排序：" class="headerlink" title="初始的冒泡排序："></a>初始的冒泡排序：</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment">	 * 初级别的冒泡排序</span></span><br><span class="line"><span class="comment">	 * <span class="doctag">@param</span> nums</span></span><br><span class="line"><span class="comment">	 * <span class="doctag">@return</span> 排序后的数组</span></span><br><span class="line"><span class="comment">	 */</span></span><br><span class="line">	<span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">int</span>[] toBubbleSort0(<span class="keyword">int</span>[] nums)&#123;</span><br><span class="line">		<span class="keyword">int</span> count = <span class="number">0</span>;</span><br><span class="line">		<span class="keyword">int</span> sum = <span class="number">0</span>;</span><br><span class="line">		<span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">1</span>; i &lt; nums.length - <span class="number">1</span>; i++)&#123;</span><br><span class="line">			<span class="keyword">for</span> (<span class="keyword">int</span> j = <span class="number">0</span>; j &lt; nums.length - i; j++)&#123;</span><br><span class="line">				sum++;</span><br><span class="line">				<span class="keyword">if</span>(nums[j] &gt; nums[j+<span class="number">1</span>])&#123;</span><br><span class="line">					count++;</span><br><span class="line">					<span class="keyword">int</span> temp = nums[j];</span><br><span class="line">					nums[j] = nums[j+<span class="number">1</span>];</span><br><span class="line">					nums[j+<span class="number">1</span>] = temp;</span><br><span class="line">				&#125;</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line">		System.out.println(count);</span><br><span class="line">		System.out.println(sum);</span><br><span class="line">		<span class="keyword">return</span> nums;</span><br><span class="line">	&#125;</span><br></pre></td></tr></table></figure>
-    
-    <a href="/2017/05/22/Algorithm-冒泡排序/" class="post-more waves-effect waves-button">
-        more
-    </a>
-    </div>
-</article>
-
-<div class="post-footer">
-    
-	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Algorithm/">Algorithm</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Java/">Java</a></li></ul>
-
-</div>
-
-
-            </li>
-        
         </ul>
         
 <nav id="page-nav">
     <div class="inner">
-    <a class="extend prev" rel="prev" href="/page/8/">上一页</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/7/">7</a><a class="page-number" href="/page/8/">8</a><span class="page-number current">9</span><a class="page-number" href="/page/10/">10</a><a class="page-number" href="/page/11/">11</a><a class="page-number" href="/page/12/">12</a><a class="extend next" rel="next" href="/page/10/">下一页</a>
+    <a class="extend prev" rel="prev" href="/page/8/">上一页</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/7/">7</a><a class="page-number" href="/page/8/">8</a><span class="page-number current">9</span><a class="page-number" href="/page/10/">10</a><a class="page-number" href="/page/11/">11</a><span class="space">&hellip;</span><a class="page-number" href="/page/13/">13</a><a class="extend next" rel="next" href="/page/10/">下一页</a>
     </div>
 </nav>
 

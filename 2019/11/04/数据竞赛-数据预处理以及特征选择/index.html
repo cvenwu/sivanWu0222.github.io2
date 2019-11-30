@@ -1,0 +1,788 @@
+<!DOCTYPE html>
+<html>
+<head><meta name="generator" content="Hexo 3.9.0">
+    <meta charset="utf-8">
+    
+    
+    <title>数据竞赛:数据预处理以及特征选择 | yirufeng&#39;s Blog | 未来的小幸运 || 致正在努力的我们 ---- 逸如风</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    
+    <meta name="keywords" content="数据预处理,数据处理,特征选取,特征工程">
+    <link rel="shortcut icon" href="/img/favicon.ico">
+    <link rel="stylesheet" href="//cdn.jsdelivr.net/gh/fancyapps/fancybox@3.5.2/dist/jquery.fancybox.min.css">
+    <link rel="stylesheet" href="/css/style.css?v=1.4.2">
+    
+    <script type="text/javascript">
+        // Data Center
+        var DC = {
+            reward:	true,
+            lv: JSON.parse('{"enable":true,"app_id":"K2RVtHi7RnmoN6dovlDKafn8-gzGzoHsz","app_key":"Qxmil0oqPFdDUyyIp2i1Xikt","icon":true}'),
+            v: JSON.parse('{"enable":false,"appid":"ACuOJIasBeRLiDe2iUApHj67-gzGzoHsz","appkey":"qbgg4tClrQQmvq8uwlpwA5mA","notify":true,"verify":true,"placeholder":"give me some sugers plz...","avatar":"wavatar"}'),
+            g: JSON.parse('{"enable":false,"lazy":true,"owner":"codefine","repo":"gitment","oauth":{"client_id":null,"client_secret":null},"perPage":10}'),
+            d: JSON.parse('{"app_id":null}')
+        };
+    </script>
+    <script type="text/javascript">
+        window.lazyScripts=[];
+    </script>
+    
+</head>
+
+
+<body>
+    <div id="loading" class="active"></div>
+
+    <aside id="menu" class="">
+  <div class="inner flex-row-vertical">
+    <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menu-off">
+        <i class="icon icon-lg icon-close"></i>
+    </a>
+    <div class="brand-wrap">
+      
+      <img src="/img/brand.jpg" class="brand-bg">
+      
+      <div class="brand">
+        <a href="/" class="avatar waves-effect waves-circle waves-light">
+          <img src="/img/1.jpg">
+        </a>
+        <hgroup class="introduce">
+          <h5 class="nickname">逸如风(yirufeng)</h5>
+          <a href="mailto:yirufeng@foxmail.com" title="yirufeng@foxmail.com" class="mail">
+            
+              <span>y</span>
+            
+              <span>i</span>
+            
+              <span>r</span>
+            
+              <span>u</span>
+            
+              <span>f</span>
+            
+              <span>e</span>
+            
+              <span>n</span>
+            
+              <span>g</span>
+            
+              <span>@</span>
+            
+              <span>f</span>
+            
+              <span>o</span>
+            
+              <span>x</span>
+            
+              <span>m</span>
+            
+              <span>a</span>
+            
+              <span>i</span>
+            
+              <span>l</span>
+            
+              <span>.</span>
+            
+              <span>c</span>
+            
+              <span>o</span>
+            
+              <span>m</span>
+            
+          </a>
+        </hgroup>
+        
+        <ul class="menu-link">
+          
+              <li>
+                <a href="https://github.com/sivanWu0222" target="_blank">
+                  <i class="icon icon-lg icon-github"></i>
+                </a>
+              </li>
+            
+              <li>
+                <a href="https://mail.qq.com/cgi-bin/qm_share?t=qm_mailme&amp;amp;email=xfTz8-Py8-f08vWFtLTrpqqo" target="_blank">
+                  <i class="icon icon-lg icon-envelope"></i>
+                </a>
+              </li>
+            
+        </ul>
+        
+      </div>
+    </div>
+    <div class="scroll-wrap flex-col">
+      <ul class="nav">
+        
+            <li class="">
+              <a href="/"  >
+                <i class="icon icon-lg icon-home"></i>
+                Home
+              </a>
+            </li>
+        
+            <li class="">
+              <a href="/categories"  >
+                <i class="icon icon-lg icon-th-list"></i>
+                Category
+              </a>
+            </li>
+        
+            <li class="">
+              <a href="/research"  >
+                <i class="icon icon-lg icon-mortar-board"></i>
+                Research
+              </a>
+            </li>
+        
+            <li class="">
+              <a href="/tags"  >
+                <i class="icon icon-lg icon-tags"></i>
+                Tag
+              </a>
+            </li>
+        
+            <li class="">
+              <a href="/archives"  >
+                <i class="icon icon-lg icon-archives"></i>
+                Archive
+              </a>
+            </li>
+        
+            <li class="">
+              <a href="/about"  >
+                <i class="icon icon-lg icon-user"></i>
+                About
+              </a>
+            </li>
+        
+            <li class="">
+              <a href="/open-source"  >
+                <i class="icon icon-lg icon-github"></i>
+                Project
+              </a>
+            </li>
+        
+            <li class="">
+              <a href="/demo"  >
+                <i class="icon icon-lg icon-audio-description"></i>
+                Demo
+              </a>
+            </li>
+        
+            <li class="">
+              <a href="/wechat-number"  >
+                <i class="icon icon-lg icon-wechat"></i>
+                公众号
+              </a>
+            </li>
+        
+            <li class="">
+              <a href="http://www.sivan.tech/LeetCodeAlgo/" target="_blank" >
+                <i class="icon icon-lg icon-braille"></i>
+                Leetcode
+              </a>
+            </li>
+        
+            <li class="">
+              <a href="http://resume.sivan.tech/" target="_blank" >
+                <i class="icon icon-lg icon-file-pdf-o"></i>
+                Resume
+              </a>
+            </li>
+        
+      </ul>
+    </div>
+  </div>
+</aside>
+
+    <main id="main">
+        <header class="top-header" id="header">
+    <div class="flex-row clearfix">
+        <a href="javascript:;" class="header-icon pull-left waves-effect waves-circle waves-light on" id="menu-toggle">
+          <i class="icon icon-lg icon-navicon"></i>
+        </a>
+        <div class="flex-col header-title ellipsis">
+            <span>数据竞赛:数据预处理以及特征选择</span>
+            
+        </div>
+        
+        <a href="javascript:;" id="site_search_btn" class="header-icon pull-right waves-effect waves-circle waves-light">
+            <i class="icon icon-lg icon-search"></i>
+        </a>
+        
+    </div>
+</header>
+<header class="content-header post-header">
+    <img src="/img/s3.jpg" class="header-bg">
+    <div class="container fade-scale">
+        <h1 class="title">数据竞赛:数据预处理以及特征选择</h1>
+        <h5 class="subtitle">
+            
+                <time datetime="2019-11-04T08:48:25.000Z" itemprop="datePublished" class="page-time">
+  2019-11-04
+</time>
+
+
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/数据竞赛/">数据竞赛</a><ul class="article-category-list-child"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/数据竞赛/数据处理以及特征工程/">数据处理以及特征工程</a></li></ul></li></ul>
+
+            
+        </h5>
+        
+    </div>
+    
+
+</header>
+
+<div id="site_search">
+    <div class="search-title clearfix">
+        <span class="pull-left">
+          <i class="icon icon-lg icon-search"></i>
+        </span>
+        <input type="text" id="local-search-input" name="q" results="0" placeholder="search my blog..." class="form-control pull-left"/>
+        <a href="javascript:;" class="close pull-right waves-effect waves-circle waves-light">
+          <i class="icon icon-lg icon-close"></i>
+        </a>
+    </div>
+    <div id="local-search-result"></div>
+</div>
+
+
+<div class="container body-wrap">
+    <article id="post-数据竞赛-数据预处理以及特征选择"
+  class="post-article article-type-post" itemprop="blogPost">
+    <div class="post-card">
+        <h1 class="post-card-title">数据竞赛:数据预处理以及特征选择</h1>
+        <div class="post-meta">
+            <time class="post-time" title="2019-11-04 16:48:25" datetime="2019-11-04T08:48:25.000Z"  itemprop="datePublished">2019-11-04</time>
+
+            
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/数据竞赛/">数据竞赛</a><ul class="article-category-list-child"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/数据竞赛/数据处理以及特征工程/">数据处理以及特征工程</a></li></ul></li></ul>
+
+
+
+            
+	<span id="/2019/11/04/数据竞赛-数据预处理以及特征选择/" class="leancloud_visitors" data-flag-title="数据竞赛:数据预处理以及特征选择" title="数据竞赛:数据预处理以及特征选择">
+		
+			<i class="icon icon-eye"></i>
+		
+		<span class="leancloud-visitors-count"></span>
+	</span>
+ 
+
+            
+
+
+            
+        </div>
+        <div class="post-content" id="post-content" itemprop="postContent">
+            
+            <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> pandas <span class="keyword">as</span> pd</span><br><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line"></span><br><span class="line">data = pd.DataFrame([[<span class="number">1</span>, np.nan, <span class="number">3</span>], [<span class="number">4</span>, <span class="number">5</span>, np.nan], [<span class="number">7</span>, <span class="number">8</span>, <span class="number">9</span>]])</span><br><span class="line">print(data)</span><br></pre></td></tr></table></figure>
+<h1 id="对缺失数据的处理"><a href="#对缺失数据的处理" class="headerlink" title="对缺失数据的处理"></a>对缺失数据的处理</h1><h2 id="删除"><a href="#删除" class="headerlink" title="删除"></a>删除</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">data1 = data.dropna()  <span class="comment"># 默认是按照行删除</span></span><br><span class="line">data2 = data.dropna(axis=<span class="number">0</span>)  <span class="comment"># 按照行删除</span></span><br><span class="line">data3 = data.dropna(axis=<span class="number">1</span>)  <span class="comment"># 按照列删除</span></span><br><span class="line">print(data1)</span><br><span class="line">print(data2)</span><br><span class="line">print(data3)</span><br></pre></td></tr></table></figure>
+<p><strong>note:前面几个虽然删除了空数据，但是并没有对data中的数据进行删除，需要我们指定inplace=True才会对在data上删除</strong><br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">data.dropna(axis=<span class="number">1</span>, inplace=<span class="literal">True</span>)</span><br><span class="line">print(data)</span><br></pre></td></tr></table></figure></p>
+<h2 id="填充"><a href="#填充" class="headerlink" title="填充"></a>填充</h2><p>指定值进行填充<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">data = pd.DataFrame([[<span class="number">1</span>, np.nan, <span class="number">3</span>], [<span class="number">4</span>, <span class="number">5</span>, np.nan], [<span class="number">7</span>, <span class="number">8</span>, <span class="number">9</span>]])</span><br><span class="line">print(data)</span><br><span class="line"></span><br><span class="line">data1 = data.fillna(<span class="number">-1</span>)  <span class="comment"># 用指定值进行填充</span></span><br><span class="line">print(data1)</span><br></pre></td></tr></table></figure></p>
+<p>均值填充<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">print(data.mean())  <span class="comment"># 默认是按照列求均值，计算有值的数值的和，然后统计有值的数值的个数，用和求个数得到每列均值</span></span><br><span class="line">data2 = data.fillna(data.mean())</span><br><span class="line">print(data2)</span><br></pre></td></tr></table></figure></p>
+<p>采用前面的值填充<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">data3 = data.fillna(method=<span class="string">'pad'</span>)  <span class="comment"># 使用数据的前一个值(所在列的前一个值，即上一行该列的元素值)对后一个值进行填充</span></span><br><span class="line">print(data3)</span><br></pre></td></tr></table></figure></p>
+<p>采用后面的值进行填充<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">data4 = data.fillna(method=<span class="string">'bfill'</span>)  <span class="comment"># 使用数据的后一个值对前一个值进行填充</span></span><br><span class="line">print(data4)</span><br><span class="line"></span><br><span class="line">data5 = data.interpolate()  <span class="comment"># 采用差值法进行填充，默认是线性差值, 算是预测填充的一种</span></span><br><span class="line">print(data5)</span><br></pre></td></tr></table></figure></p>
+<h1 id="处理缺失值与重复值"><a href="#处理缺失值与重复值" class="headerlink" title="处理缺失值与重复值"></a>处理缺失值与重复值</h1><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 处理缺失值与重复值</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">Data_preprocessing</span><span class="params">(x, feat_Remv)</span>:</span></span><br><span class="line">    <span class="comment"># 删除重复值</span></span><br><span class="line">    x = x.drop_duplicates()</span><br><span class="line"></span><br><span class="line">    <span class="comment"># 删除指定字段</span></span><br><span class="line">    x = x.drop(feat_Remv, axis=<span class="number">1</span>)</span><br><span class="line"></span><br><span class="line">    <span class="comment"># 补充缺失值</span></span><br><span class="line">    x = x.fillna(<span class="number">-1</span>)</span><br><span class="line">    <span class="keyword">return</span> x</span><br><span class="line"></span><br><span class="line">feat_Remv = [<span class="string">'instance_id'</span>, <span class="string">'creative_is_js'</span>, <span class="string">'creative_is_voicead'</span>, <span class="string">'app_paid'</span>]</span><br><span class="line">train_data = Data_preprocessing(train_data, feat_Remv)</span><br><span class="line">test_data = Data_preprocessing(test_data, feat_Remv)</span><br></pre></td></tr></table></figure>
+<h1 id="特征缩放"><a href="#特征缩放" class="headerlink" title="特征缩放"></a>特征缩放</h1><ol>
+<li>Min-Max normalization: (x - min) / (max - min)</li>
+<li>Mean normalization: (x - avg) / (max - min)</li>
+<li>Standardization: (x - avg) / (std)</li>
+</ol>
+<h2 id="如何做特征缩放"><a href="#如何做特征缩放" class="headerlink" title="如何做特征缩放"></a>如何做特征缩放</h2><h3 id="Min-Max-normalization"><a href="#Min-Max-normalization" class="headerlink" title="Min-Max normalization"></a>Min-Max normalization</h3><p><strong>Note:归一化不是让特征值范围是0-1之间，指所在一个特定范围内</strong><br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> sklearn.preprocessing <span class="keyword">import</span> MinMaxScaler</span><br><span class="line">data = [[<span class="number">1</span>, <span class="number">1</span>, <span class="number">1</span>, <span class="number">1</span>], [<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>], [<span class="number">2</span>, <span class="number">4</span>, <span class="number">9</span>, <span class="number">16</span>]]</span><br><span class="line">print(MinMaxScaler(feature_range=(<span class="number">0</span>, <span class="number">1</span>)).fit_transform(data))  <span class="comment"># feature_map选择归一化后的取值范围</span></span><br><span class="line"></span><br><span class="line">data = [[<span class="number">1</span>, <span class="number">1</span>, <span class="number">1</span>, <span class="number">1</span>], [<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>], [<span class="number">2</span>, <span class="number">4</span>, <span class="number">9</span>, <span class="number">16</span>]]</span><br><span class="line">print(MinMaxScaler(feature_range=(<span class="number">-2</span>, <span class="number">2</span>)).fit_transform(data))  <span class="comment"># feature_map选择归一化后的取值范围为-2~2</span></span><br><span class="line"></span><br><span class="line"><span class="comment">### Mean normalization</span></span><br><span class="line">data = [[<span class="number">1</span>, <span class="number">1</span>, <span class="number">1</span>, <span class="number">1</span>], [<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>], [<span class="number">2</span>, <span class="number">4</span>, <span class="number">9</span>, <span class="number">16</span>]]</span><br><span class="line">df = pd.DataFrame(data)</span><br><span class="line">print(np.max(df))  <span class="comment"># 求得每列的最大值，并返回一个ndarray</span></span><br><span class="line">print(np.mean(df))  <span class="comment"># 求得每列的均值，并返回一个ndarray</span></span><br><span class="line">print((df - np.mean(df)) / (np.max(df) - (np.min(df))))</span><br><span class="line"></span><br><span class="line"><span class="comment">### Standard Normalization</span></span><br><span class="line"><span class="keyword">from</span> sklearn.preprocessing <span class="keyword">import</span> StandardScaler</span><br><span class="line">data = [[<span class="number">1</span>, <span class="number">1</span>, <span class="number">1</span>, <span class="number">1</span>], [<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>], [<span class="number">2</span>, <span class="number">4</span>, <span class="number">9</span>, <span class="number">16</span>]]</span><br><span class="line">print(StandardScaler().fit_transform(data))  <span class="comment"># 其实这里包含两个步骤，一个训练成一个简单模型，之后转换</span></span><br></pre></td></tr></table></figure></p>
+<h1 id="样本不均衡"><a href="#样本不均衡" class="headerlink" title="样本不均衡"></a>样本不均衡</h1><blockquote>
+<p>对于样本不均衡，也会给我们进行相关的机器学习任务带来困难</p>
+</blockquote>
+<p>解决办法：</p>
+<ol>
+<li>上采样：增加分类中样本较少的类别的采样数量来实现样本的均衡<ol>
+<li>直接复制小样本数据，但是容易过拟合</li>
+<li>通过一定规则生成新的变量，如smote</li>
+</ol>
+</li>
+<li>下采样：减少分类中多数类样本的样本数量来实现样本均衡<ol>
+<li>随机去掉一些多数类，缺点是可能丢失一些重要的信息</li>
+<li>根据原始样本生成新样本来代替多数类样本</li>
+</ol>
+</li>
+<li>对每个类别设置权重：通常与数量比成反比</li>
+<li>集成学习：生成多组样本来进行训练，例如选择全部的少数样本，每次从多数样本中选择与少数样本数量一致的多数样本进行训练，训练多次</li>
+</ol>
+<p><strong>生成一个不平衡的样本</strong><br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 生成一个不平衡的样本</span></span><br><span class="line"><span class="keyword">from</span> sklearn.datasets <span class="keyword">import</span> make_classification</span><br><span class="line"><span class="keyword">from</span> collections <span class="keyword">import</span> Counter</span><br><span class="line">X, y = make_classification(n_samples=<span class="number">5000</span>,  <span class="comment"># 生成样本的数量</span></span><br><span class="line">                           n_features=<span class="number">2</span>,  <span class="comment"># 生成的样本的特征</span></span><br><span class="line">                           n_informative=<span class="number">2</span>,</span><br><span class="line">                           n_redundant=<span class="number">0</span>,</span><br><span class="line">                           n_repeated=<span class="number">0</span>,</span><br><span class="line">                           n_classes=<span class="number">3</span>,  <span class="comment"># 生成的样本的类别</span></span><br><span class="line">                           n_clusters_per_class=<span class="number">1</span>,</span><br><span class="line">                           weights=[<span class="number">0.01</span>, <span class="number">0.05</span>, <span class="number">0.94</span>],  <span class="comment"># 生成的每个样本类别的权重</span></span><br><span class="line">                           class_sep=<span class="number">0.8</span>,</span><br><span class="line">                           random_state=<span class="number">0</span></span><br><span class="line">                           )</span><br><span class="line">print(X.shape)</span><br></pre></td></tr></table></figure></p>
+<h2 id="方法一：上采样"><a href="#方法一：上采样" class="headerlink" title="方法一：上采样"></a>方法一：上采样</h2><blockquote>
+<p>通过增加分类样本中样本较少的类别的数量来实现平衡，直接复制小样本数据，缺点：容易过拟合<br>from imblearn.over_sampling import RandomOverSampler<br>ros = RandomOverSampler(random_state=0)<br>X_resampled, y_resampled = ros.fit_sample(X, y)<br>print(sorted(Counter(y_resampled).items()))</p>
+</blockquote>
+<blockquote>
+<p>上采样的另一种方法：通过一定规则生成新变量，如smote<br>from imblearn.over_sampling import SMOTE, ADASYN<br>X_resampled, y_resampled = SMOTE(kind=’borderline1’).fit_sample(X, y)<br>print(sorted(Counter(y_resampled).items()))</p>
+</blockquote>
+<h2 id="方法二：下采样"><a href="#方法二：下采样" class="headerlink" title="方法二：下采样"></a>方法二：下采样</h2><blockquote>
+<p>随机去掉一些多数类，缺点是可能会丢失一些重要信息<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> imblearn.under_sampling <span class="keyword">import</span> RandomUnderSampler</span><br><span class="line">rus = RandomUnderSampler(random_state=<span class="number">0</span>)</span><br><span class="line">X_resampled, y_resampled = rus.fit_sample(X, y)</span><br><span class="line">print(sorted(Counter(y_resampled).items()))</span><br></pre></td></tr></table></figure></p>
+</blockquote>
+<blockquote>
+<p>根据原始样本，生成新的样本来替换多数类样本, 通过聚类生成新的中心样本点来进行采样<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> imblearn.under_sampling <span class="keyword">import</span> ClusterCentroids</span><br><span class="line">cc = ClusterCentroids(random_state=<span class="number">0</span>)</span><br><span class="line">X_resampled, y_resampled = cc.fit_sample(X, y)</span><br><span class="line">print(sorted(Counter(y_resampled).items()))</span><br></pre></td></tr></table></figure></p>
+</blockquote>
+<blockquote>
+<p>方法三：集成方法，多次抽取样本的方法<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> imblearn.datasets <span class="keyword">import</span> make_imbalance</span><br><span class="line">ratio = &#123;<span class="number">0</span>:<span class="number">20</span>, <span class="number">1</span>:<span class="number">30</span>, <span class="number">2</span>:<span class="number">40</span>&#125;  <span class="comment"># 抽取的不同样本类别的个数，但是不能超过样本数量，第1类样本20个，第2类样本30个，第3类样本40个</span></span><br><span class="line">X_resampled, y_resampled = make_imbalance(X, y, ratio=ratio)</span><br><span class="line">print(sorted(Counter(y_resampled).items()))</span><br></pre></td></tr></table></figure></p>
+</blockquote>
+<h1 id="识别异常值"><a href="#识别异常值" class="headerlink" title="识别异常值"></a>识别异常值</h1><ol>
+<li>简单的统计分析：对属性值进行一个描述性的统计，从而查看哪些值是不合理的</li>
+<li>3σ原则：根据正态分布的定义，距离平均值3σ之外的概率不超过0.003，属于极小概率事件</li>
+<li>箱型图分析：箱型图提供了一个标准，即大于或小于箱型图设定的上下界的数值为异常值</li>
+<li>聚类分析：如DBSCAN基于密度的聚类方法，可以用于离群点检测</li>
+</ol>
+<p><strong>Note : 找到异常值之后可以修正异常值，采用上面讲过的填充缺失值的方法</strong></p>
+<p><a rel=数据竞赛:数据预处理以及特征选择 href="识别异常数据_3σ原则.jpg" title="" data-fancybox="images"><img src="识别异常数据_3σ原则.jpg" alt></a><br><figure class="image-box">
+                <a rel=数据竞赛:数据预处理以及特征选择 href="识别异常数据_DBSCAN.jpg" title="" data-fancybox="images"><img src="识别异常数据_DBSCAN.jpg" alt title class></a>
+                <p></p>
+            </figure><br><figure class="image-box">
+                <a rel=数据竞赛:数据预处理以及特征选择 href="识别异常数据_箱型图分析.jpg" title="" data-fancybox="images"><img src="识别异常数据_箱型图分析.jpg" alt title class></a>
+                <p></p>
+            </figure></p>
+<h2 id="方法一：箱型图分析"><a href="#方法一：箱型图分析" class="headerlink" title="方法一：箱型图分析"></a>方法一：箱型图分析</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> seaborn <span class="keyword">as</span> sns</span><br><span class="line"><span class="keyword">import</span> matplotlib.pyplot <span class="keyword">as</span> plt</span><br><span class="line">arr = [[np.random.random(), i+np.random.random(), i+<span class="number">1</span>+np.random.random()] <span class="keyword">for</span> i <span class="keyword">in</span> range(<span class="number">18</span>)]</span><br><span class="line">arr.append([<span class="number">11</span>, <span class="number">44</span>, <span class="number">77</span>])</span><br><span class="line">df = pd.DataFrame(arr)</span><br><span class="line">df.columns = [<span class="string">'a'</span>, <span class="string">'b'</span>, <span class="string">'c'</span>]</span><br><span class="line">print(df)</span><br></pre></td></tr></table></figure>
+<h2 id="方法二：3σ原则"><a href="#方法二：3σ原则" class="headerlink" title="方法二：3σ原则"></a>方法二：3σ原则</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">data = [[<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>], [<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>], [<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>], [<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>], [<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>], [<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>], [<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>], [<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>], [<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>], [<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>]]</span><br><span class="line">df = pd.DataFrame(data)</span><br><span class="line">df.columns = [<span class="string">'a'</span>, <span class="string">'b'</span>, <span class="string">'c'</span>]</span><br><span class="line">print(df.std())  <span class="comment"># 求得标准差</span></span><br><span class="line">th1 = df.mean() + <span class="number">3</span> * df.std()  <span class="comment"># 上界</span></span><br><span class="line">th2 = df.mean() - <span class="number">3</span> * df.std()  <span class="comment"># 下界</span></span><br><span class="line">df[<span class="string">'a'</span>] = df[df[<span class="string">'a'</span>] &gt; th2[<span class="string">'a'</span>]]</span><br><span class="line">df[<span class="string">'a'</span>] = df[df[<span class="string">'a'</span>] &lt; th1[<span class="string">'a'</span>]]</span><br><span class="line">print(df)</span><br></pre></td></tr></table></figure>
+<h2 id="方法三：识别异常值–DBSCAN"><a href="#方法三：识别异常值–DBSCAN" class="headerlink" title="方法三：识别异常值–DBSCAN"></a>方法三：识别异常值–DBSCAN</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> sklearn <span class="keyword">import</span> datasets</span><br><span class="line"><span class="keyword">from</span> sklearn.cluster <span class="keyword">import</span> DBSCAN</span><br><span class="line">arr = [[np.random.random(), i+np.random.random()] <span class="keyword">for</span> i <span class="keyword">in</span> range(<span class="number">18</span>)]</span><br><span class="line">arr.append([<span class="number">11</span>, <span class="number">44</span>])</span><br><span class="line">arr = np.array(arr)</span><br><span class="line">plt.scatter(arr[:, <span class="number">0</span>], arr[:, <span class="number">1</span>], marker=<span class="string">'o'</span>)</span><br><span class="line">plt.show()</span><br><span class="line"></span><br><span class="line">y_pred = DBSCAN(eps = <span class="number">3</span>).fit_predict(arr)</span><br><span class="line">plt.scatter(arr[:, <span class="number">0</span>], arr[:, <span class="number">1</span>], c=y_pred)</span><br><span class="line">plt.show()</span><br></pre></td></tr></table></figure>
+<h1 id="特征工程"><a href="#特征工程" class="headerlink" title="特征工程"></a>特征工程</h1><ol>
+<li>特征处理</li>
+<li>特征构建</li>
+<li>特征选择</li>
+</ol>
+<h2 id="特征处理："><a href="#特征处理：" class="headerlink" title="特征处理："></a>特征处理：</h2><h3 id="特征类型"><a href="#特征类型" class="headerlink" title="特征类型:"></a>特征类型:</h3><ol>
+<li>数值类型: 连续型，离散型</li>
+<li>类别类型: 也就是枚举类型</li>
+<li>时间类型: </li>
+<li>文本类型: 例如爬下来的一段评论</li>
+<li>图形类型: </li>
+</ol>
+<p><a rel=数据竞赛:数据预处理以及特征选择 href="特征处理_LabelEncoder.jpg" title="" data-fancybox="images"><img src="特征处理_LabelEncoder.jpg" alt></a><br><figure class="image-box">
+                <a rel=数据竞赛:数据预处理以及特征选择 href="特征处理_OneHot.jpg" title="" data-fancybox="images"><img src="特征处理_OneHot.jpg" alt title class></a>
+                <p></p>
+            </figure></p>
+<h4 id="数值类型的特征："><a href="#数值类型的特征：" class="headerlink" title="数值类型的特征："></a>数值类型的特征：</h4><ol>
+<li>特征缩放的几种方法：标准化，归一化，区间缩放</li>
+<li>连续变量的离散化， 分箱</li>
+</ol>
+<h4 id="类别特征："><a href="#类别特征：" class="headerlink" title="类别特征："></a>类别特征：</h4><ol>
+<li>one-hot编码</li>
+<li>LabelEncoder</li>
+</ol>
+<h4 id="时间特征："><a href="#时间特征：" class="headerlink" title="时间特征："></a>时间特征：</h4><ol>
+<li>持续时间</li>
+<li>时间间隔</li>
+</ol>
+<h3 id="连续变量的离散化：分箱-bin"><a href="#连续变量的离散化：分箱-bin" class="headerlink" title="连续变量的离散化：分箱(bin)"></a>连续变量的离散化：分箱(bin)</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">df = pd.DataFrame()</span><br><span class="line">df[<span class="string">'Age'</span>] = np.random.randint(<span class="number">1</span>, <span class="number">100</span>, <span class="number">100</span>)</span><br><span class="line">df[<span class="string">'Age'</span>].hist()  <span class="comment"># 显示一个直方图来统计年龄段</span></span><br><span class="line">bin_ranges = [<span class="number">0</span>, <span class="number">20</span>, <span class="number">30</span>, <span class="number">40</span>, <span class="number">50</span>, <span class="number">60</span>, <span class="number">100</span>]</span><br><span class="line">bin_names = [<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>, <span class="number">5</span>, <span class="number">6</span>]</span><br><span class="line"><span class="comment"># 将(0, 20]作为一个段，并给定标签1，(20, 30]作为一个段，并给定一个标签2，以此类推</span></span><br><span class="line">df[<span class="string">'Age_bin_custom_range'</span>] = pd.cut(np.array(df[<span class="string">'Age'</span>]), bins=bin_ranges)</span><br><span class="line">df[<span class="string">'Age_bin_custom_label'</span>] = pd.cut(np.array(df[<span class="string">'Age'</span>]), bins=bin_ranges, labels=bin_names)</span><br><span class="line">df[[<span class="string">'Age'</span>, <span class="string">'Age_bin_custom_range'</span>, <span class="string">'Age_bin_custom_label'</span>]].head()</span><br></pre></td></tr></table></figure>
+<p><strong>上面是手动分箱，难免会出现一些不规则的划分</strong></p>
+<figure class="image-box">
+                <a rel=数据竞赛:数据预处理以及特征选择 href="特征处理_1.jpg" title="" data-fancybox="images"><img src="特征处理_1.jpg" alt title class></a>
+                <p></p>
+            </figure>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">### 基于4分位数的自适应二进制方案</span></span><br><span class="line">quantile_list = [<span class="number">0</span>, <span class="number">.25</span>, <span class="number">.5</span>, <span class="number">.75</span>, <span class="number">1.</span>]</span><br><span class="line">quantiles = df[<span class="string">'income'</span>].quantile(quantile_list)</span><br><span class="line"><span class="comment">### 可视化这些分位数</span></span><br><span class="line">fig, ax = plt.subplots()</span><br><span class="line">df[<span class="string">'income'</span>].hist(bins=<span class="number">30</span>, color=<span class="string">'#A9C5D3'</span>, edgecolor=<span class="string">'black'</span>, grid=<span class="literal">False</span>)</span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> quantile <span class="keyword">in</span> quantile_list:</span><br><span class="line">    qvl = plt.axvline(quantile, color=<span class="string">'r'</span>)</span><br></pre></td></tr></table></figure>
+<a id="more"></a>
+<h3 id="类别特征：LabelEncoder"><a href="#类别特征：LabelEncoder" class="headerlink" title="类别特征：LabelEncoder"></a>类别特征：LabelEncoder</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> sklearn.preprocessing <span class="keyword">import</span> LabelEncoder</span><br><span class="line">lb = LabelEncoder()</span><br><span class="line">lb.fit([<span class="string">'male'</span>, <span class="string">'female'</span>])</span><br><span class="line">x_data = pd.DataFrame()</span><br><span class="line">x_data[<span class="string">'gender'</span>] = np.array([<span class="string">'male'</span>, <span class="string">'female'</span>, <span class="string">'male'</span>, <span class="string">'male'</span>, <span class="string">'female'</span>, <span class="string">'female'</span>, <span class="string">'male'</span>])</span><br><span class="line">x_data[<span class="string">'gender_encode'</span>] = lb.transform(x_data[<span class="string">'gender'</span>])</span><br><span class="line">print(x_data)</span><br></pre></td></tr></table></figure>
+<h3 id="类别特征：one-hot"><a href="#类别特征：one-hot" class="headerlink" title="类别特征：one-hot"></a>类别特征：one-hot</h3><blockquote>
+<p>在样本之间距离的计算和相似度的度量非常重要，one-hot将离散的取值扩展到了欧式空间<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> sklearn <span class="keyword">import</span> preprocessing</span><br><span class="line">enc = preprocessing.OneHotEncoder(categories=<span class="string">'auto'</span>)</span><br><span class="line">df = pd.DataFrame([[<span class="number">0</span>, <span class="number">0</span>, <span class="number">3</span>], [<span class="number">1</span>, <span class="number">1</span>, <span class="number">0</span>], [<span class="number">0</span>, <span class="number">2</span>, <span class="number">1</span>], [<span class="number">1</span>, <span class="number">0</span>, <span class="number">2</span>]])</span><br><span class="line">enc.fit(df)</span><br><span class="line"><span class="comment"># 注意：如果不写toarray，是用一个稀疏矩阵进行表示，写了toarray之后才可以展示出来</span></span><br><span class="line">array = enc.transform([[<span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>], [<span class="number">1</span>, <span class="number">1</span>, <span class="number">1</span>], [<span class="number">0</span>, <span class="number">2</span>, <span class="number">2</span>], [<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>]]).toarray()</span><br><span class="line">print(array)</span><br></pre></td></tr></table></figure></p>
+</blockquote>
+<h2 id="特征构建"><a href="#特征构建" class="headerlink" title="特征构建"></a>特征构建</h2><figure class="image-box">
+                <a rel=数据竞赛:数据预处理以及特征选择 href="特征构建_1.jpg" title="" data-fancybox="images"><img src="特征构建_1.jpg" alt title class></a>
+                <p></p>
+            </figure>
+<figure class="image-box">
+                <a rel=数据竞赛:数据预处理以及特征选择 href="特征构建_2.jpg" title="" data-fancybox="images"><img src="特征构建_2.jpg" alt title class></a>
+                <p></p>
+            </figure>
+<figure class="image-box">
+                <a rel=数据竞赛:数据预处理以及特征选择 href="特征构建_3.jpg" title="" data-fancybox="images"><img src="特征构建_3.jpg" alt title class></a>
+                <p></p>
+            </figure>
+<h2 id="特征选取："><a href="#特征选取：" class="headerlink" title="特征选取："></a>特征选取：</h2><figure class="image-box">
+                <a rel=数据竞赛:数据预处理以及特征选择 href="特征选择——1.jpg" title="" data-fancybox="images"><img src="特征选择——1.jpg" alt title class></a>
+                <p></p>
+            </figure>
+<figure class="image-box">
+                <a rel=数据竞赛:数据预处理以及特征选择 href="特征选择_2.jpg" title="" data-fancybox="images"><img src="特征选择_2.jpg" alt title class></a>
+                <p></p>
+            </figure>
+<h3 id="SelectKBest的运用："><a href="#SelectKBest的运用：" class="headerlink" title="SelectKBest的运用："></a>SelectKBest的运用：</h3><blockquote>
+<p>这里是通过卡方检验选取特征，k=20指定选择20个特征</p>
+</blockquote>
+<p><a rel=数据竞赛:数据预处理以及特征选择 href="特征选取_SelectKBest.jpg" title="" data-fancybox="images"><img src="特征选取_SelectKBest.jpg" alt></a><br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> sklearn.datasets <span class="keyword">import</span> load_digits</span><br><span class="line"><span class="keyword">from</span> sklearn.feature_selection <span class="keyword">import</span> SelectKBest, chi2</span><br><span class="line">X, y = load_digits(return_X_y=<span class="literal">True</span>)</span><br><span class="line">print(X.shape)</span><br><span class="line">X_new = SelectKBest(chi2, k=<span class="number">20</span>).fit_transform(X, y)</span><br><span class="line">X_new.shape</span><br></pre></td></tr></table></figure></p>
+
+        </div>
+        
+<blockquote class="post-copyright">
+    <div class="content">
+        
+<span class="post-time">
+    最后更新时间：<time datetime="2019-11-04T09:10:06.564Z" itemprop="dateUpdated">2019-11-04 17:10:06</time>
+</span><br>
+
+
+        
+        转载注明出处，原文地址：<a href="/2019/11/04/数据竞赛-数据预处理以及特征选择/" target="_blank" rel="external">http://www.sivan.tech/2019/11/04/数据竞赛-数据预处理以及特征选择/</a>
+        
+    </div>
+    <footer>
+        <a href="http://www.sivan.tech">
+            <img src="/img/1.jpg" alt="逸如风(yirufeng)">
+            逸如风(yirufeng)
+        </a>
+    </footer>
+</blockquote>
+
+        
+            <div class="page-reward">
+    <a id="rewardBtn" href="javascript:;" class="page-reward-btn waves-effect waves-circle waves-light">赏</a>
+</div>
+
+            
+        
+        <div class="post-footer">
+            
+	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/数据处理/">数据处理</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/数据预处理/">数据预处理</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/特征工程/">特征工程</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/特征选取/">特征选取</a></li></ul>
+
+            <div class="page-share-wrap">
+    
+
+<div class="page-share" id="pageShare">
+    <ul class="reset share-icons">
+      
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://www.sivan.tech/2019/11/04/数据竞赛-数据预处理以及特征选择/&title=《数据竞赛:数据预处理以及特征选择》 — yirufeng's Blog&pic=http://www.sivan.tech/img/1.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://www.sivan.tech/2019/11/04/数据竞赛-数据预处理以及特征选择/&title=《数据竞赛:数据预处理以及特征选择》 — yirufeng's Blog&source=12345import pandas as pdimport numpy as npdata = pd.DataFrame([[1, np.nan, 3]..." data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http://www.sivan.tech/2019/11/04/数据竞赛-数据预处理以及特征选择/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《数据竞赛:数据预处理以及特征选择》 — yirufeng's Blog&url=http://www.sivan.tech/2019/11/04/数据竞赛-数据预处理以及特征选择/&via=http://www.sivan.tech" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=http://www.sivan.tech/2019/11/04/数据竞赛-数据预处理以及特征选择/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+      
+    </ul>
+ </div>
+
+
+
+    <a href="javascript:;" id="shareFab" class="page-share-fab waves-effect waves-circle">
+        <i class="icon icon-share-alt icon-lg"></i>
+    </a>
+</div>
+
+        </div>
+        
+            
+
+
+        
+    </div>
+    
+<nav class="post-nav flex-row flex-justify-between">
+  
+    <div class="prev">
+      <a href="/2019/11/11/Paper-TL-A-survery-on-transfer-learning/" id="post-prev" class="post-nav-link">
+        <div class="tips"><i class="icon icon-angle-left icon-lg icon-pr"></i> Prev</div>
+        <h4 class="title">[Paper_TL]A survery on transfer learning</h4>
+      </a>
+    </div>
+  
+
+  
+    <div class="next">
+      <a href="/2019/09/29/实战PyTorch手写数字体识别/" id="post-next" class="post-nav-link">
+        <div class="tips">Next <i class="icon icon-angle-right icon-lg icon-pl"></i></div>
+        <h4 class="title">实战PyTorch手写数字体识别</h4>
+      </a>
+    </div>
+  
+</nav>
+
+
+    
+    
+        <aside class="post-widget">
+            <nav class="post-toc-wrap" id="post-toc">
+                <strong>目录</strong>
+                <ol class="post-toc"><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#对缺失数据的处理"><span class="post-toc-number">1.</span> <span class="post-toc-text">对缺失数据的处理</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#删除"><span class="post-toc-number">1.1.</span> <span class="post-toc-text">删除</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#填充"><span class="post-toc-number">1.2.</span> <span class="post-toc-text">填充</span></a></li></ol></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#处理缺失值与重复值"><span class="post-toc-number">2.</span> <span class="post-toc-text">处理缺失值与重复值</span></a></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#特征缩放"><span class="post-toc-number">3.</span> <span class="post-toc-text">特征缩放</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#如何做特征缩放"><span class="post-toc-number">3.1.</span> <span class="post-toc-text">如何做特征缩放</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#Min-Max-normalization"><span class="post-toc-number">3.1.1.</span> <span class="post-toc-text">Min-Max normalization</span></a></li></ol></li></ol></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#样本不均衡"><span class="post-toc-number">4.</span> <span class="post-toc-text">样本不均衡</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#方法一：上采样"><span class="post-toc-number">4.1.</span> <span class="post-toc-text">方法一：上采样</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#方法二：下采样"><span class="post-toc-number">4.2.</span> <span class="post-toc-text">方法二：下采样</span></a></li></ol></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#识别异常值"><span class="post-toc-number">5.</span> <span class="post-toc-text">识别异常值</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#方法一：箱型图分析"><span class="post-toc-number">5.1.</span> <span class="post-toc-text">方法一：箱型图分析</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#方法二：3σ原则"><span class="post-toc-number">5.2.</span> <span class="post-toc-text">方法二：3σ原则</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#方法三：识别异常值–DBSCAN"><span class="post-toc-number">5.3.</span> <span class="post-toc-text">方法三：识别异常值–DBSCAN</span></a></li></ol></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#特征工程"><span class="post-toc-number">6.</span> <span class="post-toc-text">特征工程</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#特征处理："><span class="post-toc-number">6.1.</span> <span class="post-toc-text">特征处理：</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#特征类型"><span class="post-toc-number">6.1.1.</span> <span class="post-toc-text">特征类型:</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#数值类型的特征："><span class="post-toc-number">6.1.1.1.</span> <span class="post-toc-text">数值类型的特征：</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#类别特征："><span class="post-toc-number">6.1.1.2.</span> <span class="post-toc-text">类别特征：</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#时间特征："><span class="post-toc-number">6.1.1.3.</span> <span class="post-toc-text">时间特征：</span></a></li></ol></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#连续变量的离散化：分箱-bin"><span class="post-toc-number">6.1.2.</span> <span class="post-toc-text">连续变量的离散化：分箱(bin)</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#类别特征：LabelEncoder"><span class="post-toc-number">6.1.3.</span> <span class="post-toc-text">类别特征：LabelEncoder</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#类别特征：one-hot"><span class="post-toc-number">6.1.4.</span> <span class="post-toc-text">类别特征：one-hot</span></a></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#特征构建"><span class="post-toc-number">6.2.</span> <span class="post-toc-text">特征构建</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#特征选取："><span class="post-toc-number">6.3.</span> <span class="post-toc-text">特征选取：</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#SelectKBest的运用："><span class="post-toc-number">6.3.1.</span> <span class="post-toc-text">SelectKBest的运用：</span></a></li></ol></li></ol></li></ol>
+            </nav>
+            <div class="toc-bar"><div>
+        </aside>
+    
+</article>
+
+    <div id="reward" class="page-modal reward-lay">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <h3 class="reward-title">
+        <i class="icon icon-quote-left"></i>
+        感谢原作，你的打赏是我的动力！
+        <i class="icon icon-quote-right"></i>
+    </h3>
+    <div class="reward-content">
+        
+        <div class="reward-code">
+            <img id="rewardCode" src="/img/reward-wechat.jpg" alt="打赏二维码">
+        </div>
+        
+        <label class="reward-toggle">
+            <input id="rewardToggle" type="checkbox" class="reward-toggle-check"
+                data-wechat="/img/reward-wechat.jpg" data-alipay="/img/reward-alipay.jpg">
+            <div class="reward-toggle-ctrol">
+                <span class="reward-toggle-item wechat">微信</span>
+                <span class="reward-toggle-label"></span>
+                <span class="reward-toggle-item alipay">支付宝</span>
+            </div>
+        </label>
+        
+    </div>
+</div>
+
+    
+
+</div>
+
+    </main>
+    <footer class="footer ">
+    
+    <div class="top">
+        
+            <p>
+    <span>Links：</span>
+    
+    <span class="blogroll-item">
+        <a href="https://github.com/sivanWu0222" target="_blank">GitHub</a>
+    </span>
+    
+    <span class="blogroll-item">
+        <a href="http://weibo.com/Msingwen0222/home?wvr=5" target="_blank">新浪微博</a>
+    </span>
+    
+    <span class="blogroll-item">
+        <a href="https://www.linkedin.com/in/%E6%99%93%E6%96%87-%E5%90%B4-79057a121/" target="_blank">Linkedin</a>
+    </span>
+    
+    <span class="blogroll-item">
+        <a href="http://wpa.qq.com/msgrd?v=3&amp;uin=1666762170&amp;site=qq&amp;menu=yes" target="_blank">QQ</a>
+    </span>
+    
+    <span class="blogroll-item">
+        <a href="https://zh-cn.facebook.com/people/SiVan-Wu/100014408918389" target="_blank">Facebook</a>
+    </span>
+    
+    <span class="blogroll-item">
+        <a href="https://mail.qq.com/cgi-bin/qm_share?t=qm_mailme&amp;email=xfTz8-Py8-f08vWFtLTrpqqo" target="_blank">Contact</a>
+    </span>
+    
+    <span class="blogroll-item">
+        <a href="https://twitter.com/SiVan_Wu" target="_blank">Twitter</a>
+    </span>
+    
+</p>
+
+        
+    </div>
+    
+    <div class="bottom">
+        <p>
+            <span>
+                逸如风(yirufeng) &copy; 2016 - 2019
+            </span>
+
+           	
+           	<span>
+           		<a href="http://beian.miit.gov.cn/" target="_blank">已实名认证</a>
+           	</span>
+           	
+
+            
+
+            
+
+            
+                
+<span class="site-uv" title="总访客量">
+    <i class="icon icon-user"></i>
+    <i class="busuanzi-value" id="busuanzi_value_site_uv"></i>
+</span>
+
+
+<span class="site-pv" title="总访问量">
+    <i class="icon icon-eye"></i>
+    <i class="busuanzi-value" id="busuanzi_value_site_pv"></i>
+</span>
+
+            
+        </p>
+    </div>
+</footer>
+
+    <div class="mask" id="mask"></div>
+<a href="javascript:;" id="gotop" class="waves-effect waves-circle waves-light"><span class="icon icon-lg icon-chevron-up"></span></a>
+
+
+
+<div class="global-share" id="globalShare">
+    <ul class="reset share-icons">
+      
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://www.sivan.tech/2019/11/04/数据竞赛-数据预处理以及特征选择/&title=《数据竞赛:数据预处理以及特征选择》 — yirufeng's Blog&pic=http://www.sivan.tech/img/1.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://www.sivan.tech/2019/11/04/数据竞赛-数据预处理以及特征选择/&title=《数据竞赛:数据预处理以及特征选择》 — yirufeng's Blog&source=12345import pandas as pdimport numpy as npdata = pd.DataFrame([[1, np.nan, 3]..." data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http://www.sivan.tech/2019/11/04/数据竞赛-数据预处理以及特征选择/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《数据竞赛:数据预处理以及特征选择》 — yirufeng's Blog&url=http://www.sivan.tech/2019/11/04/数据竞赛-数据预处理以及特征选择/&via=http://www.sivan.tech" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=http://www.sivan.tech/2019/11/04/数据竞赛-数据预处理以及特征选择/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+      
+    </ul>
+ </div>
+
+
+<div class="page-modal wx-share" id="wxShare">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAN4AAADeCAAAAAB3DOFrAAACuElEQVR42u3aQW7DMAwEwPz/0+m1QGBnV5RaH8anwHBijgJIBMnXK77ev66rO5/Pf37On7x64+vEhYeHhzcI/fNKXvb54jy4BH8fz9UzeHh4eKd57Zadh3LPzp9ZXCw8PDy8B/PuD4l8u5+k13h4eHjP5yUhJofBBI+Hh4f3X7ykGHH/fHuctCXa47UWPDw8vJiXb9bP+Xykv4eHh4c37qrnZdnkwJiPF9TR4uHh4R3gtels28jPk+n2TtE8w8PDwzvGS9pUbSF1NCwVR/KlmIuHh4d3gJdsvnlY98u0VuqdjHDh4eHh7eXtTY7bUkU+NJAPOnw58fDw8PDGvEnCeiI5bkmjNhgeHh7eeGggOSTabD0f28obY+1hg4eHh7eXN2k1JSXgdhHb4sWXdBwPDw/vGK9NlNtnkqDnC3F5MODh4eFt5RWt9/HmPl+atdIJHh4e3l5eHkRell1rg7VHVFSwwMPDwzvGm3SR5oMC+XhW8q5R3wwPDw8vrs3mg1B5cGu/NjlmLpcDDw8PbytvrXGVp8hJ4tum78XRhYeHh3eM15Yb2qAnWe7aSAEeHh7e3/Pu7+Tl1zwJbhd6caYMDw8PbxOv/bk5IFnWfDzrMlo8PDy8A7z2y6/x1c6CtaMD9X+Ih4eHt8Rba+fPiw5JUp6EXpSD8fDw8DbxEtJagSBvrSVLuXa04OHh4Z3j5YWAteJvu7m3rbjLRcTDw8M7zMuLp22ymzfMNhc48PDw8Lby3uWVJ8350qw13qLyBx4eHt4B3trmmx8qeWsqH+qaLx8eHh7enLe3Pd82riaNtw2JNR4eHt6AN9ms23Q8T44n5Qk8PDy8p/EmBYu2QLxWRMbDw8N7Dq8txeajCfOjCA8PD+8veUlAeZrbLkfy3bYJh4eHh3eOt/bKSZq7Nm5VjKji4eHhneL9AF6hzxSnYwPiAAAAAElFTkSuQmCC" alt="微信分享二维码">
+</div>
+
+
+    
+    <!-- main-js -->
+<script type="text/javascript" src="//cdn.bootcss.com/jquery/2.1.0/jquery.min.js"></script>
+<script type="text/javascript" src="/js/plugins/fastclick.js?v=1.4.2"></script>
+<script type="text/javascript" src="/js/plugins/ios-orientationchange-fix.js?v=1.4.2"></script>
+<script type="text/javascript" src="//cdn.jsdelivr.net/gh/fancyapps/fancybox@3.5.2/dist/jquery.fancybox.min.js"></script>
+
+<script type="text/javascript" src="//cdn.bootcss.com/node-waves/0.7.4/waves.min.js"></script>
+
+<script type="text/javascript" src="/js/method.js?v=1.4.2"></script>
+<script type="text/javascript" src="/js/blog.js?v=1.4.2"></script>
+
+<!-- third-party -->
+
+
+
+
+
+
+<script type="text/javascript" src="/js/plugins/local_search.js?v=1.4.2"></script>
+<script type="text/javascript">
+	var search_path = "search.xml";
+	if (search_path.length === 0) {
+		search_path = "search.xml";
+	}
+	var path = "/" + search_path;
+	searchFunc(path, "local-search-input", "local-search-result");
+</script>
+
+
+
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+    
+    
+
+
+
+<script type="text/javascript" src="https://cdn1.lncld.net/static/js/av-core-mini-0.6.4.js"></script>
+<script type="text/javascript" src="/js/plugins/leancloud_visitors.js?v=1.4.2"></script>
+
+
+
+    <!-- mathjax config similar to math.stackexchange -->
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+        tex2jax: {
+            inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+            processEscapes: true,
+            skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+        }
+    });
+</script>
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for (i=0; i < all.length; i += 1) {
+            all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+    });
+</script>
+
+<script type="text/javascript" src="//cdn.bootcss.com/mathjax/2.7.1/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+
+
+
+    <script>
+    (function() {
+        var OriginTitile = document.title, titleTime;
+        document.addEventListener('visibilitychange', function() {
+            if (document.hidden) {
+                document.title = '死鬼去哪里了！';
+                clearTimeout(titleTime);
+            } else {
+                document.title = '(つェ⊂)咦!又好了!';
+                titleTime = setTimeout(function() {
+                    document.title = OriginTitile;
+                },2000);
+            }
+        });
+    })();
+</script>
+
+
+
+
+
+    
+</body>
+</html>

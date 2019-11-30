@@ -1,0 +1,828 @@
+<!DOCTYPE html>
+<html>
+<head><meta name="generator" content="Hexo 3.9.0">
+    <meta charset="utf-8">
+    
+    
+    <title>实战PyTorch手写数字体识别 | yirufeng&#39;s Blog | 未来的小幸运 || 致正在努力的我们 ---- 逸如风</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    
+    <meta name="keywords" content="PyTorch,Deep Learning">
+    <link rel="shortcut icon" href="/img/favicon.ico">
+    <link rel="stylesheet" href="//cdn.jsdelivr.net/gh/fancyapps/fancybox@3.5.2/dist/jquery.fancybox.min.css">
+    <link rel="stylesheet" href="/css/style.css?v=1.4.2">
+    
+    <script type="text/javascript">
+        // Data Center
+        var DC = {
+            reward:	true,
+            lv: JSON.parse('{"enable":true,"app_id":"K2RVtHi7RnmoN6dovlDKafn8-gzGzoHsz","app_key":"Qxmil0oqPFdDUyyIp2i1Xikt","icon":true}'),
+            v: JSON.parse('{"enable":false,"appid":"ACuOJIasBeRLiDe2iUApHj67-gzGzoHsz","appkey":"qbgg4tClrQQmvq8uwlpwA5mA","notify":true,"verify":true,"placeholder":"give me some sugers plz...","avatar":"wavatar"}'),
+            g: JSON.parse('{"enable":false,"lazy":true,"owner":"codefine","repo":"gitment","oauth":{"client_id":null,"client_secret":null},"perPage":10}'),
+            d: JSON.parse('{"app_id":null}')
+        };
+    </script>
+    <script type="text/javascript">
+        window.lazyScripts=[];
+    </script>
+    
+</head>
+
+
+<body>
+    <div id="loading" class="active"></div>
+
+    <aside id="menu" class="">
+  <div class="inner flex-row-vertical">
+    <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menu-off">
+        <i class="icon icon-lg icon-close"></i>
+    </a>
+    <div class="brand-wrap">
+      
+      <img src="/img/brand.jpg" class="brand-bg">
+      
+      <div class="brand">
+        <a href="/" class="avatar waves-effect waves-circle waves-light">
+          <img src="/img/1.jpg">
+        </a>
+        <hgroup class="introduce">
+          <h5 class="nickname">逸如风(yirufeng)</h5>
+          <a href="mailto:yirufeng@foxmail.com" title="yirufeng@foxmail.com" class="mail">
+            
+              <span>y</span>
+            
+              <span>i</span>
+            
+              <span>r</span>
+            
+              <span>u</span>
+            
+              <span>f</span>
+            
+              <span>e</span>
+            
+              <span>n</span>
+            
+              <span>g</span>
+            
+              <span>@</span>
+            
+              <span>f</span>
+            
+              <span>o</span>
+            
+              <span>x</span>
+            
+              <span>m</span>
+            
+              <span>a</span>
+            
+              <span>i</span>
+            
+              <span>l</span>
+            
+              <span>.</span>
+            
+              <span>c</span>
+            
+              <span>o</span>
+            
+              <span>m</span>
+            
+          </a>
+        </hgroup>
+        
+        <ul class="menu-link">
+          
+              <li>
+                <a href="https://github.com/sivanWu0222" target="_blank">
+                  <i class="icon icon-lg icon-github"></i>
+                </a>
+              </li>
+            
+              <li>
+                <a href="https://mail.qq.com/cgi-bin/qm_share?t=qm_mailme&amp;amp;email=xfTz8-Py8-f08vWFtLTrpqqo" target="_blank">
+                  <i class="icon icon-lg icon-envelope"></i>
+                </a>
+              </li>
+            
+        </ul>
+        
+      </div>
+    </div>
+    <div class="scroll-wrap flex-col">
+      <ul class="nav">
+        
+            <li class="">
+              <a href="/"  >
+                <i class="icon icon-lg icon-home"></i>
+                Home
+              </a>
+            </li>
+        
+            <li class="">
+              <a href="/categories"  >
+                <i class="icon icon-lg icon-th-list"></i>
+                Category
+              </a>
+            </li>
+        
+            <li class="">
+              <a href="/research"  >
+                <i class="icon icon-lg icon-mortar-board"></i>
+                Research
+              </a>
+            </li>
+        
+            <li class="">
+              <a href="/tags"  >
+                <i class="icon icon-lg icon-tags"></i>
+                Tag
+              </a>
+            </li>
+        
+            <li class="">
+              <a href="/archives"  >
+                <i class="icon icon-lg icon-archives"></i>
+                Archive
+              </a>
+            </li>
+        
+            <li class="">
+              <a href="/about"  >
+                <i class="icon icon-lg icon-user"></i>
+                About
+              </a>
+            </li>
+        
+            <li class="">
+              <a href="/open-source"  >
+                <i class="icon icon-lg icon-github"></i>
+                Project
+              </a>
+            </li>
+        
+            <li class="">
+              <a href="/demo"  >
+                <i class="icon icon-lg icon-audio-description"></i>
+                Demo
+              </a>
+            </li>
+        
+            <li class="">
+              <a href="/wechat-number"  >
+                <i class="icon icon-lg icon-wechat"></i>
+                公众号
+              </a>
+            </li>
+        
+            <li class="">
+              <a href="http://www.sivan.tech/LeetCodeAlgo/" target="_blank" >
+                <i class="icon icon-lg icon-braille"></i>
+                Leetcode
+              </a>
+            </li>
+        
+            <li class="">
+              <a href="http://resume.sivan.tech/" target="_blank" >
+                <i class="icon icon-lg icon-file-pdf-o"></i>
+                Resume
+              </a>
+            </li>
+        
+      </ul>
+    </div>
+  </div>
+</aside>
+
+    <main id="main">
+        <header class="top-header" id="header">
+    <div class="flex-row clearfix">
+        <a href="javascript:;" class="header-icon pull-left waves-effect waves-circle waves-light on" id="menu-toggle">
+          <i class="icon icon-lg icon-navicon"></i>
+        </a>
+        <div class="flex-col header-title ellipsis">
+            <span>实战PyTorch手写数字体识别</span>
+            
+        </div>
+        
+        <a href="javascript:;" id="site_search_btn" class="header-icon pull-right waves-effect waves-circle waves-light">
+            <i class="icon icon-lg icon-search"></i>
+        </a>
+        
+    </div>
+</header>
+<header class="content-header post-header">
+    <img src="/img/s3.jpg" class="header-bg">
+    <div class="container fade-scale">
+        <h1 class="title">实战PyTorch手写数字体识别</h1>
+        <h5 class="subtitle">
+            
+                <time datetime="2019-09-29T11:47:51.000Z" itemprop="datePublished" class="page-time">
+  2019-09-29
+</time>
+
+
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/Deep-Learning/">Deep Learning</a><ul class="article-category-list-child"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/Deep-Learning/CNN/">CNN</a></li></ul></li></ul>
+
+            
+        </h5>
+        
+    </div>
+    
+
+</header>
+
+<div id="site_search">
+    <div class="search-title clearfix">
+        <span class="pull-left">
+          <i class="icon icon-lg icon-search"></i>
+        </span>
+        <input type="text" id="local-search-input" name="q" results="0" placeholder="search my blog..." class="form-control pull-left"/>
+        <a href="javascript:;" class="close pull-right waves-effect waves-circle waves-light">
+          <i class="icon icon-lg icon-close"></i>
+        </a>
+    </div>
+    <div id="local-search-result"></div>
+</div>
+
+
+<div class="container body-wrap">
+    <article id="post-实战PyTorch手写数字体识别"
+  class="post-article article-type-post" itemprop="blogPost">
+    <div class="post-card">
+        <h1 class="post-card-title">实战PyTorch手写数字体识别</h1>
+        <div class="post-meta">
+            <time class="post-time" title="2019-09-29 19:47:51" datetime="2019-09-29T11:47:51.000Z"  itemprop="datePublished">2019-09-29</time>
+
+            
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/Deep-Learning/">Deep Learning</a><ul class="article-category-list-child"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/Deep-Learning/CNN/">CNN</a></li></ul></li></ul>
+
+
+
+            
+	<span id="/2019/09/29/实战PyTorch手写数字体识别/" class="leancloud_visitors" data-flag-title="实战PyTorch手写数字体识别" title="实战PyTorch手写数字体识别">
+		
+			<i class="icon icon-eye"></i>
+		
+		<span class="leancloud-visitors-count"></span>
+	</span>
+ 
+
+            
+
+
+            
+        </div>
+        <div class="post-content" id="post-content" itemprop="postContent">
+            
+            <blockquote>
+<p>开始学习深度学习，想通过被誉为<strong>深度学习”Hello World”的LeNet5</strong>进行实践，奈何从网络架构看不懂到最后编码没看懂，到现在的恍然大悟，这里面有很多坑不实践只知道网络结构永远是不够的，在学习编码LeNet5的过程中，遇到了很多坑，从网上找资料，五音不全的，总感觉少了很多东西，所以自己索性就总结了自己LeNet5的经验以及一些坑</p>
+</blockquote>
+<h2 id="网络架构"><a href="#网络架构" class="headerlink" title="网络架构"></a>网络架构</h2><figure class="image-box">
+                <a rel=实战PyTorch手写数字体识别 href="./CNN.png" title="LeNet5网络结构图" data-fancybox="images"><img src="./CNN.png" alt="LeNet5网络结构图" title class></a>
+                <p>LeNet5网络结构图</p>
+            </figure>
+<p>输入的图片是 28<em>28</em>1 : <strong>分别表示28像素的高，28像素的宽，1个颜色通道</strong></p>
+<p>第一层：卷积层：卷积核大小为6✖️28✖️28, (6表示卷积核的通道数，决定了输出内容的个数，1表示卷积核的通道为1，28)<br>第二层：池化层<br>第三层：卷积层<br>第四层：池化层<br>第五层：全连接层<br>第六层：全连接层<br>第七层：全连接层</p>
+<h2 id="数据介绍"><a href="#数据介绍" class="headerlink" title="数据介绍"></a>数据介绍</h2><blockquote>
+<p>实战LeNet5架构的数据已经由大神Yann LeCun备好，只需要通过PyTorch下载并加载就可以</p>
+</blockquote>
+<p>训练集：提供了60000张28<em>28像素的黑白图(说明颜色通道为1)，60000个标签<br>测试集：提供了10000张28</em>28像素的黑白图，10000个标签</p>
+<figure class="image-box">
+                <a rel=实战PyTorch手写数字体识别 href="./数据图展示.png" title="展示其中的一个数据" data-fancybox="images"><img src="./数据图展示.png" alt="展示其中的一个数据" title class></a>
+                <p>展示其中的一个数据</p>
+            </figure>
+<h2 id="一些坑"><a href="#一些坑" class="headerlink" title="一些坑"></a>一些坑</h2><ol>
+<li>ReLU() 与 torch.relu() 真的不一样，可别搞混，自己当时就是搞混，以为是一样的，卡了半天</li>
+<li></li>
+</ol>
+<h2 id="步骤"><a href="#步骤" class="headerlink" title="步骤"></a>步骤</h2><blockquote>
+<p>任何一个神经网络的实践数据收集都是起点，这里我们使用了经典的MNIST数据集，包括60000 个训练样本和 10000 个测试样本，样本大小都是1 ✖️ 28 ✖️ 28 (1是指黑白图，也就是只有1个颜色通道)</p>
+</blockquote>
+<ol>
+<li>数据收集</li>
+<li>数据处理</li>
+<li>网络搭建</li>
+<li>针对问题定义损失函数和优化器</li>
+<li>训练模型</li>
+<li>测试模型准确度</li>
+</ol>
+<h3 id="数据处理和数据收集"><a href="#数据处理和数据收集" class="headerlink" title="数据处理和数据收集"></a>数据处理和数据收集</h3><blockquote>
+<p>PyTorch已经内置了MNIST数据集，因此我们只需要导入相应的包来下载数据集</p>
+</blockquote>
+<p><strong>注意：数据集都是图像，我们在PyTorch中数据的计算都需要将数据转换为计算图的张量(可以理解为是我们现实中的一个常量)</strong></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> torchvision.datasets <span class="keyword">as</span> datasets</span><br><span class="line"><span class="keyword">import</span> torchvision.transforms <span class="keyword">as</span> transforms</span><br><span class="line"><span class="keyword">from</span> torch.utils.data <span class="keyword">import</span> dataloader</span><br><span class="line"></span><br><span class="line"><span class="comment"># 将数据转换为计算图的张量，使用Compose可以将多种变换组合到一起，但是这里我们只将其转换为Tensor</span></span><br><span class="line">transform = transforms.Compose([</span><br><span class="line">    transforms.ToTensor()</span><br><span class="line">])</span><br><span class="line"></span><br><span class="line"><span class="comment"># 加载对应的数据集</span></span><br><span class="line"><span class="comment">## root代表数据集存放的目录</span></span><br><span class="line"><span class="comment">## train代表是否是训练集，用来区分训练集和测试集</span></span><br><span class="line"><span class="comment">## download代表是否需要下载，为true代表如果在root中没有找到数据则进行下载</span></span><br><span class="line"><span class="comment">## transform代表对下载后加载进来的数据做哪些预处理操作</span></span><br><span class="line">train_data = datasets.MNIST(root=<span class="string">'./data'</span>, train=<span class="literal">True</span>, download=<span class="literal">True</span>, transform=transform)</span><br><span class="line">test_data = datasets.MNIST(root=<span class="string">'./data'</span>, train=<span class="literal">False</span>, download=<span class="literal">True</span>, transform=transform)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment"># 数据加载(使用MINI-Batch加载)：将上面已经加载的数据存档到一个迭代器中方便训练和测试的时候遍历</span></span><br><span class="line"><span class="comment">## 第1个参数代表加载哪个数据集</span></span><br><span class="line"><span class="comment">## batch_size指示每次加载多少张图</span></span><br><span class="line"><span class="comment">## shuffle指示加载数据的时候是否随机加载(打乱)</span></span><br><span class="line">train_data_loader = dataloader.DataLoader(train_data, batch_size=BATCH_SIZE, shuffle=<span class="literal">True</span>)</span><br><span class="line">test_data_loader = dataloader.DataLoader(test_data, batch_size=BATCH_SIZE, shuffle=<span class="literal">True</span>)</span><br></pre></td></tr></table></figure>
+<h3 id="网络搭建"><a href="#网络搭建" class="headerlink" title="网络搭建"></a>网络搭建</h3><blockquote>
+<p>这里我们自定义了网络结构</p>
+</blockquote>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> torch.nn <span class="keyword">as</span> nn</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">MyCNN</span><span class="params">(nn.Module)</span>:</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span><span class="params">(self)</span>:</span></span><br><span class="line">        super(MyCNN, self).__init__()</span><br><span class="line">        self.conv = nn.Sequential(</span><br><span class="line">            <span class="comment"># 输入 batch_size, 1, 28, 28</span></span><br><span class="line">            nn.Conv2d(<span class="number">1</span>, <span class="number">3</span>, <span class="number">3</span>, padding=<span class="number">2</span>),</span><br><span class="line">            nn.BatchNorm2d(<span class="number">3</span>),</span><br><span class="line">            nn.LeakyReLU(<span class="number">0.2</span>),</span><br><span class="line">            nn.MaxPool2d(<span class="number">2</span>),</span><br><span class="line">            <span class="comment"># batch_size, 3, 15, 15</span></span><br><span class="line">            nn.Conv2d(<span class="number">3</span>, <span class="number">16</span>, <span class="number">3</span>, padding=<span class="number">1</span>),</span><br><span class="line">            nn.BatchNorm2d(<span class="number">16</span>),</span><br><span class="line">            nn.LeakyReLU(<span class="number">0.2</span>),</span><br><span class="line">            nn.MaxPool2d(<span class="number">2</span>),</span><br><span class="line">            <span class="comment"># batch_size, 16, 7, 7</span></span><br><span class="line">            nn.Conv2d(<span class="number">16</span>, <span class="number">32</span>, <span class="number">3</span>, padding=<span class="number">1</span>),</span><br><span class="line">            nn.BatchNorm2d(<span class="number">32</span>),</span><br><span class="line">            nn.LeakyReLU(<span class="number">0.2</span>),</span><br><span class="line">            nn.MaxPool2d(<span class="number">2</span>),</span><br><span class="line">            <span class="comment"># batch_size, 32, 3, 3</span></span><br><span class="line">        )</span><br><span class="line">        self.lin = nn.Linear(<span class="number">288</span>, <span class="number">10</span>)</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">forward</span><span class="params">(self, input)</span>:</span></span><br><span class="line">        y = self.conv(input)</span><br><span class="line">        y = y.view(input.size(<span class="number">0</span>), <span class="number">-1</span>)</span><br><span class="line">        y = self.lin(y)</span><br><span class="line">        <span class="keyword">return</span> y</span><br></pre></td></tr></table></figure>
+<h3 id="定义损失函数和优化器"><a href="#定义损失函数和优化器" class="headerlink" title="定义损失函数和优化器"></a>定义损失函数和优化器</h3><blockquote>
+<p>Adam: 一种计算每个参数的自适应学习率的方法<br>分类问题常用的损失函数为交叉熵（Cross Entropy Loss。交叉熵描述了两个概率分布之间的距离，交叉熵越小说明两者之间越接近。</p>
+</blockquote>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 定义损失函数以及优化器</span></span><br><span class="line">loss_func = torch.nn.CrossEntropyLoss()  <span class="comment"># 采用交叉熵损失</span></span><br><span class="line">optimizer = torch.optim.Adam(net.parameters(), lr=LEARNING_RATE)  <span class="comment">#采用学习率自己可以调节的Adam优化器</span></span><br></pre></td></tr></table></figure>
+<h3 id="训练模型"><a href="#训练模型" class="headerlink" title="训练模型"></a>训练模型</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">index_value = <span class="number">0</span></span><br><span class="line"><span class="comment"># 训练集</span></span><br><span class="line"><span class="keyword">for</span> epoch <span class="keyword">in</span> range(NUM_EPOCHS):</span><br><span class="line">    <span class="keyword">for</span> index, (data, label) <span class="keyword">in</span> enumerate(train_data_loader):</span><br><span class="line">        predict_label = net(data)</span><br><span class="line">        loss = loss_func(predict_label, label)</span><br><span class="line">        loss_value = loss.item()</span><br><span class="line">        print(<span class="string">"epoch:&#123;&#125;, index:&#123;&#125;, loss:&#123;&#125;"</span>.format(epoch, index, loss_value))</span><br><span class="line">        opt = &#123;</span><br><span class="line">            <span class="string">'title'</span>: <span class="string">'LeNet5_loss'</span>,</span><br><span class="line">            <span class="string">'xlabel'</span>: <span class="string">'index'</span>,</span><br><span class="line">            <span class="string">'ylabel'</span>: <span class="string">'loss'</span></span><br><span class="line">        &#125;</span><br><span class="line">        vis.line(Y=np.array([loss_value]), X=np.array([index_value]), win=<span class="string">'lenet5_loss'</span>, update=<span class="string">'append'</span>, opts=opt)</span><br><span class="line">        optimizer.zero_grad()</span><br><span class="line">        loss.backward()</span><br><span class="line">        index_value += <span class="number">1</span></span><br><span class="line">        optimizer.step()</span><br></pre></td></tr></table></figure>
+<h3 id="测试模型"><a href="#测试模型" class="headerlink" title="测试模型"></a>测试模型</h3><p>几个注意的地方：</p>
+<ol>
+<li><strong>进行测试的时候一定要关闭求梯度，以及dropout(使用net.eval())</strong></li>
+<li>训练之后的网络，使用net(data)将会得到预测的输出, 例如在该任务中会输出大小为(batch_size, 10)的二维tensor, 每个batch_size对应的10个数字的可能性大小，数字最大的代表预测为该数字</li>
+<li>使用net(data).argmax()求得的是二维tensor的最大值，但我们想要的是(batch_size, 10)大小的tensor中每行的最大值对应的下标，因为就是我们预测的值，因此可以采用net(data).argmax(dim=1)</li>
+<li>label == net(data).argmax(dim=1) 来判断是否与我们预测的一致，将会返回一个bool组成的tensor</li>
+<li>(label == net(data).argmax(dim=1)).sum() 可以计算我们预测的有多少是准确的，只是局限在该batch_size下</li>
+</ol>
+<a id="more"></a>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">with</span> torch.no_grad():</span><br><span class="line">    <span class="keyword">for</span> data, label <span class="keyword">in</span> test_data_loader:</span><br><span class="line">        net.eval()</span><br><span class="line">        <span class="comment">#print(net(data)) # 得到的是一个128维(batch_size) × 10(每个batch_size中的每个tensor分别对应10个数字的几率)的tensor</span></span><br><span class="line">        <span class="comment">#print(max(net(data)[0]) # 得到第一个batch_size最大的值)</span></span><br><span class="line">        <span class="comment">#print(net(data).argmax(dim=1)) # 获得最大值对应的索引，也就是我们想要得到的一个结果</span></span><br><span class="line">        </span><br><span class="line">        <span class="comment">#print(net(data)[0][net(data)[0].argmax(dim=1)])</span></span><br><span class="line">        </span><br><span class="line">        <span class="comment">#print(label)</span></span><br><span class="line">        </span><br><span class="line">        accur_num = (label == net(data).argmax(dim=<span class="number">1</span>)).sum() <span class="comment">#得到有多少是计算准确的</span></span><br><span class="line">        accur_sum += accur_num</span><br><span class="line">        n += BATCH_SIZE</span><br><span class="line">        print(<span class="string">"本轮准确率为：%.6f，累计准确率为：%.6f"</span> % ((accur_num * <span class="number">1.0</span>/ BATCH_SIZE), (accur_sum * <span class="number">1.0</span>/ n)))</span><br></pre></td></tr></table></figure>
+<h3 id="torch-argmax-详解"><a href="#torch-argmax-详解" class="headerlink" title="torch.argmax() 详解"></a>torch.argmax() 详解</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 以下参考https://blog.csdn.net/qq_27261889/article/details/88613932</span></span><br><span class="line">m = torch.tensor([[<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>], [<span class="number">4</span>, <span class="number">5</span>, <span class="number">6</span>]])</span><br><span class="line">m.argmax()<span class="comment">#找到了全局的最大值</span></span><br><span class="line">m.argmax(dim=<span class="number">0</span>) <span class="comment">#dim=0找意思就是行不要了，因此会找到每一列的最大值对应的序号返回</span></span><br><span class="line">m.argmax(dim=<span class="number">1</span>) <span class="comment">#dim=1找意思就是列不要了，因此会找到每一行的最大值对应的序号返回</span></span><br></pre></td></tr></table></figure>
+<h3 id="使用visdom进行可视化"><a href="#使用visdom进行可视化" class="headerlink" title="使用visdom进行可视化"></a>使用visdom进行可视化</h3><blockquote>
+<p>上面训练网络使用了visdom画出损失函数图进行可视化</p>
+</blockquote>
+<p><strong>注意使用vis.line()的时候, Y在前面，X在后面，并且需要将其转换为一维的np.array类型</strong><br><strong>如果需要在原图上更新，指定参数update=’append’</strong><br><strong>win指定对应pane的名字</strong><br><strong>opts采用键值对的形式指定对应可视化pane的一些属性</strong></p>
+<h4 id="启动"><a href="#启动" class="headerlink" title="启动"></a>启动</h4><blockquote>
+<p>python -m visdom.server</p>
+</blockquote>
+<h4 id="可视化"><a href="#可视化" class="headerlink" title="可视化"></a>可视化</h4><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> visdom</span><br><span class="line">vis = visdom.Visdom()</span><br><span class="line">opt = &#123;</span><br><span class="line">    <span class="string">'title'</span>: <span class="string">'LeNet5_loss'</span>,</span><br><span class="line">    <span class="string">'xlabel'</span>: <span class="string">'index'</span>,</span><br><span class="line">    <span class="string">'ylabel'</span>: <span class="string">'loss'</span></span><br><span class="line">&#125;</span><br><span class="line">vis.line(Y=np.array([loss_value]), X=np.array([index_value]), win=<span class="string">'lenet5_loss'</span>, update=<span class="string">'append'</span>, opts=opt)</span><br></pre></td></tr></table></figure>
+<h2 id="References"><a href="#References" class="headerlink" title="References"></a>References</h2><ol>
+<li><a href="https://zhuanlan.zhihu.com/p/30117574" target="_blank" rel="noopener">网络架构完全不懂的参考</a> 缺点：后面的几层讲解的不够全面</li>
+<li><a href="https://www.pytorchtutorial.com/using-visdom-for-visualization-in-pytorch/" target="_blank" rel="noopener">visdom可视化</a></li>
+<li><a href="https://blog.csdn.net/u012436149/article/details/69389610?utm_source=gold_browser_extension" target="_blank" rel="noopener">visdom可视化2</a></li>
+<li><a href="https://blog.csdn.net/nanxiaoting/article/details/81395579" target="_blank" rel="noopener">visdom可视化3</a></li>
+</ol>
+
+        </div>
+        
+<blockquote class="post-copyright">
+    <div class="content">
+        
+<span class="post-time">
+    最后更新时间：<time datetime="2019-11-09T12:54:29.510Z" itemprop="dateUpdated">2019-11-09 20:54:29</time>
+</span><br>
+
+
+        
+        转载注明出处，原文地址：<a href="/2019/09/29/实战PyTorch手写数字体识别/" target="_blank" rel="external">http://www.sivan.tech/2019/09/29/实战PyTorch手写数字体识别/</a>
+        
+    </div>
+    <footer>
+        <a href="http://www.sivan.tech">
+            <img src="/img/1.jpg" alt="逸如风(yirufeng)">
+            逸如风(yirufeng)
+        </a>
+    </footer>
+</blockquote>
+
+        
+            <div class="page-reward">
+    <a id="rewardBtn" href="javascript:;" class="page-reward-btn waves-effect waves-circle waves-light">赏</a>
+</div>
+
+            
+        
+        <div class="post-footer">
+            
+	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Deep-Learning/">Deep Learning</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/PyTorch/">PyTorch</a></li></ul>
+
+            <div class="page-share-wrap">
+    
+
+<div class="page-share" id="pageShare">
+    <ul class="reset share-icons">
+      
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://www.sivan.tech/2019/09/29/实战PyTorch手写数字体识别/&title=《实战PyTorch手写数字体识别》 — yirufeng's Blog&pic=http://www.sivan.tech/img/1.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://www.sivan.tech/2019/09/29/实战PyTorch手写数字体识别/&title=《实战PyTorch手写数字体识别》 — yirufeng's Blog&source=
+开始学习深度学习，想通过被誉为深度学习”Hello World”的LeNet5进行实践，奈何从网络架构看不懂到最后编码没看懂，到现在的恍然大悟，这里面有..." data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http://www.sivan.tech/2019/09/29/实战PyTorch手写数字体识别/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《实战PyTorch手写数字体识别》 — yirufeng's Blog&url=http://www.sivan.tech/2019/09/29/实战PyTorch手写数字体识别/&via=http://www.sivan.tech" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=http://www.sivan.tech/2019/09/29/实战PyTorch手写数字体识别/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+      
+    </ul>
+ </div>
+
+
+
+    <a href="javascript:;" id="shareFab" class="page-share-fab waves-effect waves-circle">
+        <i class="icon icon-share-alt icon-lg"></i>
+    </a>
+</div>
+
+        </div>
+        
+            
+
+
+        
+    </div>
+    
+<nav class="post-nav flex-row flex-justify-between">
+  
+    <div class="prev">
+      <a href="/2019/11/04/数据竞赛-数据预处理以及特征选择/" id="post-prev" class="post-nav-link">
+        <div class="tips"><i class="icon icon-angle-left icon-lg icon-pr"></i> Prev</div>
+        <h4 class="title">数据竞赛:数据预处理以及特征选择</h4>
+      </a>
+    </div>
+  
+
+  
+    <div class="next">
+      <a href="/2019/09/10/LeetCode-171-Excel表列序号-md/" id="post-next" class="post-nav-link">
+        <div class="tips">Next <i class="icon icon-angle-right icon-lg icon-pl"></i></div>
+        <h4 class="title">[LeetCode]171-Excel表列序号.md</h4>
+      </a>
+    </div>
+  
+</nav>
+
+
+    
+        <div id="repo">
+    <div class="loading active"></div>
+    <div class="top clearfix">
+        <div class="avatar pull-left"></div>
+        <div class="content pull-left">
+            <p class="name"></p>
+            <p class="description"></p>
+        </div>
+    </div>
+    <ul class="bottom">
+        <li class="star">
+            <span class="icon icon-star"></span>
+            <span class="val">0</span>
+        </li>
+        <li class="fork">
+            <span class="icon icon-code-fork"></span>
+            <span class="val">0</span>
+        </li>
+        <li class="date">
+            <span class="icon icon-clock-o"></span>
+            <span class="val">0000-00-00</span>
+        </li>
+    </ul>
+    <a class="link" href=""></a>
+</div>
+    
+    
+        <aside class="post-widget">
+            <nav class="post-toc-wrap" id="post-toc">
+                <strong>目录</strong>
+                <ol class="post-toc"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#网络架构"><span class="post-toc-number">1.</span> <span class="post-toc-text">网络架构</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#数据介绍"><span class="post-toc-number">2.</span> <span class="post-toc-text">数据介绍</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#一些坑"><span class="post-toc-number">3.</span> <span class="post-toc-text">一些坑</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#步骤"><span class="post-toc-number">4.</span> <span class="post-toc-text">步骤</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#数据处理和数据收集"><span class="post-toc-number">4.1.</span> <span class="post-toc-text">数据处理和数据收集</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#网络搭建"><span class="post-toc-number">4.2.</span> <span class="post-toc-text">网络搭建</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#定义损失函数和优化器"><span class="post-toc-number">4.3.</span> <span class="post-toc-text">定义损失函数和优化器</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#训练模型"><span class="post-toc-number">4.4.</span> <span class="post-toc-text">训练模型</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#测试模型"><span class="post-toc-number">4.5.</span> <span class="post-toc-text">测试模型</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#torch-argmax-详解"><span class="post-toc-number">4.6.</span> <span class="post-toc-text">torch.argmax() 详解</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#使用visdom进行可视化"><span class="post-toc-number">4.7.</span> <span class="post-toc-text">使用visdom进行可视化</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#启动"><span class="post-toc-number">4.7.1.</span> <span class="post-toc-text">启动</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#可视化"><span class="post-toc-number">4.7.2.</span> <span class="post-toc-text">可视化</span></a></li></ol></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#References"><span class="post-toc-number">5.</span> <span class="post-toc-text">References</span></a></li></ol>
+            </nav>
+            <div class="toc-bar"><div>
+        </aside>
+    
+</article>
+
+    <div id="reward" class="page-modal reward-lay">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <h3 class="reward-title">
+        <i class="icon icon-quote-left"></i>
+        感谢原作，你的打赏是我的动力！
+        <i class="icon icon-quote-right"></i>
+    </h3>
+    <div class="reward-content">
+        
+        <div class="reward-code">
+            <img id="rewardCode" src="/img/reward-wechat.jpg" alt="打赏二维码">
+        </div>
+        
+        <label class="reward-toggle">
+            <input id="rewardToggle" type="checkbox" class="reward-toggle-check"
+                data-wechat="/img/reward-wechat.jpg" data-alipay="/img/reward-alipay.jpg">
+            <div class="reward-toggle-ctrol">
+                <span class="reward-toggle-item wechat">微信</span>
+                <span class="reward-toggle-label"></span>
+                <span class="reward-toggle-item alipay">支付宝</span>
+            </div>
+        </label>
+        
+    </div>
+</div>
+
+    
+
+</div>
+
+    </main>
+    <footer class="footer ">
+    
+    <div class="top">
+        
+            <p>
+    <span>Links：</span>
+    
+    <span class="blogroll-item">
+        <a href="https://github.com/sivanWu0222" target="_blank">GitHub</a>
+    </span>
+    
+    <span class="blogroll-item">
+        <a href="http://weibo.com/Msingwen0222/home?wvr=5" target="_blank">新浪微博</a>
+    </span>
+    
+    <span class="blogroll-item">
+        <a href="https://www.linkedin.com/in/%E6%99%93%E6%96%87-%E5%90%B4-79057a121/" target="_blank">Linkedin</a>
+    </span>
+    
+    <span class="blogroll-item">
+        <a href="http://wpa.qq.com/msgrd?v=3&amp;uin=1666762170&amp;site=qq&amp;menu=yes" target="_blank">QQ</a>
+    </span>
+    
+    <span class="blogroll-item">
+        <a href="https://zh-cn.facebook.com/people/SiVan-Wu/100014408918389" target="_blank">Facebook</a>
+    </span>
+    
+    <span class="blogroll-item">
+        <a href="https://mail.qq.com/cgi-bin/qm_share?t=qm_mailme&amp;email=xfTz8-Py8-f08vWFtLTrpqqo" target="_blank">Contact</a>
+    </span>
+    
+    <span class="blogroll-item">
+        <a href="https://twitter.com/SiVan_Wu" target="_blank">Twitter</a>
+    </span>
+    
+</p>
+
+        
+    </div>
+    
+    <div class="bottom">
+        <p>
+            <span>
+                逸如风(yirufeng) &copy; 2016 - 2019
+            </span>
+
+           	
+           	<span>
+           		<a href="http://beian.miit.gov.cn/" target="_blank">已实名认证</a>
+           	</span>
+           	
+
+            
+
+            
+
+            
+                
+<span class="site-uv" title="总访客量">
+    <i class="icon icon-user"></i>
+    <i class="busuanzi-value" id="busuanzi_value_site_uv"></i>
+</span>
+
+
+<span class="site-pv" title="总访问量">
+    <i class="icon icon-eye"></i>
+    <i class="busuanzi-value" id="busuanzi_value_site_pv"></i>
+</span>
+
+            
+        </p>
+    </div>
+</footer>
+
+    <div class="mask" id="mask"></div>
+<a href="javascript:;" id="gotop" class="waves-effect waves-circle waves-light"><span class="icon icon-lg icon-chevron-up"></span></a>
+
+
+
+<div class="global-share" id="globalShare">
+    <ul class="reset share-icons">
+      
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://www.sivan.tech/2019/09/29/实战PyTorch手写数字体识别/&title=《实战PyTorch手写数字体识别》 — yirufeng's Blog&pic=http://www.sivan.tech/img/1.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://www.sivan.tech/2019/09/29/实战PyTorch手写数字体识别/&title=《实战PyTorch手写数字体识别》 — yirufeng's Blog&source=
+开始学习深度学习，想通过被誉为深度学习”Hello World”的LeNet5进行实践，奈何从网络架构看不懂到最后编码没看懂，到现在的恍然大悟，这里面有..." data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http://www.sivan.tech/2019/09/29/实战PyTorch手写数字体识别/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《实战PyTorch手写数字体识别》 — yirufeng's Blog&url=http://www.sivan.tech/2019/09/29/实战PyTorch手写数字体识别/&via=http://www.sivan.tech" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=http://www.sivan.tech/2019/09/29/实战PyTorch手写数字体识别/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+      
+    </ul>
+ </div>
+
+
+<div class="page-modal wx-share" id="wxShare">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAN4AAADeCAAAAAB3DOFrAAACtElEQVR42u3cQU7EMAwF0Ln/pUFix6Kd/52kjNDragRVxq+VEmNbvF7x9fVzJb/9iq/7lfM7N1x4eHh4o9DbIO7Dar8rWSd/iHh4eHjP8Nrt/uqeq239HtmuVjxcPDw8vD/ltYdEezDg4eHh/T/e1de0ye7VA8qTbDw8PLxP4CUB5WHd35/DkvW31Vrw8PDwYl7bAPuEzwf7e3h4eHgLXfXZptym3e2xUXw7Hh4e3gHebCwgoeb3731k0bwYHh4e3gIv2aDbAYLZ4FSe0Ocr4+Hh4Z3mtX/q72pWrTTJ7u/Bw8PDO8Gb5Z/3oeRf3JY88mjx8PDwTvOSgyFPslfGBYq3sesEw8PDw1sYCMjLo7tKDDNqbsHDw8N7nnd/GMzmnXLeyjDWr1oLHh4e3jFe29zKk+9iQCrZ7oOHiIeHh/ckb1a8mH2elXqL9BoPDw/vGC9PrGeb9ay+mh8Sw54eHh4e3oi3XnjNCxCzdtesLYeHh4d3mrdefs037vz+ISB/k3h4eHgjXltW2NDOL7f4pPh7+TLw8PDwjvGKllKZHO9qaw3Lx3h4eHiHebNBq7YQnBw2ySDC0mQEHh4e3jJvJYgotY2PnJVBhPqEwcPDw9tT/6z/yV3b2p+1uNoVhu8TDw8PL+DN2lGzsm8e4qzldjlThoeHh3eYNys6tIfHrJ1WP3Q8PDy8A7wk495VhJ0FOhsFe/MjPDw8vAVeXlrd1RLb+/je4PHw8PAe5yXgWfk1ISXljDdpOh4eHt4BXhtu3rKalX3bgYbXrgsPDw9veRJpZemV1Hy2clTGxcPDwzvAmxVYkxDbsNoUGQ8PD++TebO+0qw8Uffx8v4eHh4e3uO89YZW23J7s/UntWo8PDy8A7x8s54NXa20rJYScTw8PLwDvLYBNmuDbQsljhAPDw/vAO8btjsDJ+HlFgIAAAAASUVORK5CYII=" alt="微信分享二维码">
+</div>
+
+
+    
+    <!-- main-js -->
+<script type="text/javascript" src="//cdn.bootcss.com/jquery/2.1.0/jquery.min.js"></script>
+<script type="text/javascript" src="/js/plugins/fastclick.js?v=1.4.2"></script>
+<script type="text/javascript" src="/js/plugins/ios-orientationchange-fix.js?v=1.4.2"></script>
+<script type="text/javascript" src="//cdn.jsdelivr.net/gh/fancyapps/fancybox@3.5.2/dist/jquery.fancybox.min.js"></script>
+
+<script type="text/javascript" src="//cdn.bootcss.com/node-waves/0.7.4/waves.min.js"></script>
+
+<script type="text/javascript" src="/js/method.js?v=1.4.2"></script>
+<script type="text/javascript" src="/js/blog.js?v=1.4.2"></script>
+
+<!-- third-party -->
+
+
+    <script type="text/javascript">
+    (function() {
+
+        const origin = "sivanWu0222 | PyTorchDL"
+        let user, repo;
+        origin.replace(/(\S+)\s{0,1}\|\s{0,1}(\S+)/g, (...rest) => {
+            [user, repo] = [ rest[1], rest[2] ];
+        });
+        if (user && repo) {
+            const url = `//api.github.com/repos/${user}/${repo}?callback=?`;
+            $.getJSON(url, (data) => {
+                updateRepoInPage(data.data);
+            });
+        }
+
+        function updateRepoInPage(data) {
+            const {name, description, html_url: url, stargazers_count: stars, forks, owner: owner, updated_at: update} = data;
+            _loadAvatar(owner.avatar_url).then(avatarUrl => {
+                const avatarBg = `url(${avatarUrl})`;
+                const container = $('#repo');
+                container.click(() => {
+                    window.open(url);
+                });
+
+                //init
+                const loadingItem = container.find('.loading').hide();
+                const topItem = container.find('.top').addClass('active');
+                const bottomItem = container.find('.bottom').addClass('active');
+
+                //avatar
+                const avatarItem = container.find('.avatar');
+                const oldBg = avatarItem.css('background-image');
+                avatarItem.hover(() => {
+                    avatarItem.css('background-image', avatarBg);
+                }, () => {
+                    avatarItem.css('background-image', oldBg);
+                });
+
+                //repo-name
+                const nameItem = container.find('.name').html(name);
+
+                //description
+                const descriptionItem = container.find('.description').html(description);
+
+                //stars
+                const starItem = container.find('.star>.val').html(stars);
+
+                //forks
+                const forkItem = container.find('.fork>.val').html(forks);
+
+                //date
+                const formatDate = update.replace(/T.+/g, '');
+                const dateItem = container.find('.date>.val').html(formatDate);
+            });
+
+            function _loadAvatar(url) {
+                return new Promise((resolve, reject) => {
+                    const img = new Image();
+                    img.onload = () => {
+                        resolve(url);
+                    };
+                    img.src = url;
+                });
+            }
+
+        }
+
+    })();
+</script>
+
+
+
+
+
+<script type="text/javascript" src="/js/plugins/local_search.js?v=1.4.2"></script>
+<script type="text/javascript">
+	var search_path = "search.xml";
+	if (search_path.length === 0) {
+		search_path = "search.xml";
+	}
+	var path = "/" + search_path;
+	searchFunc(path, "local-search-input", "local-search-result");
+</script>
+
+
+
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+    
+    
+
+
+
+<script type="text/javascript" src="https://cdn1.lncld.net/static/js/av-core-mini-0.6.4.js"></script>
+<script type="text/javascript" src="/js/plugins/leancloud_visitors.js?v=1.4.2"></script>
+
+
+
+    <!-- mathjax config similar to math.stackexchange -->
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+        tex2jax: {
+            inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+            processEscapes: true,
+            skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+        }
+    });
+</script>
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for (i=0; i < all.length; i += 1) {
+            all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+    });
+</script>
+
+<script type="text/javascript" src="//cdn.bootcss.com/mathjax/2.7.1/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+
+
+
+    <script>
+    (function() {
+        var OriginTitile = document.title, titleTime;
+        document.addEventListener('visibilitychange', function() {
+            if (document.hidden) {
+                document.title = '死鬼去哪里了！';
+                clearTimeout(titleTime);
+            } else {
+                document.title = '(つェ⊂)咦!又好了!';
+                titleTime = setTimeout(function() {
+                    document.title = OriginTitile;
+                },2000);
+            }
+        });
+    })();
+</script>
+
+
+
+
+
+    
+</body>
+</html>

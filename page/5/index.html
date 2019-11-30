@@ -223,7 +223,7 @@
         <h5 class="subtitle">
             
                 <a href="javascript:;" style="color: #fff; margin-right: 4px;">
-                  <i class="icon icon-map-marker icon-1x">Zhuzhou, China</i>
+                  <i class="icon icon-map-marker icon-1x">Wuhan, China</i>
               </a><a href="https://github.com/sivanWu0222" style="color: #fff; margin-right: 4px;">
                   <i class="icon icon-github icon-1x">sivanWu0222</i>
               </a>
@@ -250,6 +250,677 @@
 
     <div class="container body-wrap">
         <ul class="post-list">
+        
+            <li class="post-list-item fade">
+                <article id="post-活动选择问题-贪心算法"
+  class="article-card article-type-post" itemprop="blogPost">
+  
+    
+    
+    <div class="top" data-title="2">
+    <div class="top-wrap">
+        <p></p>
+    </div>
+</div>
+    
+    
+        
+
+
+  
+    <h3 class="post-title re-title" itemprop="name">
+      <a class="post-title-link" href="/2019/03/16/活动选择问题-贪心算法/">活动选择问题-贪心算法</a>
+    </h3>
+  
+
+
+
+    
+    <div class="post-meta">
+        <time class="post-time" title="2019-03-16 11:03:56" datetime="2019-03-16T03:03:56.000Z"  itemprop="datePublished">2019-03-16</time>
+
+        
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/算法/">算法</a><ul class="article-category-list-child"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/算法/贪心算法/">贪心算法</a></li></ul></li></ul>
+
+
+
+        
+	<span id="/2019/03/16/活动选择问题-贪心算法/" class="leancloud_visitors" data-flag-title="活动选择问题-贪心算法" title="活动选择问题-贪心算法">
+		
+			<i class="icon icon-eye"></i>
+		
+		<span class="leancloud-visitors-count"></span>
+	</span>
+ 
+
+        
+
+
+        
+  <span><i class="icon icon-github"></i></span>
+
+        
+    </div>
+    
+    <div class="post-content" id="post-content" itemprop="postContent">
+    
+    
+        <h2 id="问题描述"><a href="#问题描述" class="headerlink" title="问题描述"></a>问题描述</h2><p>设有n个活动的集合E = {1, 2, 3, … n}，其中每个活动都要求用同一资源，例如，演讲会场等。而在同一时间内只能有一个活动能够使用这个资源。每个活动资源i都有一个要求使用这一资源的起始时刻$$s_i和一个结束时刻 f_i $$，并且设定​$$ s_i  &lt;  f_i $$。如果选择了活动i，那么它在半开区间[​$$ s_i ,  f_i $$)内占用资源，如果区间[​$$ s_i ,  f_i $$) 与 区间 [​$$ s_j    f_j $$)不相交，则称活动i与活动j是相容的。也就是说，当​$$ s_i  &gt;= f_j $$ 或者 ​$$ s_j  &gt;= ​$$ f_i ​$$时，活动i与活动j是相容大的。活动安排问题就是要在所给的活动集合中选出最大的相容活动子集合。试设计一算法实现之。</p>
+<h2 id="解题策略"><a href="#解题策略" class="headerlink" title="解题策略"></a>解题策略</h2><p>策略1：活动开始早的优先</p>
+<p>策略2：活动结束早的优先</p>
+<p>策略3：活动持续时间短的优先</p>
+<blockquote>
+<p>通过列举反例，我们不难发现，策略1和策略3都不是最优策略，因此我们按照策略2进行题解</p>
+</blockquote>
+<ol>
+<li>初始化活动集合，并按照活动结束早的顺序对活动集里的活动进行排序</li>
+<li>默认选择第1个活动，然后遍历每个活动，观察当前待选择的这个活动的开始时间是否 大于等于 前面刚刚选择活动的结束时间，如果满足，将该活动对应的下标的解向量置为1</li>
+<li>遍历解向量，输出解向量为1的活动，就是我们要求的最大相容活动集合</li>
+</ol>
+    
+    <a href="/2019/03/16/活动选择问题-贪心算法/" class="post-more waves-effect waves-button">
+        more
+    </a>
+    </div>
+</article>
+
+<div class="post-footer">
+    
+	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Algorithm/">Algorithm</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/算法设计与分析/">算法设计与分析</a></li></ul>
+
+</div>
+
+
+            </li>
+        
+            <li class="post-list-item fade">
+                <article id="post-区间覆盖问题-贪心算法"
+  class="article-card article-type-post" itemprop="blogPost">
+  
+    
+    
+    <div class="top" data-title="2">
+    <div class="top-wrap">
+        <p></p>
+    </div>
+</div>
+    
+    
+        
+
+
+  
+    <h3 class="post-title re-title" itemprop="name">
+      <a class="post-title-link" href="/2019/03/16/区间覆盖问题-贪心算法/">区间覆盖问题-贪心算法</a>
+    </h3>
+  
+
+
+
+    
+    <div class="post-meta">
+        <time class="post-time" title="2019-03-16 10:22:05" datetime="2019-03-16T02:22:05.000Z"  itemprop="datePublished">2019-03-16</time>
+
+        
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/算法/">算法</a><ul class="article-category-list-child"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/算法/贪心算法/">贪心算法</a></li></ul></li></ul>
+
+
+
+        
+	<span id="/2019/03/16/区间覆盖问题-贪心算法/" class="leancloud_visitors" data-flag-title="区间覆盖问题-贪心算法" title="区间覆盖问题-贪心算法">
+		
+			<i class="icon icon-eye"></i>
+		
+		<span class="leancloud-visitors-count"></span>
+	</span>
+ 
+
+        
+
+
+        
+  <span><i class="icon icon-github"></i></span>
+
+        
+    </div>
+    
+    <div class="post-content" id="post-content" itemprop="postContent">
+    
+    
+        <h2 id="题目描述"><a href="#题目描述" class="headerlink" title="题目描述"></a>题目描述</h2><p>在一个数轴上有若干个区间(区间端点均为整数)，每个区间的长度均为1，现用整数集M表示区间，且M中的数仅表示各区间的右端点，假设M中有m个元素，现有n条线段(m &gt; n)，试设计一个算法求出用这些线段将所有区间覆盖后的最短距离之和d。例：M = {1, 3, 4, 8, 11, 14}，n = 3</p>
+<h2 id="解题策略"><a href="#解题策略" class="headerlink" title="解题策略"></a>解题策略</h2><blockquote>
+<p>首先要读懂题意，要用n条线段覆盖所有区间，求n条线段的最短距离和，<strong>自己当时看了半天，最后理解错了，每条线段可以任意长哦，而不是固定的</strong></p>
+</blockquote>
+<ol>
+<li>先假定一条线段覆盖所有区间，求出此时线段的最大长度</li>
+<li>然后采用贪心策略，因为是n条线段，所以可以有n-1个间距</li>
+<li>将题目中给定的区间进行排序，并且算出相邻的区间的间距(<strong>公式：后一个区间的右端点 - 前一个区间的左端点</strong>)，将间距从小到大排序</li>
+<li>用上面一条线段覆盖时的最大长度 <strong>依次 减去间距中的最大值</strong>，一共减去n-1个间距(<strong>因为要n-1条线段</strong>)</li>
+<li>剩下的距离就是我们题目要求的最短距离之和d</li>
+</ol>
+    
+    <a href="/2019/03/16/区间覆盖问题-贪心算法/" class="post-more waves-effect waves-button">
+        more
+    </a>
+    </div>
+</article>
+
+<div class="post-footer">
+    
+	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Algorithm/">Algorithm</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/算法设计与分析/">算法设计与分析</a></li></ul>
+
+</div>
+
+
+            </li>
+        
+            <li class="post-list-item fade">
+                <article id="post-雷达安装问题-贪心算法"
+  class="article-card article-type-post" itemprop="blogPost">
+  
+    
+    
+    <div class="top" data-title="2">
+    <div class="top-wrap">
+        <p></p>
+    </div>
+</div>
+    
+    
+        
+
+
+  
+    <h3 class="post-title re-title" itemprop="name">
+      <a class="post-title-link" href="/2019/03/16/雷达安装问题-贪心算法/">雷达安装问题(贪心算法)</a>
+    </h3>
+  
+
+
+
+    
+    <div class="post-meta">
+        <time class="post-time" title="2019-03-16 09:06:27" datetime="2019-03-16T01:06:27.000Z"  itemprop="datePublished">2019-03-16</time>
+
+        
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/算法/">算法</a><ul class="article-category-list-child"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/算法/贪心算法/">贪心算法</a></li></ul></li></ul>
+
+
+
+        
+	<span id="/2019/03/16/雷达安装问题-贪心算法/" class="leancloud_visitors" data-flag-title="雷达安装问题(贪心算法)" title="雷达安装问题(贪心算法)">
+		
+			<i class="icon icon-eye"></i>
+		
+		<span class="leancloud-visitors-count"></span>
+	</span>
+ 
+
+        
+
+
+        
+  <span><i class="icon icon-github"></i></span>
+
+        
+    </div>
+    
+    <div class="post-content" id="post-content" itemprop="postContent">
+    
+    
+        <h2 id="问题描述"><a href="#问题描述" class="headerlink" title="问题描述"></a>问题描述</h2><p>假定海岸线是无限长的直线，陆地在海岸线的另一侧，海在海岸线的另外一侧，海上有若干个岛屿，每一个岛屿用海这一侧的一个点表示。现在如果要在海岸线上放置若干个雷达，以便于对岛屿进行侦查，每个雷达观测范围是一个圆，并且每个雷达的观测距离都是dist(即圆的半径为dist)，现使用笛卡尔坐标系，给定海中每个岛屿的位置，以及雷达的观测范围(距离)，试设计一个算法求解出最小的雷达数目，使其能够覆盖海上的全部岛屿</p>
+<h2 id="解题策略"><a href="#解题策略" class="headerlink" title="解题策略"></a>解题策略</h2><p>解题思路：采用贪心算法进行解题，</p>
+<p>贪心策略：假设每个岛屿都正好处于雷达的范围边缘上</p>
+<ol>
+<li><p>初始化岛屿个数，雷达范围，每个岛屿的横纵坐标，</p>
+</li>
+<li><p>根据贪心策略计算出与x轴的交点，也就是这个雷达的坐标(纵坐标为0)</p>
+<p>计算公式：sqrt(pow(scan, 2) - pow(island[i].y, 2)) + island[i].x</p>
+</li>
+</ol>
+<blockquote>
+<p> 疑问：与x轴可能有两个交点，我们取最右边的那个交点，这样对所有的岛屿都进行了统一</p>
+</blockquote>
+<ol start="3">
+<li><p>依据岛屿的横坐标从小到大，对岛屿进行排序</p>
+</li>
+<li><p>假设temp为第1个雷达的横坐标，那么计算temp对应的雷达与第2个岛屿的距离 与 扫描范围比较</p>
+<blockquote>
+<p>如果大于扫描范围，则多放置一个雷达，并且temp置换成下一个岛屿对应雷达的横坐标，继续按照上面方法比较</p>
+<p>如果小于扫描范围，temp值不变，直接进入下一个岛屿，比较temp对应的雷达与下一岛屿的距离，继续按照上面方法</p>
+</blockquote>
+</li>
+<li><p>最后输出岛屿个数</p>
+</li>
+</ol>
+    
+    <a href="/2019/03/16/雷达安装问题-贪心算法/" class="post-more waves-effect waves-button">
+        more
+    </a>
+    </div>
+</article>
+
+<div class="post-footer">
+    
+	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Algorithm/">Algorithm</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/算法设计与分析/">算法设计与分析</a></li></ul>
+
+</div>
+
+
+            </li>
+        
+            <li class="post-list-item fade">
+                <article id="post-二部图的最大匹配-算法分析与设计教程系列"
+  class="article-card article-type-post" itemprop="blogPost">
+  
+    
+    
+    <div class="top" data-title="2">
+    <div class="top-wrap">
+        <p></p>
+    </div>
+</div>
+    
+    
+        
+
+
+  
+    <h3 class="post-title re-title" itemprop="name">
+      <a class="post-title-link" href="/2019/03/04/二部图的最大匹配-算法分析与设计教程系列/">二部图的最大匹配(算法分析与设计教程系列)</a>
+    </h3>
+  
+
+
+
+    
+    <div class="post-meta">
+        <time class="post-time" title="2019-03-04 19:43:30" datetime="2019-03-04T11:43:30.000Z"  itemprop="datePublished">2019-03-04</time>
+
+        
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/算法分析与设计教程/">算法分析与设计教程</a><ul class="article-category-list-child"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/算法分析与设计教程/Chapter-7/">Chapter 7</a><ul class="article-category-list-child"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/算法分析与设计教程/Chapter-7/7-3-二部图的最大匹配问题/">7.3 二部图的最大匹配问题</a></li></ul></li></ul></li></ul>
+
+
+
+        
+	<span id="/2019/03/04/二部图的最大匹配-算法分析与设计教程系列/" class="leancloud_visitors" data-flag-title="二部图的最大匹配(算法分析与设计教程系列)" title="二部图的最大匹配(算法分析与设计教程系列)">
+		
+			<i class="icon icon-eye"></i>
+		
+		<span class="leancloud-visitors-count"></span>
+	</span>
+ 
+
+        
+
+
+        
+  <span><i class="icon icon-github"></i></span>
+
+        
+    </div>
+    
+    <div class="post-content" id="post-content" itemprop="postContent">
+    
+    
+        <h2 id="引言"><a href="#引言" class="headerlink" title="引言"></a>引言</h2><p>如果有4个申请读研的学生($s_i$)与4位导师($t_i$)；假设每个导师最多只能招收一名学生，下图表示学生与所申请导师之间的关系；如何分配学生导师以尽可能满足学生的志愿</p>
+<figure class="image-box">
+                <img src="https://github.com/algorithm-skill/AlgorithmAnalysisAndDesignTutorial/blob/master/%E7%AC%AC7%E7%AB%A0/7.3%E4%BA%8C%E9%83%A8%E5%9B%BE%E7%9A%84%E6%9C%80%E5%A4%A7%E5%8C%B9%E9%85%8D%E9%97%AE%E9%A2%98/%E4%BA%8C%E9%83%A8%E5%9B%BE%E4%BE%8B%E5%AD%90.png?raw=true" alt="Demo" title class="index-item-img">
+                <p>Demo</p>
+            </figure>
+<p>与此类问题类似的就是求二部图的最大匹配的问题</p>
+<h2 id="相关概念"><a href="#相关概念" class="headerlink" title="相关概念"></a>相关概念</h2><h3 id="匹配与最大匹配"><a href="#匹配与最大匹配" class="headerlink" title="匹配与最大匹配"></a>匹配与最大匹配</h3><p>设图G=&lt;V,E&gt;是一个无向图，如果存在边集M为E的子集，并且使得边集M中的所有边都没有公共结点，那么称边集M是无向图G的一个<strong>匹配</strong>；在一个无向图G中边数最多的匹配称为无向图的<strong>最大匹配</strong></p>
+<p>已经匹配过的边称为<strong>匹配边</strong>，未匹配的边叫<strong>自由边</strong>，匹配边的两个顶点叫<strong>饱和点</strong>，其他的点叫做<strong>自由点</strong>，如果V中所有的顶点都是饱和点，则称边集M是无向图的<strong>完美匹配</strong></p>
+<h3 id="交错轨道，交错回路，增广路径"><a href="#交错轨道，交错回路，增广路径" class="headerlink" title="交错轨道，交错回路，增广路径"></a>交错轨道，交错回路，增广路径</h3><p>交错轨道：一条已匹配过的边和自由边组成的简单路径叫做交错轨道</p>
+<p>交错回路：起点和终点相同的交错轨道</p>
+<p>增广路径：起点和终点均自由的交错轨道</p>
+<p>交错回路的边数一定为偶数</p>
+<p>如果交错轨道p是边集M的增广路径，则p的边数一定为奇数，一定不会成为交错回路(因为起点和终点都要自由)</p>
+<p>注意：如果边集M是无向图G的一个匹配，那么交错轨道p是边集M的一条增广路径，操作$M⊕p = (M \cup p)-(M \cap p)=(M-p) \cup (p-M)​$，(<strong>异或运算：相同的去掉，不同的加上；通过异或扩大匹配</strong>)说明$M⊕p​$是无向图的一个新匹配</p>
+<h3 id="两个定理"><a href="#两个定理" class="headerlink" title="两个定理"></a>两个定理</h3><ol>
+<li>无向图G的匹配M是无向图G的最大匹配，当且仅当在G中不包含匹配M的增广路径</li>
+<li>设M是无向图G的一个匹配，并且交错轨道p是匹配M的一条增广路径，那么$M⊕p$即是该无向图G的一个大小为$|M⊕p| = |M| + 1$的匹配</li>
+</ol>
+<h3 id="二部图"><a href="#二部图" class="headerlink" title="二部图"></a>二部图</h3><p>如果无向图G=&lt;V,E&gt;的结点集V可以分为两个子集X和Y，并且满足子集X与子集Y的交集为空集，子集X与子集Y的并集为结点集V，并且无向图G中任意一条边的两个端点，一个在X中，一个在Y中，那么就称图G是一个二部图或者偶图！</p>
+<h4 id="定理"><a href="#定理" class="headerlink" title="定理"></a>定理</h4><p><strong>(判定是否是二部图)</strong>无向图G是一个二部图，当且仅当该图没有长度为奇数的回路</p>
+<p>注意：如果是二部图才可以利用下面所讲的匈牙利树算法来寻找这个二部图的最大匹配！</p>
+<h2 id="匈牙利算法"><a href="#匈牙利算法" class="headerlink" title="匈牙利算法"></a>匈牙利算法</h2><h3 id="最大匹配的匈牙利算法步骤"><a href="#最大匹配的匈牙利算法步骤" class="headerlink" title="最大匹配的匈牙利算法步骤"></a>最大匹配的匈牙利算法步骤</h3><ol>
+<li>从一个初始匹配M开始</li>
+<li>每次找一条增广交错路径p</li>
+<li>令M &lt;- M⊕E(P)，其中E(P)是p的边集</li>
+<li>直到不存在增广交错路径为止</li>
+</ol>
+<p>书上的描述：首先从一个空匹配M开始，在无向图G中寻找匹配M的一条增广路径p，然后执行M⊕p的操作，这实际上是反转增光路径p中边的作用，即将增广路径p中已经匹配过的边变成自由的边，同时将自由的边变成已经匹配过的边，从而可以得到一个新的匹配M，通过这样一种操作，可以使得这个新的匹配M比旧的匹配边数多1，重复以上操作，直到二部图G不包含匹配M的增广路径为止，此时宾士二部图G的最大匹配。</p>
+<p><strong>结论：如果在检索增广路径的过程中，检索到一颗匈牙利树，就可以永久地将其从二部图G中删去，而不会影响检索！</strong></p>
+    
+    <a href="/2019/03/04/二部图的最大匹配-算法分析与设计教程系列/" class="post-more waves-effect waves-button">
+        more
+    </a>
+    </div>
+</article>
+
+<div class="post-footer">
+    
+	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Algorithm/">Algorithm</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/匈牙利树/">匈牙利树</a></li></ul>
+
+</div>
+
+
+            </li>
+        
+            <li class="post-list-item fade">
+                <article id="post-贪心算法-1(二部图的最大匹配(算法分析与设计教程系列)"
+  class="article-card article-type-post" itemprop="blogPost">
+  
+    
+    
+    <div class="top" data-title="2">
+    <div class="top-wrap">
+        <p></p>
+    </div>
+</div>
+    
+    
+        
+
+
+  
+    <h3 class="post-title re-title" itemprop="name">
+      <a class="post-title-link" href="/2019/03/02/贪心算法-1(二部图的最大匹配(算法分析与设计教程系列)/">贪心算法的思想以及概念</a>
+    </h3>
+  
+
+
+
+    
+    <div class="post-meta">
+        <time class="post-time" title="2019-03-02 21:41:52" datetime="2019-03-02T13:41:52.000Z"  itemprop="datePublished">2019-03-02</time>
+
+        
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/算法分析与设计教程/">算法分析与设计教程</a><ul class="article-category-list-child"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/算法分析与设计教程/Chapter-3/">Chapter 3</a></li></ul></li></ul>
+
+
+
+        
+	<span id="/2019/03/02/贪心算法-1(二部图的最大匹配(算法分析与设计教程系列)/" class="leancloud_visitors" data-flag-title="贪心算法的思想以及概念" title="贪心算法的思想以及概念">
+		
+			<i class="icon icon-eye"></i>
+		
+		<span class="leancloud-visitors-count"></span>
+	</span>
+ 
+
+        
+
+
+        
+  <span><i class="icon icon-github"></i></span>
+
+        
+    </div>
+    
+    <div class="post-content" id="post-content" itemprop="postContent">
+    
+    
+        <h2 id="目标"><a href="#目标" class="headerlink" title="目标"></a>目标</h2><ol>
+<li>理解贪心算法的基本概念以及实现机制</li>
+<li>掌握贪心算法设计的基本思想，理解贪心算法的基本设计原理</li>
+<li>掌握使用贪心策略来解决背包问题、单源点最短路径问题以及最小成本生成树问题等各类问题</li>
+<li>掌握如何分析使用贪心算法求解的最优化问题的时间复杂度与空间复杂度</li>
+<li>如何运用数学归纳法证明求解此问题所使用的贪心算法得出的解就是最优解(难点)</li>
+</ol>
+<h2 id="学习指南"><a href="#学习指南" class="headerlink" title="学习指南"></a>学习指南</h2><blockquote>
+<p>在我们设计算法解决一个实际问题之前，</p>
+<ol>
+<li>必须首先分析这个实际问题具有哪些特质</li>
+<li>然后依据这些特征选择相应的算法进行求解，往往会获得事半功倍的效果</li>
+</ol>
+</blockquote>
+<p>针对每个可以使用贪心算法进行求解的问题</p>
+<ol>
+<li>首先熟练掌握贪心策略的设计思路</li>
+<li>将其转化为贪心算法</li>
+<li>最后用数学归纳法证明按照贪心算法求出的贪心解就是这个最优解</li>
+</ol>
+<p>注意：这个证明过程是必要的，如果不对贪心算法求解的过程进行证明，只能说明根据这个贪心策略设计的贪心算法得到的解仅仅只是贪心解，并不能说明是最优解！</p>
+<h3 id="贪心法证明最优解"><a href="#贪心法证明最优解" class="headerlink" title="贪心法证明最优解"></a>贪心法证明最优解</h3><ol>
+<li>按步骤归纳：例如活动选择问题</li>
+<li>按规模归纳：例如装载问题</li>
+<li>交换论证：例如最小延迟调度</li>
+</ol>
+<h2 id="基本概念"><a href="#基本概念" class="headerlink" title="基本概念"></a>基本概念</h2><blockquote>
+<p>当有这样一类问题，有n个输入，而它的解就是由这n个输入的某个子集组成，只是这个子集必须满足某些实现给定的条件。</p>
+</blockquote>
+<p>这些必须满足的条件称为<strong>约束条件</strong></p>
+<p>将满足这些约束条件的子集称为该问题的<strong>可行解</strong></p>
+<p>由于可行解不止一个，为了衡量可行解的优劣，通常会预先给定一些标准，一般以函数形式给出，称为<strong>目标函数</strong></p>
+<p>使得目标函数取得极值得可行解称为<strong>最优解</strong></p>
+<p>注意：根据约束条件与目标函数的数学模型的特性或求解问题方法的不同，可以细划分为如下类：</p>
+<ol>
+<li>整数规划问题</li>
+<li>线性规划问题</li>
+<li>非线性规划问题</li>
+<li>动态规划问题</li>
+</ol>
+<p>尽管各类规划问题都有一些相应的求解方法，但是对于其中某些问题，我们仍然可以使用一种更为直接的方法进行求解，就是<strong>贪心算法</strong></p>
+<h2 id="基本思想"><a href="#基本思想" class="headerlink" title="基本思想"></a>基本思想</h2><blockquote>
+<p>贪心算法是一种改进了的分级处理方法</p>
+</blockquote>
+<p>首先根据优化问题的要求，选取一种度量标准，然后按照这种量度标准对这n个输入进行排序，并且按照排好的顺序依次输入每一个量。如果这个输入与当前已经构成的在这种量度意义下的部分最优解组成在一起不可能产生一个可行解，那么我们就不把该输入纳入到这一部分最优解中，这种能够得到某种量度意义下的最优解分级处理方法叫做贪心算法。</p>
+<p>注意：将目标函数作为量度标准产生的贪心解也并不一定就是原问题的最优解！</p>
+<p><strong>采用贪心算法设计求解原优化问题的最优解的核心问题就是选择能够产生优化问题最优解的最优量度标准</strong>，如果我们可以选择出最优量度标准，那么用贪心算法解决这个问题就会特别有效！</p>
+    
+    <a href="/2019/03/02/贪心算法-1(二部图的最大匹配(算法分析与设计教程系列)/" class="post-more waves-effect waves-button">
+        more
+    </a>
+    </div>
+</article>
+
+<div class="post-footer">
+    
+	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Algorithm/">Algorithm</a></li></ul>
+
+</div>
+
+
+            </li>
+        
+            <li class="post-list-item fade">
+                <article id="post-Windows-7-Service-Pack-1-and-all-applicable-updates-are-required-to-install-Python-3-6-4-64-bit"
+  class="article-card article-type-post" itemprop="blogPost">
+  
+    
+    
+    <div class="top" data-title="2">
+    <div class="top-wrap">
+        <p></p>
+    </div>
+</div>
+    
+    
+        
+
+
+  
+    <h3 class="post-title re-title" itemprop="name">
+      <a class="post-title-link" href="/2019/03/01/Windows-7-Service-Pack-1-and-all-applicable-updates-are-required-to-install-Python-3-6-4-64-bit/">Windows 7 Service Pack 1 and all applicable updates are required to install Python 3.6.4(64-bit)</a>
+    </h3>
+  
+
+
+
+    
+    <div class="post-meta">
+        <time class="post-time" title="2019-03-01 15:43:42" datetime="2019-03-01T07:43:42.000Z"  itemprop="datePublished">2019-03-01</time>
+
+        
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/编程环境/">编程环境</a><ul class="article-category-list-child"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/编程环境/Windows-7/">Windows 7</a><ul class="article-category-list-child"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/编程环境/Windows-7/Python/">Python</a></li></ul></li></ul></li></ul>
+
+
+
+        
+	<span id="/2019/03/01/Windows-7-Service-Pack-1-and-all-applicable-updates-are-required-to-install-Python-3-6-4-64-bit/" class="leancloud_visitors" data-flag-title="Windows 7 Service Pack 1 and all applicable updates are required to install Python 3.6.4(64-bit)" title="Windows 7 Service Pack 1 and all applicable updates are required to install Python 3.6.4(64-bit)">
+		
+			<i class="icon icon-eye"></i>
+		
+		<span class="leancloud-visitors-count"></span>
+	</span>
+ 
+
+        
+
+
+        
+        
+    </div>
+    
+    <div class="post-content" id="post-content" itemprop="postContent">
+    
+    
+        参考
+
+    
+    <a href="/2019/03/01/Windows-7-Service-Pack-1-and-all-applicable-updates-are-required-to-install-Python-3-6-4-64-bit/" class="post-more waves-effect waves-button">
+        more
+    </a>
+    </div>
+</article>
+
+<div class="post-footer">
+    
+	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Python/">Python</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Windows-7/">Windows 7</a></li></ul>
+
+</div>
+
+
+            </li>
+        
+            <li class="post-list-item fade">
+                <article id="post-算法引论(算法分析与设计教程系列)"
+  class="article-card article-type-post" itemprop="blogPost">
+  
+    
+    
+    <div class="top" data-title="2">
+    <div class="top-wrap">
+        <p></p>
+    </div>
+</div>
+    
+    
+        
+
+
+  
+    <h3 class="post-title re-title" itemprop="name">
+      <a class="post-title-link" href="/2019/02/28/算法引论(算法分析与设计教程系列)/">算法引论</a>
+    </h3>
+  
+
+
+
+    
+    <div class="post-meta">
+        <time class="post-time" title="2019-02-28 08:45:02" datetime="2019-02-28T00:45:02.000Z"  itemprop="datePublished">2019-02-28</time>
+
+        
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/算法分析与设计教程/">算法分析与设计教程</a><ul class="article-category-list-child"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/算法分析与设计教程/Chapter-1/">Chapter 1</a></li></ul></li></ul>
+
+
+
+        
+	<span id="/2019/02/28/算法引论(算法分析与设计教程系列)/" class="leancloud_visitors" data-flag-title="算法引论" title="算法引论">
+		
+			<i class="icon icon-eye"></i>
+		
+		<span class="leancloud-visitors-count"></span>
+	</span>
+ 
+
+        
+
+
+        
+  <span><i class="icon icon-github"></i></span>
+
+        
+    </div>
+    
+    <div class="post-content" id="post-content" itemprop="postContent">
+    
+    
+        <h2 id="学习目标"><a href="#学习目标" class="headerlink" title="学习目标"></a>学习目标</h2><ol>
+<li>掌握与计算机算法相关的各个名词、术语的含义</li>
+<li>了解时间复杂度和空间复杂度的基本概念</li>
+<li>理解计算机算法的5个重要特征</li>
+<li>了解计算机算法涉及的5个基本内容</li>
+<li>掌握计算机频率计数和估算算法时间复杂度的基本方法</li>
+</ol>
+<hr>
+<h2 id="算法的基本概念"><a href="#算法的基本概念" class="headerlink" title="算法的基本概念"></a>算法的基本概念</h2><blockquote>
+<p>只能笼统的将算法定义为解决某个确定问题的一种特殊的方法。若对算法做稍许详细一些的非形式化描述，那么算法就是一组有穷的规则，它规定了解决某一特定类型问题的一系列计算方法！</p>
+</blockquote>
+<h3 id="算法的重要特性"><a href="#算法的重要特性" class="headerlink" title="算法的重要特性"></a>算法的重要特性</h3><blockquote>
+<ol>
+<li><p>确定性</p>
+<p>算法的每一种运算都必须要有明确的定义，每一种运算应该执行怎样的动作必须是清楚地，即没有二义性的！</p>
+<p>例如算法中不允许有”将1或2与某个确定的数相加”之类的运算</p>
+</li>
+<li><p>能行性</p>
+<p>一个算法能行指的是算法中有待实现的运算都是基本的运算，即每种运算至少原理上可以由人用纸和笔在有限时间内完成。</p>
+<p>整数运算时能行性的一个例子，而实数运算不行，因为实数可能有无限长！</p>
+</li>
+<li><p>输入</p>
+<p>每个算法有0个或多个输入，是在算法开始之前给定的，取自特定的对象集合！</p>
+</li>
+<li><p>输出</p>
+<p>每个算法产生一个或多个输出，这些输出是同输入有某种特定关系的量！</p>
+</li>
+<li><p>有限性</p>
+<p>任何一个算法总在执行有限步的运算之后就停止执行，仅仅满足前面4条特性的一组规则称之为计算过程，不能称之为算法，例如操作操作系统！</p>
+<p><strong>不能把任何在有限步内就停机的算法投入计算机中运行，而只能把那些在相当有限步内停机的算法投入计算机中运行。总而言之，应尽可能避免无益耗费计算机的宝贵资源</strong></p>
+</li>
+</ol>
+</blockquote>
+<h3 id="算法的基本内容"><a href="#算法的基本内容" class="headerlink" title="算法的基本内容"></a>算法的基本内容</h3><blockquote>
+<p>为了制定一个算法，一般需要经过设计、确认、分析、编码、检查、调试、计时等阶段</p>
+</blockquote>
+<ol>
+<li><p>设计算法：使读者学会已经被实践证明的有用的一些基本设计策略</p>
+</li>
+<li><p>表示算法：基本采用结构程序设计的方式将设计的算法表示出来</p>
+</li>
+<li><p>确认算法(Algorithm Validation)(确认算法 = 设计正确 + 程序证明)</p>
+<p>算法确认：设计出一个算法以后，就应证明它对于所有可能合法的输入都可以给出正确的答案。</p>
+<p>确认的目的在于使我们确信这个算法将可以正确无误的工作，而与所采用的程序设计语言无关！</p>
+<p>程序证明：在将程序投入到计算机上执行以前，实际上还应该证明该程序是正确的，也就是证明该程序对于所有可能的合法输入都能得到正确的结果。</p>
+</li>
+<li><p>分析算法(Algorithm Analysis)</p>
+<p>算法分析：对于每个算法需要多少时间和存储空间作定量分析。</p>
+<p>作用：可以预计所设计的算法可以在怎样的环境中有效的执行，可以知道在最好、最坏及平均情况下执行得怎样，还可以使读者对于解决同一问题的不同算法执行的有效性作出比较判断</p>
+</li>
+<li><p>测试程序(测试程序 = 调试程序 + 作时空分布图)</p>
+<p>调试程序：在抽象数据集上执行程序，以确定是否会产生错误的结果，如果产生错误的结果，就修改源程序</p>
+<p>局限性：调试只能指出有错误，而不能指出程序不存在错误。</p>
+<p>作时空分布图：首先使用各种给定的数据执行调试认为是正确的程序，然后测定为计算出正确的结果所花的时间和空间，以印证以前所做的分析是否正确和支出实现最优化的有效逻辑位置。</p>
+</li>
+</ol>
+<hr>
+    
+    <a href="/2019/02/28/算法引论(算法分析与设计教程系列)/" class="post-more waves-effect waves-button">
+        more
+    </a>
+    </div>
+</article>
+
+<div class="post-footer">
+    
+	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Algorithm/">Algorithm</a></li></ul>
+
+</div>
+
+
+            </li>
         
             <li class="post-list-item fade">
                 <article id="post-关于Visual-Studio-Code-控制台无法输入-以及-乱码"
@@ -490,612 +1161,11 @@
 
             </li>
         
-            <li class="post-list-item fade">
-                <article id="post-Python中的闭包"
-  class="article-card article-type-post" itemprop="blogPost">
-  
-    
-    
-    <div class="top" data-title="2">
-    <div class="top-wrap">
-        <p></p>
-    </div>
-</div>
-    
-    
-        
-
-
-  
-    <h3 class="post-title re-title" itemprop="name">
-      <a class="post-title-link" href="/2019/01/25/Python中的闭包/">Python中的闭包</a>
-    </h3>
-  
-
-
-
-    
-    <div class="post-meta">
-        <time class="post-time" title="2019-01-25 10:58:06" datetime="2019-01-25T02:58:06.000Z"  itemprop="datePublished">2019-01-25</time>
-
-        
-	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/Python/">Python</a><ul class="article-category-list-child"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/Python/Basic/">Basic</a></li></ul></li></ul>
-
-
-
-        
-	<span id="/2019/01/25/Python中的闭包/" class="leancloud_visitors" data-flag-title="Python中的闭包" title="Python中的闭包">
-		
-			<i class="icon icon-eye"></i>
-		
-		<span class="leancloud-visitors-count"></span>
-	</span>
- 
-
-        
-
-
-        
-  <span><i class="icon icon-github"></i></span>
-
-        
-    </div>
-    
-    <div class="post-content" id="post-content" itemprop="postContent">
-    
-    
-        <h2 id="闭包-closure"><a href="#闭包-closure" class="headerlink" title="闭包(closure)"></a>闭包(closure)</h2><blockquote>
-<p>引言：闭包是函数式编程的一个重要的语法结构，函数式编程是一种编程范式，不同编程语言实现闭包方式不同</p>
-</blockquote>
-<blockquote>
-<p>Python中的闭包：从表现形式上定义为，如果一个内部函数里，对在外部作用域(但不是全局作用域)的变量进行引用，那么内部函数就被认为是闭包</p>
-</blockquote>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">funX</span><span class="params">(x)</span>:</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">funY</span><span class="params">(y)</span>:</span></span><br><span class="line">        <span class="keyword">return</span> x * y</span><br><span class="line">    <span class="keyword">return</span> funY</span><br><span class="line">	</span><br><span class="line"><span class="comment"># 闭包函数的使用</span></span><br><span class="line">i = funX(<span class="number">8</span>)</span><br><span class="line">print(i(<span class="number">5</span>))</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment"># 也可以直接写 funX(8)(5)</span></span><br></pre></td></tr></table></figure>
-<blockquote>
-<p>例如上面的代码中，在内部函数funY()中引用了外部作用域的变量y，此时funY()就被认为是闭包</p>
-</blockquote>
-<blockquote>
-<p>注意：</p>
-<ol>
-<li>不可以在外部函数以外的地方对内部函数进行调用，下面做法是错误的</li>
-<li>在闭包中，外部函数的局部变量对应内部函数的局部变量，事实上相当于之前讲的全局变量跟局部变量的对应关系(如果要修改全局变量需要使用global关键字),在内部函数中，只能对外部函数的局部变量进行访问，如果需要进行修改，Python3中可以使用nonlocal关键字</li>
-</ol>
-</blockquote>
-<blockquote>
-<ul>
-<li>适用于在某种情况下，我们并不方便使用全局变量，所以灵活的使用闭包可以实现替代全局变量。</li>
-</ul>
-</blockquote>
-    
-    <a href="/2019/01/25/Python中的闭包/" class="post-more waves-effect waves-button">
-        more
-    </a>
-    </div>
-</article>
-
-<div class="post-footer">
-    
-	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Basic/">Basic</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Python/">Python</a></li></ul>
-
-</div>
-
-
-            </li>
-        
-            <li class="post-list-item fade">
-                <article id="post-2019 新起点"
-  class="article-card article-type-post" itemprop="blogPost">
-  
-    
-    
-    <div class="top" data-title="2">
-    <div class="top-wrap">
-        <p></p>
-    </div>
-</div>
-    
-    
-        
-
-
-  
-    <h3 class="post-title re-title" itemprop="name">
-      <a class="post-title-link" href="/2019/01/04/2019 新起点/">新起点 新开始</a>
-    </h3>
-  
-
-
-
-    
-    <div class="post-meta">
-        <time class="post-time" title="2019-01-04 12:32:37" datetime="2019-01-04T04:32:37.000Z"  itemprop="datePublished">2019-01-04</time>
-
-        
-	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/杂谈/">杂谈</a></li></ul>
-
-
-
-        
-	<span id="/2019/01/04/2019 新起点/" class="leancloud_visitors" data-flag-title="新起点 新开始" title="新起点 新开始">
-		
-			<i class="icon icon-eye"></i>
-		
-		<span class="leancloud-visitors-count"></span>
-	</span>
- 
-
-        
-
-
-        
-        
-    </div>
-    
-    <div class="post-content" id="post-content" itemprop="postContent">
-    
-    
-        笑看2018
-2018年眨眼间过去，这一年自己走来真的荆棘坎坷，还是感谢自己坚持到了最后，虽然没有取得很大的成绩，但还是感悟到了很多
-
-完成的两件大事
-考了雅思，首战5.0
-考研（9月份开始真正准备）
-
-获得的奖项
-全国大学生计算机技能应用大赛高级语言程序设计赛(C语言)三等奖
-校级三等奖学金
-
-感悟
-大学上了接近4年，英语都没怎么看过，雅思考试告诉自己英语还是很注重积累的，尤其是中国人的口...
-    
-    <a href="/2019/01/04/2019 新起点/" class="post-more waves-effect waves-button">
-        more
-    </a>
-    </div>
-</article>
-
-<div class="post-footer">
-    
-	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/感悟/">感悟</a></li></ul>
-
-</div>
-
-
-            </li>
-        
-            <li class="post-list-item fade">
-                <article id="post-Ubuntu下配置Git的SSH"
-  class="article-card article-type-post" itemprop="blogPost">
-  
-    
-    
-    <div class="top" data-title="2">
-    <div class="top-wrap">
-        <p></p>
-    </div>
-</div>
-    
-    
-        
-
-
-  
-    <h3 class="post-title re-title" itemprop="name">
-      <a class="post-title-link" href="/2017/12/01/Ubuntu下配置Git的SSH/">Ubuntu下配置Git的SSH</a>
-    </h3>
-  
-
-
-
-    
-    <div class="post-meta">
-        <time class="post-time" title="2017-12-01 20:26:12" datetime="2017-12-01T12:26:12.000Z"  itemprop="datePublished">2017-12-01</time>
-
-        
-	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/git/">git</a><ul class="article-category-list-child"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/git/ssh/">ssh</a></li></ul></li></ul>
-
-
-
-        
-	<span id="/2017/12/01/Ubuntu下配置Git的SSH/" class="leancloud_visitors" data-flag-title="Ubuntu下配置Git的SSH" title="Ubuntu下配置Git的SSH">
-		
-			<i class="icon icon-eye"></i>
-		
-		<span class="leancloud-visitors-count"></span>
-	</span>
- 
-
-        
-
-
-        
-        
-    </div>
-    
-    <div class="post-content" id="post-content" itemprop="postContent">
-    
-    
-        <p><a href="https://help.github.com/en/articles/generating-a-new-ssh-key-and-adding-it-to-the-ssh-agent" target="_blank" rel="noopener">官方文档</a></p>
-<blockquote>
-<p>经常使用GitHub的童鞋一定知道，当我们每次push的时候，都会遇到一个很尴尬的问题，输入用户名和密码，一次也就够了，但是当我们每天push次数很多的时候，就已经很不耐烦了，所以为了避免这个问题，我们可以创建一个SSH秘钥，然后与GitHub进行配置，从此以后我们不需要输入任何密码！</p>
-</blockquote>
-<p>本次创建和配置我们是基于Linux进行的</p>
-<h2 id="创建"><a href="#创建" class="headerlink" title="创建"></a>创建</h2><p>生成一对秘钥，运行如下命令（注意输入自己的邮箱）</p>
-<blockquote>
-<p>ssh-keygen -t rsa -b 4096 -C “<a href="mailto:your_email@example.com" target="_blank" rel="noopener">your_email@example.com</a>“</p>
-</blockquote>
-<p>输入命令之后，系统会让我们输入秘钥存放的位置，这里直接回车，也就是使用默认位置<br>回车之后，输入密码，这里也是进行回车，因为密码是可选项，</p>
-<hr>
-<h2 id="注册"><a href="#注册" class="headerlink" title="注册"></a>注册</h2><p>当我们在本机创建了SSH密钥的时候，并不能够代表我们就可以使用了，我们需要在GitHub上进行注册，使用如下命令</p>
-<p>启动SSH代理应用并重定向使用Bourne</p>
-<blockquote>
-<p>[root@localhost /]# eval “$(ssh-agent -s)”</p>
-</blockquote>
-<p>使用代理注册SSH密钥</p>
-<blockquote>
-<p>[root@localhost /]# ssh-add ~/.ssh/id_rsa</p>
-</blockquote>
-    
-    <a href="/2017/12/01/Ubuntu下配置Git的SSH/" class="post-more waves-effect waves-button">
-        more
-    </a>
-    </div>
-</article>
-
-<div class="post-footer">
-    
-	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/GitHub/">GitHub</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/SSH/">SSH</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Ubuntu/">Ubuntu</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/git/">git</a></li></ul>
-
-</div>
-
-
-            </li>
-        
-            <li class="post-list-item fade">
-                <article id="post-版本管理工具-Git篇[2]"
-  class="article-card article-type-post" itemprop="blogPost">
-  
-    
-    
-    <div class="top" data-title="2">
-    <div class="top-wrap">
-        <p></p>
-    </div>
-</div>
-    
-    
-        
-
-
-  
-    <h3 class="post-title re-title" itemprop="name">
-      <a class="post-title-link" href="/2017/07/01/版本管理工具-Git篇[2]/">版本管理工具-Git篇[2]</a>
-    </h3>
-  
-
-
-
-    
-    <div class="post-meta">
-        <time class="post-time" title="2017-07-01 19:23:14" datetime="2017-07-01T11:23:14.000Z"  itemprop="datePublished">2017-07-01</time>
-
-        
-	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/git/">git</a><ul class="article-category-list-child"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/git/入门/">入门</a></li></ul></li></ul>
-
-
-
-        
-	<span id="/2017/07/01/版本管理工具-Git篇[2]/" class="leancloud_visitors" data-flag-title="版本管理工具-Git篇[2]" title="版本管理工具-Git篇[2]">
-		
-			<i class="icon icon-eye"></i>
-		
-		<span class="leancloud-visitors-count"></span>
-	</span>
- 
-
-        
-
-
-        
-        
-    </div>
-    
-    <div class="post-content" id="post-content" itemprop="postContent">
-    
-    
-        <h1 id="git基本指令"><a href="#git基本指令" class="headerlink" title="git基本指令"></a>git基本指令</h1><h2 id="使用git配置用户信息"><a href="#使用git配置用户信息" class="headerlink" title="使用git配置用户信息"></a>使用git配置用户信息</h2><blockquote>
-<p>对于git所用到的用户信息，对于我们每次提交更新来说都很重要，用来区分谁提交了更新，将会随着更新的内容纳入仓库记录中</p>
-</blockquote>
-<h3 id="配置用户名称和邮箱"><a href="#配置用户名称和邮箱" class="headerlink" title="配置用户名称和邮箱"></a>配置用户名称和邮箱</h3><blockquote>
-<p>当我们要配置用户名称的时候，都想要知道，之前是否已经配置过用户名称，如果没有配置过或者配置的不正确，将要采用如下方法进行配置</p>
-</blockquote>
-<pre><code>git config user.name        //打印当前用户名称
-git config user.email       //打印当前用户邮箱
-</code></pre><h4 id="针对全局进行配置"><a href="#针对全局进行配置" class="headerlink" title="针对全局进行配置"></a>针对全局进行配置</h4><blockquote>
-<p>针对全局进行配置，我们的Git主配置文件将会被修改，采用 –global 选项，更改的配置文件就是位于用户主目录下的那个，以后所有的项目都会默认使用这里配置的用户信息</p>
-</blockquote>
-<pre><code>git config --global user.name  &quot;这里写上你的用户名称&quot;
-git config --global user.email &quot;这里写上你的邮箱&quot;
-</code></pre><h4 id="针对某个项目进行配置"><a href="#针对某个项目进行配置" class="headerlink" title="针对某个项目进行配置"></a>针对某个项目进行配置</h4><blockquote>
-<p>不采用 –global 选项，就是针对某个特定的项目进行配置，而不是全局配置</p>
-</blockquote>
-<pre><code>git config --local user.name &quot;这里写上你的用户名&quot;
-git config --local user.email &quot;这里写上你的邮箱&quot;
-</code></pre>
-    
-    <a href="/2017/07/01/版本管理工具-Git篇[2]/" class="post-more waves-effect waves-button">
-        more
-    </a>
-    </div>
-</article>
-
-<div class="post-footer">
-    
-	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/GitHub/">GitHub</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/git/">git</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/版本管理工具/">版本管理工具</a></li></ul>
-
-</div>
-
-
-            </li>
-        
-            <li class="post-list-item fade">
-                <article id="post-版本管理工具-Git篇"
-  class="article-card article-type-post" itemprop="blogPost">
-  
-    
-    
-    <div class="top" data-title="2">
-    <div class="top-wrap">
-        <p></p>
-    </div>
-</div>
-    
-    
-        
-
-
-  
-    <h3 class="post-title re-title" itemprop="name">
-      <a class="post-title-link" href="/2017/01/15/版本管理工具-Git篇/">版本管理工具-Git篇[1]</a>
-    </h3>
-  
-
-
-
-    
-    <div class="post-meta">
-        <time class="post-time" title="2017-01-15 10:56:21" datetime="2017-01-15T02:56:21.000Z"  itemprop="datePublished">2017-01-15</time>
-
-        
-	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/git/">git</a><ul class="article-category-list-child"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/git/入门/">入门</a></li></ul></li></ul>
-
-
-
-        
-	<span id="/2017/01/15/版本管理工具-Git篇/" class="leancloud_visitors" data-flag-title="版本管理工具-Git篇[1]" title="版本管理工具-Git篇[1]">
-		
-			<i class="icon icon-eye"></i>
-		
-		<span class="leancloud-visitors-count"></span>
-	</span>
- 
-
-        
-
-
-        
-        
-    </div>
-    
-    <div class="post-content" id="post-content" itemprop="postContent">
-    
-    
-        <h2 id="版本管理工具的介绍"><a href="#版本管理工具的介绍" class="headerlink" title="版本管理工具的介绍"></a>版本管理工具的介绍</h2><p>作用：备份文件，与U盘等备份文件相比，可以随时随地，项目中经常使用。</p>
-<h3 id="版本管理工具可以记录历史"><a href="#版本管理工具可以记录历史" class="headerlink" title="版本管理工具可以记录历史"></a>版本管理工具可以记录历史</h3><p>网盘 u盘 保存了文件的最新状态，而不会记录修改的历史纪录，而版本管理工具对每次的修改都会进行备份，并且保留了时间和修改人，可以让我们回溯，如果不小心删除版本管理工具中的备份时，我们可以通过历史纪录对其进行找回，因此使用版本管理工具无需担心，而且使用版本管理工具，可以多端共享，例如我们经常所说的云盘，而且只要提交一次，我们就可以在任何地方通过版本管理工具对提交的代码进行下载。尤其对于，一些经常需要分开工作的工作人员比较实用</p>
-    
-    <a href="/2017/01/15/版本管理工具-Git篇/" class="post-more waves-effect waves-button">
-        more
-    </a>
-    </div>
-</article>
-
-<div class="post-footer">
-    
-	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/GitHub/">GitHub</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/git/">git</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/版本管理工具/">版本管理工具</a></li></ul>
-
-</div>
-
-
-            </li>
-        
-            <li class="post-list-item fade">
-                <article id="post-C语言遇到的一些问题"
-  class="article-card article-type-post" itemprop="blogPost">
-  
-    
-    
-    <div class="top" data-title="1">
-    <div class="top-wrap">
-        <p></p>
-    </div>
-</div>
-    
-    
-        
-
-
-  
-    <h3 class="post-title re-title" itemprop="name">
-      <a class="post-title-link" href="/2018/10/28/C语言遇到的一些问题/">C语言遇到的一些问题</a>
-    </h3>
-  
-
-
-
-    
-    <div class="post-meta">
-        <time class="post-time" title="2018-10-28 14:40:53" datetime="2018-10-28T06:40:53.000Z"  itemprop="datePublished">2018-10-28</time>
-
-        
-	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/CCNU/">CCNU</a><ul class="article-category-list-child"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/CCNU/C/">C</a><ul class="article-category-list-child"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/CCNU/C/ApplyMaster/">ApplyMaster</a></li></ul></li></ul></li></ul>
-
-
-
-        
-	<span id="/2018/10/28/C语言遇到的一些问题/" class="leancloud_visitors" data-flag-title="C语言遇到的一些问题" title="C语言遇到的一些问题">
-		
-			<i class="icon icon-eye"></i>
-		
-		<span class="leancloud-visitors-count"></span>
-	</span>
- 
-
-        
-
-
-        
-  <span><i class="icon icon-github"></i></span>
-
-        
-    </div>
-    
-    <div class="post-content" id="post-content" itemprop="postContent">
-    
-    
-        <h1 id="函数调用时候形参赋值"><a href="#函数调用时候形参赋值" class="headerlink" title="函数调用时候形参赋值"></a>函数调用时候形参赋值</h1><blockquote>
-<p>函数调用时，实参复制给形参的时候是<strong><em>从右到左</em></strong>复制, 并不是从左到右</p>
-</blockquote>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">compare</span> <span class="params">(<span class="keyword">int</span> a, <span class="keyword">int</span> b)</span></span>;     </span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">main</span> <span class="params">( )</span></span></span><br><span class="line"><span class="function"></span>&#123;   </span><br><span class="line">    <span class="keyword">int</span> i = <span class="number">2</span>;</span><br><span class="line">    compare ( i, i++ );           </span><br><span class="line">    <span class="built_in">printf</span> (<span class="string">"i = %d\n"</span>, i);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">compare</span> <span class="params">( <span class="keyword">int</span> a, <span class="keyword">int</span> b )</span> </span></span><br><span class="line"><span class="function"></span>&#123;   </span><br><span class="line">    <span class="built_in">printf</span> (<span class="string">"a = %d  b = %d\n"</span>, a, b);</span><br><span class="line">    <span class="keyword">if</span> ( a &gt; b)  </span><br><span class="line">        <span class="built_in">printf</span> (<span class="string">"a &gt; b\n"</span>);</span><br><span class="line">    <span class="keyword">else</span> </span><br><span class="line">      <span class="keyword">if</span> (a == b)  </span><br><span class="line">          <span class="built_in">printf</span> (<span class="string">"a = b\n"</span>);</span><br><span class="line">      <span class="keyword">else</span> </span><br><span class="line">          <span class="built_in">printf</span> (<span class="string">"a &lt; b\n"</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h3 id="运行结果"><a href="#运行结果" class="headerlink" title="运行结果"></a>运行结果</h3><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">a = <span class="number">3</span>  b = <span class="number">2</span></span><br><span class="line">a &gt; b</span><br><span class="line">i = <span class="number">3</span></span><br></pre></td></tr></table></figure>
-<hr>
-<h1 id="字符串转换为整型"><a href="#字符串转换为整型" class="headerlink" title="字符串转换为整型"></a>字符串转换为整型</h1><blockquote>
-<p>在控制台执行C语言程序的时候有时候需要传递参数但是我们传递的是const char *类型的参数，我们需要获得参数并将其赋值给整型变量的时候就需要进行类型转换,可以使用atoi()函数</p>
-</blockquote>
-<h2 id="atoi函数介绍"><a href="#atoi函数介绍" class="headerlink" title="atoi函数介绍"></a>atoi函数介绍</h2><p>原型：int  atoi （const  char  *nptr）</p>
-<p>用法：#include  &lt;stdlib.h&gt;</p>
-<p>功能：将字符串转换成整型数；atoi()会扫描参数nptr字符串，跳过前面的空格字符，直到遇上数字或正负号才开始做转换，而再遇到非数字或字符串时（’\0’）才结束转化，并将结果返回。</p>
-<p>说明：atoi()函数返回转换后的整型数。</p>
-<p>举例：</p>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> *  编写文本文件显示程序，在命令行中指定文本文件显示的范围。如下所示</span></span><br><span class="line"><span class="comment"> * </span></span><br><span class="line"><span class="comment"> * type filename m n</span></span><br><span class="line"><span class="comment"> * 其中type为执行文件，filename是要显示的文本文件名，</span></span><br><span class="line"><span class="comment"> * m和n指定了显示的范围，即显示从m行到n行的内容</span></span><br><span class="line"><span class="comment"> * 当m和n不指定的时候，显示文件全部内容</span></span><br><span class="line"><span class="comment"> **/</span></span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdlib.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">main</span><span class="params">(<span class="keyword">int</span> argc, <span class="keyword">char</span> <span class="keyword">const</span> *argv[])</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">int</span> m, n;</span><br><span class="line">    m = atoi(argv[<span class="number">2</span>]);</span><br><span class="line">    n = atoi(argv[<span class="number">2</span>]);</span><br><span class="line">	<span class="built_in">printf</span>(<span class="string">"%d %d\n"</span>, m, n);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<blockquote>
-<p>转载：<a href="https://blog.csdn.net/youbang321/article/details/7887990" target="_blank" rel="noopener">https://blog.csdn.net/youbang321/article/details/7887990</a> </p>
-</blockquote>
-<hr>
-<h1 id="fgets-文件读取函数的一些注意点（变色的重点）"><a href="#fgets-文件读取函数的一些注意点（变色的重点）" class="headerlink" title="fgets()文件读取函数的一些注意点（变色的重点）"></a>fgets()文件读取函数的一些注意点（变色的重点）</h1><p>fgets函数读取文件的时候在一行结束的时候,也<strong><em>会把该行的末尾的’\n’读取进去</em></strong>，并随后加入’\0’，因此<strong>*在使用puts()输出的时候首先会输出字符串中的换行,然后puts()在自动输出的时候也会自动附加换行**</strong></p>
-<hr>
-<h1 id="strlen-与-sizeof-的区别"><a href="#strlen-与-sizeof-的区别" class="headerlink" title="strlen 与 sizeof 的区别"></a>strlen 与 sizeof 的区别</h1><p>参考: <a href="https://blog.csdn.net/SunnyYoona/article/details/39118465" target="_blank" rel="noopener">https://blog.csdn.net/SunnyYoona/article/details/39118465</a></p>
-<hr>
-<h1 id="return-与-exit-的区别"><a href="#return-与-exit-的区别" class="headerlink" title="return 与 exit 的区别"></a>return 与 exit 的区别</h1><p>参考: <a href="https://blog.csdn.net/ligeforrent/article/details/45362959" target="_blank" rel="noopener">https://blog.csdn.net/ligeforrent/article/details/45362959</a></p>
-<hr>
-<h1 id="getch-getche-以及-getchar-的区别"><a href="#getch-getche-以及-getchar-的区别" class="headerlink" title="getch getche 以及 getchar 的区别"></a>getch getche 以及 getchar 的区别</h1><p>参考: <a href="https://blog.csdn.net/cxyol/article/details/628324" target="_blank" rel="noopener">https://blog.csdn.net/cxyol/article/details/628324</a></p>
-<hr>
-<h1 id="C语言结构体数组中两个元素的值交换"><a href="#C语言结构体数组中两个元素的值交换" class="headerlink" title="C语言结构体数组中两个元素的值交换"></a>C语言结构体数组中两个元素的值交换</h1><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdlib.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> NUM 100</span></span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">Score_Tab</span></span></span><br><span class="line"><span class="class">&#123;</span></span><br><span class="line">    <span class="keyword">int</span> rank;</span><br><span class="line">    <span class="keyword">char</span> no[<span class="number">11</span>];</span><br><span class="line">    <span class="keyword">char</span> name[<span class="number">21</span>];</span><br><span class="line">    <span class="keyword">int</span> score;</span><br><span class="line">    <span class="keyword">int</span> time;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">main</span><span class="params">(<span class="keyword">int</span> argc, <span class="keyword">char</span> <span class="keyword">const</span> *argv[])</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="class"><span class="keyword">struct</span> <span class="title">Score_Tab</span> <span class="title">score</span>[100], <span class="title">temp</span>;</span></span><br><span class="line">    FILE *fp;</span><br><span class="line">    <span class="keyword">int</span> i, j, k, n, s, t;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span>((fp = fopen(<span class="string">"score_tab.txt"</span>, <span class="string">"r"</span>)) == <span class="literal">NULL</span>)              <span class="comment">//打开文件失败</span></span><br><span class="line">    &#123;</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">"can not open source file: score_tab.txt\n"</span>);</span><br><span class="line">        <span class="built_in">exit</span>(<span class="number">0</span>);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">//从文件中读取数据到结构体数组score中</span></span><br><span class="line">    n = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">while</span>(<span class="built_in">fscanf</span>(fp, <span class="string">"%s%s%d%d"</span>, score[n].no, score[n].name, &amp;score[n].score, &amp;score[n].time) != EOF)</span><br><span class="line">        n++;</span><br><span class="line">    </span><br><span class="line">    <span class="comment">//对结构体数组score按分数降序排列,分数相同则按所用时间升序排列</span></span><br><span class="line">    <span class="keyword">for</span>(i = <span class="number">0</span>; i &lt; n<span class="number">-1</span>; i++)</span><br><span class="line">    &#123;</span><br><span class="line">        k = i;</span><br><span class="line">        <span class="keyword">for</span>(j = i + <span class="number">1</span>; j &lt; n; j++)</span><br><span class="line">            <span class="keyword">if</span>(score[j].score &gt; score[k].score || score[j].score==score[k].score &amp;&amp; score[j].time &lt; score[k].time)</span><br><span class="line">                k = j;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">if</span>(k != i)</span><br><span class="line">        &#123;</span><br><span class="line">            temp = score[i];</span><br><span class="line">            score[i] = score[k];</span><br><span class="line">            score[k] = temp;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">//排名次</span></span><br><span class="line">    j = <span class="number">0</span>;</span><br><span class="line">    s = <span class="number">0</span>;</span><br><span class="line">    t = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">for</span>(i = <span class="number">0</span>; i &lt; n; i++)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">if</span>(score[i].score != s || score[i].time != t)</span><br><span class="line">        &#123;</span><br><span class="line">            j++;</span><br><span class="line">            score[i].rank = j;</span><br><span class="line">            s = score[i].score;</span><br><span class="line">            t = score[i].time;</span><br><span class="line">        &#125;</span><br><span class="line">        score[i].rank = j;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">//显示排名结果</span></span><br><span class="line">    <span class="keyword">for</span>(i = <span class="number">0</span>; i &lt; n; i++)</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">"%4d %-10s %-20s %3d %3d\n"</span>, score[i].rank, score[i].no, score[i].name, score[i].score, score[i].time);</span><br><span class="line">    </span><br><span class="line"></span><br><span class="line">    fclose(fp);</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<hr>
-    
-    <a href="/2018/10/28/C语言遇到的一些问题/" class="post-more waves-effect waves-button">
-        more
-    </a>
-    </div>
-</article>
-
-<div class="post-footer">
-    
-	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/ApplyMaster/">ApplyMaster</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/C/">C</a></li></ul>
-
-</div>
-
-
-            </li>
-        
-            <li class="post-list-item fade">
-                <article id="post-带头结点的单链表"
-  class="article-card article-type-post" itemprop="blogPost">
-  
-    
-    
-    <div class="top" data-title="1">
-    <div class="top-wrap">
-        <p></p>
-    </div>
-</div>
-    
-    
-        
-
-
-  
-    <h3 class="post-title re-title" itemprop="name">
-      <a class="post-title-link" href="/2018/10/07/带头结点的单链表/">带头结点的单链表</a>
-    </h3>
-  
-
-
-
-    
-    <div class="post-meta">
-        <time class="post-time" title="2018-10-07 21:30:06" datetime="2018-10-07T13:30:06.000Z"  itemprop="datePublished">2018-10-07</time>
-
-        
-	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/数据结构/">数据结构</a><ul class="article-category-list-child"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/数据结构/线性表/">线性表</a><ul class="article-category-list-child"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/数据结构/线性表/链式表示-顺序表/">链式表示-顺序表</a></li></ul></li></ul></li></ul>
-
-
-
-        
-	<span id="/2018/10/07/带头结点的单链表/" class="leancloud_visitors" data-flag-title="带头结点的单链表" title="带头结点的单链表">
-		
-			<i class="icon icon-eye"></i>
-		
-		<span class="leancloud-visitors-count"></span>
-	</span>
- 
-
-        
-
-
-        
-  <span><i class="icon icon-github"></i></span>
-
-        
-    </div>
-    
-    <div class="post-content" id="post-content" itemprop="postContent">
-    
-    
-        <h2 id="函数说明"><a href="#函数说明" class="headerlink" title="函数说明"></a>函数说明</h2><ol>
-<li>void InitLinkList(LinkList *l);                                 //初始化链表</li>
-<li>Status ListEmpty(LinkList *l)                                   //判断单链表是否为空</li>
-<li>void CreatFormHead(LinkList PHead);                             //头插法建表</li>
-<li>void CreatFormTail(LinkList PHead);                             //尾插法建表</li>
-<li>LinkList <em>GetElem(LinkList </em>l, int i)                           //按序号查找</li>
-<li>LinkList <em>LocateElem(LinkList </em>l, ElemType e)                   //按值查找表结点</li>
-<li>void PrintLinkList(LinkList *l)                                 //打印链表</li>
-<li>Status DestroyLinkList(LinkList *l)                             //销毁链表</li>
-<li>Status DeleteNodeFromLinkList(LinkList *l, int i)               //删除操作</li>
-<li>Status InsertNodeToLinkList(LinkList *l, int i, ElemType data)  //插入节点</li>
-<li>int GetListLength(LinkList *l)                                  //求链表的长度</li>
-</ol>
-<hr>
-    
-    <a href="/2018/10/07/带头结点的单链表/" class="post-more waves-effect waves-button">
-        more
-    </a>
-    </div>
-</article>
-
-<div class="post-footer">
-    
-	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/C/">C</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/单链表/">单链表</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/数据结构/">数据结构</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/线性表/">线性表</a></li></ul>
-
-</div>
-
-
-            </li>
-        
         </ul>
         
 <nav id="page-nav">
     <div class="inner">
-    <a class="extend prev" rel="prev" href="/page/4/">上一页</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/3/">3</a><a class="page-number" href="/page/4/">4</a><span class="page-number current">5</span><a class="page-number" href="/page/6/">6</a><a class="page-number" href="/page/7/">7</a><span class="space">&hellip;</span><a class="page-number" href="/page/12/">12</a><a class="extend next" rel="next" href="/page/6/">下一页</a>
+    <a class="extend prev" rel="prev" href="/page/4/">上一页</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/3/">3</a><a class="page-number" href="/page/4/">4</a><span class="page-number current">5</span><a class="page-number" href="/page/6/">6</a><a class="page-number" href="/page/7/">7</a><span class="space">&hellip;</span><a class="page-number" href="/page/13/">13</a><a class="extend next" rel="next" href="/page/6/">下一页</a>
     </div>
 </nav>
 

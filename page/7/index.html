@@ -223,7 +223,7 @@
         <h5 class="subtitle">
             
                 <a href="javascript:;" style="color: #fff; margin-right: 4px;">
-                  <i class="icon icon-map-marker icon-1x">Zhuzhou, China</i>
+                  <i class="icon icon-map-marker icon-1x">Wuhan, China</i>
               </a><a href="https://github.com/sivanWu0222" style="color: #fff; margin-right: 4px;">
                   <i class="icon icon-github icon-1x">sivanWu0222</i>
               </a>
@@ -250,6 +250,575 @@
 
     <div class="container body-wrap">
         <ul class="post-list">
+        
+            <li class="post-list-item fade">
+                <article id="post-C-字符串"
+  class="article-card article-type-post" itemprop="blogPost">
+  
+    
+    
+    <div class="top" data-title="1">
+    <div class="top-wrap">
+        <p></p>
+    </div>
+</div>
+    
+    
+        
+
+
+  
+    <h3 class="post-title re-title" itemprop="name">
+      <a class="post-title-link" href="/2018/07/02/C-字符串/">C-字符串</a>
+    </h3>
+  
+
+
+
+    
+    <div class="post-meta">
+        <time class="post-time" title="2018-07-02 09:58:58" datetime="2018-07-02T01:58:58.000Z"  itemprop="datePublished">2018-07-02</time>
+
+        
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/C/">C</a><ul class="article-category-list-child"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/C/Grammar/">Grammar</a></li></ul></li></ul>
+
+
+
+        
+	<span id="/2018/07/02/C-字符串/" class="leancloud_visitors" data-flag-title="C-字符串" title="C-字符串">
+		
+			<i class="icon icon-eye"></i>
+		
+		<span class="leancloud-visitors-count"></span>
+	</span>
+ 
+
+        
+
+
+        
+  <span><i class="icon icon-github"></i></span>
+
+        
+    </div>
+    
+    <div class="post-content" id="post-content" itemprop="postContent">
+    
+    
+        <h1 id="字符串"><a href="#字符串" class="headerlink" title="字符串"></a>字符串</h1><p>C/C++中，字符串有两种形式：</p>
+<ol>
+<li>字符串常量    “Hello World”</li>
+<li>字符串变量    存放于字符数组中，该字符数组中包含一个’\0’字符，代表字符串的结尾，将用来存放字符串数组的变量称为字符串变量。</li>
+</ol>
+<h2 id="字符串常量"><a href="#字符串常量" class="headerlink" title="字符串常量"></a>字符串常量</h2><p>注意事项：</p>
+<ol>
+<li>字符串常量内存中所占的字节数等于字符数目+1，因为末尾要存放一个’\0’字符，是二进制数0的ASCII码。C/C++中的字符串都是以’\0’结尾的</li>
+<li>“”是合法的字符串常量，该字符串里面是一个空字符串，称为“空串”，但是仍会占用1个字节的存储空间用来存放代表结束为止的’\0’</li>
+<li>字符串常量中包括双引号时，双引号应该写为“\””，而“\”字符在字符串出现时，应该写为“\”，“*”和“\”仍只占用1个字节</li>
+</ol>
+<h2 id="字符串变量"><a href="#字符串变量" class="headerlink" title="字符串变量"></a>字符串变量</h2><ol>
+<li>在使用scanf输入字符串时，输入的字符串不可以有空格，例如输入”Fox River”则为”Fox”，也就是将会读取空格前面的那部分。</li>
+<li>当我们想要将用户输入的一个或者包含多个空格的一整行当做一个字符串读入时，那么应该用gets(字符串变量)</li>
+<li>在C/C++对字符或者字符串进行处理时，碰到’\0’就认为字符串结束了。</li>
+</ol>
+<h3 id="函数gets"><a href="#函数gets" class="headerlink" title="函数gets"></a>函数gets</h3><p>原型：char <em>gets(char </em>s)<br>功能：将用户输入的一整行，当做一个字符串读入到s中，并在后面自动加上’\0’</p>
+<h3 id="函数strcmp"><a href="#函数strcmp" class="headerlink" title="函数strcmp"></a>函数strcmp</h3><p>功能：比较两个字符串是否一致，如果一致，返回0</p>
+<h3 id="函数strcpy"><a href="#函数strcpy" class="headerlink" title="函数strcpy"></a>函数strcpy</h3><p>功能：将后面的字符串拷贝到前面那个字符串变量，要注意字符串变量一定要可以装得下后面的字符串。同时要特别注意，拷贝函数会在最后加上一个’\0’</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">/*书上示例程序*/</span></span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;string.h&gt;</span></span></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="keyword">char</span> szTitle[] = <span class="string">"Prison Break"</span>;</span><br><span class="line">	<span class="keyword">char</span> szHero[<span class="number">100</span>] = <span class="string">"Michael scofield"</span>;</span><br><span class="line">	<span class="keyword">char</span> szPrisonName[<span class="number">100</span>];</span><br><span class="line">	<span class="keyword">char</span> szResponse[<span class="number">100</span>];</span><br><span class="line">	<span class="built_in">printf</span>(<span class="string">"What's the name of the prison in %s?\n"</span>, szTitle);</span><br><span class="line">	<span class="built_in">scanf</span>( <span class="string">"%s"</span>, szPrisonName);</span><br><span class="line">	<span class="keyword">if</span>( <span class="built_in">strcmp</span>( szPrisonName, <span class="string">"Fox-River"</span>) == <span class="number">0</span> ) &#123;		<span class="comment">//如果返回结果为0，则说明比较结果一致 </span></span><br><span class="line">		<span class="built_in">printf</span>(<span class="string">"Yeah! Do you love %s?\n"</span>, szHero);</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">else</span> &#123;</span><br><span class="line">		<span class="built_in">strcpy</span>( szResponse, <span class="string">"It seems you haven't watched it!\n"</span>);	<span class="comment">//将后面的内容拷贝到前面的数组中。 </span></span><br><span class="line">		<span class="built_in">printf</span>( szResponse);</span><br><span class="line">	&#125;</span><br><span class="line">	szTitle [<span class="number">0</span>] = <span class="string">'t'</span>;</span><br><span class="line">	szTitle [<span class="number">3</span>] = <span class="number">0</span>; <span class="comment">//等效于 szTitle [3] = ‘\0’; 因为C/C++在处理字符串时认为遇到\0就会就认为字符串结束了，因此将会输出tri </span></span><br><span class="line">	<span class="built_in">printf</span>(szTitle);</span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line"> &#125;</span><br></pre></td></tr></table></figure>
+    
+    <a href="/2018/07/02/C-字符串/" class="post-more waves-effect waves-button">
+        more
+    </a>
+    </div>
+</article>
+
+<div class="post-footer">
+    
+	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/C/">C</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Grammar/">Grammar</a></li></ul>
+
+</div>
+
+
+            </li>
+        
+            <li class="post-list-item fade">
+                <article id="post-二维数组"
+  class="article-card article-type-post" itemprop="blogPost">
+  
+    
+    
+    <div class="top" data-title="1">
+    <div class="top-wrap">
+        <p></p>
+    </div>
+</div>
+    
+    
+        
+
+
+  
+    <h3 class="post-title re-title" itemprop="name">
+      <a class="post-title-link" href="/2018/07/01/二维数组/">二维数组</a>
+    </h3>
+  
+
+
+
+    
+    <div class="post-meta">
+        <time class="post-time" title="2018-07-01 10:16:04" datetime="2018-07-01T02:16:04.000Z"  itemprop="datePublished">2018-07-01</time>
+
+        
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/Algorithm/">Algorithm</a><ul class="article-category-list-child"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/Algorithm/C/">C</a></li></ul></li></ul>
+
+
+
+        
+	<span id="/2018/07/01/二维数组/" class="leancloud_visitors" data-flag-title="二维数组" title="二维数组">
+		
+			<i class="icon icon-eye"></i>
+		
+		<span class="leancloud-visitors-count"></span>
+	</span>
+ 
+
+        
+
+
+        
+  <span><i class="icon icon-github"></i></span>
+
+        
+    </div>
+    
+    <div class="post-content" id="post-content" itemprop="postContent">
+    
+    
+        <h2 id="数组"><a href="#数组" class="headerlink" title="数组"></a>数组</h2><blockquote>
+<p>数组”元素个数”必须是常数或常量表达式，不能是变量，而且其值必须是正整数。元素个数称作”数组的长度”。</p>
+</blockquote>
+<h3 id="定义一个数组"><a href="#定义一个数组" class="headerlink" title="定义一个数组"></a>定义一个数组</h3><p>1.T array[N];    //T可以是任何类型，如char,double,int等，N可以是一个正整数或者值为正整数的常量表达式</p>
+<blockquote>
+<p>这里我们定义了一个数组，数组名字是array,里面存放了N个元素，每个元素都是一个类型为T的变量。这N个元素在内存里面一个挨一个连续存放。array数组占用了一片连续的，大小为N * (sizeof(T))字节的存储空间。<br>下标可以是任何值为整型的表达式。表达式里面可以包含变量、函数调用。下标如为小数时，编译器将自动去尾取整。</p>
+</blockquote>
+<h3 id="数组初始化"><a href="#数组初始化" class="headerlink" title="数组初始化"></a>数组初始化</h3><p>int a[10] = {0, 1, 2, 3, 4, 5, 6, 7, 8, 9};</p>
+<p>数组初始化时，</p>
+<ol>
+<li>{}中值的个数可以少于元素个数，此时相当于只给前面元素赋值，而后面的元素，其存储空间里的每个字节都被写入二进制数0</li>
+<li>在定义数组时，如果全部元素赋值，则可以不给出数组元素的个数。</li>
+<li>数组元素的下标，可以是任何整数，可以是负数，也可以大于数组元素的个数。当大于数组元素个数的时候，编译时候不会出错。</li>
+<li>访问的数组元素并不在数组的存储空间内，这种现象叫做”数组越界”。</li>
+<li>如果在跟踪调试程序的时候，发现某个变量变成了一个不正确的值，当想不出为什么这个变量变成该值，要考虑一下数组是如何越界的！</li>
+<li>由于数组越界导致指令被修改，甚至会发现在调试器里调试的时候，程序将不按正常次序运行。例如，单步调试程序的时候，明明碰到一个条件为真的if语句，却就是不执行为真的那个分支！</li>
+</ol>
+<h2 id="二维数组"><a href="#二维数组" class="headerlink" title="二维数组"></a>二维数组</h2><blockquote>
+<p>二维数组的每一行实际上都是一个一维数组，二维数组存放矩阵特别合适</p>
+</blockquote>
+<p>二维数组正常赋值和打印：<br><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> ROW 3</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> COL 2</span></span><br><span class="line"></span><br><span class="line"><span class="comment">/*输入赋值给二维数组*/</span></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">scanTwoDimensionArray</span><span class="params">(<span class="keyword">int</span> *num)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="keyword">int</span> i,j;</span><br><span class="line">	<span class="keyword">for</span>(i = <span class="number">0</span>; i &lt; ROW; i++)</span><br><span class="line">	&#123;</span><br><span class="line">		<span class="keyword">for</span>(j = <span class="number">0</span>; j &lt; COL; j++)</span><br><span class="line">		&#123;</span><br><span class="line">			<span class="built_in">scanf</span>(<span class="string">"%d"</span>,&amp;(*(num + i * ROW + j)));	</span><br><span class="line">		&#125;		</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">/*二维数组按行输出*/</span></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">printTwoDimensionArray</span><span class="params">(<span class="keyword">int</span> *num)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="keyword">int</span> i,j;</span><br><span class="line">	<span class="keyword">for</span>(i = <span class="number">0</span>; i &lt; ROW; i++)</span><br><span class="line">	&#123;</span><br><span class="line">		<span class="keyword">for</span>(j = <span class="number">0</span>; j &lt; COL; j++)</span><br><span class="line">		&#123;</span><br><span class="line">			<span class="built_in">printf</span>(<span class="string">"%d\t"</span>,*(num + i * ROW + j));	</span><br><span class="line">		&#125;		</span><br><span class="line">		<span class="built_in">printf</span>(<span class="string">"\n"</span>);</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="keyword">int</span> a[ROW][COL],i,j;</span><br><span class="line">	scanTwoDimensionArray(a);</span><br><span class="line">	printTwoDimensionArray(a);</span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+    
+    <a href="/2018/07/01/二维数组/" class="post-more waves-effect waves-button">
+        more
+    </a>
+    </div>
+</article>
+
+<div class="post-footer">
+    
+	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Algorithm/">Algorithm</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/C/">C</a></li></ul>
+
+</div>
+
+
+            </li>
+        
+            <li class="post-list-item fade">
+                <article id="post-C-冒泡排序"
+  class="article-card article-type-post" itemprop="blogPost">
+  
+    
+    
+    <div class="top" data-title="1">
+    <div class="top-wrap">
+        <p></p>
+    </div>
+</div>
+    
+    
+        
+
+
+  
+    <h3 class="post-title re-title" itemprop="name">
+      <a class="post-title-link" href="/2018/07/01/C-冒泡排序/">C 冒泡排序</a>
+    </h3>
+  
+
+
+
+    
+    <div class="post-meta">
+        <time class="post-time" title="2018-07-01 09:56:34" datetime="2018-07-01T01:56:34.000Z"  itemprop="datePublished">2018-07-01</time>
+
+        
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/Algorithm/">Algorithm</a><ul class="article-category-list-child"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/Algorithm/C/">C</a></li></ul></li></ul>
+
+
+
+        
+	<span id="/2018/07/01/C-冒泡排序/" class="leancloud_visitors" data-flag-title="C 冒泡排序" title="C 冒泡排序">
+		
+			<i class="icon icon-eye"></i>
+		
+		<span class="leancloud-visitors-count"></span>
+	</span>
+ 
+
+        
+
+
+        
+  <span><i class="icon icon-github"></i></span>
+
+        
+    </div>
+    
+    <div class="post-content" id="post-content" itemprop="postContent">
+    
+    
+        <h2 id="冒泡排序"><a href="#冒泡排序" class="headerlink" title="冒泡排序"></a>冒泡排序</h2><blockquote>
+<p>使用C语言进行冒泡排序，每次都把当前找到的最大的放到最后一个，所以只需要找前面的n - 1 -i个数</p>
+</blockquote>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> MAX_NUM 5</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment">	@brief:打印数组的内容</span></span><br><span class="line"><span class="comment">	@param:数组的指针 </span></span><br><span class="line"><span class="comment">*/</span> </span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">printArray</span><span class="params">(<span class="keyword">int</span> *num)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="keyword">int</span> i;</span><br><span class="line">	<span class="keyword">for</span>(i = <span class="number">0</span>; i &lt; MAX_NUM; i++)</span><br><span class="line">	&#123;</span><br><span class="line">		<span class="built_in">printf</span>(<span class="string">"%d\t"</span>,*(num + i));</span><br><span class="line">	&#125; </span><br><span class="line">	<span class="built_in">printf</span>(<span class="string">"\n"</span>);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment">	@brief:为数组元素赋值</span></span><br><span class="line"><span class="comment">	@param:数组指针 </span></span><br><span class="line"><span class="comment">**/</span></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">scanArray</span><span class="params">(<span class="keyword">int</span> *num)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="keyword">int</span> i;</span><br><span class="line">	<span class="keyword">for</span>(i = <span class="number">0</span>; i &lt; MAX_NUM; i++)</span><br><span class="line">	&#123;</span><br><span class="line">		<span class="built_in">scanf</span>(<span class="string">"%d"</span>,&amp;(*(num + i)));</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment">	@brief:选择排序算法</span></span><br><span class="line"><span class="comment">	@param:数组指针 </span></span><br><span class="line"><span class="comment">**/</span></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">selectionSort</span><span class="params">(<span class="keyword">int</span> *num)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="keyword">int</span> i,j,min,temp;</span><br><span class="line">	<span class="keyword">for</span>(i = <span class="number">0</span>; i &lt; MAX_NUM; i++)</span><br><span class="line">	&#123;</span><br><span class="line">		min = i;</span><br><span class="line">		<span class="keyword">for</span>(j = i + <span class="number">1</span>; j &lt; MAX_NUM; j++)</span><br><span class="line">		&#123;</span><br><span class="line">			<span class="keyword">if</span>(*(num+min) &gt; *(num+j))</span><br><span class="line">			&#123;</span><br><span class="line">				min = j;</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line">		</span><br><span class="line">		temp = *(num+i);</span><br><span class="line">		*(num+i) = *(num+min);</span><br><span class="line">		*(num+min) = temp;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment">	@brief:冒泡排序</span></span><br><span class="line"><span class="comment">	@param:数组指针 </span></span><br><span class="line"><span class="comment">**/</span></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">bubbledSort</span><span class="params">(<span class="keyword">int</span> *num)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="keyword">int</span> i,j,min;</span><br><span class="line">	<span class="keyword">for</span>(i = <span class="number">0</span>; i &lt; MAX_NUM - <span class="number">1</span>; i++)</span><br><span class="line">	&#123;</span><br><span class="line">		<span class="keyword">for</span>(j = <span class="number">0</span>; j &lt; MAX_NUM - <span class="number">1</span> - i; j++)			</span><br><span class="line">		<span class="comment">//这里需要注意是每次都会把最大放到最后，所以每次只需要管前面的就可以 </span></span><br><span class="line">		&#123;</span><br><span class="line">			<span class="keyword">if</span>(*(num + j) &gt; *(num + j + <span class="number">1</span>))</span><br><span class="line">			&#123;</span><br><span class="line">				min = *(num + j + <span class="number">1</span>);</span><br><span class="line">				*(num + j + <span class="number">1</span>) = *(num + j);</span><br><span class="line">				*(num + j) = min;</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line">		printArray(num);</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="keyword">int</span> num[MAX_NUM];</span><br><span class="line">	scanArray(num);</span><br><span class="line">	bubbledSort(num);</span><br><span class="line">	printArray(num);</span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line"> &#125;</span><br></pre></td></tr></table></figure>
+    
+    <a href="/2018/07/01/C-冒泡排序/" class="post-more waves-effect waves-button">
+        more
+    </a>
+    </div>
+</article>
+
+<div class="post-footer">
+    
+	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Algorithm/">Algorithm</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/C/">C</a></li></ul>
+
+</div>
+
+
+            </li>
+        
+            <li class="post-list-item fade">
+                <article id="post-C-选择排序"
+  class="article-card article-type-post" itemprop="blogPost">
+  
+    
+    
+    <div class="top" data-title="1">
+    <div class="top-wrap">
+        <p></p>
+    </div>
+</div>
+    
+    
+        
+
+
+  
+    <h3 class="post-title re-title" itemprop="name">
+      <a class="post-title-link" href="/2018/06/30/C-选择排序/">C 选择排序</a>
+    </h3>
+  
+
+
+
+    
+    <div class="post-meta">
+        <time class="post-time" title="2018-06-30 22:53:25" datetime="2018-06-30T14:53:25.000Z"  itemprop="datePublished">2018-06-30</time>
+
+        
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/Algorithm/">Algorithm</a><ul class="article-category-list-child"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/Algorithm/C/">C</a></li></ul></li></ul>
+
+
+
+        
+	<span id="/2018/06/30/C-选择排序/" class="leancloud_visitors" data-flag-title="C 选择排序" title="C 选择排序">
+		
+			<i class="icon icon-eye"></i>
+		
+		<span class="leancloud-visitors-count"></span>
+	</span>
+ 
+
+        
+
+
+        
+  <span><i class="icon icon-github"></i></span>
+
+        
+    </div>
+    
+    <div class="post-content" id="post-content" itemprop="postContent">
+    
+    
+        <h2 id="排序模板"><a href="#排序模板" class="headerlink" title="排序模板"></a>排序模板</h2><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> MAX_NUM 10</span></span><br><span class="line"></span><br><span class="line"><span class="comment">/*输出数组*/</span> </span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">printArray</span><span class="params">(<span class="keyword">int</span> *n)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="keyword">int</span> i;</span><br><span class="line">	<span class="keyword">for</span>( i = <span class="number">0</span>; i &lt; MAX_NUM; i++ )</span><br><span class="line">	&#123;</span><br><span class="line">		<span class="built_in">printf</span>(<span class="string">"%d\t"</span>, *(n + i));</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">/*输入数组*/</span></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">scanArray</span><span class="params">(<span class="keyword">int</span> *n)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="keyword">int</span> i;</span><br><span class="line">	<span class="keyword">for</span> (i = <span class="number">0</span>; i &lt; MAX_NUM; i++)</span><br><span class="line">	&#123;</span><br><span class="line">		<span class="built_in">scanf</span>(<span class="string">"%d"</span>,&amp;(*(n+i)));</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="keyword">int</span> an[MAX_NUM];</span><br><span class="line">	scanArray(an);</span><br><span class="line">	printArray(an);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+    
+    <a href="/2018/06/30/C-选择排序/" class="post-more waves-effect waves-button">
+        more
+    </a>
+    </div>
+</article>
+
+<div class="post-footer">
+    
+	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Algorithm/">Algorithm</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/C/">C</a></li></ul>
+
+</div>
+
+
+            </li>
+        
+            <li class="post-list-item fade">
+                <article id="post-ACM训练-1"
+  class="article-card article-type-post" itemprop="blogPost">
+  
+    
+    
+    <div class="top" data-title="1">
+    <div class="top-wrap">
+        <p></p>
+    </div>
+</div>
+    
+    
+        
+
+
+  
+    <h3 class="post-title re-title" itemprop="name">
+      <a class="post-title-link" href="/2018/06/29/ACM训练-1/">ACM训练-1</a>
+    </h3>
+  
+
+
+
+    
+    <div class="post-meta">
+        <time class="post-time" title="2018-06-29 18:52:46" datetime="2018-06-29T10:52:46.000Z"  itemprop="datePublished">2018-06-29</time>
+
+        
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/ACM/">ACM</a><ul class="article-category-list-child"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/ACM/Easy/">Easy</a></li></ul></li></ul>
+
+
+
+        
+	<span id="/2018/06/29/ACM训练-1/" class="leancloud_visitors" data-flag-title="ACM训练-1" title="ACM训练-1">
+		
+			<i class="icon icon-eye"></i>
+		
+		<span class="leancloud-visitors-count"></span>
+	</span>
+ 
+
+        
+
+
+        
+  <span><i class="icon icon-github"></i></span>
+
+        
+    </div>
+    
+    <div class="post-content" id="post-content" itemprop="postContent">
+    
+    
+        <h2 id="打印点坐标"><a href="#打印点坐标" class="headerlink" title="打印点坐标"></a>打印点坐标</h2><blockquote>
+<p>假如在二维坐标系中有很多点，每一个点都有坐标(x,y),打印在以(100,100)为圆心，100为半径里面所有的点的坐标。</p>
+</blockquote>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * 假如在二维坐标系中有很多点，每一个点都有坐标(x,y),</span></span><br><span class="line"><span class="comment"> * 打印在以(100,100)为圆心，100为半径里面所有的点的坐标。</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;cmath&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">  <span class="keyword">for</span> (<span class="keyword">int</span> x = <span class="number">0</span>, y = <span class="number">0</span>; x &lt;= <span class="number">200</span>; x++)</span><br><span class="line">  &#123;</span><br><span class="line">    y = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">while</span>(y &lt;= <span class="number">200</span>)</span><br><span class="line">    &#123;</span><br><span class="line">      <span class="keyword">if</span>(<span class="built_in">sqrt</span>(<span class="built_in">pow</span>(x - <span class="number">100</span>, <span class="number">2</span>) + <span class="built_in">pow</span>(y <span class="number">-100</span>, <span class="number">2</span>)) &lt;= <span class="number">100</span>)</span><br><span class="line">        <span class="built_in">cout</span> &lt;&lt; <span class="string">"("</span> &lt;&lt; x &lt;&lt; <span class="string">","</span> &lt;&lt; y &lt;&lt; <span class="string">")"</span> &lt;&lt; <span class="string">"\n"</span>;</span><br><span class="line">      y++;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="求100以内的水仙花数"><a href="#求100以内的水仙花数" class="headerlink" title="求100以内的水仙花数"></a>求100以内的水仙花数</h2><blockquote>
+<p>求1000以内所有的“水仙花数”，”水仙花“是一个三位数，个位，十位，白位的数字的立方和等于本身。例如153 = 1+ 125 + 27</p>
+</blockquote>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * 求1000以内的水仙花数：个位 十位 百位 立方和等于本身</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;cmath&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">  <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">999</span>; i &gt;= <span class="number">100</span> &amp;&amp; i &lt;= <span class="number">999</span>; i--)</span><br><span class="line">  &#123;</span><br><span class="line">    <span class="keyword">if</span> (i == <span class="built_in">pow</span>(i%<span class="number">10</span>, <span class="number">3</span>) + <span class="built_in">pow</span>(i/<span class="number">100</span>, <span class="number">3</span>) + <span class="built_in">pow</span>(i/<span class="number">10</span>%<span class="number">10</span>, <span class="number">3</span>))</span><br><span class="line">    &#123;</span><br><span class="line">      <span class="built_in">cout</span> &lt;&lt; i &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+    
+    <a href="/2018/06/29/ACM训练-1/" class="post-more waves-effect waves-button">
+        more
+    </a>
+    </div>
+</article>
+
+<div class="post-footer">
+    
+	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/ACM/">ACM</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Algorithm/">Algorithm</a></li></ul>
+
+</div>
+
+
+            </li>
+        
+            <li class="post-list-item fade">
+                <article id="post-c-primer-中文版-5th-edition-Unit-5-语句篇"
+  class="article-card article-type-post" itemprop="blogPost">
+  
+    
+    
+    <div class="top" data-title="1">
+    <div class="top-wrap">
+        <p></p>
+    </div>
+</div>
+    
+    
+        
+
+
+  
+    <h3 class="post-title re-title" itemprop="name">
+      <a class="post-title-link" href="/2018/06/28/c-primer-中文版-5th-edition-Unit-5-语句篇/">C++ primer 中文版 5th edition Unit 5--语句篇</a>
+    </h3>
+  
+
+
+
+    
+    <div class="post-meta">
+        <time class="post-time" title="2018-06-28 19:11:53" datetime="2018-06-28T11:11:53.000Z"  itemprop="datePublished">2018-06-28</time>
+
+        
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/C/">C++</a><ul class="article-category-list-child"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/C/Grammar/">Grammar</a></li></ul></li></ul>
+
+
+
+        
+	<span id="/2018/06/28/c-primer-中文版-5th-edition-Unit-5-语句篇/" class="leancloud_visitors" data-flag-title="C++ primer 中文版 5th edition Unit 5--语句篇" title="C++ primer 中文版 5th edition Unit 5--语句篇">
+		
+			<i class="icon icon-eye"></i>
+		
+		<span class="leancloud-visitors-count"></span>
+	</span>
+ 
+
+        
+
+
+        
+  <span><i class="icon icon-github"></i></span>
+
+        
+    </div>
+    
+    <div class="post-content" id="post-content" itemprop="postContent">
+    
+    
+        <blockquote>
+<p>对C++中常用的结构和语句进行描述，包括选择结构，顺序结构，循环结构等和一些常用的语句！</p>
+</blockquote>
+<h2 id="空语句"><a href="#空语句" class="headerlink" title="空语句"></a>空语句</h2><blockquote>
+<p>空语句是最简单的语句，只有一个单独的分号</p>
+</blockquote>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">;<span class="comment">//这是一个空语句</span></span><br></pre></td></tr></table></figure>
+<h3 id="使用"><a href="#使用" class="headerlink" title="使用"></a>使用</h3><ol>
+<li>当我们在coding时，语法上需要一条语句而逻辑上并不需要，此时我们应该使用空语句</li>
+<li>当我们在循环的全部工作可以在条件语句中完成时，这时我们就会用到空语句</li>
+</ol>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="comment">/*重复读入数据直至到达文件末尾或者某次输入的值等于sought*/</span></span><br><span class="line">	<span class="keyword">while</span>(<span class="built_in">cin</span> &gt;&gt; s &amp;&amp; s != sought)</span><br><span class="line">		;</span><br></pre></td></tr></table></figure>
+<p>注意事项：</p>
+<ol>
+<li>当我们使用空语句的时候应该加上注释，从而让阅读这段代码的人知道我们是故意省略的</li>
+<li>当使用空语句的时候应该注意分号的位置。</li>
+<li>多余的空语句并非总是乌海的<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">while(iter != svec.end())	;		//由于多了个分号，循环将会变为死循环</span><br><span class="line">	++iter;							//不属于循环的一部分</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<h2 id="悬垂else"><a href="#悬垂else" class="headerlink" title="悬垂else"></a>悬垂else</h2><blockquote>
+<p>当我们遇到if语句多于else语句时，如何确定哪个if语句和哪个else语句匹配，这个问题便称为悬垂else(dangling else)</p>
+</blockquote>
+<p>在那些既有if语句又有if else语句中，这是个普遍的问题，不同语言中解决思路不同，C++中，规定else与离他最近的尚未匹配的if匹配，从而消除程序的二义性</p>
+    
+    <a href="/2018/06/28/c-primer-中文版-5th-edition-Unit-5-语句篇/" class="post-more waves-effect waves-button">
+        more
+    </a>
+    </div>
+</article>
+
+<div class="post-footer">
+    
+	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/C/">C++</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Grammar/">Grammar</a></li></ul>
+
+</div>
+
+
+            </li>
+        
+            <li class="post-list-item fade">
+                <article id="post-c-prime-中文版-prime-5th-edition-Unit-1"
+  class="article-card article-type-post" itemprop="blogPost">
+  
+    
+    
+    <div class="top" data-title="1">
+    <div class="top-wrap">
+        <p></p>
+    </div>
+</div>
+    
+    
+        
+
+
+  
+    <h3 class="post-title re-title" itemprop="name">
+      <a class="post-title-link" href="/2018/06/26/c-prime-中文版-prime-5th-edition-Unit-1/">C++ primer 中文版 5th edition Unit 1</a>
+    </h3>
+  
+
+
+
+    
+    <div class="post-meta">
+        <time class="post-time" title="2018-06-26 19:58:23" datetime="2018-06-26T11:58:23.000Z"  itemprop="datePublished">2018-06-26</time>
+
+        
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/C/">C++</a><ul class="article-category-list-child"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/C/Grammar/">Grammar</a></li></ul></li></ul>
+
+
+
+        
+	<span id="/2018/06/26/c-prime-中文版-prime-5th-edition-Unit-1/" class="leancloud_visitors" data-flag-title="C++ primer 中文版 5th edition Unit 1" title="C++ primer 中文版 5th edition Unit 1">
+		
+			<i class="icon icon-eye"></i>
+		
+		<span class="leancloud-visitors-count"></span>
+	</span>
+ 
+
+        
+
+
+        
+  <span><i class="icon icon-github"></i></span>
+
+        
+    </div>
+    
+    <div class="post-content" id="post-content" itemprop="postContent">
+    
+    
+        <h2 id="术语"><a href="#术语" class="headerlink" title="术语"></a>术语</h2><p>缓冲区：内存中的一个存储数据的区域。IO设施通常会将数据放到缓冲区，我们可以显式的刷新缓冲区来将缓冲区中的数据输出IO设备。默认情况下，&gt;cin会刷新cout&gt;程序非正常终止也会刷新cout<br>cerr：一个ostream对象，关系到标准错误处理，默认情况下，写入到cerr的数据是不缓冲的。<br>clog：一个ostream对象，关系到标准错误。默认情况下，写到clog的数据是缓冲的。通常用于一个日志文件中。<br>.运算符：点运算符，左侧为一个类类型对象，右侧为类类型对象的一个成员名字。<br>::运算符：作用域运算符，用在访问命名空间中的名字<br>&lt;&lt;运算符：输出运算符，表示将右侧对象写入到标准输出中<br>“&gt;&gt;”运算符：输入运算符，表示将左侧标准输入到右侧对象中</p>
+<h2 id="读取数量不定的输入数据"><a href="#读取数量不定的输入数据" class="headerlink" title="读取数量不定的输入数据"></a>读取数量不定的输入数据</h2><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * 读取数量不定的输入数据</span></span><br><span class="line"><span class="comment"> * @return [description]</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">  <span class="keyword">int</span> sum = <span class="number">0</span>, value = <span class="number">0</span>;</span><br><span class="line">  <span class="comment">//读取数据直到遇到文件尾（可以是正常的文件结束符，也可以是输入错误），计算所有读入的值的和</span></span><br><span class="line">  <span class="comment">//从键盘输入文件结束符：win下是ctrl + z然后按Enter或Return键</span></span><br><span class="line">  <span class="keyword">while</span> (  <span class="built_in">std</span>::<span class="built_in">cin</span> &gt;&gt; value )</span><br><span class="line">  <span class="comment">/*</span></span><br><span class="line"><span class="comment">  //当使用istream对象作为条件时，其效果是检测流的状态，如果流是有效的，</span></span><br><span class="line"><span class="comment">  //当使用那么就会检测成功，当遇到一个错误输入(输入不是整数)或者文件结束符，</span></span><br><span class="line"><span class="comment">  //就会变为无效，将会使得条件为假</span></span><br><span class="line"><span class="comment">  */</span></span><br><span class="line">    sum += value; <span class="comment">//等价于sum = sum + value;</span></span><br><span class="line"></span><br><span class="line">  <span class="built_in">std</span>::<span class="built_in">cout</span> &lt;&lt; <span class="string">"Sum is:"</span> &lt;&lt; sum &lt;&lt; <span class="built_in">std</span>::<span class="built_in">endl</span>;</span><br><span class="line">  <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+    
+    <a href="/2018/06/26/c-prime-中文版-prime-5th-edition-Unit-1/" class="post-more waves-effect waves-button">
+        more
+    </a>
+    </div>
+</article>
+
+<div class="post-footer">
+    
+	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/C/">C++</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Grammar/">Grammar</a></li></ul>
+
+</div>
+
+
+            </li>
         
             <li class="post-list-item fade">
                 <article id="post-ERROR-Deployer-not-found-git"
@@ -472,588 +1041,11 @@
 
             </li>
         
-            <li class="post-list-item fade">
-                <article id="post-Java中的数组"
-  class="article-card article-type-post" itemprop="blogPost">
-  
-    
-    
-    
-        
-
-
-  
-    <h3 class="post-title re-title" itemprop="name">
-      <a class="post-title-link" href="/2017/11/28/Java中的数组/">详解Java中的数组内存</a>
-    </h3>
-  
-
-
-
-    
-    <div class="post-meta">
-        <time class="post-time" title="2017-11-28 13:38:35" datetime="2017-11-28T05:38:35.000Z"  itemprop="datePublished">2017-11-28</time>
-
-        
-	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/Java/">Java</a><ul class="article-category-list-child"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/Java/数组/">数组</a></li></ul></li></ul>
-
-
-
-        
-	<span id="/2017/11/28/Java中的数组/" class="leancloud_visitors" data-flag-title="详解Java中的数组内存" title="详解Java中的数组内存">
-		
-			<i class="icon icon-eye"></i>
-		
-		<span class="leancloud-visitors-count"></span>
-	</span>
- 
-
-        
-
-
-        
-        
-    </div>
-    
-    <div class="post-content" id="post-content" itemprop="postContent">
-    
-    
-        <h2 id="你了解数组么？"><a href="#你了解数组么？" class="headerlink" title="你了解数组么？"></a>你了解数组么？</h2><blockquote>
-<p>Java中，声明一个数组的过程中，内存将会如何分配<br>Java数组初始化一共有多少种方式<br>基本类型数组和引用类型数组之间，初始化时内存分配机制有什么区别</p>
-</blockquote>
-<p>当我们使用Java数组之前，必须先对数组进行初始化（否则无法使用），当数组的所有元素都被分配了合适的内存空间，并指定了初始值时，数组初始化完成。程序以后将无法改变数组内存的大小以及位置。</p>
-<hr>
-<h2 id="数组初始化的两种方式"><a href="#数组初始化的两种方式" class="headerlink" title="数组初始化的两种方式"></a>数组初始化的两种方式</h2><p>数组是静态的</p>
-<blockquote>
-<p>这里由于Java语言是典型的静态语言，因此Java的数组是静态的，即当数组被初始化之后，长度将不可以改变。而JavaScript则是动态语言，数组长度可以改变</p>
-</blockquote>
-<h3 id="静态初始化："><a href="#静态初始化：" class="headerlink" title="静态初始化："></a>静态初始化：</h3><blockquote>
-<p>初始化时由程序员显式指定每个数组元素的初始值，由系统决定数组的长度！</p>
-</blockquote>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">String[] num1= <span class="keyword">new</span> String[] &#123;<span class="string">"1"</span>,<span class="string">"2"</span>&#125;;</span><br></pre></td></tr></table></figure>
-<h3 id="动态初始化："><a href="#动态初始化：" class="headerlink" title="动态初始化："></a>动态初始化：</h3><blockquote>
-<p>初始化时程序只指定数组长度，由系统为数组元素分配初始值！</p>
-</blockquote>
-<p>初始值分配规则：</p>
-<ol>
-<li>整数类型：byte short int long 数组元素默认值为0</li>
-<li>浮点类型：float double 数组元素默认值为0.0</li>
-<li>字符类型：char ，数组元素默认值为’\u0000’</li>
-<li>布尔类型：boolean，数组元素的默认值为false</li>
-<li>引用类型(类，接口，数组)：数组元素默认值为null</li>
-</ol>
-<p>注意事项：</p>
-<ol>
-<li>在我们初始化数组的时候，不可以同时声明数组的长度和给定数组元素的内容</li>
-<li>一旦数组元素初始化完成，内存分配即结束，此时程序只可以改变数组元素的值，而不可以改变数组的长度</li>
-<li>Java中的数组变量是一种引用类型的变量，数组变量本身并不是数组本身，只是指向堆内存数组对象而已！</li>
-</ol>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">String[] num2 = <span class="keyword">new</span> String[<span class="number">2</span>];</span><br></pre></td></tr></table></figure>
-<p>此时，内存示意图如下：<br><figure class="image-box">
-                <img src="http://on3w7gc9m.bkt.clouddn.com/QQ%E5%9B%BE%E7%89%8720171128140438.png" alt title class="index-item-img">
-                <p></p>
-            </figure></p>
-<p>不管采用了数组初始化的哪种方式，一旦数组初始化完成，数组的长度将无法改变！</p>
-<p>对于Java程序中所有的引用变量，都不需要经过初始化操作，需要初始化的是该引用变量所引用的对象！</p>
-    
-    <a href="/2017/11/28/Java中的数组/" class="post-more waves-effect waves-button">
-        more
-    </a>
-    </div>
-</article>
-
-<div class="post-footer">
-    
-	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Java/">Java</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/数组/">数组</a></li></ul>
-
-</div>
-
-
-            </li>
-        
-            <li class="post-list-item fade">
-                <article id="post-dom4j与XStream的使用"
-  class="article-card article-type-post" itemprop="blogPost">
-  
-    
-    
-    
-        
-
-
-  
-    <h3 class="post-title re-title" itemprop="name">
-      <a class="post-title-link" href="/2017/11/24/dom4j与XStream的使用/">dom4j与XStream的使用</a>
-    </h3>
-  
-
-
-
-    
-    <div class="post-meta">
-        <time class="post-time" title="2017-11-24 16:31:11" datetime="2017-11-24T08:31:11.000Z"  itemprop="datePublished">2017-11-24</time>
-
-        
-	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/Java/">Java</a><ul class="article-category-list-child"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/Java/XML/">XML</a></li></ul></li></ul>
-
-
-
-        
-	<span id="/2017/11/24/dom4j与XStream的使用/" class="leancloud_visitors" data-flag-title="dom4j与XStream的使用" title="dom4j与XStream的使用">
-		
-			<i class="icon icon-eye"></i>
-		
-		<span class="leancloud-visitors-count"></span>
-	</span>
- 
-
-        
-
-
-        
-        
-    </div>
-    
-    <div class="post-content" id="post-content" itemprop="postContent">
-    
-    
-        <blockquote>
-<p>对于XML的处理，这里简单的使用开源框架Dom4j和XStream来实现</p>
-</blockquote>
-<h2 id="Dom4j"><a href="#Dom4j" class="headerlink" title="Dom4j"></a>Dom4j</h2><blockquote>
-<p>Dom4j是一个优秀的Java XML API ,主要用于读写XML格式的数据，Dom4j具有性能优异，功能强大，易于使用等特点，同时也是一个开源的软件</p>
-</blockquote>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@date</span> 2017年11月23日 下午3:54:48</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@author</span> SiVan</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">package</span> com.test;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> java.util.List;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> org.dom4j.Document;</span><br><span class="line"><span class="keyword">import</span> org.dom4j.DocumentException;</span><br><span class="line"><span class="keyword">import</span> org.dom4j.DocumentHelper;</span><br><span class="line"><span class="keyword">import</span> org.dom4j.Element;</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@author</span> SiVan</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@time</span> 2017年11月23日 下午3:54:48</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@TODO</span> TODO</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Dom4jTest</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> <span class="keyword">throws</span> DocumentException </span>&#123;</span><br><span class="line">		StringBuffer sb = <span class="keyword">new</span> StringBuffer();</span><br><span class="line">		sb.append(<span class="string">"&lt;?xml version=\"1.0\" encoding=\"utf-8\"?&gt;"</span>)</span><br><span class="line">		  .append(<span class="string">"&lt;person&gt;"</span>)</span><br><span class="line">		  .append(<span class="string">"&lt;name&gt;吴晓文&lt;/name&gt;"</span>)</span><br><span class="line">		  .append(<span class="string">"&lt;sex&gt;男&lt;/sex&gt;"</span>)</span><br><span class="line">		  .append(<span class="string">"&lt;address&gt;山西省朔州市&lt;/address&gt;"</span>)</span><br><span class="line">		  .append(<span class="string">"&lt;/person&gt;"</span>);</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">		<span class="comment">/* 通过解析XML字符串创建Document对象 */</span></span><br><span class="line">		Document document = DocumentHelper.parseText(sb.toString());</span><br><span class="line">		Element root = document.getRootElement();</span><br><span class="line">		<span class="comment">/* 得到根元素下面的所有子节点 */</span></span><br><span class="line">		List&lt;Element&gt; elementList = root.elements();</span><br><span class="line">		<span class="comment">/* 遍历所有子节点 */</span></span><br><span class="line">		<span class="keyword">for</span> (Element element : elementList) &#123;</span><br><span class="line">			System.out.println(element.getName() + <span class="string">"=&gt; "</span> + element.getText());</span><br><span class="line">		&#125;</span><br><span class="line"></span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-    
-    <a href="/2017/11/24/dom4j与XStream的使用/" class="post-more waves-effect waves-button">
-        more
-    </a>
-    </div>
-</article>
-
-<div class="post-footer">
-    
-	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Java/">Java</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/XML/">XML</a></li></ul>
-
-</div>
-
-
-            </li>
-        
-            <li class="post-list-item fade">
-                <article id="post-微信开发-1"
-  class="article-card article-type-post" itemprop="blogPost">
-  
-    
-    
-    
-        
-
-
-  
-    <h3 class="post-title re-title" itemprop="name">
-      <a class="post-title-link" href="/2017/11/23/微信开发-1/">微信开发(1)</a>
-    </h3>
-  
-
-
-
-    
-    <div class="post-meta">
-        <time class="post-time" title="2017-11-23 15:25:22" datetime="2017-11-23T07:25:22.000Z"  itemprop="datePublished">2017-11-23</time>
-
-        
-	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/微信/">微信</a><ul class="article-category-list-child"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/微信/开发/">开发</a></li></ul></li></ul>
-
-
-
-        
-	<span id="/2017/11/23/微信开发-1/" class="leancloud_visitors" data-flag-title="微信开发(1)" title="微信开发(1)">
-		
-			<i class="icon icon-eye"></i>
-		
-		<span class="leancloud-visitors-count"></span>
-	</span>
- 
-
-        
-
-
-        
-        
-    </div>
-    
-    <div class="post-content" id="post-content" itemprop="postContent">
-    
-    
-        <h2 id="前言："><a href="#前言：" class="headerlink" title="前言："></a>前言：</h2><blockquote>
-<p>在我写这篇文章之前，博主就已经看了一下微信公众号以及微信小程序的历史，不得不感叹自己老了！随着最近几年Native App的兴起和衰落，自己本认为可以火的Native App现在逐渐被一些light App所挤占，很大一部分尤以腾讯的微信为平台！</p>
-</blockquote>
-<p>这篇文章主要是记录自己开始微信开发的第一页，也是目前比较紧急的事情，因为要为公司开发一款微信公众号，虽然开发已经过去2个月了，2个月自己也是跌跌撞撞，做了很多自己不擅长的事情，产品需求的分析与设计，界面的设计与编写，产品的架构…..很多自己不敢想象的事情还是做了！</p>
-<h3 id="准备工作"><a href="#准备工作" class="headerlink" title="准备工作"></a>准备工作</h3><ol>
-<li>拥有一款已经注册且通过的认证号或者服务号</li>
-<li>拥有一个独立服务器(自己用的花生壳，可以免费内网映射1G流量)</li>
-<li>….貌似没有了(其实读者应该去看一下开发文档<a href="https://mp.weixin.qq.com/wiki?t=resource/res_main&id=mp1421135319" target="_blank" rel="noopener">文档</a>)</li>
-</ol>
-<hr>
-<h2 id="接入微信公众号"><a href="#接入微信公众号" class="headerlink" title="接入微信公众号"></a>接入微信公众号</h2><blockquote>
-<p>接入微信公众号也就是通俗上的告诉微信服务器，你的服务器就是你自己申请的微信公众号的服务器。(验证服务器是否被微信识别)</p>
-</blockquote>
-<h3 id="如何接入微信公众号"><a href="#如何接入微信公众号" class="headerlink" title="如何接入微信公众号"></a>如何接入微信公众号</h3><blockquote>
-<p>登录微信公众平台-&gt;开发-&gt;开发者工具-&gt;公众平台测试帐号-&gt;接口配置信息-&gt;修改</p>
-</blockquote>
-<ol>
-<li>配置url</li>
-<li>配置token</li>
-</ol>
-<p>流程：</p>
-<ol>
-<li>配置URL和token之后，微信公众号会向配置好的url发送一个get请求，将会携带如下4个参数（token就是我们刚刚配置的）<table><tr><td>signature</td><td>微信加密签名，signature结合了开发者填写的token参数和请求中的timestamp参数、nonce参数。</td></tr><tr><td>timestamp</td><td>时间戳</td></tr><tr><td>nonce</td><td>随机数</td></tr><tr><td>echostr</td><td>随机字符串</td></tr></table></li>
-<li>将token、timestamp、nonce三个参数进行字典序排序(升序)</li>
-<li>将三个参数字符串拼接成一个字符串进行sha1加密(得到的是一个加密后的十六进制字符串)</li>
-<li>开发者获得加密后的字符串可与signature对比，标识该请求来源于微信</li>
-<li>如果请求通过，我们需要返回一个echostr(微信服务器传给我们的)给微信服务器</li>
-</ol>
-    
-    <a href="/2017/11/23/微信开发-1/" class="post-more waves-effect waves-button">
-        more
-    </a>
-    </div>
-</article>
-
-<div class="post-footer">
-    
-	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/微信开发/">微信开发</a></li></ul>
-
-</div>
-
-
-            </li>
-        
-            <li class="post-list-item fade">
-                <article id="post-MyBatis中的基本概念"
-  class="article-card article-type-post" itemprop="blogPost">
-  
-    
-    
-    
-        
-
-
-  
-    <h3 class="post-title re-title" itemprop="name">
-      <a class="post-title-link" href="/2017/11/22/MyBatis中的基本概念/">MyBatis中的基本概念</a>
-    </h3>
-  
-
-
-
-    
-    <div class="post-meta">
-        <time class="post-time" title="2017-11-22 19:25:15" datetime="2017-11-22T11:25:15.000Z"  itemprop="datePublished">2017-11-22</time>
-
-        
-	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/框架/">框架</a><ul class="article-category-list-child"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/框架/MyBatis/">MyBatis</a></li></ul></li></ul>
-
-
-
-        
-	<span id="/2017/11/22/MyBatis中的基本概念/" class="leancloud_visitors" data-flag-title="MyBatis中的基本概念" title="MyBatis中的基本概念">
-		
-			<i class="icon icon-eye"></i>
-		
-		<span class="leancloud-visitors-count"></span>
-	</span>
- 
-
-        
-
-
-        
-        
-    </div>
-    
-    <div class="post-content" id="post-content" itemprop="postContent">
-    
-    
-        <h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><ol>
-<li>pojo：不按MVC进行分层，只有Java Bean有一些属性，还有get以及set方法</li>
-<li>domain：不按MVC进行分层，只有Java Bean有一些属性，还有get以及set方法</li>
-<li>po：用在持久层，相当于 pojo+xml！在页面中进行添加或者修改的时候，直接传入到action中！<br> po中的类名等于表名，属性名等于字段名，还有对应的set以及get方法</li>
-<li>vo：View Object表现层对象，主要用于在高级查询中接收从页面中传过来的参数，好处是扩展性强！</li>
-<li>bo：用在service层，现在基本不用</li>
-</ol>
-<p>pojo,domain.po,vo,bo可以用在各种层面，不会报错！（也就是说po用在表现层，vo用在表现层不报错，<br>因为都是普通的java bean没有语法错误）最好不用混着用，不利于代码维护！</p>
-<hr>
-<h2 id="MyBatis中的原理"><a href="#MyBatis中的原理" class="headerlink" title="MyBatis中的原理"></a>MyBatis中的原理</h2><figure class="image-box">
-                <img src="http://on3w7gc9m.bkt.clouddn.com/QQ%E5%9B%BE%E7%89%8720171119093655.png" alt="MyBatis架图" title class="index-item-img">
-                <p>MyBatis架图</p>
-            </figure>
-<p>输入映射：对于每条Sql语句指定的输入参数的类型（只可以指定Map,基本数据类型(包括String)，以及POJO）<br>输出映射：返回的结果集类型（只可以指定Map,List,基本数据类型(包括String)，以及POJO）</p>
-<h3 id="MyBatis中的执行器"><a href="#MyBatis中的执行器" class="headerlink" title="MyBatis中的执行器"></a>MyBatis中的执行器</h3><blockquote>
-<p>当我们使用MyBatis中的SqlSession执行Sql语句的时候，MyBatis会内部调用Executor接口来执行映射文件中配置好的(也就是通过调用MappedStatement)Sql语句</p>
-</blockquote>
-<ol>
-<li>基本执行器</li>
-<li>缓存执行器</li>
-</ol>
-<h3 id="返回数据库自增主键"><a href="#返回数据库自增主键" class="headerlink" title="返回数据库自增主键"></a>返回数据库自增主键</h3><p>数据库中我们可以使用如下代码，来查询刚刚插入的记录的主键值，会返回1个0<br><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> <span class="keyword">LAST_INSERT_ID</span>;</span><br></pre></td></tr></table></figure></p>
-<p>但是如果我们在MyBatis中配置了如下代码，将会返回刚刚插入的主键记录的值</p>
-<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">&lt;!-- 方法1 --&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">insert</span> <span class="attr">id</span>=<span class="string">"addStudent"</span> <span class="attr">parameterType</span>=<span class="string">"com.pojo.Student"</span> <span class="attr">keyProperty</span>=<span class="string">"id"</span> <span class="attr">useGeneratedKeys</span>=<span class="string">"true"</span>&gt;</span></span><br><span class="line">		insert into student(name,sex,birthday) values(#&#123;name&#125;, #&#123;sex&#125;, #&#123;birthday&#125;)</span><br><span class="line"><span class="tag">&lt;/<span class="name">insert</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="comment">&lt;!-- 方法2 --&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">insert</span> <span class="attr">id</span>=<span class="string">"addStudent2"</span> <span class="attr">parameterType</span>=<span class="string">"com.pojo.Student"</span> <span class="attr">keyProperty</span>=<span class="string">"id"</span> <span class="attr">useGeneratedKeys</span>=<span class="string">"true"</span>&gt;</span></span><br><span class="line"></span><br><span class="line">		<span class="comment">&lt;!--</span></span><br><span class="line"><span class="comment">			keyProperty指定自增主键的值返回到POJO的哪个属性中</span></span><br><span class="line"><span class="comment">			order指相对于下面insert插入语句的执行顺序</span></span><br><span class="line"><span class="comment">		--&gt;</span></span><br><span class="line">		<span class="tag">&lt;<span class="name">selectKey</span> <span class="attr">keyProperty</span>=<span class="string">"id"</span> <span class="attr">order</span>=<span class="string">"AFTER"</span> <span class="attr">resultType</span>=<span class="string">"java.lang.Integer"</span>&gt;</span></span><br><span class="line">			SELECT LAST_INSERT_ID();</span><br><span class="line">		<span class="tag">&lt;/<span class="name">selectKey</span>&gt;</span></span><br><span class="line">		insert into student(name,sex,birthday) values(#&#123;name&#125;, #&#123;sex&#125;, #&#123;birthday&#125;)</span><br><span class="line"><span class="tag">&lt;/<span class="name">insert</span>&gt;</span></span><br></pre></td></tr></table></figure>
-    
-    <a href="/2017/11/22/MyBatis中的基本概念/" class="post-more waves-effect waves-button">
-        more
-    </a>
-    </div>
-</article>
-
-<div class="post-footer">
-    
-	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/MyBatis/">MyBatis</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/框架/">框架</a></li></ul>
-
-</div>
-
-
-            </li>
-        
-            <li class="post-list-item fade">
-                <article id="post-MyBatis两种生成Dao的方式"
-  class="article-card article-type-post" itemprop="blogPost">
-  
-    
-    
-    
-        
-
-
-  
-    <h3 class="post-title re-title" itemprop="name">
-      <a class="post-title-link" href="/2017/11/20/MyBatis两种生成Dao的方式/">MyBatis中Dao开发的两种方式</a>
-    </h3>
-  
-
-
-
-    
-    <div class="post-meta">
-        <time class="post-time" title="2017-11-20 19:02:52" datetime="2017-11-20T11:02:52.000Z"  itemprop="datePublished">2017-11-20</time>
-
-        
-	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/框架/">框架</a><ul class="article-category-list-child"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/框架/MyBatis/">MyBatis</a></li></ul></li></ul>
-
-
-
-        
-	<span id="/2017/11/20/MyBatis两种生成Dao的方式/" class="leancloud_visitors" data-flag-title="MyBatis中Dao开发的两种方式" title="MyBatis中Dao开发的两种方式">
-		
-			<i class="icon icon-eye"></i>
-		
-		<span class="leancloud-visitors-count"></span>
-	</span>
- 
-
-        
-
-
-        
-        
-    </div>
-    
-    <div class="post-content" id="post-content" itemprop="postContent">
-    
-    
-        <h2 id="Dao的两种开发方式"><a href="#Dao的两种开发方式" class="headerlink" title="Dao的两种开发方式"></a>Dao的两种开发方式</h2><ol>
-<li>原始Dao的开发方法(接口与实现类，手动编写)</li>
-<li>动态代理方式(使用Mapper接口代理的方式)</li>
-</ol>
-<h3 id="原始Dao编写"><a href="#原始Dao编写" class="headerlink" title="原始Dao编写"></a>原始Dao编写</h3><p>编写StudentDao接口：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * 一个user的持久化接口</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@author</span> SiVan</span></span><br><span class="line"><span class="comment"> *</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">interface</span> <span class="title">UserDao</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">	<span class="comment">/*查找所有学生*/</span></span><br><span class="line">	<span class="function"><span class="keyword">public</span> List&lt;Student&gt; <span class="title">findAll</span><span class="params">()</span></span>;</span><br><span class="line"></span><br><span class="line">	<span class="function"><span class="keyword">public</span> Student <span class="title">findStudentById</span><span class="params">(Integer id)</span></span>;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
-<p>编写UserDaoImpl(也就是UserDao的实现类)</p>
-<blockquote>
-<p>编写实现类的时候，我们注意到每个具体的方法都会有一个session，由于session是线程不安全的，所以session最好的作用范围便是方法之内！</p>
-</blockquote>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * 具体的UserDao实现类</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">import</span> com.pojo.Student;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">UserDaoImpl</span> <span class="keyword">implements</span> <span class="title">UserDao</span></span>&#123;</span><br><span class="line"></span><br><span class="line">	<span class="keyword">private</span> SqlSessionFactory factory;</span><br><span class="line"></span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="title">UserDaoImpl</span><span class="params">(SqlSessionFactory factory)</span> </span>&#123;</span><br><span class="line">		<span class="keyword">this</span>.factory = factory;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">	<span class="meta">@Override</span></span><br><span class="line">	<span class="function"><span class="keyword">public</span> List&lt;Student&gt; <span class="title">findAll</span><span class="params">()</span> </span>&#123;</span><br><span class="line">		<span class="comment">/*由于SqlSession是线程不安全的，因此SqlSession最好的作用域便是方法内*/</span></span><br><span class="line">		SqlSession session = factory.openSession();</span><br><span class="line">		<span class="keyword">return</span> session.selectList(<span class="string">"com.dao.StudentDao.findAll"</span>);</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="meta">@Override</span></span><br><span class="line">	<span class="function"><span class="keyword">public</span> Student <span class="title">findStudentById</span><span class="params">(Integer id)</span> </span>&#123;</span><br><span class="line">		SqlSession session = factory.openSession();</span><br><span class="line">		<span class="keyword">return</span> (Student) session.selectOne(<span class="string">"com.dao.StudentDao.findStudentById"</span>,id);</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>编写测试类（需要初始化factory）<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> com.demo;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> java.io.InputStream;</span><br><span class="line"><span class="keyword">import</span> java.util.List;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> org.apache.ibatis.session.SqlSessionFactory;</span><br><span class="line"><span class="keyword">import</span> org.apache.ibatis.session.SqlSessionFactoryBuilder;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> com.dao.UserDao;</span><br><span class="line"><span class="keyword">import</span> com.dao.UserDaoImpl;</span><br><span class="line"><span class="keyword">import</span> com.pojo.Student;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">UserDaoTest</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">	<span class="keyword">private</span> <span class="keyword">static</span> SqlSessionFactory factory;</span><br><span class="line"></span><br><span class="line">	<span class="comment">/*初始化*/</span></span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">static</span>  <span class="keyword">void</span> <span class="title">setUp</span><span class="params">()</span> </span>&#123;</span><br><span class="line">		InputStream in = Student.class.getResourceAsStream(<span class="string">"/SqlMapConfig.xml"</span>);</span><br><span class="line">		factory = <span class="keyword">new</span> SqlSessionFactoryBuilder().build(in);</span><br><span class="line">		System.out.println(<span class="string">"s"</span>);</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">		setUp();</span><br><span class="line">		UserDao userDao = <span class="keyword">new</span> UserDaoImpl(factory);</span><br><span class="line">		System.out.println(factory);</span><br><span class="line">		System.out.println(userDao);</span><br><span class="line">		List list = userDao.findAll();</span><br><span class="line">		System.out.println(list);</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
-    
-    <a href="/2017/11/20/MyBatis两种生成Dao的方式/" class="post-more waves-effect waves-button">
-        more
-    </a>
-    </div>
-</article>
-
-<div class="post-footer">
-    
-	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/MyBatis/">MyBatis</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/框架/">框架</a></li></ul>
-
-</div>
-
-
-            </li>
-        
-            <li class="post-list-item fade">
-                <article id="post-深入使用MyBatis"
-  class="article-card article-type-post" itemprop="blogPost">
-  
-    
-    
-    
-        
-
-
-  
-    <h3 class="post-title re-title" itemprop="name">
-      <a class="post-title-link" href="/2017/11/19/深入使用MyBatis/">深入使用MyBatis</a>
-    </h3>
-  
-
-
-
-    
-    <div class="post-meta">
-        <time class="post-time" title="2017-11-19 19:02:52" datetime="2017-11-19T11:02:52.000Z"  itemprop="datePublished">2017-11-19</time>
-
-        
-	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/框架/">框架</a><ul class="article-category-list-child"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/框架/MyBatis/">MyBatis</a></li></ul></li></ul>
-
-
-
-        
-	<span id="/2017/11/19/深入使用MyBatis/" class="leancloud_visitors" data-flag-title="深入使用MyBatis" title="深入使用MyBatis">
-		
-			<i class="icon icon-eye"></i>
-		
-		<span class="leancloud-visitors-count"></span>
-	</span>
- 
-
-        
-
-
-        
-        
-    </div>
-    
-    <div class="post-content" id="post-content" itemprop="postContent">
-    
-    
-        <h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><blockquote>
-<p>前面几篇文章简要介绍了MyBatis的基本使用，以及一些基本概念，包括我们经常所用到的POJO，还有Dao的两种开发方式，但是我们经常使用的便是VO(View Object)，通过VO我们直接进行业务调用更加容易理解，因为我们每次传递的都是一个VO对象，而不是一个页面传入多个对象，尤其是对于MyBatis中的Sql操作而言，只能传入一个对象，我们可以传入Map，但是不建议这么做，建议使用我们下面所说的VO</p>
-</blockquote>
-<hr>
-<h2 id="使用VO进行MyBatis的高级查询"><a href="#使用VO进行MyBatis的高级查询" class="headerlink" title="使用VO进行MyBatis的高级查询"></a>使用VO进行MyBatis的高级查询</h2><h3 id="输入映射"><a href="#输入映射" class="headerlink" title="输入映射"></a>输入映射</h3><p>输入映射就是我们在Mapper配置文件中所配置的parameterType，不仅仅是基本数据类型，还可以是POJO类型，还可以是VO类型！</p>
-<blockquote>
-<p>假设有一个页面只是对于用户进行操作，VO便是从页面传过来的对象。使用VO可以给我们带来很大的扩展性，进行任何的操作都可以通过VO来进行，可以用来避免使用Map，</p>
-</blockquote>
-<p>用到的POJO类的编写：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> com.pojo;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> java.io.Serializable;</span><br><span class="line"><span class="keyword">import</span> java.sql.Timestamp;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Student</span> <span class="keyword">implements</span> <span class="title">Serializable</span></span>&#123;</span><br><span class="line"></span><br><span class="line">	<span class="keyword">private</span> Integer id;</span><br><span class="line">	<span class="keyword">private</span> String name;</span><br><span class="line">	<span class="keyword">private</span> String sex;</span><br><span class="line">	<span class="keyword">private</span> Timestamp birthday;</span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="title">Student</span><span class="params">()</span> </span>&#123;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="function"><span class="keyword">public</span> Integer <span class="title">getId</span><span class="params">()</span> </span>&#123;</span><br><span class="line">		<span class="keyword">return</span> id;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setId</span><span class="params">(Integer id)</span> </span>&#123;</span><br><span class="line">		<span class="keyword">this</span>.id = id;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="function"><span class="keyword">public</span> String <span class="title">getName</span><span class="params">()</span> </span>&#123;</span><br><span class="line">		<span class="keyword">return</span> name;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setName</span><span class="params">(String name)</span> </span>&#123;</span><br><span class="line">		<span class="keyword">this</span>.name = name;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="function"><span class="keyword">public</span> String <span class="title">getSex</span><span class="params">()</span> </span>&#123;</span><br><span class="line">		<span class="keyword">return</span> sex;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setSex</span><span class="params">(String sex)</span> </span>&#123;</span><br><span class="line">		<span class="keyword">this</span>.sex = sex;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="function"><span class="keyword">public</span> Timestamp <span class="title">getBirthday</span><span class="params">()</span> </span>&#123;</span><br><span class="line">		<span class="keyword">return</span> birthday;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setBirthday</span><span class="params">(Timestamp birthday)</span> </span>&#123;</span><br><span class="line">		<span class="keyword">this</span>.birthday = birthday;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
-    
-    <a href="/2017/11/19/深入使用MyBatis/" class="post-more waves-effect waves-button">
-        more
-    </a>
-    </div>
-</article>
-
-<div class="post-footer">
-    
-	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/MyBatis/">MyBatis</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/框架/">框架</a></li></ul>
-
-</div>
-
-
-            </li>
-        
-            <li class="post-list-item fade">
-                <article id="post-入门Mybatis"
-  class="article-card article-type-post" itemprop="blogPost">
-  
-    
-    
-    
-        
-
-
-  
-    <h3 class="post-title re-title" itemprop="name">
-      <a class="post-title-link" href="/2017/11/18/入门Mybatis/">入门Mybatis</a>
-    </h3>
-  
-
-
-
-    
-    <div class="post-meta">
-        <time class="post-time" title="2017-11-18 16:28:03" datetime="2017-11-18T08:28:03.000Z"  itemprop="datePublished">2017-11-18</time>
-
-        
-	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/框架/">框架</a><ul class="article-category-list-child"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/框架/Mybatis/">Mybatis</a></li></ul></li></ul>
-
-
-
-        
-	<span id="/2017/11/18/入门Mybatis/" class="leancloud_visitors" data-flag-title="入门Mybatis" title="入门Mybatis">
-		
-			<i class="icon icon-eye"></i>
-		
-		<span class="leancloud-visitors-count"></span>
-	</span>
- 
-
-        
-
-
-        
-        
-    </div>
-    
-    <div class="post-content" id="post-content" itemprop="postContent">
-    
-    
-        <h2 id="前言："><a href="#前言：" class="headerlink" title="前言："></a>前言：</h2><p> Mybatis与Hibernate一样，作为轻量级持久层框架，是现在的主流，并且MyBatis与Hibernate不同，MyBatis的灵活性与Hibernate不可同日而语，当我们能够以SQL语句进行轻便操作的时候，你可知道MyBatis带给我们的便利，虽然没有Hibernate封装的好，但是MyBatis扩展性更好些，也更灵活些！有人曾说Hibernate是全自动的，但是MyBatis是半自动的！</p>
-<hr>
-<h2 id="搭建基本环境"><a href="#搭建基本环境" class="headerlink" title="搭建基本环境"></a>搭建基本环境</h2><blockquote>
-<p>使用任何框架的第一步都是搭建框架的基本环境，当我们环境搭建好之后，所谓的半个成品就出来了233333</p>
-</blockquote>
-<ol>
-<li>引入使用数据库的JDBC驱动jar包</li>
-<li>引入MyBatis的核心开发包</li>
-<li>引入MyBatis的依赖包，也就是log4j等</li>
-<li>创建POJO类</li>
-<li>引入log4j的配置文件</li>
-<li>引入MyBatis的POJO配置文件</li>
-<li>引入MyBatis核心配置文件</li>
-</ol>
-<p>具体文件缺失，<a href="https://github.com/sivanWu0222/MyBatisDoc/blob/master/README.md" target="_blank" rel="noopener">参考</a></p>
-<p>POJO类文件：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> com.pojo;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> java.io.Serializable;</span><br><span class="line"><span class="keyword">import</span> java.sql.Timestamp;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Student</span> <span class="keyword">implements</span> <span class="title">Serializable</span></span>&#123;</span><br><span class="line"></span><br><span class="line">	<span class="keyword">private</span> Integer id;</span><br><span class="line">	<span class="keyword">private</span> String name;</span><br><span class="line">	<span class="keyword">private</span> String sex;</span><br><span class="line">	<span class="keyword">private</span> Timestamp birthday;</span><br><span class="line"></span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="title">Student</span><span class="params">()</span> </span>&#123;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="function"><span class="keyword">public</span> Integer <span class="title">getId</span><span class="params">()</span> </span>&#123;</span><br><span class="line">		<span class="keyword">return</span> id;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setId</span><span class="params">(Integer id)</span> </span>&#123;</span><br><span class="line">		<span class="keyword">this</span>.id = id;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="function"><span class="keyword">public</span> String <span class="title">getName</span><span class="params">()</span> </span>&#123;</span><br><span class="line">		<span class="keyword">return</span> name;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setName</span><span class="params">(String name)</span> </span>&#123;</span><br><span class="line">		<span class="keyword">this</span>.name = name;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="function"><span class="keyword">public</span> String <span class="title">getSex</span><span class="params">()</span> </span>&#123;</span><br><span class="line">		<span class="keyword">return</span> sex;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setSex</span><span class="params">(String sex)</span> </span>&#123;</span><br><span class="line">		<span class="keyword">this</span>.sex = sex;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="function"><span class="keyword">public</span> Timestamp <span class="title">getBirthday</span><span class="params">()</span> </span>&#123;</span><br><span class="line">		<span class="keyword">return</span> birthday;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setBirthday</span><span class="params">(Timestamp birthday)</span> </span>&#123;</span><br><span class="line">		<span class="keyword">this</span>.birthday = birthday;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
-<p>POJO的配置文件头约束<br><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?xml version="1.0" encoding="UTF-8" ?&gt;</span></span><br><span class="line"><span class="meta">&lt;!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"</span></span><br><span class="line"><span class="meta">"http://mybatis.org/dtd/mybatis-3-mapper.dtd"&gt;</span></span><br></pre></td></tr></table></figure></p>
-<p>核心配置文件头约束<br><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?xml version="1.0" encoding="UTF-8" ?&gt;</span></span><br><span class="line"><span class="meta">&lt;!DOCTYPE configuration PUBLIC "-//mybatis.org//DTD Config 3.0//EN"</span></span><br><span class="line"><span class="meta">"http://mybatis.org/dtd/mybatis-3-config.dtd"&gt;</span></span><br></pre></td></tr></table></figure></p>
-<hr>
-<h2 id="基本使用"><a href="#基本使用" class="headerlink" title="基本使用"></a>基本使用</h2><ol>
-<li>创建一个输入流，通过流加载总配置文件</li>
-<li>通过加载进来的总配置文件创建SqlSessionFactoryBuilder来创建SessionFactory</li>
-<li>创建session</li>
-<li>编写具体的业务(增删改查，<strong>MyBatis中自动开启事务，我们只需要操作和提交事务就可以</strong>)</li>
-<li>提交事务</li>
-<li>关闭session</li>
-</ol>
-    
-    <a href="/2017/11/18/入门Mybatis/" class="post-more waves-effect waves-button">
-        more
-    </a>
-    </div>
-</article>
-
-<div class="post-footer">
-    
-	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Java/">Java</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/MyBatis/">MyBatis</a></li></ul>
-
-</div>
-
-
-            </li>
-        
         </ul>
         
 <nav id="page-nav">
     <div class="inner">
-    <a class="extend prev" rel="prev" href="/page/6/">上一页</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/5/">5</a><a class="page-number" href="/page/6/">6</a><span class="page-number current">7</span><a class="page-number" href="/page/8/">8</a><a class="page-number" href="/page/9/">9</a><span class="space">&hellip;</span><a class="page-number" href="/page/12/">12</a><a class="extend next" rel="next" href="/page/8/">下一页</a>
+    <a class="extend prev" rel="prev" href="/page/6/">上一页</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/5/">5</a><a class="page-number" href="/page/6/">6</a><span class="page-number current">7</span><a class="page-number" href="/page/8/">8</a><a class="page-number" href="/page/9/">9</a><span class="space">&hellip;</span><a class="page-number" href="/page/13/">13</a><a class="extend next" rel="next" href="/page/8/">下一页</a>
     </div>
 </nav>
 

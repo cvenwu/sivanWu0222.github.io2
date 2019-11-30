@@ -3,6 +3,489 @@
   
     
     <entry>
+      <title><![CDATA[csv模块写入csv文件 os创建目录 np.prod计算元素乘积]]></title>
+      <url>/2019/11/30/csv%E6%A8%A1%E5%9D%97%E5%86%99%E5%85%A5csv%E6%96%87%E4%BB%B6-os%E5%88%9B%E5%BB%BA%E7%9B%AE%E5%BD%95-np-prod%E8%AE%A1%E7%AE%97%E5%85%83%E7%B4%A0%E6%88%90%E7%BB%A9/</url>
+      <content type="html"><![CDATA[<h2 id="csv-库的使用"><a href="#csv-库的使用" class="headerlink" title="csv 库的使用"></a>csv 库的使用</h2><h3 id="写csv文件"><a href="#写csv文件" class="headerlink" title="写csv文件"></a>写csv文件</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> csv</span><br><span class="line"><span class="keyword">if</span> __name__ == <span class="string">'__main__'</span>:</span><br><span class="line">    <span class="keyword">with</span> open(<span class="string">'result.csv'</span>, <span class="string">"a+"</span>, newline=<span class="string">''</span>) <span class="keyword">as</span> f:</span><br><span class="line">        writer = csv.writer(f, delimiter=<span class="string">':'</span>)  <span class="comment"># delimiter用于csv文件中分隔符的显示,默认是,</span></span><br><span class="line">        writer.writerow([<span class="string">'1'</span>, <span class="string">'2'</span>, <span class="number">3</span>])</span><br></pre></td></tr></table></figure>
+<p>np.prod() 默认计算所有元素乘积，无论传入进来的是一个向量还是一个tensor, 可以指定axis=1用来获取每一行的乘积</p>
+<h2 id="使用os内置库创建目录"><a href="#使用os内置库创建目录" class="headerlink" title="使用os内置库创建目录"></a>使用os内置库创建目录</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="keyword">import</span> argparse</span><br><span class="line"><span class="keyword">import</span> os</span><br><span class="line"></span><br><span class="line"><span class="comment"># 创建目录存放生成的图片</span></span><br><span class="line"><span class="comment">## os.makedirs 会递归创建目录</span></span><br><span class="line"><span class="comment">## os.mkdir 只会创建子目录</span></span><br><span class="line">os.makedirs(<span class="string">'images'</span>, exist_ok=<span class="literal">True</span>)  <span class="comment"># 如果exist_ok是False,目标目录存在时返回OSError</span></span><br><span class="line">os.mkdir(<span class="string">'path'</span>)</span><br></pre></td></tr></table></figure>
+<h2 id="从一个对象知道对应的类的名字"><a href="#从一个对象知道对应的类的名字" class="headerlink" title="从一个对象知道对应的类的名字"></a>从一个对象知道对应的类的名字</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">class_name</span><span class="params">(cl)</span>:</span></span><br><span class="line">    <span class="comment"># return cl.__class__  # &lt;class '__main__.config'&gt;</span></span><br><span class="line">    <span class="keyword">return</span> cl.__class__.__name__  <span class="comment"># 返回类名字 config</span></span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">config</span>:</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span><span class="params">(self)</span>:</span></span><br><span class="line">        <span class="keyword">pass</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> __name__ == <span class="string">'__main__'</span>:</span><br><span class="line">    con = config()</span><br><span class="line">    print(class_name(con))</span><br></pre></td></tr></table></figure>
+<h2 id="使用np-prod-计算元素成绩"><a href="#使用np-prod-计算元素成绩" class="headerlink" title="使用np.prod()计算元素成绩"></a>使用np.prod()计算元素成绩</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line">a = np.array([<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>])</span><br><span class="line">result = np.prod(a)  <span class="comment"># 当指定axis=1,求行的乘积</span></span><br></pre></td></tr></table></figure>
+<a id="more"></a>]]></content>
+      
+        <categories>
+            
+            <category> Python </category>
+            
+        </categories>
+        
+        
+        <tags>
+            
+            <tag> Python </tag>
+            
+            <tag> csv </tag>
+            
+            <tag> os </tag>
+            
+            <tag> numpy </tag>
+            
+        </tags>
+        
+    </entry>
+    
+    <entry>
+      <title><![CDATA[Python 线程池爬虫的简单使用]]></title>
+      <url>/2019/11/30/Python-%E7%BA%BF%E7%A8%8B%E6%B1%A0%E7%88%AC%E8%99%AB%E7%9A%84%E7%AE%80%E5%8D%95%E5%AE%9E%E7%94%A8/</url>
+      <content type="html"><![CDATA[<h1 id="python使用线程池进行编程"><a href="#python使用线程池进行编程" class="headerlink" title="python使用线程池进行编程"></a>python使用线程池进行编程</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">import concurrent</span><br><span class="line">from concurrent import futures  # 做多线程和多进程编程</span><br><span class="line">from concurrent.futures import ThreadPoolExecutor</span><br><span class="line">from concurrent.futures import as_completed</span><br></pre></td></tr></table></figure>
+<h1 id="线程池"><a href="#线程池" class="headerlink" title="线程池"></a>线程池</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br></pre></td><td class="code"><pre><span class="line">## 为什么需要线程池</span><br><span class="line">## 主线程中可以获取某一个线程的状态或者某一个任务的状态以及返回值</span><br><span class="line">## 当一个线程完成的时候我们主线程也可以立即知道</span><br><span class="line">## futures可以让多线程和多进程编码一致</span><br><span class="line"></span><br><span class="line">import time</span><br><span class="line">def get_html(times):</span><br><span class="line">    time.sleep(times)  # 休眠</span><br><span class="line"></span><br><span class="line">    print(&apos;get page &#123;&#125; success&apos;.format(times))</span><br><span class="line">    return times</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">def main():</span><br><span class="line">    executor = ThreadPoolExecutor(max_workers=2)</span><br><span class="line"></span><br><span class="line">    # 提交任务</span><br><span class="line">    ## 通过submit函数提交执行的函数到线程池中</span><br><span class="line">    ## submit是非阻塞的，将会立即返回</span><br><span class="line">    task1 = executor.submit(get_html, (3))  # 第一个参数是函数名称，第二个参数是函数的参数</span><br><span class="line">    task2 = executor.submit(get_html, (10))  # 会有一个返回结果</span><br><span class="line"></span><br><span class="line">    # done 方法用于判定某个任务是否完成</span><br><span class="line">    print(task1.done())  # 判断这个函数是否执行成功</span><br><span class="line">    time.sleep(4)</span><br><span class="line">    print(task2.done())</span><br><span class="line"></span><br><span class="line">    # result 方法得到task执行的返回结果</span><br><span class="line">    print(task2.result())</span><br><span class="line">    print(task1.result())</span><br><span class="line"></span><br><span class="line">    # 将某一个任务cancel掉， 在submit返回的对象上进行操作，</span><br><span class="line">    task2.cancel()  # 只有在还没有执行的时候cancel掉</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"># 获取已经成功的task的返回as_completed 是一个生成器</span><br><span class="line">executor = ThreadPoolExecutor(max_workers=4)</span><br><span class="line">urls = [10, 10, 10]</span><br><span class="line">all_tasks = [executor.submit(get_html, url) for url in urls]</span><br><span class="line"></span><br><span class="line"># 异步运行</span><br><span class="line"># for future in as_completed(all_tasks):  # 返回已经完成的future</span><br><span class="line">    # data = future.result()  # 得到执行的结果</span><br><span class="line">    # print(data)</span><br><span class="line"></span><br><span class="line"># 通过executor获取已经完成的task， 会按照urls中的元素的顺序执行，但也是并发只是会等待</span><br><span class="line"># for data in executor.map(get_html, urls):  # 直接返回执行的结果</span><br><span class="line">#     print(data)</span><br></pre></td></tr></table></figure>
+<a id="more"></a>
+<h2 id="json使用"><a href="#json使用" class="headerlink" title="json使用"></a>json使用</h2><blockquote>
+<p>json.loads() 参数是一个str,可以将str转换为dict<br>json.load() 参数是一个文件对象，可以将文件句柄转换为一个dict</p>
+</blockquote>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> json</span><br><span class="line"><span class="keyword">import</span> requests</span><br><span class="line">url = <span class="string">'http://www.baidu.com'</span></span><br><span class="line">json.loads(requests.get(url).text)</span><br><span class="line">json.load(open(<span class="string">'1.file'</span>, <span class="string">'r'</span>))</span><br></pre></td></tr></table></figure>
+<h2 id="Examples-多线程爬取示范代码"><a href="#Examples-多线程爬取示范代码" class="headerlink" title="Examples 多线程爬取示范代码"></a>Examples 多线程爬取示范代码</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="keyword">import</span> concurrent</span><br><span class="line"><span class="keyword">from</span> concurrent.futures <span class="keyword">import</span> ThreadPoolExecutor</span><br><span class="line"><span class="keyword">from</span> urllib <span class="keyword">import</span> request</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">TestThreadPoolExecutor</span><span class="params">(object)</span>:</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span><span class="params">(self)</span>:</span></span><br><span class="line">        self.urls = [</span><br><span class="line">            <span class="string">'https://www.baidu.com/'</span>,</span><br><span class="line">            <span class="string">'http://www.sina.com/'</span>,</span><br><span class="line">            <span class="string">'http://www.csdn.net/'</span>,</span><br><span class="line">            <span class="string">'https://juejin.im/'</span>,</span><br><span class="line">            <span class="string">'https://www.zhihu.com/'</span></span><br><span class="line">        ]</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">get_web_content</span><span class="params">(self, url=None)</span>:</span></span><br><span class="line">        print(<span class="string">'start get web content from: '</span>+url)</span><br><span class="line">        <span class="keyword">try</span>:</span><br><span class="line">            headers = &#123;<span class="string">"User-Agent"</span>: <span class="string">"Mozilla/5.0 (X11; Linux x86_64)"</span>&#125;</span><br><span class="line">            req = request.Request(url, headers=headers)</span><br><span class="line">            <span class="keyword">return</span> request.urlopen(req).read().decode(<span class="string">"utf-8"</span>)</span><br><span class="line">        <span class="keyword">except</span> BaseException <span class="keyword">as</span> e:</span><br><span class="line">            print(str(e))</span><br><span class="line">            <span class="keyword">return</span> <span class="literal">None</span></span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">runner</span><span class="params">(self)</span>:</span></span><br><span class="line">        thread_pool = ThreadPoolExecutor(max_workers=<span class="number">6</span>)</span><br><span class="line">        futures = dict()</span><br><span class="line">        <span class="keyword">for</span> url <span class="keyword">in</span> self.urls:</span><br><span class="line">            future = thread_pool.submit(self.get_web_content, url)</span><br><span class="line">            futures[future] = url</span><br><span class="line"></span><br><span class="line">        <span class="keyword">for</span> future <span class="keyword">in</span> concurrent.futures.as_completed(futures):</span><br><span class="line">            url = futures[future]</span><br><span class="line">            <span class="keyword">try</span>:</span><br><span class="line">                data = future.result()</span><br><span class="line">            <span class="keyword">except</span> Exception <span class="keyword">as</span> e:</span><br><span class="line">                print(<span class="string">'Run thread url ('</span>+url+<span class="string">') error. '</span>+str(e))</span><br><span class="line">            <span class="keyword">else</span>:</span><br><span class="line">                print(url+<span class="string">'Request data ok. size='</span>+str(len(data)))</span><br><span class="line">        print(<span class="string">'Finished!'</span>)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> __name__ == <span class="string">'__main__'</span>:</span><br><span class="line">    TestThreadPoolExecutor().runner()</span><br></pre></td></tr></table></figure>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> concurrent.futures <span class="keyword">import</span> ThreadPoolExecutor</span><br><span class="line"><span class="keyword">import</span> concurrent</span><br><span class="line"><span class="keyword">import</span> requests</span><br><span class="line">urls = [</span><br><span class="line">            <span class="string">'https://www.baidu.com/'</span>,</span><br><span class="line">            <span class="string">'http://www.sina.com/'</span>,</span><br><span class="line">            <span class="string">'http://www.csdn.net/'</span>,</span><br><span class="line">            <span class="string">'https://juejin.im/'</span>,</span><br><span class="line">            <span class="string">'https://www.zhihu.com/'</span></span><br><span class="line">]</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">sppider</span><span class="params">(url)</span>:</span></span><br><span class="line">    print(<span class="string">'开始爬取：'</span>, url)</span><br><span class="line">    <span class="keyword">return</span> requests.get(url).text</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">run</span><span class="params">()</span>:</span></span><br><span class="line">    thread_pool = ThreadPoolExecutor(max_workers=<span class="number">4</span>)</span><br><span class="line">    futures = dict()</span><br><span class="line">    <span class="keyword">for</span> url <span class="keyword">in</span> urls:</span><br><span class="line">        future = thread_pool.submit(sppider, url)</span><br><span class="line">        print(future)</span><br><span class="line">        print(type(future))</span><br><span class="line">        futures[future] = url</span><br><span class="line"></span><br><span class="line">    <span class="keyword">for</span> future <span class="keyword">in</span> concurrent.futures.as_completed(futures):</span><br><span class="line">        url = futures[future]</span><br><span class="line">        <span class="keyword">try</span>:</span><br><span class="line">            data = future.result()</span><br><span class="line">            print(type(data))</span><br><span class="line">            print(data)</span><br><span class="line">        <span class="keyword">except</span> Exception <span class="keyword">as</span> e:</span><br><span class="line">            print(<span class="string">'Run thread url ('</span> + url + <span class="string">') error. '</span> + str(e))</span><br><span class="line">        <span class="keyword">else</span>:</span><br><span class="line">            print(url + <span class="string">'Request data ok. size='</span> + str(len(data)))</span><br><span class="line">    print(<span class="string">'Finished!'</span>)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> __name__ == <span class="string">'__main__'</span>:</span><br><span class="line">    run()</span><br></pre></td></tr></table></figure>
+]]></content>
+      
+        <categories>
+            
+            <category> Python </category>
+            
+            <category> 多线程 </category>
+            
+        </categories>
+        
+        
+        <tags>
+            
+            <tag> Python </tag>
+            
+            <tag> Concurrent </tag>
+            
+        </tags>
+        
+    </entry>
+    
+    <entry>
+      <title><![CDATA[python tqdm模块使用教程]]></title>
+      <url>/2019/11/15/python-tqdm%E6%A8%A1%E5%9D%97%E4%BD%BF%E7%94%A8%E6%95%99%E7%A8%8B/</url>
+      <content type="html"><![CDATA[<h2 id="tqdm-使用教程"><a href="#tqdm-使用教程" class="headerlink" title="tqdm 使用教程"></a>tqdm 使用教程</h2><blockquote>
+<p>tqdm 是一个Python进度条模块，用于显示读取进度或者处理进度</p>
+</blockquote>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="keyword">import</span> tqdm</span><br><span class="line"><span class="keyword">from</span> time <span class="keyword">import</span> sleep</span><br><span class="line"><span class="comment"># 第一种方法</span></span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> tqdm.tqdm(range(<span class="number">2</span>)):</span><br><span class="line">    print(i)</span><br><span class="line">    sleep(<span class="number">1</span>)</span><br><span class="line"><span class="comment"># 第二种方法</span></span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> tqdm.trange(<span class="number">2</span>):</span><br><span class="line">    print(i)</span><br><span class="line">    sleep(<span class="number">1</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 第三种方法</span></span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> tqdm.tnrange(<span class="number">2</span>, desc=<span class="string">'ours'</span>):</span><br><span class="line">    print(i)</span><br><span class="line">    sleep(<span class="number">1</span>)</span><br><span class="line"><span class="comment"># 第四种方法</span></span><br><span class="line">pbar = tqdm.trange(<span class="number">10</span>)</span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> pbar:</span><br><span class="line">    print(i)</span><br><span class="line">    pbar.set_description(<span class="string">'kaishi'</span>)</span><br><span class="line">    sleep(<span class="number">1</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 运行结果如下：</span></span><br><span class="line"><span class="string">'''</span></span><br><span class="line"><span class="string">/Users/yirufeng/anaconda3/bin/python3.7 /Users/yirufeng/git_repository/DLNN/tqdm使用教程.py</span></span><br><span class="line"><span class="string">0</span></span><br><span class="line"><span class="string"> 50%|█████     | 1/2 [00:01&lt;00:01,  1.00s/it]1</span></span><br><span class="line"><span class="string">100%|██████████| 2/2 [00:02&lt;00:00,  1.00s/it]</span></span><br><span class="line"><span class="string">  0%|          | 0/2 [00:00&lt;?, ?it/s]0</span></span><br><span class="line"><span class="string"> 50%|█████     | 1/2 [00:01&lt;00:01,  1.00s/it]1</span></span><br><span class="line"><span class="string">100%|██████████| 2/2 [00:02&lt;00:00,  1.00s/it]</span></span><br><span class="line"><span class="string">HBox(children=(IntProgress(value=0, description='ours', max=2, style=ProgressStyle(description_width='initial')), HTML(value='')))</span></span><br><span class="line"><span class="string">0</span></span><br><span class="line"><span class="string">1</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">0</span></span><br><span class="line"><span class="string">kaishi:   0%|          | 0/10 [00:00&lt;?, ?it/s]1</span></span><br><span class="line"><span class="string">kaishi:  10%|█         | 1/10 [00:01&lt;00:09,  1.01s/it]2</span></span><br><span class="line"><span class="string">kaishi:  20%|██        | 2/10 [00:02&lt;00:08,  1.00s/it]3</span></span><br><span class="line"><span class="string">kaishi:  40%|████      | 4/10 [00:04&lt;00:06,  1.00s/it]4</span></span><br><span class="line"><span class="string">5</span></span><br><span class="line"><span class="string">kaishi:  50%|█████     | 5/10 [00:05&lt;00:05,  1.00s/it]6</span></span><br><span class="line"><span class="string">kaishi:  70%|███████   | 7/10 [00:07&lt;00:03,  1.00s/it]7</span></span><br><span class="line"><span class="string">8</span></span><br><span class="line"><span class="string">kaishi:  80%|████████  | 8/10 [00:08&lt;00:02,  1.00s/it]9</span></span><br><span class="line"><span class="string">kaishi: 100%|██████████| 10/10 [00:10&lt;00:00,  1.00s/it]</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">Process finished with exit code 0</span></span><br><span class="line"><span class="string">'''</span></span><br></pre></td></tr></table></figure>
+<a id="more"></a>]]></content>
+      
+        <categories>
+            
+            <category> Python </category>
+            
+            <category> tqdm </category>
+            
+        </categories>
+        
+        
+        <tags>
+            
+            <tag> Python </tag>
+            
+            <tag> tqdm </tag>
+            
+        </tags>
+        
+    </entry>
+    
+    <entry>
+      <title><![CDATA[python中fire库的基本使用]]></title>
+      <url>/2019/11/14/python%E4%B8%ADfire%E5%BA%93%E7%9A%84%E5%9F%BA%E6%9C%AC%E4%BD%BF%E7%94%A8/</url>
+      <content type="html"><![CDATA[<p><a href="https://www.cnblogs.com/my_captain/p/9574560.html" target="_blank" rel="noopener">参考教程</a></p>
+<h2 id="一个py文件只有一个函数"><a href="#一个py文件只有一个函数" class="headerlink" title="一个py文件只有一个函数"></a>一个py文件只有一个函数</h2><p>只有一个函数时,采用如下命令进行调用：</p>
+<blockquote>
+<p>python test_fire.py 5 2</p>
+</blockquote>
+<p><img src="pycharm_fire.jpg" alt="Pycharm中直接运行的结果"></p>
+<figure class="image-box">
+                <img src="terminal_fire.jpg" alt="命令行参数运行的结果" title class>
+                <p>命令行参数运行的结果</p>
+            </figure>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> fire</span><br><span class="line">print(fire.__version__)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">add</span><span class="params">(a, b)</span>:</span></span><br><span class="line">    <span class="keyword">return</span> a + b</span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> __name__ == <span class="string">'__main__'</span>:</span><br><span class="line">    fire.Fire(add)</span><br></pre></td></tr></table></figure>
+<h2 id="一个py文件有多个函数"><a href="#一个py文件有多个函数" class="headerlink" title="一个py文件有多个函数"></a>一个py文件有多个函数</h2><p>有多个函数时,采用如下命令进行调用：</p>
+<blockquote>
+<p>python test_fire.py 函数名 参数</p>
+</blockquote>
+<figure class="image-box">
+                <img src="pycharm_fire2.jpg" alt="Pycharm中直接运行的结果" title class>
+                <p>Pycharm中直接运行的结果</p>
+            </figure>
+<figure class="image-box">
+                <img src="terminal_fire2.jpg" alt="命令行参数运行的结果" title class>
+                <p>命令行参数运行的结果</p>
+            </figure>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> fire</span><br><span class="line">print(fire.__version__)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Calculator</span><span class="params">(object)</span>:</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">add</span><span class="params">(self, a, b)</span>:</span></span><br><span class="line">        <span class="keyword">return</span> a + b</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">sub</span><span class="params">(self, a, b)</span>:</span></span><br><span class="line">        <span class="keyword">return</span> a - b</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> __name__ == <span class="string">'__main__'</span>:</span><br><span class="line">    fire.Fire(Calculator)</span><br></pre></td></tr></table></figure>
+<a id="more"></a>]]></content>
+      
+        <categories>
+            
+            <category> Python </category>
+            
+            <category> fire </category>
+            
+        </categories>
+        
+        
+        <tags>
+            
+            <tag> Python </tag>
+            
+            <tag> fire </tag>
+            
+        </tags>
+        
+    </entry>
+    
+    <entry>
+      <title><![CDATA[[Paper_TL]A survery on transfer learning]]></title>
+      <url>/2019/11/11/Paper-TL-A-survery-on-transfer-learning/</url>
+      <content type="html"><![CDATA[<h2 id="three-main-research-issues-of-transfer-learning"><a href="#three-main-research-issues-of-transfer-learning" class="headerlink" title="three main research issues of transfer learning"></a>three main research issues of transfer learning</h2><ol>
+<li><p>what to transfer</p>
+<blockquote>
+<p>“What to transfer” asks which part of knowledge can be transferred across domains or tasks. Some knowledge is specific for individual domains or tasks, and some knowledge may be common between different domains such that they may help improve performance for the target domain or task.</p>
+</blockquote>
+</li>
+<li><p>how to transfer</p>
+<blockquote>
+<p> After discovering which knowledge can be transferred, learning algorithms need to be developed to transfer the knowledge, which corresponds to the “how to transfer” issue.</p>
+</blockquote>
+</li>
+<li><p>when to transfer</p>
+<blockquote>
+<p>Most current work on transfer learning focuses on “What to transfer” and “How to transfer”, by implicitly assuming that the source and target domains be related to each other. However, how to avoid negative transfer is an important open issue that is attracting more and more attention in the future</p>
+</blockquote>
+</li>
+</ol>
+<h2 id="迁移学习怎么来的"><a href="#迁移学习怎么来的" class="headerlink" title="迁移学习怎么来的"></a>迁移学习怎么来的</h2><p>The fundamental motivation for Transfer learning in the field of machine learning was<br>discussed in a NIPS-95 workshop on “Learning to Learn” 1, which focused on the need for lifelong machine-learning methods that retain and reuse previously learned knowledge</p>
+<h2 id="How-to-transfer-3种不同的迁移模式-based-on-the-definition-of-transfer-learning"><a href="#How-to-transfer-3种不同的迁移模式-based-on-the-definition-of-transfer-learning" class="headerlink" title="How to transfer?(3种不同的迁移模式, based on the definition of transfer learning)"></a>How to transfer?(3种不同的迁移模式, based on the definition of transfer learning)</h2><ol>
+<li>inductive transfer learning  (推导迁移学习)</li>
+<li>transductive transfer learning (转导迁移学习)</li>
+<li>unsupervised transfer learning (无监督迁移学习)<blockquote>
+<p>Transfer learning is classified to three different settings: inductive transfer learning, transductive transfer learning and unsupervised transfer learning. Most previous works focused on the former two settings. Unsupervised transfer learning may attract more and more attention in the future.</p>
+</blockquote>
+</li>
+</ol>
+<figure class="image-box">
+                <img src="根据方式分类.png" alt="根据方式进行分类" title class>
+                <p>根据方式进行分类</p>
+            </figure>
+<h3 id="inductive-learning-任务不同，域相同"><a href="#inductive-learning-任务不同，域相同" class="headerlink" title="inductive learning:(任务不同，域相同)"></a>inductive learning:(任务不同，域相同)</h3><p>the target task is different from the source task, no matter when the source and target domains are the same or not.</p>
+<p>In this case, some labeled data in the target domain are required to induce an objective predictive model fT(·) for use in the target domain. In addition, according to different situations of labeled and unlabeled data in the source domain, we can further categorize the inductive transfer learning setting into two cases.</p>
+<ol>
+<li>A lot of labeled data in the source domain are available<blockquote>
+<p>In this case, the inductive transfer learning setting is similar to the multi-task learning setting. However, the inductive transfer learning setting only aims at achieving high performance in the target task by transferring knowledge from the source task while multi-task learning tries to learn the target and source task simultaneously</p>
+</blockquote>
+</li>
+<li>No labeled data in the source domain are available.<blockquote>
+<p>In this case, the inductive transfer learning setting is similar to the self-taught learning setting, which is first proposed by Raina et al. [22]. In the self-taught learning setting, the label spaces between the source and target domains may be different, which implies the side information of the source domain cannot be used directly. Thus, it’s similar to the inductive transfer learning setting where the labeled data in the source domain are unavailable.</p>
+</blockquote>
+</li>
+</ol>
+<h3 id="transductive-transfer-learning-任务相同，域不同"><a href="#transductive-transfer-learning-任务相同，域不同" class="headerlink" title="transductive transfer learning(任务相同，域不同)"></a>transductive transfer learning(任务相同，域不同)</h3><ol>
+<li>The feature spaces between the source and target domains are different,</li>
+<li>The feature spaces between domains are the same but the marginal probability distributions of the input data are different.<br>The latter case of the transductive transfer learning setting is related to domain adaptation for knowledge transfer in text classification [23] and sample selection bias [24] or co-variate shift [25], whose assumptions are similar.</li>
+</ol>
+<h3 id="unsupervised-transfer-learning-任务不同但是相关"><a href="#unsupervised-transfer-learning-任务不同但是相关" class="headerlink" title="unsupervised transfer learning(任务不同但是相关)"></a>unsupervised transfer learning(任务不同但是相关)</h3><p>In this situation, no labeled data in the target domain are available while a lot of labeled data in the source domain are available. In addition, according to different situations between the source and target domains, we can further categorize the transductive transfer learning setting into two cases</p>
+<p><strong>different task but related to the source task</strong>, unsupervised transfer learning focuses on <strong>solving unsupervised learning tasks in the target domain</strong>. Thus, no labeled data available in both source and target domains in training)</p>
+<h2 id="What-to-transfer-based-on-what-to-transfer-所有的迁移学习根据内容可以归纳为如下四类"><a href="#What-to-transfer-based-on-what-to-transfer-所有的迁移学习根据内容可以归纳为如下四类" class="headerlink" title="What to transfer?(based on what to transfer 所有的迁移学习根据内容可以归纳为如下四类)"></a>What to transfer?(based on what to transfer 所有的迁移学习根据内容可以归纳为如下四类)</h2><ol>
+<li>instance-transfer approach  </li>
+<li>feature-representation-transfer approach</li>
+<li>parameter-transfer approach</li>
+<li>relational-knowledge-transfer approach</li>
+</ol>
+<blockquote>
+<p>The former three contexts have an i.i.d assumption on the data while the last context deals with transfer learning on relational data. Most of these approaches assume that the selected source domain is related to the target domain.</p>
+</blockquote>
+<h2 id="some-important-research-issues-或者当前研究的困境"><a href="#some-important-research-issues-或者当前研究的困境" class="headerlink" title="some important research issues(或者当前研究的困境)"></a>some important research issues(或者当前研究的困境)</h2><ol>
+<li>how to avoid negative transfer</li>
+</ol>
+<p>负迁移：迁移之后的效果比之前还差。<br>现在我们的许多机器学习(包括深度学习)中都假设源域和目标域是相关的，但是如果假设不成立，负迁移就可能会发生。<br>避免：首先要对源域和目标域的可转移性进行度量，根据度量，我们可以选择相关的源域来提取相关知识，从而学习目标任务。<br>如何度量：基于距离度量，我们可以对源域或任务进行聚类，这有助于度量可转移性。<br>另一个任务：当一个完整的域不能用于转移学习时，我们是否还可以转移域的一部分用于目标域的有用学习</p>
+<ol start="2">
+<li>most existing transfer learning algorithms so far focused on improving generalization across different distributions between source and target domains or tasks.</li>
+</ol>
+<ol start="3">
+<li>目前机器学习算法和深度学习算法的一个前提条件：the training and test data are drawn from the same feature space and the same distribution.</li>
+</ol>
+]]></content>
+      
+        <categories>
+            
+            <category> Paper </category>
+            
+            <category> Transfer Learning </category>
+            
+        </categories>
+        
+        
+        <tags>
+            
+            <tag> Paper </tag>
+            
+            <tag> notes </tag>
+            
+        </tags>
+        
+    </entry>
+    
+    <entry>
+      <title><![CDATA[数据竞赛:数据预处理以及特征选择]]></title>
+      <url>/2019/11/04/%E6%95%B0%E6%8D%AE%E7%AB%9E%E8%B5%9B-%E6%95%B0%E6%8D%AE%E9%A2%84%E5%A4%84%E7%90%86%E4%BB%A5%E5%8F%8A%E7%89%B9%E5%BE%81%E9%80%89%E6%8B%A9/</url>
+      <content type="html"><![CDATA[<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> pandas <span class="keyword">as</span> pd</span><br><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line"></span><br><span class="line">data = pd.DataFrame([[<span class="number">1</span>, np.nan, <span class="number">3</span>], [<span class="number">4</span>, <span class="number">5</span>, np.nan], [<span class="number">7</span>, <span class="number">8</span>, <span class="number">9</span>]])</span><br><span class="line">print(data)</span><br></pre></td></tr></table></figure>
+<h1 id="对缺失数据的处理"><a href="#对缺失数据的处理" class="headerlink" title="对缺失数据的处理"></a>对缺失数据的处理</h1><h2 id="删除"><a href="#删除" class="headerlink" title="删除"></a>删除</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">data1 = data.dropna()  <span class="comment"># 默认是按照行删除</span></span><br><span class="line">data2 = data.dropna(axis=<span class="number">0</span>)  <span class="comment"># 按照行删除</span></span><br><span class="line">data3 = data.dropna(axis=<span class="number">1</span>)  <span class="comment"># 按照列删除</span></span><br><span class="line">print(data1)</span><br><span class="line">print(data2)</span><br><span class="line">print(data3)</span><br></pre></td></tr></table></figure>
+<p><strong>note:前面几个虽然删除了空数据，但是并没有对data中的数据进行删除，需要我们指定inplace=True才会对在data上删除</strong><br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">data.dropna(axis=<span class="number">1</span>, inplace=<span class="literal">True</span>)</span><br><span class="line">print(data)</span><br></pre></td></tr></table></figure></p>
+<h2 id="填充"><a href="#填充" class="headerlink" title="填充"></a>填充</h2><p>指定值进行填充<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">data = pd.DataFrame([[<span class="number">1</span>, np.nan, <span class="number">3</span>], [<span class="number">4</span>, <span class="number">5</span>, np.nan], [<span class="number">7</span>, <span class="number">8</span>, <span class="number">9</span>]])</span><br><span class="line">print(data)</span><br><span class="line"></span><br><span class="line">data1 = data.fillna(<span class="number">-1</span>)  <span class="comment"># 用指定值进行填充</span></span><br><span class="line">print(data1)</span><br></pre></td></tr></table></figure></p>
+<p>均值填充<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">print(data.mean())  <span class="comment"># 默认是按照列求均值，计算有值的数值的和，然后统计有值的数值的个数，用和求个数得到每列均值</span></span><br><span class="line">data2 = data.fillna(data.mean())</span><br><span class="line">print(data2)</span><br></pre></td></tr></table></figure></p>
+<p>采用前面的值填充<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">data3 = data.fillna(method=<span class="string">'pad'</span>)  <span class="comment"># 使用数据的前一个值(所在列的前一个值，即上一行该列的元素值)对后一个值进行填充</span></span><br><span class="line">print(data3)</span><br></pre></td></tr></table></figure></p>
+<p>采用后面的值进行填充<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">data4 = data.fillna(method=<span class="string">'bfill'</span>)  <span class="comment"># 使用数据的后一个值对前一个值进行填充</span></span><br><span class="line">print(data4)</span><br><span class="line"></span><br><span class="line">data5 = data.interpolate()  <span class="comment"># 采用差值法进行填充，默认是线性差值, 算是预测填充的一种</span></span><br><span class="line">print(data5)</span><br></pre></td></tr></table></figure></p>
+<h1 id="处理缺失值与重复值"><a href="#处理缺失值与重复值" class="headerlink" title="处理缺失值与重复值"></a>处理缺失值与重复值</h1><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 处理缺失值与重复值</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">Data_preprocessing</span><span class="params">(x, feat_Remv)</span>:</span></span><br><span class="line">    <span class="comment"># 删除重复值</span></span><br><span class="line">    x = x.drop_duplicates()</span><br><span class="line"></span><br><span class="line">    <span class="comment"># 删除指定字段</span></span><br><span class="line">    x = x.drop(feat_Remv, axis=<span class="number">1</span>)</span><br><span class="line"></span><br><span class="line">    <span class="comment"># 补充缺失值</span></span><br><span class="line">    x = x.fillna(<span class="number">-1</span>)</span><br><span class="line">    <span class="keyword">return</span> x</span><br><span class="line"></span><br><span class="line">feat_Remv = [<span class="string">'instance_id'</span>, <span class="string">'creative_is_js'</span>, <span class="string">'creative_is_voicead'</span>, <span class="string">'app_paid'</span>]</span><br><span class="line">train_data = Data_preprocessing(train_data, feat_Remv)</span><br><span class="line">test_data = Data_preprocessing(test_data, feat_Remv)</span><br></pre></td></tr></table></figure>
+<h1 id="特征缩放"><a href="#特征缩放" class="headerlink" title="特征缩放"></a>特征缩放</h1><ol>
+<li>Min-Max normalization: (x - min) / (max - min)</li>
+<li>Mean normalization: (x - avg) / (max - min)</li>
+<li>Standardization: (x - avg) / (std)</li>
+</ol>
+<h2 id="如何做特征缩放"><a href="#如何做特征缩放" class="headerlink" title="如何做特征缩放"></a>如何做特征缩放</h2><h3 id="Min-Max-normalization"><a href="#Min-Max-normalization" class="headerlink" title="Min-Max normalization"></a>Min-Max normalization</h3><p><strong>Note:归一化不是让特征值范围是0-1之间，指所在一个特定范围内</strong><br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> sklearn.preprocessing <span class="keyword">import</span> MinMaxScaler</span><br><span class="line">data = [[<span class="number">1</span>, <span class="number">1</span>, <span class="number">1</span>, <span class="number">1</span>], [<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>], [<span class="number">2</span>, <span class="number">4</span>, <span class="number">9</span>, <span class="number">16</span>]]</span><br><span class="line">print(MinMaxScaler(feature_range=(<span class="number">0</span>, <span class="number">1</span>)).fit_transform(data))  <span class="comment"># feature_map选择归一化后的取值范围</span></span><br><span class="line"></span><br><span class="line">data = [[<span class="number">1</span>, <span class="number">1</span>, <span class="number">1</span>, <span class="number">1</span>], [<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>], [<span class="number">2</span>, <span class="number">4</span>, <span class="number">9</span>, <span class="number">16</span>]]</span><br><span class="line">print(MinMaxScaler(feature_range=(<span class="number">-2</span>, <span class="number">2</span>)).fit_transform(data))  <span class="comment"># feature_map选择归一化后的取值范围为-2~2</span></span><br><span class="line"></span><br><span class="line"><span class="comment">### Mean normalization</span></span><br><span class="line">data = [[<span class="number">1</span>, <span class="number">1</span>, <span class="number">1</span>, <span class="number">1</span>], [<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>], [<span class="number">2</span>, <span class="number">4</span>, <span class="number">9</span>, <span class="number">16</span>]]</span><br><span class="line">df = pd.DataFrame(data)</span><br><span class="line">print(np.max(df))  <span class="comment"># 求得每列的最大值，并返回一个ndarray</span></span><br><span class="line">print(np.mean(df))  <span class="comment"># 求得每列的均值，并返回一个ndarray</span></span><br><span class="line">print((df - np.mean(df)) / (np.max(df) - (np.min(df))))</span><br><span class="line"></span><br><span class="line"><span class="comment">### Standard Normalization</span></span><br><span class="line"><span class="keyword">from</span> sklearn.preprocessing <span class="keyword">import</span> StandardScaler</span><br><span class="line">data = [[<span class="number">1</span>, <span class="number">1</span>, <span class="number">1</span>, <span class="number">1</span>], [<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>], [<span class="number">2</span>, <span class="number">4</span>, <span class="number">9</span>, <span class="number">16</span>]]</span><br><span class="line">print(StandardScaler().fit_transform(data))  <span class="comment"># 其实这里包含两个步骤，一个训练成一个简单模型，之后转换</span></span><br></pre></td></tr></table></figure></p>
+<h1 id="样本不均衡"><a href="#样本不均衡" class="headerlink" title="样本不均衡"></a>样本不均衡</h1><blockquote>
+<p>对于样本不均衡，也会给我们进行相关的机器学习任务带来困难</p>
+</blockquote>
+<p>解决办法：</p>
+<ol>
+<li>上采样：增加分类中样本较少的类别的采样数量来实现样本的均衡<ol>
+<li>直接复制小样本数据，但是容易过拟合</li>
+<li>通过一定规则生成新的变量，如smote</li>
+</ol>
+</li>
+<li>下采样：减少分类中多数类样本的样本数量来实现样本均衡<ol>
+<li>随机去掉一些多数类，缺点是可能丢失一些重要的信息</li>
+<li>根据原始样本生成新样本来代替多数类样本</li>
+</ol>
+</li>
+<li>对每个类别设置权重：通常与数量比成反比</li>
+<li>集成学习：生成多组样本来进行训练，例如选择全部的少数样本，每次从多数样本中选择与少数样本数量一致的多数样本进行训练，训练多次</li>
+</ol>
+<p><strong>生成一个不平衡的样本</strong><br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 生成一个不平衡的样本</span></span><br><span class="line"><span class="keyword">from</span> sklearn.datasets <span class="keyword">import</span> make_classification</span><br><span class="line"><span class="keyword">from</span> collections <span class="keyword">import</span> Counter</span><br><span class="line">X, y = make_classification(n_samples=<span class="number">5000</span>,  <span class="comment"># 生成样本的数量</span></span><br><span class="line">                           n_features=<span class="number">2</span>,  <span class="comment"># 生成的样本的特征</span></span><br><span class="line">                           n_informative=<span class="number">2</span>,</span><br><span class="line">                           n_redundant=<span class="number">0</span>,</span><br><span class="line">                           n_repeated=<span class="number">0</span>,</span><br><span class="line">                           n_classes=<span class="number">3</span>,  <span class="comment"># 生成的样本的类别</span></span><br><span class="line">                           n_clusters_per_class=<span class="number">1</span>,</span><br><span class="line">                           weights=[<span class="number">0.01</span>, <span class="number">0.05</span>, <span class="number">0.94</span>],  <span class="comment"># 生成的每个样本类别的权重</span></span><br><span class="line">                           class_sep=<span class="number">0.8</span>,</span><br><span class="line">                           random_state=<span class="number">0</span></span><br><span class="line">                           )</span><br><span class="line">print(X.shape)</span><br></pre></td></tr></table></figure></p>
+<h2 id="方法一：上采样"><a href="#方法一：上采样" class="headerlink" title="方法一：上采样"></a>方法一：上采样</h2><blockquote>
+<p>通过增加分类样本中样本较少的类别的数量来实现平衡，直接复制小样本数据，缺点：容易过拟合<br>from imblearn.over_sampling import RandomOverSampler<br>ros = RandomOverSampler(random_state=0)<br>X_resampled, y_resampled = ros.fit_sample(X, y)<br>print(sorted(Counter(y_resampled).items()))</p>
+</blockquote>
+<blockquote>
+<p>上采样的另一种方法：通过一定规则生成新变量，如smote<br>from imblearn.over_sampling import SMOTE, ADASYN<br>X_resampled, y_resampled = SMOTE(kind=’borderline1’).fit_sample(X, y)<br>print(sorted(Counter(y_resampled).items()))</p>
+</blockquote>
+<h2 id="方法二：下采样"><a href="#方法二：下采样" class="headerlink" title="方法二：下采样"></a>方法二：下采样</h2><blockquote>
+<p>随机去掉一些多数类，缺点是可能会丢失一些重要信息<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> imblearn.under_sampling <span class="keyword">import</span> RandomUnderSampler</span><br><span class="line">rus = RandomUnderSampler(random_state=<span class="number">0</span>)</span><br><span class="line">X_resampled, y_resampled = rus.fit_sample(X, y)</span><br><span class="line">print(sorted(Counter(y_resampled).items()))</span><br></pre></td></tr></table></figure></p>
+</blockquote>
+<blockquote>
+<p>根据原始样本，生成新的样本来替换多数类样本, 通过聚类生成新的中心样本点来进行采样<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> imblearn.under_sampling <span class="keyword">import</span> ClusterCentroids</span><br><span class="line">cc = ClusterCentroids(random_state=<span class="number">0</span>)</span><br><span class="line">X_resampled, y_resampled = cc.fit_sample(X, y)</span><br><span class="line">print(sorted(Counter(y_resampled).items()))</span><br></pre></td></tr></table></figure></p>
+</blockquote>
+<blockquote>
+<p>方法三：集成方法，多次抽取样本的方法<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> imblearn.datasets <span class="keyword">import</span> make_imbalance</span><br><span class="line">ratio = &#123;<span class="number">0</span>:<span class="number">20</span>, <span class="number">1</span>:<span class="number">30</span>, <span class="number">2</span>:<span class="number">40</span>&#125;  <span class="comment"># 抽取的不同样本类别的个数，但是不能超过样本数量，第1类样本20个，第2类样本30个，第3类样本40个</span></span><br><span class="line">X_resampled, y_resampled = make_imbalance(X, y, ratio=ratio)</span><br><span class="line">print(sorted(Counter(y_resampled).items()))</span><br></pre></td></tr></table></figure></p>
+</blockquote>
+<h1 id="识别异常值"><a href="#识别异常值" class="headerlink" title="识别异常值"></a>识别异常值</h1><ol>
+<li>简单的统计分析：对属性值进行一个描述性的统计，从而查看哪些值是不合理的</li>
+<li>3σ原则：根据正态分布的定义，距离平均值3σ之外的概率不超过0.003，属于极小概率事件</li>
+<li>箱型图分析：箱型图提供了一个标准，即大于或小于箱型图设定的上下界的数值为异常值</li>
+<li>聚类分析：如DBSCAN基于密度的聚类方法，可以用于离群点检测</li>
+</ol>
+<p><strong>Note : 找到异常值之后可以修正异常值，采用上面讲过的填充缺失值的方法</strong></p>
+<p><img src="识别异常数据_3σ原则.jpg" alt><br><figure class="image-box">
+                <img src="识别异常数据_DBSCAN.jpg" alt title class>
+                <p></p>
+            </figure><br><figure class="image-box">
+                <img src="识别异常数据_箱型图分析.jpg" alt title class>
+                <p></p>
+            </figure></p>
+<h2 id="方法一：箱型图分析"><a href="#方法一：箱型图分析" class="headerlink" title="方法一：箱型图分析"></a>方法一：箱型图分析</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> seaborn <span class="keyword">as</span> sns</span><br><span class="line"><span class="keyword">import</span> matplotlib.pyplot <span class="keyword">as</span> plt</span><br><span class="line">arr = [[np.random.random(), i+np.random.random(), i+<span class="number">1</span>+np.random.random()] <span class="keyword">for</span> i <span class="keyword">in</span> range(<span class="number">18</span>)]</span><br><span class="line">arr.append([<span class="number">11</span>, <span class="number">44</span>, <span class="number">77</span>])</span><br><span class="line">df = pd.DataFrame(arr)</span><br><span class="line">df.columns = [<span class="string">'a'</span>, <span class="string">'b'</span>, <span class="string">'c'</span>]</span><br><span class="line">print(df)</span><br></pre></td></tr></table></figure>
+<h2 id="方法二：3σ原则"><a href="#方法二：3σ原则" class="headerlink" title="方法二：3σ原则"></a>方法二：3σ原则</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">data = [[<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>], [<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>], [<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>], [<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>], [<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>], [<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>], [<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>], [<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>], [<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>], [<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>]]</span><br><span class="line">df = pd.DataFrame(data)</span><br><span class="line">df.columns = [<span class="string">'a'</span>, <span class="string">'b'</span>, <span class="string">'c'</span>]</span><br><span class="line">print(df.std())  <span class="comment"># 求得标准差</span></span><br><span class="line">th1 = df.mean() + <span class="number">3</span> * df.std()  <span class="comment"># 上界</span></span><br><span class="line">th2 = df.mean() - <span class="number">3</span> * df.std()  <span class="comment"># 下界</span></span><br><span class="line">df[<span class="string">'a'</span>] = df[df[<span class="string">'a'</span>] &gt; th2[<span class="string">'a'</span>]]</span><br><span class="line">df[<span class="string">'a'</span>] = df[df[<span class="string">'a'</span>] &lt; th1[<span class="string">'a'</span>]]</span><br><span class="line">print(df)</span><br></pre></td></tr></table></figure>
+<h2 id="方法三：识别异常值–DBSCAN"><a href="#方法三：识别异常值–DBSCAN" class="headerlink" title="方法三：识别异常值–DBSCAN"></a>方法三：识别异常值–DBSCAN</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> sklearn <span class="keyword">import</span> datasets</span><br><span class="line"><span class="keyword">from</span> sklearn.cluster <span class="keyword">import</span> DBSCAN</span><br><span class="line">arr = [[np.random.random(), i+np.random.random()] <span class="keyword">for</span> i <span class="keyword">in</span> range(<span class="number">18</span>)]</span><br><span class="line">arr.append([<span class="number">11</span>, <span class="number">44</span>])</span><br><span class="line">arr = np.array(arr)</span><br><span class="line">plt.scatter(arr[:, <span class="number">0</span>], arr[:, <span class="number">1</span>], marker=<span class="string">'o'</span>)</span><br><span class="line">plt.show()</span><br><span class="line"></span><br><span class="line">y_pred = DBSCAN(eps = <span class="number">3</span>).fit_predict(arr)</span><br><span class="line">plt.scatter(arr[:, <span class="number">0</span>], arr[:, <span class="number">1</span>], c=y_pred)</span><br><span class="line">plt.show()</span><br></pre></td></tr></table></figure>
+<h1 id="特征工程"><a href="#特征工程" class="headerlink" title="特征工程"></a>特征工程</h1><ol>
+<li>特征处理</li>
+<li>特征构建</li>
+<li>特征选择</li>
+</ol>
+<h2 id="特征处理："><a href="#特征处理：" class="headerlink" title="特征处理："></a>特征处理：</h2><h3 id="特征类型"><a href="#特征类型" class="headerlink" title="特征类型:"></a>特征类型:</h3><ol>
+<li>数值类型: 连续型，离散型</li>
+<li>类别类型: 也就是枚举类型</li>
+<li>时间类型: </li>
+<li>文本类型: 例如爬下来的一段评论</li>
+<li>图形类型: </li>
+</ol>
+<p><img src="特征处理_LabelEncoder.jpg" alt><br><figure class="image-box">
+                <img src="特征处理_OneHot.jpg" alt title class>
+                <p></p>
+            </figure></p>
+<h4 id="数值类型的特征："><a href="#数值类型的特征：" class="headerlink" title="数值类型的特征："></a>数值类型的特征：</h4><ol>
+<li>特征缩放的几种方法：标准化，归一化，区间缩放</li>
+<li>连续变量的离散化， 分箱</li>
+</ol>
+<h4 id="类别特征："><a href="#类别特征：" class="headerlink" title="类别特征："></a>类别特征：</h4><ol>
+<li>one-hot编码</li>
+<li>LabelEncoder</li>
+</ol>
+<h4 id="时间特征："><a href="#时间特征：" class="headerlink" title="时间特征："></a>时间特征：</h4><ol>
+<li>持续时间</li>
+<li>时间间隔</li>
+</ol>
+<h3 id="连续变量的离散化：分箱-bin"><a href="#连续变量的离散化：分箱-bin" class="headerlink" title="连续变量的离散化：分箱(bin)"></a>连续变量的离散化：分箱(bin)</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">df = pd.DataFrame()</span><br><span class="line">df[<span class="string">'Age'</span>] = np.random.randint(<span class="number">1</span>, <span class="number">100</span>, <span class="number">100</span>)</span><br><span class="line">df[<span class="string">'Age'</span>].hist()  <span class="comment"># 显示一个直方图来统计年龄段</span></span><br><span class="line">bin_ranges = [<span class="number">0</span>, <span class="number">20</span>, <span class="number">30</span>, <span class="number">40</span>, <span class="number">50</span>, <span class="number">60</span>, <span class="number">100</span>]</span><br><span class="line">bin_names = [<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>, <span class="number">5</span>, <span class="number">6</span>]</span><br><span class="line"><span class="comment"># 将(0, 20]作为一个段，并给定标签1，(20, 30]作为一个段，并给定一个标签2，以此类推</span></span><br><span class="line">df[<span class="string">'Age_bin_custom_range'</span>] = pd.cut(np.array(df[<span class="string">'Age'</span>]), bins=bin_ranges)</span><br><span class="line">df[<span class="string">'Age_bin_custom_label'</span>] = pd.cut(np.array(df[<span class="string">'Age'</span>]), bins=bin_ranges, labels=bin_names)</span><br><span class="line">df[[<span class="string">'Age'</span>, <span class="string">'Age_bin_custom_range'</span>, <span class="string">'Age_bin_custom_label'</span>]].head()</span><br></pre></td></tr></table></figure>
+<p><strong>上面是手动分箱，难免会出现一些不规则的划分</strong></p>
+<figure class="image-box">
+                <img src="特征处理_1.jpg" alt title class>
+                <p></p>
+            </figure>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">### 基于4分位数的自适应二进制方案</span></span><br><span class="line">quantile_list = [<span class="number">0</span>, <span class="number">.25</span>, <span class="number">.5</span>, <span class="number">.75</span>, <span class="number">1.</span>]</span><br><span class="line">quantiles = df[<span class="string">'income'</span>].quantile(quantile_list)</span><br><span class="line"><span class="comment">### 可视化这些分位数</span></span><br><span class="line">fig, ax = plt.subplots()</span><br><span class="line">df[<span class="string">'income'</span>].hist(bins=<span class="number">30</span>, color=<span class="string">'#A9C5D3'</span>, edgecolor=<span class="string">'black'</span>, grid=<span class="literal">False</span>)</span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> quantile <span class="keyword">in</span> quantile_list:</span><br><span class="line">    qvl = plt.axvline(quantile, color=<span class="string">'r'</span>)</span><br></pre></td></tr></table></figure>
+<a id="more"></a>
+<h3 id="类别特征：LabelEncoder"><a href="#类别特征：LabelEncoder" class="headerlink" title="类别特征：LabelEncoder"></a>类别特征：LabelEncoder</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> sklearn.preprocessing <span class="keyword">import</span> LabelEncoder</span><br><span class="line">lb = LabelEncoder()</span><br><span class="line">lb.fit([<span class="string">'male'</span>, <span class="string">'female'</span>])</span><br><span class="line">x_data = pd.DataFrame()</span><br><span class="line">x_data[<span class="string">'gender'</span>] = np.array([<span class="string">'male'</span>, <span class="string">'female'</span>, <span class="string">'male'</span>, <span class="string">'male'</span>, <span class="string">'female'</span>, <span class="string">'female'</span>, <span class="string">'male'</span>])</span><br><span class="line">x_data[<span class="string">'gender_encode'</span>] = lb.transform(x_data[<span class="string">'gender'</span>])</span><br><span class="line">print(x_data)</span><br></pre></td></tr></table></figure>
+<h3 id="类别特征：one-hot"><a href="#类别特征：one-hot" class="headerlink" title="类别特征：one-hot"></a>类别特征：one-hot</h3><blockquote>
+<p>在样本之间距离的计算和相似度的度量非常重要，one-hot将离散的取值扩展到了欧式空间<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> sklearn <span class="keyword">import</span> preprocessing</span><br><span class="line">enc = preprocessing.OneHotEncoder(categories=<span class="string">'auto'</span>)</span><br><span class="line">df = pd.DataFrame([[<span class="number">0</span>, <span class="number">0</span>, <span class="number">3</span>], [<span class="number">1</span>, <span class="number">1</span>, <span class="number">0</span>], [<span class="number">0</span>, <span class="number">2</span>, <span class="number">1</span>], [<span class="number">1</span>, <span class="number">0</span>, <span class="number">2</span>]])</span><br><span class="line">enc.fit(df)</span><br><span class="line"><span class="comment"># 注意：如果不写toarray，是用一个稀疏矩阵进行表示，写了toarray之后才可以展示出来</span></span><br><span class="line">array = enc.transform([[<span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>], [<span class="number">1</span>, <span class="number">1</span>, <span class="number">1</span>], [<span class="number">0</span>, <span class="number">2</span>, <span class="number">2</span>], [<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>]]).toarray()</span><br><span class="line">print(array)</span><br></pre></td></tr></table></figure></p>
+</blockquote>
+<h2 id="特征构建"><a href="#特征构建" class="headerlink" title="特征构建"></a>特征构建</h2><figure class="image-box">
+                <img src="特征构建_1.jpg" alt title class>
+                <p></p>
+            </figure>
+<figure class="image-box">
+                <img src="特征构建_2.jpg" alt title class>
+                <p></p>
+            </figure>
+<figure class="image-box">
+                <img src="特征构建_3.jpg" alt title class>
+                <p></p>
+            </figure>
+<h2 id="特征选取："><a href="#特征选取：" class="headerlink" title="特征选取："></a>特征选取：</h2><figure class="image-box">
+                <img src="特征选择——1.jpg" alt title class>
+                <p></p>
+            </figure>
+<figure class="image-box">
+                <img src="特征选择_2.jpg" alt title class>
+                <p></p>
+            </figure>
+<h3 id="SelectKBest的运用："><a href="#SelectKBest的运用：" class="headerlink" title="SelectKBest的运用："></a>SelectKBest的运用：</h3><blockquote>
+<p>这里是通过卡方检验选取特征，k=20指定选择20个特征</p>
+</blockquote>
+<p><img src="特征选取_SelectKBest.jpg" alt><br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> sklearn.datasets <span class="keyword">import</span> load_digits</span><br><span class="line"><span class="keyword">from</span> sklearn.feature_selection <span class="keyword">import</span> SelectKBest, chi2</span><br><span class="line">X, y = load_digits(return_X_y=<span class="literal">True</span>)</span><br><span class="line">print(X.shape)</span><br><span class="line">X_new = SelectKBest(chi2, k=<span class="number">20</span>).fit_transform(X, y)</span><br><span class="line">X_new.shape</span><br></pre></td></tr></table></figure></p>
+]]></content>
+      
+        <categories>
+            
+            <category> 数据竞赛 </category>
+            
+            <category> 数据处理以及特征工程 </category>
+            
+        </categories>
+        
+        
+        <tags>
+            
+            <tag> 数据预处理 </tag>
+            
+            <tag> 数据处理 </tag>
+            
+            <tag> 特征选取 </tag>
+            
+            <tag> 特征工程 </tag>
+            
+        </tags>
+        
+    </entry>
+    
+    <entry>
+      <title><![CDATA[实战PyTorch手写数字体识别]]></title>
+      <url>/2019/09/29/%E5%AE%9E%E6%88%98PyTorch%E6%89%8B%E5%86%99%E6%95%B0%E5%AD%97%E4%BD%93%E8%AF%86%E5%88%AB/</url>
+      <content type="html"><![CDATA[<blockquote>
+<p>开始学习深度学习，想通过被誉为<strong>深度学习”Hello World”的LeNet5</strong>进行实践，奈何从网络架构看不懂到最后编码没看懂，到现在的恍然大悟，这里面有很多坑不实践只知道网络结构永远是不够的，在学习编码LeNet5的过程中，遇到了很多坑，从网上找资料，五音不全的，总感觉少了很多东西，所以自己索性就总结了自己LeNet5的经验以及一些坑</p>
+</blockquote>
+<h2 id="网络架构"><a href="#网络架构" class="headerlink" title="网络架构"></a>网络架构</h2><figure class="image-box">
+                <img src="./CNN.png" alt="LeNet5网络结构图" title class>
+                <p>LeNet5网络结构图</p>
+            </figure>
+<p>输入的图片是 28<em>28</em>1 : <strong>分别表示28像素的高，28像素的宽，1个颜色通道</strong></p>
+<p>第一层：卷积层：卷积核大小为6✖️28✖️28, (6表示卷积核的通道数，决定了输出内容的个数，1表示卷积核的通道为1，28)<br>第二层：池化层<br>第三层：卷积层<br>第四层：池化层<br>第五层：全连接层<br>第六层：全连接层<br>第七层：全连接层</p>
+<h2 id="数据介绍"><a href="#数据介绍" class="headerlink" title="数据介绍"></a>数据介绍</h2><blockquote>
+<p>实战LeNet5架构的数据已经由大神Yann LeCun备好，只需要通过PyTorch下载并加载就可以</p>
+</blockquote>
+<p>训练集：提供了60000张28<em>28像素的黑白图(说明颜色通道为1)，60000个标签<br>测试集：提供了10000张28</em>28像素的黑白图，10000个标签</p>
+<figure class="image-box">
+                <img src="./数据图展示.png" alt="展示其中的一个数据" title class>
+                <p>展示其中的一个数据</p>
+            </figure>
+<h2 id="一些坑"><a href="#一些坑" class="headerlink" title="一些坑"></a>一些坑</h2><ol>
+<li>ReLU() 与 torch.relu() 真的不一样，可别搞混，自己当时就是搞混，以为是一样的，卡了半天</li>
+<li></li>
+</ol>
+<h2 id="步骤"><a href="#步骤" class="headerlink" title="步骤"></a>步骤</h2><blockquote>
+<p>任何一个神经网络的实践数据收集都是起点，这里我们使用了经典的MNIST数据集，包括60000 个训练样本和 10000 个测试样本，样本大小都是1 ✖️ 28 ✖️ 28 (1是指黑白图，也就是只有1个颜色通道)</p>
+</blockquote>
+<ol>
+<li>数据收集</li>
+<li>数据处理</li>
+<li>网络搭建</li>
+<li>针对问题定义损失函数和优化器</li>
+<li>训练模型</li>
+<li>测试模型准确度</li>
+</ol>
+<h3 id="数据处理和数据收集"><a href="#数据处理和数据收集" class="headerlink" title="数据处理和数据收集"></a>数据处理和数据收集</h3><blockquote>
+<p>PyTorch已经内置了MNIST数据集，因此我们只需要导入相应的包来下载数据集</p>
+</blockquote>
+<p><strong>注意：数据集都是图像，我们在PyTorch中数据的计算都需要将数据转换为计算图的张量(可以理解为是我们现实中的一个常量)</strong></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> torchvision.datasets <span class="keyword">as</span> datasets</span><br><span class="line"><span class="keyword">import</span> torchvision.transforms <span class="keyword">as</span> transforms</span><br><span class="line"><span class="keyword">from</span> torch.utils.data <span class="keyword">import</span> dataloader</span><br><span class="line"></span><br><span class="line"><span class="comment"># 将数据转换为计算图的张量，使用Compose可以将多种变换组合到一起，但是这里我们只将其转换为Tensor</span></span><br><span class="line">transform = transforms.Compose([</span><br><span class="line">    transforms.ToTensor()</span><br><span class="line">])</span><br><span class="line"></span><br><span class="line"><span class="comment"># 加载对应的数据集</span></span><br><span class="line"><span class="comment">## root代表数据集存放的目录</span></span><br><span class="line"><span class="comment">## train代表是否是训练集，用来区分训练集和测试集</span></span><br><span class="line"><span class="comment">## download代表是否需要下载，为true代表如果在root中没有找到数据则进行下载</span></span><br><span class="line"><span class="comment">## transform代表对下载后加载进来的数据做哪些预处理操作</span></span><br><span class="line">train_data = datasets.MNIST(root=<span class="string">'./data'</span>, train=<span class="literal">True</span>, download=<span class="literal">True</span>, transform=transform)</span><br><span class="line">test_data = datasets.MNIST(root=<span class="string">'./data'</span>, train=<span class="literal">False</span>, download=<span class="literal">True</span>, transform=transform)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment"># 数据加载(使用MINI-Batch加载)：将上面已经加载的数据存档到一个迭代器中方便训练和测试的时候遍历</span></span><br><span class="line"><span class="comment">## 第1个参数代表加载哪个数据集</span></span><br><span class="line"><span class="comment">## batch_size指示每次加载多少张图</span></span><br><span class="line"><span class="comment">## shuffle指示加载数据的时候是否随机加载(打乱)</span></span><br><span class="line">train_data_loader = dataloader.DataLoader(train_data, batch_size=BATCH_SIZE, shuffle=<span class="literal">True</span>)</span><br><span class="line">test_data_loader = dataloader.DataLoader(test_data, batch_size=BATCH_SIZE, shuffle=<span class="literal">True</span>)</span><br></pre></td></tr></table></figure>
+<h3 id="网络搭建"><a href="#网络搭建" class="headerlink" title="网络搭建"></a>网络搭建</h3><blockquote>
+<p>这里我们自定义了网络结构</p>
+</blockquote>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> torch.nn <span class="keyword">as</span> nn</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">MyCNN</span><span class="params">(nn.Module)</span>:</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span><span class="params">(self)</span>:</span></span><br><span class="line">        super(MyCNN, self).__init__()</span><br><span class="line">        self.conv = nn.Sequential(</span><br><span class="line">            <span class="comment"># 输入 batch_size, 1, 28, 28</span></span><br><span class="line">            nn.Conv2d(<span class="number">1</span>, <span class="number">3</span>, <span class="number">3</span>, padding=<span class="number">2</span>),</span><br><span class="line">            nn.BatchNorm2d(<span class="number">3</span>),</span><br><span class="line">            nn.LeakyReLU(<span class="number">0.2</span>),</span><br><span class="line">            nn.MaxPool2d(<span class="number">2</span>),</span><br><span class="line">            <span class="comment"># batch_size, 3, 15, 15</span></span><br><span class="line">            nn.Conv2d(<span class="number">3</span>, <span class="number">16</span>, <span class="number">3</span>, padding=<span class="number">1</span>),</span><br><span class="line">            nn.BatchNorm2d(<span class="number">16</span>),</span><br><span class="line">            nn.LeakyReLU(<span class="number">0.2</span>),</span><br><span class="line">            nn.MaxPool2d(<span class="number">2</span>),</span><br><span class="line">            <span class="comment"># batch_size, 16, 7, 7</span></span><br><span class="line">            nn.Conv2d(<span class="number">16</span>, <span class="number">32</span>, <span class="number">3</span>, padding=<span class="number">1</span>),</span><br><span class="line">            nn.BatchNorm2d(<span class="number">32</span>),</span><br><span class="line">            nn.LeakyReLU(<span class="number">0.2</span>),</span><br><span class="line">            nn.MaxPool2d(<span class="number">2</span>),</span><br><span class="line">            <span class="comment"># batch_size, 32, 3, 3</span></span><br><span class="line">        )</span><br><span class="line">        self.lin = nn.Linear(<span class="number">288</span>, <span class="number">10</span>)</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">forward</span><span class="params">(self, input)</span>:</span></span><br><span class="line">        y = self.conv(input)</span><br><span class="line">        y = y.view(input.size(<span class="number">0</span>), <span class="number">-1</span>)</span><br><span class="line">        y = self.lin(y)</span><br><span class="line">        <span class="keyword">return</span> y</span><br></pre></td></tr></table></figure>
+<h3 id="定义损失函数和优化器"><a href="#定义损失函数和优化器" class="headerlink" title="定义损失函数和优化器"></a>定义损失函数和优化器</h3><blockquote>
+<p>Adam: 一种计算每个参数的自适应学习率的方法<br>分类问题常用的损失函数为交叉熵（Cross Entropy Loss。交叉熵描述了两个概率分布之间的距离，交叉熵越小说明两者之间越接近。</p>
+</blockquote>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 定义损失函数以及优化器</span></span><br><span class="line">loss_func = torch.nn.CrossEntropyLoss()  <span class="comment"># 采用交叉熵损失</span></span><br><span class="line">optimizer = torch.optim.Adam(net.parameters(), lr=LEARNING_RATE)  <span class="comment">#采用学习率自己可以调节的Adam优化器</span></span><br></pre></td></tr></table></figure>
+<h3 id="训练模型"><a href="#训练模型" class="headerlink" title="训练模型"></a>训练模型</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">index_value = <span class="number">0</span></span><br><span class="line"><span class="comment"># 训练集</span></span><br><span class="line"><span class="keyword">for</span> epoch <span class="keyword">in</span> range(NUM_EPOCHS):</span><br><span class="line">    <span class="keyword">for</span> index, (data, label) <span class="keyword">in</span> enumerate(train_data_loader):</span><br><span class="line">        predict_label = net(data)</span><br><span class="line">        loss = loss_func(predict_label, label)</span><br><span class="line">        loss_value = loss.item()</span><br><span class="line">        print(<span class="string">"epoch:&#123;&#125;, index:&#123;&#125;, loss:&#123;&#125;"</span>.format(epoch, index, loss_value))</span><br><span class="line">        opt = &#123;</span><br><span class="line">            <span class="string">'title'</span>: <span class="string">'LeNet5_loss'</span>,</span><br><span class="line">            <span class="string">'xlabel'</span>: <span class="string">'index'</span>,</span><br><span class="line">            <span class="string">'ylabel'</span>: <span class="string">'loss'</span></span><br><span class="line">        &#125;</span><br><span class="line">        vis.line(Y=np.array([loss_value]), X=np.array([index_value]), win=<span class="string">'lenet5_loss'</span>, update=<span class="string">'append'</span>, opts=opt)</span><br><span class="line">        optimizer.zero_grad()</span><br><span class="line">        loss.backward()</span><br><span class="line">        index_value += <span class="number">1</span></span><br><span class="line">        optimizer.step()</span><br></pre></td></tr></table></figure>
+<h3 id="测试模型"><a href="#测试模型" class="headerlink" title="测试模型"></a>测试模型</h3><p>几个注意的地方：</p>
+<ol>
+<li><strong>进行测试的时候一定要关闭求梯度，以及dropout(使用net.eval())</strong></li>
+<li>训练之后的网络，使用net(data)将会得到预测的输出, 例如在该任务中会输出大小为(batch_size, 10)的二维tensor, 每个batch_size对应的10个数字的可能性大小，数字最大的代表预测为该数字</li>
+<li>使用net(data).argmax()求得的是二维tensor的最大值，但我们想要的是(batch_size, 10)大小的tensor中每行的最大值对应的下标，因为就是我们预测的值，因此可以采用net(data).argmax(dim=1)</li>
+<li>label == net(data).argmax(dim=1) 来判断是否与我们预测的一致，将会返回一个bool组成的tensor</li>
+<li>(label == net(data).argmax(dim=1)).sum() 可以计算我们预测的有多少是准确的，只是局限在该batch_size下</li>
+</ol>
+<a id="more"></a>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">with</span> torch.no_grad():</span><br><span class="line">    <span class="keyword">for</span> data, label <span class="keyword">in</span> test_data_loader:</span><br><span class="line">        net.eval()</span><br><span class="line">        <span class="comment">#print(net(data)) # 得到的是一个128维(batch_size) × 10(每个batch_size中的每个tensor分别对应10个数字的几率)的tensor</span></span><br><span class="line">        <span class="comment">#print(max(net(data)[0]) # 得到第一个batch_size最大的值)</span></span><br><span class="line">        <span class="comment">#print(net(data).argmax(dim=1)) # 获得最大值对应的索引，也就是我们想要得到的一个结果</span></span><br><span class="line">        </span><br><span class="line">        <span class="comment">#print(net(data)[0][net(data)[0].argmax(dim=1)])</span></span><br><span class="line">        </span><br><span class="line">        <span class="comment">#print(label)</span></span><br><span class="line">        </span><br><span class="line">        accur_num = (label == net(data).argmax(dim=<span class="number">1</span>)).sum() <span class="comment">#得到有多少是计算准确的</span></span><br><span class="line">        accur_sum += accur_num</span><br><span class="line">        n += BATCH_SIZE</span><br><span class="line">        print(<span class="string">"本轮准确率为：%.6f，累计准确率为：%.6f"</span> % ((accur_num * <span class="number">1.0</span>/ BATCH_SIZE), (accur_sum * <span class="number">1.0</span>/ n)))</span><br></pre></td></tr></table></figure>
+<h3 id="torch-argmax-详解"><a href="#torch-argmax-详解" class="headerlink" title="torch.argmax() 详解"></a>torch.argmax() 详解</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 以下参考https://blog.csdn.net/qq_27261889/article/details/88613932</span></span><br><span class="line">m = torch.tensor([[<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>], [<span class="number">4</span>, <span class="number">5</span>, <span class="number">6</span>]])</span><br><span class="line">m.argmax()<span class="comment">#找到了全局的最大值</span></span><br><span class="line">m.argmax(dim=<span class="number">0</span>) <span class="comment">#dim=0找意思就是行不要了，因此会找到每一列的最大值对应的序号返回</span></span><br><span class="line">m.argmax(dim=<span class="number">1</span>) <span class="comment">#dim=1找意思就是列不要了，因此会找到每一行的最大值对应的序号返回</span></span><br></pre></td></tr></table></figure>
+<h3 id="使用visdom进行可视化"><a href="#使用visdom进行可视化" class="headerlink" title="使用visdom进行可视化"></a>使用visdom进行可视化</h3><blockquote>
+<p>上面训练网络使用了visdom画出损失函数图进行可视化</p>
+</blockquote>
+<p><strong>注意使用vis.line()的时候, Y在前面，X在后面，并且需要将其转换为一维的np.array类型</strong><br><strong>如果需要在原图上更新，指定参数update=’append’</strong><br><strong>win指定对应pane的名字</strong><br><strong>opts采用键值对的形式指定对应可视化pane的一些属性</strong></p>
+<h4 id="启动"><a href="#启动" class="headerlink" title="启动"></a>启动</h4><blockquote>
+<p>python -m visdom.server</p>
+</blockquote>
+<h4 id="可视化"><a href="#可视化" class="headerlink" title="可视化"></a>可视化</h4><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> visdom</span><br><span class="line">vis = visdom.Visdom()</span><br><span class="line">opt = &#123;</span><br><span class="line">    <span class="string">'title'</span>: <span class="string">'LeNet5_loss'</span>,</span><br><span class="line">    <span class="string">'xlabel'</span>: <span class="string">'index'</span>,</span><br><span class="line">    <span class="string">'ylabel'</span>: <span class="string">'loss'</span></span><br><span class="line">&#125;</span><br><span class="line">vis.line(Y=np.array([loss_value]), X=np.array([index_value]), win=<span class="string">'lenet5_loss'</span>, update=<span class="string">'append'</span>, opts=opt)</span><br></pre></td></tr></table></figure>
+<h2 id="References"><a href="#References" class="headerlink" title="References"></a>References</h2><ol>
+<li><a href="https://zhuanlan.zhihu.com/p/30117574" target="_blank" rel="noopener">网络架构完全不懂的参考</a> 缺点：后面的几层讲解的不够全面</li>
+<li><a href="https://www.pytorchtutorial.com/using-visdom-for-visualization-in-pytorch/" target="_blank" rel="noopener">visdom可视化</a></li>
+<li><a href="https://blog.csdn.net/u012436149/article/details/69389610?utm_source=gold_browser_extension" target="_blank" rel="noopener">visdom可视化2</a></li>
+<li><a href="https://blog.csdn.net/nanxiaoting/article/details/81395579" target="_blank" rel="noopener">visdom可视化3</a></li>
+</ol>
+]]></content>
+      
+        <categories>
+            
+            <category> Deep Learning </category>
+            
+            <category> CNN </category>
+            
+        </categories>
+        
+        
+        <tags>
+            
+            <tag> PyTorch </tag>
+            
+            <tag> Deep Learning </tag>
+            
+        </tags>
+        
+    </entry>
+    
+    <entry>
       <title><![CDATA[[LeetCode]171-Excel表列序号.md]]></title>
       <url>/2019/09/10/LeetCode-171-Excel%E8%A1%A8%E5%88%97%E5%BA%8F%E5%8F%B7-md/</url>
       <content type="html"><![CDATA[<h1 id="171-Excel表列序号"><a href="#171-Excel表列序号" class="headerlink" title="171-Excel表列序号"></a>171-Excel表列序号</h1><p><a href="https://leetcode-cn.com/problems/excel-sheet-column-number/" target="_blank" rel="noopener">题目内容</a></p>
@@ -5820,77 +6303,6 @@ at java.net.SocketInputStream.read(SocketInputStream.java:129)
     
     <entry>
       <title><![CDATA[版本管理工具-Git篇[1]]]></title>
-      <url>/2017/01/15/%E7%89%88%E6%9C%AC%E7%AE%A1%E7%90%86%E5%B7%A5%E5%85%B7-Git%E7%AF%87/</url>
-      <content type="html"><![CDATA[<h2 id="版本管理工具的介绍"><a href="#版本管理工具的介绍" class="headerlink" title="版本管理工具的介绍"></a>版本管理工具的介绍</h2><p>作用：备份文件，与U盘等备份文件相比，可以随时随地，项目中经常使用。</p>
-<h3 id="版本管理工具可以记录历史"><a href="#版本管理工具可以记录历史" class="headerlink" title="版本管理工具可以记录历史"></a>版本管理工具可以记录历史</h3><p>网盘 u盘 保存了文件的最新状态，而不会记录修改的历史纪录，而版本管理工具对每次的修改都会进行备份，并且保留了时间和修改人，可以让我们回溯，如果不小心删除版本管理工具中的备份时，我们可以通过历史纪录对其进行找回，因此使用版本管理工具无需担心，而且使用版本管理工具，可以多端共享，例如我们经常所说的云盘，而且只要提交一次，我们就可以在任何地方通过版本管理工具对提交的代码进行下载。尤其对于，一些经常需要分开工作的工作人员比较实用</p>
-<a id="more"></a>
-<h3 id="历史"><a href="#历史" class="headerlink" title="历史"></a>历史</h3><ol>
-<li><p>CVS： 版本管理工具始祖，也是被第一个大规模使用的版本管理工具。由荷兰一所大学教授所开发，由于当时三个人分开工作，为了便于一起协调，创建了CVS。集中式的工具，放到中心服务器上，需要联网</p>
-</li>
-<li><p>SVN： 2000年诞生，也是集中式的工具</p>
-</li>
-<li><p>git： 2005年诞生，Geek社区主流工具，分布式工具！</p>
-</li>
-<li><p>Github： 程序员社区，托管代码基于Git操作。大牛多在这里！！！</p>
-</li>
-</ol>
-<h3 id="集中式-与-分布式-区别"><a href="#集中式-与-分布式-区别" class="headerlink" title="集中式 与 分布式 区别"></a>集中式 与 分布式 区别</h3><ol>
-<li>集中式需要放到中心服务器上，并且操作需要联网，不方便</li>
-<li>分布式则是只要有版本库，就可以在不联网的前提下，快速完成文件提交，记录查看，以及删除等操作，效率高！</li>
-</ol>
-<hr>
-<h2 id="初探Git"><a href="#初探Git" class="headerlink" title="初探Git"></a>初探Git</h2><h3 id="Git-下载-与-安装"><a href="#Git-下载-与-安装" class="headerlink" title="Git 下载 与 安装"></a>Git 下载 与 安装</h3><h4 id="Linux下的安装"><a href="#Linux下的安装" class="headerlink" title="Linux下的安装"></a>Linux下的安装</h4><blockquote>
-<p>打开终端 执行 yum install git 然后键入 yes 等待既可以安装完成 Git</p>
-</blockquote>
-<h2 id="入门Github"><a href="#入门Github" class="headerlink" title="入门Github"></a>入门Github</h2><blockquote>
-<p>GitHub由于下载比较难，推荐离线安装包安装</p>
-</blockquote>
-<h3 id="Linux下检出项目到本地"><a href="#Linux下检出项目到本地" class="headerlink" title="Linux下检出项目到本地"></a>Linux下检出项目到本地</h3><blockquote>
-<p>使用 git clone Github上的仓库地址</p>
-<ol>
-<li>首先创建一个 目录，用来存放 我们检出的项目，使用命令 mkdir Test</li>
-<li>接下来，进入到Test目录，然后 git clone Github上的仓库地址，就可以了</li>
-</ol>
-</blockquote>
-<h3 id="Linux下提交项目"><a href="#Linux下提交项目" class="headerlink" title="Linux下提交项目"></a>Linux下提交项目</h3><blockquote>
-<p>再修改之后，只停留到了本地，没有交到Github维护，因此我们需要同步到Github</p>
-</blockquote>
-<ol>
-<li>首先使用 git status 查看工作区的状态</li>
-<li>对于未跟踪的文件，使用git add 文件名（不包括文件类型），进行跟踪</li>
-<li>然后键入 git commit 命令，并对修改进行描述，这里提交的是提交到了本地的仓库，并没有提交给Github维护</li>
-<li>键入git push，输入Github账户和密码，然后成功提交给Github进行维护</li>
-</ol>
-<h3 id="Windows下检出并提交项目"><a href="#Windows下检出并提交项目" class="headerlink" title="Windows下检出并提交项目"></a>Windows下检出并提交项目</h3><ol>
-<li>首先进入GitHub官方主页，并进入项目所对应的仓库主页，然后点击 open in desktop，选择本地的一个目录，此时检出完成，只需要我们对其进行修改</li>
-<li>修改之后，首先要做的提交修改的东东，并对修改的东西进行一个修改说明</li>
-<li>之后进行同步就可以了</li>
-</ol>
-]]></content>
-      
-        <categories>
-            
-            <category> git </category>
-            
-            <category> 入门 </category>
-            
-        </categories>
-        
-        
-        <tags>
-            
-            <tag> git </tag>
-            
-            <tag> GitHub </tag>
-            
-            <tag> 版本管理工具 </tag>
-            
-        </tags>
-        
-    </entry>
-    
-    <entry>
-      <title><![CDATA[版本管理工具-Git篇[1]]]></title>
       <url>/2017/01/15/%E7%89%88%E6%9C%AC%E7%AE%A1%E7%90%86%E5%B7%A5%E5%85%B7-Git%E7%AF%87%5B1%5D/</url>
       <content type="html"><![CDATA[<h2 id="版本管理工具的介绍"><a href="#版本管理工具的介绍" class="headerlink" title="版本管理工具的介绍"></a>版本管理工具的介绍</h2><p>作用：备份文件，与U盘等备份文件相比，可以随时随地，项目中经常使用。</p>
 <h3 id="版本管理工具可以记录历史"><a href="#版本管理工具可以记录历史" class="headerlink" title="版本管理工具可以记录历史"></a>版本管理工具可以记录历史</h3><p>网盘 u盘 保存了文件的最新状态，而不会记录修改的历史纪录，而版本管理工具对每次的修改都会进行备份，并且保留了时间和修改人，可以让我们回溯，如果不小心删除版本管理工具中的备份时，我们可以通过历史纪录对其进行找回，因此使用版本管理工具无需担心，而且使用版本管理工具，可以多端共享，例如我们经常所说的云盘，而且只要提交一次，我们就可以在任何地方通过版本管理工具对提交的代码进行下载。尤其对于，一些经常需要分开工作的工作人员比较实用</p>
@@ -5955,6 +6367,77 @@ at java.net.SocketInputStream.read(SocketInputStream.java:129)
             <tag> Tools </tag>
             
             <tag> Git </tag>
+            
+        </tags>
+        
+    </entry>
+    
+    <entry>
+      <title><![CDATA[版本管理工具-Git篇[1]]]></title>
+      <url>/2017/01/15/%E7%89%88%E6%9C%AC%E7%AE%A1%E7%90%86%E5%B7%A5%E5%85%B7-Git%E7%AF%87/</url>
+      <content type="html"><![CDATA[<h2 id="版本管理工具的介绍"><a href="#版本管理工具的介绍" class="headerlink" title="版本管理工具的介绍"></a>版本管理工具的介绍</h2><p>作用：备份文件，与U盘等备份文件相比，可以随时随地，项目中经常使用。</p>
+<h3 id="版本管理工具可以记录历史"><a href="#版本管理工具可以记录历史" class="headerlink" title="版本管理工具可以记录历史"></a>版本管理工具可以记录历史</h3><p>网盘 u盘 保存了文件的最新状态，而不会记录修改的历史纪录，而版本管理工具对每次的修改都会进行备份，并且保留了时间和修改人，可以让我们回溯，如果不小心删除版本管理工具中的备份时，我们可以通过历史纪录对其进行找回，因此使用版本管理工具无需担心，而且使用版本管理工具，可以多端共享，例如我们经常所说的云盘，而且只要提交一次，我们就可以在任何地方通过版本管理工具对提交的代码进行下载。尤其对于，一些经常需要分开工作的工作人员比较实用</p>
+<a id="more"></a>
+<h3 id="历史"><a href="#历史" class="headerlink" title="历史"></a>历史</h3><ol>
+<li><p>CVS： 版本管理工具始祖，也是被第一个大规模使用的版本管理工具。由荷兰一所大学教授所开发，由于当时三个人分开工作，为了便于一起协调，创建了CVS。集中式的工具，放到中心服务器上，需要联网</p>
+</li>
+<li><p>SVN： 2000年诞生，也是集中式的工具</p>
+</li>
+<li><p>git： 2005年诞生，Geek社区主流工具，分布式工具！</p>
+</li>
+<li><p>Github： 程序员社区，托管代码基于Git操作。大牛多在这里！！！</p>
+</li>
+</ol>
+<h3 id="集中式-与-分布式-区别"><a href="#集中式-与-分布式-区别" class="headerlink" title="集中式 与 分布式 区别"></a>集中式 与 分布式 区别</h3><ol>
+<li>集中式需要放到中心服务器上，并且操作需要联网，不方便</li>
+<li>分布式则是只要有版本库，就可以在不联网的前提下，快速完成文件提交，记录查看，以及删除等操作，效率高！</li>
+</ol>
+<hr>
+<h2 id="初探Git"><a href="#初探Git" class="headerlink" title="初探Git"></a>初探Git</h2><h3 id="Git-下载-与-安装"><a href="#Git-下载-与-安装" class="headerlink" title="Git 下载 与 安装"></a>Git 下载 与 安装</h3><h4 id="Linux下的安装"><a href="#Linux下的安装" class="headerlink" title="Linux下的安装"></a>Linux下的安装</h4><blockquote>
+<p>打开终端 执行 yum install git 然后键入 yes 等待既可以安装完成 Git</p>
+</blockquote>
+<h2 id="入门Github"><a href="#入门Github" class="headerlink" title="入门Github"></a>入门Github</h2><blockquote>
+<p>GitHub由于下载比较难，推荐离线安装包安装</p>
+</blockquote>
+<h3 id="Linux下检出项目到本地"><a href="#Linux下检出项目到本地" class="headerlink" title="Linux下检出项目到本地"></a>Linux下检出项目到本地</h3><blockquote>
+<p>使用 git clone Github上的仓库地址</p>
+<ol>
+<li>首先创建一个 目录，用来存放 我们检出的项目，使用命令 mkdir Test</li>
+<li>接下来，进入到Test目录，然后 git clone Github上的仓库地址，就可以了</li>
+</ol>
+</blockquote>
+<h3 id="Linux下提交项目"><a href="#Linux下提交项目" class="headerlink" title="Linux下提交项目"></a>Linux下提交项目</h3><blockquote>
+<p>再修改之后，只停留到了本地，没有交到Github维护，因此我们需要同步到Github</p>
+</blockquote>
+<ol>
+<li>首先使用 git status 查看工作区的状态</li>
+<li>对于未跟踪的文件，使用git add 文件名（不包括文件类型），进行跟踪</li>
+<li>然后键入 git commit 命令，并对修改进行描述，这里提交的是提交到了本地的仓库，并没有提交给Github维护</li>
+<li>键入git push，输入Github账户和密码，然后成功提交给Github进行维护</li>
+</ol>
+<h3 id="Windows下检出并提交项目"><a href="#Windows下检出并提交项目" class="headerlink" title="Windows下检出并提交项目"></a>Windows下检出并提交项目</h3><ol>
+<li>首先进入GitHub官方主页，并进入项目所对应的仓库主页，然后点击 open in desktop，选择本地的一个目录，此时检出完成，只需要我们对其进行修改</li>
+<li>修改之后，首先要做的提交修改的东东，并对修改的东西进行一个修改说明</li>
+<li>之后进行同步就可以了</li>
+</ol>
+]]></content>
+      
+        <categories>
+            
+            <category> git </category>
+            
+            <category> 入门 </category>
+            
+        </categories>
+        
+        
+        <tags>
+            
+            <tag> git </tag>
+            
+            <tag> GitHub </tag>
+            
+            <tag> 版本管理工具 </tag>
             
         </tags>
         
