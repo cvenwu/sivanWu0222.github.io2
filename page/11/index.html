@@ -252,6 +252,79 @@
         <ul class="post-list">
         
             <li class="post-list-item fade">
+                <article id="post-浅谈MySQL中的正则表达式"
+  class="article-card article-type-post" itemprop="blogPost">
+  
+    
+    
+    
+        
+
+
+  
+    <h3 class="post-title re-title" itemprop="name">
+      <a class="post-title-link" href="/2017/05/14/浅谈MySQL中的正则表达式/">浅谈MySQL中的正则表达式</a>
+    </h3>
+  
+
+
+
+    
+    <div class="post-meta">
+        <time class="post-time" title="2017-05-14 21:26:19" datetime="2017-05-14T21:26:19.000Z"  itemprop="datePublished">2017-05-14</time>
+
+        
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/MySQL/">MySQL</a><ul class="article-category-list-child"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/MySQL/正则表达式/">正则表达式</a></li></ul></li></ul>
+
+
+
+        
+	<span id="/2017/05/14/浅谈MySQL中的正则表达式/" class="leancloud_visitors" data-flag-title="浅谈MySQL中的正则表达式" title="浅谈MySQL中的正则表达式">
+		
+			<i class="icon icon-eye"></i>
+		
+		<span class="leancloud-visitors-count"></span>
+	</span>
+ 
+
+        
+
+
+        
+        
+    </div>
+    
+    <div class="post-content" id="post-content" itemprop="postContent">
+    
+    
+        <blockquote>
+<p>记得之前自己不熟悉正则表达式的时候，别人问到这个问题，自己一脸懵逼，现在尽管自己对正则表达式有所了解，但还是不够游刃有余，其实自己最感慨<br>正则表达式的强大之处，可能一个正则表达式可以解决我们一个很复杂的问题，例如如何匹配一个身份证号码，如果没有正则表达式，我们可能很难对数据进行有效的过滤。</p>
+</blockquote>
+<h1 id="MySQL中的正则表达式"><a href="#MySQL中的正则表达式" class="headerlink" title="MySQL中的正则表达式"></a>MySQL中的正则表达式</h1><blockquote>
+<p>MySQL中的正则表达式仅支持多数正则表达式实现的一个很小的子集</p>
+</blockquote>
+<h2 id="LIKE-与-REGEXP-的区别"><a href="#LIKE-与-REGEXP-的区别" class="headerlink" title="LIKE 与 REGEXP 的区别"></a>LIKE 与 REGEXP 的区别</h2><p>下面这段SQL代码将匹配 prod_name 为 1000 的记录<br><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> prod_name</span><br><span class="line"><span class="keyword">FROM</span> products</span><br><span class="line"><span class="keyword">WHERE</span> prod_name <span class="keyword">LIKE</span> <span class="string">'1000'</span></span><br><span class="line"><span class="keyword">ORDER</span> <span class="keyword">BY</span> prod_name;</span><br></pre></td></tr></table></figure></p>
+<p>下面这段SQL代码将匹配 prod_name 中 含有 1000 的记录<br><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> prod_name</span><br><span class="line"><span class="keyword">FROM</span> products</span><br><span class="line"><span class="keyword">WHERE</span> prod_name REGEXP <span class="string">'1000'</span></span><br><span class="line"><span class="keyword">ORDER</span> <span class="keyword">BY</span> prod_name;</span><br></pre></td></tr></table></figure></p>
+<ol>
+<li>LIKE 匹配整个列，如果被匹配的文本在列值中出现(而不是列值)，LIKE子句将不会找到</li>
+<li>REGEXP 则在列值内进行匹配，如果被匹配的文本在列值中出现，REGEXP将会找到
+    
+    <a href="/2017/05/14/浅谈MySQL中的正则表达式/" class="post-more waves-effect waves-button">
+        more
+    </a>
+    </div>
+</article>
+
+<div class="post-footer">
+    
+	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/MySQL/">MySQL</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/SQL/">SQL</a></li></ul>
+
+</div>
+
+
+            </li>
+        
+            <li class="post-list-item fade">
                 <article id="post-浅谈SQL中的Where语句"
   class="article-card article-type-post" itemprop="blogPost">
   
@@ -883,75 +956,6 @@
 <div class="post-footer">
     
 	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Eclipse/">Eclipse</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Tools/">Tools</a></li></ul>
-
-</div>
-
-
-            </li>
-        
-            <li class="post-list-item fade">
-                <article id="post-文件输入输出流"
-  class="article-card article-type-post" itemprop="blogPost">
-  
-    
-    
-    
-        
-
-
-  
-    <h3 class="post-title re-title" itemprop="name">
-      <a class="post-title-link" href="/2017/03/09/文件输入输出流/">文件输入输出流</a>
-    </h3>
-  
-
-
-
-    
-    <div class="post-meta">
-        <time class="post-time" title="2017-03-09 10:56:49" datetime="2017-03-09T10:56:49.000Z"  itemprop="datePublished">2017-03-09</time>
-
-        
-	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/Java/">Java</a><ul class="article-category-list-child"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/Java/File/">File</a></li></ul></li></ul>
-
-
-
-        
-	<span id="/2017/03/09/文件输入输出流/" class="leancloud_visitors" data-flag-title="文件输入输出流" title="文件输入输出流">
-		
-			<i class="icon icon-eye"></i>
-		
-		<span class="leancloud-visitors-count"></span>
-	</span>
- 
-
-        
-
-
-        
-        
-    </div>
-    
-    <div class="post-content" id="post-content" itemprop="postContent">
-    
-    
-        <p>文本输入输出流–Scanner和PrintWriter–输入和输出针对Java虚拟机而言</p>
-<h2 id="PrintWriter输出流"><a href="#PrintWriter输出流" class="headerlink" title="PrintWriter输出流"></a>PrintWriter输出流</h2><blockquote>
-<ol>
-<li>使用PrintWriter可以创建一个文本文件，并且向文本文件写入数据</li>
-<li>使用PrintWriter后，必须使用关闭输出流，可以手动也可以自动关闭，不关闭会导致数据不能正确的保存在文件中</li>
-</ol>
-</blockquote>
-    
-    <a href="/2017/03/09/文件输入输出流/" class="post-more waves-effect waves-button">
-        more
-    </a>
-    </div>
-</article>
-
-<div class="post-footer">
-    
-	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/IO/">IO</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Java/">Java</a></li></ul>
 
 </div>
 

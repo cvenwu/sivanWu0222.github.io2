@@ -252,6 +252,93 @@
         <ul class="post-list">
         
             <li class="post-list-item fade">
+                <article id="post-Hibernate入门"
+  class="article-card article-type-post" itemprop="blogPost">
+  
+    
+    
+    
+        
+
+
+  
+    <h3 class="post-title re-title" itemprop="name">
+      <a class="post-title-link" href="/2017/11/12/Hibernate入门/">手动搭建Hibernate开发环境</a>
+    </h3>
+  
+
+
+
+    
+    <div class="post-meta">
+        <time class="post-time" title="2017-11-12 21:40:57" datetime="2017-11-12T21:40:57.000Z"  itemprop="datePublished">2017-11-12</time>
+
+        
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/框架/">框架</a><ul class="article-category-list-child"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/框架/Hibernate/">Hibernate</a></li></ul></li></ul>
+
+
+
+        
+	<span id="/2017/11/12/Hibernate入门/" class="leancloud_visitors" data-flag-title="手动搭建Hibernate开发环境" title="手动搭建Hibernate开发环境">
+		
+			<i class="icon icon-eye"></i>
+		
+		<span class="leancloud-visitors-count"></span>
+	</span>
+ 
+
+        
+
+
+        
+        
+    </div>
+    
+    <div class="post-content" id="post-content" itemprop="postContent">
+    
+    
+        <h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><blockquote>
+<p>Hibernate框架是一个开源的轻量级框架，与传统的EJB（Sun 公司提供的J2EE开发规范，重量级的一个框架，重量级是因为EJB框架依赖jar包较大，使用很麻烦）完全不同</p>
+</blockquote>
+<p>Hibernate的核心便是ORM（Object Relation Mapping）,也就是我们传统Java中的面向对象的关系应用到了数据库中（并不是使得数据库成为面向对象数据库，而是通过一种XML的配置文件，将我们的操作转变为Hibernate所提及的面向对象操作）</p>
+<ol>
+<li>Object：特指我们常说的Java中的对象类</li>
+<li>Relation：也就是我们常说的表的结构</li>
+<li>Mapping：XML配置文件，作为两者（Object与Relation）的中间桥梁</li>
+</ol>
+<h3 id="优点"><a href="#优点" class="headerlink" title="优点"></a>优点</h3><ol>
+<li>Hibernate对于不同的数据库都可以使用Hibernate中特有的hql语句进行操作，只是配置文件相差而已！</li>
+<li>Hibernate封装了我们之前的JDBC的操作，极大程度的避免了重复繁琐的代码</li>
+<li>Hibernate性能较前任EJB相比有极大的提高，映射文件也很灵活，支持多种关系映射，例如一对多，多对多等</li>
+</ol>
+<blockquote>
+<p>相比Mybatis来说，Hibernate封装更为彻底，所以相比Mybatis来说，灵活性比较欠缺</p>
+</blockquote>
+<hr>
+<h2 id="手动搭建Hibernate开发环境"><a href="#手动搭建Hibernate开发环境" class="headerlink" title="手动搭建Hibernate开发环境"></a>手动搭建Hibernate开发环境</h2><ol>
+<li>将数据库驱动包导入到WEB-INF下面的lib里面，（很多人可能会问Hibernate不是已经可以用面向对象的思维来操作数据库了么，但是为什么还是需要导入数据库jar包呢，原因很简单，因为Hibernate是跨数据库的，它无法识别我们使用的是哪个数据库来进行开发，所以需要我们收到导入相对应数据库的jar包）</li>
+<li>导入Hibernate开发所必须的core开发包，<a href="https://github.com/sivanWu0222/HibernateDoc/tree/master/jar/required" target="_blank" rel="noopener">点击下载</a></li>
+<li>导入Hibernate所依赖的jar包(1个是log4j规范接口包，1个实现包，另一个Hibernate规范接口包) <a href="https://github.com/sivanWu0222/HibernateDoc/tree/master/jar/dependency/log4j" target="_blank" rel="noopener"></a></li>
+<li>手动编写一个JavaBean（<strong>JavaBean中的所有属性全部使用包装类，而不是基本类型，例如当我们插入一个顾客，如果年龄忘记赋值，则为0，但是包装类型则为null，因此建议使用包装类</strong>）：<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SET</span> FOREIGN_KEY_CHECKS=<span class="number">0</span>;</span><br><span class="line"><span class="comment">-- ----------------------------</span></span><br><span class="line"><span class="comment">-- Table structure for `cst_customer`</span></span><br><span class="line"><span class="comment">-- ----------------------------</span></span><br><span class="line"><span class="keyword">DROP</span> <span class="keyword">TABLE</span> <span class="keyword">IF</span> <span class="keyword">EXISTS</span> <span class="string">`cst_customer`</span>;</span><br><span class="line"><span class="keyword">CREATE</span> <span class="keyword">TABLE</span> <span class="string">`cst_customer`</span> (</span><br><span class="line">  <span class="string">`cust_id`</span> <span class="built_in">bigint</span>(<span class="number">32</span>) <span class="keyword">NOT</span> <span class="literal">NULL</span> AUTO_INCREMENT,</span><br><span class="line">  <span class="string">`cust_name`</span> <span class="built_in">varchar</span>(<span class="number">32</span>) <span class="keyword">NOT</span> <span class="literal">NULL</span>,</span><br><span class="line">  <span class="string">`cust_user_id`</span> <span class="built_in">bigint</span>(<span class="number">32</span>) <span class="keyword">DEFAULT</span> <span class="literal">NULL</span>,</span><br><span class="line">  <span class="string">`cust_create_id`</span> <span class="built_in">bigint</span>(<span class="number">32</span>) <span class="keyword">DEFAULT</span> <span class="literal">NULL</span>,</span><br><span class="line">  <span class="string">`cust_source`</span> <span class="built_in">varchar</span>(<span class="number">32</span>) <span class="keyword">DEFAULT</span> <span class="literal">NULL</span>,</span><br><span class="line">  <span class="string">`cust_industry`</span> <span class="built_in">varchar</span>(<span class="number">32</span>) <span class="keyword">DEFAULT</span> <span class="literal">NULL</span>,</span><br><span class="line">  <span class="string">`cust_level`</span> <span class="built_in">varchar</span>(<span class="number">32</span>) <span class="keyword">DEFAULT</span> <span class="literal">NULL</span>,</span><br><span class="line">  <span class="string">`cust_linkman`</span> <span class="built_in">varchar</span>(<span class="number">64</span>) <span class="keyword">DEFAULT</span> <span class="literal">NULL</span>,</span><br><span class="line">  <span class="string">`cust_phone`</span> <span class="built_in">varchar</span>(<span class="number">64</span>) <span class="keyword">DEFAULT</span> <span class="literal">NULL</span>,</span><br><span class="line">  <span class="string">`cust_mobile`</span> <span class="built_in">varchar</span>(<span class="number">16</span>) <span class="keyword">DEFAULT</span> <span class="literal">NULL</span>,</span><br><span class="line">  PRIMARY <span class="keyword">KEY</span> (<span class="string">`cust_id`</span>)</span><br><span class="line">) <span class="keyword">ENGINE</span>=<span class="keyword">InnoDB</span> AUTO_INCREMENT=<span class="number">94</span> <span class="keyword">DEFAULT</span> <span class="keyword">CHARSET</span>=utf8;</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+    
+    <a href="/2017/11/12/Hibernate入门/" class="post-more waves-effect waves-button">
+        more
+    </a>
+    </div>
+</article>
+
+<div class="post-footer">
+    
+	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Hibernate/">Hibernate</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Java/">Java</a></li></ul>
+
+</div>
+
+
+            </li>
+        
+            <li class="post-list-item fade">
                 <article id="post-入门Spring"
   class="article-card article-type-post" itemprop="blogPost">
   
@@ -923,91 +1010,6 @@
 <div class="post-footer">
     
 	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Java/">Java</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/SSH/">SSH</a></li></ul>
-
-</div>
-
-
-            </li>
-        
-            <li class="post-list-item fade">
-                <article id="post-ready-与-window-onload-方法区别"
-  class="article-card article-type-post" itemprop="blogPost">
-  
-    
-    
-    
-        
-
-
-  
-    <h3 class="post-title re-title" itemprop="name">
-      <a class="post-title-link" href="/2017/10/18/ready-与-window-onload-方法区别/">$(document).ready() 与 window.onload() 方法区别</a>
-    </h3>
-  
-
-
-
-    
-    <div class="post-meta">
-        <time class="post-time" title="2017-10-18 19:14:09" datetime="2017-10-18T19:14:09.000Z"  itemprop="datePublished">2017-10-18</time>
-
-        
-	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/jQuery/">jQuery</a><ul class="article-category-list-child"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/jQuery/事件/">事件</a></li></ul></li></ul>
-
-
-
-        
-	<span id="/2017/10/18/ready-与-window-onload-方法区别/" class="leancloud_visitors" data-flag-title="$(document).ready() 与 window.onload() 方法区别" title="$(document).ready() 与 window.onload() 方法区别">
-		
-			<i class="icon icon-eye"></i>
-		
-		<span class="leancloud-visitors-count"></span>
-	</span>
- 
-
-        
-
-
-        
-        
-    </div>
-    
-    <div class="post-content" id="post-content" itemprop="postContent">
-    
-    
-        <blockquote>
-<p>浏览器装载完文档之后,浏览器会通过JS为document元素添加事件，JS中通常使用window.onload 方法，而在jQuery中，通常会使用$(document).ready()方法</p>
-</blockquote>
-<h1 id="区别"><a href="#区别" class="headerlink" title="区别"></a>区别</h1><h2 id="执行时机的区别"><a href="#执行时机的区别" class="headerlink" title="执行时机的区别"></a>执行时机的区别</h2><ol>
-<li>window.onload 方法在等待网页中的所有元素全部加载(和元素有关联的文件)之后才会执行。JS此时才会访问网页中的元素。</li>
-<li>jQuery 中的 $(document).ready()方法注册的事件处理程序，在Dom完全就绪的时候就可以调用，此时网页的所有元素都可以进行访问，但并不是这些元素关联的文件都已经下载完毕。</li>
-</ol>
-<blockquote>
-<p>注意： 当DOM数解析完成之后，图片还没有加载完毕，图片高度和宽度这样的属性此时不一定有效</p>
-</blockquote>
-<h2 id="多次使用"><a href="#多次使用" class="headerlink" title="多次使用"></a>多次使用</h2><blockquote>
-<p>网页中的代码如下，但是多次使用 window.onload 之后，只会弹出一次</p>
-</blockquote>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">window</span>.onload = <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">  alert(<span class="string">"1"</span>);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="built_in">window</span>.onload = <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">  alert(<span class="string">"2"</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<blockquote>
-<p>而jQuery中的 $(document).ready() 则可以写多次，且都会执行</p>
-</blockquote>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">$(document).ready(function()&#123;</span><br><span class="line">  alert(&quot;1&quot;);</span><br><span class="line">  &#125;);</span><br><span class="line">$(document).ready(function()&#123;</span><br><span class="line">  alert(&quot;2&quot;);</span><br><span class="line">  &#125;);</span><br></pre></td></tr></table></figure>
-<p>总结：</p>
-<ol>
-<li>onload 事件一次只可以保存一个函数的引用，会自动用后面的函数覆盖前面的函数，因此不可以在现有的行为上继续添加行为</li>
-<li>$(document).ready()方法能够将会很好的处理这些情况，每次调用都会在现有的行为上追加新的行为，并按照注册的顺序依次执行</li>
-</ol>
-    
-    <a href="/2017/10/18/ready-与-window-onload-方法区别/" class="post-more waves-effect waves-button">
-        more
-    </a>
-    </div>
-</article>
-
-<div class="post-footer">
-    
-	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/JavaScript/">JavaScript</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/jQuery/">jQuery</a></li></ul>
 
 </div>
 

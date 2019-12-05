@@ -252,6 +252,95 @@
         <ul class="post-list">
         
             <li class="post-list-item fade">
+                <article id="post-毕业设计遇到的一些问题"
+  class="article-card article-type-post" itemprop="blogPost">
+  
+    
+    
+    <div class="top" data-title="2">
+    <div class="top-wrap">
+        <p></p>
+    </div>
+</div>
+    
+    
+        
+
+
+  
+    <h3 class="post-title re-title" itemprop="name">
+      <a class="post-title-link" href="/2019/04/25/毕业设计遇到的一些问题/">毕业设计问题解决方案记录</a>
+    </h3>
+  
+
+
+
+    
+    <div class="post-meta">
+        <time class="post-time" title="2019-04-25 08:22:35" datetime="2019-04-25T08:22:35.000Z"  itemprop="datePublished">2019-04-25</time>
+
+        
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/本科毕业设计/">本科毕业设计</a><ul class="article-category-list-child"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/本科毕业设计/问题/">问题</a></li></ul></li></ul>
+
+
+
+        
+	<span id="/2019/04/25/毕业设计遇到的一些问题/" class="leancloud_visitors" data-flag-title="毕业设计问题解决方案记录" title="毕业设计问题解决方案记录">
+		
+			<i class="icon icon-eye"></i>
+		
+		<span class="leancloud-visitors-count"></span>
+	</span>
+ 
+
+        
+
+
+        
+        
+    </div>
+    
+    <div class="post-content" id="post-content" itemprop="postContent">
+    
+    
+        <h2 id="gensim模块遇到的问题"><a href="#gensim模块遇到的问题" class="headerlink" title="gensim模块遇到的问题"></a>gensim模块遇到的问题</h2><h3 id="使用gensim模块加载word2vec预先训练好的词向量"><a href="#使用gensim模块加载word2vec预先训练好的词向量" class="headerlink" title="使用gensim模块加载word2vec预先训练好的词向量"></a>使用gensim模块加载word2vec预先训练好的词向量</h3><p>加载google news的模型需要注意 <strong>binary=True</strong></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> gensim</span><br><span class="line">print(<span class="string">'gensim version: %s'</span> % gensim.__version__)</span><br><span class="line">glove_model = gensim.models.KeyedVectors.load_word2vec_format(<span class="string">'D:\GoogleNews-vectors-negative300.bin'</span>, binary=<span class="literal">True</span>)</span><br></pre></td></tr></table></figure>
+<p><a href="https://www.jianshu.com/p/ecd06ca2ff46" target="_blank" rel="noopener">参考</a></p>
+<h3 id="使用gensim模块加载glove预先训练好的词向量"><a href="#使用gensim模块加载glove预先训练好的词向量" class="headerlink" title="使用gensim模块加载glove预先训练好的词向量"></a>使用gensim模块加载glove预先训练好的词向量</h3><p>加载glove预先训练好的词向量</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> gensim</span><br><span class="line">print(<span class="string">'gensim version: %s'</span> % gensim.__version__)</span><br><span class="line">glove_model = gensim.models.KeyedVectors(<span class="string">'../model/text/stanford/glove/glove.6B.50d.vec'</span>)</span><br></pre></td></tr></table></figure>
+<p><a href="https://github.com/makcedward/nlp/blob/master/sample/nlp-word_mover_distance.ipynb" target="_blank" rel="noopener">参考</a></p>
+<hr>
+<h2 id="spacy模块遇到的问题"><a href="#spacy模块遇到的问题" class="headerlink" title="spacy模块遇到的问题"></a>spacy模块遇到的问题</h2><blockquote>
+<p>OSError: [E050] Can’t find model ‘en’. It doesn’t seem to be a shortcut link, a Python package or a valid path to a data directory.</p>
+</blockquote>
+<p>出错代码：<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> spacy</span><br><span class="line">spacy_nlp = spacy.load(<span class="string">'en'</span>)   <span class="comment"># 在本行出错</span></span><br></pre></td></tr></table></figure></p>
+<p>解决方案：</p>
+<ol>
+<li>python -m spacy download en</li>
+</ol>
+<p><a href="https://blog.csdn.net/qq_27009517/article/details/83825523" target="_blank" rel="noopener">参考</a></p>
+<h2 id="No-module-named-‘pyemd’"><a href="#No-module-named-‘pyemd’" class="headerlink" title="No module named ‘pyemd’"></a>No module named ‘pyemd’</h2><p>出错代码：<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span> token, headline <span class="keyword">in</span> zip(headline_tokens, news_headlines):</span><br><span class="line">    print(<span class="string">'-'</span> * <span class="number">50</span>)</span><br><span class="line">    print(<span class="string">'Comparing to:'</span>, headline)</span><br><span class="line">    distance = glove_model.wmdistance(subject_token, token)		<span class="comment"># 本行代码报错</span></span><br><span class="line">    print(<span class="string">'distance = %.4f'</span> % distance)</span><br></pre></td></tr></table></figure></p>
+<h3 id="安装Pyemd-报错"><a href="#安装Pyemd-报错" class="headerlink" title="安装Pyemd 报错"></a>安装Pyemd 报错</h3><blockquote>
+<p>安装pyemd 报错【环境配置】出现：Microsoft Visual C++ 14.0 is required 的解决方案</p>
+</blockquote>
+<p>解决办法：<a href="https://blog.csdn.net/weixin_42057852/article/details/80857948" target="_blank" rel="noopener">参考</a></p>
+    
+    <a href="/2019/04/25/毕业设计遇到的一些问题/" class="post-more waves-effect waves-button">
+        more
+    </a>
+    </div>
+</article>
+
+<div class="post-footer">
+    
+	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/毕业设计/">毕业设计</a></li></ul>
+
+</div>
+
+
+            </li>
+        
+            <li class="post-list-item fade">
                 <article id="post-转-如何在论文中优雅的插入伪代码"
   class="article-card article-type-post" itemprop="blogPost">
   
@@ -915,81 +1004,6 @@
 <h2 id="最大团问题"><a href="#最大团问题" class="headerlink" title="最大团问题"></a>最大团问题</h2><h2 id="解题策略"><a href="#解题策略" class="headerlink" title="解题策略"></a>解题策略</h2><p>判断顶点是否可以加入团：当前要加入的顶点与之前已经加入的所有顶点都要有边相连！</p>
     
     <a href="/2019/03/16/最大团问题-回溯算法/" class="post-more waves-effect waves-button">
-        more
-    </a>
-    </div>
-</article>
-
-<div class="post-footer">
-    
-	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Algorithm/">Algorithm</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/算法设计与分析/">算法设计与分析</a></li></ul>
-
-</div>
-
-
-            </li>
-        
-            <li class="post-list-item fade">
-                <article id="post-背包问题-贪心算法"
-  class="article-card article-type-post" itemprop="blogPost">
-  
-    
-    
-    <div class="top" data-title="2">
-    <div class="top-wrap">
-        <p></p>
-    </div>
-</div>
-    
-    
-        
-
-
-  
-    <h3 class="post-title re-title" itemprop="name">
-      <a class="post-title-link" href="/2019/03/16/背包问题-贪心算法/">背包问题-贪心算法</a>
-    </h3>
-  
-
-
-
-    
-    <div class="post-meta">
-        <time class="post-time" title="2019-03-16 15:19:43" datetime="2019-03-16T15:19:43.000Z"  itemprop="datePublished">2019-03-16</time>
-
-        
-	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/算法/">算法</a><ul class="article-category-list-child"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/算法/贪心算法/">贪心算法</a></li></ul></li></ul>
-
-
-
-        
-	<span id="/2019/03/16/背包问题-贪心算法/" class="leancloud_visitors" data-flag-title="背包问题-贪心算法" title="背包问题-贪心算法">
-		
-			<i class="icon icon-eye"></i>
-		
-		<span class="leancloud-visitors-count"></span>
-	</span>
- 
-
-        
-
-
-        
-  <span><i class="icon icon-github"></i></span>
-
-        
-    </div>
-    
-    <div class="post-content" id="post-content" itemprop="postContent">
-    
-    
-        <h2 id="问题描述"><a href="#问题描述" class="headerlink" title="问题描述"></a>问题描述</h2><p>假设山洞中有n种宝物，每种宝物都有一定重量w和相应的价值v，老驴运载能力有限，只能运走m重量的宝物，一种宝物只能拿一样，宝物可以分割，那么怎么才能使毛驴运走宝物的价值最大？</p>
-<h2 id="解题策略"><a href="#解题策略" class="headerlink" title="解题策略"></a>解题策略</h2><p>策略1：根据物品的重量从小到大排序，依次选择物品进入背包，使得剩余质量消耗慢</p>
-<p>策略2：根据物品的价值从大到小排序，优先选择价值大的物品进入背包，使得总价值达到最大</p>
-<p>策略3：根据物品的价值与质量的比，即效益比，按照效益比的从大到小优先选入背包</p>
-<p><strong>通过列举反例，我们可以推翻策略1,2，   策略3就是我们可以利用求得最优解的策略</strong></p>
-    
-    <a href="/2019/03/16/背包问题-贪心算法/" class="post-more waves-effect waves-button">
         more
     </a>
     </div>

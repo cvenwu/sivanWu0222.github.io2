@@ -252,6 +252,133 @@
         <ul class="post-list">
         
             <li class="post-list-item fade">
+                <article id="post-OpenCV-TensorFlow-入门人工智能图像处理-1"
+  class="article-card article-type-post" itemprop="blogPost">
+  
+    
+    
+    <div class="top" data-title="2">
+    <div class="top-wrap">
+        <p></p>
+    </div>
+</div>
+    
+    
+        
+
+
+  
+    <h3 class="post-title re-title" itemprop="name">
+      <a class="post-title-link" href="/2019/05/09/OpenCV-TensorFlow-入门人工智能图像处理-1/">OpenCV+TensorFlow 入门人工智能图像处理[1]</a>
+    </h3>
+  
+
+
+
+    
+    <div class="post-meta">
+        <time class="post-time" title="2019-05-09 12:11:12" datetime="2019-05-09T12:11:12.000Z"  itemprop="datePublished">2019-05-09</time>
+
+        
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/计算机视觉/">计算机视觉</a></li></ul>
+
+
+
+        
+	<span id="/2019/05/09/OpenCV-TensorFlow-入门人工智能图像处理-1/" class="leancloud_visitors" data-flag-title="OpenCV+TensorFlow 入门人工智能图像处理[1]" title="OpenCV+TensorFlow 入门人工智能图像处理[1]">
+		
+			<i class="icon icon-eye"></i>
+		
+		<span class="leancloud-visitors-count"></span>
+	</span>
+ 
+
+        
+
+
+        
+  <span><i class="icon icon-github"></i></span>
+
+        
+    </div>
+    
+    <div class="post-content" id="post-content" itemprop="postContent">
+    
+    
+        <h2 id="opencv"><a href="#opencv" class="headerlink" title="opencv"></a>opencv</h2><h3 id="opencv的导入"><a href="#opencv的导入" class="headerlink" title="opencv的导入"></a>opencv的导入</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> cv2</span><br></pre></td></tr></table></figure>
+<h3 id="读取图像数据"><a href="#读取图像数据" class="headerlink" title="读取图像数据"></a>读取图像数据</h3><p>imread()方法对图片进行数据的读取</p>
+<ol>
+<li>有2个参数，第1个参数是文件名</li>
+<li>第2个参数是图片的类型，如果当前参数为0，读取的是灰度图片，如果参数为1，读取进来的为彩色图片</li>
+<li>该方法完成图片的读取，返回的是当前图片的图像数据</li>
+<li>虽然表面上看只是图像读取，但是包含了几个步骤，文件的读取，图像格式的分析，图像数据的解码，数据的加载</li>
+</ol>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">img = cv2.imread(<span class="string">'./image0.jpg'</span>, class="index-item-img">
+<p><strong>opencv中读取图像后获得的像素点是bgr(blue, green, red)与rgb不同</strong></p>
+<h3 id="展示图像"><a href="#展示图像" class="headerlink" title="展示图像"></a>展示图像</h3><p>imshow()对图片进行展示</p>
+<ol>
+<li>有2个参数，第1个参数是展示出的图像所在的窗体名称</li>
+<li>第2个参数是当前窗体展示的内容</li>
+</ol>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">cv2.imshow(<span class="string">'image'</span>, img)</span><br><span class="line"><span class="comment"># 防止一瞬间消失掉后看不到图片</span></span><br><span class="line">cv2.waitKey(<span class="number">0</span>)</span><br></pre></td></tr></table></figure>
+<p>因为读取图片之后对图片进行显示的时候将会在一瞬间消失掉，因此我们需要stop，也就是采用了<strong>cv2.waitKey(0)</strong></p>
+<h3 id="图像数据的写入"><a href="#图像数据的写入" class="headerlink" title="图像数据的写入"></a>图像数据的写入</h3><p>imwrite() 将数据写入到一张图片中</p>
+<ol>
+<li>有2个参数，第1个参数是 图片的名称</li>
+<li>第2个参数是 当前图片的数组</li>
+</ol>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 此时的img是解码之后的数据</span></span><br><span class="line">cv2.imwrite(<span class="string">'image1.jpg'</span>, img)</span><br><span class="line">type(img) <span class="comment"># 将会是一个ndarray数组</span></span><br></pre></td></tr></table></figure>
+<h3 id="图像质量"><a href="#图像质量" class="headerlink" title="图像质量"></a>图像质量</h3><blockquote>
+<p>图像划分为jpg与png，两个采用不同的压缩格式</p>
+</blockquote>
+<h4 id="PNG与JPG压缩的区别："><a href="#PNG与JPG压缩的区别：" class="headerlink" title="PNG与JPG压缩的区别："></a>PNG与JPG压缩的区别：</h4><ol>
+<li>jpg图片压缩将会损失图片的质量，也就是有损压缩，png图片压缩是无损压缩</li>
+<li>jpg无法设置透明度，png可以设置透明度，不仅仅可以修改传统的RGB</li>
+</ol>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 第3个参数用来描述当前图片的质量,对于jpg图片的压缩可以采用不同的压缩比来对其进行控制，范围是0-100</span></span><br><span class="line">cv2.imwrite(<span class="string">'imageTest2.jpg'</span>, img, [cv2.IMWRITE_JPEG_QUALITY, <span class="number">50</span>]) </span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> cv2</span><br><span class="line">img = cv2.imread(<span class="string">'./image0.jpg'</span>, class="index-item-img">
+<p>在imwrite()方法的第3个参数中：</p>
+<ol>
+<li>对于JPG 来说 数字越小，压缩比越高，图片质量越不清晰，压缩范围是0-100</li>
+<li>对于PNG 来说，数字越小，压缩比越低，图片质量越清晰 ，压缩范围是0-9 </li>
+</ol>
+<h2 id="坐标轴"><a href="#坐标轴" class="headerlink" title="坐标轴"></a>坐标轴</h2><figure class="image-box">
+                <img src="/2019/05/09/OpenCV-TensorFlow-入门人工智能图像处理-1/./OpenCV-TensorFlow-入门人工智能图像处理-1/坐标轴.png" alt="糟了" title="这是标题" class="index-item-img">
+                <p>这是标题</p>
+            </figure>   
+<p>x轴对应垂直高度的变化</p>
+<h2 id="图像基础知识"><a href="#图像基础知识" class="headerlink" title="图像基础知识"></a>图像基础知识</h2><ul>
+<li><p>像素点(像素)：图像是由一个个方块组成，每个方块称为像素点，</p>
+</li>
+<li><p>每种颜色都是由RGB三种颜色分量组合而成。</p>
+</li>
+<li><p>像素点如何存储：在计算机中，每种颜色都可以通过RGB三种颜色进行合成，在8位颜色深度中，每个RGB对应的分量取值都是0-255</p>
+</li>
+<li><p>颜色深度：8位颜色深度，表示的是RGB每个分量中， 都有2^8个可能</p>
+</li>
+<li>对于png图片来说，每一个像素点除了RGB之外，还可能有α通道作为透明度</li>
+<li>经常见到的颜色存储格式：RGB(red, green, blue) 、BGR(blue, green, red)</li>
+</ul>
+<h3 id="例子："><a href="#例子：" class="headerlink" title="例子："></a>例子：</h3><p>如果有一个图片，宽为640 高是480 ，表示图片在水平方向上有640个像素点，在竖直方向上有480个像素点，</p>
+<p>图片未经压缩的大小计算： 大小 = 宽度 <em> 高度 </em> 3 * 颜色深度 (单位是bit)</p>
+<p>除以8 转换为B </p>
+<p>首先是宽度*高度，得到多少个像素点，然后因为每个点是由RGB中的3个颜色分量组成，所以 再乘以3，每个颜色分量是8位的颜色深度，所以最后计算而来</p>
+    
+    <a href="/2019/05/09/OpenCV-TensorFlow-入门人工智能图像处理-1/" class="post-more waves-effect waves-button">
+        more
+    </a>
+    </div>
+</article>
+
+<div class="post-footer">
+    
+	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/CV/">CV</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/OpenCV/">OpenCV</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/TensorFlow/">TensorFlow</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/人工智能/">人工智能</a></li></ul>
+
+</div>
+
+
+            </li>
+        
+            <li class="post-list-item fade">
                 <article id="post-Python中使用uuid来生成唯一标识"
   class="article-card article-type-post" itemprop="blogPost">
   
@@ -946,95 +1073,6 @@ urllib.request.urlopen(timeout=1) # 设置1秒为超时界限
 <div class="post-footer">
     
 	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Anaconda/">Anaconda</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/FAISS/">FAISS</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/FAISS安装/">FAISS安装</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Ubuntu/">Ubuntu</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/毕业设计/">毕业设计</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/毕业设计环境/">毕业设计环境</a></li></ul>
-
-</div>
-
-
-            </li>
-        
-            <li class="post-list-item fade">
-                <article id="post-毕业设计遇到的一些问题"
-  class="article-card article-type-post" itemprop="blogPost">
-  
-    
-    
-    <div class="top" data-title="2">
-    <div class="top-wrap">
-        <p></p>
-    </div>
-</div>
-    
-    
-        
-
-
-  
-    <h3 class="post-title re-title" itemprop="name">
-      <a class="post-title-link" href="/2019/04/25/毕业设计遇到的一些问题/">毕业设计问题解决方案记录</a>
-    </h3>
-  
-
-
-
-    
-    <div class="post-meta">
-        <time class="post-time" title="2019-04-25 08:22:35" datetime="2019-04-25T08:22:35.000Z"  itemprop="datePublished">2019-04-25</time>
-
-        
-	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/本科毕业设计/">本科毕业设计</a><ul class="article-category-list-child"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/本科毕业设计/问题/">问题</a></li></ul></li></ul>
-
-
-
-        
-	<span id="/2019/04/25/毕业设计遇到的一些问题/" class="leancloud_visitors" data-flag-title="毕业设计问题解决方案记录" title="毕业设计问题解决方案记录">
-		
-			<i class="icon icon-eye"></i>
-		
-		<span class="leancloud-visitors-count"></span>
-	</span>
- 
-
-        
-
-
-        
-        
-    </div>
-    
-    <div class="post-content" id="post-content" itemprop="postContent">
-    
-    
-        <h2 id="gensim模块遇到的问题"><a href="#gensim模块遇到的问题" class="headerlink" title="gensim模块遇到的问题"></a>gensim模块遇到的问题</h2><h3 id="使用gensim模块加载word2vec预先训练好的词向量"><a href="#使用gensim模块加载word2vec预先训练好的词向量" class="headerlink" title="使用gensim模块加载word2vec预先训练好的词向量"></a>使用gensim模块加载word2vec预先训练好的词向量</h3><p>加载google news的模型需要注意 <strong>binary=True</strong></p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> gensim</span><br><span class="line">print(<span class="string">'gensim version: %s'</span> % gensim.__version__)</span><br><span class="line">glove_model = gensim.models.KeyedVectors.load_word2vec_format(<span class="string">'D:\GoogleNews-vectors-negative300.bin'</span>, binary=<span class="literal">True</span>)</span><br></pre></td></tr></table></figure>
-<p><a href="https://www.jianshu.com/p/ecd06ca2ff46" target="_blank" rel="noopener">参考</a></p>
-<h3 id="使用gensim模块加载glove预先训练好的词向量"><a href="#使用gensim模块加载glove预先训练好的词向量" class="headerlink" title="使用gensim模块加载glove预先训练好的词向量"></a>使用gensim模块加载glove预先训练好的词向量</h3><p>加载glove预先训练好的词向量</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> gensim</span><br><span class="line">print(<span class="string">'gensim version: %s'</span> % gensim.__version__)</span><br><span class="line">glove_model = gensim.models.KeyedVectors(<span class="string">'../model/text/stanford/glove/glove.6B.50d.vec'</span>)</span><br></pre></td></tr></table></figure>
-<p><a href="https://github.com/makcedward/nlp/blob/master/sample/nlp-word_mover_distance.ipynb" target="_blank" rel="noopener">参考</a></p>
-<hr>
-<h2 id="spacy模块遇到的问题"><a href="#spacy模块遇到的问题" class="headerlink" title="spacy模块遇到的问题"></a>spacy模块遇到的问题</h2><blockquote>
-<p>OSError: [E050] Can’t find model ‘en’. It doesn’t seem to be a shortcut link, a Python package or a valid path to a data directory.</p>
-</blockquote>
-<p>出错代码：<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> spacy</span><br><span class="line">spacy_nlp = spacy.load(<span class="string">'en'</span>)   <span class="comment"># 在本行出错</span></span><br></pre></td></tr></table></figure></p>
-<p>解决方案：</p>
-<ol>
-<li>python -m spacy download en</li>
-</ol>
-<p><a href="https://blog.csdn.net/qq_27009517/article/details/83825523" target="_blank" rel="noopener">参考</a></p>
-<h2 id="No-module-named-‘pyemd’"><a href="#No-module-named-‘pyemd’" class="headerlink" title="No module named ‘pyemd’"></a>No module named ‘pyemd’</h2><p>出错代码：<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span> token, headline <span class="keyword">in</span> zip(headline_tokens, news_headlines):</span><br><span class="line">    print(<span class="string">'-'</span> * <span class="number">50</span>)</span><br><span class="line">    print(<span class="string">'Comparing to:'</span>, headline)</span><br><span class="line">    distance = glove_model.wmdistance(subject_token, token)		<span class="comment"># 本行代码报错</span></span><br><span class="line">    print(<span class="string">'distance = %.4f'</span> % distance)</span><br></pre></td></tr></table></figure></p>
-<h3 id="安装Pyemd-报错"><a href="#安装Pyemd-报错" class="headerlink" title="安装Pyemd 报错"></a>安装Pyemd 报错</h3><blockquote>
-<p>安装pyemd 报错【环境配置】出现：Microsoft Visual C++ 14.0 is required 的解决方案</p>
-</blockquote>
-<p>解决办法：<a href="https://blog.csdn.net/weixin_42057852/article/details/80857948" target="_blank" rel="noopener">参考</a></p>
-    
-    <a href="/2019/04/25/毕业设计遇到的一些问题/" class="post-more waves-effect waves-button">
-        more
-    </a>
-    </div>
-</article>
-
-<div class="post-footer">
-    
-	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/毕业设计/">毕业设计</a></li></ul>
 
 </div>
 

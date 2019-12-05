@@ -252,6 +252,91 @@
         <ul class="post-list">
         
             <li class="post-list-item fade">
+                <article id="post-ready-与-window-onload-方法区别"
+  class="article-card article-type-post" itemprop="blogPost">
+  
+    
+    
+    
+        
+
+
+  
+    <h3 class="post-title re-title" itemprop="name">
+      <a class="post-title-link" href="/2017/10/18/ready-与-window-onload-方法区别/">$(document).ready() 与 window.onload() 方法区别</a>
+    </h3>
+  
+
+
+
+    
+    <div class="post-meta">
+        <time class="post-time" title="2017-10-18 19:14:09" datetime="2017-10-18T19:14:09.000Z"  itemprop="datePublished">2017-10-18</time>
+
+        
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/jQuery/">jQuery</a><ul class="article-category-list-child"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/jQuery/事件/">事件</a></li></ul></li></ul>
+
+
+
+        
+	<span id="/2017/10/18/ready-与-window-onload-方法区别/" class="leancloud_visitors" data-flag-title="$(document).ready() 与 window.onload() 方法区别" title="$(document).ready() 与 window.onload() 方法区别">
+		
+			<i class="icon icon-eye"></i>
+		
+		<span class="leancloud-visitors-count"></span>
+	</span>
+ 
+
+        
+
+
+        
+        
+    </div>
+    
+    <div class="post-content" id="post-content" itemprop="postContent">
+    
+    
+        <blockquote>
+<p>浏览器装载完文档之后,浏览器会通过JS为document元素添加事件，JS中通常使用window.onload 方法，而在jQuery中，通常会使用$(document).ready()方法</p>
+</blockquote>
+<h1 id="区别"><a href="#区别" class="headerlink" title="区别"></a>区别</h1><h2 id="执行时机的区别"><a href="#执行时机的区别" class="headerlink" title="执行时机的区别"></a>执行时机的区别</h2><ol>
+<li>window.onload 方法在等待网页中的所有元素全部加载(和元素有关联的文件)之后才会执行。JS此时才会访问网页中的元素。</li>
+<li>jQuery 中的 $(document).ready()方法注册的事件处理程序，在Dom完全就绪的时候就可以调用，此时网页的所有元素都可以进行访问，但并不是这些元素关联的文件都已经下载完毕。</li>
+</ol>
+<blockquote>
+<p>注意： 当DOM数解析完成之后，图片还没有加载完毕，图片高度和宽度这样的属性此时不一定有效</p>
+</blockquote>
+<h2 id="多次使用"><a href="#多次使用" class="headerlink" title="多次使用"></a>多次使用</h2><blockquote>
+<p>网页中的代码如下，但是多次使用 window.onload 之后，只会弹出一次</p>
+</blockquote>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">window</span>.onload = <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">  alert(<span class="string">"1"</span>);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="built_in">window</span>.onload = <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">  alert(<span class="string">"2"</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>而jQuery中的 $(document).ready() 则可以写多次，且都会执行</p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">$(document).ready(function()&#123;</span><br><span class="line">  alert(&quot;1&quot;);</span><br><span class="line">  &#125;);</span><br><span class="line">$(document).ready(function()&#123;</span><br><span class="line">  alert(&quot;2&quot;);</span><br><span class="line">  &#125;);</span><br></pre></td></tr></table></figure>
+<p>总结：</p>
+<ol>
+<li>onload 事件一次只可以保存一个函数的引用，会自动用后面的函数覆盖前面的函数，因此不可以在现有的行为上继续添加行为</li>
+<li>$(document).ready()方法能够将会很好的处理这些情况，每次调用都会在现有的行为上追加新的行为，并按照注册的顺序依次执行</li>
+</ol>
+    
+    <a href="/2017/10/18/ready-与-window-onload-方法区别/" class="post-more waves-effect waves-button">
+        more
+    </a>
+    </div>
+</article>
+
+<div class="post-footer">
+    
+	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/JavaScript/">JavaScript</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/jQuery/">jQuery</a></li></ul>
+
+</div>
+
+
+            </li>
+        
+            <li class="post-list-item fade">
                 <article id="post-了解类的加载，连接和初始化"
   class="article-card article-type-post" itemprop="blogPost">
   
@@ -960,79 +1045,6 @@ at java.net.SocketInputStream.read(SocketInputStream.java:129)
 <div class="post-footer">
     
 	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Java/">Java</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/net/">net</a></li></ul>
-
-</div>
-
-
-            </li>
-        
-            <li class="post-list-item fade">
-                <article id="post-浅谈MySQL中的正则表达式"
-  class="article-card article-type-post" itemprop="blogPost">
-  
-    
-    
-    
-        
-
-
-  
-    <h3 class="post-title re-title" itemprop="name">
-      <a class="post-title-link" href="/2017/05/14/浅谈MySQL中的正则表达式/">浅谈MySQL中的正则表达式</a>
-    </h3>
-  
-
-
-
-    
-    <div class="post-meta">
-        <time class="post-time" title="2017-05-14 21:26:19" datetime="2017-05-14T21:26:19.000Z"  itemprop="datePublished">2017-05-14</time>
-
-        
-	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/MySQL/">MySQL</a><ul class="article-category-list-child"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/MySQL/正则表达式/">正则表达式</a></li></ul></li></ul>
-
-
-
-        
-	<span id="/2017/05/14/浅谈MySQL中的正则表达式/" class="leancloud_visitors" data-flag-title="浅谈MySQL中的正则表达式" title="浅谈MySQL中的正则表达式">
-		
-			<i class="icon icon-eye"></i>
-		
-		<span class="leancloud-visitors-count"></span>
-	</span>
- 
-
-        
-
-
-        
-        
-    </div>
-    
-    <div class="post-content" id="post-content" itemprop="postContent">
-    
-    
-        <blockquote>
-<p>记得之前自己不熟悉正则表达式的时候，别人问到这个问题，自己一脸懵逼，现在尽管自己对正则表达式有所了解，但还是不够游刃有余，其实自己最感慨<br>正则表达式的强大之处，可能一个正则表达式可以解决我们一个很复杂的问题，例如如何匹配一个身份证号码，如果没有正则表达式，我们可能很难对数据进行有效的过滤。</p>
-</blockquote>
-<h1 id="MySQL中的正则表达式"><a href="#MySQL中的正则表达式" class="headerlink" title="MySQL中的正则表达式"></a>MySQL中的正则表达式</h1><blockquote>
-<p>MySQL中的正则表达式仅支持多数正则表达式实现的一个很小的子集</p>
-</blockquote>
-<h2 id="LIKE-与-REGEXP-的区别"><a href="#LIKE-与-REGEXP-的区别" class="headerlink" title="LIKE 与 REGEXP 的区别"></a>LIKE 与 REGEXP 的区别</h2><p>下面这段SQL代码将匹配 prod_name 为 1000 的记录<br><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> prod_name</span><br><span class="line"><span class="keyword">FROM</span> products</span><br><span class="line"><span class="keyword">WHERE</span> prod_name <span class="keyword">LIKE</span> <span class="string">'1000'</span></span><br><span class="line"><span class="keyword">ORDER</span> <span class="keyword">BY</span> prod_name;</span><br></pre></td></tr></table></figure></p>
-<p>下面这段SQL代码将匹配 prod_name 中 含有 1000 的记录<br><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> prod_name</span><br><span class="line"><span class="keyword">FROM</span> products</span><br><span class="line"><span class="keyword">WHERE</span> prod_name REGEXP <span class="string">'1000'</span></span><br><span class="line"><span class="keyword">ORDER</span> <span class="keyword">BY</span> prod_name;</span><br></pre></td></tr></table></figure></p>
-<ol>
-<li>LIKE 匹配整个列，如果被匹配的文本在列值中出现(而不是列值)，LIKE子句将不会找到</li>
-<li>REGEXP 则在列值内进行匹配，如果被匹配的文本在列值中出现，REGEXP将会找到
-    
-    <a href="/2017/05/14/浅谈MySQL中的正则表达式/" class="post-more waves-effect waves-button">
-        more
-    </a>
-    </div>
-</article>
-
-<div class="post-footer">
-    
-	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/MySQL/">MySQL</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/SQL/">SQL</a></li></ul>
 
 </div>
 

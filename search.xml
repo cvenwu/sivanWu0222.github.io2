@@ -3,6 +3,40 @@
   
     
     <entry>
+      <title><![CDATA[动态规划解决0-1背包问题]]></title>
+      <url>/2019/12/05/%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92%E8%A7%A3%E5%86%B30-1%E8%83%8C%E5%8C%85%E9%97%AE%E9%A2%98/</url>
+      <content type="html"><![CDATA[<h2 id="动态规划求解0-1背包问题"><a href="#动态规划求解0-1背包问题" class="headerlink" title="动态规划求解0-1背包问题"></a>动态规划求解0-1背包问题</h2><h3 id="问题描述"><a href="#问题描述" class="headerlink" title="问题描述"></a>问题描述</h3><p>利用动态规划法求0-1背包问题。有n = 20个物品，背包最大可装载M = 878 Kg。物品重量和价值分别如下：<br>W = {92 ,4 ,43 ,83 ,84 ,68 ,92 ,82 ,6 ,44 ,32 ,18 ,56 ,83 ,25 ,96 ,70 ,48 ,14 ,58},<br>V = {44 ,46 ,90 ,72 ,91, 40 ,75 ,35 ,8 ,54 ,78 ,40 ,77 ,15 ,61 ,17 ,75 ,29 ,75 ,63}，<br>求最优背包价值。</p>
+<h3 id="核心"><a href="#核心" class="headerlink" title="核心"></a>核心</h3><ol>
+<li>初始化状态转移矩阵</li>
+<li>建立状态转移方程</li>
+</ol>
+<figure class="image-box">
+                <img src="状态转移方程.png" alt="状态转移方程" title class>
+                <p>状态转移方程</p>
+            </figure>
+<a id="more"></a>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="string">'''</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">'''</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">dynamic_programming</span><span class="params">(bag_weight, goods_weight, goods_value)</span>:</span></span><br><span class="line">    <span class="comment"># 动态规划状态转移矩阵 20 * 878, 每一行代表一个物品，每一列代表背包重量，每个元素代表背包重量代表的最大价值，并且第二行的值只能选前两个物品</span></span><br><span class="line">    status_matrix = [[<span class="number">0</span> <span class="keyword">for</span> i <span class="keyword">in</span> range(bag_weight + <span class="number">1</span>)] <span class="keyword">for</span> j <span class="keyword">in</span> range(len(goods_value) + <span class="number">1</span>)]</span><br><span class="line">    <span class="keyword">for</span> row_index <span class="keyword">in</span> range(<span class="number">1</span>, len(status_matrix)):</span><br><span class="line">        <span class="keyword">for</span> col_index <span class="keyword">in</span> range(<span class="number">1</span>, len(status_matrix[<span class="number">0</span>])):</span><br><span class="line">            <span class="comment"># 如果可以放下当前物品</span></span><br><span class="line">            <span class="keyword">if</span> col_index &gt;= goods_weight[row_index - <span class="number">1</span>]:  <span class="comment"># 注意这里有等号</span></span><br><span class="line">                <span class="comment"># 取两者的最大值，也就是上一行当前列或上一行减去当前物品重量对于列的值</span></span><br><span class="line">                status_matrix[row_index][col_index] = max(status_matrix[row_index<span class="number">-1</span>][col_index],</span><br><span class="line">                                                          status_matrix[row_index<span class="number">-1</span>][col_index-goods_weight[row_index<span class="number">-1</span>]] + goods_value[row_index<span class="number">-1</span>])</span><br><span class="line">            <span class="keyword">else</span>:</span><br><span class="line">                <span class="comment"># 如果放不下当前物品</span></span><br><span class="line">                status_matrix[row_index][col_index] = status_matrix[row_index<span class="number">-1</span>][col_index]</span><br><span class="line"></span><br><span class="line">    <span class="comment"># 返回最大收益</span></span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> status_matrix:</span><br><span class="line">        print(i)</span><br><span class="line">    <span class="keyword">return</span> status_matrix[<span class="number">-1</span>][<span class="number">-1</span>]</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> __name__ == <span class="string">'__main__'</span>:</span><br><span class="line">    weight = [<span class="number">92</span>, <span class="number">4</span>, <span class="number">43</span>, <span class="number">83</span>, <span class="number">84</span>, <span class="number">68</span>, <span class="number">92</span>, <span class="number">82</span>, <span class="number">6</span>, <span class="number">44</span>, <span class="number">32</span>, <span class="number">18</span>, <span class="number">56</span>, <span class="number">83</span>, <span class="number">25</span>, <span class="number">96</span>, <span class="number">70</span>, <span class="number">48</span>, <span class="number">14</span>, <span class="number">58</span>]</span><br><span class="line">    value = [<span class="number">44</span>, <span class="number">46</span>, <span class="number">90</span>, <span class="number">72</span>, <span class="number">91</span>, <span class="number">40</span>, <span class="number">75</span>, <span class="number">35</span>, <span class="number">8</span>, <span class="number">54</span>, <span class="number">78</span>, <span class="number">40</span>, <span class="number">77</span>, <span class="number">15</span>, <span class="number">61</span>, <span class="number">17</span>, <span class="number">75</span>, <span class="number">29</span>, <span class="number">75</span>, <span class="number">63</span>]</span><br><span class="line">    max_value = dynamic_programming(<span class="number">878</span>, weight, value)</span><br><span class="line">    print(max_value)</span><br></pre></td></tr></table></figure>]]></content>
+      
+        <categories>
+            
+            <category> Algorithm </category>
+            
+            <category> DP </category>
+            
+        </categories>
+        
+        
+        <tags>
+            
+            <tag> Algorithm </tag>
+            
+            <tag> DP </tag>
+            
+        </tags>
+        
+    </entry>
+    
+    <entry>
       <title><![CDATA[csv模块写入csv文件 os创建目录 np.prod计算元素乘积]]></title>
       <url>/2019/11/30/csv%E6%A8%A1%E5%9D%97%E5%86%99%E5%85%A5csv%E6%96%87%E4%BB%B6-os%E5%88%9B%E5%BB%BA%E7%9B%AE%E5%BD%95-np-prod%E8%AE%A1%E7%AE%97%E5%85%83%E7%B4%A0%E6%88%90%E7%BB%A9/</url>
       <content type="html"><![CDATA[<h2 id="csv-库的使用"><a href="#csv-库的使用" class="headerlink" title="csv 库的使用"></a>csv 库的使用</h2><h3 id="写csv文件"><a href="#写csv文件" class="headerlink" title="写csv文件"></a>写csv文件</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> csv</span><br><span class="line"><span class="keyword">if</span> __name__ == <span class="string">'__main__'</span>:</span><br><span class="line">    <span class="keyword">with</span> open(<span class="string">'result.csv'</span>, <span class="string">"a+"</span>, newline=<span class="string">''</span>) <span class="keyword">as</span> f:</span><br><span class="line">        writer = csv.writer(f, delimiter=<span class="string">':'</span>)  <span class="comment"># delimiter用于csv文件中分隔符的显示,默认是,</span></span><br><span class="line">        writer.writerow([<span class="string">'1'</span>, <span class="string">'2'</span>, <span class="number">3</span>])</span><br></pre></td></tr></table></figure>
@@ -6308,77 +6342,6 @@ at java.net.SocketInputStream.read(SocketInputStream.java:129)
     
     <entry>
       <title><![CDATA[版本管理工具-Git篇[1]]]></title>
-      <url>/2017/01/15/%E7%89%88%E6%9C%AC%E7%AE%A1%E7%90%86%E5%B7%A5%E5%85%B7-Git%E7%AF%87/</url>
-      <content type="html"><![CDATA[<h2 id="版本管理工具的介绍"><a href="#版本管理工具的介绍" class="headerlink" title="版本管理工具的介绍"></a>版本管理工具的介绍</h2><p>作用：备份文件，与U盘等备份文件相比，可以随时随地，项目中经常使用。</p>
-<h3 id="版本管理工具可以记录历史"><a href="#版本管理工具可以记录历史" class="headerlink" title="版本管理工具可以记录历史"></a>版本管理工具可以记录历史</h3><p>网盘 u盘 保存了文件的最新状态，而不会记录修改的历史纪录，而版本管理工具对每次的修改都会进行备份，并且保留了时间和修改人，可以让我们回溯，如果不小心删除版本管理工具中的备份时，我们可以通过历史纪录对其进行找回，因此使用版本管理工具无需担心，而且使用版本管理工具，可以多端共享，例如我们经常所说的云盘，而且只要提交一次，我们就可以在任何地方通过版本管理工具对提交的代码进行下载。尤其对于，一些经常需要分开工作的工作人员比较实用</p>
-<a id="more"></a>
-<h3 id="历史"><a href="#历史" class="headerlink" title="历史"></a>历史</h3><ol>
-<li><p>CVS： 版本管理工具始祖，也是被第一个大规模使用的版本管理工具。由荷兰一所大学教授所开发，由于当时三个人分开工作，为了便于一起协调，创建了CVS。集中式的工具，放到中心服务器上，需要联网</p>
-</li>
-<li><p>SVN： 2000年诞生，也是集中式的工具</p>
-</li>
-<li><p>git： 2005年诞生，Geek社区主流工具，分布式工具！</p>
-</li>
-<li><p>Github： 程序员社区，托管代码基于Git操作。大牛多在这里！！！</p>
-</li>
-</ol>
-<h3 id="集中式-与-分布式-区别"><a href="#集中式-与-分布式-区别" class="headerlink" title="集中式 与 分布式 区别"></a>集中式 与 分布式 区别</h3><ol>
-<li>集中式需要放到中心服务器上，并且操作需要联网，不方便</li>
-<li>分布式则是只要有版本库，就可以在不联网的前提下，快速完成文件提交，记录查看，以及删除等操作，效率高！</li>
-</ol>
-<hr>
-<h2 id="初探Git"><a href="#初探Git" class="headerlink" title="初探Git"></a>初探Git</h2><h3 id="Git-下载-与-安装"><a href="#Git-下载-与-安装" class="headerlink" title="Git 下载 与 安装"></a>Git 下载 与 安装</h3><h4 id="Linux下的安装"><a href="#Linux下的安装" class="headerlink" title="Linux下的安装"></a>Linux下的安装</h4><blockquote>
-<p>打开终端 执行 yum install git 然后键入 yes 等待既可以安装完成 Git</p>
-</blockquote>
-<h2 id="入门Github"><a href="#入门Github" class="headerlink" title="入门Github"></a>入门Github</h2><blockquote>
-<p>GitHub由于下载比较难，推荐离线安装包安装</p>
-</blockquote>
-<h3 id="Linux下检出项目到本地"><a href="#Linux下检出项目到本地" class="headerlink" title="Linux下检出项目到本地"></a>Linux下检出项目到本地</h3><blockquote>
-<p>使用 git clone Github上的仓库地址</p>
-<ol>
-<li>首先创建一个 目录，用来存放 我们检出的项目，使用命令 mkdir Test</li>
-<li>接下来，进入到Test目录，然后 git clone Github上的仓库地址，就可以了</li>
-</ol>
-</blockquote>
-<h3 id="Linux下提交项目"><a href="#Linux下提交项目" class="headerlink" title="Linux下提交项目"></a>Linux下提交项目</h3><blockquote>
-<p>再修改之后，只停留到了本地，没有交到Github维护，因此我们需要同步到Github</p>
-</blockquote>
-<ol>
-<li>首先使用 git status 查看工作区的状态</li>
-<li>对于未跟踪的文件，使用git add 文件名（不包括文件类型），进行跟踪</li>
-<li>然后键入 git commit 命令，并对修改进行描述，这里提交的是提交到了本地的仓库，并没有提交给Github维护</li>
-<li>键入git push，输入Github账户和密码，然后成功提交给Github进行维护</li>
-</ol>
-<h3 id="Windows下检出并提交项目"><a href="#Windows下检出并提交项目" class="headerlink" title="Windows下检出并提交项目"></a>Windows下检出并提交项目</h3><ol>
-<li>首先进入GitHub官方主页，并进入项目所对应的仓库主页，然后点击 open in desktop，选择本地的一个目录，此时检出完成，只需要我们对其进行修改</li>
-<li>修改之后，首先要做的提交修改的东东，并对修改的东西进行一个修改说明</li>
-<li>之后进行同步就可以了</li>
-</ol>
-]]></content>
-      
-        <categories>
-            
-            <category> git </category>
-            
-            <category> 入门 </category>
-            
-        </categories>
-        
-        
-        <tags>
-            
-            <tag> git </tag>
-            
-            <tag> GitHub </tag>
-            
-            <tag> 版本管理工具 </tag>
-            
-        </tags>
-        
-    </entry>
-    
-    <entry>
-      <title><![CDATA[版本管理工具-Git篇[1]]]></title>
       <url>/2017/01/15/%E7%89%88%E6%9C%AC%E7%AE%A1%E7%90%86%E5%B7%A5%E5%85%B7-Git%E7%AF%87%5B1%5D/</url>
       <content type="html"><![CDATA[<h2 id="版本管理工具的介绍"><a href="#版本管理工具的介绍" class="headerlink" title="版本管理工具的介绍"></a>版本管理工具的介绍</h2><p>作用：备份文件，与U盘等备份文件相比，可以随时随地，项目中经常使用。</p>
 <h3 id="版本管理工具可以记录历史"><a href="#版本管理工具可以记录历史" class="headerlink" title="版本管理工具可以记录历史"></a>版本管理工具可以记录历史</h3><p>网盘 u盘 保存了文件的最新状态，而不会记录修改的历史纪录，而版本管理工具对每次的修改都会进行备份，并且保留了时间和修改人，可以让我们回溯，如果不小心删除版本管理工具中的备份时，我们可以通过历史纪录对其进行找回，因此使用版本管理工具无需担心，而且使用版本管理工具，可以多端共享，例如我们经常所说的云盘，而且只要提交一次，我们就可以在任何地方通过版本管理工具对提交的代码进行下载。尤其对于，一些经常需要分开工作的工作人员比较实用</p>
@@ -6443,6 +6406,77 @@ at java.net.SocketInputStream.read(SocketInputStream.java:129)
             <tag> Tools </tag>
             
             <tag> Git </tag>
+            
+        </tags>
+        
+    </entry>
+    
+    <entry>
+      <title><![CDATA[版本管理工具-Git篇[1]]]></title>
+      <url>/2017/01/15/%E7%89%88%E6%9C%AC%E7%AE%A1%E7%90%86%E5%B7%A5%E5%85%B7-Git%E7%AF%87/</url>
+      <content type="html"><![CDATA[<h2 id="版本管理工具的介绍"><a href="#版本管理工具的介绍" class="headerlink" title="版本管理工具的介绍"></a>版本管理工具的介绍</h2><p>作用：备份文件，与U盘等备份文件相比，可以随时随地，项目中经常使用。</p>
+<h3 id="版本管理工具可以记录历史"><a href="#版本管理工具可以记录历史" class="headerlink" title="版本管理工具可以记录历史"></a>版本管理工具可以记录历史</h3><p>网盘 u盘 保存了文件的最新状态，而不会记录修改的历史纪录，而版本管理工具对每次的修改都会进行备份，并且保留了时间和修改人，可以让我们回溯，如果不小心删除版本管理工具中的备份时，我们可以通过历史纪录对其进行找回，因此使用版本管理工具无需担心，而且使用版本管理工具，可以多端共享，例如我们经常所说的云盘，而且只要提交一次，我们就可以在任何地方通过版本管理工具对提交的代码进行下载。尤其对于，一些经常需要分开工作的工作人员比较实用</p>
+<a id="more"></a>
+<h3 id="历史"><a href="#历史" class="headerlink" title="历史"></a>历史</h3><ol>
+<li><p>CVS： 版本管理工具始祖，也是被第一个大规模使用的版本管理工具。由荷兰一所大学教授所开发，由于当时三个人分开工作，为了便于一起协调，创建了CVS。集中式的工具，放到中心服务器上，需要联网</p>
+</li>
+<li><p>SVN： 2000年诞生，也是集中式的工具</p>
+</li>
+<li><p>git： 2005年诞生，Geek社区主流工具，分布式工具！</p>
+</li>
+<li><p>Github： 程序员社区，托管代码基于Git操作。大牛多在这里！！！</p>
+</li>
+</ol>
+<h3 id="集中式-与-分布式-区别"><a href="#集中式-与-分布式-区别" class="headerlink" title="集中式 与 分布式 区别"></a>集中式 与 分布式 区别</h3><ol>
+<li>集中式需要放到中心服务器上，并且操作需要联网，不方便</li>
+<li>分布式则是只要有版本库，就可以在不联网的前提下，快速完成文件提交，记录查看，以及删除等操作，效率高！</li>
+</ol>
+<hr>
+<h2 id="初探Git"><a href="#初探Git" class="headerlink" title="初探Git"></a>初探Git</h2><h3 id="Git-下载-与-安装"><a href="#Git-下载-与-安装" class="headerlink" title="Git 下载 与 安装"></a>Git 下载 与 安装</h3><h4 id="Linux下的安装"><a href="#Linux下的安装" class="headerlink" title="Linux下的安装"></a>Linux下的安装</h4><blockquote>
+<p>打开终端 执行 yum install git 然后键入 yes 等待既可以安装完成 Git</p>
+</blockquote>
+<h2 id="入门Github"><a href="#入门Github" class="headerlink" title="入门Github"></a>入门Github</h2><blockquote>
+<p>GitHub由于下载比较难，推荐离线安装包安装</p>
+</blockquote>
+<h3 id="Linux下检出项目到本地"><a href="#Linux下检出项目到本地" class="headerlink" title="Linux下检出项目到本地"></a>Linux下检出项目到本地</h3><blockquote>
+<p>使用 git clone Github上的仓库地址</p>
+<ol>
+<li>首先创建一个 目录，用来存放 我们检出的项目，使用命令 mkdir Test</li>
+<li>接下来，进入到Test目录，然后 git clone Github上的仓库地址，就可以了</li>
+</ol>
+</blockquote>
+<h3 id="Linux下提交项目"><a href="#Linux下提交项目" class="headerlink" title="Linux下提交项目"></a>Linux下提交项目</h3><blockquote>
+<p>再修改之后，只停留到了本地，没有交到Github维护，因此我们需要同步到Github</p>
+</blockquote>
+<ol>
+<li>首先使用 git status 查看工作区的状态</li>
+<li>对于未跟踪的文件，使用git add 文件名（不包括文件类型），进行跟踪</li>
+<li>然后键入 git commit 命令，并对修改进行描述，这里提交的是提交到了本地的仓库，并没有提交给Github维护</li>
+<li>键入git push，输入Github账户和密码，然后成功提交给Github进行维护</li>
+</ol>
+<h3 id="Windows下检出并提交项目"><a href="#Windows下检出并提交项目" class="headerlink" title="Windows下检出并提交项目"></a>Windows下检出并提交项目</h3><ol>
+<li>首先进入GitHub官方主页，并进入项目所对应的仓库主页，然后点击 open in desktop，选择本地的一个目录，此时检出完成，只需要我们对其进行修改</li>
+<li>修改之后，首先要做的提交修改的东东，并对修改的东西进行一个修改说明</li>
+<li>之后进行同步就可以了</li>
+</ol>
+]]></content>
+      
+        <categories>
+            
+            <category> git </category>
+            
+            <category> 入门 </category>
+            
+        </categories>
+        
+        
+        <tags>
+            
+            <tag> git </tag>
+            
+            <tag> GitHub </tag>
+            
+            <tag> 版本管理工具 </tag>
             
         </tags>
         

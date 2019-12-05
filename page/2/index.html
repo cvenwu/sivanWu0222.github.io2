@@ -252,6 +252,136 @@
         <ul class="post-list">
         
             <li class="post-list-item fade">
+                <article id="post-吴恩达机器学习-02单变量线性回归-md"
+  class="article-card article-type-post" itemprop="blogPost">
+  
+    
+    
+    <div class="top" data-title="2">
+    <div class="top-wrap">
+        <p></p>
+    </div>
+</div>
+    
+    
+        
+
+
+  
+    <h3 class="post-title re-title" itemprop="name">
+      <a class="post-title-link" href="/2019/09/05/吴恩达机器学习-02单变量线性回归-md/">[吴恩达机器学习]02单变量线性回归.md</a>
+    </h3>
+  
+
+
+
+    
+    <div class="post-meta">
+        <time class="post-time" title="2019-09-05 19:45:31" datetime="2019-09-05T19:45:31.000Z"  itemprop="datePublished">2019-09-05</time>
+
+        
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/机器学习/">机器学习</a><ul class="article-category-list-child"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/机器学习/第一阶段/">第一阶段</a></li></ul></li></ul>
+
+
+
+        
+	<span id="/2019/09/05/吴恩达机器学习-02单变量线性回归-md/" class="leancloud_visitors" data-flag-title="[吴恩达机器学习]02单变量线性回归.md" title="[吴恩达机器学习]02单变量线性回归.md">
+		
+			<i class="icon icon-eye"></i>
+		
+		<span class="leancloud-visitors-count"></span>
+	</span>
+ 
+
+        
+
+
+        
+  <span><i class="icon icon-github"></i></span>
+
+        
+    </div>
+    
+    <div class="post-content" id="post-content" itemprop="postContent">
+    
+    
+        <h1 id="单变量线性回归"><a href="#单变量线性回归" class="headerlink" title="单变量线性回归"></a>单变量线性回归</h1><h2 id="模型描述"><a href="#模型描述" class="headerlink" title="模型描述"></a>模型描述</h2><h3 id="课程用到的一些符号说明"><a href="#课程用到的一些符号说明" class="headerlink" title="课程用到的一些符号说明"></a>课程用到的一些符号说明</h3><ul>
+<li>m = 训练集的样本数量</li>
+<li>x = 输入变量 （或特征）</li>
+<li>y = 输出变量 (预测的值)</li>
+<li>(x , y) 表示一个训练样本</li>
+<li>$$(x_i, y_i)表示第i个训练样本$$ </li>
+</ul>
+<p><img src="/2019/09/05/吴恩达机器学习-02单变量线性回归-md/2单变量线性回归.png" alt="单变量线性回归.png"></p  class="index-item-img">
+<blockquote>
+<p>一般可以表示为$$h(x) = c_1 * x + c_2$$</p>
+</blockquote>
+<h2 id="代价函数"><a href="#代价函数" class="headerlink" title="代价函数"></a>代价函数</h2><p>在线性回归预测中，我们希望获得两个理想的参数$$c_1和c_2$$使得我们预测的结果h与实际的结果y的差值越小越好。这里我们引入了代价函数$$\sum_{i=1}^m{(h-y)^2} ，$$ 也就是<strong>预测值与实际值的误差平方和越小越好</strong>, 也就是<strong>最小化代价函数</strong></p>
+<blockquote>
+<p>代价函数也被成为平方误差函数或平方误差代价函数</p>
+</blockquote>
+<p>此时我们已经将问题转换为求使得代价函数$$\sum_{i=1}^m{(h-y)^2} $$最小的两个理想参数$$c_1和c_2$$， 我们可以把其看作线性回归的整体目标函数。</p>
+<p>为了更直观理解，吴恩达老师将其代价函数简化为如下图中描述(即在求和的基础上除以2m)</p>
+<figure class="image-box">
+                <img src="/2019/09/05/吴恩达机器学习-02单变量线性回归-md/02代价函数.png" alt="02代价函数.png" title class="index-item-img">
+                <p>02代价函数.png</p>
+            </figure>
+<figure class="image-box">
+                <img src="/2019/09/05/吴恩达机器学习-02单变量线性回归-md/02代价函数2.png" alt="02代价函数2.png" title class="index-item-img">
+                <p>02代价函数2.png</p>
+            </figure>
+<p>也有其他评估线性回归的代价函数，但是平方误差和是我们最常见的一个评估手段。</p>
+<h2 id="梯度下降法-Gradient-Descent-Algorithm"><a href="#梯度下降法-Gradient-Descent-Algorithm" class="headerlink" title="梯度下降法(Gradient Descent Algorithm)"></a>梯度下降法(Gradient Descent Algorithm)</h2><blockquote>
+<p>梯度下降法可以将代价函数最小化，不仅可以用来最小化代价函数，而且可以最小化其他函数，并且应用领域十分广泛</p>
+</blockquote>
+<p>梯度下降的思路：</p>
+<ol>
+<li>给要确定值的所有参数一个初始值(通常我们都把他们初始化为0)</li>
+<li>不停的改变所有参数来减小代价函数的值直到找到了代价函数的最小值</li>
+</ol>
+<blockquote>
+<p>计算注意事项：所有参数必须做到同时更新，不可以更新后赋值。梯度下降必须做到所有参数的同时更新。</p>
+</blockquote>
+<figure class="image-box">
+                <img src="/2019/09/05/吴恩达机器学习-02单变量线性回归-md/梯度下降公式以及注意事项.png" alt="梯度下降公式以及注意事项" title class="index-item-img">
+                <p>梯度下降公式以及注意事项</p>
+            </figure>
+<p>其中α称为学习率，也就是决定梯度下降走路的步伐，控制我们以多大的速度更新参数$$Θ_j,第二部分是导数项，</p>
+<p>吴恩达老师提出的问题：对于J(Θ_1),如果Θ_1已经处于一个局部最优点，那么下一步梯度下降会怎样？$$</p>
+<blockquote>
+<p>$$因为已经处于局部最优点，此时导数为0，所以Θ_1将不会再改变，也就是Θ_1就是原来的Θ_1，将会使我们的解一直保持在局部最优解中$$</p>
+</blockquote>
+<figure class="image-box">
+                <img src="/2019/09/05/吴恩达机器学习-02单变量线性回归-md/梯度下降2.png" alt="梯度下降一些问题" title class="index-item-img">
+                <p>梯度下降一些问题</p>
+            </figure>
+<p>注意：随着梯度下降算法的运行，后面的步骤中，导数将会变得越来越小，使得梯度下降越来越慢，因此没必要在后面的步骤中减小学习率</p>
+<h2 id="梯度下降与代价函数结合–线性回归"><a href="#梯度下降与代价函数结合–线性回归" class="headerlink" title="梯度下降与代价函数结合–线性回归"></a>梯度下降与代价函数结合–线性回归</h2><figure class="image-box">
+                <img src="/2019/09/05/吴恩达机器学习-02单变量线性回归-md/线性回归总结.png" alt="线性回归总结" title class="index-item-img">
+                <p>线性回归总结</p>
+            </figure>
+<p>Batch梯度下降法，表示每一步梯度下降，我们都遍历了整个训练集，其实在数学中可以通过方程组求出最小代价函数的参数，但是对于大规模数据集，梯度下降比较实用</p>
+<p><img src="/2019/09/05/吴恩达机器学习-02单变量线性回归-md/梯度下降推导公式1.png" alt="梯度下降公式1"><br><figure class="image-box" class="index-item-img">
+                <img src="/2019/09/05/吴恩达机器学习-02单变量线性回归-md/梯度下降推导公式2.png" alt="梯度下降公式2" title class="index-item-img">
+                <p>梯度下降公式2</p>
+            </figure></p>
+    
+    <a href="/2019/09/05/吴恩达机器学习-02单变量线性回归-md/" class="post-more waves-effect waves-button">
+        more
+    </a>
+    </div>
+</article>
+
+<div class="post-footer">
+    
+	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/ML/">ML</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/吴恩达/">吴恩达</a></li></ul>
+
+</div>
+
+
+            </li>
+        
+            <li class="post-list-item fade">
                 <article id="post-吴恩达机器学习-01机器学习入门-md"
   class="article-card article-type-post" itemprop="blogPost">
   
@@ -1067,133 +1197,6 @@ git reset 默认是 git reset –mixed
 <p>执行结果<br><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">8</span><br><span class="line">12</span><br><span class="line">4</span><br><span class="line">3.0</span><br><span class="line">data2: 2</span><br><span class="line">sess.run(data_copy)  8</span><br><span class="line">data2: 8</span><br><span class="line">data_copy.eval() 14</span><br><span class="line">data2: 14</span><br><span class="line">tf.get_default_session().run(data_copy) 20</span><br><span class="line">data2: 20</span><br></pre></td></tr></table></figure></p>
     
     <a href="/2019/05/14/OpenCV-TensorFlow-入门人工智能图像处理-2/" class="post-more waves-effect waves-button">
-        more
-    </a>
-    </div>
-</article>
-
-<div class="post-footer">
-    
-	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/CV/">CV</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/OpenCV/">OpenCV</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/TensorFlow/">TensorFlow</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/人工智能/">人工智能</a></li></ul>
-
-</div>
-
-
-            </li>
-        
-            <li class="post-list-item fade">
-                <article id="post-OpenCV-TensorFlow-入门人工智能图像处理-1"
-  class="article-card article-type-post" itemprop="blogPost">
-  
-    
-    
-    <div class="top" data-title="2">
-    <div class="top-wrap">
-        <p></p>
-    </div>
-</div>
-    
-    
-        
-
-
-  
-    <h3 class="post-title re-title" itemprop="name">
-      <a class="post-title-link" href="/2019/05/09/OpenCV-TensorFlow-入门人工智能图像处理-1/">OpenCV+TensorFlow 入门人工智能图像处理[1]</a>
-    </h3>
-  
-
-
-
-    
-    <div class="post-meta">
-        <time class="post-time" title="2019-05-09 12:11:12" datetime="2019-05-09T12:11:12.000Z"  itemprop="datePublished">2019-05-09</time>
-
-        
-	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/计算机视觉/">计算机视觉</a></li></ul>
-
-
-
-        
-	<span id="/2019/05/09/OpenCV-TensorFlow-入门人工智能图像处理-1/" class="leancloud_visitors" data-flag-title="OpenCV+TensorFlow 入门人工智能图像处理[1]" title="OpenCV+TensorFlow 入门人工智能图像处理[1]">
-		
-			<i class="icon icon-eye"></i>
-		
-		<span class="leancloud-visitors-count"></span>
-	</span>
- 
-
-        
-
-
-        
-  <span><i class="icon icon-github"></i></span>
-
-        
-    </div>
-    
-    <div class="post-content" id="post-content" itemprop="postContent">
-    
-    
-        <h2 id="opencv"><a href="#opencv" class="headerlink" title="opencv"></a>opencv</h2><h3 id="opencv的导入"><a href="#opencv的导入" class="headerlink" title="opencv的导入"></a>opencv的导入</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> cv2</span><br></pre></td></tr></table></figure>
-<h3 id="读取图像数据"><a href="#读取图像数据" class="headerlink" title="读取图像数据"></a>读取图像数据</h3><p>imread()方法对图片进行数据的读取</p>
-<ol>
-<li>有2个参数，第1个参数是文件名</li>
-<li>第2个参数是图片的类型，如果当前参数为0，读取的是灰度图片，如果参数为1，读取进来的为彩色图片</li>
-<li>该方法完成图片的读取，返回的是当前图片的图像数据</li>
-<li>虽然表面上看只是图像读取，但是包含了几个步骤，文件的读取，图像格式的分析，图像数据的解码，数据的加载</li>
-</ol>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">img = cv2.imread(<span class="string">'./image0.jpg'</span>, class="index-item-img">
-<p><strong>opencv中读取图像后获得的像素点是bgr(blue, green, red)与rgb不同</strong></p>
-<h3 id="展示图像"><a href="#展示图像" class="headerlink" title="展示图像"></a>展示图像</h3><p>imshow()对图片进行展示</p>
-<ol>
-<li>有2个参数，第1个参数是展示出的图像所在的窗体名称</li>
-<li>第2个参数是当前窗体展示的内容</li>
-</ol>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">cv2.imshow(<span class="string">'image'</span>, img)</span><br><span class="line"><span class="comment"># 防止一瞬间消失掉后看不到图片</span></span><br><span class="line">cv2.waitKey(<span class="number">0</span>)</span><br></pre></td></tr></table></figure>
-<p>因为读取图片之后对图片进行显示的时候将会在一瞬间消失掉，因此我们需要stop，也就是采用了<strong>cv2.waitKey(0)</strong></p>
-<h3 id="图像数据的写入"><a href="#图像数据的写入" class="headerlink" title="图像数据的写入"></a>图像数据的写入</h3><p>imwrite() 将数据写入到一张图片中</p>
-<ol>
-<li>有2个参数，第1个参数是 图片的名称</li>
-<li>第2个参数是 当前图片的数组</li>
-</ol>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 此时的img是解码之后的数据</span></span><br><span class="line">cv2.imwrite(<span class="string">'image1.jpg'</span>, img)</span><br><span class="line">type(img) <span class="comment"># 将会是一个ndarray数组</span></span><br></pre></td></tr></table></figure>
-<h3 id="图像质量"><a href="#图像质量" class="headerlink" title="图像质量"></a>图像质量</h3><blockquote>
-<p>图像划分为jpg与png，两个采用不同的压缩格式</p>
-</blockquote>
-<h4 id="PNG与JPG压缩的区别："><a href="#PNG与JPG压缩的区别：" class="headerlink" title="PNG与JPG压缩的区别："></a>PNG与JPG压缩的区别：</h4><ol>
-<li>jpg图片压缩将会损失图片的质量，也就是有损压缩，png图片压缩是无损压缩</li>
-<li>jpg无法设置透明度，png可以设置透明度，不仅仅可以修改传统的RGB</li>
-</ol>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 第3个参数用来描述当前图片的质量,对于jpg图片的压缩可以采用不同的压缩比来对其进行控制，范围是0-100</span></span><br><span class="line">cv2.imwrite(<span class="string">'imageTest2.jpg'</span>, img, [cv2.IMWRITE_JPEG_QUALITY, <span class="number">50</span>]) </span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> cv2</span><br><span class="line">img = cv2.imread(<span class="string">'./image0.jpg'</span>, class="index-item-img">
-<p>在imwrite()方法的第3个参数中：</p>
-<ol>
-<li>对于JPG 来说 数字越小，压缩比越高，图片质量越不清晰，压缩范围是0-100</li>
-<li>对于PNG 来说，数字越小，压缩比越低，图片质量越清晰 ，压缩范围是0-9 </li>
-</ol>
-<h2 id="坐标轴"><a href="#坐标轴" class="headerlink" title="坐标轴"></a>坐标轴</h2><figure class="image-box">
-                <img src="/2019/05/09/OpenCV-TensorFlow-入门人工智能图像处理-1/./OpenCV-TensorFlow-入门人工智能图像处理-1/坐标轴.png" alt="糟了" title="这是标题" class="index-item-img">
-                <p>这是标题</p>
-            </figure>   
-<p>x轴对应垂直高度的变化</p>
-<h2 id="图像基础知识"><a href="#图像基础知识" class="headerlink" title="图像基础知识"></a>图像基础知识</h2><ul>
-<li><p>像素点(像素)：图像是由一个个方块组成，每个方块称为像素点，</p>
-</li>
-<li><p>每种颜色都是由RGB三种颜色分量组合而成。</p>
-</li>
-<li><p>像素点如何存储：在计算机中，每种颜色都可以通过RGB三种颜色进行合成，在8位颜色深度中，每个RGB对应的分量取值都是0-255</p>
-</li>
-<li><p>颜色深度：8位颜色深度，表示的是RGB每个分量中， 都有2^8个可能</p>
-</li>
-<li>对于png图片来说，每一个像素点除了RGB之外，还可能有α通道作为透明度</li>
-<li>经常见到的颜色存储格式：RGB(red, green, blue) 、BGR(blue, green, red)</li>
-</ul>
-<h3 id="例子："><a href="#例子：" class="headerlink" title="例子："></a>例子：</h3><p>如果有一个图片，宽为640 高是480 ，表示图片在水平方向上有640个像素点，在竖直方向上有480个像素点，</p>
-<p>图片未经压缩的大小计算： 大小 = 宽度 <em> 高度 </em> 3 * 颜色深度 (单位是bit)</p>
-<p>除以8 转换为B </p>
-<p>首先是宽度*高度，得到多少个像素点，然后因为每个点是由RGB中的3个颜色分量组成，所以 再乘以3，每个颜色分量是8位的颜色深度，所以最后计算而来</p>
-    
-    <a href="/2019/05/09/OpenCV-TensorFlow-入门人工智能图像处理-1/" class="post-more waves-effect waves-button">
         more
     </a>
     </div>

@@ -252,6 +252,82 @@
         <ul class="post-list">
         
             <li class="post-list-item fade">
+                <article id="post-数据类型注意事项"
+  class="article-card article-type-post" itemprop="blogPost">
+  
+    
+    
+    
+        
+
+
+  
+    <h3 class="post-title re-title" itemprop="name">
+      <a class="post-title-link" href="/2016/12/22/数据类型注意事项/">数据类型注意事项</a>
+    </h3>
+  
+
+
+
+    
+    <div class="post-meta">
+        <time class="post-time" title="2016-12-22 10:56:59" datetime="2016-12-22T10:56:59.000Z"  itemprop="datePublished">2016-12-22</time>
+
+        
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/Java/">Java</a><ul class="article-category-list-child"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/Java/基础/">基础</a></li></ul></li></ul>
+
+
+
+        
+	<span id="/2016/12/22/数据类型注意事项/" class="leancloud_visitors" data-flag-title="数据类型注意事项" title="数据类型注意事项">
+		
+			<i class="icon icon-eye"></i>
+		
+		<span class="leancloud-visitors-count"></span>
+	</span>
+ 
+
+        
+
+
+        
+        
+    </div>
+    
+    <div class="post-content" id="post-content" itemprop="postContent">
+    
+    
+        <h2 id="例题1："><a href="#例题1：" class="headerlink" title="例题1："></a>例题1：</h2><blockquote>
+<p>给出如下一段代码，判断会输出什么</p>
+</blockquote>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Second</span> </span>&#123;</span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span></span></span><br><span class="line"><span class="function">	</span>&#123;</span><br><span class="line"></span><br><span class="line">		<span class="keyword">byte</span> a = <span class="number">1</span>;</span><br><span class="line">		<span class="keyword">byte</span> b = <span class="number">1</span>;</span><br><span class="line">		<span class="keyword">byte</span> c = a + b;                     <span class="comment">/*1*/</span></span><br><span class="line">		<span class="keyword">byte</span> d = (<span class="keyword">byte</span>)a + (<span class="keyword">byte</span>)b;         <span class="comment">/*2*/</span></span><br><span class="line">		System.out.println(c);</span><br><span class="line">		System.out.println(d);</span><br><span class="line"></span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="结果："><a href="#结果：" class="headerlink" title="结果："></a>结果：</h3><blockquote>
+<p>其实，这里什么都不会输出，并且会报错</p>
+</blockquote>
+<h3 id="原因分析："><a href="#原因分析：" class="headerlink" title="原因分析："></a>原因分析：</h3><blockquote>
+<p>这里有一条规律，JAVA中 int以及int以下的类型进行运算，结果是int类型，这个程序中，注释标为1和2的地方都是byte类型经过加法运算，所以最终结果是int类型，而且int转byte是不可以自动转换的，需要进行强制转换</p>
+</blockquote>
+<h3 id="总结一下："><a href="#总结一下：" class="headerlink" title="总结一下："></a>总结一下：</h3><ol>
+<li>int及int以下的类型，经过运算结果仍为intl类型</li>
+<li>JAVA是一种强类型语言，大类型转小类型强转，小转大自动转</li>
+</ol>
+    
+    <a href="/2016/12/22/数据类型注意事项/" class="post-more waves-effect waves-button">
+        more
+    </a>
+    </div>
+</article>
+
+<div class="post-footer">
+    
+	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Java/">Java</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/数据类型/">数据类型</a></li></ul>
+
+</div>
+
+
+            </li>
+        
+            <li class="post-list-item fade">
                 <article id="post-Java-4"
   class="article-card article-type-post" itemprop="blogPost">
   

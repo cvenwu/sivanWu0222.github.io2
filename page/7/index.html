@@ -252,6 +252,96 @@
         <ul class="post-list">
         
             <li class="post-list-item fade">
+                <article id="post-结构体变量内存分配"
+  class="article-card article-type-post" itemprop="blogPost">
+  
+    
+    
+    <div class="top" data-title="1">
+    <div class="top-wrap">
+        <p></p>
+    </div>
+</div>
+    
+    
+        
+
+
+  
+    <h3 class="post-title re-title" itemprop="name">
+      <a class="post-title-link" href="/2018/09/26/结构体变量内存分配/">结构体变量内存分配</a>
+    </h3>
+  
+
+
+
+    
+    <div class="post-meta">
+        <time class="post-time" title="2018-09-26 16:53:57" datetime="2018-09-26T16:53:57.000Z"  itemprop="datePublished">2018-09-26</time>
+
+        
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/CCNU/">CCNU</a><ul class="article-category-list-child"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/CCNU/C/">C</a><ul class="article-category-list-child"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/CCNU/C/ApplyMaster/">ApplyMaster</a></li></ul></li></ul></li></ul>
+
+
+
+        
+	<span id="/2018/09/26/结构体变量内存分配/" class="leancloud_visitors" data-flag-title="结构体变量内存分配" title="结构体变量内存分配">
+		
+			<i class="icon icon-eye"></i>
+		
+		<span class="leancloud-visitors-count"></span>
+	</span>
+ 
+
+        
+
+
+        
+  <span><i class="icon icon-github"></i></span>
+
+        
+    </div>
+    
+    <div class="post-content" id="post-content" itemprop="postContent">
+    
+    
+        <h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><blockquote>
+<p>之前只是最简单的认为结构体中内存的分配与变量和数组在内存中的分配如出一辙,在刚才看王敬华老师“C语言程序设计教程”这本书才知道TC,BC,VC下结构体在内存中分配的区别</p>
+</blockquote>
+<p>引言：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">MyStruct</span></span></span><br><span class="line"><span class="class">&#123;</span></span><br><span class="line">	<span class="keyword">double</span> x;</span><br><span class="line">	<span class="keyword">char</span> y;</span><br><span class="line">	<span class="keyword">int</span> z;</span><br><span class="line">&#125; a;</span><br></pre></td></tr></table></figure>
+<p>在TC与BC中, int占2字节, 在VC中 int占4字节, double与char和在TC,BC中占的字节数一样分别是8、1字节</p>
+<blockquote>
+<p>那么，这个结构体在TC,BC与VC中占据的字节一样么？</p>
+</blockquote>
+<p>肯定是不一样的，一个是各个成员所占内存空间的大小之和，而VC则是根据规则计算出来，并不一定等于各个成员所占内存空间的大小</p>
+<hr>
+<h2 id="TC-BC环境下的结构体变量内存分配"><a href="#TC-BC环境下的结构体变量内存分配" class="headerlink" title="TC,BC环境下的结构体变量内存分配"></a>TC,BC环境下的结构体变量内存分配</h2><blockquote>
+<p>在TC与BC编译环境下，结构体变量所占内存空间的大小等于它所包含的每个成员所占内存空间的大小</p>
+</blockquote>
+<hr>
+<h2 id="VC环境下结构体变量内存分配"><a href="#VC环境下结构体变量内存分配" class="headerlink" title="VC环境下结构体变量内存分配"></a>VC环境下结构体变量内存分配</h2><h3 id="遵循两个规则"><a href="#遵循两个规则" class="headerlink" title="遵循两个规则"></a>遵循两个规则</h3><ol>
+<li>默认情况下，VC环境下各成员变量存放的起始地址相对于结构的起始地址的偏移量必须为该成员变量类型所占用的字节数的倍数</li>
+<li>为了确保结构体变量所占内存空间的大小为结构体的字节边界数(即该结构体中占用最大空间的类型所占用的字节数)的倍数，所以在为最后一个成员变量申请空间后，还会根据需要自动填充空缺的字节。</li>
+</ol>
+<table align="center"><thead><tr align="center"><td>类型</td><td>对齐方式(变量存放的起始地址相对于结构的起始地址的偏移量)</td></tr></thead><tbody><tr align="center"><td>char</td><td>偏移量必须为sizeof(char)即1的倍数</td></tr><tr align="center"><td>short</td><td>偏移量必须为sizeof(short)即2的倍数</td></tr><tr align="center"><td>int</td><td>偏移量必须为sizeof(int)即4的倍数</td></tr><tr align="center"><td>long</td><td>偏移量必须为sizeof(long)即4的倍数</td></tr><tr align="center"><td>float</td><td>偏移量必须为sizeof(float)即4的倍数</td></tr><tr align="center"><td>double</td><td>偏移量必须为sizeof(double)即8的倍数</td></tr></tbody></table>
+    
+    <a href="/2018/09/26/结构体变量内存分配/" class="post-more waves-effect waves-button">
+        more
+    </a>
+    </div>
+</article>
+
+<div class="post-footer">
+    
+	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/ApplyMaster/">ApplyMaster</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/C/">C</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/结构体/">结构体</a></li></ul>
+
+</div>
+
+
+            </li>
+        
+            <li class="post-list-item fade">
                 <article id="post-C-字符串"
   class="article-card article-type-post" itemprop="blogPost">
   
@@ -968,73 +1058,6 @@
 <div class="post-footer">
     
 	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Python/">Python</a></li></ul>
-
-</div>
-
-
-            </li>
-        
-            <li class="post-list-item fade">
-                <article id="post-js中取消事件冒泡的两种方式"
-  class="article-card article-type-post" itemprop="blogPost">
-  
-    
-    
-    
-        
-
-
-  
-    <h3 class="post-title re-title" itemprop="name">
-      <a class="post-title-link" href="/2017/11/30/js中取消事件冒泡的两种方式/">js中取消事件冒泡的两种方式</a>
-    </h3>
-  
-
-
-
-    
-    <div class="post-meta">
-        <time class="post-time" title="2017-11-30 13:56:02" datetime="2017-11-30T13:56:02.000Z"  itemprop="datePublished">2017-11-30</time>
-
-        
-	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/JavaScript/">JavaScript</a></li></ul>
-
-
-
-        
-	<span id="/2017/11/30/js中取消事件冒泡的两种方式/" class="leancloud_visitors" data-flag-title="js中取消事件冒泡的两种方式" title="js中取消事件冒泡的两种方式">
-		
-			<i class="icon icon-eye"></i>
-		
-		<span class="leancloud-visitors-count"></span>
-	</span>
- 
-
-        
-
-
-        
-        
-    </div>
-    
-    <div class="post-content" id="post-content" itemprop="postContent">
-    
-    
-        <h2 id="事件冒泡的由来"><a href="#事件冒泡的由来" class="headerlink" title="事件冒泡的由来"></a>事件冒泡的由来</h2><p>  当我们在给写好的控件绑定一个事件之前，它是没有绑定事件的，因此便需要将自己的相应的事件与父容器的相应的事件对应，从而就产生了事件冒泡，甚至于当我们在子容器谢了一个点击事件之后，点击子容器，子容器的点击事件执行，父容器的点击事件也会执行，但是子容器的点击事件最先执行，但是往往我们只需要子容器的点击事件，因此我们需要阻止事件冒泡！</p>
-<p>页面上有好多事件，也可以多个元素响应一个事件.假如:</p>
-<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">BODY</span> <span class="attr">onclick</span>=<span class="string">"alert('aaa');"</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">onclick</span>=<span class="string">"alert('bbb');"</span>&gt;</span></span><br><span class="line"> <span class="tag">&lt;<span class="name">a</span> <span class="attr">href</span>=<span class="string">"#"</span> <span class="attr">class</span>=<span class="string">"cooltip"</span> <span class="attr">title</span>=<span class="string">"这是我的超链接提示1。"</span> <span class="attr">onclick</span>=<span class="string">"alert('ddd');"</span>&gt;</span></span><br><span class="line">   提示</span><br><span class="line">  <span class="tag">&lt;/<span class="name">a</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">BODY</span>&gt;</span></span><br></pre></td></tr></table></figure>
-<p>上面这段代码一共有三个事件,body，div，a都分别绑定了单击事件。在页面中当单击a标签会连续弹出3个提示框。这就是事件冒泡引起的现象。事件冒 泡的过程是：a –&gt; div –&gt; body 。a冒泡到div冒泡到body。</p>
-<p>本来在上面的代码中只想触发a元素的onclick事件，然而div,body事件也同时 触发了。因此我们必须要对事件的作用范围进行限制。当单击a元素的onclick事件时只触发a本身的事件。由于IE- DOM和标准DOM实现事件对象的方法各不相同，导致在不同浏览器中获取事件的对象变得比较困难。如果想阻止事件的传递，我们可以用 event.stopPropagation()阻止事件的传递行为.</p>
-    
-    <a href="/2017/11/30/js中取消事件冒泡的两种方式/" class="post-more waves-effect waves-button">
-        more
-    </a>
-    </div>
-</article>
-
-<div class="post-footer">
-    
-	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/JavaScript/">JavaScript</a></li></ul>
 
 </div>
 
