@@ -382,14 +382,6 @@
     
         <h2 id="csv-库的使用"><a href="#csv-库的使用" class="headerlink" title="csv 库的使用"></a>csv 库的使用</h2><h3 id="写csv文件"><a href="#写csv文件" class="headerlink" title="写csv文件"></a>写csv文件</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> csv</span><br><span class="line"><span class="keyword">if</span> __name__ == <span class="string">'__main__'</span>:</span><br><span class="line">    <span class="keyword">with</span> open(<span class="string">'result.csv'</span>, <span class="string">"a+"</span>, newline=<span class="string">''</span>) <span class="keyword">as</span> f:</span><br><span class="line">        writer = csv.writer(f, delimiter=<span class="string">':'</span>)  <span class="comment"># delimiter用于csv文件中分隔符的显示,默认是,</span></span><br><span class="line">        writer.writerow([<span class="string">'1'</span>, <span class="string">'2'</span>, <span class="number">3</span>])</span><br></pre></td></tr></table></figure>
 <p>np.prod() 默认计算所有元素乘积，无论传入进来的是一个向量还是一个tensor, 可以指定axis=1用来获取每一行的乘积</p>
-<h3 id="写入和读取csv文件"><a href="#写入和读取csv文件" class="headerlink" title="写入和读取csv文件"></a>写入和读取csv文件</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">with</span> open(os.path.join(self.root, filename), mode=<span class="string">'w'</span>, newline=<span class="string">''</span>) <span class="keyword">as</span> f:</span><br><span class="line">                writer = csv.writer(f)</span><br><span class="line">                <span class="keyword">for</span> img <span class="keyword">in</span> images:</span><br><span class="index-item-img">
-<h2 id="glob库的使用"><a href="#glob库的使用" class="headerlink" title="glob库的使用"></a>glob库的使用</h2><blockquote>
-<p>glob根据指定文件名字的规则进行文件名的搜寻，并返回一个列表</p>
-</blockquote>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># glob模块根据规则匹配特定的文件名字并返回一个列表,所以采用+将列表进行拼接而不是作为元素加入列表中</span></span><br><span class="line">            images += (glob.glob(os.path.join(self.root, name, <span class="string">'*.png'</span>)))</span><br><span class="line">            images += (glob.glob(os.path.join(self.root, name, <span class="string">'*.jpeg'</span>)))</span><br><span class="line">            images += (glob.glob(os.path.join(self.root, name, <span class="string">'*.jpg'</span>)))</span><br></pre></td></tr></table></figure>
-<h2 id="使用os内置库创建目录"><a href="#使用os内置库创建目录" class="headerlink" title="使用os内置库创建目录"></a>使用os内置库创建目录</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="keyword">import</span> argparse</span><br><span class="line"><span class="keyword">import</span> os</span><br><span class="line"></span><br><span class="line"><span class="comment"># 创建目录存放生成的图片</span></span><br><span class="line"><span class="comment">## os.makedirs 会递归创建目录</span></span><br><span class="line"><span class="comment">## os.mkdir 只会创建子目录</span></span><br><span class="line">os.makedirs(<span class="string">'images'</span>, exist_ok=<span class="literal">True</span>)  <span class="comment"># 如果exist_ok是False,目标目录存在时返回OSError</span></span><br><span class="line">os.mkdir(<span class="string">'path'</span>)</span><br></pre></td></tr></table></figure>
-<h2 id="从一个对象知道对应的类的名字"><a href="#从一个对象知道对应的类的名字" class="headerlink" title="从一个对象知道对应的类的名字"></a>从一个对象知道对应的类的名字</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">class_name</span><span class="params">(cl)</span>:</span></span><br><span class="line">    <span class="comment"># return cl.__class__  # &lt;class '__main__.config'&gt;</span></span><br><span class="line">    <span class="keyword">return</span> cl.__class__.__name__  <span class="comment"># 返回类名字 config</span></span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">config</span>:</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span><span class="params">(self)</span>:</span></span><br><span class="line">        <span class="keyword">pass</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> __name__ == <span class="string">'__main__'</span>:</span><br><span class="line">    con = config()</span><br><span class="line">    print(class_name(con))</span><br></pre></td></tr></table></figure>
-<h2 id="使用np-prod-计算元素成绩"><a href="#使用np-prod-计算元素成绩" class="headerlink" title="使用np.prod()计算元素成绩"></a>使用np.prod()计算元素成绩</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line">a = np.array([<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>])</span><br><span class="line">result = np.prod(a)  <span class="comment"># 当指定axis=1,求行的乘积</span></span><br></pre></td></tr></table></figure>
     
     <a href="/2019/11/30/csv模块写入csv文件-os创建目录-np-prod计算元素成绩/" class="post-more waves-effect waves-button">
         more
@@ -432,7 +424,7 @@
 
     
     <div class="post-meta">
-        <time class="post-time" title="2019-11-30 16:37:18" datetime="2019-11-30T16:37:18.000Z"  itemprop="datePublished">2019-11-30</time>
+        <time class="post-time" title="2019-11-30 08:37:18" datetime="2019-11-30T08:37:18.000Z"  itemprop="datePublished">2019-11-30</time>
 
         
 	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/Python/">Python</a><ul class="article-category-list-child"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/Python/多线程/">多线程</a></li></ul></li></ul>
@@ -660,7 +652,7 @@
 
   
     <h3 class="post-title re-title" itemprop="name">
-      <a class="post-title-link" href="/2019/11/11/Paper-TL-A-survery-on-transfer-learning/">[Paper_TL]A survery on transfer learning</a>
+      <a class="post-title-link" href="/2019/11/11/Paper-TL-A-survery-on-transfer-learning/">A survey on transfer learning</a>
     </h3>
   
 
@@ -668,7 +660,7 @@
 
     
     <div class="post-meta">
-        <time class="post-time" title="2019-11-11 04:33:15" datetime="2019-11-11T04:33:15.000Z"  itemprop="datePublished">2019-11-11</time>
+        <time class="post-time" title="2019-11-11 12:33:15" datetime="2019-11-11T12:33:15.000Z"  itemprop="datePublished">2019-11-11</time>
 
         
 	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/Paper/">Paper</a><ul class="article-category-list-child"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/Paper/Transfer-Learning/">Transfer Learning</a></li></ul></li></ul>
@@ -676,7 +668,7 @@
 
 
         
-	<span id="/2019/11/11/Paper-TL-A-survery-on-transfer-learning/" class="leancloud_visitors" data-flag-title="[Paper_TL]A survery on transfer learning" title="[Paper_TL]A survery on transfer learning">
+	<span id="/2019/11/11/Paper-TL-A-survery-on-transfer-learning/" class="leancloud_visitors" data-flag-title="A survey on transfer learning" title="A survey on transfer learning">
 		
 			<i class="icon icon-eye"></i>
 		
@@ -694,10 +686,36 @@
     <div class="post-content" id="post-content" itemprop="postContent">
     
     
-        three main research issues of transfer learning
-what to transfer
-
-“What to transfer” asks which part of knowledge can be transferred across domains or tasks. Some knowledge is specific for individu...
+        <h2 id="three-main-research-issues-of-transfer-learning"><a href="#three-main-research-issues-of-transfer-learning" class="headerlink" title="three main research issues of transfer learning"></a>three main research issues of transfer learning</h2><ol>
+<li><p>what to transfer</p>
+<blockquote>
+<p>“What to transfer” asks which part of knowledge can be transferred across domains or tasks. Some knowledge is specific for individual domains or tasks, and some knowledge may be common between different domains such that they may help improve performance for the target domain or task.</p>
+</blockquote>
+</li>
+<li><p>how to transfer</p>
+<blockquote>
+<p> After discovering which knowledge can be transferred, learning algorithms need to be developed to transfer the knowledge, which corresponds to the “how to transfer” issue.</p>
+</blockquote>
+</li>
+<li><p>when to transfer</p>
+<blockquote>
+<p>Most current work on transfer learning focuses on “What to transfer” and “How to transfer”, by implicitly assuming that the source and target domains be related to each other. However, how to avoid negative transfer is an important open issue that is attracting more and more attention in the future</p>
+</blockquote>
+</li>
+</ol>
+<h2 id="迁移学习怎么来的"><a href="#迁移学习怎么来的" class="headerlink" title="迁移学习怎么来的"></a>迁移学习怎么来的</h2><p>The fundamental motivation for Transfer learning in the field of machine learning was<br>discussed in a NIPS-95 workshop on “Learning to Learn” 1, which focused on the need for lifelong machine-learning methods that retain and reuse previously learned knowledge</p>
+<h2 id="How-to-transfer-3种不同的迁移模式-based-on-the-definition-of-transfer-learning"><a href="#How-to-transfer-3种不同的迁移模式-based-on-the-definition-of-transfer-learning" class="headerlink" title="How to transfer?(3种不同的迁移模式, based on the definition of transfer learning)"></a>How to transfer?(3种不同的迁移模式, based on the definition of transfer learning)</h2><ol>
+<li>inductive transfer learning  (推导迁移学习)</li>
+<li>transductive transfer learning (转导迁移学习)</li>
+<li>unsupervised transfer learning (无监督迁移学习)<blockquote>
+<p>Transfer learning is classified to three different settings: inductive transfer learning, transductive transfer learning and unsupervised transfer learning. Most previous works focused on the former two settings. Unsupervised transfer learning may attract more and more attention in the future.</p>
+</blockquote>
+</li>
+</ol>
+<figure class="image-box">
+                <img src="/2019/11/11/Paper-TL-A-survery-on-transfer-learning/根据方式分类.png" alt="根据方式进行分类" title class="index-item-img">
+                <p>根据方式进行分类</p>
+            </figure>
     
     <a href="/2019/11/11/Paper-TL-A-survery-on-transfer-learning/" class="post-more waves-effect waves-button">
         more
