@@ -3,6 +3,22 @@
   
     
     <entry>
+      <title><![CDATA[网速慢如何安装Python包]]></title>
+      <url>/2019/12/17/%E7%BD%91%E9%80%9F%E6%85%A2%E5%A6%82%E4%BD%95%E5%AE%89%E8%A3%85Python%E5%8C%85/</url>
+      <content type="html"><![CDATA[<h2 id="技巧"><a href="#技巧" class="headerlink" title="技巧"></a>技巧</h2><p>使用pip命令安装的时候设置超时选项, e.g.<br><strong> pip –default-timeout=100 install -U XXXX </strong></p>
+<h2 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h2><p><a href="https://blog.csdn.net/Gloriamin/article/details/82494648" target="_blank" rel="noopener">1</a><br><a href="https://www.jb51.net/article/141905.htm" target="_blank" rel="noopener">2</a><br><a href="https://www.cnblogs.com/mingtan/p/7007827.html" target="_blank" rel="noopener">3</a><br><a id="more"></a></p>
+]]></content>
+      
+        
+        <tags>
+            
+            <tag> tricks </tag>
+            
+        </tags>
+        
+    </entry>
+    
+    <entry>
       <title><![CDATA[动态规划解决0-1背包问题]]></title>
       <url>/2019/12/05/%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92%E8%A7%A3%E5%86%B30-1%E8%83%8C%E5%8C%85%E9%97%AE%E9%A2%98/</url>
       <content type="html"><![CDATA[<h2 id="动态规划求解0-1背包问题"><a href="#动态规划求解0-1背包问题" class="headerlink" title="动态规划求解0-1背包问题"></a>动态规划求解0-1背包问题</h2><h3 id="问题描述"><a href="#问题描述" class="headerlink" title="问题描述"></a>问题描述</h3><p>利用动态规划法求0-1背包问题。有n = 20个物品，背包最大可装载M = 878 Kg。物品重量和价值分别如下：<br>W = {92 ,4 ,43 ,83 ,84 ,68 ,92 ,82 ,6 ,44 ,32 ,18 ,56 ,83 ,25 ,96 ,70 ,48 ,14 ,58},<br>V = {44 ,46 ,90 ,72 ,91, 40 ,75 ,35 ,8 ,54 ,78 ,40 ,77 ,15 ,61 ,17 ,75 ,29 ,75 ,63}，<br>求最优背包价值。</p>
@@ -6344,77 +6360,6 @@ at java.net.SocketInputStream.read(SocketInputStream.java:129)
     
     <entry>
       <title><![CDATA[版本管理工具-Git篇[1]]]></title>
-      <url>/2017/01/15/%E7%89%88%E6%9C%AC%E7%AE%A1%E7%90%86%E5%B7%A5%E5%85%B7-Git%E7%AF%87/</url>
-      <content type="html"><![CDATA[<h2 id="版本管理工具的介绍"><a href="#版本管理工具的介绍" class="headerlink" title="版本管理工具的介绍"></a>版本管理工具的介绍</h2><p>作用：备份文件，与U盘等备份文件相比，可以随时随地，项目中经常使用。</p>
-<h3 id="版本管理工具可以记录历史"><a href="#版本管理工具可以记录历史" class="headerlink" title="版本管理工具可以记录历史"></a>版本管理工具可以记录历史</h3><p>网盘 u盘 保存了文件的最新状态，而不会记录修改的历史纪录，而版本管理工具对每次的修改都会进行备份，并且保留了时间和修改人，可以让我们回溯，如果不小心删除版本管理工具中的备份时，我们可以通过历史纪录对其进行找回，因此使用版本管理工具无需担心，而且使用版本管理工具，可以多端共享，例如我们经常所说的云盘，而且只要提交一次，我们就可以在任何地方通过版本管理工具对提交的代码进行下载。尤其对于，一些经常需要分开工作的工作人员比较实用</p>
-<a id="more"></a>
-<h3 id="历史"><a href="#历史" class="headerlink" title="历史"></a>历史</h3><ol>
-<li><p>CVS： 版本管理工具始祖，也是被第一个大规模使用的版本管理工具。由荷兰一所大学教授所开发，由于当时三个人分开工作，为了便于一起协调，创建了CVS。集中式的工具，放到中心服务器上，需要联网</p>
-</li>
-<li><p>SVN： 2000年诞生，也是集中式的工具</p>
-</li>
-<li><p>git： 2005年诞生，Geek社区主流工具，分布式工具！</p>
-</li>
-<li><p>Github： 程序员社区，托管代码基于Git操作。大牛多在这里！！！</p>
-</li>
-</ol>
-<h3 id="集中式-与-分布式-区别"><a href="#集中式-与-分布式-区别" class="headerlink" title="集中式 与 分布式 区别"></a>集中式 与 分布式 区别</h3><ol>
-<li>集中式需要放到中心服务器上，并且操作需要联网，不方便</li>
-<li>分布式则是只要有版本库，就可以在不联网的前提下，快速完成文件提交，记录查看，以及删除等操作，效率高！</li>
-</ol>
-<hr>
-<h2 id="初探Git"><a href="#初探Git" class="headerlink" title="初探Git"></a>初探Git</h2><h3 id="Git-下载-与-安装"><a href="#Git-下载-与-安装" class="headerlink" title="Git 下载 与 安装"></a>Git 下载 与 安装</h3><h4 id="Linux下的安装"><a href="#Linux下的安装" class="headerlink" title="Linux下的安装"></a>Linux下的安装</h4><blockquote>
-<p>打开终端 执行 yum install git 然后键入 yes 等待既可以安装完成 Git</p>
-</blockquote>
-<h2 id="入门Github"><a href="#入门Github" class="headerlink" title="入门Github"></a>入门Github</h2><blockquote>
-<p>GitHub由于下载比较难，推荐离线安装包安装</p>
-</blockquote>
-<h3 id="Linux下检出项目到本地"><a href="#Linux下检出项目到本地" class="headerlink" title="Linux下检出项目到本地"></a>Linux下检出项目到本地</h3><blockquote>
-<p>使用 git clone Github上的仓库地址</p>
-<ol>
-<li>首先创建一个 目录，用来存放 我们检出的项目，使用命令 mkdir Test</li>
-<li>接下来，进入到Test目录，然后 git clone Github上的仓库地址，就可以了</li>
-</ol>
-</blockquote>
-<h3 id="Linux下提交项目"><a href="#Linux下提交项目" class="headerlink" title="Linux下提交项目"></a>Linux下提交项目</h3><blockquote>
-<p>再修改之后，只停留到了本地，没有交到Github维护，因此我们需要同步到Github</p>
-</blockquote>
-<ol>
-<li>首先使用 git status 查看工作区的状态</li>
-<li>对于未跟踪的文件，使用git add 文件名（不包括文件类型），进行跟踪</li>
-<li>然后键入 git commit 命令，并对修改进行描述，这里提交的是提交到了本地的仓库，并没有提交给Github维护</li>
-<li>键入git push，输入Github账户和密码，然后成功提交给Github进行维护</li>
-</ol>
-<h3 id="Windows下检出并提交项目"><a href="#Windows下检出并提交项目" class="headerlink" title="Windows下检出并提交项目"></a>Windows下检出并提交项目</h3><ol>
-<li>首先进入GitHub官方主页，并进入项目所对应的仓库主页，然后点击 open in desktop，选择本地的一个目录，此时检出完成，只需要我们对其进行修改</li>
-<li>修改之后，首先要做的提交修改的东东，并对修改的东西进行一个修改说明</li>
-<li>之后进行同步就可以了</li>
-</ol>
-]]></content>
-      
-        <categories>
-            
-            <category> git </category>
-            
-            <category> 入门 </category>
-            
-        </categories>
-        
-        
-        <tags>
-            
-            <tag> git </tag>
-            
-            <tag> GitHub </tag>
-            
-            <tag> 版本管理工具 </tag>
-            
-        </tags>
-        
-    </entry>
-    
-    <entry>
-      <title><![CDATA[版本管理工具-Git篇[1]]]></title>
       <url>/2017/01/15/%E7%89%88%E6%9C%AC%E7%AE%A1%E7%90%86%E5%B7%A5%E5%85%B7-Git%E7%AF%87%5B1%5D/</url>
       <content type="html"><![CDATA[<h2 id="版本管理工具的介绍"><a href="#版本管理工具的介绍" class="headerlink" title="版本管理工具的介绍"></a>版本管理工具的介绍</h2><p>作用：备份文件，与U盘等备份文件相比，可以随时随地，项目中经常使用。</p>
 <h3 id="版本管理工具可以记录历史"><a href="#版本管理工具可以记录历史" class="headerlink" title="版本管理工具可以记录历史"></a>版本管理工具可以记录历史</h3><p>网盘 u盘 保存了文件的最新状态，而不会记录修改的历史纪录，而版本管理工具对每次的修改都会进行备份，并且保留了时间和修改人，可以让我们回溯，如果不小心删除版本管理工具中的备份时，我们可以通过历史纪录对其进行找回，因此使用版本管理工具无需担心，而且使用版本管理工具，可以多端共享，例如我们经常所说的云盘，而且只要提交一次，我们就可以在任何地方通过版本管理工具对提交的代码进行下载。尤其对于，一些经常需要分开工作的工作人员比较实用</p>
@@ -6479,6 +6424,77 @@ at java.net.SocketInputStream.read(SocketInputStream.java:129)
             <tag> Tools </tag>
             
             <tag> Git </tag>
+            
+        </tags>
+        
+    </entry>
+    
+    <entry>
+      <title><![CDATA[版本管理工具-Git篇[1]]]></title>
+      <url>/2017/01/15/%E7%89%88%E6%9C%AC%E7%AE%A1%E7%90%86%E5%B7%A5%E5%85%B7-Git%E7%AF%87/</url>
+      <content type="html"><![CDATA[<h2 id="版本管理工具的介绍"><a href="#版本管理工具的介绍" class="headerlink" title="版本管理工具的介绍"></a>版本管理工具的介绍</h2><p>作用：备份文件，与U盘等备份文件相比，可以随时随地，项目中经常使用。</p>
+<h3 id="版本管理工具可以记录历史"><a href="#版本管理工具可以记录历史" class="headerlink" title="版本管理工具可以记录历史"></a>版本管理工具可以记录历史</h3><p>网盘 u盘 保存了文件的最新状态，而不会记录修改的历史纪录，而版本管理工具对每次的修改都会进行备份，并且保留了时间和修改人，可以让我们回溯，如果不小心删除版本管理工具中的备份时，我们可以通过历史纪录对其进行找回，因此使用版本管理工具无需担心，而且使用版本管理工具，可以多端共享，例如我们经常所说的云盘，而且只要提交一次，我们就可以在任何地方通过版本管理工具对提交的代码进行下载。尤其对于，一些经常需要分开工作的工作人员比较实用</p>
+<a id="more"></a>
+<h3 id="历史"><a href="#历史" class="headerlink" title="历史"></a>历史</h3><ol>
+<li><p>CVS： 版本管理工具始祖，也是被第一个大规模使用的版本管理工具。由荷兰一所大学教授所开发，由于当时三个人分开工作，为了便于一起协调，创建了CVS。集中式的工具，放到中心服务器上，需要联网</p>
+</li>
+<li><p>SVN： 2000年诞生，也是集中式的工具</p>
+</li>
+<li><p>git： 2005年诞生，Geek社区主流工具，分布式工具！</p>
+</li>
+<li><p>Github： 程序员社区，托管代码基于Git操作。大牛多在这里！！！</p>
+</li>
+</ol>
+<h3 id="集中式-与-分布式-区别"><a href="#集中式-与-分布式-区别" class="headerlink" title="集中式 与 分布式 区别"></a>集中式 与 分布式 区别</h3><ol>
+<li>集中式需要放到中心服务器上，并且操作需要联网，不方便</li>
+<li>分布式则是只要有版本库，就可以在不联网的前提下，快速完成文件提交，记录查看，以及删除等操作，效率高！</li>
+</ol>
+<hr>
+<h2 id="初探Git"><a href="#初探Git" class="headerlink" title="初探Git"></a>初探Git</h2><h3 id="Git-下载-与-安装"><a href="#Git-下载-与-安装" class="headerlink" title="Git 下载 与 安装"></a>Git 下载 与 安装</h3><h4 id="Linux下的安装"><a href="#Linux下的安装" class="headerlink" title="Linux下的安装"></a>Linux下的安装</h4><blockquote>
+<p>打开终端 执行 yum install git 然后键入 yes 等待既可以安装完成 Git</p>
+</blockquote>
+<h2 id="入门Github"><a href="#入门Github" class="headerlink" title="入门Github"></a>入门Github</h2><blockquote>
+<p>GitHub由于下载比较难，推荐离线安装包安装</p>
+</blockquote>
+<h3 id="Linux下检出项目到本地"><a href="#Linux下检出项目到本地" class="headerlink" title="Linux下检出项目到本地"></a>Linux下检出项目到本地</h3><blockquote>
+<p>使用 git clone Github上的仓库地址</p>
+<ol>
+<li>首先创建一个 目录，用来存放 我们检出的项目，使用命令 mkdir Test</li>
+<li>接下来，进入到Test目录，然后 git clone Github上的仓库地址，就可以了</li>
+</ol>
+</blockquote>
+<h3 id="Linux下提交项目"><a href="#Linux下提交项目" class="headerlink" title="Linux下提交项目"></a>Linux下提交项目</h3><blockquote>
+<p>再修改之后，只停留到了本地，没有交到Github维护，因此我们需要同步到Github</p>
+</blockquote>
+<ol>
+<li>首先使用 git status 查看工作区的状态</li>
+<li>对于未跟踪的文件，使用git add 文件名（不包括文件类型），进行跟踪</li>
+<li>然后键入 git commit 命令，并对修改进行描述，这里提交的是提交到了本地的仓库，并没有提交给Github维护</li>
+<li>键入git push，输入Github账户和密码，然后成功提交给Github进行维护</li>
+</ol>
+<h3 id="Windows下检出并提交项目"><a href="#Windows下检出并提交项目" class="headerlink" title="Windows下检出并提交项目"></a>Windows下检出并提交项目</h3><ol>
+<li>首先进入GitHub官方主页，并进入项目所对应的仓库主页，然后点击 open in desktop，选择本地的一个目录，此时检出完成，只需要我们对其进行修改</li>
+<li>修改之后，首先要做的提交修改的东东，并对修改的东西进行一个修改说明</li>
+<li>之后进行同步就可以了</li>
+</ol>
+]]></content>
+      
+        <categories>
+            
+            <category> git </category>
+            
+            <category> 入门 </category>
+            
+        </categories>
+        
+        
+        <tags>
+            
+            <tag> git </tag>
+            
+            <tag> GitHub </tag>
+            
+            <tag> 版本管理工具 </tag>
             
         </tags>
         

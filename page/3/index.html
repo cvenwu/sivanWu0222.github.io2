@@ -252,6 +252,93 @@
         <ul class="post-list">
         
             <li class="post-list-item fade">
+                <article id="post-OpenCV-TensorFlow-入门人工智能图像处理-2"
+  class="article-card article-type-post" itemprop="blogPost">
+  
+    
+    
+    <div class="top" data-title="2">
+    <div class="top-wrap">
+        <p></p>
+    </div>
+</div>
+    
+    
+        
+
+
+  
+    <h3 class="post-title re-title" itemprop="name">
+      <a class="post-title-link" href="/2019/05/14/OpenCV-TensorFlow-入门人工智能图像处理-2/">OpenCV+TensorFlow 入门人工智能图像处理[2]</a>
+    </h3>
+  
+
+
+
+    
+    <div class="post-meta">
+        <time class="post-time" title="2019-05-14 04:11:12" datetime="2019-05-14T04:11:12.000Z"  itemprop="datePublished">2019-05-14</time>
+
+        
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/计算机视觉/">计算机视觉</a></li></ul>
+
+
+
+        
+	<span id="/2019/05/14/OpenCV-TensorFlow-入门人工智能图像处理-2/" class="leancloud_visitors" data-flag-title="OpenCV+TensorFlow 入门人工智能图像处理[2]" title="OpenCV+TensorFlow 入门人工智能图像处理[2]">
+		
+			<i class="icon icon-eye"></i>
+		
+		<span class="leancloud-visitors-count"></span>
+	</span>
+ 
+
+        
+
+
+        
+  <span><i class="icon icon-github"></i></span>
+
+        
+    </div>
+    
+    <div class="post-content" id="post-content" itemprop="postContent">
+    
+    
+        <h2 id="TensorFlow理解"><a href="#TensorFlow理解" class="headerlink" title="TensorFlow理解"></a>TensorFlow理解</h2><h3 id="TensorFlow运算的实质"><a href="#TensorFlow运算的实质" class="headerlink" title="TensorFlow运算的实质"></a>TensorFlow运算的实质</h3><ul>
+<li>tf本质 = 张量tensor + 计算图graphs</li>
+<li>张量不仅指常量还包括变量，其实就是tensorflow中的数据</li>
+<li>计算图其实就是数据操作的过程，构成了计算图</li>
+<li>在tensorflow中，所有的计算图都要放入到会话session中来执行</li>
+<li>session可以理解为一个运算的交互环境</li>
+<li>session中所有的变量才可以进行操作，所以有一个init操作</li>
+<li>init操作实质也是一个计算图</li>
+<li>如果不使用with语句打开session,最后需要手动close</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 初始化操作，实质也是一个计算图</span></span><br><span class="line">init = tf.global_variables_initializer()</span><br><span class="line">sess.run(init)</span><br></pre></td></tr></table></figure>
+<h3 id="常量与变量的四则运算"><a href="#常量与变量的四则运算" class="headerlink" title="常量与变量的四则运算"></a>常量与变量的四则运算</h3><h4 id="常数之间的四则运算"><a href="#常数之间的四则运算" class="headerlink" title="常数之间的四则运算"></a>常数之间的四则运算</h4><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> tensorflow <span class="keyword">as</span> tf</span><br><span class="line">data1 = tf.constant(<span class="number">6</span>)</span><br><span class="line">data2 = tf.constant(<span class="number">2</span>)</span><br><span class="line">data_add = tf.add(data1, data2)</span><br><span class="line">data_mul = tf.multiply(data1, data2)</span><br><span class="line">data_sub = tf.subtract(data1, data2)</span><br><span class="line">data_div = tf.divide(data1, data2)</span><br><span class="line"><span class="keyword">with</span> tf.Session() <span class="keyword">as</span> sess:</span><br><span class="line">    print(sess.run(data_add))</span><br><span class="line">    print(sess.run(data_mul))</span><br><span class="line">    print(sess.run(data_sub))</span><br><span class="line">    print(sess.run(data_div))</span><br></pre></td></tr></table></figure>
+<p>执行结果<br><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">8</span><br><span class="line">12</span><br><span class="line">4</span><br><span class="line">3.0</span><br></pre></td></tr></table></figure></p>
+<h4 id="常数与变量的四则运算"><a href="#常数与变量的四则运算" class="headerlink" title="常数与变量的四则运算"></a>常数与变量的四则运算</h4><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> tensorflow <span class="keyword">as</span> tf</span><br><span class="line">data1 = tf.constant(<span class="number">6</span>)</span><br><span class="line">data2 = tf.Variable(<span class="number">2</span>)</span><br><span class="line">data_add = tf.add(data1, data2)</span><br><span class="line">data_copy = tf.assign(data2, data_add) <span class="comment"># 将data_add运算的结果追加到data2中</span></span><br><span class="line">data_mul = tf.multiply(data1, data2)</span><br><span class="line">data_sub = tf.subtract(data1, data2)</span><br><span class="line">data_div = tf.divide(data1, data2)</span><br><span class="line">init = tf.global_variables_initializer()</span><br><span class="line"><span class="keyword">with</span> tf.Session() <span class="keyword">as</span> sess:</span><br><span class="line">    <span class="comment"># 所有的变量必须完成初始化才可以操作</span></span><br><span class="line">    sess.run(init)</span><br><span class="line">    print(sess.run(data_add))</span><br><span class="line">    print(sess.run(data_mul))</span><br><span class="line">    print(sess.run(data_sub))</span><br><span class="line">    print(sess.run(data_div))</span><br></pre></td></tr></table></figure>
+<p>执行结果<br><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">8</span><br><span class="line">12</span><br><span class="line">4</span><br><span class="line">3.0</span><br></pre></td></tr></table></figure></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> tensorflow <span class="keyword">as</span> tf</span><br><span class="line">data1 = tf.constant(<span class="number">6</span>)</span><br><span class="line">data2 = tf.Variable(<span class="number">2</span>)</span><br><span class="line">data_add = tf.add(data1, data2)</span><br><span class="line">data_copy = tf.assign(data2, data_add) <span class="comment"># 将data_add运算的结果追加到data2中</span></span><br><span class="line">data_mul = tf.multiply(data1, data2)</span><br><span class="line">data_sub = tf.subtract(data1, data2)</span><br><span class="line">data_div = tf.divide(data1, data2)</span><br><span class="line">init = tf.global_variables_initializer()</span><br><span class="line"><span class="keyword">with</span> tf.Session() <span class="keyword">as</span> sess:</span><br><span class="line">    <span class="comment"># 所有的变量必须完成初始化才可以操作</span></span><br><span class="line">    sess.run(init)</span><br><span class="line">    print(sess.run(data_add))</span><br><span class="line">    print(sess.run(data_mul))</span><br><span class="line">    print(sess.run(data_sub))</span><br><span class="line">    print(sess.run(data_div))</span><br><span class="line">    print(<span class="string">"data2:"</span>, sess.run(data2))</span><br><span class="line">    print(<span class="string">"sess.run(data_copy) "</span>, sess.run(data_copy)) <span class="comment"># 将8赋值给data_copy</span></span><br><span class="line">    print(<span class="string">"data2:"</span>, sess.run(data2))</span><br><span class="line">    <span class="comment"># 将8+6赋值给data_copy, eval()方法类似于下面的代码，也是会话执行</span></span><br><span class="line">    print(<span class="string">"data_copy.eval()"</span>, data_copy.eval())  <span class="comment"># 此时data_add已经为14</span></span><br><span class="line">    print(<span class="string">"data2:"</span>, sess.run(data2))</span><br><span class="line">    print(<span class="string">"tf.get_default_session().run(data_copy)"</span>, tf.get_default_session().run(data_copy))</span><br><span class="line">    print(<span class="string">"data2:"</span>, sess.run(data2))</span><br><span class="line">    <span class="comment"># 计算图执行得两种方式：</span></span><br><span class="line">    <span class="comment"># 1. sess.run(图名)</span></span><br><span class="line">    <span class="comment"># 2. 图名.eval()</span></span><br></pre></td></tr></table></figure>
+<p>执行结果<br><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">8</span><br><span class="line">12</span><br><span class="line">4</span><br><span class="line">3.0</span><br><span class="line">data2: 2</span><br><span class="line">sess.run(data_copy)  8</span><br><span class="line">data2: 8</span><br><span class="line">data_copy.eval() 14</span><br><span class="line">data2: 14</span><br><span class="line">tf.get_default_session().run(data_copy) 20</span><br><span class="line">data2: 20</span><br></pre></td></tr></table></figure></p>
+    
+    <a href="/2019/05/14/OpenCV-TensorFlow-入门人工智能图像处理-2/" class="post-more waves-effect waves-button">
+        more
+    </a>
+    </div>
+</article>
+
+<div class="post-footer">
+    
+	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/CV/">CV</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/OpenCV/">OpenCV</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/TensorFlow/">TensorFlow</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/人工智能/">人工智能</a></li></ul>
+
+</div>
+
+
+            </li>
+        
+            <li class="post-list-item fade">
                 <article id="post-OpenCV-TensorFlow-入门人工智能图像处理-1"
   class="article-card article-type-post" itemprop="blogPost">
   
@@ -994,85 +1081,6 @@ urllib.request.urlopen(timeout=1) # 设置1秒为超时界限
 <div class="post-footer">
     
 	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Python/">Python</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/爬虫/">爬虫</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/精通Python网络爬虫、核心技术、框架与项目实战/">精通Python网络爬虫、核心技术、框架与项目实战</a></li></ul>
-
-</div>
-
-
-            </li>
-        
-            <li class="post-list-item fade">
-                <article id="post-Ubuntu虚拟机搭建FAISS"
-  class="article-card article-type-post" itemprop="blogPost">
-  
-    
-    
-    <div class="top" data-title="2">
-    <div class="top-wrap">
-        <p></p>
-    </div>
-</div>
-    
-    
-        
-
-
-  
-    <h3 class="post-title re-title" itemprop="name">
-      <a class="post-title-link" href="/2019/04/25/Ubuntu虚拟机搭建FAISS/">Ubuntu虚拟机搭建FAISS</a>
-    </h3>
-  
-
-
-
-    
-    <div class="post-meta">
-        <time class="post-time" title="2019-04-25 04:55:56" datetime="2019-04-25T04:55:56.000Z"  itemprop="datePublished">2019-04-25</time>
-
-        
-	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/本科毕业设计/">本科毕业设计</a><ul class="article-category-list-child"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/本科毕业设计/环境/">环境</a></li></ul></li></ul>
-
-
-
-        
-	<span id="/2019/04/25/Ubuntu虚拟机搭建FAISS/" class="leancloud_visitors" data-flag-title="Ubuntu虚拟机搭建FAISS" title="Ubuntu虚拟机搭建FAISS">
-		
-			<i class="icon icon-eye"></i>
-		
-		<span class="leancloud-visitors-count"></span>
-	</span>
- 
-
-        
-
-
-        
-  <span><i class="icon icon-github"></i></span>
-
-        
-    </div>
-    
-    <div class="post-content" id="post-content" itemprop="postContent">
-    
-    
-        <h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><blockquote>
-<p>因为使用Anaconda安装FAISS是最简单的一种方法，之前使用Conda(Anaconda的包管理工具)安装，老是曝出如下问题： </p>
-</blockquote>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">conda: error: failed to fetch repodata from 'http://repo.continuum.io/pkgs/pro/linux-64/'</span><br></pre></td></tr></table></figure>
-<h3 id="解决办法："><a href="#解决办法：" class="headerlink" title="解决办法："></a>解决办法：</h3><p>重新去官网下载一个最新的Anaconda安装包<br><a href="https://pan.baidu.com/s/11pP63oKIAKjZBSI4ycGA5g" target="_blank" rel="noopener">百度网盘下载</a><br>提取码：lebr</p>
-<h2 id="Ubuntu安装Anaconda"><a href="#Ubuntu安装Anaconda" class="headerlink" title="Ubuntu安装Anaconda"></a>Ubuntu安装Anaconda</h2><p><a href="https://www.jianshu.com/p/2645510a39de" target="_blank" rel="noopener">参考</a></p>
-<h2 id="安装其他包"><a href="#安装其他包" class="headerlink" title="安装其他包"></a>安装其他包</h2><p><a href="https://www.jianshu.com/p/2645510a39de" target="_blank" rel="noopener">参考</a></p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br></pre></td><td class="code"><pre><span class="line">yirufeng@ubuntu:~/Anaconda$ conda install openblas</span><br><span class="line">WARNING: The conda.compat module is deprecated and will be removed in a future release.</span><br><span class="line">Collecting package metadata: done</span><br><span class="line">Solving environment: done</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span># Package Plan ##</span><br><span class="line"></span><br><span class="line">  environment location: /home/yirufeng/anaconda3</span><br><span class="line"></span><br><span class="line">  added / updated specs:</span><br><span class="line">    - openblas</span><br><span class="line"></span><br><span class="line">The following packages will be downloaded:</span><br><span class="line"></span><br><span class="line">    package                    |            build</span><br><span class="line">    ---------------------------|-----------------</span><br><span class="line">    conda-4.6.14               |           py37_0        2.1 MB</span><br><span class="line">    libgfortran-3.0.0          |                1        281 KB</span><br><span class="line">    openblas-0.2.19            |                0        3.0 MB</span><br><span class="line">    ------------------------------------------------------------</span><br><span class="line">                       Total:         5.4 MB</span><br><span class="line"></span><br><span class="line">The following NEW packages will be INSTALLED:</span><br><span class="line"></span><br><span class="line">  libgfortran        pkgs/free/linux-64::libgfortran-3.0.0-1</span><br><span class="line">  openblas           pkgs/free/linux-64::openblas-0.2.19-0</span><br><span class="line"></span><br><span class="line">The following packages will be UPDATED:</span><br><span class="line"></span><br><span class="line">  c</span><br><span class="line">  </span><br><span class="line">  </span><br><span class="line">  </span><br><span class="line">(base) yirufeng@ubuntu:~/Anaconda$ conda install faiss-cpu -c pytorch</span><br><span class="line">Collecting package metadata: done</span><br><span class="line">Solving environment: done</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span># Package Plan ##</span><br><span class="line"></span><br><span class="line">  environment location: /home/yirufeng/anaconda3</span><br><span class="line"></span><br><span class="line">  added / updated specs:</span><br><span class="line">    - faiss-cpu</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">The following packages will be downloaded:</span><br><span class="line"></span><br><span class="line">    package                    |            build</span><br><span class="line">    ---------------------------|-----------------</span><br><span class="line">    faiss-cpu-1.5.1            |   py37h6bb024c_1        879 KB  pytorch</span><br><span class="line">    ------------------------------------------------------------</span><br><span class="line">                                    Total:         879 KB</span><br><span class="line"></span><br><span class="line">The following NEW packages will be INSTALLED:</span><br><span class="line"></span><br><span class="line">  faiss-cpu          pytorch/linux-64::faiss-cpu-1.5.1-py37h6bb024c_1</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">Proceed ([y]/n)? y</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">Downloading and Extracting Packages</span><br><span class="line">faiss-cpu-1.5.1      | 879 KB    | ############################################## | 100% </span><br><span class="line">Preparing transaction: done</span><br><span class="line">Verifying transaction: done</span><br><span class="line">Executing transaction: done</span><br><span class="line">(base) yirufeng@ubuntu:~/Anaconda$</span><br></pre></td></tr></table></figure>
-<h2 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h2><p><a href="https://www.jianshu.com/p/2645510a39de" target="_blank" rel="noopener">参考</a></p>
-    
-    <a href="/2019/04/25/Ubuntu虚拟机搭建FAISS/" class="post-more waves-effect waves-button">
-        more
-    </a>
-    </div>
-</article>
-
-<div class="post-footer">
-    
-	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Anaconda/">Anaconda</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/FAISS/">FAISS</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/FAISS安装/">FAISS安装</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Ubuntu/">Ubuntu</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/毕业设计/">毕业设计</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/毕业设计环境/">毕业设计环境</a></li></ul>
 
 </div>
 
