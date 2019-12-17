@@ -41,7 +41,7 @@
       <url>/2019/11/30/csv%E6%A8%A1%E5%9D%97%E5%86%99%E5%85%A5csv%E6%96%87%E4%BB%B6-os%E5%88%9B%E5%BB%BA%E7%9B%AE%E5%BD%95-np-prod%E8%AE%A1%E7%AE%97%E5%85%83%E7%B4%A0%E6%88%90%E7%BB%A9/</url>
       <content type="html"><![CDATA[<h2 id="csv-库的使用"><a href="#csv-库的使用" class="headerlink" title="csv 库的使用"></a>csv 库的使用</h2><h3 id="写csv文件"><a href="#写csv文件" class="headerlink" title="写csv文件"></a>写csv文件</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> csv</span><br><span class="line"><span class="keyword">if</span> __name__ == <span class="string">'__main__'</span>:</span><br><span class="line">    <span class="keyword">with</span> open(<span class="string">'result.csv'</span>, <span class="string">"a+"</span>, newline=<span class="string">''</span>) <span class="keyword">as</span> f:</span><br><span class="line">        writer = csv.writer(f, delimiter=<span class="string">':'</span>)  <span class="comment"># delimiter用于csv文件中分隔符的显示,默认是,</span></span><br><span class="line">        writer.writerow([<span class="string">'1'</span>, <span class="string">'2'</span>, <span class="number">3</span>])</span><br></pre></td></tr></table></figure>
 <p>np.prod() 默认计算所有元素乘积，无论传入进来的是一个向量还是一个tensor, 可以指定axis=1用来获取每一行的乘积</p>
-<h3 id="写入和读取csv文件"><a href="#写入和读取csv文件" class="headerlink" title="写入和读取csv文件"></a>写入和读取csv文件</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">with</span> open(os.path.join(self.root, filename), mode=<span class="string">'w'</span>, newline=<span class="string">''</span>) <span class="keyword">as</span> f:</span><br><span class="line">                writer = csv.writer(f)</span><br><span class="line">                <span class="keyword">for</span> img <span class="keyword">in</span> images:</span><br><span class="line">                    name = img.split(os.sep)[<span class="number">-2</span>]</span><br><span class="line">                    label = self.name2label[name]</span><br><span class="line">                    writer.writerow([img, label])</span><br><span class="line">    </span><br><span class="line">        imgs, labels = [], []</span><br><span class="line"><span class="keyword">with</span> open(os.path.join(self.root, filename)) <span class="keyword">as</span> f:</span><br><span class="line">    reader = csv.reader(f)</span><br><span class="line">    <span class="keyword">for</span> line <span class="keyword">in</span> reader:</span><br><span class="line">        img, label = line</span><br><span class="line">        label = int(label)</span><br><span class="line">        </span><br><span class="line">        imgs.append(img)</span><br><span class="line">        labels.append(label)</span><br></pre></td></tr></table></figure>
+<h3 id="写入和读取csv文件"><a href="#写入和读取csv文件" class="headerlink" title="写入和读取csv文件"></a>写入和读取csv文件</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">with</span> open(os.path.join(self.root, filename), mode=<span class="string">'w'</span>, newline=<span class="string">''</span>) <span class="keyword">as</span> f:</span><br><span class="line">                writer = csv.writer(f)</span><br><span class="line">                <span class="keyword">for</span> img <span class="keyword">in</span> images:</span><br><span class="line">                    name = img.split(os.sep)[<span class="number">-2</span>]</span><br><span class="line">                    label = self.name2label[name]</span><br><span class="line">                    writer.writerow([img, label])</span><br><span class="line">    </span><br><span class="line">        imgs, labels = [], []</span><br><span class="line"><span class="keyword">with</span> open(os.path.join(self.root, filename)) <span class="keyword">as</span> f:</span><br><span class="line">    reader = csv.reader(f)</span><br><span class="line">    <span class="keyword">for</span> line <span class="keyword">in</span> reader:</span><br><span class="line">        <span class="comment">## line 将会被认为是一个列表，将行尾部的换行符去掉之后将剩下的内容按照,进行划分得到的列表</span></span><br><span class="line">        img, label = line</span><br><span class="line">        label = int(label)</span><br><span class="line">        </span><br><span class="line">        imgs.append(img)</span><br><span class="line">        labels.append(label)</span><br></pre></td></tr></table></figure>
 <h2 id="glob库的使用"><a href="#glob库的使用" class="headerlink" title="glob库的使用"></a>glob库的使用</h2><blockquote>
 <p>glob根据指定文件名字的规则进行文件名的搜寻，并返回一个列表</p>
 </blockquote>
@@ -75,8 +75,8 @@
     <entry>
       <title><![CDATA[Python 线程池爬虫的简单使用]]></title>
       <url>/2019/11/30/Python-%E7%BA%BF%E7%A8%8B%E6%B1%A0%E7%88%AC%E8%99%AB%E7%9A%84%E7%AE%80%E5%8D%95%E5%AE%9E%E7%94%A8/</url>
-      <content type="html"><![CDATA[<h1 id="python使用线程池进行编程"><a href="#python使用线程池进行编程" class="headerlink" title="python使用线程池进行编程"></a>python使用线程池进行编程</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">import concurrent</span><br><span class="line">from concurrent import futures  # 做多线程和多进程编程</span><br><span class="line">from concurrent.futures import ThreadPoolExecutor</span><br><span class="line">from concurrent.futures import as_completed</span><br></pre></td></tr></table></figure>
-<h1 id="线程池"><a href="#线程池" class="headerlink" title="线程池"></a>线程池</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br></pre></td><td class="code"><pre><span class="line">## 为什么需要线程池</span><br><span class="line">## 主线程中可以获取某一个线程的状态或者某一个任务的状态以及返回值</span><br><span class="line">## 当一个线程完成的时候我们主线程也可以立即知道</span><br><span class="line">## futures可以让多线程和多进程编码一致</span><br><span class="line"></span><br><span class="line">import time</span><br><span class="line">def get_html(times):</span><br><span class="line">    time.sleep(times)  # 休眠</span><br><span class="line"></span><br><span class="line">    print(&apos;get page &#123;&#125; success&apos;.format(times))</span><br><span class="line">    return times</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">def main():</span><br><span class="line">    executor = ThreadPoolExecutor(max_workers=2)</span><br><span class="line"></span><br><span class="line">    # 提交任务</span><br><span class="line">    ## 通过submit函数提交执行的函数到线程池中</span><br><span class="line">    ## submit是非阻塞的，将会立即返回</span><br><span class="line">    task1 = executor.submit(get_html, (3))  # 第一个参数是函数名称，第二个参数是函数的参数</span><br><span class="line">    task2 = executor.submit(get_html, (10))  # 会有一个返回结果</span><br><span class="line"></span><br><span class="line">    # done 方法用于判定某个任务是否完成</span><br><span class="line">    print(task1.done())  # 判断这个函数是否执行成功</span><br><span class="line">    time.sleep(4)</span><br><span class="line">    print(task2.done())</span><br><span class="line"></span><br><span class="line">    # result 方法得到task执行的返回结果</span><br><span class="line">    print(task2.result())</span><br><span class="line">    print(task1.result())</span><br><span class="line"></span><br><span class="line">    # 将某一个任务cancel掉， 在submit返回的对象上进行操作，</span><br><span class="line">    task2.cancel()  # 只有在还没有执行的时候cancel掉</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"># 获取已经成功的task的返回as_completed 是一个生成器</span><br><span class="line">executor = ThreadPoolExecutor(max_workers=4)</span><br><span class="line">urls = [10, 10, 10]</span><br><span class="line">all_tasks = [executor.submit(get_html, url) for url in urls]</span><br><span class="line"></span><br><span class="line"># 异步运行</span><br><span class="line"># for future in as_completed(all_tasks):  # 返回已经完成的future</span><br><span class="line">    # data = future.result()  # 得到执行的结果</span><br><span class="line">    # print(data)</span><br><span class="line"></span><br><span class="line"># 通过executor获取已经完成的task， 会按照urls中的元素的顺序执行，但也是并发只是会等待</span><br><span class="line"># for data in executor.map(get_html, urls):  # 直接返回执行的结果</span><br><span class="line">#     print(data)</span><br></pre></td></tr></table></figure>
+      <content type="html"><![CDATA[<h1 id="python使用线程池进行编程"><a href="#python使用线程池进行编程" class="headerlink" title="python使用线程池进行编程"></a>python使用线程池进行编程</h1><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> concurrent</span><br><span class="line"><span class="keyword">from</span> concurrent <span class="keyword">import</span> futures  <span class="comment"># 做多线程和多进程编程</span></span><br><span class="line"><span class="keyword">from</span> concurrent.futures <span class="keyword">import</span> ThreadPoolExecutor</span><br><span class="line"><span class="keyword">from</span> concurrent.futures <span class="keyword">import</span> as_completed</span><br></pre></td></tr></table></figure>
+<h1 id="线程池"><a href="#线程池" class="headerlink" title="线程池"></a>线程池</h1><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">## 为什么需要线程池</span></span><br><span class="line"><span class="comment">## 主线程中可以获取某一个线程的状态或者某一个任务的状态以及返回值</span></span><br><span class="line"><span class="comment">## 当一个线程完成的时候我们主线程也可以立即知道</span></span><br><span class="line"><span class="comment">## futures可以让多线程和多进程编码一致</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> time</span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">get_html</span><span class="params">(times)</span>:</span></span><br><span class="line">    time.sleep(times)  <span class="comment"># 休眠</span></span><br><span class="line"></span><br><span class="line">    print(<span class="string">'get page &#123;&#125; success'</span>.format(times))</span><br><span class="line">    <span class="keyword">return</span> times</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">main</span><span class="params">()</span>:</span></span><br><span class="line">    executor = ThreadPoolExecutor(max_workers=<span class="number">2</span>)</span><br><span class="line"></span><br><span class="line">    <span class="comment"># 提交任务</span></span><br><span class="line">    <span class="comment">## 通过submit函数提交执行的函数到线程池中</span></span><br><span class="line">    <span class="comment">## submit是非阻塞的，将会立即返回</span></span><br><span class="line">    task1 = executor.submit(get_html, (<span class="number">3</span>))  <span class="comment"># 第一个参数是函数名称，第二个参数是函数的参数</span></span><br><span class="line">    task2 = executor.submit(get_html, (<span class="number">10</span>))  <span class="comment"># 会有一个返回结果</span></span><br><span class="line"></span><br><span class="line">    <span class="comment"># done 方法用于判定某个任务是否完成</span></span><br><span class="line">    print(task1.done())  <span class="comment"># 判断这个函数是否执行成功</span></span><br><span class="line">    time.sleep(<span class="number">4</span>)</span><br><span class="line">    print(task2.done())</span><br><span class="line"></span><br><span class="line">    <span class="comment"># result 方法得到task执行的返回结果</span></span><br><span class="line">    print(task2.result())</span><br><span class="line">    print(task1.result())</span><br><span class="line"></span><br><span class="line">    <span class="comment"># 将某一个任务cancel掉， 在submit返回的对象上进行操作，</span></span><br><span class="line">    task2.cancel()  <span class="comment"># 只有在还没有执行的时候cancel掉</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment"># 获取已经成功的task的返回as_completed 是一个生成器</span></span><br><span class="line">executor = ThreadPoolExecutor(max_workers=<span class="number">4</span>)</span><br><span class="line">urls = [<span class="number">10</span>, <span class="number">10</span>, <span class="number">10</span>]</span><br><span class="line">all_tasks = [executor.submit(get_html, url) <span class="keyword">for</span> url <span class="keyword">in</span> urls]</span><br><span class="line"></span><br><span class="line"><span class="comment"># 异步运行</span></span><br><span class="line"><span class="comment"># for future in as_completed(all_tasks):  # 返回已经完成的future</span></span><br><span class="line">    <span class="comment"># data = future.result()  # 得到执行的结果</span></span><br><span class="line">    <span class="comment"># print(data)</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 通过executor获取已经完成的task， 会按照urls中的元素的顺序执行，但也是并发只是会等待</span></span><br><span class="line"><span class="comment"># for data in executor.map(get_html, urls):  # 直接返回执行的结果</span></span><br><span class="line"><span class="comment">#     print(data)</span></span><br></pre></td></tr></table></figure>
 <a id="more"></a>
 <h2 id="json使用"><a href="#json使用" class="headerlink" title="json使用"></a>json使用</h2><blockquote>
 <p>json.loads() 参数是一个str,可以将str转换为dict<br>json.load() 参数是一个文件对象，可以将文件句柄转换为一个dict</p>
@@ -1178,9 +1178,9 @@
             
             <tag> Flask </tag>
             
-            <tag> flask </tag>
-            
             <tag> Web </tag>
+            
+            <tag> flask </tag>
             
         </tags>
         
@@ -5123,9 +5123,9 @@
         
         <tags>
             
-            <tag> 数据库 </tag>
-            
             <tag> MySQL </tag>
+            
+            <tag> 数据库 </tag>
             
         </tags>
         
@@ -5669,9 +5669,9 @@ at java.net.SocketInputStream.read(SocketInputStream.java:129)
         
         <tags>
             
-            <tag> MySQL </tag>
-            
             <tag> SQL </tag>
+            
+            <tag> MySQL </tag>
             
         </tags>
         
@@ -6342,77 +6342,6 @@ at java.net.SocketInputStream.read(SocketInputStream.java:129)
     
     <entry>
       <title><![CDATA[版本管理工具-Git篇[1]]]></title>
-      <url>/2017/01/15/%E7%89%88%E6%9C%AC%E7%AE%A1%E7%90%86%E5%B7%A5%E5%85%B7-Git%E7%AF%87%5B1%5D/</url>
-      <content type="html"><![CDATA[<h2 id="版本管理工具的介绍"><a href="#版本管理工具的介绍" class="headerlink" title="版本管理工具的介绍"></a>版本管理工具的介绍</h2><p>作用：备份文件，与U盘等备份文件相比，可以随时随地，项目中经常使用。</p>
-<h3 id="版本管理工具可以记录历史"><a href="#版本管理工具可以记录历史" class="headerlink" title="版本管理工具可以记录历史"></a>版本管理工具可以记录历史</h3><p>网盘 u盘 保存了文件的最新状态，而不会记录修改的历史纪录，而版本管理工具对每次的修改都会进行备份，并且保留了时间和修改人，可以让我们回溯，如果不小心删除版本管理工具中的备份时，我们可以通过历史纪录对其进行找回，因此使用版本管理工具无需担心，而且使用版本管理工具，可以多端共享，例如我们经常所说的云盘，而且只要提交一次，我们就可以在任何地方通过版本管理工具对提交的代码进行下载。尤其对于，一些经常需要分开工作的工作人员比较实用</p>
-<a id="more"></a>
-<h3 id="历史"><a href="#历史" class="headerlink" title="历史"></a>历史</h3><figure class="image-box">
-                <img src="http://on3w7gc9m.bkt.clouddn.com/psb.png" alt="这里写图片描述" title class>
-                <p>这里写图片描述</p>
-            </figure>
-<ol>
-<li><p>CVS： 版本管理工具始祖，也是被第一个大规模使用的版本管理工具。由荷兰一所大学教授所开发，由于当时三个人分开工作，为了便于一起协调，创建了CVS。集中式的工具，放到中心服务器上，需要联网</p>
-</li>
-<li><p>SVN： 2000年诞生，也是集中式的工具</p>
-</li>
-<li><p>git： 2005年诞生，Geek社区主流工具，分布式工具！</p>
-</li>
-<li><p>Github： 程序员社区，托管代码基于Git操作。大牛多在这里！！！</p>
-</li>
-</ol>
-<h3 id="集中式-与-分布式-区别"><a href="#集中式-与-分布式-区别" class="headerlink" title="集中式 与 分布式 区别"></a>集中式 与 分布式 区别</h3><ol>
-<li>集中式需要放到中心服务器上，并且操作需要联网，不方便</li>
-<li>分布式则是只要有版本库，就可以在不联网的前提下，快速完成文件提交，记录查看，以及删除等操作，效率高！</li>
-</ol>
-<hr>
-<h2 id="初探Git"><a href="#初探Git" class="headerlink" title="初探Git"></a>初探Git</h2><h3 id="Git-下载-与-安装"><a href="#Git-下载-与-安装" class="headerlink" title="Git 下载 与 安装"></a>Git 下载 与 安装</h3><h4 id="Linux下的安装"><a href="#Linux下的安装" class="headerlink" title="Linux下的安装"></a>Linux下的安装</h4><blockquote>
-<p>打开终端 执行 yum install git 然后键入 yes 等待既可以安装完成 Git</p>
-</blockquote>
-<h2 id="入门Github"><a href="#入门Github" class="headerlink" title="入门Github"></a>入门Github</h2><blockquote>
-<p>GitHub由于下载比较难，推荐离线安装包安装</p>
-</blockquote>
-<h3 id="Linux下检出项目到本地"><a href="#Linux下检出项目到本地" class="headerlink" title="Linux下检出项目到本地"></a>Linux下检出项目到本地</h3><blockquote>
-<p>使用 git clone Github上的仓库地址</p>
-<ol>
-<li>首先创建一个 目录，用来存放 我们检出的项目，使用命令 mkdir Test</li>
-<li>接下来，进入到Test目录，然后 git clone Github上的仓库地址，就可以了</li>
-</ol>
-</blockquote>
-<h3 id="Linux下提交项目"><a href="#Linux下提交项目" class="headerlink" title="Linux下提交项目"></a>Linux下提交项目</h3><blockquote>
-<p>再修改之后，只停留到了本地，没有交到Github维护，因此我们需要同步到Github</p>
-</blockquote>
-<ol>
-<li>首先使用 git status 查看工作区的状态</li>
-<li>对于未跟踪的文件，使用git add 文件名（不包括文件类型），进行跟踪</li>
-<li>然后键入 git commit 命令，并对修改进行描述，这里提交的是提交到了本地的仓库，并没有提交给Github维护</li>
-<li>键入git push，输入Github账户和密码，然后成功提交给Github进行维护</li>
-</ol>
-<h3 id="Windows下检出并提交项目"><a href="#Windows下检出并提交项目" class="headerlink" title="Windows下检出并提交项目"></a>Windows下检出并提交项目</h3><ol>
-<li>首先进入GitHub官方主页，并进入项目所对应的仓库主页，然后点击 open in desktop，选择本地的一个目录，此时检出完成，只需要我们对其进行修改</li>
-<li>修改之后，首先要做的提交修改的东东，并对修改的东西进行一个修改说明</li>
-<li>之后进行同步就可以了</li>
-</ol>
-]]></content>
-      
-        <categories>
-            
-            <category> Tools </category>
-            
-        </categories>
-        
-        
-        <tags>
-            
-            <tag> Tools </tag>
-            
-            <tag> Git </tag>
-            
-        </tags>
-        
-    </entry>
-    
-    <entry>
-      <title><![CDATA[版本管理工具-Git篇[1]]]></title>
       <url>/2017/01/15/%E7%89%88%E6%9C%AC%E7%AE%A1%E7%90%86%E5%B7%A5%E5%85%B7-Git%E7%AF%87/</url>
       <content type="html"><![CDATA[<h2 id="版本管理工具的介绍"><a href="#版本管理工具的介绍" class="headerlink" title="版本管理工具的介绍"></a>版本管理工具的介绍</h2><p>作用：备份文件，与U盘等备份文件相比，可以随时随地，项目中经常使用。</p>
 <h3 id="版本管理工具可以记录历史"><a href="#版本管理工具可以记录历史" class="headerlink" title="版本管理工具可以记录历史"></a>版本管理工具可以记录历史</h3><p>网盘 u盘 保存了文件的最新状态，而不会记录修改的历史纪录，而版本管理工具对每次的修改都会进行备份，并且保留了时间和修改人，可以让我们回溯，如果不小心删除版本管理工具中的备份时，我们可以通过历史纪录对其进行找回，因此使用版本管理工具无需担心，而且使用版本管理工具，可以多端共享，例如我们经常所说的云盘，而且只要提交一次，我们就可以在任何地方通过版本管理工具对提交的代码进行下载。尤其对于，一些经常需要分开工作的工作人员比较实用</p>
@@ -6477,6 +6406,77 @@ at java.net.SocketInputStream.read(SocketInputStream.java:129)
             <tag> GitHub </tag>
             
             <tag> 版本管理工具 </tag>
+            
+        </tags>
+        
+    </entry>
+    
+    <entry>
+      <title><![CDATA[版本管理工具-Git篇[1]]]></title>
+      <url>/2017/01/15/%E7%89%88%E6%9C%AC%E7%AE%A1%E7%90%86%E5%B7%A5%E5%85%B7-Git%E7%AF%87%5B1%5D/</url>
+      <content type="html"><![CDATA[<h2 id="版本管理工具的介绍"><a href="#版本管理工具的介绍" class="headerlink" title="版本管理工具的介绍"></a>版本管理工具的介绍</h2><p>作用：备份文件，与U盘等备份文件相比，可以随时随地，项目中经常使用。</p>
+<h3 id="版本管理工具可以记录历史"><a href="#版本管理工具可以记录历史" class="headerlink" title="版本管理工具可以记录历史"></a>版本管理工具可以记录历史</h3><p>网盘 u盘 保存了文件的最新状态，而不会记录修改的历史纪录，而版本管理工具对每次的修改都会进行备份，并且保留了时间和修改人，可以让我们回溯，如果不小心删除版本管理工具中的备份时，我们可以通过历史纪录对其进行找回，因此使用版本管理工具无需担心，而且使用版本管理工具，可以多端共享，例如我们经常所说的云盘，而且只要提交一次，我们就可以在任何地方通过版本管理工具对提交的代码进行下载。尤其对于，一些经常需要分开工作的工作人员比较实用</p>
+<a id="more"></a>
+<h3 id="历史"><a href="#历史" class="headerlink" title="历史"></a>历史</h3><figure class="image-box">
+                <img src="http://on3w7gc9m.bkt.clouddn.com/psb.png" alt="这里写图片描述" title class>
+                <p>这里写图片描述</p>
+            </figure>
+<ol>
+<li><p>CVS： 版本管理工具始祖，也是被第一个大规模使用的版本管理工具。由荷兰一所大学教授所开发，由于当时三个人分开工作，为了便于一起协调，创建了CVS。集中式的工具，放到中心服务器上，需要联网</p>
+</li>
+<li><p>SVN： 2000年诞生，也是集中式的工具</p>
+</li>
+<li><p>git： 2005年诞生，Geek社区主流工具，分布式工具！</p>
+</li>
+<li><p>Github： 程序员社区，托管代码基于Git操作。大牛多在这里！！！</p>
+</li>
+</ol>
+<h3 id="集中式-与-分布式-区别"><a href="#集中式-与-分布式-区别" class="headerlink" title="集中式 与 分布式 区别"></a>集中式 与 分布式 区别</h3><ol>
+<li>集中式需要放到中心服务器上，并且操作需要联网，不方便</li>
+<li>分布式则是只要有版本库，就可以在不联网的前提下，快速完成文件提交，记录查看，以及删除等操作，效率高！</li>
+</ol>
+<hr>
+<h2 id="初探Git"><a href="#初探Git" class="headerlink" title="初探Git"></a>初探Git</h2><h3 id="Git-下载-与-安装"><a href="#Git-下载-与-安装" class="headerlink" title="Git 下载 与 安装"></a>Git 下载 与 安装</h3><h4 id="Linux下的安装"><a href="#Linux下的安装" class="headerlink" title="Linux下的安装"></a>Linux下的安装</h4><blockquote>
+<p>打开终端 执行 yum install git 然后键入 yes 等待既可以安装完成 Git</p>
+</blockquote>
+<h2 id="入门Github"><a href="#入门Github" class="headerlink" title="入门Github"></a>入门Github</h2><blockquote>
+<p>GitHub由于下载比较难，推荐离线安装包安装</p>
+</blockquote>
+<h3 id="Linux下检出项目到本地"><a href="#Linux下检出项目到本地" class="headerlink" title="Linux下检出项目到本地"></a>Linux下检出项目到本地</h3><blockquote>
+<p>使用 git clone Github上的仓库地址</p>
+<ol>
+<li>首先创建一个 目录，用来存放 我们检出的项目，使用命令 mkdir Test</li>
+<li>接下来，进入到Test目录，然后 git clone Github上的仓库地址，就可以了</li>
+</ol>
+</blockquote>
+<h3 id="Linux下提交项目"><a href="#Linux下提交项目" class="headerlink" title="Linux下提交项目"></a>Linux下提交项目</h3><blockquote>
+<p>再修改之后，只停留到了本地，没有交到Github维护，因此我们需要同步到Github</p>
+</blockquote>
+<ol>
+<li>首先使用 git status 查看工作区的状态</li>
+<li>对于未跟踪的文件，使用git add 文件名（不包括文件类型），进行跟踪</li>
+<li>然后键入 git commit 命令，并对修改进行描述，这里提交的是提交到了本地的仓库，并没有提交给Github维护</li>
+<li>键入git push，输入Github账户和密码，然后成功提交给Github进行维护</li>
+</ol>
+<h3 id="Windows下检出并提交项目"><a href="#Windows下检出并提交项目" class="headerlink" title="Windows下检出并提交项目"></a>Windows下检出并提交项目</h3><ol>
+<li>首先进入GitHub官方主页，并进入项目所对应的仓库主页，然后点击 open in desktop，选择本地的一个目录，此时检出完成，只需要我们对其进行修改</li>
+<li>修改之后，首先要做的提交修改的东东，并对修改的东西进行一个修改说明</li>
+<li>之后进行同步就可以了</li>
+</ol>
+]]></content>
+      
+        <categories>
+            
+            <category> Tools </category>
+            
+        </categories>
+        
+        
+        <tags>
+            
+            <tag> Tools </tag>
+            
+            <tag> Git </tag>
             
         </tags>
         
