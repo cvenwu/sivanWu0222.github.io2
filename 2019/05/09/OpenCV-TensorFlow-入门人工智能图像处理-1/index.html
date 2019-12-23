@@ -218,7 +218,7 @@
         <h1 class="title">OpenCV+TensorFlow 入门人工智能图像处理[1]</h1>
         <h5 class="subtitle">
             
-                <time datetime="2019-05-09T04:11:12.000Z" itemprop="datePublished" class="page-time">
+                <time datetime="2019-05-09T12:11:12.000Z" itemprop="datePublished" class="page-time">
   2019-05-09
 </time>
 
@@ -253,7 +253,7 @@
     <div class="post-card">
         <h1 class="post-card-title">OpenCV+TensorFlow 入门人工智能图像处理[1]</h1>
         <div class="post-meta">
-            <time class="post-time" title="2019-05-09 04:11:12" datetime="2019-05-09T04:11:12.000Z"  itemprop="datePublished">2019-05-09</time>
+            <time class="post-time" title="2019-05-09 12:11:12" datetime="2019-05-09T12:11:12.000Z"  itemprop="datePublished">2019-05-09</time>
 
             
 	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/计算机视觉/">计算机视觉</a></li></ul>
@@ -284,14 +284,15 @@
 <li>该方法完成图片的读取，返回的是当前图片的图像数据</li>
 <li>虽然表面上看只是图像读取，但是包含了几个步骤，文件的读取，图像格式的分析，图像数据的解码，数据的加载</li>
 </ol>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">img = cv2.imread(<span class="string">'./image0.jpg'</span>, <span class="number">1</span>)</span><br><span class="line">(b, g, r) = img[<span class="number">100</span>, <span class="number">100</span>]</span><br><span class="line">print(b, g, r)</span><br></pre></td></tr></table></figure>
+<a id="more"></a>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> cv2</span><br><span class="line">img = cv2.imread(<span class="string">'./image0.jpg'</span>, <span class="number">1</span>)</span><br><span class="line">(b, g, r) = img[<span class="number">100</span>, <span class="number">100</span>]</span><br><span class="line">print(b, g, r)</span><br></pre></td></tr></table></figure>
 <p><strong>opencv中读取图像后获得的像素点是bgr(blue, green, red)与rgb不同</strong></p>
 <h3 id="展示图像"><a href="#展示图像" class="headerlink" title="展示图像"></a>展示图像</h3><p>imshow()对图片进行展示</p>
 <ol>
 <li>有2个参数，第1个参数是展示出的图像所在的窗体名称</li>
 <li>第2个参数是当前窗体展示的内容</li>
 </ol>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">cv2.imshow(<span class="string">'image'</span>, img)</span><br><span class="line"><span class="comment"># 防止一瞬间消失掉后看不到图片</span></span><br><span class="line">cv2.waitKey(<span class="number">0</span>)</span><br></pre></td></tr></table></figure>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">cv2.imshow(<span class="string">'image'</span>, img)</span><br><span class="line"><span class="comment"># 防止一瞬间消w失掉后看不到图片</span></span><br><span class="line">cv2.waitKey(<span class="number">0</span>)</span><br></pre></td></tr></table></figure>
 <p>因为读取图片之后对图片进行显示的时候将会在一瞬间消失掉，因此我们需要stop，也就是采用了<strong>cv2.waitKey(0)</strong></p>
 <h3 id="图像数据的写入"><a href="#图像数据的写入" class="headerlink" title="图像数据的写入"></a>图像数据的写入</h3><p>imwrite() 将数据写入到一张图片中</p>
 <ol>
@@ -313,19 +314,15 @@
 <li>对于PNG 来说，数字越小，压缩比越低，图片质量越清晰 ，压缩范围是0-9 </li>
 </ol>
 <h2 id="坐标轴"><a href="#坐标轴" class="headerlink" title="坐标轴"></a>坐标轴</h2><figure class="image-box">
-                <a rel=OpenCV+TensorFlow 入门人工智能图像处理[1] href="./OpenCV-TensorFlow-入门人工智能图像处理-1/坐标轴.png" title="这是标题" data-fancybox="images"><img src="./OpenCV-TensorFlow-入门人工智能图像处理-1/坐标轴.png" alt="糟了" title="这是标题" class></a>
-                <p>这是标题</p>
+                <a rel=OpenCV+TensorFlow 入门人工智能图像处理[1] href="坐标轴.png" title="opencv中的坐标轴" data-fancybox="images"><img src="坐标轴.png" alt="糟了" title="opencv中的坐标轴" class></a>
+                <p>opencv中的坐标轴</p>
             </figure>   
 <p>x轴对应垂直高度的变化</p>
 <h2 id="图像基础知识"><a href="#图像基础知识" class="headerlink" title="图像基础知识"></a>图像基础知识</h2><ul>
-<li><p>像素点(像素)：图像是由一个个方块组成，每个方块称为像素点，</p>
-</li>
-<li><p>每种颜色都是由RGB三种颜色分量组合而成。</p>
-</li>
-<li><p>像素点如何存储：在计算机中，每种颜色都可以通过RGB三种颜色进行合成，在8位颜色深度中，每个RGB对应的分量取值都是0-255</p>
-</li>
-<li><p>颜色深度：8位颜色深度，表示的是RGB每个分量中， 都有2^8个可能</p>
-</li>
+<li>像素点(像素)：图像是由一个个方块组成，每个方块称为像素点，</li>
+<li>每种颜色都是由RGB三种颜色分量组合而成。</li>
+<li>像素点如何存储：在计算机中，每种颜色都可以通过RGB三种颜色进行合成，在8位颜色深度中，每个RGB对应的分量取值都是0-255</li>
+<li>颜色深度：8位颜色深度，表示的是RGB每个分量中， 都有2^8个可能</li>
 <li>对于png图片来说，每一个像素点除了RGB之外，还可能有α通道作为透明度</li>
 <li>经常见到的颜色存储格式：RGB(red, green, blue) 、BGR(blue, green, red)</li>
 </ul>
@@ -333,14 +330,14 @@
 <p>图片未经压缩的大小计算： 大小 = 宽度 <em> 高度 </em> 3 * 颜色深度 (单位是bit)</p>
 <p>除以8 转换为B </p>
 <p>首先是宽度*高度，得到多少个像素点，然后因为每个点是由RGB中的3个颜色分量组成，所以 再乘以3，每个颜色分量是8位的颜色深度，所以最后计算而来</p>
-<a id="more"></a>
+<!-- more -->
         </div>
         
 <blockquote class="post-copyright">
     <div class="content">
         
 <span class="post-time">
-    最后更新时间：<time datetime="2019-08-26T10:46:59.863Z" itemprop="dateUpdated">2019-08-26 10:46:59</time>
+    最后更新时间：<time datetime="2019-12-23T03:12:05.119Z" itemprop="dateUpdated">2019-12-23 03:12:05</time>
 </span><br>
 
 
