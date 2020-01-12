@@ -1,0 +1,796 @@
+<!DOCTYPE html>
+<html>
+<head><meta name="generator" content="Hexo 3.9.0">
+    <meta charset="utf-8">
+    
+    
+    <title>opencv-视频篇 | yirufeng&#39;s Blog | 未来的小幸运 || 致正在努力的我们 ---- 逸如风</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    
+    <meta name="keywords" content="Python,OpenCV">
+    <link rel="shortcut icon" href="/img/favicon.ico">
+    <link rel="stylesheet" href="//cdn.jsdelivr.net/gh/fancyapps/fancybox@3.5.2/dist/jquery.fancybox.min.css">
+    <link rel="stylesheet" href="/css/style.css?v=1.4.2">
+    
+    <script type="text/javascript">
+        // Data Center
+        var DC = {
+            reward:	true,
+            lv: JSON.parse('{"enable":true,"app_id":"K2RVtHi7RnmoN6dovlDKafn8-gzGzoHsz","app_key":"Qxmil0oqPFdDUyyIp2i1Xikt","icon":true}'),
+            v: JSON.parse('{"enable":false,"appid":"ACuOJIasBeRLiDe2iUApHj67-gzGzoHsz","appkey":"qbgg4tClrQQmvq8uwlpwA5mA","notify":true,"verify":true,"placeholder":"give me some sugers plz...","avatar":"wavatar"}'),
+            g: JSON.parse('{"enable":false,"lazy":true,"owner":"codefine","repo":"gitment","oauth":{"client_id":null,"client_secret":null},"perPage":10}'),
+            d: JSON.parse('{"app_id":null}')
+        };
+    </script>
+    <script type="text/javascript">
+        window.lazyScripts=[];
+    </script>
+    
+</head>
+
+
+<body>
+    <div id="loading" class="active"></div>
+
+    <aside id="menu" class="">
+  <div class="inner flex-row-vertical">
+    <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menu-off">
+        <i class="icon icon-lg icon-close"></i>
+    </a>
+    <div class="brand-wrap">
+      
+      <img src="/img/brand.jpg" class="brand-bg">
+      
+      <div class="brand">
+        <a href="/" class="avatar waves-effect waves-circle waves-light">
+          <img src="/img/1.jpg">
+        </a>
+        <hgroup class="introduce">
+          <h5 class="nickname">逸如风(yirufeng)</h5>
+          <a href="mailto:yirufeng@foxmail.com" title="yirufeng@foxmail.com" class="mail">
+            
+              <span>y</span>
+            
+              <span>i</span>
+            
+              <span>r</span>
+            
+              <span>u</span>
+            
+              <span>f</span>
+            
+              <span>e</span>
+            
+              <span>n</span>
+            
+              <span>g</span>
+            
+              <span>@</span>
+            
+              <span>f</span>
+            
+              <span>o</span>
+            
+              <span>x</span>
+            
+              <span>m</span>
+            
+              <span>a</span>
+            
+              <span>i</span>
+            
+              <span>l</span>
+            
+              <span>.</span>
+            
+              <span>c</span>
+            
+              <span>o</span>
+            
+              <span>m</span>
+            
+          </a>
+        </hgroup>
+        
+        <ul class="menu-link">
+          
+              <li>
+                <a href="https://github.com/sivanWu0222" target="_blank">
+                  <i class="icon icon-lg icon-github"></i>
+                </a>
+              </li>
+            
+              <li>
+                <a href="https://mail.qq.com/cgi-bin/qm_share?t=qm_mailme&amp;amp;email=xfTz8-Py8-f08vWFtLTrpqqo" target="_blank">
+                  <i class="icon icon-lg icon-envelope"></i>
+                </a>
+              </li>
+            
+        </ul>
+        
+      </div>
+    </div>
+    <div class="scroll-wrap flex-col">
+      <ul class="nav">
+        
+            <li class="">
+              <a href="/"  >
+                <i class="icon icon-lg icon-home"></i>
+                Home
+              </a>
+            </li>
+        
+            <li class="">
+              <a href="/categories"  >
+                <i class="icon icon-lg icon-th-list"></i>
+                Category
+              </a>
+            </li>
+        
+            <li class="">
+              <a href="/research"  >
+                <i class="icon icon-lg icon-mortar-board"></i>
+                Research
+              </a>
+            </li>
+        
+            <li class="">
+              <a href="/tags"  >
+                <i class="icon icon-lg icon-tags"></i>
+                Tag
+              </a>
+            </li>
+        
+            <li class="">
+              <a href="/archives"  >
+                <i class="icon icon-lg icon-archives"></i>
+                Archive
+              </a>
+            </li>
+        
+            <li class="">
+              <a href="/about"  >
+                <i class="icon icon-lg icon-user"></i>
+                About
+              </a>
+            </li>
+        
+            <li class="">
+              <a href="/open-source"  >
+                <i class="icon icon-lg icon-github"></i>
+                Project
+              </a>
+            </li>
+        
+            <li class="">
+              <a href="/demo"  >
+                <i class="icon icon-lg icon-audio-description"></i>
+                Demo
+              </a>
+            </li>
+        
+            <li class="">
+              <a href="/wechat-number"  >
+                <i class="icon icon-lg icon-wechat"></i>
+                公众号
+              </a>
+            </li>
+        
+            <li class="">
+              <a href="http://www.sivan.tech/LeetCodeAlgo/" target="_blank" >
+                <i class="icon icon-lg icon-braille"></i>
+                Leetcode
+              </a>
+            </li>
+        
+            <li class="">
+              <a href="http://resume.sivan.tech/" target="_blank" >
+                <i class="icon icon-lg icon-file-pdf-o"></i>
+                Resume
+              </a>
+            </li>
+        
+      </ul>
+    </div>
+  </div>
+</aside>
+
+    <main id="main">
+        <header class="top-header" id="header">
+    <div class="flex-row clearfix">
+        <a href="javascript:;" class="header-icon pull-left waves-effect waves-circle waves-light on" id="menu-toggle">
+          <i class="icon icon-lg icon-navicon"></i>
+        </a>
+        <div class="flex-col header-title ellipsis">
+            <span>opencv-视频篇</span>
+            
+        </div>
+        
+        <a href="javascript:;" id="site_search_btn" class="header-icon pull-right waves-effect waves-circle waves-light">
+            <i class="icon icon-lg icon-search"></i>
+        </a>
+        
+    </div>
+</header>
+<header class="content-header post-header">
+    <img src="/img/s3.jpg" class="header-bg">
+    <div class="container fade-scale">
+        <h1 class="title">opencv-视频篇</h1>
+        <h5 class="subtitle">
+            
+                <time datetime="2020-01-12T10:54:19.000Z" itemprop="datePublished" class="page-time">
+  2020-01-12
+</time>
+
+
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/OpenCV/">OpenCV</a></li></ul>
+
+            
+        </h5>
+        
+    </div>
+    
+
+</header>
+
+<div id="site_search">
+    <div class="search-title clearfix">
+        <span class="pull-left">
+          <i class="icon icon-lg icon-search"></i>
+        </span>
+        <input type="text" id="local-search-input" name="q" results="0" placeholder="search my blog..." class="form-control pull-left"/>
+        <a href="javascript:;" class="close pull-right waves-effect waves-circle waves-light">
+          <i class="icon icon-lg icon-close"></i>
+        </a>
+    </div>
+    <div id="local-search-result"></div>
+</div>
+
+
+<div class="container body-wrap">
+    <article id="post-opencv-视频篇"
+  class="post-article article-type-post" itemprop="blogPost">
+    <div class="post-card">
+        <h1 class="post-card-title">opencv-视频篇</h1>
+        <div class="post-meta">
+            <time class="post-time" title="2020-01-12 10:54:19" datetime="2020-01-12T10:54:19.000Z"  itemprop="datePublished">2020-01-12</time>
+
+            
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/OpenCV/">OpenCV</a></li></ul>
+
+
+
+            
+	<span id="/2020/01/12/opencv-视频篇/" class="leancloud_visitors" data-flag-title="opencv-视频篇" title="opencv-视频篇">
+		
+			<i class="icon icon-eye"></i>
+		
+		<span class="leancloud-visitors-count"></span>
+	</span>
+ 
+
+            
+
+
+            
+        </div>
+        <div class="post-content" id="post-content" itemprop="postContent">
+            
+            <h2 id="用摄像头捕获视频"><a href="#用摄像头捕获视频" class="headerlink" title="用摄像头捕获视频"></a>用摄像头捕获视频</h2><p>使用函数cv2.VideoCapture()，其中里面需要传入一个参数0表示笔记本内置摄像头，可以设置1或别的数字来设置别的摄像头</p>
+<p>注意：</p>
+<ol>
+<li><p>cap.read() 返回两个值：第一个值：一个布尔值（True/False）。 如果帧读取的是正确的， 就是 True。所以最后你可以通过检查他的返回值来查看视频文件是否已经到了结尾。第二个值：读取到的视频帧</p>
+</li>
+<li><p>有时 cap 可能不能成功的初始化摄像头设备。这种情况下上面的代码会报 错。你可以使用 cap.isOpened()，来检查是否成功初始化了。如果返回值是 True，那就没有问题。否则就要使用函数 cap.open()</p>
+</li>
+<li>可以使用函数 cap.get(propId) 来获得视频的一些参数信息。 这里 propId 可以是 0 到 18 之间的任何整数。每一个数代表视频的一个属性，见 下表</li>
+</ol>
+<figure class="image-box">
+                <a rel=opencv-视频篇 href="cap属性列表.png" title="cap属性列表" data-fancybox="images"><img src="cap属性列表.png" alt="糟了" title="cap属性列表" class></a>
+                <p>cap属性列表</p>
+            </figure>
+<a id="more"></a>
+<p>例子：摄像头捕获视频，并将其转换为灰度图显示<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">"""</span></span><br><span class="line"><span class="string">@File : 摄像头捕获视频.py</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">@Author: sivan Wu</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">@Date : 2020/1/11 12:03 下午</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">@Desc : 为了获取视频，你应该创建一个 VideoCapture 对象</span></span><br><span class="line"><span class="string">他的参数可以是 设备的索引号，或者是一个视频文件。设备索引号就是在指定要使用的摄像头。 一般的笔记本电脑都有内置摄像头。所以参数就是 0。</span></span><br><span class="line"><span class="string">你可以通过设置成 1 或 者其他的来选择别的摄像头。之后，你就可以一帧一帧的捕获视频了。但是最 后，别忘了停止捕获视频</span></span><br><span class="line"><span class="string">"""</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> cv2</span><br><span class="line"></span><br><span class="line">cap = cv2.VideoCapture(<span class="number">0</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># while True:</span></span><br><span class="line"><span class="keyword">while</span> cap.isOpened():  <span class="comment"># 检查是否成功初始化摄像头, 如果返回值为True,就没有问题了，否则就需要使用函数cap.open()</span></span><br><span class="line">    <span class="comment"># Capture frame-by-frame</span></span><br><span class="line">    <span class="comment"># cap.read() 返回一个布尔值（True/False）。 如果帧读取的是正确的，就是True。</span></span><br><span class="line">    <span class="comment"># 所以最后你可以通过检查他的返回值来查看视频文件是否已经到了结尾</span></span><br><span class="line">    ret, frame = cap.read()</span><br><span class="line">    <span class="comment"># Our operations on the frame come here</span></span><br><span class="line">    gray = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    <span class="comment"># 获得额外的视频信息</span></span><br><span class="line">    <span class="comment">## 使用函数 cap.get(propId) 来获得视频的一些参数信息, propId 可以是 0 到 18 之间的任何整数。每一个数代表视频的一个属性</span></span><br><span class="line">    <span class="comment">## 其中的一些值可以使用 cap.set(propId,value) 来修改，value 就是 你想要设置成的新值</span></span><br><span class="line">    width = cap.get(<span class="number">3</span>)</span><br><span class="line">    height = cap.get(<span class="number">4</span>)</span><br><span class="line">    print(width, height)</span><br><span class="line"></span><br><span class="line">    <span class="comment"># Display the resulting frame</span></span><br><span class="line">    cv2.imshow(<span class="string">"frame"</span>, gray)</span><br><span class="line">    <span class="comment"># 0xFF：0xFF是一个位掩码，十六进制常数，二进制值为11111111, 它将左边的24位设置为0,</span></span><br><span class="line">    <span class="comment"># 把返回值限制在在0和255之间。ord(’ ')返回按键对应的整数（ASCII码）</span></span><br><span class="line">    <span class="keyword">if</span> cv2.waitKey(<span class="number">1</span>) &amp; <span class="number">0xFF</span> == ord(<span class="string">'q'</span>):</span><br><span class="line">        <span class="keyword">break</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># When everything done, release the capture</span></span><br><span class="line">cap.release()</span><br><span class="line">cv2.destroyAllWindows()</span><br></pre></td></tr></table></figure></p>
+<h2 id="从文件中读取视频"><a href="#从文件中读取视频" class="headerlink" title="从文件中读取视频"></a>从文件中读取视频</h2><blockquote>
+<p>只需要将函数cv2.VideoCapture()里面的参数修改成文件所在的路径以及文件名</p>
+</blockquote>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">"""</span></span><br><span class="line"><span class="string">@File : 从文件中播放视频.py</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">@Author: sivan Wu</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">@Date : 2020/1/11 3:45 下午</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">@Desc :</span></span><br><span class="line"><span class="string">            与从摄像头中捕获一样，你只需要把设备索引号改成视频文件的名字。在播放每一帧时，使用 cv2.waiKey() 设置适当的持续时间。</span></span><br><span class="line"><span class="string">            如果设置的太低视 频就会播放的非常快，如果设置的太高就会播放的很慢（你可以使用这种方法 控制视频的播放速度）。</span></span><br><span class="line"><span class="string">            通常情况下 25 毫秒就可以了</span></span><br><span class="line"><span class="string">"""</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> cv2</span><br><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line"></span><br><span class="line">cap = cv2.VideoCapture(<span class="string">"./自己写代码/10秒.mp4"</span>)</span><br><span class="line"></span><br><span class="line"><span class="keyword">while</span> cap.isOpened():</span><br><span class="line">    ret, frame = cap.read()</span><br><span class="line">    <span class="keyword">if</span> ret == <span class="literal">True</span>:</span><br><span class="line">        cv2.imshow(<span class="string">"frame"</span>, frame)</span><br><span class="line">        <span class="keyword">if</span> cv2.waitKey(<span class="number">25</span>) &amp; <span class="number">0xFF</span> == ord(<span class="string">'q'</span>):</span><br><span class="line">            <span class="keyword">break</span></span><br><span class="line">    <span class="keyword">else</span>:</span><br><span class="line">        <span class="keyword">break</span></span><br><span class="line">cap.release()</span><br><span class="line">cv2.destroyAllWindows()</span><br></pre></td></tr></table></figure>
+<h2 id="保存视频"><a href="#保存视频" class="headerlink" title="保存视频"></a>保存视频</h2><blockquote>
+<p>使用VideoWriter(filename, fourcc, fps, frameSize[, isColor])函数进行写入视频</p>
+</blockquote>
+<p>编码支持列表：<a href="http://www.fourcc.org/codecs.php#letter_i" target="_blank" rel="noopener">参考</a></p>
+<p><strong>VideoWriter(filename, fourcc, fps, frameSize[, isColor]) -&gt; <videowriter object></videowriter></strong></p>
+<p>参数讲解：</p>
+<ol>
+<li>第一个参数是要保存的文件的路径</li>
+<li>fourcc 指定编码器: 使用cv2.VideoWriter_fourcc(*’I420’)创建的编码，可用编码列表参考 <a href="http://www.fourcc.org/codecs.php#letter_i" target="_blank" rel="noopener">http://www.fourcc.org/codecs.php#letter_i</a></li>
+<li>fps 要保存的视频的帧率</li>
+<li>frameSize 要保存的文件的画面尺寸</li>
+<li>isColor 指示是黑白画面还是彩色的画面</li>
+</ol>
+<p>步骤：</p>
+<ol>
+<li>设置视频编码：fourcc = cv2.VideoWriter_fourcc(*’MJPG’)</li>
+<li>VideoWriter(filename, fourcc, fps, frameSize[, isColor]) 函数建立一个writer</li>
+<li>读取视频的每一帧，将每一帧使用writer输出到文件中,writer.write(frame)</li>
+<li>循环3直到读取到视频的结尾：采用ret == True进行判断，因为如果到视频结束将会返回False</li>
+</ol>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">"""</span></span><br><span class="line"><span class="string">@File : 写入到视频文件中.py</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">@Author: sivan Wu</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">@Date : 2020/1/12 10:20 上午</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">@Desc :</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">"""</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> cv2</span><br><span class="line"></span><br><span class="line"><span class="comment"># 下面的编码采用I420, MJPG都可以</span></span><br><span class="line"><span class="comment"># fourcc = cv2.VideoWriter_fourcc(*'I420')</span></span><br><span class="line">fourcc = cv2.VideoWriter_fourcc(*<span class="string">'MJPG'</span>)</span><br><span class="line"></span><br><span class="line">cap = cv2.VideoCapture(<span class="number">0</span>)</span><br><span class="line">frame_width = int(cap.get(<span class="number">3</span>))  <span class="comment"># 获取宽度</span></span><br><span class="line">frame_height = int(cap.get(<span class="number">4</span>))  <span class="comment"># 获取高度</span></span><br><span class="line"><span class="comment"># frame_width, frame_height 不能修改为其他值</span></span><br><span class="line">writer = cv2.VideoWriter(<span class="string">"out.avi"</span>, fourcc, <span class="number">20.0</span>, (frame_width, frame_height))</span><br><span class="line"><span class="keyword">while</span> cap.isOpened():</span><br><span class="line">    ret, frame = cap.read()</span><br><span class="line">    <span class="keyword">if</span> ret == <span class="literal">True</span>:</span><br><span class="line">        frame = cv2.flip(frame, <span class="number">0</span>)</span><br><span class="line">        writer.write(frame)</span><br><span class="line">        cv2.imshow(<span class="string">"frame"</span>, frame)</span><br><span class="line">        <span class="keyword">if</span> cv2.waitKey(<span class="number">1</span>) &amp; <span class="number">0xFF</span> == ord(<span class="string">'q'</span>):</span><br><span class="line">            <span class="keyword">break</span></span><br><span class="line">    <span class="keyword">else</span>:</span><br><span class="line">        <span class="keyword">break</span></span><br><span class="line"></span><br><span class="line">cap.release()</span><br><span class="line"></span><br><span class="line">writer.release()</span><br><span class="line">cv2.destroyAllWindows()</span><br></pre></td></tr></table></figure>
+<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><blockquote>
+<p>frame = cv2.flip(frame, 0)</p>
+</blockquote>
+<p>摄像头捕获视频之后沿X轴反转之后保存到文件中：第一个参数表示要旋转的视频，第二个参数表示旋转的方向，0表示绕x轴旋转，大于0的数表示绕y轴旋转，小于0的负数表示绕x和y轴旋转</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">"""</span></span><br><span class="line"><span class="string">@File : 保存视频.py</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">@Author: sivan Wu</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">@Date : 2020/1/11 9:50 下午</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">@Desc : 捕获视频，并对每一帧都进行加工之后我们想要保存这个视频</span></span><br><span class="line"><span class="string">        下面的代码是从摄像头中捕获视频，沿水平方向旋转每一帧并保存它。</span></span><br><span class="line"><span class="string">"""</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> cv2</span><br><span class="line"></span><br><span class="line">cap = cv2.VideoCapture(<span class="number">0</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># Define the codec and create VideoWriter object</span></span><br><span class="line">fourcc = cv2.VideoWriter_fourcc(*<span class="string">'XVID'</span>)</span><br><span class="line">out = cv2.VideoWriter(<span class="string">"output.avi"</span>, fourcc, <span class="number">20.0</span>, (<span class="number">60.0</span>, <span class="number">48.0</span>))</span><br><span class="line"></span><br><span class="line"><span class="keyword">while</span> cap.isOpened():</span><br><span class="line">    ret, frame = cap.read()</span><br><span class="line">    <span class="keyword">if</span> ret == <span class="literal">True</span>:</span><br><span class="line">        <span class="comment"># 第一个参数表示要旋转的视频，第二个参数表示旋转的方向，0表示绕x轴旋转，大于0的数表示绕y轴旋转，小于0的负数表示绕x和y轴旋转</span></span><br><span class="line">        frame = cv2.flip(frame, <span class="number">0</span>)</span><br><span class="line">        out.write(frame)</span><br><span class="line">        cv2.imshow(<span class="string">'frame'</span>, frame)</span><br><span class="line">        <span class="keyword">if</span> cv2.waitKey(<span class="number">1</span>) &amp; <span class="number">0xFF</span> == ord(<span class="string">'q'</span>):</span><br><span class="line">            <span class="keyword">break</span></span><br><span class="line">    <span class="keyword">else</span>:</span><br><span class="line">        <span class="keyword">break</span></span><br><span class="line">cap.release()</span><br><span class="line">cv2.destroyAllWindows()</span><br></pre></td></tr></table></figure>
+<h2 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h2><p><a href="https://github.com/spmallick/learnopencv/blob/master/VideoReadWriteDisplay/videoWrite.py" target="_blank" rel="noopener">learnopencv</a></p>
+
+        </div>
+        
+<blockquote class="post-copyright">
+    <div class="content">
+        
+<span class="post-time">
+    最后更新时间：<time datetime="2020-01-12T03:30:52.413Z" itemprop="dateUpdated">2020-01-12 03:30:52</time>
+</span><br>
+
+
+        
+        转载注明出处，原文地址：<a href="/2020/01/12/opencv-视频篇/" target="_blank" rel="external">http://www.sivan.tech/2020/01/12/opencv-视频篇/</a>
+        
+    </div>
+    <footer>
+        <a href="http://www.sivan.tech">
+            <img src="/img/1.jpg" alt="逸如风(yirufeng)">
+            逸如风(yirufeng)
+        </a>
+    </footer>
+</blockquote>
+
+        
+            <div class="page-reward">
+    <a id="rewardBtn" href="javascript:;" class="page-reward-btn waves-effect waves-circle waves-light">赏</a>
+</div>
+
+            
+        
+        <div class="post-footer">
+            
+	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/OpenCV/">OpenCV</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Python/">Python</a></li></ul>
+
+            <div class="page-share-wrap">
+    
+
+<div class="page-share" id="pageShare">
+    <ul class="reset share-icons">
+      
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://www.sivan.tech/2020/01/12/opencv-视频篇/&title=《opencv-视频篇》 — yirufeng's Blog&pic=http://www.sivan.tech/img/1.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://www.sivan.tech/2020/01/12/opencv-视频篇/&title=《opencv-视频篇》 — yirufeng's Blog&source=用摄像头捕获视频使用函数cv2.VideoCapture()，其中里面需要传入一个参数0表示笔记本内置摄像头，可以设置1或别的数字来设置别的摄像头
+注意：..." data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http://www.sivan.tech/2020/01/12/opencv-视频篇/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《opencv-视频篇》 — yirufeng's Blog&url=http://www.sivan.tech/2020/01/12/opencv-视频篇/&via=http://www.sivan.tech" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=http://www.sivan.tech/2020/01/12/opencv-视频篇/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+      
+    </ul>
+ </div>
+
+
+
+    <a href="javascript:;" id="shareFab" class="page-share-fab waves-effect waves-circle">
+        <i class="icon icon-share-alt icon-lg"></i>
+    </a>
+</div>
+
+        </div>
+        
+            
+
+
+        
+    </div>
+    
+<nav class="post-nav flex-row flex-justify-between flex-row-reverse">
+  
+
+  
+    <div class="next">
+      <a href="/2020/01/12/opencv-图像篇/" id="post-next" class="post-nav-link">
+        <div class="tips">Next <i class="icon icon-angle-right icon-lg icon-pl"></i></div>
+        <h4 class="title">OpenCV-图像篇</h4>
+      </a>
+    </div>
+  
+</nav>
+
+
+    
+        <div id="repo">
+    <div class="loading active"></div>
+    <div class="top clearfix">
+        <div class="avatar pull-left"></div>
+        <div class="content pull-left">
+            <p class="name"></p>
+            <p class="description"></p>
+        </div>
+    </div>
+    <ul class="bottom">
+        <li class="star">
+            <span class="icon icon-star"></span>
+            <span class="val">0</span>
+        </li>
+        <li class="fork">
+            <span class="icon icon-code-fork"></span>
+            <span class="val">0</span>
+        </li>
+        <li class="date">
+            <span class="icon icon-clock-o"></span>
+            <span class="val">0000-00-00</span>
+        </li>
+    </ul>
+    <a class="link" href=""></a>
+</div>
+    
+    
+        <aside class="post-widget">
+            <nav class="post-toc-wrap" id="post-toc">
+                <strong>目录</strong>
+                <ol class="post-toc"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#用摄像头捕获视频"><span class="post-toc-number">1.</span> <span class="post-toc-text">用摄像头捕获视频</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#从文件中读取视频"><span class="post-toc-number">2.</span> <span class="post-toc-text">从文件中读取视频</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#保存视频"><span class="post-toc-number">3.</span> <span class="post-toc-text">保存视频</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#总结"><span class="post-toc-number">4.</span> <span class="post-toc-text">总结</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#参考"><span class="post-toc-number">5.</span> <span class="post-toc-text">参考</span></a></li></ol>
+            </nav>
+            <div class="toc-bar"><div>
+        </aside>
+    
+</article>
+
+    <div id="reward" class="page-modal reward-lay">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <h3 class="reward-title">
+        <i class="icon icon-quote-left"></i>
+        感谢原作，你的打赏是我的动力！
+        <i class="icon icon-quote-right"></i>
+    </h3>
+    <div class="reward-content">
+        
+        <div class="reward-code">
+            <img id="rewardCode" src="/img/reward-wechat.jpg" alt="打赏二维码">
+        </div>
+        
+        <label class="reward-toggle">
+            <input id="rewardToggle" type="checkbox" class="reward-toggle-check"
+                data-wechat="/img/reward-wechat.jpg" data-alipay="/img/reward-alipay.jpg">
+            <div class="reward-toggle-ctrol">
+                <span class="reward-toggle-item wechat">微信</span>
+                <span class="reward-toggle-label"></span>
+                <span class="reward-toggle-item alipay">支付宝</span>
+            </div>
+        </label>
+        
+    </div>
+</div>
+
+    
+
+</div>
+
+    </main>
+    <footer class="footer ">
+    
+    <div class="top">
+        
+            <p>
+    <span>Links：</span>
+    
+    <span class="blogroll-item">
+        <a href="https://github.com/sivanWu0222" target="_blank">GitHub</a>
+    </span>
+    
+    <span class="blogroll-item">
+        <a href="http://weibo.com/Msingwen0222/home?wvr=5" target="_blank">新浪微博</a>
+    </span>
+    
+    <span class="blogroll-item">
+        <a href="https://www.linkedin.com/in/%E6%99%93%E6%96%87-%E5%90%B4-79057a121/" target="_blank">Linkedin</a>
+    </span>
+    
+    <span class="blogroll-item">
+        <a href="http://wpa.qq.com/msgrd?v=3&amp;uin=1666762170&amp;site=qq&amp;menu=yes" target="_blank">QQ</a>
+    </span>
+    
+    <span class="blogroll-item">
+        <a href="https://zh-cn.facebook.com/people/SiVan-Wu/100014408918389" target="_blank">Facebook</a>
+    </span>
+    
+    <span class="blogroll-item">
+        <a href="https://mail.qq.com/cgi-bin/qm_share?t=qm_mailme&amp;email=xfTz8-Py8-f08vWFtLTrpqqo" target="_blank">Contact</a>
+    </span>
+    
+    <span class="blogroll-item">
+        <a href="https://twitter.com/yirufeng1" target="_blank">Twitter</a>
+    </span>
+    
+</p>
+
+        
+    </div>
+    
+    <div class="bottom">
+        <p>
+            <span>
+                逸如风(yirufeng) &copy; 2016 - 2020
+            </span>
+
+           	
+           	<span>
+           		<a href="http://beian.miit.gov.cn/" target="_blank">已实名认证</a>
+           	</span>
+           	
+
+            
+
+            
+
+            
+                
+<span class="site-uv" title="总访客量">
+    <i class="icon icon-user"></i>
+    <i class="busuanzi-value" id="busuanzi_value_site_uv"></i>
+</span>
+
+
+<span class="site-pv" title="总访问量">
+    <i class="icon icon-eye"></i>
+    <i class="busuanzi-value" id="busuanzi_value_site_pv"></i>
+</span>
+
+            
+        </p>
+    </div>
+</footer>
+
+    <div class="mask" id="mask"></div>
+<a href="javascript:;" id="gotop" class="waves-effect waves-circle waves-light"><span class="icon icon-lg icon-chevron-up"></span></a>
+
+
+
+<div class="global-share" id="globalShare">
+    <ul class="reset share-icons">
+      
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://www.sivan.tech/2020/01/12/opencv-视频篇/&title=《opencv-视频篇》 — yirufeng's Blog&pic=http://www.sivan.tech/img/1.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://www.sivan.tech/2020/01/12/opencv-视频篇/&title=《opencv-视频篇》 — yirufeng's Blog&source=用摄像头捕获视频使用函数cv2.VideoCapture()，其中里面需要传入一个参数0表示笔记本内置摄像头，可以设置1或别的数字来设置别的摄像头
+注意：..." data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http://www.sivan.tech/2020/01/12/opencv-视频篇/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《opencv-视频篇》 — yirufeng's Blog&url=http://www.sivan.tech/2020/01/12/opencv-视频篇/&via=http://www.sivan.tech" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=http://www.sivan.tech/2020/01/12/opencv-视频篇/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+      
+    </ul>
+ </div>
+
+
+<div class="page-modal wx-share" id="wxShare">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAMYAAADGCAAAAACs8KCBAAACLElEQVR42u3aQW7DMAwF0dz/0i7QbSFnPqU0MDlaBYmh6nnBUiRfL7yu30W+v/6sdLfVrweWDBkyHsu4btf9cVef738lL4KfTYYMGXMY92GRh9HVMwRDXt/yexkyZMjAh0gTvhQsQ4YMGWmKdupG+bX/GzJkyHgUg/xJDuOFsy/cxWXIkPFARtoY+M/PH+xvyJAh4yGMK1y8AcmLbjy8LveXIUNGawZvK/LSP7+yprA34ViGDBlNGaeGKtIrbq21uXzRMmTIGMDg7cZaI+Fs4Qx1NmTIkNGIUSv6pwGRp3q1FyRDhowJjHS7nUbmzuAFahvIkCGjKSMteJEDpc2DnTPIkCGjN4OnaPtJG29w8iKgDBkyJjD4dTRN1FDvtFTIkyFDxkxGOuJQK72lDYC0bCdDhowJjP1wSZ6vtQHicpsMGTLaMXbCHw+mp5qX+0FchgwZz2KQTXkbkgCK/dX7fWTIkDGSwZO8tBmZXoNJs0GGDBm9GbXkjx+Oj5GlI2LxjJsMGTIeyyBJG7+IfroVunxShgwZAxg7Dch0XCwtsaHCnAwZMlozdgr0+wc9XLaTIUNGU8YVrlPBkSeXaH8ZMmS0ZuyPWfBBCj5mUdtHhgwZvRlpsb52AeaY2hlkyJAxgXEqyPLGJ7++xrVDGTJkDGaQElhtUCMN0zJkyJBRu0ymo2O1ULvcX4YMGQMYPMzFtTp8Ta0FcRkyZExg7IQ8XiAjyeWBBFGGDBndGD+4qmqYsR5wawAAAABJRU5ErkJggg==" alt="微信分享二维码">
+</div>
+
+
+    
+    <!-- main-js -->
+<script type="text/javascript" src="//cdn.bootcss.com/jquery/2.1.0/jquery.min.js"></script>
+<script type="text/javascript" src="/js/plugins/fastclick.js?v=1.4.2"></script>
+<script type="text/javascript" src="/js/plugins/ios-orientationchange-fix.js?v=1.4.2"></script>
+<script type="text/javascript" src="//cdn.jsdelivr.net/gh/fancyapps/fancybox@3.5.2/dist/jquery.fancybox.min.js"></script>
+
+<script type="text/javascript" src="//cdn.bootcss.com/node-waves/0.7.4/waves.min.js"></script>
+
+<script type="text/javascript" src="/js/method.js?v=1.4.2"></script>
+<script type="text/javascript" src="/js/blog.js?v=1.4.2"></script>
+
+<!-- third-party -->
+
+
+    <script type="text/javascript">
+    (function() {
+
+        const origin = "sivanWu0222 | sivanWu0222 | OpenCV_Python"
+        let user, repo;
+        origin.replace(/(\S+)\s{0,1}\|\s{0,1}(\S+)/g, (...rest) => {
+            [user, repo] = [ rest[1], rest[2] ];
+        });
+        if (user && repo) {
+            const url = `//api.github.com/repos/${user}/${repo}?callback=?`;
+            $.getJSON(url, (data) => {
+                updateRepoInPage(data.data);
+            });
+        }
+
+        function updateRepoInPage(data) {
+            const {name, description, html_url: url, stargazers_count: stars, forks, owner: owner, updated_at: update} = data;
+            _loadAvatar(owner.avatar_url).then(avatarUrl => {
+                const avatarBg = `url(${avatarUrl})`;
+                const container = $('#repo');
+                container.click(() => {
+                    window.open(url);
+                });
+
+                //init
+                const loadingItem = container.find('.loading').hide();
+                const topItem = container.find('.top').addClass('active');
+                const bottomItem = container.find('.bottom').addClass('active');
+
+                //avatar
+                const avatarItem = container.find('.avatar');
+                const oldBg = avatarItem.css('background-image');
+                avatarItem.hover(() => {
+                    avatarItem.css('background-image', avatarBg);
+                }, () => {
+                    avatarItem.css('background-image', oldBg);
+                });
+
+                //repo-name
+                const nameItem = container.find('.name').html(name);
+
+                //description
+                const descriptionItem = container.find('.description').html(description);
+
+                //stars
+                const starItem = container.find('.star>.val').html(stars);
+
+                //forks
+                const forkItem = container.find('.fork>.val').html(forks);
+
+                //date
+                const formatDate = update.replace(/T.+/g, '');
+                const dateItem = container.find('.date>.val').html(formatDate);
+            });
+
+            function _loadAvatar(url) {
+                return new Promise((resolve, reject) => {
+                    const img = new Image();
+                    img.onload = () => {
+                        resolve(url);
+                    };
+                    img.src = url;
+                });
+            }
+
+        }
+
+    })();
+</script>
+
+
+
+
+
+<script type="text/javascript" src="/js/plugins/local_search.js?v=1.4.2"></script>
+<script type="text/javascript">
+	var search_path = "search.xml";
+	if (search_path.length === 0) {
+		search_path = "search.xml";
+	}
+	var path = "/" + search_path;
+	searchFunc(path, "local-search-input", "local-search-result");
+</script>
+
+
+
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+    
+    
+
+
+
+<script type="text/javascript" src="https://cdn1.lncld.net/static/js/av-core-mini-0.6.4.js"></script>
+<script type="text/javascript" src="/js/plugins/leancloud_visitors.js?v=1.4.2"></script>
+
+
+
+    <!-- mathjax config similar to math.stackexchange -->
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+        tex2jax: {
+            inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+            processEscapes: true,
+            skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+        }
+    });
+</script>
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for (i=0; i < all.length; i += 1) {
+            all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+    });
+</script>
+
+<script type="text/javascript" src="//cdn.bootcss.com/mathjax/2.7.1/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+
+
+
+    <script>
+    (function() {
+        var OriginTitile = document.title, titleTime;
+        document.addEventListener('visibilitychange', function() {
+            if (document.hidden) {
+                document.title = '死鬼去哪里了！';
+                clearTimeout(titleTime);
+            } else {
+                document.title = '(つェ⊂)咦!又好了!';
+                titleTime = setTimeout(function() {
+                    document.title = OriginTitile;
+                },2000);
+            }
+        });
+    })();
+</script>
+
+
+
+
+
+    
+</body>
+</html>

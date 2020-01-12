@@ -252,6 +252,151 @@
         <ul class="post-list">
         
             <li class="post-list-item fade">
+                <article id="post-Algorithm-冒泡排序"
+  class="article-card article-type-post" itemprop="blogPost">
+  
+    
+    
+    
+        
+
+
+  
+    <h3 class="post-title re-title" itemprop="name">
+      <a class="post-title-link" href="/2017/05/22/Algorithm-冒泡排序/">Algorithm-冒泡排序</a>
+    </h3>
+  
+
+
+
+    
+    <div class="post-meta">
+        <time class="post-time" title="2017-05-22 12:36:47" datetime="2017-05-22T12:36:47.000Z"  itemprop="datePublished">2017-05-22</time>
+
+        
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/Algorithm/">Algorithm</a><ul class="article-category-list-child"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/Algorithm/BubbleSort/">BubbleSort</a></li></ul></li></ul>
+
+
+
+        
+	<span id="/2017/05/22/Algorithm-冒泡排序/" class="leancloud_visitors" data-flag-title="Algorithm-冒泡排序" title="Algorithm-冒泡排序">
+		
+			<i class="icon icon-eye"></i>
+		
+		<span class="leancloud-visitors-count"></span>
+	</span>
+ 
+
+        
+
+
+        
+        
+    </div>
+    
+    <div class="post-content" id="post-content" itemprop="postContent">
+    
+    
+        <h1 id="冒泡排序"><a href="#冒泡排序" class="headerlink" title="冒泡排序"></a>冒泡排序</h1><blockquote>
+<p>这里假定冒泡排序是整形数组，并且以升序排列</p>
+</blockquote>
+<ol>
+<li><p>冒牌排序需要我们遍历几次数组，每次遍历中，需要比较相邻的两个元素，如果按降序排列，则互换，否则保持不变！由于较小的值像“气泡”一样逐渐浮向顶部，而较大的值沉向底部，所以称为冒泡排序或者下沉排序。</p>
+</li>
+<li><p>特征：假设一共有n个元素，第m次遍历之后，最后的m个元素顺序已经确定</p>
+</li>
+<li>时间复杂度：最大为o(n*n)，最小为o(1)</li>
+</ol>
+<hr>
+<h2 id="初始的冒泡排序："><a href="#初始的冒泡排序：" class="headerlink" title="初始的冒泡排序："></a>初始的冒泡排序：</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment">	 * 初级别的冒泡排序</span></span><br><span class="line"><span class="comment">	 * <span class="doctag">@param</span> nums</span></span><br><span class="line"><span class="comment">	 * <span class="doctag">@return</span> 排序后的数组</span></span><br><span class="line"><span class="comment">	 */</span></span><br><span class="line">	<span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">int</span>[] toBubbleSort0(<span class="keyword">int</span>[] nums)&#123;</span><br><span class="line">		<span class="keyword">int</span> count = <span class="number">0</span>;</span><br><span class="line">		<span class="keyword">int</span> sum = <span class="number">0</span>;</span><br><span class="line">		<span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">1</span>; i &lt; nums.length - <span class="number">1</span>; i++)&#123;</span><br><span class="line">			<span class="keyword">for</span> (<span class="keyword">int</span> j = <span class="number">0</span>; j &lt; nums.length - i; j++)&#123;</span><br><span class="line">				sum++;</span><br><span class="line">				<span class="keyword">if</span>(nums[j] &gt; nums[j+<span class="number">1</span>])&#123;</span><br><span class="line">					count++;</span><br><span class="line">					<span class="keyword">int</span> temp = nums[j];</span><br><span class="line">					nums[j] = nums[j+<span class="number">1</span>];</span><br><span class="line">					nums[j+<span class="number">1</span>] = temp;</span><br><span class="line">				&#125;</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line">		System.out.println(count);</span><br><span class="line">		System.out.println(sum);</span><br><span class="line">		<span class="keyword">return</span> nums;</span><br><span class="line">	&#125;</span><br></pre></td></tr></table></figure>
+    
+    <a href="/2017/05/22/Algorithm-冒泡排序/" class="post-more waves-effect waves-button">
+        more
+    </a>
+    </div>
+</article>
+
+<div class="post-footer">
+    
+	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Algorithm/">Algorithm</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Java/">Java</a></li></ul>
+
+</div>
+
+
+            </li>
+        
+            <li class="post-list-item fade">
+                <article id="post-减少HTML网页图片资源请求次数"
+  class="article-card article-type-post" itemprop="blogPost">
+  
+    
+    
+    
+        
+
+
+  
+    <h3 class="post-title re-title" itemprop="name">
+      <a class="post-title-link" href="/2017/05/22/减少HTML网页图片资源请求次数/">减少HTML网页图片资源请求次数</a>
+    </h3>
+  
+
+
+
+    
+    <div class="post-meta">
+        <time class="post-time" title="2017-05-22 11:25:04" datetime="2017-05-22T11:25:04.000Z"  itemprop="datePublished">2017-05-22</time>
+
+        
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/HTML-CSS/">HTML/CSS</a><ul class="article-category-list-child"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/HTML-CSS/优化/">优化</a></li></ul></li></ul>
+
+
+
+        
+	<span id="/2017/05/22/减少HTML网页图片资源请求次数/" class="leancloud_visitors" data-flag-title="减少HTML网页图片资源请求次数" title="减少HTML网页图片资源请求次数">
+		
+			<i class="icon icon-eye"></i>
+		
+		<span class="leancloud-visitors-count"></span>
+	</span>
+ 
+
+        
+
+
+        
+        
+    </div>
+    
+    <div class="post-content" id="post-content" itemprop="postContent">
+    
+    
+        <blockquote>
+<p>最近学习前端，老师讲过一个问题，虽然<a href="http://www.qq.com" target="_blank" rel="noopener">QQ</a>网页很好看，但是加载时间过长，因为将每一张图片都分离开来，一张图片对应用户的一次请求，所以我们一般讲网站用的图标都集中到一张图上，然后通过移动图片位置和确定图片大小来锁定我们要的图片，会让我们网页的次数减少一个很大的层次，算是一个经验！！！</p>
+</blockquote>
+<h2 id="优点："><a href="#优点：" class="headerlink" title="优点："></a>优点：</h2><ol>
+<li>这里放了两张图，其中第一张是网页所用到的图片，都集中到一张图片上了，第二张我们要实现的效果图片，不用专门对图片进行裁剪</li>
+<li>这里我们只对图片请求了一次，不需要对图标分别请求，优化了网页</li>
+</ol>
+<h2 id="缺点："><a href="#缺点：" class="headerlink" title="缺点："></a>缺点：</h2><ol>
+<li>需要手动定位到我们需要的图标，可能遇到图标对的不齐的问题
+    
+    <a href="/2017/05/22/减少HTML网页图片资源请求次数/" class="post-more waves-effect waves-button">
+        more
+    </a>
+    </div>
+</article>
+
+<div class="post-footer">
+    
+	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/CSS/">CSS</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/HTML/">HTML</a></li></ul>
+
+</div>
+
+
+            </li>
+        
+            <li class="post-list-item fade">
                 <article id="post-Socket通信遇到的问题"
   class="article-card article-type-post" itemprop="blogPost">
   
@@ -827,144 +972,6 @@ at java.net.SocketInputStream.read(SocketInputStream.java:129)
 
             </li>
         
-            <li class="post-list-item fade">
-                <article id="post-Swing窗体取消标题如何拖动"
-  class="article-card article-type-post" itemprop="blogPost">
-  
-    
-    
-    
-        
-
-
-  
-    <h3 class="post-title re-title" itemprop="name">
-      <a class="post-title-link" href="/2017/05/05/Swing窗体取消标题如何拖动/">Swing窗体取消标题如何拖动</a>
-    </h3>
-  
-
-
-
-    
-    <div class="post-meta">
-        <time class="post-time" title="2017-05-05 00:24:13" datetime="2017-05-05T00:24:13.000Z"  itemprop="datePublished">2017-05-05</time>
-
-        
-	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/Java/">Java</a><ul class="article-category-list-child"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/Java/Swing/">Swing</a></li></ul></li></ul>
-
-
-
-        
-	<span id="/2017/05/05/Swing窗体取消标题如何拖动/" class="leancloud_visitors" data-flag-title="Swing窗体取消标题如何拖动" title="Swing窗体取消标题如何拖动">
-		
-			<i class="icon icon-eye"></i>
-		
-		<span class="leancloud-visitors-count"></span>
-	</span>
- 
-
-        
-
-
-        
-        
-    </div>
-    
-    <div class="post-content" id="post-content" itemprop="postContent">
-    
-    
-        <blockquote>
-<p>众所周知，swing中的窗体默认提供了边框以及标题栏，但是我们设置undecorated为true之后，不会使用Swing中的窗体来修饰，但是默认窗体也将不会随着鼠标的拖动而移动，因此我们需要给我们自己窗体添加一个随着鼠标移动而移动的事件</p>
-</blockquote>
-<h2 id="添加鼠标监听器事件"><a href="#添加鼠标监听器事件" class="headerlink" title="添加鼠标监听器事件"></a>添加鼠标监听器事件</h2><blockquote>
-<p>窗体移动默认都是鼠标按下之后，鼠标开始移动，窗体也会跟着鼠标开始移动！鼠标移动之前，我们需要记录按下鼠标时相对于窗体的位置，因为移动将不会改变鼠标相对于窗体的位置</p>
-</blockquote>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">frame.addMouseListener(<span class="keyword">new</span> MouseAdapter() &#123;</span><br><span class="line">          <span class="meta">@Override</span></span><br><span class="line">          <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">mousePressed</span><span class="params">(MouseEvent e)</span> </span>&#123;</span><br><span class="line">            pressedPoint = e.getPoint();<span class="comment">/*记录鼠标相对于窗体坐标*/</span></span><br><span class="line">          &#125;</span><br><span class="line">      &#125;);</span><br></pre></td></tr></table></figure>
-    
-    <a href="/2017/05/05/Swing窗体取消标题如何拖动/" class="post-more waves-effect waves-button">
-        more
-    </a>
-    </div>
-</article>
-
-<div class="post-footer">
-    
-	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Java/">Java</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Swing/">Swing</a></li></ul>
-
-</div>
-
-
-            </li>
-        
-            <li class="post-list-item fade">
-                <article id="post-泛型"
-  class="article-card article-type-post" itemprop="blogPost">
-  
-    
-    
-    
-        
-
-
-  
-    <h3 class="post-title re-title" itemprop="name">
-      <a class="post-title-link" href="/2017/03/22/泛型/">泛型</a>
-    </h3>
-  
-
-
-
-    
-    <div class="post-meta">
-        <time class="post-time" title="2017-03-22 02:56:28" datetime="2017-03-22T02:56:28.000Z"  itemprop="datePublished">2017-03-22</time>
-
-        
-	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/Java/">Java</a><ul class="article-category-list-child"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/Java/泛型/">泛型</a></li></ul></li></ul>
-
-
-
-        
-	<span id="/2017/03/22/泛型/" class="leancloud_visitors" data-flag-title="泛型" title="泛型">
-		
-			<i class="icon icon-eye"></i>
-		
-		<span class="leancloud-visitors-count"></span>
-	</span>
- 
-
-        
-
-
-        
-        
-    </div>
-    
-    <div class="post-content" id="post-content" itemprop="postContent">
-    
-    
-        <blockquote>
-<p>前言：泛型是JDK1.5开始，Java便允许定义泛型类，泛型接口，泛型方法。可以使用泛型对API中一些接口和类进行修改。</p>
-</blockquote>
-<ul>
-<li>JDK1.5之前的java.lang.Comparable</li>
-</ul>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> java.lang;</span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">interface</span> <span class="title">Comparable</span></span>&#123;</span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">compareTo</span><span class="params">(Object o)</span></span></span><br><span class="line"><span class="function">&#125;</span></span><br></pre></td></tr></table></figure>
-    
-    <a href="/2017/03/22/泛型/" class="post-more waves-effect waves-button">
-        more
-    </a>
-    </div>
-</article>
-
-<div class="post-footer">
-    
-	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Java/">Java</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/泛型/">泛型</a></li></ul>
-
-</div>
-
-
-            </li>
-        
         </ul>
         
 <nav id="page-nav">
@@ -1008,7 +1015,7 @@ at java.net.SocketInputStream.read(SocketInputStream.java:129)
     </span>
     
     <span class="blogroll-item">
-        <a href="https://twitter.com/SiVan_Wu" target="_blank">Twitter</a>
+        <a href="https://twitter.com/yirufeng1" target="_blank">Twitter</a>
     </span>
     
 </p>
@@ -1019,7 +1026,7 @@ at java.net.SocketInputStream.read(SocketInputStream.java:129)
     <div class="bottom">
         <p>
             <span>
-                逸如风(yirufeng) &copy; 2016 - 2019
+                逸如风(yirufeng) &copy; 2016 - 2020
             </span>
 
            	

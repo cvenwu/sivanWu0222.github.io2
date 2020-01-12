@@ -3,6 +3,154 @@
   
     
     <entry>
+      <title><![CDATA[opencv-视频篇]]></title>
+      <url>/2020/01/12/opencv-%E8%A7%86%E9%A2%91%E7%AF%87/</url>
+      <content type="html"><![CDATA[<h2 id="用摄像头捕获视频"><a href="#用摄像头捕获视频" class="headerlink" title="用摄像头捕获视频"></a>用摄像头捕获视频</h2><p>使用函数cv2.VideoCapture()，其中里面需要传入一个参数0表示笔记本内置摄像头，可以设置1或别的数字来设置别的摄像头</p>
+<p>注意：</p>
+<ol>
+<li><p>cap.read() 返回两个值：第一个值：一个布尔值（True/False）。 如果帧读取的是正确的， 就是 True。所以最后你可以通过检查他的返回值来查看视频文件是否已经到了结尾。第二个值：读取到的视频帧</p>
+</li>
+<li><p>有时 cap 可能不能成功的初始化摄像头设备。这种情况下上面的代码会报 错。你可以使用 cap.isOpened()，来检查是否成功初始化了。如果返回值是 True，那就没有问题。否则就要使用函数 cap.open()</p>
+</li>
+<li>可以使用函数 cap.get(propId) 来获得视频的一些参数信息。 这里 propId 可以是 0 到 18 之间的任何整数。每一个数代表视频的一个属性，见 下表</li>
+</ol>
+<figure class="image-box">
+                <img src="cap属性列表.png" alt="糟了" title="cap属性列表" class>
+                <p>cap属性列表</p>
+            </figure>
+<a id="more"></a>
+<p>例子：摄像头捕获视频，并将其转换为灰度图显示<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">"""</span></span><br><span class="line"><span class="string">@File : 摄像头捕获视频.py</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">@Author: sivan Wu</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">@Date : 2020/1/11 12:03 下午</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">@Desc : 为了获取视频，你应该创建一个 VideoCapture 对象</span></span><br><span class="line"><span class="string">他的参数可以是 设备的索引号，或者是一个视频文件。设备索引号就是在指定要使用的摄像头。 一般的笔记本电脑都有内置摄像头。所以参数就是 0。</span></span><br><span class="line"><span class="string">你可以通过设置成 1 或 者其他的来选择别的摄像头。之后，你就可以一帧一帧的捕获视频了。但是最 后，别忘了停止捕获视频</span></span><br><span class="line"><span class="string">"""</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> cv2</span><br><span class="line"></span><br><span class="line">cap = cv2.VideoCapture(<span class="number">0</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># while True:</span></span><br><span class="line"><span class="keyword">while</span> cap.isOpened():  <span class="comment"># 检查是否成功初始化摄像头, 如果返回值为True,就没有问题了，否则就需要使用函数cap.open()</span></span><br><span class="line">    <span class="comment"># Capture frame-by-frame</span></span><br><span class="line">    <span class="comment"># cap.read() 返回一个布尔值（True/False）。 如果帧读取的是正确的，就是True。</span></span><br><span class="line">    <span class="comment"># 所以最后你可以通过检查他的返回值来查看视频文件是否已经到了结尾</span></span><br><span class="line">    ret, frame = cap.read()</span><br><span class="line">    <span class="comment"># Our operations on the frame come here</span></span><br><span class="line">    gray = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    <span class="comment"># 获得额外的视频信息</span></span><br><span class="line">    <span class="comment">## 使用函数 cap.get(propId) 来获得视频的一些参数信息, propId 可以是 0 到 18 之间的任何整数。每一个数代表视频的一个属性</span></span><br><span class="line">    <span class="comment">## 其中的一些值可以使用 cap.set(propId,value) 来修改，value 就是 你想要设置成的新值</span></span><br><span class="line">    width = cap.get(<span class="number">3</span>)</span><br><span class="line">    height = cap.get(<span class="number">4</span>)</span><br><span class="line">    print(width, height)</span><br><span class="line"></span><br><span class="line">    <span class="comment"># Display the resulting frame</span></span><br><span class="line">    cv2.imshow(<span class="string">"frame"</span>, gray)</span><br><span class="line">    <span class="comment"># 0xFF：0xFF是一个位掩码，十六进制常数，二进制值为11111111, 它将左边的24位设置为0,</span></span><br><span class="line">    <span class="comment"># 把返回值限制在在0和255之间。ord(’ ')返回按键对应的整数（ASCII码）</span></span><br><span class="line">    <span class="keyword">if</span> cv2.waitKey(<span class="number">1</span>) &amp; <span class="number">0xFF</span> == ord(<span class="string">'q'</span>):</span><br><span class="line">        <span class="keyword">break</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># When everything done, release the capture</span></span><br><span class="line">cap.release()</span><br><span class="line">cv2.destroyAllWindows()</span><br></pre></td></tr></table></figure></p>
+<h2 id="从文件中读取视频"><a href="#从文件中读取视频" class="headerlink" title="从文件中读取视频"></a>从文件中读取视频</h2><blockquote>
+<p>只需要将函数cv2.VideoCapture()里面的参数修改成文件所在的路径以及文件名</p>
+</blockquote>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">"""</span></span><br><span class="line"><span class="string">@File : 从文件中播放视频.py</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">@Author: sivan Wu</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">@Date : 2020/1/11 3:45 下午</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">@Desc :</span></span><br><span class="line"><span class="string">            与从摄像头中捕获一样，你只需要把设备索引号改成视频文件的名字。在播放每一帧时，使用 cv2.waiKey() 设置适当的持续时间。</span></span><br><span class="line"><span class="string">            如果设置的太低视 频就会播放的非常快，如果设置的太高就会播放的很慢（你可以使用这种方法 控制视频的播放速度）。</span></span><br><span class="line"><span class="string">            通常情况下 25 毫秒就可以了</span></span><br><span class="line"><span class="string">"""</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> cv2</span><br><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line"></span><br><span class="line">cap = cv2.VideoCapture(<span class="string">"./自己写代码/10秒.mp4"</span>)</span><br><span class="line"></span><br><span class="line"><span class="keyword">while</span> cap.isOpened():</span><br><span class="line">    ret, frame = cap.read()</span><br><span class="line">    <span class="keyword">if</span> ret == <span class="literal">True</span>:</span><br><span class="line">        cv2.imshow(<span class="string">"frame"</span>, frame)</span><br><span class="line">        <span class="keyword">if</span> cv2.waitKey(<span class="number">25</span>) &amp; <span class="number">0xFF</span> == ord(<span class="string">'q'</span>):</span><br><span class="line">            <span class="keyword">break</span></span><br><span class="line">    <span class="keyword">else</span>:</span><br><span class="line">        <span class="keyword">break</span></span><br><span class="line">cap.release()</span><br><span class="line">cv2.destroyAllWindows()</span><br></pre></td></tr></table></figure>
+<h2 id="保存视频"><a href="#保存视频" class="headerlink" title="保存视频"></a>保存视频</h2><blockquote>
+<p>使用VideoWriter(filename, fourcc, fps, frameSize[, isColor])函数进行写入视频</p>
+</blockquote>
+<p>编码支持列表：<a href="http://www.fourcc.org/codecs.php#letter_i" target="_blank" rel="noopener">参考</a></p>
+<p><strong>VideoWriter(filename, fourcc, fps, frameSize[, isColor]) -&gt; <videowriter object></videowriter></strong></p>
+<p>参数讲解：</p>
+<ol>
+<li>第一个参数是要保存的文件的路径</li>
+<li>fourcc 指定编码器: 使用cv2.VideoWriter_fourcc(*’I420’)创建的编码，可用编码列表参考 <a href="http://www.fourcc.org/codecs.php#letter_i" target="_blank" rel="noopener">http://www.fourcc.org/codecs.php#letter_i</a></li>
+<li>fps 要保存的视频的帧率</li>
+<li>frameSize 要保存的文件的画面尺寸</li>
+<li>isColor 指示是黑白画面还是彩色的画面</li>
+</ol>
+<p>步骤：</p>
+<ol>
+<li>设置视频编码：fourcc = cv2.VideoWriter_fourcc(*’MJPG’)</li>
+<li>VideoWriter(filename, fourcc, fps, frameSize[, isColor]) 函数建立一个writer</li>
+<li>读取视频的每一帧，将每一帧使用writer输出到文件中,writer.write(frame)</li>
+<li>循环3直到读取到视频的结尾：采用ret == True进行判断，因为如果到视频结束将会返回False</li>
+</ol>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">"""</span></span><br><span class="line"><span class="string">@File : 写入到视频文件中.py</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">@Author: sivan Wu</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">@Date : 2020/1/12 10:20 上午</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">@Desc :</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">"""</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> cv2</span><br><span class="line"></span><br><span class="line"><span class="comment"># 下面的编码采用I420, MJPG都可以</span></span><br><span class="line"><span class="comment"># fourcc = cv2.VideoWriter_fourcc(*'I420')</span></span><br><span class="line">fourcc = cv2.VideoWriter_fourcc(*<span class="string">'MJPG'</span>)</span><br><span class="line"></span><br><span class="line">cap = cv2.VideoCapture(<span class="number">0</span>)</span><br><span class="line">frame_width = int(cap.get(<span class="number">3</span>))  <span class="comment"># 获取宽度</span></span><br><span class="line">frame_height = int(cap.get(<span class="number">4</span>))  <span class="comment"># 获取高度</span></span><br><span class="line"><span class="comment"># frame_width, frame_height 不能修改为其他值</span></span><br><span class="line">writer = cv2.VideoWriter(<span class="string">"out.avi"</span>, fourcc, <span class="number">20.0</span>, (frame_width, frame_height))</span><br><span class="line"><span class="keyword">while</span> cap.isOpened():</span><br><span class="line">    ret, frame = cap.read()</span><br><span class="line">    <span class="keyword">if</span> ret == <span class="literal">True</span>:</span><br><span class="line">        frame = cv2.flip(frame, <span class="number">0</span>)</span><br><span class="line">        writer.write(frame)</span><br><span class="line">        cv2.imshow(<span class="string">"frame"</span>, frame)</span><br><span class="line">        <span class="keyword">if</span> cv2.waitKey(<span class="number">1</span>) &amp; <span class="number">0xFF</span> == ord(<span class="string">'q'</span>):</span><br><span class="line">            <span class="keyword">break</span></span><br><span class="line">    <span class="keyword">else</span>:</span><br><span class="line">        <span class="keyword">break</span></span><br><span class="line"></span><br><span class="line">cap.release()</span><br><span class="line"></span><br><span class="line">writer.release()</span><br><span class="line">cv2.destroyAllWindows()</span><br></pre></td></tr></table></figure>
+<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><blockquote>
+<p>frame = cv2.flip(frame, 0)</p>
+</blockquote>
+<p>摄像头捕获视频之后沿X轴反转之后保存到文件中：第一个参数表示要旋转的视频，第二个参数表示旋转的方向，0表示绕x轴旋转，大于0的数表示绕y轴旋转，小于0的负数表示绕x和y轴旋转</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">"""</span></span><br><span class="line"><span class="string">@File : 保存视频.py</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">@Author: sivan Wu</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">@Date : 2020/1/11 9:50 下午</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">@Desc : 捕获视频，并对每一帧都进行加工之后我们想要保存这个视频</span></span><br><span class="line"><span class="string">        下面的代码是从摄像头中捕获视频，沿水平方向旋转每一帧并保存它。</span></span><br><span class="line"><span class="string">"""</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> cv2</span><br><span class="line"></span><br><span class="line">cap = cv2.VideoCapture(<span class="number">0</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># Define the codec and create VideoWriter object</span></span><br><span class="line">fourcc = cv2.VideoWriter_fourcc(*<span class="string">'XVID'</span>)</span><br><span class="line">out = cv2.VideoWriter(<span class="string">"output.avi"</span>, fourcc, <span class="number">20.0</span>, (<span class="number">60.0</span>, <span class="number">48.0</span>))</span><br><span class="line"></span><br><span class="line"><span class="keyword">while</span> cap.isOpened():</span><br><span class="line">    ret, frame = cap.read()</span><br><span class="line">    <span class="keyword">if</span> ret == <span class="literal">True</span>:</span><br><span class="line">        <span class="comment"># 第一个参数表示要旋转的视频，第二个参数表示旋转的方向，0表示绕x轴旋转，大于0的数表示绕y轴旋转，小于0的负数表示绕x和y轴旋转</span></span><br><span class="line">        frame = cv2.flip(frame, <span class="number">0</span>)</span><br><span class="line">        out.write(frame)</span><br><span class="line">        cv2.imshow(<span class="string">'frame'</span>, frame)</span><br><span class="line">        <span class="keyword">if</span> cv2.waitKey(<span class="number">1</span>) &amp; <span class="number">0xFF</span> == ord(<span class="string">'q'</span>):</span><br><span class="line">            <span class="keyword">break</span></span><br><span class="line">    <span class="keyword">else</span>:</span><br><span class="line">        <span class="keyword">break</span></span><br><span class="line">cap.release()</span><br><span class="line">cv2.destroyAllWindows()</span><br></pre></td></tr></table></figure>
+<h2 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h2><p><a href="https://github.com/spmallick/learnopencv/blob/master/VideoReadWriteDisplay/videoWrite.py" target="_blank" rel="noopener">learnopencv</a></p>
+]]></content>
+      
+        <categories>
+            
+            <category> OpenCV </category>
+            
+        </categories>
+        
+        
+        <tags>
+            
+            <tag> Python </tag>
+            
+            <tag> OpenCV </tag>
+            
+        </tags>
+        
+    </entry>
+    
+    <entry>
+      <title><![CDATA[OpenCV-图像篇]]></title>
+      <url>/2020/01/12/opencv-%E5%9B%BE%E5%83%8F%E7%AF%87/</url>
+      <content type="html"><![CDATA[<h2 id="OpenCV基础函数讲解"><a href="#OpenCV基础函数讲解" class="headerlink" title="OpenCV基础函数讲解"></a>OpenCV基础函数讲解</h2><blockquote>
+<p>学习 使用 opencv in python 读取图像，显示图像，保存图像的功能，同时还学习了最简单的matplotlib绘图的功能(有点小瑕疵，后面讲)</p>
+</blockquote>
+<p><strong>注意：彩色图像使用 OpenCV 加载时是 BGR 模式。但是 Matplotib 是 RGB 模式。所以彩色图像如果已经被 OpenCV 读取，那它将不会被 Matplotib 正确显示</strong></p>
+<h3 id="waitKey-函数讲解"><a href="#waitKey-函数讲解" class="headerlink" title="waitKey() 函数讲解"></a>waitKey() 函数讲解</h3><p>waitKey(delay): 表示在delay毫秒内等待用户按键，若用户没有按键则每经过delay毫秒将会刷新一次</p>
+<p><strong>功能是不断刷新图像，频率时间为delay，单位为ms，返回值为当前键盘按键值</strong></p>
+<ul>
+<li>waitKey()–是在一个给定的时间内(单位ms)等待用户按键触发; 如果用户没有按下键,则接续等待(循环)</li>
+</ul>
+<p>常见：设置waitKey(0),则表示程序会无限制的等待用户的按键事件</p>
+<p>一般在imgshow的时候，如果设置waitKey(0),代表按任意键继续</p>
+<ul>
+<li>显示视频时，延迟时间需要设置为 大于0的参数</li>
+</ul>
+<p><code>delay &gt; 0时，延迟”delay”ms，在显示视频时这个函数是有用的，用于设置在显示完一帧图像后程序等待”delay”ms再显示下一帧视频；如果使用waitKey(0)则只会显示第一帧视频, 显示视频时，延迟时间需要设置为大于0的参数, delay&gt;0时，延迟”delay”ms，在显示视频时这个函数是有用的，用于设置在显示完一帧图像后程序等待”delay”ms再显示下一帧视频；如果使用waitKey(0)则只会显示第一帧视频</code></p>
+<p><a href="https://blog.csdn.net/a1809032425/article/details/81952952" target="_blank" rel="noopener">参考</a></p>
+<a id="more"></a>
+<h2 id="OpenCV读取图像"><a href="#OpenCV读取图像" class="headerlink" title="OpenCV读取图像"></a>OpenCV读取图像</h2><p><code>Note: 使用cv2.imread(filepath) ，如果文件路径错误，将不会报错而是返回一个None</code></p>
+<p>cv2.imread() 后面的几个常用读取模式：<strong>读取图像正常情况下返回一个ndarray</strong></p>
+<ol>
+<li>cv2.IMREAD_COLOR ： 正常读取彩色图 <strong>读取的是BGR</strong></li>
+<li>cv2.IMREAD_GRAYSCALE : 读取灰度图 </li>
+<li>cv2.IMREAD_UNCHANGED : 读取包括图像的 alpha 通道的图</li>
+</ol>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">"""</span></span><br><span class="line"><span class="string">@File : 读入图像.py</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">@Author: sivan Wu</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">@Date : 2020/1/11 10:26 上午</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">@Desc : 使用cv2.imread()读取一幅图像</span></span><br><span class="line"><span class="string">        警告：就算图像的路径是错的，OpenCV 也不会提醒你的， 但是当你使用命 令print img时得到的结果是None</span></span><br><span class="line"><span class="string">"""</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> cv2</span><br><span class="line"></span><br><span class="line">IMAGE_PATH = <span class="string">"../data/timg.jpeg"</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 读入彩色图, 第二个参数是cv2.IMREAD_COLOR(默认为该参数)</span></span><br><span class="line"><span class="comment"># 读入一副彩色图像。 图像的透明度会被忽略， 这是默认参数</span></span><br><span class="line">image = cv2.imread(IMAGE_PATH, cv2.IMREAD_COLOR)  <span class="comment"># 返回的类型是&lt;class 'numpy.ndarray'&gt;， cv2.IMREAD_COLOR = 1</span></span><br><span class="line">print(<span class="string">"--------------彩色图像开始--------------"</span>)</span><br><span class="line">print(image.shape)</span><br><span class="line">print(type(image))</span><br><span class="line">print(<span class="string">"--------------彩色图像开始--------------"</span>)</span><br><span class="line"><span class="comment"># 读入灰色图像，第二个参数是cv2.IMREAD_GRAYSCALE</span></span><br><span class="line">image_gray = cv2.imread(IMAGE_PATH, cv2.IMREAD_GRAYSCALE)  <span class="comment"># cv2.IMREAD_GRAYSCALE = 0</span></span><br><span class="line">print(<span class="string">"--------------灰色图像开始--------------"</span>)</span><br><span class="line">print(image_gray.shape)</span><br><span class="line">print(type(image_gray))</span><br><span class="line">print(<span class="string">"--------------灰色图像开始--------------"</span>)</span><br><span class="line"><span class="comment"># cv2.IMREAD_UNCHANGED：读入一幅图像，并且包括图像的 alpha 通道</span></span><br><span class="line">image_gray_with_alpha = cv2.imread(IMAGE_PATH, cv2.IMREAD_UNCHANGED)</span><br><span class="line">print(<span class="string">"--------------读取带alpha通道的图像开始--------------"</span>)</span><br><span class="line">print(image_gray_with_alpha.shape)</span><br><span class="line">print(type(image_gray_with_alpha))</span><br><span class="line">print(<span class="string">"--------------读取带alpha通道的图像开始--------------"</span>)</span><br></pre></td></tr></table></figure>
+<h2 id="OpenCV保存图像"><a href="#OpenCV保存图像" class="headerlink" title="OpenCV保存图像"></a>OpenCV保存图像</h2><blockquote>
+<p>如果原来文件存在则将会覆盖</p>
+</blockquote>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">"""</span></span><br><span class="line"><span class="string">@File : 保存图像.py</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">@Author: sivan Wu</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">@Date : 2020/1/11 10:50 上午</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">@Desc : 使用函数cv2.imwrite(param1, param2) param1是一个字符串的文件名字，param2是一个cv2读取到的ndarray对象</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">"""</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> cv2</span><br><span class="line"></span><br><span class="line">IMAGE_PATH = <span class="string">"../data/timg.jpeg"</span></span><br><span class="line">image = cv2.imread(IMAGE_PATH, cv2.IMREAD_COLOR)  <span class="comment"># cv2.IMREAD_GRAYSCALE = 0</span></span><br><span class="line">cv2.imwrite(<span class="string">"大头儿子.png"</span>, image)  <span class="comment"># 如果原文件夹有该文件将会覆盖</span></span><br></pre></td></tr></table></figure>
+<h2 id="OpenCV显示图像"><a href="#OpenCV显示图像" class="headerlink" title="OpenCV显示图像"></a>OpenCV显示图像</h2><h3 id="先读取图像再创建窗口"><a href="#先读取图像再创建窗口" class="headerlink" title="先读取图像再创建窗口"></a>先读取图像再创建窗口</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">"""</span></span><br><span class="line"><span class="string">@File : 显示图像.py</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">@Author: sivan Wu</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">@Date : 2020/1/11 10:36 上午</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">@Desc : 显示图像：使用函数 cv2.imshow() 显示图像。窗口会自动调整为图像大小。第一 个参数是窗口的名字</span></span><br><span class="line"><span class="string">，其次才是我们的图像。你可以创建多个窗口，只要你喜 欢，但是必须给他们不同的名字</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">"""</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> cv2</span><br><span class="line"></span><br><span class="line">IMAGE_PATH = <span class="string">"../data/timg.jpeg"</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 读入彩色图, 第二个参数是cv2.IMREAD_COLOR(默认为该参数)</span></span><br><span class="line"><span class="comment"># 读入一副彩色图像。 图像的透明度会被忽略， 这是默认参数</span></span><br><span class="line">image = cv2.imread(IMAGE_PATH, cv2.IMREAD_COLOR)  <span class="comment"># 返回的类型是&lt;class 'numpy.ndarray'&gt;， cv2.IMREAD_COLOR = 1</span></span><br><span class="line">print(<span class="string">"--------------彩色图像开始--------------"</span>)</span><br><span class="line">print(image.shape)</span><br><span class="line">print(type(image))</span><br><span class="line">print(<span class="string">"--------------彩色图像开始--------------"</span>)</span><br><span class="line"><span class="comment"># 读入灰色图像，第二个参数是cv2.IMREAD_GRAYSCALE</span></span><br><span class="line">image_gray = cv2.imread(IMAGE_PATH, cv2.IMREAD_GRAYSCALE)  <span class="comment"># cv2.IMREAD_GRAYSCALE = 0</span></span><br><span class="line">print(<span class="string">"--------------灰色图像开始--------------"</span>)</span><br><span class="line">print(image_gray.shape)</span><br><span class="line">print(type(image_gray))</span><br><span class="line">print(<span class="string">"--------------灰色图像开始--------------"</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 显示图像</span></span><br><span class="line">print(<span class="string">"--------------显示图像开始--------------"</span>)</span><br><span class="line">cv2.imshow(<span class="string">"灰色图像"</span>, image_gray)  <span class="comment">#</span></span><br><span class="line">cv2.imshow(<span class="string">"彩色图像"</span>, image)  <span class="comment">#</span></span><br><span class="line">cv2.waitKey(<span class="number">0</span>)</span><br><span class="line">cv2.destroyWindow(<span class="string">"灰色图像"</span>)  <span class="comment"># 想删除特定的窗口可以使用 cv2.destroyWindow()，在括号内输入你想删除的窗口名</span></span><br><span class="line">cv2.destroyAllWindows()  <span class="comment"># 可以轻易删除所有我们建立的窗口</span></span><br><span class="line">print(<span class="string">"--------------显示图像结束--------------"</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 另外一种情形：首先创建窗口，之后加载图像</span></span><br><span class="line">cv2.namedWindow(<span class="string">"窗口"</span>, cv2.WINDOW_NORMAL)</span><br><span class="line">cv2.imshow(<span class="string">"窗口"</span>, image_gray)</span><br><span class="line">cv2.waitKey(<span class="number">0</span>)</span><br><span class="line">cv2.destroyWindow(<span class="string">"窗口"</span>)</span><br></pre></td></tr></table></figure>
+<h3 id="先创建窗口再读取图像"><a href="#先创建窗口再读取图像" class="headerlink" title="先创建窗口再读取图像"></a>先创建窗口再读取图像</h3><blockquote>
+<p>一 种 特 殊 的 情 况 是， 你 也 可 以 先 创 建 一 个 窗 口， 之 后 再 加 载 图 像。 这 种 情 况 下，你 可 以 决 定 窗 口 是 否 可 以 调 整 大 小。 使 用 到 的 函 数 是 cv2.namedWindow()。 初 始 设 定 函 数标 签 是 cv2.WINDOW_AUTOSIZE。 但 是 如 果 你 把 标 签 改 成 cv2.WINDOW_NORMAL， 你就可以调整窗口大小了。<br>当图像维度太大， 或者要添加轨迹条时，调整窗口大小将会很有用</p>
+</blockquote>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">"""</span></span><br><span class="line"><span class="string">@File : 显示图像情形2.py</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">@Author: sivan Wu</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">@Date : 2020/1/11 10:44 上午</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">@Desc : 显示图像.py中我们首先读取图像之后才将创建窗口将图像送进去，现在我们可以先创建窗口，再将读取的图像送入</span></span><br><span class="line"><span class="string">"""</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> cv2</span><br><span class="line"></span><br><span class="line">IMAGE_PATH = <span class="string">"../data/timg.jpeg"</span></span><br><span class="line">image_gray = cv2.imread(IMAGE_PATH, cv2.IMREAD_GRAYSCALE)  <span class="comment"># cv2.IMREAD_GRAYSCALE = 0</span></span><br><span class="line">cv2.namedWindow(<span class="string">"win_name"</span>, cv2.WINDOW_AUTOSIZE)</span><br><span class="line">cv2.imshow(<span class="string">"win_name"</span>, image_gray)</span><br><span class="line">cv2.waitKey(<span class="number">0</span>)</span><br><span class="line">cv2.destroyWindow(<span class="string">"win_name"</span>)</span><br></pre></td></tr></table></figure>
+<h2 id="补充：使用matplotlib绘图"><a href="#补充：使用matplotlib绘图" class="headerlink" title="补充：使用matplotlib绘图"></a>补充：使用matplotlib绘图</h2><p><strong>注意：彩色图像使用 OpenCV 加载时是 BGR 模式。但是 Matplotib 是 RGB 模式。所以彩色图像如果已经被 OpenCV 读取，那它将不会被 Matplotib 正确显示</strong></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="string">"""</span></span><br><span class="line"><span class="string">@File : matplotlib绘图.py</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">@Author: sivan Wu</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">@Date : 2020/1/11 11:07 上午</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">@Desc :</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">"""</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> matplotlib.pyplot <span class="keyword">as</span> plt</span><br><span class="line"><span class="keyword">import</span> cv2</span><br><span class="line"></span><br><span class="line">IMAGE_PATH = <span class="string">"../data/timg.jpeg"</span></span><br><span class="line">image = cv2.imread(IMAGE_PATH, cv2.IMREAD_COLOR)</span><br><span class="line">plt.imshow(image, cmap=<span class="string">'gray'</span>, interpolation=<span class="string">'bicubic'</span>)</span><br><span class="line">plt.xticks([])</span><br><span class="line">plt.yticks([])</span><br><span class="line">plt.show()</span><br></pre></td></tr></table></figure>
+<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>例子：加载一个灰度图，显示图片，按下’s’键保存后退出，或者 按下 ESC 键退出不保存\</p>
+<p><strong>如果你用的是 64 位系统，你需要将 k = cv2.waitKey(0) 这行改成 k = cv2.waitKey(0)&amp;0xFF</strong></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">"""</span></span><br><span class="line"><span class="string">@File : 总结一下.py</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">@Author: sivan Wu</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">@Date : 2020/1/11 11:00 上午</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">@Desc : 加载一个灰度图，显示图片，按下’s’键保存后退出，或者 按下 ESC 键退出不保存</span></span><br><span class="line"><span class="string">        如果你用的是 64 位系统，你需要将 k = cv2.waitKey(0) 这行改成 k = cv2.waitKey(0)&amp;0xFF</span></span><br><span class="line"><span class="string">"""</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> cv2</span><br><span class="line"></span><br><span class="line">IMAGE_PATH = <span class="string">"../data/timg.jpeg"</span></span><br><span class="line">image = cv2.imread(IMAGE_PATH, cv2.IMREAD_GRAYSCALE)</span><br><span class="line">cv2.imshow(<span class="string">"gray_image"</span>, image)</span><br><span class="line">key = cv2.waitKey(<span class="number">0</span>) &amp; <span class="number">0xFF</span>  <span class="comment"># 必选先点开图之后再按键盘</span></span><br><span class="line">print(type(key))  <span class="comment"># &lt;class 'int'&gt;</span></span><br><span class="line">print(key)  <span class="comment"># 119</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> key == ord(<span class="string">'s'</span>):</span><br><span class="line">    cv2.imwrite(<span class="string">"保存的图像.png"</span>, image)</span><br><span class="line">    cv2.destroyWindow(<span class="string">"gray_image"</span>)</span><br><span class="line"><span class="keyword">else</span>:</span><br><span class="line">    cv2.destroyWindow(<span class="string">"gray_image"</span>)</span><br></pre></td></tr></table></figure>
+<h3 id="使用opencv读取图像后用matplotlib进行显示"><a href="#使用opencv读取图像后用matplotlib进行显示" class="headerlink" title="使用opencv读取图像后用matplotlib进行显示"></a>使用opencv读取图像后用matplotlib进行显示</h3><p><strong>注意：彩色图像使用 OpenCV 加载时是 BGR 模式。但是 Matplotib 是 RGB 模式。所以彩色图像如果已经被 OpenCV 读取，那它将不会被 Matplotib 正确显示</strong></p>
+<p><strong>关键：将BGR转换为RGB</strong></p>
+<p>解释：img[:,:,::-1]中括号中有两个逗号，四个冒号</p>
+<p>[：，：，：：-1]</p>
+<p>第一个冒号——取遍图像的所有行数</p>
+<p>第二个冒号——取遍图像的所有列数</p>
+<p>第三个和第四个冒号——取遍图像的所有通道数，-1是反向取值</p>
+<p>所以，如果一幅300*100的彩色图像，</p>
+<p>执行img[：，：，：：-1]后行列不变，通道数方向，由R、G、B更改为B、G、R，即第二轴反向</p>
+<p>若是执行img[1：4，5：10，1：3：-1]后，第1行到第3行，第5列到第9列，第1通道到第2通道上的数据反向，即——第1行到第3行，第5列到第9列由R、G、B更改为R、B、G</p>
+<blockquote>
+<p>第一种方法：</p>
+</blockquote>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">"""</span></span><br><span class="line"><span class="string">@File : 练习.py</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">@Author: sivan Wu</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">@Date : 2020/1/11 11:26 上午</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">@Desc : 当你用 OpenCV 加载一个彩色图像，并用 Matplotib 显示它时会遇 到一些困难。请阅读this discussion并且尝试理解它</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">"""</span></span><br><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> cv2</span><br><span class="line"></span><br><span class="line">IMAGE_PATH = <span class="string">"../data/timg.jpeg"</span></span><br><span class="line">image = cv2.imread(IMAGE_PATH, cv2.IMREAD_COLOR)</span><br><span class="line">img2 = image[:,:,::<span class="number">-1</span>]</span><br><span class="line"><span class="keyword">import</span> matplotlib.pyplot <span class="keyword">as</span> plt</span><br><span class="line">plt.imshow(img2)</span><br><span class="line">plt.show()</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>第二种方法：使用cvtcolor()函数</p>
+</blockquote>
+<p>功能说明：<strong>cvtcolor()函数是一个颜色空间转换函数，可以实现RGB颜色向HSV，HSI等颜色空间转换。也可以转换为灰度图。</strong></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> cv2</span><br><span class="line"></span><br><span class="line">IMAGE_PATH = <span class="string">"../data/timg.jpeg"</span></span><br><span class="line">image = cv2.imread(IMAGE_PATH, cv2.IMREAD_COLOR)</span><br><span class="line">img2 = image[:,:,::<span class="number">-1</span>]</span><br><span class="line"><span class="keyword">import</span> matplotlib.pyplot <span class="keyword">as</span> plt</span><br><span class="line">image = cv2.cvtColor(image, cv2.COLOR_BGR2RGB)</span><br><span class="line">plt.imshow(image)</span><br><span class="line">plt.show()</span><br></pre></td></tr></table></figure>
+]]></content>
+      
+        <categories>
+            
+            <category> OpenCV </category>
+            
+        </categories>
+        
+        
+        <tags>
+            
+            <tag> Python </tag>
+            
+            <tag> OpenCV </tag>
+            
+        </tags>
+        
+    </entry>
+    
+    <entry>
       <title><![CDATA[网速慢如何安装Python包]]></title>
       <url>/2019/12/17/%E7%BD%91%E9%80%9F%E6%85%A2%E5%A6%82%E4%BD%95%E5%AE%89%E8%A3%85Python%E5%8C%85/</url>
       <content type="html"><![CDATA[<h2 id="技巧"><a href="#技巧" class="headerlink" title="技巧"></a>技巧</h2><p>使用pip命令安装的时候设置超时选项, e.g.<br><strong> pip –default-timeout=100 install -U XXXX </strong></p>
@@ -1248,7 +1396,7 @@
     </entry>
     
     <entry>
-      <title><![CDATA[OpenCV+TensorFlow 入门人工智能图像处理[1]]]></title>
+      <title><![CDATA[OpenCV--预热]]></title>
       <url>/2019/05/09/OpenCV-TensorFlow-%E5%85%A5%E9%97%A8%E4%BA%BA%E5%B7%A5%E6%99%BA%E8%83%BD%E5%9B%BE%E5%83%8F%E5%A4%84%E7%90%86-1/</url>
       <content type="html"><![CDATA[<h2 id="opencv"><a href="#opencv" class="headerlink" title="opencv"></a>opencv</h2><h3 id="opencv的导入"><a href="#opencv的导入" class="headerlink" title="opencv的导入"></a>opencv的导入</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> cv2</span><br></pre></td></tr></table></figure>
 <h3 id="读取图像数据"><a href="#读取图像数据" class="headerlink" title="读取图像数据"></a>读取图像数据</h3><p>imread()方法对图片进行数据的读取</p>
@@ -6355,77 +6503,6 @@ at java.net.SocketInputStream.read(SocketInputStream.java:129)
     
     <entry>
       <title><![CDATA[版本管理工具-Git篇[1]]]></title>
-      <url>/2017/01/15/%E7%89%88%E6%9C%AC%E7%AE%A1%E7%90%86%E5%B7%A5%E5%85%B7-Git%E7%AF%87%5B1%5D/</url>
-      <content type="html"><![CDATA[<h2 id="版本管理工具的介绍"><a href="#版本管理工具的介绍" class="headerlink" title="版本管理工具的介绍"></a>版本管理工具的介绍</h2><p>作用：备份文件，与U盘等备份文件相比，可以随时随地，项目中经常使用。</p>
-<h3 id="版本管理工具可以记录历史"><a href="#版本管理工具可以记录历史" class="headerlink" title="版本管理工具可以记录历史"></a>版本管理工具可以记录历史</h3><p>网盘 u盘 保存了文件的最新状态，而不会记录修改的历史纪录，而版本管理工具对每次的修改都会进行备份，并且保留了时间和修改人，可以让我们回溯，如果不小心删除版本管理工具中的备份时，我们可以通过历史纪录对其进行找回，因此使用版本管理工具无需担心，而且使用版本管理工具，可以多端共享，例如我们经常所说的云盘，而且只要提交一次，我们就可以在任何地方通过版本管理工具对提交的代码进行下载。尤其对于，一些经常需要分开工作的工作人员比较实用</p>
-<a id="more"></a>
-<h3 id="历史"><a href="#历史" class="headerlink" title="历史"></a>历史</h3><figure class="image-box">
-                <img src="http://on3w7gc9m.bkt.clouddn.com/psb.png" alt="这里写图片描述" title class>
-                <p>这里写图片描述</p>
-            </figure>
-<ol>
-<li><p>CVS： 版本管理工具始祖，也是被第一个大规模使用的版本管理工具。由荷兰一所大学教授所开发，由于当时三个人分开工作，为了便于一起协调，创建了CVS。集中式的工具，放到中心服务器上，需要联网</p>
-</li>
-<li><p>SVN： 2000年诞生，也是集中式的工具</p>
-</li>
-<li><p>git： 2005年诞生，Geek社区主流工具，分布式工具！</p>
-</li>
-<li><p>Github： 程序员社区，托管代码基于Git操作。大牛多在这里！！！</p>
-</li>
-</ol>
-<h3 id="集中式-与-分布式-区别"><a href="#集中式-与-分布式-区别" class="headerlink" title="集中式 与 分布式 区别"></a>集中式 与 分布式 区别</h3><ol>
-<li>集中式需要放到中心服务器上，并且操作需要联网，不方便</li>
-<li>分布式则是只要有版本库，就可以在不联网的前提下，快速完成文件提交，记录查看，以及删除等操作，效率高！</li>
-</ol>
-<hr>
-<h2 id="初探Git"><a href="#初探Git" class="headerlink" title="初探Git"></a>初探Git</h2><h3 id="Git-下载-与-安装"><a href="#Git-下载-与-安装" class="headerlink" title="Git 下载 与 安装"></a>Git 下载 与 安装</h3><h4 id="Linux下的安装"><a href="#Linux下的安装" class="headerlink" title="Linux下的安装"></a>Linux下的安装</h4><blockquote>
-<p>打开终端 执行 yum install git 然后键入 yes 等待既可以安装完成 Git</p>
-</blockquote>
-<h2 id="入门Github"><a href="#入门Github" class="headerlink" title="入门Github"></a>入门Github</h2><blockquote>
-<p>GitHub由于下载比较难，推荐离线安装包安装</p>
-</blockquote>
-<h3 id="Linux下检出项目到本地"><a href="#Linux下检出项目到本地" class="headerlink" title="Linux下检出项目到本地"></a>Linux下检出项目到本地</h3><blockquote>
-<p>使用 git clone Github上的仓库地址</p>
-<ol>
-<li>首先创建一个 目录，用来存放 我们检出的项目，使用命令 mkdir Test</li>
-<li>接下来，进入到Test目录，然后 git clone Github上的仓库地址，就可以了</li>
-</ol>
-</blockquote>
-<h3 id="Linux下提交项目"><a href="#Linux下提交项目" class="headerlink" title="Linux下提交项目"></a>Linux下提交项目</h3><blockquote>
-<p>再修改之后，只停留到了本地，没有交到Github维护，因此我们需要同步到Github</p>
-</blockquote>
-<ol>
-<li>首先使用 git status 查看工作区的状态</li>
-<li>对于未跟踪的文件，使用git add 文件名（不包括文件类型），进行跟踪</li>
-<li>然后键入 git commit 命令，并对修改进行描述，这里提交的是提交到了本地的仓库，并没有提交给Github维护</li>
-<li>键入git push，输入Github账户和密码，然后成功提交给Github进行维护</li>
-</ol>
-<h3 id="Windows下检出并提交项目"><a href="#Windows下检出并提交项目" class="headerlink" title="Windows下检出并提交项目"></a>Windows下检出并提交项目</h3><ol>
-<li>首先进入GitHub官方主页，并进入项目所对应的仓库主页，然后点击 open in desktop，选择本地的一个目录，此时检出完成，只需要我们对其进行修改</li>
-<li>修改之后，首先要做的提交修改的东东，并对修改的东西进行一个修改说明</li>
-<li>之后进行同步就可以了</li>
-</ol>
-]]></content>
-      
-        <categories>
-            
-            <category> Tools </category>
-            
-        </categories>
-        
-        
-        <tags>
-            
-            <tag> Tools </tag>
-            
-            <tag> Git </tag>
-            
-        </tags>
-        
-    </entry>
-    
-    <entry>
-      <title><![CDATA[版本管理工具-Git篇[1]]]></title>
       <url>/2017/01/15/%E7%89%88%E6%9C%AC%E7%AE%A1%E7%90%86%E5%B7%A5%E5%85%B7-Git%E7%AF%87/</url>
       <content type="html"><![CDATA[<h2 id="版本管理工具的介绍"><a href="#版本管理工具的介绍" class="headerlink" title="版本管理工具的介绍"></a>版本管理工具的介绍</h2><p>作用：备份文件，与U盘等备份文件相比，可以随时随地，项目中经常使用。</p>
 <h3 id="版本管理工具可以记录历史"><a href="#版本管理工具可以记录历史" class="headerlink" title="版本管理工具可以记录历史"></a>版本管理工具可以记录历史</h3><p>网盘 u盘 保存了文件的最新状态，而不会记录修改的历史纪录，而版本管理工具对每次的修改都会进行备份，并且保留了时间和修改人，可以让我们回溯，如果不小心删除版本管理工具中的备份时，我们可以通过历史纪录对其进行找回，因此使用版本管理工具无需担心，而且使用版本管理工具，可以多端共享，例如我们经常所说的云盘，而且只要提交一次，我们就可以在任何地方通过版本管理工具对提交的代码进行下载。尤其对于，一些经常需要分开工作的工作人员比较实用</p>
@@ -6490,6 +6567,77 @@ at java.net.SocketInputStream.read(SocketInputStream.java:129)
             <tag> GitHub </tag>
             
             <tag> 版本管理工具 </tag>
+            
+        </tags>
+        
+    </entry>
+    
+    <entry>
+      <title><![CDATA[版本管理工具-Git篇[1]]]></title>
+      <url>/2017/01/15/%E7%89%88%E6%9C%AC%E7%AE%A1%E7%90%86%E5%B7%A5%E5%85%B7-Git%E7%AF%87%5B1%5D/</url>
+      <content type="html"><![CDATA[<h2 id="版本管理工具的介绍"><a href="#版本管理工具的介绍" class="headerlink" title="版本管理工具的介绍"></a>版本管理工具的介绍</h2><p>作用：备份文件，与U盘等备份文件相比，可以随时随地，项目中经常使用。</p>
+<h3 id="版本管理工具可以记录历史"><a href="#版本管理工具可以记录历史" class="headerlink" title="版本管理工具可以记录历史"></a>版本管理工具可以记录历史</h3><p>网盘 u盘 保存了文件的最新状态，而不会记录修改的历史纪录，而版本管理工具对每次的修改都会进行备份，并且保留了时间和修改人，可以让我们回溯，如果不小心删除版本管理工具中的备份时，我们可以通过历史纪录对其进行找回，因此使用版本管理工具无需担心，而且使用版本管理工具，可以多端共享，例如我们经常所说的云盘，而且只要提交一次，我们就可以在任何地方通过版本管理工具对提交的代码进行下载。尤其对于，一些经常需要分开工作的工作人员比较实用</p>
+<a id="more"></a>
+<h3 id="历史"><a href="#历史" class="headerlink" title="历史"></a>历史</h3><figure class="image-box">
+                <img src="http://on3w7gc9m.bkt.clouddn.com/psb.png" alt="这里写图片描述" title class>
+                <p>这里写图片描述</p>
+            </figure>
+<ol>
+<li><p>CVS： 版本管理工具始祖，也是被第一个大规模使用的版本管理工具。由荷兰一所大学教授所开发，由于当时三个人分开工作，为了便于一起协调，创建了CVS。集中式的工具，放到中心服务器上，需要联网</p>
+</li>
+<li><p>SVN： 2000年诞生，也是集中式的工具</p>
+</li>
+<li><p>git： 2005年诞生，Geek社区主流工具，分布式工具！</p>
+</li>
+<li><p>Github： 程序员社区，托管代码基于Git操作。大牛多在这里！！！</p>
+</li>
+</ol>
+<h3 id="集中式-与-分布式-区别"><a href="#集中式-与-分布式-区别" class="headerlink" title="集中式 与 分布式 区别"></a>集中式 与 分布式 区别</h3><ol>
+<li>集中式需要放到中心服务器上，并且操作需要联网，不方便</li>
+<li>分布式则是只要有版本库，就可以在不联网的前提下，快速完成文件提交，记录查看，以及删除等操作，效率高！</li>
+</ol>
+<hr>
+<h2 id="初探Git"><a href="#初探Git" class="headerlink" title="初探Git"></a>初探Git</h2><h3 id="Git-下载-与-安装"><a href="#Git-下载-与-安装" class="headerlink" title="Git 下载 与 安装"></a>Git 下载 与 安装</h3><h4 id="Linux下的安装"><a href="#Linux下的安装" class="headerlink" title="Linux下的安装"></a>Linux下的安装</h4><blockquote>
+<p>打开终端 执行 yum install git 然后键入 yes 等待既可以安装完成 Git</p>
+</blockquote>
+<h2 id="入门Github"><a href="#入门Github" class="headerlink" title="入门Github"></a>入门Github</h2><blockquote>
+<p>GitHub由于下载比较难，推荐离线安装包安装</p>
+</blockquote>
+<h3 id="Linux下检出项目到本地"><a href="#Linux下检出项目到本地" class="headerlink" title="Linux下检出项目到本地"></a>Linux下检出项目到本地</h3><blockquote>
+<p>使用 git clone Github上的仓库地址</p>
+<ol>
+<li>首先创建一个 目录，用来存放 我们检出的项目，使用命令 mkdir Test</li>
+<li>接下来，进入到Test目录，然后 git clone Github上的仓库地址，就可以了</li>
+</ol>
+</blockquote>
+<h3 id="Linux下提交项目"><a href="#Linux下提交项目" class="headerlink" title="Linux下提交项目"></a>Linux下提交项目</h3><blockquote>
+<p>再修改之后，只停留到了本地，没有交到Github维护，因此我们需要同步到Github</p>
+</blockquote>
+<ol>
+<li>首先使用 git status 查看工作区的状态</li>
+<li>对于未跟踪的文件，使用git add 文件名（不包括文件类型），进行跟踪</li>
+<li>然后键入 git commit 命令，并对修改进行描述，这里提交的是提交到了本地的仓库，并没有提交给Github维护</li>
+<li>键入git push，输入Github账户和密码，然后成功提交给Github进行维护</li>
+</ol>
+<h3 id="Windows下检出并提交项目"><a href="#Windows下检出并提交项目" class="headerlink" title="Windows下检出并提交项目"></a>Windows下检出并提交项目</h3><ol>
+<li>首先进入GitHub官方主页，并进入项目所对应的仓库主页，然后点击 open in desktop，选择本地的一个目录，此时检出完成，只需要我们对其进行修改</li>
+<li>修改之后，首先要做的提交修改的东东，并对修改的东西进行一个修改说明</li>
+<li>之后进行同步就可以了</li>
+</ol>
+]]></content>
+      
+        <categories>
+            
+            <category> Tools </category>
+            
+        </categories>
+        
+        
+        <tags>
+            
+            <tag> Tools </tag>
+            
+            <tag> Git </tag>
             
         </tags>
         

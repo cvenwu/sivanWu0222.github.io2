@@ -252,6 +252,157 @@
         <ul class="post-list">
         
             <li class="post-list-item fade">
+                <article id="post-Spring中使用注解"
+  class="article-card article-type-post" itemprop="blogPost">
+  
+    
+    
+    
+        
+
+
+  
+    <h3 class="post-title re-title" itemprop="name">
+      <a class="post-title-link" href="/2017/10/26/Spring中使用注解/">Spring中使用注解</a>
+    </h3>
+  
+
+
+
+    
+    <div class="post-meta">
+        <time class="post-time" title="2017-10-26 02:51:29" datetime="2017-10-26T02:51:29.000Z"  itemprop="datePublished">2017-10-26</time>
+
+        
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/框架/">框架</a><ul class="article-category-list-child"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/框架/Spring/">Spring</a></li></ul></li></ul>
+
+
+
+        
+	<span id="/2017/10/26/Spring中使用注解/" class="leancloud_visitors" data-flag-title="Spring中使用注解" title="Spring中使用注解">
+		
+			<i class="icon icon-eye"></i>
+		
+		<span class="leancloud-visitors-count"></span>
+	</span>
+ 
+
+        
+
+
+        
+        
+    </div>
+    
+    <div class="post-content" id="post-content" itemprop="postContent">
+    
+    
+        <h2 id="使用注解进行实例Bean"><a href="#使用注解进行实例Bean" class="headerlink" title="使用注解进行实例Bean"></a>使用注解进行实例Bean</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> org.springframework.stereotype.Component;</span><br><span class="line"></span><br><span class="line"><span class="meta">@Component</span>(value=<span class="string">"user1"</span>)</span><br><span class="line"><span class="comment">/*类似于&lt;bean id="user1" class="com.pojo.User"&gt;&lt;/bean&gt;*/</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">User</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">add</span><span class="params">()</span> </span>&#123;</span><br><span class="line">		System.out.println(<span class="string">"user----------add--------"</span>);</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="测试"><a href="#测试" class="headerlink" title="测试"></a>测试</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> org.springframework.context.support.ClassPathXmlApplicationContext;</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * 使用注解进行装载Bean</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@author</span> SiVan</span></span><br><span class="line"><span class="comment"> *</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Test</span> </span>&#123;</span><br><span class="line">	<span class="meta">@org</span>.junit.Test</span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">add</span><span class="params">()</span> </span>&#123;</span><br><span class="line">		ApplicationContext context = <span class="keyword">new</span> ClassPathXmlApplicationContext(<span class="string">"bean1.xml"</span>);</span><br><span class="line">		User user = (User)context.getBean(<span class="string">"user1"</span>);</span><br><span class="line">		System.out.println(user);</span><br><span class="line">		user.add();</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<hr>
+<h2 id="使用注解创建单实例-多实例"><a href="#使用注解创建单实例-多实例" class="headerlink" title="使用注解创建单实例/多实例"></a>使用注解创建单实例/多实例</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> org.springframework.context.annotation.Scope;</span><br><span class="line"><span class="keyword">import</span> org.springframework.stereotype.Component;</span><br><span class="line"></span><br><span class="line"><span class="meta">@Component</span>(value=<span class="string">"user1"</span>)</span><br><span class="line"><span class="meta">@Scope</span>(value=<span class="string">"prototype"</span>)     <span class="comment">/*指令多实例*/</span></span><br><span class="line"><span class="comment">/*指定单实例 @Scope(value="singleton")*/</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">User</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">add</span><span class="params">()</span> </span>&#123;</span><br><span class="line">		System.out.println(<span class="string">"user----------add--------"</span>);</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<hr>
+<h2 id="注意事项"><a href="#注意事项" class="headerlink" title="注意事项"></a>注意事项</h2><h3 id="NoSuchBeanDefinitionException"><a href="#NoSuchBeanDefinitionException" class="headerlink" title="NoSuchBeanDefinitionException"></a>NoSuchBeanDefinitionException</h3><blockquote>
+<p>由于配置文件的包名路径没有写对，所以没有搜索到，确保配置文件类的路径正确</p>
+</blockquote>
+    
+    <a href="/2017/10/26/Spring中使用注解/" class="post-more waves-effect waves-button">
+        more
+    </a>
+    </div>
+</article>
+
+<div class="post-footer">
+    
+	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Java/">Java</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Spring/">Spring</a></li></ul>
+
+</div>
+
+
+            </li>
+        
+            <li class="post-list-item fade">
+                <article id="post-一种优雅的策略-递归"
+  class="article-card article-type-post" itemprop="blogPost">
+  
+    
+    
+    
+        
+
+
+  
+    <h3 class="post-title re-title" itemprop="name">
+      <a class="post-title-link" href="/2017/10/22/一种优雅的策略-递归/">一种优雅的策略---递归</a>
+    </h3>
+  
+
+
+
+    
+    <div class="post-meta">
+        <time class="post-time" title="2017-10-22 04:11:50" datetime="2017-10-22T04:11:50.000Z"  itemprop="datePublished">2017-10-22</time>
+
+        
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/Algorithm/">Algorithm</a><ul class="article-category-list-child"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/Algorithm/策略/">策略</a></li></ul></li></ul>
+
+
+
+        
+	<span id="/2017/10/22/一种优雅的策略-递归/" class="leancloud_visitors" data-flag-title="一种优雅的策略---递归" title="一种优雅的策略---递归">
+		
+			<i class="icon icon-eye"></i>
+		
+		<span class="leancloud-visitors-count"></span>
+	</span>
+ 
+
+        
+
+
+        
+        
+    </div>
+    
+    <div class="post-content" id="post-content" itemprop="postContent">
+    
+    
+        <h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><blockquote>
+<p>现在写这篇文章主要记录自己使用递归的经过</p>
+</blockquote>
+<p>说到递归，不得不说起自己大一刚刚开学接触c语言，第1个问题便是一个求阶乘的题目，最终采用了递归策略，记得自己当时测试的时候，足足用了1分钟，最后才发现是一个死循环，从那时开始便开始躲避递归，就怕来个死循环<del>~</del>唧唧！</p>
+<blockquote>
+<p>说实话，在我今天写这个技术博客记录自己递归的使用历程的时候，不得不说自己 真的是 从 厌恶递归 –&gt; 接受递归 –&gt; 欣赏递归</p>
+</blockquote>
+<hr>
+<h2 id="递归的使用"><a href="#递归的使用" class="headerlink" title="递归的使用"></a>递归的使用</h2><blockquote>
+<p>说到递归的使用，二话不说先来一个例子，自己之前看到一本书上，例子如下</p>
+</blockquote>
+<p>当我们打开祖母留给我们的箱子的时候，发现里面依然有一个箱子，然而我们要找的仅仅是一把钥匙，所以每次都会打开一个箱子，直到打开箱子发现钥匙为止！(流程描述如下)</p>
+<p><img src="http://on3w7gc9m.bkt.clouddn.com/00.png"></p   class="index-item-img">
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">FindKey</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">	<span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">final</span> <span class="keyword">int</span> BOX_KEY = <span class="number">1</span>;</span><br><span class="line">	<span class="comment">/**</span></span><br><span class="line"><span class="comment">	 *</span></span><br><span class="line"><span class="comment">	 * <span class="doctag">@param</span> box 一个宝箱</span></span><br><span class="line"><span class="comment">	 */</span></span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">find</span><span class="params">(Box box)</span> </span>&#123;</span><br><span class="line">		<span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; box.listBoxes; i++) &#123;</span><br><span class="line">			<span class="keyword">if</span>(box[i] == BOX_KEY) &#123;</span><br><span class="line">				System.out.println(<span class="string">"The key is found"</span>);</span><br><span class="line">        <span class="keyword">return</span>;</span><br><span class="line">			&#125;<span class="keyword">else</span> &#123;</span><br><span class="line">				find(box[i]); <span class="comment">/* 递归 */</span></span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p><strong> 记得之前看过Stack Overflow上的一句话：使用循环 程序性能可能更高，使用递归，程序可能更容易理解</strong></p>
+</blockquote>
+<hr>
+<h2 id="递归中的条件"><a href="#递归中的条件" class="headerlink" title="递归中的条件"></a>递归中的条件</h2><p>正如大家都知道，递归都是自己调用自己，如果我们在编写程序的时候，没有进行判断，程序将会出现死循环，这个错误对我们来说是非常严重的，因此我们对递归是否继续进行判断。</p>
+    
+    <a href="/2017/10/22/一种优雅的策略-递归/" class="post-more waves-effect waves-button">
+        more
+    </a>
+    </div>
+</article>
+
+<div class="post-footer">
+    
+	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Algorithm/">Algorithm</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Java/">Java</a></li></ul>
+
+</div>
+
+
+            </li>
+        
+            <li class="post-list-item fade">
                 <article id="post-记录一次SSH整合的过程"
   class="article-card article-type-post" itemprop="blogPost">
   
@@ -911,151 +1062,6 @@
 
             </li>
         
-            <li class="post-list-item fade">
-                <article id="post-Algorithm-冒泡排序"
-  class="article-card article-type-post" itemprop="blogPost">
-  
-    
-    
-    
-        
-
-
-  
-    <h3 class="post-title re-title" itemprop="name">
-      <a class="post-title-link" href="/2017/05/22/Algorithm-冒泡排序/">Algorithm-冒泡排序</a>
-    </h3>
-  
-
-
-
-    
-    <div class="post-meta">
-        <time class="post-time" title="2017-05-22 12:36:47" datetime="2017-05-22T12:36:47.000Z"  itemprop="datePublished">2017-05-22</time>
-
-        
-	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/Algorithm/">Algorithm</a><ul class="article-category-list-child"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/Algorithm/BubbleSort/">BubbleSort</a></li></ul></li></ul>
-
-
-
-        
-	<span id="/2017/05/22/Algorithm-冒泡排序/" class="leancloud_visitors" data-flag-title="Algorithm-冒泡排序" title="Algorithm-冒泡排序">
-		
-			<i class="icon icon-eye"></i>
-		
-		<span class="leancloud-visitors-count"></span>
-	</span>
- 
-
-        
-
-
-        
-        
-    </div>
-    
-    <div class="post-content" id="post-content" itemprop="postContent">
-    
-    
-        <h1 id="冒泡排序"><a href="#冒泡排序" class="headerlink" title="冒泡排序"></a>冒泡排序</h1><blockquote>
-<p>这里假定冒泡排序是整形数组，并且以升序排列</p>
-</blockquote>
-<ol>
-<li><p>冒牌排序需要我们遍历几次数组，每次遍历中，需要比较相邻的两个元素，如果按降序排列，则互换，否则保持不变！由于较小的值像“气泡”一样逐渐浮向顶部，而较大的值沉向底部，所以称为冒泡排序或者下沉排序。</p>
-</li>
-<li><p>特征：假设一共有n个元素，第m次遍历之后，最后的m个元素顺序已经确定</p>
-</li>
-<li>时间复杂度：最大为o(n*n)，最小为o(1)</li>
-</ol>
-<hr>
-<h2 id="初始的冒泡排序："><a href="#初始的冒泡排序：" class="headerlink" title="初始的冒泡排序："></a>初始的冒泡排序：</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment">	 * 初级别的冒泡排序</span></span><br><span class="line"><span class="comment">	 * <span class="doctag">@param</span> nums</span></span><br><span class="line"><span class="comment">	 * <span class="doctag">@return</span> 排序后的数组</span></span><br><span class="line"><span class="comment">	 */</span></span><br><span class="line">	<span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">int</span>[] toBubbleSort0(<span class="keyword">int</span>[] nums)&#123;</span><br><span class="line">		<span class="keyword">int</span> count = <span class="number">0</span>;</span><br><span class="line">		<span class="keyword">int</span> sum = <span class="number">0</span>;</span><br><span class="line">		<span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">1</span>; i &lt; nums.length - <span class="number">1</span>; i++)&#123;</span><br><span class="line">			<span class="keyword">for</span> (<span class="keyword">int</span> j = <span class="number">0</span>; j &lt; nums.length - i; j++)&#123;</span><br><span class="line">				sum++;</span><br><span class="line">				<span class="keyword">if</span>(nums[j] &gt; nums[j+<span class="number">1</span>])&#123;</span><br><span class="line">					count++;</span><br><span class="line">					<span class="keyword">int</span> temp = nums[j];</span><br><span class="line">					nums[j] = nums[j+<span class="number">1</span>];</span><br><span class="line">					nums[j+<span class="number">1</span>] = temp;</span><br><span class="line">				&#125;</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line">		System.out.println(count);</span><br><span class="line">		System.out.println(sum);</span><br><span class="line">		<span class="keyword">return</span> nums;</span><br><span class="line">	&#125;</span><br></pre></td></tr></table></figure>
-    
-    <a href="/2017/05/22/Algorithm-冒泡排序/" class="post-more waves-effect waves-button">
-        more
-    </a>
-    </div>
-</article>
-
-<div class="post-footer">
-    
-	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Algorithm/">Algorithm</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Java/">Java</a></li></ul>
-
-</div>
-
-
-            </li>
-        
-            <li class="post-list-item fade">
-                <article id="post-减少HTML网页图片资源请求次数"
-  class="article-card article-type-post" itemprop="blogPost">
-  
-    
-    
-    
-        
-
-
-  
-    <h3 class="post-title re-title" itemprop="name">
-      <a class="post-title-link" href="/2017/05/22/减少HTML网页图片资源请求次数/">减少HTML网页图片资源请求次数</a>
-    </h3>
-  
-
-
-
-    
-    <div class="post-meta">
-        <time class="post-time" title="2017-05-22 11:25:04" datetime="2017-05-22T11:25:04.000Z"  itemprop="datePublished">2017-05-22</time>
-
-        
-	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/HTML-CSS/">HTML/CSS</a><ul class="article-category-list-child"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/HTML-CSS/优化/">优化</a></li></ul></li></ul>
-
-
-
-        
-	<span id="/2017/05/22/减少HTML网页图片资源请求次数/" class="leancloud_visitors" data-flag-title="减少HTML网页图片资源请求次数" title="减少HTML网页图片资源请求次数">
-		
-			<i class="icon icon-eye"></i>
-		
-		<span class="leancloud-visitors-count"></span>
-	</span>
- 
-
-        
-
-
-        
-        
-    </div>
-    
-    <div class="post-content" id="post-content" itemprop="postContent">
-    
-    
-        <blockquote>
-<p>最近学习前端，老师讲过一个问题，虽然<a href="http://www.qq.com" target="_blank" rel="noopener">QQ</a>网页很好看，但是加载时间过长，因为将每一张图片都分离开来，一张图片对应用户的一次请求，所以我们一般讲网站用的图标都集中到一张图上，然后通过移动图片位置和确定图片大小来锁定我们要的图片，会让我们网页的次数减少一个很大的层次，算是一个经验！！！</p>
-</blockquote>
-<h2 id="优点："><a href="#优点：" class="headerlink" title="优点："></a>优点：</h2><ol>
-<li>这里放了两张图，其中第一张是网页所用到的图片，都集中到一张图片上了，第二张我们要实现的效果图片，不用专门对图片进行裁剪</li>
-<li>这里我们只对图片请求了一次，不需要对图标分别请求，优化了网页</li>
-</ol>
-<h2 id="缺点："><a href="#缺点：" class="headerlink" title="缺点："></a>缺点：</h2><ol>
-<li>需要手动定位到我们需要的图标，可能遇到图标对的不齐的问题
-    
-    <a href="/2017/05/22/减少HTML网页图片资源请求次数/" class="post-more waves-effect waves-button">
-        more
-    </a>
-    </div>
-</article>
-
-<div class="post-footer">
-    
-	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/CSS/">CSS</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/HTML/">HTML</a></li></ul>
-
-</div>
-
-
-            </li>
-        
         </ul>
         
 <nav id="page-nav">
@@ -1099,7 +1105,7 @@
     </span>
     
     <span class="blogroll-item">
-        <a href="https://twitter.com/SiVan_Wu" target="_blank">Twitter</a>
+        <a href="https://twitter.com/yirufeng1" target="_blank">Twitter</a>
     </span>
     
 </p>
@@ -1110,7 +1116,7 @@
     <div class="bottom">
         <p>
             <span>
-                逸如风(yirufeng) &copy; 2016 - 2019
+                逸如风(yirufeng) &copy; 2016 - 2020
             </span>
 
            	

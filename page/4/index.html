@@ -252,6 +252,185 @@
         <ul class="post-list">
         
             <li class="post-list-item fade">
+                <article id="post-Python-爬虫篇-1-快速使用urllib爬取网页"
+  class="article-card article-type-post" itemprop="blogPost">
+  
+    
+    
+    <div class="top" data-title="2">
+    <div class="top-wrap">
+        <p></p>
+    </div>
+</div>
+    
+    
+        
+
+
+  
+    <h3 class="post-title re-title" itemprop="name">
+      <a class="post-title-link" href="/2019/04/27/Python-爬虫篇-1-快速使用urllib爬取网页/">[Python 爬虫篇](1)快速使用urllib爬取网页</a>
+    </h3>
+  
+
+
+
+    
+    <div class="post-meta">
+        <time class="post-time" title="2019-04-27 08:47:02" datetime="2019-04-27T08:47:02.000Z"  itemprop="datePublished">2019-04-27</time>
+
+        
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/Python/">Python</a><ul class="article-category-list-child"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/Python/爬虫/">爬虫</a></li></ul></li></ul>
+
+
+
+        
+	<span id="/2019/04/27/Python-爬虫篇-1-快速使用urllib爬取网页/" class="leancloud_visitors" data-flag-title="[Python 爬虫篇](1)快速使用urllib爬取网页" title="[Python 爬虫篇](1)快速使用urllib爬取网页">
+		
+			<i class="icon icon-eye"></i>
+		
+		<span class="leancloud-visitors-count"></span>
+	</span>
+ 
+
+        
+
+
+        
+  <span><i class="icon icon-github"></i></span>
+
+        
+    </div>
+    
+    <div class="post-content" id="post-content" itemprop="postContent">
+    
+    
+        <h3 id="读取内容常见的3种方式"><a href="#读取内容常见的3种方式" class="headerlink" title="读取内容常见的3种方式"></a>读取内容常见的3种方式</h3><blockquote>
+<p>在我们使用urllib打开网页之后，要读取文件的全部内容可以有如下3种方式</p>
+<ol>
+<li>file.read()读取网页全部内容到一个字符串中</li>
+<li>file.readline()读取文件的一行内容</li>
+<li>file.readlines()读取网页内容到一个列表中，<strong>如果要读取网页全部内容，建议使用这种方式</strong></li>
+</ol>
+</blockquote>
+<h3 id="读取网页内容并且保存到本地"><a href="#读取网页内容并且保存到本地" class="headerlink" title="读取网页内容并且保存到本地"></a>读取网页内容并且保存到本地</h3><h4 id="方法一：使用文件进行操作"><a href="#方法一：使用文件进行操作" class="headerlink" title="方法一：使用文件进行操作"></a>方法一：使用文件进行操作</h4><ol>
+<li>首先 爬取一个网页并将爬取到的内容读取出来赋值给一个变量</li>
+<li>以写入的方式打开一个本地文件，命名为.html文件</li>
+<li>将1中的变量中的内容写入到2中的文件</li>
+<li>关闭该文件</li>
+</ol>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> urllib.request</span><br><span class="line">URL = <span class="string">"https://www.baidu.com"</span></span><br><span class="line">data = urllib.request.urlopen(URL).read()</span><br><span class="line"><span class="keyword">with</span> open(<span class="string">'baidu_content.html'</span>, <span class="string">'wb+'</span>) <span class="keyword">as</span> f:</span><br><span class="line">    f.write(data)</span><br></pre></td></tr></table></figure>
+<h4 id="方法二：直接使用urllib-request-urlretrieve-URL-file"><a href="#方法二：直接使用urllib-request-urlretrieve-URL-file" class="headerlink" title="方法二：直接使用urllib.request.urlretrieve(URL, file)"></a>方法二：直接使用urllib.request.urlretrieve(URL, file)</h4><blockquote>
+<p>使用urllib.request.urlretrieve(URL, file) 直接将URL对应的网页内容保存到指定的FILE文件</p>
+</blockquote>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> urllib.request</span><br><span class="line">URL = <span class="string">"http://www.baidu.com"</span></span><br><span class="line">urllib.request.urlretrieve(URL, <span class="string">'1.html'</span>)</span><br></pre></td></tr></table></figure>
+<p><strong>urllib.request.urlretrieve(URL, file)将网页内容保存到本地将会产生缓存，如果希望清除缓存可以采用如下的方式</strong><br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">urllib.request.urlcleanup()</span><br></pre></td></tr></table></figure></p>
+<h3 id="urllib的其他常见用法"><a href="#urllib的其他常见用法" class="headerlink" title="urllib的其他常见用法"></a>urllib的其他常见用法</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="keyword">import</span> urllib.request</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>file = urllib.request.urlopen(<span class="string">"http://www.baidu.com"</span>)</span><br><span class="line"><span class="comment"># 如果希望返回与当前环境有关的信息，可以使用info()返回</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>file.info</span><br><span class="line">&lt;bound method HTTPResponse.info of &lt;http.client.HTTPResponse object at <span class="number">0x7fd8fb0edb00</span>&gt;&gt;</span><br><span class="line"><span class="comment"># 如果希望获取当前爬取网页的状态码，可以使用getcode()</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>file.getcode()</span><br><span class="line"><span class="number">200</span></span><br><span class="line"><span class="comment"># 如果想要获取爬取网页的URL地址，可以使用geturl()实现</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>file.geturl()</span><br><span class="line"><span class="string">'http://www.baidu.com'</span></span><br></pre></td></tr></table></figure>
+<h3 id="URL注意事项"><a href="#URL注意事项" class="headerlink" title="URL注意事项"></a>URL注意事项</h3><p>一般来说，URL标准只允许一部分ASCII字符，因此对于中文以及其他一些字符，将会对其进行URL编码</p>
+<p>如果要进行URL编码可以使用 urllib.request.quote(编码内容) 来进行编码<br>如果要进行URL解码可以使用 urllib.request.unquote(编码内容) 来进行编码</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span>file.geturl()</span><br><span class="line"><span class="string">'http://www.baidu.com'</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>urllib.request.quote(<span class="string">"http://www.baidu.com"</span>)</span><br><span class="line"><span class="string">'http%3A//www.baidu.com'</span></span><br></pre></td></tr></table></figure>
+    
+    <a href="/2019/04/27/Python-爬虫篇-1-快速使用urllib爬取网页/" class="post-more waves-effect waves-button">
+        more
+    </a>
+    </div>
+</article>
+
+<div class="post-footer">
+    
+	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Python/">Python</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/爬虫/">爬虫</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/精通Python网络爬虫、核心技术、框架与项目实战/">精通Python网络爬虫、核心技术、框架与项目实战</a></li></ul>
+
+</div>
+
+
+            </li>
+        
+            <li class="post-list-item fade">
+                <article id="post-Python-爬虫篇-2-爬取网页遇到403错误-模拟浏览器进行爬取"
+  class="article-card article-type-post" itemprop="blogPost">
+  
+    
+    
+    <div class="top" data-title="2">
+    <div class="top-wrap">
+        <p></p>
+    </div>
+</div>
+    
+    
+        
+
+
+  
+    <h3 class="post-title re-title" itemprop="name">
+      <a class="post-title-link" href="/2019/04/27/Python-爬虫篇-2-爬取网页遇到403错误-模拟浏览器进行爬取/">[Python 爬虫篇](2)爬取网页遇到403错误 模拟浏览器进行爬取</a>
+    </h3>
+  
+
+
+
+    
+    <div class="post-meta">
+        <time class="post-time" title="2019-04-27 08:44:40" datetime="2019-04-27T08:44:40.000Z"  itemprop="datePublished">2019-04-27</time>
+
+        
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/Python/">Python</a><ul class="article-category-list-child"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/Python/爬虫/">爬虫</a></li></ul></li></ul>
+
+
+
+        
+	<span id="/2019/04/27/Python-爬虫篇-2-爬取网页遇到403错误-模拟浏览器进行爬取/" class="leancloud_visitors" data-flag-title="[Python 爬虫篇](2)爬取网页遇到403错误 模拟浏览器进行爬取" title="[Python 爬虫篇](2)爬取网页遇到403错误 模拟浏览器进行爬取">
+		
+			<i class="icon icon-eye"></i>
+		
+		<span class="leancloud-visitors-count"></span>
+	</span>
+ 
+
+        
+
+
+        
+  <span><i class="icon icon-github"></i></span>
+
+        
+    </div>
+    
+    <div class="post-content" id="post-content" itemprop="postContent">
+    
+    
+        <blockquote>
+<p>出现403错误，是因为浏览器的这些网页为了防止我们恶意采集数据而进行的反爬虫设置，我们需要修改报头来模拟浏览器</p>
+</blockquote>
+<p>通过在头部设置User-Agent信息来模拟浏览器</p>
+<h2 id="使用build-opener-修改报头"><a href="#使用build-opener-修改报头" class="headerlink" title="使用build_opener()修改报头"></a>使用build_opener()修改报头</h2><p>格式：</p>
+<ol>
+<li>headers = (“User-Agent”, 具体信息)</li>
+<li>opener对象名.addheaders = [头信息]</li>
+</ol>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> urllib.request</span><br><span class="line"></span><br><span class="line"><span class="comment"># url = "http://blog.csdn.com/weiwei_pig/article/details/51178226"</span></span><br><span class="line"><span class="comment"># 定义要爬取的地址</span></span><br><span class="line">url = <span class="string">"http://www.baidu.com"</span></span><br><span class="line">file = urllib.request.urlopen(url).read()</span><br><span class="line">print(file)</span><br><span class="line"><span class="comment"># 定义一个变量存储对应的Users-Agent信息，格式为("User-Agent", 具体信息)</span></span><br><span class="line">headers = (<span class="string">"User-Agent"</span>, <span class="string">"Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/73.0.3683.103 Safari/537.36"</span>)</span><br><span class="line"><span class="comment"># 创建自定义的opener对象并赋值给变量opener</span></span><br><span class="line">opener = urllib.request.build_opener()</span><br><span class="line"><span class="comment"># 设置opener对象的addheaders，即设置对应的头信息</span></span><br><span class="line">opener.addheaders = [headers]</span><br><span class="line"><span class="comment"># 设置好头部信息，就可以使用opener对象的open()方法打开对应的网址</span></span><br><span class="line"><span class="comment"># 此时，将会采用刚才添加的头部信息模拟浏览器打开网站</span></span><br><span class="line">data = opener.open(url).read()</span><br><span class="line">print(data)</span><br></pre></td></tr></table></figure>
+<h2 id="使用add-header-修改报头"><a href="#使用add-header-修改报头" class="headerlink" title="使用add_header()修改报头"></a>使用add_header()修改报头</h2><blockquote>
+<p>可以使用urllib.request.Request下的add_header()方法来修改报头</p>
+</blockquote>
+<p><strong>格式为 req对象.add_header(字段名，字段值)</strong></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> urllib.request</span><br><span class="line"><span class="comment"># 1. 首先设置要爬取的网址</span></span><br><span class="line">url = <span class="string">"http://www.baidu.com"</span></span><br><span class="line"><span class="comment"># 2. urllib.request.Request(url)创建一个Request对象并且赋值给变量req</span></span><br><span class="line">req = urllib.request.Request(url)</span><br><span class="line"><span class="comment"># 3. req对象使用add_header()方法添加对应的报头信息，格式为 req对象.add_header(字段名，字段值)</span></span><br><span class="line">req.add_header(<span class="string">"User-Agent"</span>, <span class="string">"Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/73.0.3683.103 Safari/537.36"</span>)</span><br><span class="line"><span class="comment"># 4. 使用设置好的req对象打开url链接，此时将会打开并读取网页内容赋值给data变量</span></span><br><span class="line">data = urllib.request.urlopen(req).read()</span><br><span class="line">print(data)</span><br></pre></td></tr></table></figure>
+    
+    <a href="/2019/04/27/Python-爬虫篇-2-爬取网页遇到403错误-模拟浏览器进行爬取/" class="post-more waves-effect waves-button">
+        more
+    </a>
+    </div>
+</article>
+
+<div class="post-footer">
+    
+	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Python/">Python</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/爬虫/">爬虫</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/精通Python网络爬虫、核心技术、框架与项目实战/">精通Python网络爬虫、核心技术、框架与项目实战</a></li></ul>
+
+</div>
+
+
+            </li>
+        
+            <li class="post-list-item fade">
                 <article id="post-Ubuntu虚拟机搭建FAISS"
   class="article-card article-type-post" itemprop="blogPost">
   
@@ -868,159 +1047,6 @@
 
             </li>
         
-            <li class="post-list-item fade">
-                <article id="post-转-解析Python中的yield关键字"
-  class="article-card article-type-post" itemprop="blogPost">
-  
-    
-    
-    <div class="top" data-title="2">
-    <div class="top-wrap">
-        <p></p>
-    </div>
-</div>
-    
-    
-        
-
-
-  
-    <h3 class="post-title re-title" itemprop="name">
-      <a class="post-title-link" href="/2019/04/06/转-解析Python中的yield关键字/">[转]解析Python中的yield关键字</a>
-    </h3>
-  
-
-
-
-    
-    <div class="post-meta">
-        <time class="post-time" title="2019-04-06 06:24:58" datetime="2019-04-06T06:24:58.000Z"  itemprop="datePublished">2019-04-06</time>
-
-        
-	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/Python/">Python</a><ul class="article-category-list-child"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/Python/生成器/">生成器</a></li></ul></li></ul>
-
-
-
-        
-	<span id="/2019/04/06/转-解析Python中的yield关键字/" class="leancloud_visitors" data-flag-title="[转]解析Python中的yield关键字" title="[转]解析Python中的yield关键字">
-		
-			<i class="icon icon-eye"></i>
-		
-		<span class="leancloud-visitors-count"></span>
-	</span>
- 
-
-        
-
-
-        
-  <span><i class="icon icon-github"></i></span>
-
-        
-    </div>
-    
-    <div class="post-content" id="post-content" itemprop="postContent">
-    
-    
-        <p><a href="https://blog.csdn.net/mieleizhi0522/article/details/82142856" target="_blank" rel="noopener">参考</a></p>
-    
-    <a href="/2019/04/06/转-解析Python中的yield关键字/" class="post-more waves-effect waves-button">
-        more
-    </a>
-    </div>
-</article>
-
-<div class="post-footer">
-    
-	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Python/">Python</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/生成器/">生成器</a></li></ul>
-
-</div>
-
-
-            </li>
-        
-            <li class="post-list-item fade">
-                <article id="post-研究生复试"
-  class="article-card article-type-post" itemprop="blogPost">
-  
-    
-    
-    <div class="top" data-title="2">
-    <div class="top-wrap">
-        <p></p>
-    </div>
-</div>
-    
-    
-        
-
-
-  
-    <h3 class="post-title re-title" itemprop="name">
-      <a class="post-title-link" href="/2019/03/30/研究生复试/">研究生复试</a>
-    </h3>
-  
-
-
-
-    
-    <div class="post-meta">
-        <time class="post-time" title="2019-03-30 13:04:11" datetime="2019-03-30T13:04:11.000Z"  itemprop="datePublished">2019-03-30</time>
-
-        
-	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/考研/">考研</a></li></ul>
-
-
-
-        
-	<span id="/2019/03/30/研究生复试/" class="leancloud_visitors" data-flag-title="研究生复试" title="研究生复试">
-		
-			<i class="icon icon-eye"></i>
-		
-		<span class="leancloud-visitors-count"></span>
-	</span>
- 
-
-        
-
-
-        
-        
-    </div>
-    
-    <div class="post-content" id="post-content" itemprop="postContent">
-    
-    
-        <h1 id="研究生复试"><a href="#研究生复试" class="headerlink" title="研究生复试"></a>研究生复试</h1><h2 id="综合面试"><a href="#综合面试" class="headerlink" title="综合面试"></a>综合面试</h2><p>因为面试占比复试成绩的50%，所以自己比较注重面试前的准备，并且对准备的PPT进行了几次讲解的演练</p>
-<ol>
-<li>材料给每个老师都准备1份：4/6级成绩单，简历，荣誉证书</li>
-<li>PPT避免太多文字性描述，多用图表形象说明一切</li>
-<li>简历和PPT上写的东西，自己尽量要熟悉，尤其是当老师问到问题的时候</li>
-</ol>
-<h4 id="老师问到的两个问题"><a href="#老师问到的两个问题" class="headerlink" title="老师问到的两个问题"></a>老师问到的两个问题</h4><ol>
-<li><p>你说你项目中用到了数据库，数据库分为关系型数据库和非关系型数据库，你知道关系数据库的三大范式么</p>
-<p><strong> 之前学习过数据库这门课，但是忘记数据库的三大范式了，然后老师追问是你们专业课么，我说是，然后自己根据项目中的数据库设计规范来回答了这个问题，自己当时回答是：自己没有深入原理理解，所以项目中主要是主键，外键约束，还有索引  </strong></p>
-</li>
-<li><p>你说你了解机器学习的算法，你可以列举机器学习的一个算法么</p>
-<p><strong>自己对这个不是很理解，但是之前有学习过一节课，就是讲解感知器设置权重判定是否给申请信用卡的人发信用卡(林轩田机器学习基石的第2章) </strong></p>
-</li>
-</ol>
-    
-    <a href="/2019/03/30/研究生复试/" class="post-more waves-effect waves-button">
-        more
-    </a>
-    </div>
-</article>
-
-<div class="post-footer">
-    
-	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/复试/">复试</a></li></ul>
-
-</div>
-
-
-            </li>
-        
         </ul>
         
 <nav id="page-nav">
@@ -1064,7 +1090,7 @@
     </span>
     
     <span class="blogroll-item">
-        <a href="https://twitter.com/SiVan_Wu" target="_blank">Twitter</a>
+        <a href="https://twitter.com/yirufeng1" target="_blank">Twitter</a>
     </span>
     
 </p>
@@ -1075,7 +1101,7 @@
     <div class="bottom">
         <p>
             <span>
-                逸如风(yirufeng) &copy; 2016 - 2019
+                逸如风(yirufeng) &copy; 2016 - 2020
             </span>
 
            	

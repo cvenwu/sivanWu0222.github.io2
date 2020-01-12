@@ -252,6 +252,153 @@
         <ul class="post-list">
         
             <li class="post-list-item fade">
+                <article id="post-c-prime-中文版-prime-5th-edition-Unit-1"
+  class="article-card article-type-post" itemprop="blogPost">
+  
+    
+    
+    <div class="top" data-title="1">
+    <div class="top-wrap">
+        <p></p>
+    </div>
+</div>
+    
+    
+        
+
+
+  
+    <h3 class="post-title re-title" itemprop="name">
+      <a class="post-title-link" href="/2018/06/26/c-prime-中文版-prime-5th-edition-Unit-1/">C++ primer 中文版 5th edition Unit 1</a>
+    </h3>
+  
+
+
+
+    
+    <div class="post-meta">
+        <time class="post-time" title="2018-06-26 11:58:23" datetime="2018-06-26T11:58:23.000Z"  itemprop="datePublished">2018-06-26</time>
+
+        
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/C/">C++</a><ul class="article-category-list-child"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/C/Grammar/">Grammar</a></li></ul></li></ul>
+
+
+
+        
+	<span id="/2018/06/26/c-prime-中文版-prime-5th-edition-Unit-1/" class="leancloud_visitors" data-flag-title="C++ primer 中文版 5th edition Unit 1" title="C++ primer 中文版 5th edition Unit 1">
+		
+			<i class="icon icon-eye"></i>
+		
+		<span class="leancloud-visitors-count"></span>
+	</span>
+ 
+
+        
+
+
+        
+  <span><i class="icon icon-github"></i></span>
+
+        
+    </div>
+    
+    <div class="post-content" id="post-content" itemprop="postContent">
+    
+    
+        <h2 id="术语"><a href="#术语" class="headerlink" title="术语"></a>术语</h2><p>缓冲区：内存中的一个存储数据的区域。IO设施通常会将数据放到缓冲区，我们可以显式的刷新缓冲区来将缓冲区中的数据输出IO设备。默认情况下，&gt;cin会刷新cout&gt;程序非正常终止也会刷新cout<br>cerr：一个ostream对象，关系到标准错误处理，默认情况下，写入到cerr的数据是不缓冲的。<br>clog：一个ostream对象，关系到标准错误。默认情况下，写到clog的数据是缓冲的。通常用于一个日志文件中。<br>.运算符：点运算符，左侧为一个类类型对象，右侧为类类型对象的一个成员名字。<br>::运算符：作用域运算符，用在访问命名空间中的名字<br>&lt;&lt;运算符：输出运算符，表示将右侧对象写入到标准输出中<br>“&gt;&gt;”运算符：输入运算符，表示将左侧标准输入到右侧对象中</p>
+<h2 id="读取数量不定的输入数据"><a href="#读取数量不定的输入数据" class="headerlink" title="读取数量不定的输入数据"></a>读取数量不定的输入数据</h2><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * 读取数量不定的输入数据</span></span><br><span class="line"><span class="comment"> * @return [description]</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">  <span class="keyword">int</span> sum = <span class="number">0</span>, value = <span class="number">0</span>;</span><br><span class="line">  <span class="comment">//读取数据直到遇到文件尾（可以是正常的文件结束符，也可以是输入错误），计算所有读入的值的和</span></span><br><span class="line">  <span class="comment">//从键盘输入文件结束符：win下是ctrl + z然后按Enter或Return键</span></span><br><span class="line">  <span class="keyword">while</span> (  <span class="built_in">std</span>::<span class="built_in">cin</span> &gt;&gt; value )</span><br><span class="line">  <span class="comment">/*</span></span><br><span class="line"><span class="comment">  //当使用istream对象作为条件时，其效果是检测流的状态，如果流是有效的，</span></span><br><span class="line"><span class="comment">  //当使用那么就会检测成功，当遇到一个错误输入(输入不是整数)或者文件结束符，</span></span><br><span class="line"><span class="comment">  //就会变为无效，将会使得条件为假</span></span><br><span class="line"><span class="comment">  */</span></span><br><span class="line">    sum += value; <span class="comment">//等价于sum = sum + value;</span></span><br><span class="line"></span><br><span class="line">  <span class="built_in">std</span>::<span class="built_in">cout</span> &lt;&lt; <span class="string">"Sum is:"</span> &lt;&lt; sum &lt;&lt; <span class="built_in">std</span>::<span class="built_in">endl</span>;</span><br><span class="line">  <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+    
+    <a href="/2018/06/26/c-prime-中文版-prime-5th-edition-Unit-1/" class="post-more waves-effect waves-button">
+        more
+    </a>
+    </div>
+</article>
+
+<div class="post-footer">
+    
+	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/C/">C++</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Grammar/">Grammar</a></li></ul>
+
+</div>
+
+
+            </li>
+        
+            <li class="post-list-item fade">
+                <article id="post-ERROR-Deployer-not-found-git"
+  class="article-card article-type-post" itemprop="blogPost">
+  
+    
+    
+    <div class="top" data-title="1">
+    <div class="top-wrap">
+        <p></p>
+    </div>
+</div>
+    
+    
+        
+
+
+  
+    <h3 class="post-title re-title" itemprop="name">
+      <a class="post-title-link" href="/2018/06/26/ERROR-Deployer-not-found-git/">ERROR Deployer not found: git</a>
+    </h3>
+  
+
+
+
+    
+    <div class="post-meta">
+        <time class="post-time" title="2018-06-26 05:09:55" datetime="2018-06-26T05:09:55.000Z"  itemprop="datePublished">2018-06-26</time>
+
+        
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/hexo/">hexo</a></li></ul>
+
+
+
+        
+	<span id="/2018/06/26/ERROR-Deployer-not-found-git/" class="leancloud_visitors" data-flag-title="ERROR Deployer not found: git" title="ERROR Deployer not found: git">
+		
+			<i class="icon icon-eye"></i>
+		
+		<span class="leancloud-visitors-count"></span>
+	</span>
+ 
+
+        
+
+
+        
+  <span><i class="icon icon-github"></i></span>
+
+        
+    </div>
+    
+    <div class="post-content" id="post-content" itemprop="postContent">
+    
+    
+        ERROR Deployer not found: git
+使用 hexo d 命令部署博客到GitHub或其他平台时，遇到”ERROR Deployer not found: git”
+
+解决方案：npm install –save hexo-deployer-git
+
+    
+    <a href="/2018/06/26/ERROR-Deployer-not-found-git/" class="post-more waves-effect waves-button">
+        more
+    </a>
+    </div>
+</article>
+
+<div class="post-footer">
+    
+	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/git/">git</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/hexo/">hexo</a></li></ul>
+
+</div>
+
+
+            </li>
+        
+            <li class="post-list-item fade">
                 <article id="post-流程执行与输入"
   class="article-card article-type-post" itemprop="blogPost">
   
@@ -885,187 +1032,6 @@
 
             </li>
         
-            <li class="post-list-item fade">
-                <article id="post-入门Mybatis"
-  class="article-card article-type-post" itemprop="blogPost">
-  
-    
-    
-    
-        
-
-
-  
-    <h3 class="post-title re-title" itemprop="name">
-      <a class="post-title-link" href="/2017/11/18/入门Mybatis/">入门Mybatis</a>
-    </h3>
-  
-
-
-
-    
-    <div class="post-meta">
-        <time class="post-time" title="2017-11-18 08:28:03" datetime="2017-11-18T08:28:03.000Z"  itemprop="datePublished">2017-11-18</time>
-
-        
-	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/框架/">框架</a><ul class="article-category-list-child"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/框架/Mybatis/">Mybatis</a></li></ul></li></ul>
-
-
-
-        
-	<span id="/2017/11/18/入门Mybatis/" class="leancloud_visitors" data-flag-title="入门Mybatis" title="入门Mybatis">
-		
-			<i class="icon icon-eye"></i>
-		
-		<span class="leancloud-visitors-count"></span>
-	</span>
- 
-
-        
-
-
-        
-        
-    </div>
-    
-    <div class="post-content" id="post-content" itemprop="postContent">
-    
-    
-        <h2 id="前言："><a href="#前言：" class="headerlink" title="前言："></a>前言：</h2><p> Mybatis与Hibernate一样，作为轻量级持久层框架，是现在的主流，并且MyBatis与Hibernate不同，MyBatis的灵活性与Hibernate不可同日而语，当我们能够以SQL语句进行轻便操作的时候，你可知道MyBatis带给我们的便利，虽然没有Hibernate封装的好，但是MyBatis扩展性更好些，也更灵活些！有人曾说Hibernate是全自动的，但是MyBatis是半自动的！</p>
-<hr>
-<h2 id="搭建基本环境"><a href="#搭建基本环境" class="headerlink" title="搭建基本环境"></a>搭建基本环境</h2><blockquote>
-<p>使用任何框架的第一步都是搭建框架的基本环境，当我们环境搭建好之后，所谓的半个成品就出来了233333</p>
-</blockquote>
-<ol>
-<li>引入使用数据库的JDBC驱动jar包</li>
-<li>引入MyBatis的核心开发包</li>
-<li>引入MyBatis的依赖包，也就是log4j等</li>
-<li>创建POJO类</li>
-<li>引入log4j的配置文件</li>
-<li>引入MyBatis的POJO配置文件</li>
-<li>引入MyBatis核心配置文件</li>
-</ol>
-<p>具体文件缺失，<a href="https://github.com/sivanWu0222/MyBatisDoc/blob/master/README.md" target="_blank" rel="noopener">参考</a></p>
-<p>POJO类文件：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> com.pojo;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> java.io.Serializable;</span><br><span class="line"><span class="keyword">import</span> java.sql.Timestamp;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Student</span> <span class="keyword">implements</span> <span class="title">Serializable</span></span>&#123;</span><br><span class="line"></span><br><span class="line">	<span class="keyword">private</span> Integer id;</span><br><span class="line">	<span class="keyword">private</span> String name;</span><br><span class="line">	<span class="keyword">private</span> String sex;</span><br><span class="line">	<span class="keyword">private</span> Timestamp birthday;</span><br><span class="line"></span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="title">Student</span><span class="params">()</span> </span>&#123;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="function"><span class="keyword">public</span> Integer <span class="title">getId</span><span class="params">()</span> </span>&#123;</span><br><span class="line">		<span class="keyword">return</span> id;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setId</span><span class="params">(Integer id)</span> </span>&#123;</span><br><span class="line">		<span class="keyword">this</span>.id = id;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="function"><span class="keyword">public</span> String <span class="title">getName</span><span class="params">()</span> </span>&#123;</span><br><span class="line">		<span class="keyword">return</span> name;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setName</span><span class="params">(String name)</span> </span>&#123;</span><br><span class="line">		<span class="keyword">this</span>.name = name;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="function"><span class="keyword">public</span> String <span class="title">getSex</span><span class="params">()</span> </span>&#123;</span><br><span class="line">		<span class="keyword">return</span> sex;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setSex</span><span class="params">(String sex)</span> </span>&#123;</span><br><span class="line">		<span class="keyword">this</span>.sex = sex;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="function"><span class="keyword">public</span> Timestamp <span class="title">getBirthday</span><span class="params">()</span> </span>&#123;</span><br><span class="line">		<span class="keyword">return</span> birthday;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setBirthday</span><span class="params">(Timestamp birthday)</span> </span>&#123;</span><br><span class="line">		<span class="keyword">this</span>.birthday = birthday;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
-<p>POJO的配置文件头约束<br><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?xml version="1.0" encoding="UTF-8" ?&gt;</span></span><br><span class="line"><span class="meta">&lt;!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"</span></span><br><span class="line"><span class="meta">"http://mybatis.org/dtd/mybatis-3-mapper.dtd"&gt;</span></span><br></pre></td></tr></table></figure></p>
-<p>核心配置文件头约束<br><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?xml version="1.0" encoding="UTF-8" ?&gt;</span></span><br><span class="line"><span class="meta">&lt;!DOCTYPE configuration PUBLIC "-//mybatis.org//DTD Config 3.0//EN"</span></span><br><span class="line"><span class="meta">"http://mybatis.org/dtd/mybatis-3-config.dtd"&gt;</span></span><br></pre></td></tr></table></figure></p>
-<hr>
-<h2 id="基本使用"><a href="#基本使用" class="headerlink" title="基本使用"></a>基本使用</h2><ol>
-<li>创建一个输入流，通过流加载总配置文件</li>
-<li>通过加载进来的总配置文件创建SqlSessionFactoryBuilder来创建SessionFactory</li>
-<li>创建session</li>
-<li>编写具体的业务(增删改查，<strong>MyBatis中自动开启事务，我们只需要操作和提交事务就可以</strong>)</li>
-<li>提交事务</li>
-<li>关闭session</li>
-</ol>
-    
-    <a href="/2017/11/18/入门Mybatis/" class="post-more waves-effect waves-button">
-        more
-    </a>
-    </div>
-</article>
-
-<div class="post-footer">
-    
-	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Java/">Java</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/MyBatis/">MyBatis</a></li></ul>
-
-</div>
-
-
-            </li>
-        
-            <li class="post-list-item fade">
-                <article id="post-Hibernate中的知识点"
-  class="article-card article-type-post" itemprop="blogPost">
-  
-    
-    
-    
-        
-
-
-  
-    <h3 class="post-title re-title" itemprop="name">
-      <a class="post-title-link" href="/2017/11/13/Hibernate中的知识点/">Hibernate中的知识点</a>
-    </h3>
-  
-
-
-
-    
-    <div class="post-meta">
-        <time class="post-time" title="2017-11-13 08:49:12" datetime="2017-11-13T08:49:12.000Z"  itemprop="datePublished">2017-11-13</time>
-
-        
-	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/框架/">框架</a><ul class="article-category-list-child"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/框架/Hibernate/">Hibernate</a></li></ul></li></ul>
-
-
-
-        
-	<span id="/2017/11/13/Hibernate中的知识点/" class="leancloud_visitors" data-flag-title="Hibernate中的知识点" title="Hibernate中的知识点">
-		
-			<i class="icon icon-eye"></i>
-		
-		<span class="leancloud-visitors-count"></span>
-	</span>
- 
-
-        
-
-
-        
-        
-    </div>
-    
-    <div class="post-content" id="post-content" itemprop="postContent">
-    
-    
-        <h2 id="持久化类-Persistent-Object-简称PO"><a href="#持久化类-Persistent-Object-简称PO" class="headerlink" title="持久化类(Persistent Object 简称PO)"></a>持久化类(Persistent Object 简称PO)</h2><blockquote>
-<p>持久化类就是一个Java类，当这个类与表建立了映射关系(通过XML配置文件)</p>
-</blockquote>
-<p>PO = POJO(JavaBean) + XML配置文件</p>
-<h3 id="JavaBean规范："><a href="#JavaBean规范：" class="headerlink" title="JavaBean规范："></a>JavaBean规范：</h3><ol>
-<li>必须有构造方法，如果没有无参的需要自己加上一个无参构造方法</li>
-<li>属性必须私有，并且必须提供set以及get方法</li>
-</ol>
-<h3 id="PO编写规则"><a href="#PO编写规则" class="headerlink" title="PO编写规则"></a>PO编写规则</h3><ol>
-<li>提供一个无参的public修饰符的构造器（因为底层要通过反射创建对象）</li>
-<li>提供一个标识属性，映射表的主键字段（唯一标识ID,也就是所说的OId）</li>
-<li>所有属性提供public访问控制符的set以及get方法</li>
-<li>标识属性应尽量使用基本类型的包装类</li>
-</ol>
-<h3 id="持久化类的三种状态"><a href="#持久化类的三种状态" class="headerlink" title="持久化类的三种状态"></a>持久化类的三种状态</h3><ol>
-<li>瞬时态<blockquote>
-<p>刚创建的对象，没有被持久化到数据库（没有持久化表示OId,OId就是数据库中的主键，也就是唯一区分JavaBean对象的属性），没有被纳入Session管理（没有缓存到Session中）</p>
-</blockquote>
-</li>
-</ol>
-<ol start="2">
-<li>持久态<blockquote>
-<p>存在于数据库中（有唯一标识OId），并且被Session进行管理（缓存到了Session中）</p>
-</blockquote>
-</li>
-</ol>
-<p>注意事项：<br>持久态的对象有更新数据库的能力，示例如下(正常情况下，我们需要执行session.update()方法进行修改，但是这里是由于session的一级缓存，所以持久态对象在不执行session.update()方法的时候依然具有更新数据库的能力)</p>
-<blockquote>
-</blockquote>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="keyword">import</span> org.hibernate.Session;</span><br><span class="line"><span class="keyword">import</span> org.hibernate.Transaction;</span><br><span class="line"><span class="keyword">import</span> org.junit.Test;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> com.itheima.domain.User;</span><br><span class="line"><span class="keyword">import</span> com.itheima.util.HibernateUtils;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Demo2</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">	<span class="meta">@Test</span></span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">run</span><span class="params">()</span> </span>&#123;</span><br><span class="line">		Session session = HibernateUtils.getSession();</span><br><span class="line">		Transaction transaction = session.beginTransaction();</span><br><span class="line"></span><br><span class="line">		User user = session.get(User.class, <span class="number">18</span>);</span><br><span class="line">		user.setName(<span class="string">"wxwddd"</span>);</span><br><span class="line"></span><br><span class="line">		transaction.commit();</span><br><span class="line">		session.close();</span><br><span class="line"></span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-    
-    <a href="/2017/11/13/Hibernate中的知识点/" class="post-more waves-effect waves-button">
-        more
-    </a>
-    </div>
-</article>
-
-<div class="post-footer">
-    
-	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Hibernate/">Hibernate</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Java/">Java</a></li></ul>
-
-</div>
-
-
-            </li>
-        
         </ul>
         
 <nav id="page-nav">
@@ -1109,7 +1075,7 @@
     </span>
     
     <span class="blogroll-item">
-        <a href="https://twitter.com/SiVan_Wu" target="_blank">Twitter</a>
+        <a href="https://twitter.com/yirufeng1" target="_blank">Twitter</a>
     </span>
     
 </p>
@@ -1120,7 +1086,7 @@
     <div class="bottom">
         <p>
             <span>
-                逸如风(yirufeng) &copy; 2016 - 2019
+                逸如风(yirufeng) &copy; 2016 - 2020
             </span>
 
            	

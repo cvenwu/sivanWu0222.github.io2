@@ -252,6 +252,225 @@
         <ul class="post-list">
         
             <li class="post-list-item fade">
+                <article id="post-实战PyTorch手写数字体识别"
+  class="article-card article-type-post" itemprop="blogPost">
+  
+    
+    
+    <div class="top" data-title="2">
+    <div class="top-wrap">
+        <p></p>
+    </div>
+</div>
+    
+    
+        
+
+
+  
+    <h3 class="post-title re-title" itemprop="name">
+      <a class="post-title-link" href="/2019/09/29/实战PyTorch手写数字体识别/">实战PyTorch手写数字体识别</a>
+    </h3>
+  
+
+
+
+    
+    <div class="post-meta">
+        <time class="post-time" title="2019-09-29 11:47:51" datetime="2019-09-29T11:47:51.000Z"  itemprop="datePublished">2019-09-29</time>
+
+        
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/Deep-Learning/">Deep Learning</a><ul class="article-category-list-child"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/Deep-Learning/CNN/">CNN</a></li></ul></li></ul>
+
+
+
+        
+	<span id="/2019/09/29/实战PyTorch手写数字体识别/" class="leancloud_visitors" data-flag-title="实战PyTorch手写数字体识别" title="实战PyTorch手写数字体识别">
+		
+			<i class="icon icon-eye"></i>
+		
+		<span class="leancloud-visitors-count"></span>
+	</span>
+ 
+
+        
+
+
+        
+  <span><i class="icon icon-github"></i></span>
+
+        
+    </div>
+    
+    <div class="post-content" id="post-content" itemprop="postContent">
+    
+    
+        <blockquote>
+<p>开始学习深度学习，想通过被誉为<strong>深度学习”Hello World”的LeNet5</strong>进行实践，奈何从网络架构看不懂到最后编码没看懂，到现在的恍然大悟，这里面有很多坑不实践只知道网络结构永远是不够的，在学习编码LeNet5的过程中，遇到了很多坑，从网上找资料，五音不全的，总感觉少了很多东西，所以自己索性就总结了自己LeNet5的经验以及一些坑</p>
+</blockquote>
+<h2 id="网络架构"><a href="#网络架构" class="headerlink" title="网络架构"></a>网络架构</h2><figure class="image-box">
+                <img src="/2019/09/29/实战PyTorch手写数字体识别/./CNN.png" alt="LeNet5网络结构图" title class="index-item-img">
+                <p>LeNet5网络结构图</p>
+            </figure>
+<p>输入的图片是 28<em>28</em>1 : <strong>分别表示28像素的高，28像素的宽，1个颜色通道</strong></p>
+<p>第一层：卷积层：卷积核大小为6✖️28✖️28, (6表示卷积核的通道数，决定了输出内容的个数，1表示卷积核的通道为1，28)<br>第二层：池化层<br>第三层：卷积层<br>第四层：池化层<br>第五层：全连接层<br>第六层：全连接层<br>第七层：全连接层</p>
+<h2 id="数据介绍"><a href="#数据介绍" class="headerlink" title="数据介绍"></a>数据介绍</h2><blockquote>
+<p>实战LeNet5架构的数据已经由大神Yann LeCun备好，只需要通过PyTorch下载并加载就可以</p>
+</blockquote>
+<p>训练集：提供了60000张28<em>28像素的黑白图(说明颜色通道为1)，60000个标签<br>测试集：提供了10000张28</em>28像素的黑白图，10000个标签</p>
+<figure class="image-box">
+                <img src="/2019/09/29/实战PyTorch手写数字体识别/./数据图展示.png" alt="展示其中的一个数据" title class="index-item-img">
+                <p>展示其中的一个数据</p>
+            </figure>
+<h2 id="一些坑"><a href="#一些坑" class="headerlink" title="一些坑"></a>一些坑</h2><ol>
+<li>ReLU() 与 torch.relu() 真的不一样，可别搞混，自己当时就是搞混，以为是一样的，卡了半天</li>
+<li></li>
+</ol>
+<h2 id="步骤"><a href="#步骤" class="headerlink" title="步骤"></a>步骤</h2><blockquote>
+<p>任何一个神经网络的实践数据收集都是起点，这里我们使用了经典的MNIST数据集，包括60000 个训练样本和 10000 个测试样本，样本大小都是1 ✖️ 28 ✖️ 28 (1是指黑白图，也就是只有1个颜色通道)</p>
+</blockquote>
+<ol>
+<li>数据收集</li>
+<li>数据处理</li>
+<li>网络搭建</li>
+<li>针对问题定义损失函数和优化器</li>
+<li>训练模型</li>
+<li>测试模型准确度</li>
+</ol>
+<h3 id="数据处理和数据收集"><a href="#数据处理和数据收集" class="headerlink" title="数据处理和数据收集"></a>数据处理和数据收集</h3><blockquote>
+<p>PyTorch已经内置了MNIST数据集，因此我们只需要导入相应的包来下载数据集</p>
+</blockquote>
+<p><strong>注意：数据集都是图像，我们在PyTorch中数据的计算都需要将数据转换为计算图的张量(可以理解为是我们现实中的一个常量)</strong></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> torchvision.datasets <span class="keyword">as</span> datasets</span><br><span class="line"><span class="keyword">import</span> torchvision.transforms <span class="keyword">as</span> transforms</span><br><span class="line"><span class="keyword">from</span> torch.utils.data <span class="keyword">import</span> dataloader</span><br><span class="line"></span><br><span class="line"><span class="comment"># 将数据转换为计算图的张量，使用Compose可以将多种变换组合到一起，但是这里我们只将其转换为Tensor</span></span><br><span class="line">transform = transforms.Compose([</span><br><span class="line">    transforms.ToTensor()</span><br><span class="line">])</span><br><span class="line"></span><br><span class="line"><span class="comment"># 加载对应的数据集</span></span><br><span class="line"><span class="comment">## root代表数据集存放的目录</span></span><br><span class="line"><span class="comment">## train代表是否是训练集，用来区分训练集和测试集</span></span><br><span class="line"><span class="comment">## download代表是否需要下载，为true代表如果在root中没有找到数据则进行下载</span></span><br><span class="line"><span class="comment">## transform代表对下载后加载进来的数据做哪些预处理操作</span></span><br><span class="line">train_data = datasets.MNIST(root=<span class="string">'./data'</span>, train=<span class="literal">True</span>, download=<span class="literal">True</span>, transform=transform)</span><br><span class="line">test_data = datasets.MNIST(root=<span class="string">'./data'</span>, train=<span class="literal">False</span>, download=<span class="literal">True</span>, transform=transform)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment"># 数据加载(使用MINI-Batch加载)：将上面已经加载的数据存档到一个迭代器中方便训练和测试的时候遍历</span></span><br><span class="line"><span class="comment">## 第1个参数代表加载哪个数据集</span></span><br><span class="line"><span class="comment">## batch_size指示每次加载多少张图</span></span><br><span class="line"><span class="comment">## shuffle指示加载数据的时候是否随机加载(打乱)</span></span><br><span class="line">train_data_loader = dataloader.DataLoader(train_data, batch_size=BATCH_SIZE, shuffle=<span class="literal">True</span>)</span><br><span class="line">test_data_loader = dataloader.DataLoader(test_data, batch_size=BATCH_SIZE, shuffle=<span class="literal">True</span>)</span><br></pre></td></tr></table></figure>
+<h3 id="网络搭建"><a href="#网络搭建" class="headerlink" title="网络搭建"></a>网络搭建</h3><blockquote>
+<p>这里我们自定义了网络结构</p>
+</blockquote>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> torch.nn <span class="keyword">as</span> nn</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">MyCNN</span><span class="params">(nn.Module)</span>:</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span><span class="params">(self)</span>:</span></span><br><span class="line">        super(MyCNN, self).__init__()</span><br><span class="line">        self.conv = nn.Sequential(</span><br><span class="line">            <span class="comment"># 输入 batch_size, 1, 28, 28</span></span><br><span class="line">            nn.Conv2d(<span class="number">1</span>, <span class="number">3</span>, <span class="number">3</span>, padding=<span class="number">2</span>),</span><br><span class="line">            nn.BatchNorm2d(<span class="number">3</span>),</span><br><span class="line">            nn.LeakyReLU(<span class="number">0.2</span>),</span><br><span class="line">            nn.MaxPool2d(<span class="number">2</span>),</span><br><span class="line">            <span class="comment"># batch_size, 3, 15, 15</span></span><br><span class="line">            nn.Conv2d(<span class="number">3</span>, <span class="number">16</span>, <span class="number">3</span>, padding=<span class="number">1</span>),</span><br><span class="line">            nn.BatchNorm2d(<span class="number">16</span>),</span><br><span class="line">            nn.LeakyReLU(<span class="number">0.2</span>),</span><br><span class="line">            nn.MaxPool2d(<span class="number">2</span>),</span><br><span class="line">            <span class="comment"># batch_size, 16, 7, 7</span></span><br><span class="line">            nn.Conv2d(<span class="number">16</span>, <span class="number">32</span>, <span class="number">3</span>, padding=<span class="number">1</span>),</span><br><span class="line">            nn.BatchNorm2d(<span class="number">32</span>),</span><br><span class="line">            nn.LeakyReLU(<span class="number">0.2</span>),</span><br><span class="line">            nn.MaxPool2d(<span class="number">2</span>),</span><br><span class="line">            <span class="comment"># batch_size, 32, 3, 3</span></span><br><span class="line">        )</span><br><span class="line">        self.lin = nn.Linear(<span class="number">288</span>, <span class="number">10</span>)</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">forward</span><span class="params">(self, input)</span>:</span></span><br><span class="line">        y = self.conv(input)</span><br><span class="line">        y = y.view(input.size(<span class="number">0</span>), <span class="number">-1</span>)</span><br><span class="line">        y = self.lin(y)</span><br><span class="line">        <span class="keyword">return</span> y</span><br></pre></td></tr></table></figure>
+<h3 id="定义损失函数和优化器"><a href="#定义损失函数和优化器" class="headerlink" title="定义损失函数和优化器"></a>定义损失函数和优化器</h3><blockquote>
+<p>Adam: 一种计算每个参数的自适应学习率的方法<br>分类问题常用的损失函数为交叉熵（Cross Entropy Loss。交叉熵描述了两个概率分布之间的距离，交叉熵越小说明两者之间越接近。</p>
+</blockquote>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 定义损失函数以及优化器</span></span><br><span class="line">loss_func = torch.nn.CrossEntropyLoss()  <span class="comment"># 采用交叉熵损失</span></span><br><span class="line">optimizer = torch.optim.Adam(net.parameters(), lr=LEARNING_RATE)  <span class="comment">#采用学习率自己可以调节的Adam优化器</span></span><br></pre></td></tr></table></figure>
+<h3 id="训练模型"><a href="#训练模型" class="headerlink" title="训练模型"></a>训练模型</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">index_value = <span class="number">0</span></span><br><span class="line"><span class="comment"># 训练集</span></span><br><span class="line"><span class="keyword">for</span> epoch <span class="keyword">in</span> range(NUM_EPOCHS):</span><br><span class="line">    <span class="keyword">for</span> index, (data, label) <span class="keyword">in</span> enumerate(train_data_loader):</span><br><span class="line">        predict_label = net(data)</span><br><span class="line">        loss = loss_func(predict_label, label)</span><br><span class="line">        loss_value = loss.item()</span><br><span class="line">        print(<span class="string">"epoch:&#123;&#125;, index:&#123;&#125;, loss:&#123;&#125;"</span>.format(epoch, index, loss_value))</span><br><span class="line">        opt = &#123;</span><br><span class="line">            <span class="string">'title'</span>: <span class="string">'LeNet5_loss'</span>,</span><br><span class="line">            <span class="string">'xlabel'</span>: <span class="string">'index'</span>,</span><br><span class="line">            <span class="string">'ylabel'</span>: <span class="string">'loss'</span></span><br><span class="line">        &#125;</span><br><span class="line">        vis.line(Y=np.array([loss_value]), X=np.array([index_value]), win=<span class="string">'lenet5_loss'</span>, update=<span class="string">'append'</span>, opts=opt)</span><br><span class="line">        optimizer.zero_grad()</span><br><span class="line">        loss.backward()</span><br><span class="line">        index_value += <span class="number">1</span></span><br><span class="line">        optimizer.step()</span><br></pre></td></tr></table></figure>
+<h3 id="测试模型"><a href="#测试模型" class="headerlink" title="测试模型"></a>测试模型</h3><p>几个注意的地方：</p>
+<ol>
+<li><strong>进行测试的时候一定要关闭求梯度，以及dropout(使用net.eval())</strong></li>
+<li>训练之后的网络，使用net(data)将会得到预测的输出, 例如在该任务中会输出大小为(batch_size, 10)的二维tensor, 每个batch_size对应的10个数字的可能性大小，数字最大的代表预测为该数字</li>
+<li>使用net(data).argmax()求得的是二维tensor的最大值，但我们想要的是(batch_size, 10)大小的tensor中每行的最大值对应的下标，因为就是我们预测的值，因此可以采用net(data).argmax(dim=1)</li>
+<li>label == net(data).argmax(dim=1) 来判断是否与我们预测的一致，将会返回一个bool组成的tensor</li>
+<li>(label == net(data).argmax(dim=1)).sum() 可以计算我们预测的有多少是准确的，只是局限在该batch_size下</li>
+</ol>
+    
+    <a href="/2019/09/29/实战PyTorch手写数字体识别/" class="post-more waves-effect waves-button">
+        more
+    </a>
+    </div>
+</article>
+
+<div class="post-footer">
+    
+	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Deep-Learning/">Deep Learning</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/PyTorch/">PyTorch</a></li></ul>
+
+</div>
+
+
+            </li>
+        
+            <li class="post-list-item fade">
+                <article id="post-LeetCode-171-Excel表列序号-md"
+  class="article-card article-type-post" itemprop="blogPost">
+  
+    
+    
+    <div class="top" data-title="2">
+    <div class="top-wrap">
+        <p></p>
+    </div>
+</div>
+    
+    
+        
+
+
+  
+    <h3 class="post-title re-title" itemprop="name">
+      <a class="post-title-link" href="/2019/09/10/LeetCode-171-Excel表列序号-md/">[LeetCode]171-Excel表列序号.md</a>
+    </h3>
+  
+
+
+
+    
+    <div class="post-meta">
+        <time class="post-time" title="2019-09-10 05:08:53" datetime="2019-09-10T05:08:53.000Z"  itemprop="datePublished">2019-09-10</time>
+
+        
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/LeetCode/">LeetCode</a></li></ul>
+
+
+
+        
+	<span id="/2019/09/10/LeetCode-171-Excel表列序号-md/" class="leancloud_visitors" data-flag-title="[LeetCode]171-Excel表列序号.md" title="[LeetCode]171-Excel表列序号.md">
+		
+			<i class="icon icon-eye"></i>
+		
+		<span class="leancloud-visitors-count"></span>
+	</span>
+ 
+
+        
+
+
+        
+  <span><i class="icon icon-github"></i></span>
+
+        
+    </div>
+    
+    <div class="post-content" id="post-content" itemprop="postContent">
+    
+    
+        <h1 id="171-Excel表列序号"><a href="#171-Excel表列序号" class="headerlink" title="171-Excel表列序号"></a>171-Excel表列序号</h1><p><a href="https://leetcode-cn.com/problems/excel-sheet-column-number/" target="_blank" rel="noopener">题目内容</a></p>
+<blockquote>
+<p>其实这道题就是一个进制转换题，把26个字母看作26进制，只是进制从1开始到26</p>
+</blockquote>
+<h2 id="第一次提交"><a href="#第一次提交" class="headerlink" title="第一次提交"></a>第一次提交</h2><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">titleToNumber</span><span class="params">(<span class="keyword">char</span> * s)</span></span>&#123;</span><br><span class="line">    <span class="keyword">int</span> i = <span class="number">0</span>, sum = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">while</span> (s[i] != <span class="string">'\0'</span>)</span><br><span class="line">    &#123;</span><br><span class="line">        sum = sum * <span class="number">26</span> + s[i] - <span class="number">64</span>;             <span class="comment">//在输入最后一个测试用例的时候("FXSHRXW")首先会产生溢出，之后才会执行减去64的操作</span></span><br><span class="line">        i++;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> sum;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>结果：999 / 1000 个通过测试用例<br>执行出错信息：Line 5: Char 24: runtime error: signed integer overflow: 2147483624 + 87 cannot be represented in type ‘int’ (solution.c)<br>最后执行的输入：”FXSHRXW”</p>
+</blockquote>
+<p>总结：在最后一个测试用例执行的时候，发生了int溢出，因为FXSHRXW执行到最后一个字母时，sum<em>26刚执行完还没有发生溢出，直到加上s[i]才发生溢出，所以考虑将**</em>-64移动到前面，避免溢出***</p>
+<p>分析：</p>
+<ol>
+<li>FXSHRX执行完之后，sum取值是82595524</li>
+<li>sum * 26 = 2147483624</li>
+<li>sum * 26 + s[i] = 2147483624 + 87 因为此时s[i]是最后一个字母W对应的ASCII编码，发生溢出</li>
+<li>故猜想把后面的-64提到前面避免溢出，最后跑了一遍可行</li>
+</ol>
+<h2 id="第二次提交"><a href="#第二次提交" class="headerlink" title="第二次提交"></a>第二次提交</h2><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">titleToNumber2</span><span class="params">(<span class="keyword">char</span> * s)</span></span>&#123;</span><br><span class="line">    <span class="keyword">int</span> i = <span class="number">0</span>, sum = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">while</span> (s[i] != <span class="string">'\0'</span>)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="comment">// sum = sum * 26 + s[i] - 64;</span></span><br><span class="line">        <span class="comment">// 为了防止溢出，修改加的顺序, 要把-64提到前面</span></span><br><span class="line">        sum = sum * <span class="number">26</span> - <span class="number">64</span> + s[i];</span><br><span class="line">        i++;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> sum;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>第二次提交：成功<br>执行用时 :8 ms, 在所有 C 提交中击败了35.51%的用户<br>内存消耗 :6.7 MB, 在所有 C 提交中击败了30.43%的用户</p>
+</blockquote>
+<figure class="image-box">
+                <img src="/2019/09/10/LeetCode-171-Excel表列序号-md/./2.png" alt="第二种解法" title class="index-item-img">
+                <p>第二种解法</p>
+            </figure>
+<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p><code>C 语言int 范围-2147483648 ~ 2147483647</code></p>
+    
+    <a href="/2019/09/10/LeetCode-171-Excel表列序号-md/" class="post-more waves-effect waves-button">
+        more
+    </a>
+    </div>
+</article>
+
+<div class="post-footer">
+    
+	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Job/">Job</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/LeetCode/">LeetCode</a></li></ul>
+
+</div>
+
+
+            </li>
+        
+            <li class="post-list-item fade">
                 <article id="post-吴恩达机器学习-03多变量线性回归"
   class="article-card article-type-post" itemprop="blogPost">
   
@@ -995,234 +1214,6 @@ git reset 默认是 git reset –mixed
 
             </li>
         
-            <li class="post-list-item fade">
-                <article id="post-MLA-01-k-近邻算法初探"
-  class="article-card article-type-post" itemprop="blogPost">
-  
-    
-        
-<div class="item-thumb">
-    <a class="thumb-link" href="/2019/06/07/MLA-01-k-近邻算法初探/"></a>
-    <div class="thumb-hover">
-        <span class="icon icon-eye"></span>
-    </div>
-    <img src="//i.loli.net/2017/12/12/5a2fd18a74471.jpg" alt="图片路径不正确">
-    
-
-
-  
-    <h3 class="post-title ab-title" itemprop="name">
-      <a class="post-title-link" href="/2019/06/07/MLA-01-k-近邻算法初探/">[MLA-01]k-近邻算法初探</a>
-    </h3>
-  
-
-
-
-</div>
-
-        
-    
-    <div class="top" data-title="2">
-    <div class="top-wrap">
-        <p></p>
-    </div>
-</div>
-    
-    
-    <div class="post-meta">
-        <time class="post-time" title="2019-06-07 02:37:26" datetime="2019-06-07T02:37:26.000Z"  itemprop="datePublished">2019-06-07</time>
-
-        
-	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/ML/">ML</a><ul class="article-category-list-child"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/ML/k近邻算法/">k近邻算法</a></li></ul></li></ul>
-
-
-
-        
-	<span id="/2019/06/07/MLA-01-k-近邻算法初探/" class="leancloud_visitors" data-flag-title="[MLA-01]k-近邻算法初探" title="[MLA-01]k-近邻算法初探">
-		
-			<i class="icon icon-eye"></i>
-		
-		<span class="leancloud-visitors-count"></span>
-	</span>
- 
-
-        
-
-
-        
-  <span><i class="icon icon-github"></i></span>
-
-        
-    </div>
-    
-    <div class="post-content" id="post-content" itemprop="postContent">
-    
-    
-        <h1 id="了解"><a href="#了解" class="headerlink" title="了解"></a>了解</h1><p>k 邻近算法是《机器学习实战》中第一个讲到的机器学习算法，也是最容易理解的算法，不需要很多背景知识即可理解和上手。</p>
-<h2 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h2><blockquote>
-<p>k-近邻算法采用测量不同特征值之间的距离进行分类</p>
-</blockquote>
-<p>优点：精度高，对异常值不敏感，无数据输入确定<br>缺点：计算复杂度高，空间复杂度高<br>适用数据范围：数值型和标称型</p>
-<h2 id="需要了解的一些知识"><a href="#需要了解的一些知识" class="headerlink" title="需要了解的一些知识"></a>需要了解的一些知识</h2><ul>
-<li>k邻近算法只适用于分类算法(预测的值是离散的而不是连续的)</li>
-<li>k邻近算法属于监督学习</li>
-</ul>
-<h1 id="原理"><a href="#原理" class="headerlink" title="原理"></a>原理</h1><p>对于要预测的某个数据点，从已带有标签的数据中选择k个距离该数据点最近的数据，并对其标签进行统计，频率最大的便是该数据点的标签，也就是我们预测的结果</p>
-<blockquote>
-<p>书上的解释：存在一个样本数据集合，也称作训练样本集，并且样本集中每个数据都存在标签，即我们知道样本集中每个数据与所属分类的对应关系。输入没有标签的数据后，将新数据的每个特征值与样本集中每个数据特征进行比较，然后算法提取样本集中特征最相似数据(最近邻)的分类标签。一般来说，只选择样本数据集中前k个最相似的数据。最后选择k个最相似数据中出现次数最多的分类，作为新数据的分类。</p>
-</blockquote>
-<h1 id="一般流程"><a href="#一般流程" class="headerlink" title="一般流程"></a>一般流程</h1><ol>
-<li>收集数据</li>
-<li>准备数据：计算距离所需要的数值，最好是结构化的数据格式</li>
-<li>分析数据</li>
-<li>训练算法：此步骤不适用于k近邻算法</li>
-<li>测试算法：计算错误率</li>
-<li>使用算法：首先需要输入样本数据和结构化的输出结果，然后运行k近邻算判定输入数据分别属于哪个分类，最后应用对计算出的分类执行后续的处理</li>
-</ol>
-<h1 id="实现"><a href="#实现" class="headerlink" title="实现"></a>实现</h1><p>对每个未知类别属性的数据集中的每个点依次执行如下操作：</p>
-<ol>
-<li>计算已知类别数据集中点与当前点之间的距离</li>
-<li>按照距离从小到大进行排序</li>
-<li>选取与当前点距离最小的k个点</li>
-<li>确定前k个点所在类别的出现频率</li>
-<li>返回前k个点出现频率最高的类别作为当前点的预测分类</li>
-</ol>
-<h2 id="准备数据"><a href="#准备数据" class="headerlink" title="准备数据"></a>准备数据</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 导入科学计算包</span></span><br><span class="line"><span class="keyword">from</span> numpy <span class="keyword">import</span> *</span><br><span class="line"><span class="comment"># 导入运算符模块，k近邻算法执行排序操作时将会使用这个模块提供的函数</span></span><br><span class="line"><span class="keyword">import</span> operator</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">createDataSet</span><span class="params">()</span>:</span></span><br><span class="line">    group = array([[<span class="number">1.0</span>, <span class="number">1.1</span>], [<span class="number">1.0</span>, <span class="number">1.0</span>], [<span class="number">0</span>, <span class="number">0</span>], [<span class="number">0</span>, <span class="number">0.1</span>]])</span><br><span class="line">    labels = [<span class="string">'A'</span>, <span class="string">'A'</span>, <span class="string">'B'</span>, <span class="string">'B'</span>]</span><br><span class="line">    <span class="keyword">return</span> group, labels</span><br></pre></td></tr></table></figure>
-<h2 id="实现KNN分类算法"><a href="#实现KNN分类算法" class="headerlink" title="实现KNN分类算法"></a>实现KNN分类算法</h2><blockquote>
-<p>采用欧式距离公式计算两个数据点之间的距离，从小到大排序，确定前k个最小距离元素所对应的分类</p>
-</blockquote>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">classify</span><span class="params">(inX, dataSet, labels, k)</span>:</span></span><br><span class="line">  <span class="string">"""</span></span><br><span class="line"><span class="string">  根据欧式距离公式计算出的距离从小到大排序，返回前k个元素</span></span><br><span class="line"><span class="string">  :param inX: 用于分类的输入向量</span></span><br><span class="line"><span class="string">  :param dataSet: 输入的训练样本集</span></span><br><span class="line"><span class="string">  :param labels: 标签向量</span></span><br><span class="line"><span class="string">  :param k: 标签向量元素的个数或训练集中数据的行数</span></span><br><span class="line"><span class="string">  :return:</span></span><br><span class="line"><span class="string">  """</span></span><br><span class="line">  dataSetSize = dataSet.shape[<span class="number">0</span>]</span><br><span class="line">  <span class="comment"># 距离计算</span></span><br><span class="line">  diffMat = tile(inX, (dataSetSize, <span class="number">1</span>)) - dataSet</span><br><span class="line">  sqDiffMat = diffMat ** <span class="number">2</span></span><br><span class="line">  sqDistances = sqDiffMat.sum(axis=<span class="number">1</span>)</span><br><span class="line">  distances = sqDistances ** <span class="number">0.5</span></span><br><span class="line">  sortedDistIndicies = distances.argsort()</span><br><span class="line">  classCount = &#123;&#125;</span><br><span class="line">  <span class="comment"># 以下两行，选择距离最小的k个点</span></span><br><span class="line">  <span class="keyword">for</span> i <span class="keyword">in</span> range(k):</span><br><span class="line">      votellabel = labels[sortedDistIndicies[i]]</span><br><span class="line">      classCount[votellabel] = classCount.get(votellabel, <span class="number">0</span>) + <span class="number">1</span></span><br><span class="line">      sortedClassCount = sorted(classCount.items(), key=operator.itemgetter(<span class="number">1</span>), reverse=<span class="literal">True</span>)</span><br><span class="line">  <span class="keyword">return</span> sortedClassCount[<span class="number">0</span>][<span class="number">0</span>]</span><br></pre></td></tr></table></figure>
-<h3 id="numpy中的tile-方法"><a href="#numpy中的tile-方法" class="headerlink" title="numpy中的tile()方法"></a>numpy中的tile()方法</h3><blockquote>
-<p>的功能是重复某个数组。比如tile(A,n)，功能是将数组A重复n次，构成一个新的数组<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">num = [<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>]</span><br><span class="line">tile(num, <span class="number">2</span>) <span class="comment"># 返回一个数组，将num重复两次</span></span><br><span class="line">tile(num, (<span class="number">1</span>, <span class="number">2</span>)) <span class="comment"># 返回一个1行并且将num重复两次的矩阵</span></span><br><span class="line">tile(num, (<span class="number">2</span>, <span class="number">3</span>)) <span class="comment"># 返回一个两行并且每行将num重复3次的矩阵</span></span><br></pre></td></tr></table></figure></p>
-</blockquote>
-<p>结果是：</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">[<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>]</span><br><span class="line">[[<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>]]</span><br><span class="line">[[<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>], [<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>]]</span><br></pre></td></tr></table></figure>
-<h3 id="字典使用get-方法"><a href="#字典使用get-方法" class="headerlink" title="字典使用get()方法"></a>字典使用get()方法</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">classCount[votellabel] = classCount.get(votellabel, <span class="number">0</span>) + <span class="number">1</span></span><br></pre></td></tr></table></figure>
-<p>作用：从classCount字典中获取votellabel的元素，如果不存在返回0</p>
-<h3 id="operator模块的itemgetter-方法"><a href="#operator模块的itemgetter-方法" class="headerlink" title="operator模块的itemgetter()方法"></a>operator模块的itemgetter()方法</h3><blockquote>
-<p>operator模块提供的itemgetter函数用于获取对象的哪些维的数据</p>
-</blockquote>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sortedClassCount = sorted(classCount.items(), key=operator.itemgetter(<span class="number">1</span>), reverse=<span class="literal">True</span>)</span><br></pre></td></tr></table></figure>
-<p>operator.itemgetter函数<del>获取的不是值</del>，而是<strong>定义了一个函数</strong>，通过该函数作用到对象上才能获取值。</p>
-<h2 id="测试分类器"><a href="#测试分类器" class="headerlink" title="测试分类器"></a>测试分类器</h2><blockquote>
-<p>k近邻算法的错误率在0-1之间， 错误率=错误次数/测试执行的总数</p>
-</blockquote>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">group, labels = createDataSet()</span><br><span class="line">print(classify([<span class="number">0</span>, <span class="number">0</span>], group, labels, <span class="number">3</span>))</span><br></pre></td></tr></table></figure>
-<h1 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h1><p>上面就是一个简单的分类器的简单实现，采用欧式距离公式计算两个数据点的距离</p>
-<h2 id="k近邻算法的缺点"><a href="#k近邻算法的缺点" class="headerlink" title="k近邻算法的缺点"></a>k近邻算法的缺点</h2><ol>
-<li>如果期望k近邻算法能够表现优秀，我们必须有接近实际数据的训练样本集</li>
-<li>由于必须对数据集中的每个数据计算距离值，在实际使用中(如需要实时计算或数据量超级大时)可能非常耗时</li>
-<li>无法给出任何数据的基础结构信息，因此我们无法知晓平均实例样本和典型实例样本具有什么特征</li>
-<li>k近邻算法可以很好的完成分类任务，但是最大的缺点就是无法给出数据的内在含义</li>
-</ol>
-    
-    <a href="/2019/06/07/MLA-01-k-近邻算法初探/" class="post-more waves-effect waves-button">
-        more
-    </a>
-    </div>
-</article>
-
-<div class="post-footer">
-    
-	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/K近邻算法/">K近邻算法</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/ML/">ML</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Machine-Learning/">Machine Learning</a></li></ul>
-
-</div>
-
-
-            </li>
-        
-            <li class="post-list-item fade">
-                <article id="post-使用Flask实现一个简单的图书管理"
-  class="article-card article-type-post" itemprop="blogPost">
-  
-    
-    
-    <div class="top" data-title="2">
-    <div class="top-wrap">
-        <p></p>
-    </div>
-</div>
-    
-    
-        
-
-
-  
-    <h3 class="post-title re-title" itemprop="name">
-      <a class="post-title-link" href="/2019/05/17/使用Flask实现一个简单的图书管理/">使用Flask实现一个简单的图书管理</a>
-    </h3>
-  
-
-
-
-    
-    <div class="post-meta">
-        <time class="post-time" title="2019-05-17 02:00:56" datetime="2019-05-17T02:00:56.000Z"  itemprop="datePublished">2019-05-17</time>
-
-        
-	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/Flask/">Flask</a></li></ul>
-
-
-
-        
-	<span id="/2019/05/17/使用Flask实现一个简单的图书管理/" class="leancloud_visitors" data-flag-title="使用Flask实现一个简单的图书管理" title="使用Flask实现一个简单的图书管理">
-		
-			<i class="icon icon-eye"></i>
-		
-		<span class="leancloud-visitors-count"></span>
-	</span>
- 
-
-        
-
-
-        
-  <span><i class="icon icon-github"></i></span>
-
-        
-    </div>
-    
-    <div class="post-content" id="post-content" itemprop="postContent">
-    
-    
-        <h2 id="项目演示以及讲解项目开发流程"><a href="#项目演示以及讲解项目开发流程" class="headerlink" title="项目演示以及讲解项目开发流程"></a>项目演示以及讲解项目开发流程</h2><ol>
-<li>配置连接数据库</li>
-<li>添加书和作者模型</li>
-<li>添加数据</li>
-<li>使用模板显示数据库查询的数据</li>
-<li>使用WTF显示变淡</li>
-<li>实现相关增删逻辑</li>
-</ol>
-<h2 id="配置数据库"><a href="#配置数据库" class="headerlink" title="配置数据库"></a>配置数据库</h2><ol>
-<li>导入SQLAlchemy</li>
-<li>配置数据库</li>
-<li>关闭动态跟踪修改</li>
-<li>创建数据库对象</li>
-<li>使用终端创建数据库</li>
-</ol>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> flask_sqlalchemy <span class="keyword">import</span> SQLAlchemy</span><br><span class="line"></span><br><span class="line"><span class="comment"># 数据库配置</span></span><br><span class="line">app.config[<span class="string">'SQLALCHEMY_DATABASE_URI'</span>] = <span class="string">'mysql://root:123456@localhost:3306/flask_books'</span></span><br><span class="line"><span class="comment"># 关闭自动跟踪修改</span></span><br><span class="line">app.config[<span class="string">'SQLALCHEMY_TRACK_MODIFICATIONS'</span>] = <span class="literal">False</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 创建数据库对象，并将数据库对应与对应的app绑定起来</span></span><br><span class="line">db = SQLAlchemy(app)</span><br></pre></td></tr></table></figure>
-<h3 id="定义书和作者模型"><a href="#定义书和作者模型" class="headerlink" title="定义书和作者模型"></a>定义书和作者模型</h3><ul>
-<li>模型继承自db.Model</li>
-<li><strong>tablename</strong> 指定表名</li>
-<li>db.Column() 标明是一个字段</li>
-<li>db.relationship 定义关系引用 </li>
-</ul>
-    
-    <a href="/2019/05/17/使用Flask实现一个简单的图书管理/" class="post-more waves-effect waves-button">
-        more
-    </a>
-    </div>
-</article>
-
-<div class="post-footer">
-    
-	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Flask/">Flask</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Python/">Python</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Web/">Web</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/flask/">flask</a></li></ul>
-
-</div>
-
-
-            </li>
-        
         </ul>
         
 <nav id="page-nav">
@@ -1266,7 +1257,7 @@ git reset 默认是 git reset –mixed
     </span>
     
     <span class="blogroll-item">
-        <a href="https://twitter.com/SiVan_Wu" target="_blank">Twitter</a>
+        <a href="https://twitter.com/yirufeng1" target="_blank">Twitter</a>
     </span>
     
 </p>
@@ -1277,7 +1268,7 @@ git reset 默认是 git reset –mixed
     <div class="bottom">
         <p>
             <span>
-                逸如风(yirufeng) &copy; 2016 - 2019
+                逸如风(yirufeng) &copy; 2016 - 2020
             </span>
 
            	

@@ -252,6 +252,144 @@
         <ul class="post-list">
         
             <li class="post-list-item fade">
+                <article id="post-Swing窗体取消标题如何拖动"
+  class="article-card article-type-post" itemprop="blogPost">
+  
+    
+    
+    
+        
+
+
+  
+    <h3 class="post-title re-title" itemprop="name">
+      <a class="post-title-link" href="/2017/05/05/Swing窗体取消标题如何拖动/">Swing窗体取消标题如何拖动</a>
+    </h3>
+  
+
+
+
+    
+    <div class="post-meta">
+        <time class="post-time" title="2017-05-05 00:24:13" datetime="2017-05-05T00:24:13.000Z"  itemprop="datePublished">2017-05-05</time>
+
+        
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/Java/">Java</a><ul class="article-category-list-child"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/Java/Swing/">Swing</a></li></ul></li></ul>
+
+
+
+        
+	<span id="/2017/05/05/Swing窗体取消标题如何拖动/" class="leancloud_visitors" data-flag-title="Swing窗体取消标题如何拖动" title="Swing窗体取消标题如何拖动">
+		
+			<i class="icon icon-eye"></i>
+		
+		<span class="leancloud-visitors-count"></span>
+	</span>
+ 
+
+        
+
+
+        
+        
+    </div>
+    
+    <div class="post-content" id="post-content" itemprop="postContent">
+    
+    
+        <blockquote>
+<p>众所周知，swing中的窗体默认提供了边框以及标题栏，但是我们设置undecorated为true之后，不会使用Swing中的窗体来修饰，但是默认窗体也将不会随着鼠标的拖动而移动，因此我们需要给我们自己窗体添加一个随着鼠标移动而移动的事件</p>
+</blockquote>
+<h2 id="添加鼠标监听器事件"><a href="#添加鼠标监听器事件" class="headerlink" title="添加鼠标监听器事件"></a>添加鼠标监听器事件</h2><blockquote>
+<p>窗体移动默认都是鼠标按下之后，鼠标开始移动，窗体也会跟着鼠标开始移动！鼠标移动之前，我们需要记录按下鼠标时相对于窗体的位置，因为移动将不会改变鼠标相对于窗体的位置</p>
+</blockquote>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">frame.addMouseListener(<span class="keyword">new</span> MouseAdapter() &#123;</span><br><span class="line">          <span class="meta">@Override</span></span><br><span class="line">          <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">mousePressed</span><span class="params">(MouseEvent e)</span> </span>&#123;</span><br><span class="line">            pressedPoint = e.getPoint();<span class="comment">/*记录鼠标相对于窗体坐标*/</span></span><br><span class="line">          &#125;</span><br><span class="line">      &#125;);</span><br></pre></td></tr></table></figure>
+    
+    <a href="/2017/05/05/Swing窗体取消标题如何拖动/" class="post-more waves-effect waves-button">
+        more
+    </a>
+    </div>
+</article>
+
+<div class="post-footer">
+    
+	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Java/">Java</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Swing/">Swing</a></li></ul>
+
+</div>
+
+
+            </li>
+        
+            <li class="post-list-item fade">
+                <article id="post-泛型"
+  class="article-card article-type-post" itemprop="blogPost">
+  
+    
+    
+    
+        
+
+
+  
+    <h3 class="post-title re-title" itemprop="name">
+      <a class="post-title-link" href="/2017/03/22/泛型/">泛型</a>
+    </h3>
+  
+
+
+
+    
+    <div class="post-meta">
+        <time class="post-time" title="2017-03-22 02:56:28" datetime="2017-03-22T02:56:28.000Z"  itemprop="datePublished">2017-03-22</time>
+
+        
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/Java/">Java</a><ul class="article-category-list-child"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/Java/泛型/">泛型</a></li></ul></li></ul>
+
+
+
+        
+	<span id="/2017/03/22/泛型/" class="leancloud_visitors" data-flag-title="泛型" title="泛型">
+		
+			<i class="icon icon-eye"></i>
+		
+		<span class="leancloud-visitors-count"></span>
+	</span>
+ 
+
+        
+
+
+        
+        
+    </div>
+    
+    <div class="post-content" id="post-content" itemprop="postContent">
+    
+    
+        <blockquote>
+<p>前言：泛型是JDK1.5开始，Java便允许定义泛型类，泛型接口，泛型方法。可以使用泛型对API中一些接口和类进行修改。</p>
+</blockquote>
+<ul>
+<li>JDK1.5之前的java.lang.Comparable</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> java.lang;</span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">interface</span> <span class="title">Comparable</span></span>&#123;</span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">compareTo</span><span class="params">(Object o)</span></span></span><br><span class="line"><span class="function">&#125;</span></span><br></pre></td></tr></table></figure>
+    
+    <a href="/2017/03/22/泛型/" class="post-more waves-effect waves-button">
+        more
+    </a>
+    </div>
+</article>
+
+<div class="post-footer">
+    
+	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Java/">Java</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/泛型/">泛型</a></li></ul>
+
+</div>
+
+
+            </li>
+        
+            <li class="post-list-item fade">
                 <article id="post-Eclipse"
   class="article-card article-type-post" itemprop="blogPost">
   
@@ -803,139 +941,6 @@
 
             </li>
         
-            <li class="post-list-item fade">
-                <article id="post-Android-目录字典"
-  class="article-card article-type-post" itemprop="blogPost">
-  
-    
-    
-    
-        
-
-
-  
-    <h3 class="post-title re-title" itemprop="name">
-      <a class="post-title-link" href="/2016/12/25/Android-目录字典/">[Android]-目录字典</a>
-    </h3>
-  
-
-
-
-    
-    <div class="post-meta">
-        <time class="post-time" title="2016-12-25 02:52:50" datetime="2016-12-25T02:52:50.000Z"  itemprop="datePublished">2016-12-25</time>
-
-        
-	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/Android/">Android</a></li></ul>
-
-
-
-        
-	<span id="/2016/12/25/Android-目录字典/" class="leancloud_visitors" data-flag-title="[Android]-目录字典" title="[Android]-目录字典">
-		
-			<i class="icon icon-eye"></i>
-		
-		<span class="leancloud-visitors-count"></span>
-	</span>
- 
-
-        
-
-
-        
-        
-    </div>
-    
-    <div class="post-content" id="post-content" itemprop="postContent">
-    
-    
-        <h2 id="src"><a href="#src" class="headerlink" title="src"></a>src</h2><p>存放Android应用程序源代码的文件，通过在该文件夹下，通常创建包来进行区分不同的功能，在相应的包写上对应功能的程序代码，比如将服务，广播，还有活动区别分来</p>
-    
-    <a href="/2016/12/25/Android-目录字典/" class="post-more waves-effect waves-button">
-        more
-    </a>
-    </div>
-</article>
-
-<div class="post-footer">
-    
-	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Android/">Android</a></li></ul>
-
-</div>
-
-
-            </li>
-        
-            <li class="post-list-item fade">
-                <article id="post-Java-5"
-  class="article-card article-type-post" itemprop="blogPost">
-  
-    
-    
-    
-        
-
-
-  
-    <h3 class="post-title re-title" itemprop="name">
-      <a class="post-title-link" href="/2016/12/23/Java-5/">[Java]-5</a>
-    </h3>
-  
-
-
-
-    
-    <div class="post-meta">
-        <time class="post-time" title="2016-12-23 02:54:55" datetime="2016-12-23T02:54:55.000Z"  itemprop="datePublished">2016-12-23</time>
-
-        
-	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/Java/">Java</a><ul class="article-category-list-child"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/Java/基础/">基础</a></li></ul></li></ul>
-
-
-
-        
-	<span id="/2016/12/23/Java-5/" class="leancloud_visitors" data-flag-title="[Java]-5" title="[Java]-5">
-		
-			<i class="icon icon-eye"></i>
-		
-		<span class="leancloud-visitors-count"></span>
-	</span>
- 
-
-        
-
-
-        
-        
-    </div>
-    
-    <div class="post-content" id="post-content" itemprop="postContent">
-    
-    
-        <p><strong>注意: 在JAVA方法中，不允许再定义方法，只可以调用</strong></p>
-<h2 id="封装"><a href="#封装" class="headerlink" title="封装"></a>封装</h2><table><thead><tr><th>访问修饰符</th><th style="text-align:right">所有类</th><th style="text-align:center">当前包以及不同包的子类</th><th>同包的类</th><th>当前类</th></tr></thead><tr align="center"><td>public</td><td style="text-align:right">Y</td><td style="text-align:center">Y</td><td>Y</td><td>Y</td></tr><tr align="center"><td>protected</td><td style="text-align:right">N</td><td style="text-align:center">Y</td><td>Y</td><td>Y</td></tr><tr align="center"><td>默认(不写)</td><td style="text-align:right">N</td><td style="text-align:center">N</td><td>Y</td><td>Y</td></tr><tr align="center"><td>private</td><td style="text-align:right">N</td><td style="text-align:center">N</td><td>N</td><td>N</td></tr></table>
-
-
-<blockquote>
-<p>其实访问修饰符就是帮助JAVA实现封装，封装就是我们生活中的包装，例如食物不包装会腐烂，汽车不包装会生锈，但是在JAVA中，我们封装可以提高安全性，可以避免恶意程序的调用，当然完全封装也不利于我们对功能的实现，所以我们在封装的时候，会留下接口，其实接口就是我们在封装所设置的set以及get方法</p>
-</blockquote>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">注意：JAVA中方法的重写时，子类方法的访问修饰符   &gt;=   父类的访问修饰符</span><br></pre></td></tr></table></figure>
-    
-    <a href="/2016/12/23/Java-5/" class="post-more waves-effect waves-button">
-        more
-    </a>
-    </div>
-</article>
-
-<div class="post-footer">
-    
-	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/OOP/">OOP</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/final/">final</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/static/">static</a></li></ul>
-
-</div>
-
-
-            </li>
-        
         </ul>
         
 <nav id="page-nav">
@@ -979,7 +984,7 @@
     </span>
     
     <span class="blogroll-item">
-        <a href="https://twitter.com/SiVan_Wu" target="_blank">Twitter</a>
+        <a href="https://twitter.com/yirufeng1" target="_blank">Twitter</a>
     </span>
     
 </p>
@@ -990,7 +995,7 @@
     <div class="bottom">
         <p>
             <span>
-                逸如风(yirufeng) &copy; 2016 - 2019
+                逸如风(yirufeng) &copy; 2016 - 2020
             </span>
 
            	
