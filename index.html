@@ -252,6 +252,100 @@
         <ul class="post-list">
         
             <li class="post-list-item fade">
+                <article id="post-opencv-直方图统计与显示"
+  class="article-card article-type-post" itemprop="blogPost">
+  
+    
+    
+    <div class="top" data-title="2">
+    <div class="top-wrap">
+        <p></p>
+    </div>
+</div>
+    
+    
+        
+
+
+  
+    <h3 class="post-title re-title" itemprop="name">
+      <a class="post-title-link" href="/2020/01/12/opencv-直方图统计与显示/">opencv-直方图统计与显示</a>
+    </h3>
+  
+
+
+
+    
+    <div class="post-meta">
+        <time class="post-time" title="2020-01-12 19:11:24" datetime="2020-01-12T19:11:24.000Z"  itemprop="datePublished">2020-01-12</time>
+
+        
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/OpenCV/">OpenCV</a></li></ul>
+
+
+
+        
+	<span id="/2020/01/12/opencv-直方图统计与显示/" class="leancloud_visitors" data-flag-title="opencv-直方图统计与显示" title="opencv-直方图统计与显示">
+		
+			<i class="icon icon-eye"></i>
+		
+		<span class="leancloud-visitors-count"></span>
+	</span>
+ 
+
+        
+
+
+        
+  <span><i class="icon icon-github"></i></span>
+
+        
+    </div>
+    
+    <div class="post-content" id="post-content" itemprop="postContent">
+    
+    
+        <p>使用opencv操作直方图需要进行的两个步骤：</p>
+<ol>
+<li>统计直方图</li>
+<li>显示直方图</li>
+</ol>
+<h1 id="直方图"><a href="#直方图" class="headerlink" title="直方图"></a>直方图</h1><p>什么是直方图呢？通过直方图你可以对整幅图像的灰度分布有一个整体的 了解。直方图的 x 轴是灰度值（0 到 255），y 轴是图片中具有同一个灰度值的 点的数目</p>
+<p>直方图的绘制包括最核心的两步：<strong>统计直方图，绘制直方图</strong></p>
+<h2 id="使用opencv-统计直方图"><a href="#使用opencv-统计直方图" class="headerlink" title="使用opencv 统计直方图"></a>使用opencv 统计直方图</h2><p><strong>函数 cv2.calcHist 可以帮助我们统计一幅图像 的直方图</strong></p>
+<p>cv2.calcHist(images, channels, mask, histSize, ranges, hist, accumulate)</p>
+<p>返回值：返回的hist 是一个 256x1 的数组，每一个值代表了与次灰度值对应的像素点数 目</p>
+<p>参数解释：</p>
+<ol>
+<li><p>images: 原图像（图像格式为 uint8 或 ﬂoat32）。当传入函数时应该 用中括号 [] 括起来，例如：[img]。</p>
+</li>
+<li><p>channels: 同样需要用中括号括起来，它会告诉函数我们要统计那幅图 像的直方图。如果输入图像是灰度图，它的值就是 [0]；如果是彩色图像 的话，传入的参数可以是 [0]，[1]，[2] 它们分别对应着通道 B，G，R。</p>
+</li>
+<li><p>mask: 掩模图像。要统计整幅图像的直方图就把它设为 None。但是如 果你想统计图像某一部分的直方图的话，你就需要制作一个掩模图像，并 使用它。（后边有例子）</p>
+</li>
+<li><p>histSize:BIN 的数目。也应该用中括号括起来，例如：[256]。</p>
+</li>
+<li><p>ranges: 像素值范围，通常为 [0，256]</p>
+</li>
+</ol>
+<p><strong>image.ravel() 将图像转换成一维数组</strong></p>
+    
+    <a href="/2020/01/12/opencv-直方图统计与显示/" class="post-more waves-effect waves-button">
+        more
+    </a>
+    </div>
+</article>
+
+<div class="post-footer">
+    
+	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/OpenCV/">OpenCV</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Python/">Python</a></li></ul>
+
+</div>
+
+
+            </li>
+        
+            <li class="post-list-item fade">
                 <article id="post-opencv-视频篇"
   class="article-card article-type-post" itemprop="blogPost">
   
@@ -963,174 +1057,6 @@
 <div class="post-footer">
     
 	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Paper/">Paper</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/notes/">notes</a></li></ul>
-
-</div>
-
-
-            </li>
-        
-            <li class="post-list-item fade">
-                <article id="post-数据竞赛-数据预处理以及特征选择"
-  class="article-card article-type-post" itemprop="blogPost">
-  
-    
-    
-    <div class="top" data-title="2">
-    <div class="top-wrap">
-        <p></p>
-    </div>
-</div>
-    
-    
-        
-
-
-  
-    <h3 class="post-title re-title" itemprop="name">
-      <a class="post-title-link" href="/2019/11/04/数据竞赛-数据预处理以及特征选择/">数据竞赛:数据预处理以及特征选择</a>
-    </h3>
-  
-
-
-
-    
-    <div class="post-meta">
-        <time class="post-time" title="2019-11-04 08:48:25" datetime="2019-11-04T08:48:25.000Z"  itemprop="datePublished">2019-11-04</time>
-
-        
-	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/数据竞赛/">数据竞赛</a><ul class="article-category-list-child"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/数据竞赛/数据处理以及特征工程/">数据处理以及特征工程</a></li></ul></li></ul>
-
-
-
-        
-	<span id="/2019/11/04/数据竞赛-数据预处理以及特征选择/" class="leancloud_visitors" data-flag-title="数据竞赛:数据预处理以及特征选择" title="数据竞赛:数据预处理以及特征选择">
-		
-			<i class="icon icon-eye"></i>
-		
-		<span class="leancloud-visitors-count"></span>
-	</span>
- 
-
-        
-
-
-        
-        
-    </div>
-    
-    <div class="post-content" id="post-content" itemprop="postContent">
-    
-    
-        <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> pandas <span class="keyword">as</span> pd</span><br><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line"></span><br><span class="line">data = pd.DataFrame([[<span class="number">1</span>, np.nan, <span class="number">3</span>], [<span class="number">4</span>, <span class="number">5</span>, np.nan], [<span class="number">7</span>, <span class="number">8</span>, <span class="number">9</span>]])</span><br><span class="line">print(data)</span><br></pre></td></tr></table></figure>
-<h1 id="对缺失数据的处理"><a href="#对缺失数据的处理" class="headerlink" title="对缺失数据的处理"></a>对缺失数据的处理</h1><h2 id="删除"><a href="#删除" class="headerlink" title="删除"></a>删除</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">data1 = data.dropna()  <span class="comment"># 默认是按照行删除</span></span><br><span class="line">data2 = data.dropna(axis=<span class="number">0</span>)  <span class="comment"># 按照行删除</span></span><br><span class="line">data3 = data.dropna(axis=<span class="number">1</span>)  <span class="comment"># 按照列删除</span></span><br><span class="line">print(data1)</span><br><span class="line">print(data2)</span><br><span class="line">print(data3)</span><br></pre></td></tr></table></figure>
-<p><strong>note:前面几个虽然删除了空数据，但是并没有对data中的数据进行删除，需要我们指定inplace=True才会对在data上删除</strong><br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">data.dropna(axis=<span class="number">1</span>, inplace=<span class="literal">True</span>)</span><br><span class="line">print(data)</span><br></pre></td></tr></table></figure></p>
-<h2 id="填充"><a href="#填充" class="headerlink" title="填充"></a>填充</h2><p>指定值进行填充<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">data = pd.DataFrame([[<span class="number">1</span>, np.nan, <span class="number">3</span>], [<span class="number">4</span>, <span class="number">5</span>, np.nan], [<span class="number">7</span>, <span class="number">8</span>, <span class="number">9</span>]])</span><br><span class="line">print(data)</span><br><span class="line"></span><br><span class="line">data1 = data.fillna(<span class="number">-1</span>)  <span class="comment"># 用指定值进行填充</span></span><br><span class="line">print(data1)</span><br></pre></td></tr></table></figure></p>
-<p>均值填充<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">print(data.mean())  <span class="comment"># 默认是按照列求均值，计算有值的数值的和，然后统计有值的数值的个数，用和求个数得到每列均值</span></span><br><span class="line">data2 = data.fillna(data.mean())</span><br><span class="line">print(data2)</span><br></pre></td></tr></table></figure></p>
-<p>采用前面的值填充<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">data3 = data.fillna(method=<span class="string">'pad'</span>)  <span class="comment"># 使用数据的前一个值(所在列的前一个值，即上一行该列的元素值)对后一个值进行填充</span></span><br><span class="line">print(data3)</span><br></pre></td></tr></table></figure></p>
-<p>采用后面的值进行填充<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">data4 = data.fillna(method=<span class="string">'bfill'</span>)  <span class="comment"># 使用数据的后一个值对前一个值进行填充</span></span><br><span class="line">print(data4)</span><br><span class="line"></span><br><span class="line">data5 = data.interpolate()  <span class="comment"># 采用差值法进行填充，默认是线性差值, 算是预测填充的一种</span></span><br><span class="line">print(data5)</span><br></pre></td></tr></table></figure></p>
-<h1 id="处理缺失值与重复值"><a href="#处理缺失值与重复值" class="headerlink" title="处理缺失值与重复值"></a>处理缺失值与重复值</h1><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 处理缺失值与重复值</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">Data_preprocessing</span><span class="params">(x, feat_Remv)</span>:</span></span><br><span class="line">    <span class="comment"># 删除重复值</span></span><br><span class="line">    x = x.drop_duplicates()</span><br><span class="line"></span><br><span class="line">    <span class="comment"># 删除指定字段</span></span><br><span class="line">    x = x.drop(feat_Remv, axis=<span class="number">1</span>)</span><br><span class="line"></span><br><span class="line">    <span class="comment"># 补充缺失值</span></span><br><span class="line">    x = x.fillna(<span class="number">-1</span>)</span><br><span class="line">    <span class="keyword">return</span> x</span><br><span class="line"></span><br><span class="line">feat_Remv = [<span class="string">'instance_id'</span>, <span class="string">'creative_is_js'</span>, <span class="string">'creative_is_voicead'</span>, <span class="string">'app_paid'</span>]</span><br><span class="line">train_data = Data_preprocessing(train_data, feat_Remv)</span><br><span class="line">test_data = Data_preprocessing(test_data, feat_Remv)</span><br></pre></td></tr></table></figure>
-<h1 id="特征缩放"><a href="#特征缩放" class="headerlink" title="特征缩放"></a>特征缩放</h1><ol>
-<li>Min-Max normalization: (x - min) / (max - min)</li>
-<li>Mean normalization: (x - avg) / (max - min)</li>
-<li>Standardization: (x - avg) / (std)</li>
-</ol>
-<h2 id="如何做特征缩放"><a href="#如何做特征缩放" class="headerlink" title="如何做特征缩放"></a>如何做特征缩放</h2><h3 id="Min-Max-normalization"><a href="#Min-Max-normalization" class="headerlink" title="Min-Max normalization"></a>Min-Max normalization</h3><p><strong>Note:归一化不是让特征值范围是0-1之间，指所在一个特定范围内</strong><br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> sklearn.preprocessing <span class="keyword">import</span> MinMaxScaler</span><br><span class="line">data = [[<span class="number">1</span>, <span class="number">1</span>, <span class="number">1</span>, <span class="number">1</span>], [<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>], [<span class="number">2</span>, <span class="number">4</span>, <span class="number">9</span>, <span class="number">16</span>]]</span><br><span class="line">print(MinMaxScaler(feature_range=(<span class="number">0</span>, <span class="number">1</span>)).fit_transform(data))  <span class="comment"># feature_map选择归一化后的取值范围</span></span><br><span class="line"></span><br><span class="line">data = [[<span class="number">1</span>, <span class="number">1</span>, <span class="number">1</span>, <span class="number">1</span>], [<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>], [<span class="number">2</span>, <span class="number">4</span>, <span class="number">9</span>, <span class="number">16</span>]]</span><br><span class="line">print(MinMaxScaler(feature_range=(<span class="number">-2</span>, <span class="number">2</span>)).fit_transform(data))  <span class="comment"># feature_map选择归一化后的取值范围为-2~2</span></span><br><span class="line"></span><br><span class="line"><span class="comment">### Mean normalization</span></span><br><span class="line">data = [[<span class="number">1</span>, <span class="number">1</span>, <span class="number">1</span>, <span class="number">1</span>], [<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>], [<span class="number">2</span>, <span class="number">4</span>, <span class="number">9</span>, <span class="number">16</span>]]</span><br><span class="line">df = pd.DataFrame(data)</span><br><span class="line">print(np.max(df))  <span class="comment"># 求得每列的最大值，并返回一个ndarray</span></span><br><span class="line">print(np.mean(df))  <span class="comment"># 求得每列的均值，并返回一个ndarray</span></span><br><span class="line">print((df - np.mean(df)) / (np.max(df) - (np.min(df))))</span><br><span class="line"></span><br><span class="line"><span class="comment">### Standard Normalization</span></span><br><span class="line"><span class="keyword">from</span> sklearn.preprocessing <span class="keyword">import</span> StandardScaler</span><br><span class="line">data = [[<span class="number">1</span>, <span class="number">1</span>, <span class="number">1</span>, <span class="number">1</span>], [<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>], [<span class="number">2</span>, <span class="number">4</span>, <span class="number">9</span>, <span class="number">16</span>]]</span><br><span class="line">print(StandardScaler().fit_transform(data))  <span class="comment"># 其实这里包含两个步骤，一个训练成一个简单模型，之后转换</span></span><br></pre></td></tr></table></figure></p>
-<h1 id="样本不均衡"><a href="#样本不均衡" class="headerlink" title="样本不均衡"></a>样本不均衡</h1><blockquote>
-<p>对于样本不均衡，也会给我们进行相关的机器学习任务带来困难</p>
-</blockquote>
-<p>解决办法：</p>
-<ol>
-<li>上采样：增加分类中样本较少的类别的采样数量来实现样本的均衡<ol>
-<li>直接复制小样本数据，但是容易过拟合</li>
-<li>通过一定规则生成新的变量，如smote</li>
-</ol>
-</li>
-<li>下采样：减少分类中多数类样本的样本数量来实现样本均衡<ol>
-<li>随机去掉一些多数类，缺点是可能丢失一些重要的信息</li>
-<li>根据原始样本生成新样本来代替多数类样本</li>
-</ol>
-</li>
-<li>对每个类别设置权重：通常与数量比成反比</li>
-<li>集成学习：生成多组样本来进行训练，例如选择全部的少数样本，每次从多数样本中选择与少数样本数量一致的多数样本进行训练，训练多次</li>
-</ol>
-<p><strong>生成一个不平衡的样本</strong><br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 生成一个不平衡的样本</span></span><br><span class="line"><span class="keyword">from</span> sklearn.datasets <span class="keyword">import</span> make_classification</span><br><span class="line"><span class="keyword">from</span> collections <span class="keyword">import</span> Counter</span><br><span class="line">X, y = make_classification(n_samples=<span class="number">5000</span>,  <span class="comment"># 生成样本的数量</span></span><br><span class="line">                           n_features=<span class="number">2</span>,  <span class="comment"># 生成的样本的特征</span></span><br><span class="line">                           n_informative=<span class="number">2</span>,</span><br><span class="line">                           n_redundant=<span class="number">0</span>,</span><br><span class="line">                           n_repeated=<span class="number">0</span>,</span><br><span class="line">                           n_classes=<span class="number">3</span>,  <span class="comment"># 生成的样本的类别</span></span><br><span class="line">                           n_clusters_per_class=<span class="number">1</span>,</span><br><span class="line">                           weights=[<span class="number">0.01</span>, <span class="number">0.05</span>, <span class="number">0.94</span>],  <span class="comment"># 生成的每个样本类别的权重</span></span><br><span class="line">                           class_sep=<span class="number">0.8</span>,</span><br><span class="line">                           random_state=<span class="number">0</span></span><br><span class="line">                           )</span><br><span class="line">print(X.shape)</span><br></pre></td></tr></table></figure></p>
-<h2 id="方法一：上采样"><a href="#方法一：上采样" class="headerlink" title="方法一：上采样"></a>方法一：上采样</h2><blockquote>
-<p>通过增加分类样本中样本较少的类别的数量来实现平衡，直接复制小样本数据，缺点：容易过拟合<br>from imblearn.over_sampling import RandomOverSampler<br>ros = RandomOverSampler(random_state=0)<br>X_resampled, y_resampled = ros.fit_sample(X, y)<br>print(sorted(Counter(y_resampled).items()))</p>
-</blockquote>
-<blockquote>
-<p>上采样的另一种方法：通过一定规则生成新变量，如smote<br>from imblearn.over_sampling import SMOTE, ADASYN<br>X_resampled, y_resampled = SMOTE(kind=’borderline1’).fit_sample(X, y)<br>print(sorted(Counter(y_resampled).items()))</p>
-</blockquote>
-<h2 id="方法二：下采样"><a href="#方法二：下采样" class="headerlink" title="方法二：下采样"></a>方法二：下采样</h2><blockquote>
-<p>随机去掉一些多数类，缺点是可能会丢失一些重要信息<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> imblearn.under_sampling <span class="keyword">import</span> RandomUnderSampler</span><br><span class="line">rus = RandomUnderSampler(random_state=<span class="number">0</span>)</span><br><span class="line">X_resampled, y_resampled = rus.fit_sample(X, y)</span><br><span class="line">print(sorted(Counter(y_resampled).items()))</span><br></pre></td></tr></table></figure></p>
-</blockquote>
-<blockquote>
-<p>根据原始样本，生成新的样本来替换多数类样本, 通过聚类生成新的中心样本点来进行采样<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> imblearn.under_sampling <span class="keyword">import</span> ClusterCentroids</span><br><span class="line">cc = ClusterCentroids(random_state=<span class="number">0</span>)</span><br><span class="line">X_resampled, y_resampled = cc.fit_sample(X, y)</span><br><span class="line">print(sorted(Counter(y_resampled).items()))</span><br></pre></td></tr></table></figure></p>
-</blockquote>
-<blockquote>
-<p>方法三：集成方法，多次抽取样本的方法<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> imblearn.datasets <span class="keyword">import</span> make_imbalance</span><br><span class="line">ratio = &#123;<span class="number">0</span>:<span class="number">20</span>, <span class="number">1</span>:<span class="number">30</span>, <span class="number">2</span>:<span class="number">40</span>&#125;  <span class="comment"># 抽取的不同样本类别的个数，但是不能超过样本数量，第1类样本20个，第2类样本30个，第3类样本40个</span></span><br><span class="line">X_resampled, y_resampled = make_imbalance(X, y, ratio=ratio)</span><br><span class="line">print(sorted(Counter(y_resampled).items()))</span><br></pre></td></tr></table></figure></p>
-</blockquote>
-<h1 id="识别异常值"><a href="#识别异常值" class="headerlink" title="识别异常值"></a>识别异常值</h1><ol>
-<li>简单的统计分析：对属性值进行一个描述性的统计，从而查看哪些值是不合理的</li>
-<li>3σ原则：根据正态分布的定义，距离平均值3σ之外的概率不超过0.003，属于极小概率事件</li>
-<li>箱型图分析：箱型图提供了一个标准，即大于或小于箱型图设定的上下界的数值为异常值</li>
-<li>聚类分析：如DBSCAN基于密度的聚类方法，可以用于离群点检测</li>
-</ol>
-<p><strong>Note : 找到异常值之后可以修正异常值，采用上面讲过的填充缺失值的方法</strong></p>
-<p><img src="/2019/11/04/数据竞赛-数据预处理以及特征选择/识别异常数据_3σ原则.jpg" alt><br><figure class="image-box" class="index-item-img">
-                <img src="/2019/11/04/数据竞赛-数据预处理以及特征选择/识别异常数据_DBSCAN.jpg" alt title class="index-item-img">
-                <p></p>
-            </figure><br><figure class="image-box">
-                <img src="/2019/11/04/数据竞赛-数据预处理以及特征选择/识别异常数据_箱型图分析.jpg" alt title class="index-item-img">
-                <p></p>
-            </figure></p>
-<h2 id="方法一：箱型图分析"><a href="#方法一：箱型图分析" class="headerlink" title="方法一：箱型图分析"></a>方法一：箱型图分析</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> seaborn <span class="keyword">as</span> sns</span><br><span class="line"><span class="keyword">import</span> matplotlib.pyplot <span class="keyword">as</span> plt</span><br><span class="line">arr = [[np.random.random(), i+np.random.random(), i+<span class="number">1</span>+np.random.random()] <span class="keyword">for</span> i <span class="keyword">in</span> range(<span class="number">18</span>)]</span><br><span class="line">arr.append([<span class="number">11</span>, <span class="number">44</span>, <span class="number">77</span>])</span><br><span class="line">df = pd.DataFrame(arr)</span><br><span class="line">df.columns = [<span class="string">'a'</span>, <span class="string">'b'</span>, <span class="string">'c'</span>]</span><br><span class="line">print(df)</span><br></pre></td></tr></table></figure>
-<h2 id="方法二：3σ原则"><a href="#方法二：3σ原则" class="headerlink" title="方法二：3σ原则"></a>方法二：3σ原则</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">data = [[<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>], [<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>], [<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>], [<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>], [<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>], [<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>], [<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>], [<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>], [<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>], [<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>]]</span><br><span class="line">df = pd.DataFrame(data)</span><br><span class="line">df.columns = [<span class="string">'a'</span>, <span class="string">'b'</span>, <span class="string">'c'</span>]</span><br><span class="line">print(df.std())  <span class="comment"># 求得标准差</span></span><br><span class="line">th1 = df.mean() + <span class="number">3</span> * df.std()  <span class="comment"># 上界</span></span><br><span class="line">th2 = df.mean() - <span class="number">3</span> * df.std()  <span class="comment"># 下界</span></span><br><span class="line">df[<span class="string">'a'</span>] = df[df[<span class="string">'a'</span>] &gt; th2[<span class="string">'a'</span>]]</span><br><span class="line">df[<span class="string">'a'</span>] = df[df[<span class="string">'a'</span>] &lt; th1[<span class="string">'a'</span>]]</span><br><span class="line">print(df)</span><br></pre></td></tr></table></figure>
-<h2 id="方法三：识别异常值–DBSCAN"><a href="#方法三：识别异常值–DBSCAN" class="headerlink" title="方法三：识别异常值–DBSCAN"></a>方法三：识别异常值–DBSCAN</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> sklearn <span class="keyword">import</span> datasets</span><br><span class="line"><span class="keyword">from</span> sklearn.cluster <span class="keyword">import</span> DBSCAN</span><br><span class="line">arr = [[np.random.random(), i+np.random.random()] <span class="keyword">for</span> i <span class="keyword">in</span> range(<span class="number">18</span>)]</span><br><span class="line">arr.append([<span class="number">11</span>, <span class="number">44</span>])</span><br><span class="line">arr = np.array(arr)</span><br><span class="line">plt.scatter(arr[:, <span class="number">0</span>], arr[:, <span class="number">1</span>], marker=<span class="string">'o'</span>)</span><br><span class="line">plt.show()</span><br><span class="line"></span><br><span class="line">y_pred = DBSCAN(eps = <span class="number">3</span>).fit_predict(arr)</span><br><span class="line">plt.scatter(arr[:, <span class="number">0</span>], arr[:, <span class="number">1</span>], c=y_pred)</span><br><span class="line">plt.show()</span><br></pre></td></tr></table></figure>
-<h1 id="特征工程"><a href="#特征工程" class="headerlink" title="特征工程"></a>特征工程</h1><ol>
-<li>特征处理</li>
-<li>特征构建</li>
-<li>特征选择</li>
-</ol>
-<h2 id="特征处理："><a href="#特征处理：" class="headerlink" title="特征处理："></a>特征处理：</h2><h3 id="特征类型"><a href="#特征类型" class="headerlink" title="特征类型:"></a>特征类型:</h3><ol>
-<li>数值类型: 连续型，离散型</li>
-<li>类别类型: 也就是枚举类型</li>
-<li>时间类型: </li>
-<li>文本类型: 例如爬下来的一段评论</li>
-<li>图形类型: </li>
-</ol>
-<p><img src="/2019/11/04/数据竞赛-数据预处理以及特征选择/特征处理_LabelEncoder.jpg" alt><br><figure class="image-box" class="index-item-img">
-                <img src="/2019/11/04/数据竞赛-数据预处理以及特征选择/特征处理_OneHot.jpg" alt title class="index-item-img">
-                <p></p>
-            </figure></p>
-<h4 id="数值类型的特征："><a href="#数值类型的特征：" class="headerlink" title="数值类型的特征："></a>数值类型的特征：</h4><ol>
-<li>特征缩放的几种方法：标准化，归一化，区间缩放</li>
-<li>连续变量的离散化， 分箱</li>
-</ol>
-<h4 id="类别特征："><a href="#类别特征：" class="headerlink" title="类别特征："></a>类别特征：</h4><ol>
-<li>one-hot编码</li>
-<li>LabelEncoder</li>
-</ol>
-<h4 id="时间特征："><a href="#时间特征：" class="headerlink" title="时间特征："></a>时间特征：</h4><ol>
-<li>持续时间</li>
-<li>时间间隔</li>
-</ol>
-<h3 id="连续变量的离散化：分箱-bin"><a href="#连续变量的离散化：分箱-bin" class="headerlink" title="连续变量的离散化：分箱(bin)"></a>连续变量的离散化：分箱(bin)</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">df = pd.DataFrame()</span><br><span class="line">df[<span class="string">'Age'</span>] = np.random.randint(<span class="number">1</span>, <span class="number">100</span>, <span class="number">100</span>)</span><br><span class="line">df[<span class="string">'Age'</span>].hist()  <span class="comment"># 显示一个直方图来统计年龄段</span></span><br><span class="line">bin_ranges = [<span class="number">0</span>, <span class="number">20</span>, <span class="number">30</span>, <span class="number">40</span>, <span class="number">50</span>, <span class="number">60</span>, <span class="number">100</span>]</span><br><span class="line">bin_names = [<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>, <span class="number">5</span>, <span class="number">6</span>]</span><br><span class="line"><span class="comment"># 将(0, 20]作为一个段，并给定标签1，(20, 30]作为一个段，并给定一个标签2，以此类推</span></span><br><span class="line">df[<span class="string">'Age_bin_custom_range'</span>] = pd.cut(np.array(df[<span class="string">'Age'</span>]), bins=bin_ranges)</span><br><span class="line">df[<span class="string">'Age_bin_custom_label'</span>] = pd.cut(np.array(df[<span class="string">'Age'</span>]), bins=bin_ranges, labels=bin_names)</span><br><span class="line">df[[<span class="string">'Age'</span>, <span class="string">'Age_bin_custom_range'</span>, <span class="string">'Age_bin_custom_label'</span>]].head()</span><br></pre></td></tr></table></figure>
-<p><strong>上面是手动分箱，难免会出现一些不规则的划分</strong></p>
-<figure class="image-box">
-                <img src="/2019/11/04/数据竞赛-数据预处理以及特征选择/特征处理_1.jpg" alt title class="index-item-img">
-                <p></p>
-            </figure>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">### 基于4分位数的自适应二进制方案</span></span><br><span class="line">quantile_list = [<span class="number">0</span>, <span class="number">.25</span>, <span class="number">.5</span>, <span class="number">.75</span>, <span class="number">1.</span>]</span><br><span class="line">quantiles = df[<span class="string">'income'</span>].quantile(quantile_list)</span><br><span class="line"><span class="comment">### 可视化这些分位数</span></span><br><span class="line">fig, ax = plt.subplots()</span><br><span class="line">df[<span class="string">'income'</span>].hist(bins=<span class="number">30</span>, color=<span class="string">'#A9C5D3'</span>, edgecolor=<span class="string">'black'</span>, grid=<span class="literal">False</span>)</span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> quantile <span class="keyword">in</span> quantile_list:</span><br><span class="line">    qvl = plt.axvline(quantile, color=<span class="string">'r'</span>)</span><br></pre></td></tr></table></figure>
-    
-    <a href="/2019/11/04/数据竞赛-数据预处理以及特征选择/" class="post-more waves-effect waves-button">
-        more
-    </a>
-    </div>
-</article>
-
-<div class="post-footer">
-    
-	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/数据处理/">数据处理</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/数据预处理/">数据预处理</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/特征工程/">特征工程</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/特征选取/">特征选取</a></li></ul>
 
 </div>
 

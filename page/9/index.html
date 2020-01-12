@@ -252,6 +252,77 @@
         <ul class="post-list">
         
             <li class="post-list-item fade">
+                <article id="post-深入使用MyBatis"
+  class="article-card article-type-post" itemprop="blogPost">
+  
+    
+    
+    
+        
+
+
+  
+    <h3 class="post-title re-title" itemprop="name">
+      <a class="post-title-link" href="/2017/11/19/深入使用MyBatis/">深入使用MyBatis</a>
+    </h3>
+  
+
+
+
+    
+    <div class="post-meta">
+        <time class="post-time" title="2017-11-19 11:02:52" datetime="2017-11-19T11:02:52.000Z"  itemprop="datePublished">2017-11-19</time>
+
+        
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/框架/">框架</a><ul class="article-category-list-child"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/框架/MyBatis/">MyBatis</a></li></ul></li></ul>
+
+
+
+        
+	<span id="/2017/11/19/深入使用MyBatis/" class="leancloud_visitors" data-flag-title="深入使用MyBatis" title="深入使用MyBatis">
+		
+			<i class="icon icon-eye"></i>
+		
+		<span class="leancloud-visitors-count"></span>
+	</span>
+ 
+
+        
+
+
+        
+        
+    </div>
+    
+    <div class="post-content" id="post-content" itemprop="postContent">
+    
+    
+        <h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><blockquote>
+<p>前面几篇文章简要介绍了MyBatis的基本使用，以及一些基本概念，包括我们经常所用到的POJO，还有Dao的两种开发方式，但是我们经常使用的便是VO(View Object)，通过VO我们直接进行业务调用更加容易理解，因为我们每次传递的都是一个VO对象，而不是一个页面传入多个对象，尤其是对于MyBatis中的Sql操作而言，只能传入一个对象，我们可以传入Map，但是不建议这么做，建议使用我们下面所说的VO</p>
+</blockquote>
+<hr>
+<h2 id="使用VO进行MyBatis的高级查询"><a href="#使用VO进行MyBatis的高级查询" class="headerlink" title="使用VO进行MyBatis的高级查询"></a>使用VO进行MyBatis的高级查询</h2><h3 id="输入映射"><a href="#输入映射" class="headerlink" title="输入映射"></a>输入映射</h3><p>输入映射就是我们在Mapper配置文件中所配置的parameterType，不仅仅是基本数据类型，还可以是POJO类型，还可以是VO类型！</p>
+<blockquote>
+<p>假设有一个页面只是对于用户进行操作，VO便是从页面传过来的对象。使用VO可以给我们带来很大的扩展性，进行任何的操作都可以通过VO来进行，可以用来避免使用Map，</p>
+</blockquote>
+<p>用到的POJO类的编写：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> com.pojo;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> java.io.Serializable;</span><br><span class="line"><span class="keyword">import</span> java.sql.Timestamp;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Student</span> <span class="keyword">implements</span> <span class="title">Serializable</span></span>&#123;</span><br><span class="line"></span><br><span class="line">	<span class="keyword">private</span> Integer id;</span><br><span class="line">	<span class="keyword">private</span> String name;</span><br><span class="line">	<span class="keyword">private</span> String sex;</span><br><span class="line">	<span class="keyword">private</span> Timestamp birthday;</span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="title">Student</span><span class="params">()</span> </span>&#123;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="function"><span class="keyword">public</span> Integer <span class="title">getId</span><span class="params">()</span> </span>&#123;</span><br><span class="line">		<span class="keyword">return</span> id;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setId</span><span class="params">(Integer id)</span> </span>&#123;</span><br><span class="line">		<span class="keyword">this</span>.id = id;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="function"><span class="keyword">public</span> String <span class="title">getName</span><span class="params">()</span> </span>&#123;</span><br><span class="line">		<span class="keyword">return</span> name;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setName</span><span class="params">(String name)</span> </span>&#123;</span><br><span class="line">		<span class="keyword">this</span>.name = name;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="function"><span class="keyword">public</span> String <span class="title">getSex</span><span class="params">()</span> </span>&#123;</span><br><span class="line">		<span class="keyword">return</span> sex;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setSex</span><span class="params">(String sex)</span> </span>&#123;</span><br><span class="line">		<span class="keyword">this</span>.sex = sex;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="function"><span class="keyword">public</span> Timestamp <span class="title">getBirthday</span><span class="params">()</span> </span>&#123;</span><br><span class="line">		<span class="keyword">return</span> birthday;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setBirthday</span><span class="params">(Timestamp birthday)</span> </span>&#123;</span><br><span class="line">		<span class="keyword">this</span>.birthday = birthday;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+    
+    <a href="/2017/11/19/深入使用MyBatis/" class="post-more waves-effect waves-button">
+        more
+    </a>
+    </div>
+</article>
+
+<div class="post-footer">
+    
+	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/MyBatis/">MyBatis</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/框架/">框架</a></li></ul>
+
+</div>
+
+
+            </li>
+        
+            <li class="post-list-item fade">
                 <article id="post-入门Mybatis"
   class="article-card article-type-post" itemprop="blogPost">
   
@@ -979,91 +1050,6 @@
 <div class="post-footer">
     
 	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Hibernate/">Hibernate</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/json/">json</a></li></ul>
-
-</div>
-
-
-            </li>
-        
-            <li class="post-list-item fade">
-                <article id="post-解决MySql-8小时自动关闭的问题"
-  class="article-card article-type-post" itemprop="blogPost">
-  
-    
-    
-    
-        
-
-
-  
-    <h3 class="post-title re-title" itemprop="name">
-      <a class="post-title-link" href="/2017/10/28/解决MySql-8小时自动关闭的问题/">解决MySql 8小时自动关闭的问题</a>
-    </h3>
-  
-
-
-
-    
-    <div class="post-meta">
-        <time class="post-time" title="2017-10-28 02:08:04" datetime="2017-10-28T02:08:04.000Z"  itemprop="datePublished">2017-10-28</time>
-
-        
-	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/MySql/">MySql</a><ul class="article-category-list-child"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/MySql/8小时/">8小时</a></li></ul></li></ul>
-
-
-
-        
-	<span id="/2017/10/28/解决MySql-8小时自动关闭的问题/" class="leancloud_visitors" data-flag-title="解决MySql 8小时自动关闭的问题" title="解决MySql 8小时自动关闭的问题">
-		
-			<i class="icon icon-eye"></i>
-		
-		<span class="leancloud-visitors-count"></span>
-	</span>
- 
-
-        
-
-
-        
-        
-    </div>
-    
-    <div class="post-content" id="post-content" itemprop="postContent">
-    
-    
-        <h2 id="前言："><a href="#前言：" class="headerlink" title="前言："></a>前言：</h2><blockquote>
-<p>记得自己之前在服务器上部署了一个很low的假期签到系统，每次叫大家签到都是晚上，很大程度上讲，时间已经过了将近16个小时，每次第二天叫大家签到的时候，很多人，都发了同一个问题给我，服务器报了连接异常，后来听到身边的大牛才知道，原来MySql如果配置不当，连接空闲超过8小时，MySql将会关闭该连接，但是我们服务器认为连接还是存在的，因此还会访问，所以就会出现异常情况</p>
-</blockquote>
-<blockquote>
-<p>也有一部分原因自己是知道的，因为自己采用了c3p0数据源，所以才会出现这个情况，而dbcp则不会出现如此情况！</p>
-</blockquote>
-<hr>
-<h2 id="查询当前数据库连接超时时间"><a href="#查询当前数据库连接超时时间" class="headerlink" title="查询当前数据库连接超时时间"></a>查询当前数据库连接超时时间</h2><blockquote>
-<p>mysql 命令行中 键入如下命令</p>
-</blockquote>
-<p>SHOW GLOBAL VARIABLES LIKE ‘wait_timeout’;</p>
-<blockquote>
-<p>结果如下</p>
-</blockquote>
-<p><img src="http://on3w7gc9m.bkt.clouddn.com/QQ%E5%9B%BE%E7%89%8720171030103053.png"></p   class="index-item-img">
-<p>超时时间为28800秒，换算下来也就是8小时</p>
-<hr>
-<h2 id="解决方法"><a href="#解决方法" class="headerlink" title="解决方法"></a>解决方法</h2><h3 id="方法一："><a href="#方法一：" class="headerlink" title="方法一："></a>方法一：</h3><blockquote>
-<p>这个也是自己之前的方法：也就是采用一个简单的定时器，每隔7小时定时查一下数据库，不让连接自动关闭，</p>
-</blockquote>
-<h3 id="方法二："><a href="#方法二：" class="headerlink" title="方法二："></a>方法二：</h3><blockquote>
-<p>每次当我们连接到数据库中的时候，url可改为：<br>jdbc:mysql://localhost:3306/test?user=root&amp;password=root&amp;useUnicode=true&amp;characterEncoding=utf8&amp;autoReconnect=true&amp;failOverReadOnly=false</p>
-</blockquote>
-    
-    <a href="/2017/10/28/解决MySql-8小时自动关闭的问题/" class="post-more waves-effect waves-button">
-        more
-    </a>
-    </div>
-</article>
-
-<div class="post-footer">
-    
-	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Hibernate/">Hibernate</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/MySql/">MySql</a></li></ul>
 
 </div>
 

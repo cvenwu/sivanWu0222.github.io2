@@ -252,6 +252,81 @@
         <ul class="post-list">
         
             <li class="post-list-item fade">
+                <article id="post-C3P0连接池的使用"
+  class="article-card article-type-post" itemprop="blogPost">
+  
+    
+    
+    
+        
+
+
+  
+    <h3 class="post-title re-title" itemprop="name">
+      <a class="post-title-link" href="/2017/07/07/C3P0连接池的使用/">C3P0连接池的使用</a>
+    </h3>
+  
+
+
+
+    
+    <div class="post-meta">
+        <time class="post-time" title="2017-07-07 04:42:40" datetime="2017-07-07T04:42:40.000Z"  itemprop="datePublished">2017-07-07</time>
+
+        
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/Java/">Java</a></li></ul>
+
+
+
+        
+	<span id="/2017/07/07/C3P0连接池的使用/" class="leancloud_visitors" data-flag-title="C3P0连接池的使用" title="C3P0连接池的使用">
+		
+			<i class="icon icon-eye"></i>
+		
+		<span class="leancloud-visitors-count"></span>
+	</span>
+ 
+
+        
+
+
+        
+        
+    </div>
+    
+    <div class="post-content" id="post-content" itemprop="postContent">
+    
+    
+        <blockquote>
+<p>C3P0作为JDBC一个开源的连接池之一，有自己的很大优点，与DBCP相比，C3P0可以自动回收空闲连接，它实现了数据源和JNDI绑定，并且支持JDBC3规范和JDBC2的标准扩展，甚至Hibernate 和 Spring 都采用它作为JDBC的连接池</p>
+</blockquote>
+<hr>
+<h2 id="前提："><a href="#前提：" class="headerlink" title="前提："></a>前提：</h2><ol>
+<li>导入两个<a href="https://github.com/sivanWu0222/JavaExercises/tree/master/JavaJY/13/WebContent/WEB-INF/lib" target="_blank" rel="noopener">Jar包</a></li>
+</ol>
+<hr>
+<h2 id="使用方法一："><a href="#使用方法一：" class="headerlink" title="使用方法一："></a>使用方法一：</h2><blockquote>
+<p>不采用封装，直接进行使用，对于一些连接数据库所需要的参数写在了mysql.ini配置文件中，包括driver,url,user,pass 四个配置选项，采用 windows配置文件的格式（键值对）进行配置</p>
+</blockquote>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="keyword">import</span> java.beans.PropertyVetoException;</span><br><span class="line"><span class="keyword">import</span> java.io.FileInputStream;</span><br><span class="line"><span class="keyword">import</span> java.io.IOException;</span><br><span class="line"><span class="keyword">import</span> java.sql.Connection;</span><br><span class="line"><span class="keyword">import</span> java.sql.SQLException;</span><br><span class="line"><span class="keyword">import</span> java.util.Properties;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> com.mchange.v2.c3p0.ComboPooledDataSource;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">ToUseC3p0</span> </span>&#123;</span><br><span class="line">	</span><br><span class="line">	</span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span></span>&#123;</span><br><span class="line">		</span><br><span class="line">		<span class="comment">/*初始化数据库连接参数*/</span></span><br><span class="line">		Properties props = <span class="keyword">new</span> Properties();</span><br><span class="line">		<span class="keyword">try</span> &#123;</span><br><span class="line">			props.load(<span class="keyword">new</span> FileInputStream(<span class="string">"mysql.ini"</span>));</span><br><span class="line">		&#125; <span class="keyword">catch</span> (IOException e1) &#123;</span><br><span class="line">			</span><br><span class="line">			e1.printStackTrace();</span><br><span class="line">		&#125;</span><br><span class="line">		String driver = props.getProperty(<span class="string">"driver"</span>);</span><br><span class="line">		String user = props.getProperty(<span class="string">"user"</span>);</span><br><span class="line">		String pass = props.getProperty(<span class="string">"pass"</span>);</span><br><span class="line">		String url = props.getProperty(<span class="string">"url"</span>);</span><br><span class="line">		</span><br><span class="line">		ComboPooledDataSource cpds = <span class="keyword">new</span> ComboPooledDataSource();</span><br><span class="line">		<span class="keyword">try</span> &#123;</span><br><span class="line">			cpds.setDriverClass(driver);</span><br><span class="line">		&#125; <span class="keyword">catch</span> (PropertyVetoException e) &#123;</span><br><span class="line">			</span><br><span class="line">			e.printStackTrace();</span><br><span class="line">		&#125;</span><br><span class="line">		cpds.setJdbcUrl(url);</span><br><span class="line">		cpds.setUser(user);</span><br><span class="line">		cpds.setPassword(pass);</span><br><span class="line">		</span><br><span class="line">		</span><br><span class="line">		</span><br><span class="line">		<span class="comment">/*获得连接，使用连接，然后释放连接*/</span></span><br><span class="line">		Connection conn = <span class="keyword">null</span>;</span><br><span class="line">		<span class="keyword">try</span> &#123;</span><br><span class="line">			 conn = cpds.getConnection();</span><br><span class="line">		&#125; <span class="keyword">catch</span> (SQLException e) &#123;</span><br><span class="line">			</span><br><span class="line">			e.printStackTrace();</span><br><span class="line">		&#125;<span class="keyword">finally</span> &#123;</span><br><span class="line">			<span class="keyword">try</span> &#123;</span><br><span class="line">				conn.close(); </span><br><span class="line">										</span><br><span class="line">				<span class="comment">/*这里并没有真正释放连接，而是将连接归还到连接池中*/</span></span><br><span class="line">			&#125; <span class="keyword">catch</span> (SQLException e) &#123;</span><br><span class="line">				</span><br><span class="line">				e.printStackTrace();</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line">		</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<hr>
+    
+    <a href="/2017/07/07/C3P0连接池的使用/" class="post-more waves-effect waves-button">
+        more
+    </a>
+    </div>
+</article>
+
+<div class="post-footer">
+    
+	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/C3P0/">C3P0</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Java/">Java</a></li></ul>
+
+</div>
+
+
+            </li>
+        
+            <li class="post-list-item fade">
                 <article id="post-Algorithm-冒泡排序"
   class="article-card article-type-post" itemprop="blogPost">
   
@@ -895,77 +970,6 @@ at java.net.SocketInputStream.read(SocketInputStream.java:129)
 <div class="post-footer">
     
 	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Java/">Java</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/线程/">线程</a></li></ul>
-
-</div>
-
-
-            </li>
-        
-            <li class="post-list-item fade">
-                <article id="post-JTable表头，表数据居中以及关键字查找和分页"
-  class="article-card article-type-post" itemprop="blogPost">
-  
-    
-    
-    
-        
-
-
-  
-    <h3 class="post-title re-title" itemprop="name">
-      <a class="post-title-link" href="/2017/05/05/JTable表头，表数据居中以及关键字查找和分页/">JTable表头，表数据居中以及关键字查找和分页</a>
-    </h3>
-  
-
-
-
-    
-    <div class="post-meta">
-        <time class="post-time" title="2017-05-05 01:19:37" datetime="2017-05-05T01:19:37.000Z"  itemprop="datePublished">2017-05-05</time>
-
-        
-	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/Java/">Java</a><ul class="article-category-list-child"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/Java/Swing/">Swing</a></li></ul></li></ul>
-
-
-
-        
-	<span id="/2017/05/05/JTable表头，表数据居中以及关键字查找和分页/" class="leancloud_visitors" data-flag-title="JTable表头，表数据居中以及关键字查找和分页" title="JTable表头，表数据居中以及关键字查找和分页">
-		
-			<i class="icon icon-eye"></i>
-		
-		<span class="leancloud-visitors-count"></span>
-	</span>
- 
-
-        
-
-
-        
-        
-    </div>
-    
-    <div class="post-content" id="post-content" itemprop="postContent">
-    
-    
-        <h2 id="JTable-设置表头居中"><a href="#JTable-设置表头居中" class="headerlink" title="JTable 设置表头居中"></a>JTable 设置表头居中</h2><blockquote>
-<p>通过表格默认的渲染器和引用JLabel的center来使得表头居中</p>
-</blockquote>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">((DefaultTableCellRenderer)table.getTableHeader().getDefaultRenderer()).setHorizontalAlignment(JLabel.CENTER);</span><br></pre></td></tr></table></figure>
-<hr>
-<h2 id="JTable-设置表数据居中"><a href="#JTable-设置表数据居中" class="headerlink" title="JTable 设置表数据居中"></a>JTable 设置表数据居中</h2><blockquote>
-<p>有时我们需要让表格数据居中显示，而不是默认的左对齐，可以给用户一个更好的体验！</p>
-</blockquote>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">DefaultTableCellRenderer renderer=<span class="keyword">new</span> DefaultTableCellRenderer();</span><br><span class="line">renderer.setHorizontalAlignment(DefaultTableCellRenderer.CENTER);</span><br><span class="line">table.setDefaultRenderer(Object.class, renderer);</span><br></pre></td></tr></table></figure>
-    
-    <a href="/2017/05/05/JTable表头，表数据居中以及关键字查找和分页/" class="post-more waves-effect waves-button">
-        more
-    </a>
-    </div>
-</article>
-
-<div class="post-footer">
-    
-	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/JTable/">JTable</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Java/">Java</a></li></ul>
 
 </div>
 

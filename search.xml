@@ -3,6 +3,78 @@
   
     
     <entry>
+      <title><![CDATA[opencv-直方图统计与显示]]></title>
+      <url>/2020/01/12/opencv-%E7%9B%B4%E6%96%B9%E5%9B%BE%E7%BB%9F%E8%AE%A1%E4%B8%8E%E6%98%BE%E7%A4%BA/</url>
+      <content type="html"><![CDATA[<p>使用opencv操作直方图需要进行的两个步骤：</p>
+<ol>
+<li>统计直方图</li>
+<li>显示直方图</li>
+</ol>
+<h1 id="直方图"><a href="#直方图" class="headerlink" title="直方图"></a>直方图</h1><p>什么是直方图呢？通过直方图你可以对整幅图像的灰度分布有一个整体的 了解。直方图的 x 轴是灰度值（0 到 255），y 轴是图片中具有同一个灰度值的 点的数目</p>
+<p>直方图的绘制包括最核心的两步：<strong>统计直方图，绘制直方图</strong></p>
+<h2 id="使用opencv-统计直方图"><a href="#使用opencv-统计直方图" class="headerlink" title="使用opencv 统计直方图"></a>使用opencv 统计直方图</h2><p><strong>函数 cv2.calcHist 可以帮助我们统计一幅图像 的直方图</strong></p>
+<p>cv2.calcHist(images, channels, mask, histSize, ranges, hist, accumulate)</p>
+<p>返回值：返回的hist 是一个 256x1 的数组，每一个值代表了与次灰度值对应的像素点数 目</p>
+<p>参数解释：</p>
+<ol>
+<li><p>images: 原图像（图像格式为 uint8 或 ﬂoat32）。当传入函数时应该 用中括号 [] 括起来，例如：[img]。</p>
+</li>
+<li><p>channels: 同样需要用中括号括起来，它会告诉函数我们要统计那幅图 像的直方图。如果输入图像是灰度图，它的值就是 [0]；如果是彩色图像 的话，传入的参数可以是 [0]，[1]，[2] 它们分别对应着通道 B，G，R。</p>
+</li>
+<li><p>mask: 掩模图像。要统计整幅图像的直方图就把它设为 None。但是如 果你想统计图像某一部分的直方图的话，你就需要制作一个掩模图像，并 使用它。（后边有例子）</p>
+</li>
+<li><p>histSize:BIN 的数目。也应该用中括号括起来，例如：[256]。</p>
+</li>
+<li><p>ranges: 像素值范围，通常为 [0，256]</p>
+</li>
+</ol>
+<p><strong>image.ravel() 将图像转换成一维数组</strong></p>
+<a id="more"></a>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">"""</span></span><br><span class="line"><span class="string">@File : opencv统计直方图.py</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">@Author: sivan Wu</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">@Date : 2020/1/12 4:07 下午</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">@Desc :</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">"""</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> cv2</span><br><span class="line"><span class="keyword">import</span> matplotlib.pyplot <span class="keyword">as</span> plt</span><br><span class="line">image = cv2.imread(<span class="string">"../data/angela.jpeg"</span>, cv2.IMREAD_GRAYSCALE)</span><br><span class="line"></span><br><span class="line"><span class="comment">## 使用opencv 统计直方图函数</span></span><br><span class="line"><span class="comment">## 返回的hist 是一个 256x1 的数组，每一个值代表了与次灰度值对应的像素点数 目</span></span><br><span class="line">hist = cv2.calcHist([image], [<span class="number">0</span>], <span class="literal">None</span>, [<span class="number">256</span>], [<span class="number">0</span>, <span class="number">256</span>])</span><br><span class="line">print(hist)</span><br><span class="line">plt.plot(hist)</span><br><span class="line">plt.show()</span><br></pre></td></tr></table></figure>
+<h2 id="使用numpy统计直方图"><a href="#使用numpy统计直方图" class="headerlink" title="使用numpy统计直方图"></a>使用numpy统计直方图</h2><blockquote>
+<p>Numpy 还 有 一 个 函 数 np.bincount()， 它 的 运 行 速 度 是 np.histgram 的 十 倍。 所 以 对 于 一 维 直 方 图， 我 们 最 好 使 用 这 个 函 数。 使 用 np.bincount 时 别 忘 了 设 置 minlength=256。 例 如， hist=np.bincount(img.ravel()，minlength=256)</p>
+</blockquote>
+<p><code>注意：OpenCV 的函数要比 np.histgram() 快 40 倍。 所以坚持使用 OpenCV 函数。</code></p>
+<p>例子：Numpy 中的函数 np.histogram() 也可以帮我们统计直方图</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">"""</span></span><br><span class="line"><span class="string">@File : numpy统计直方图.py</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">@Author: sivan Wu</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">@Date : 2020/1/12 4:13 下午</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">@Desc :</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">"""</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> cv2</span><br><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line"><span class="keyword">import</span> matplotlib.pyplot <span class="keyword">as</span> plt</span><br><span class="line">image = cv2.imread(<span class="string">"../data/angela.jpeg"</span>)</span><br><span class="line">hist = np.histogram(image.ravel(), <span class="number">256</span>, [<span class="number">0</span>, <span class="number">256</span>])</span><br><span class="line">plt.show()</span><br><span class="line">print(hist)</span><br><span class="line">print(len(hist))</span><br></pre></td></tr></table></figure>
+<h2 id="使用opencv绘制直方图"><a href="#使用opencv绘制直方图" class="headerlink" title="使用opencv绘制直方图"></a>使用opencv绘制直方图</h2><p>由于步骤比较繁琐，<a href="https://github.com/Itseez/opencv/raw/master/samples/python2/hist.py" target="_blank" rel="noopener">参考</a></p>
+<h2 id="使用matlotlib绘制直方图"><a href="#使用matlotlib绘制直方图" class="headerlink" title="使用matlotlib绘制直方图"></a>使用matlotlib绘制直方图</h2><h3 id="绘制灰度的直方图"><a href="#绘制灰度的直方图" class="headerlink" title="绘制灰度的直方图"></a>绘制灰度的直方图</h3><p>包括如下3部分内容：</p>
+<ol>
+<li>opencv统计直方图和matplotlib显示</li>
+<li>numpy.bincount()统计直方图和matplotlib显示</li>
+<li>numpy.histogram()统计直方图和matplotlib显示</li>
+</ol>
+<blockquote>
+<p>Numpy 还 有 一 个 函 数 np.bincount()， 它 的 运 行 速 度 是 np.histgram 的 十 倍。 所 以 对 于 一 维 直 方 图， 我 们 最 好 使 用 这 个 函 数。 使 用 np.bincount 时 别 忘 了 设 置 minlength=256。 例 如， hist=np.bincount(img.ravel()，minlength=256)</p>
+</blockquote>
+<p><code>注意：OpenCV 的函数要比 np.histgram() 快 40 倍。 所以坚持使用OpenCV函数</code></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">"""</span></span><br><span class="line"><span class="string">@File : matplotlib绘制灰色图的直方图.py</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">@Author: sivan Wu</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">@Date : 2020/1/12 4:20 下午</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">@Desc :</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">"""</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> cv2</span><br><span class="line"><span class="keyword">import</span> matplotlib.pyplot <span class="keyword">as</span> plt</span><br><span class="line"></span><br><span class="line">image = cv2.imread(<span class="string">"../data/angela.jpeg"</span>, cv2.IMREAD_GRAYSCALE)</span><br><span class="line"></span><br><span class="line"><span class="comment">## 使用opencv 统计直方图函数 和 matplotlib显示</span></span><br><span class="line"><span class="comment">## 返回的hist 是一个 256x1 的数组，每一个值代表了与次灰度值对应的像素点数 目</span></span><br><span class="line">hist = cv2.calcHist([image], [<span class="number">0</span>], <span class="literal">None</span>, [<span class="number">256</span>], [<span class="number">0</span>, <span class="number">256</span>])</span><br><span class="line">print(hist)</span><br><span class="line">plt.plot(hist)</span><br><span class="line">plt.show()</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line"></span><br><span class="line"><span class="comment">## 使用numpy统计直方图函数np.bincount() 和 matplotlib显示</span></span><br><span class="line">image = cv2.imread(<span class="string">"../data/angela.jpeg"</span>, cv2.IMREAD_GRAYSCALE)</span><br><span class="line">hist2 = np.bincount(image.ravel(), minlength=<span class="number">256</span>)</span><br><span class="line">print(len(hist2))  <span class="comment"># 256</span></span><br><span class="line">print(type(hist2))  <span class="comment"># &lt;class 'numpy.ndarray'&gt;</span></span><br><span class="line">plt.plot(hist2)</span><br><span class="line">plt.show()</span><br><span class="line"></span><br><span class="line"><span class="comment">## 使用numpy统计直方图函数np.histogram() 和 matplotlib显示</span></span><br><span class="line">hist, bins = np.histogram(image.ravel(), <span class="number">256</span>, [<span class="number">0</span>, <span class="number">256</span>])</span><br><span class="line">print(type(hist))</span><br><span class="line">print(len(hist))</span><br><span class="line">plt.plot(hist)</span><br><span class="line">plt.show()</span><br></pre></td></tr></table></figure>
+<h3 id="绘制彩色图的直方图"><a href="#绘制彩色图的直方图" class="headerlink" title="绘制彩色图的直方图"></a>绘制彩色图的直方图</h3><blockquote>
+<p>绘制彩色图在不同颜色通道下的直方图</p>
+</blockquote>
+<p>例如：绘制彩色图对应BGR三个颜色通道的直方图</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="string">"""</span></span><br><span class="line"><span class="string">@File : matplotlib绘制彩色图的直方图.py</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">@Author: sivan Wu</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">@Date : 2020/1/12 4:20 下午</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">@Desc :</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">"""</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> cv2</span><br><span class="line"><span class="keyword">import</span> matplotlib.pyplot <span class="keyword">as</span> plt</span><br><span class="line"></span><br><span class="line">image = cv2.imread(<span class="string">"../data/angela.jpeg"</span>)</span><br><span class="line"></span><br><span class="line">color = [<span class="string">'b'</span>, <span class="string">'g'</span>, <span class="string">'r'</span>]</span><br><span class="line"><span class="comment"># 绘制彩色图不同通道的直方图</span></span><br><span class="line"><span class="keyword">for</span> i, col <span class="keyword">in</span> enumerate(color):</span><br><span class="line">    hist = cv2.calcHist([image], [i], <span class="literal">None</span>, [<span class="number">256</span>], [<span class="number">0</span>, <span class="number">256</span>])</span><br><span class="line">    plt.plot(hist, color=col)</span><br><span class="line">    plt.xlim([<span class="number">0</span>, <span class="number">256</span>])  <span class="comment"># 包括256</span></span><br><span class="line">plt.show()</span><br></pre></td></tr></table></figure>
+<h2 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h2><p><a href="https://www.cambridgeincolour.com/tutorials/histograms1.htm" target="_blank" rel="noopener">更多资源</a></p>
+]]></content>
+      
+        <categories>
+            
+            <category> OpenCV </category>
+            
+        </categories>
+        
+        
+        <tags>
+            
+            <tag> Python </tag>
+            
+            <tag> OpenCV </tag>
+            
+        </tags>
+        
+    </entry>
+    
+    <entry>
       <title><![CDATA[opencv-视频篇]]></title>
       <url>/2020/01/12/opencv-%E8%A7%86%E9%A2%91%E7%AF%87/</url>
       <content type="html"><![CDATA[<h2 id="用摄像头捕获视频"><a href="#用摄像头捕获视频" class="headerlink" title="用摄像头捕获视频"></a>用摄像头捕获视频</h2><p>使用函数cv2.VideoCapture()，其中里面需要传入一个参数0表示笔记本内置摄像头，可以设置1或别的数字来设置别的摄像头</p>
@@ -6504,77 +6576,6 @@ at java.net.SocketInputStream.read(SocketInputStream.java:129)
     
     <entry>
       <title><![CDATA[版本管理工具-Git篇[1]]]></title>
-      <url>/2017/01/15/%E7%89%88%E6%9C%AC%E7%AE%A1%E7%90%86%E5%B7%A5%E5%85%B7-Git%E7%AF%87/</url>
-      <content type="html"><![CDATA[<h2 id="版本管理工具的介绍"><a href="#版本管理工具的介绍" class="headerlink" title="版本管理工具的介绍"></a>版本管理工具的介绍</h2><p>作用：备份文件，与U盘等备份文件相比，可以随时随地，项目中经常使用。</p>
-<h3 id="版本管理工具可以记录历史"><a href="#版本管理工具可以记录历史" class="headerlink" title="版本管理工具可以记录历史"></a>版本管理工具可以记录历史</h3><p>网盘 u盘 保存了文件的最新状态，而不会记录修改的历史纪录，而版本管理工具对每次的修改都会进行备份，并且保留了时间和修改人，可以让我们回溯，如果不小心删除版本管理工具中的备份时，我们可以通过历史纪录对其进行找回，因此使用版本管理工具无需担心，而且使用版本管理工具，可以多端共享，例如我们经常所说的云盘，而且只要提交一次，我们就可以在任何地方通过版本管理工具对提交的代码进行下载。尤其对于，一些经常需要分开工作的工作人员比较实用</p>
-<a id="more"></a>
-<h3 id="历史"><a href="#历史" class="headerlink" title="历史"></a>历史</h3><ol>
-<li><p>CVS： 版本管理工具始祖，也是被第一个大规模使用的版本管理工具。由荷兰一所大学教授所开发，由于当时三个人分开工作，为了便于一起协调，创建了CVS。集中式的工具，放到中心服务器上，需要联网</p>
-</li>
-<li><p>SVN： 2000年诞生，也是集中式的工具</p>
-</li>
-<li><p>git： 2005年诞生，Geek社区主流工具，分布式工具！</p>
-</li>
-<li><p>Github： 程序员社区，托管代码基于Git操作。大牛多在这里！！！</p>
-</li>
-</ol>
-<h3 id="集中式-与-分布式-区别"><a href="#集中式-与-分布式-区别" class="headerlink" title="集中式 与 分布式 区别"></a>集中式 与 分布式 区别</h3><ol>
-<li>集中式需要放到中心服务器上，并且操作需要联网，不方便</li>
-<li>分布式则是只要有版本库，就可以在不联网的前提下，快速完成文件提交，记录查看，以及删除等操作，效率高！</li>
-</ol>
-<hr>
-<h2 id="初探Git"><a href="#初探Git" class="headerlink" title="初探Git"></a>初探Git</h2><h3 id="Git-下载-与-安装"><a href="#Git-下载-与-安装" class="headerlink" title="Git 下载 与 安装"></a>Git 下载 与 安装</h3><h4 id="Linux下的安装"><a href="#Linux下的安装" class="headerlink" title="Linux下的安装"></a>Linux下的安装</h4><blockquote>
-<p>打开终端 执行 yum install git 然后键入 yes 等待既可以安装完成 Git</p>
-</blockquote>
-<h2 id="入门Github"><a href="#入门Github" class="headerlink" title="入门Github"></a>入门Github</h2><blockquote>
-<p>GitHub由于下载比较难，推荐离线安装包安装</p>
-</blockquote>
-<h3 id="Linux下检出项目到本地"><a href="#Linux下检出项目到本地" class="headerlink" title="Linux下检出项目到本地"></a>Linux下检出项目到本地</h3><blockquote>
-<p>使用 git clone Github上的仓库地址</p>
-<ol>
-<li>首先创建一个 目录，用来存放 我们检出的项目，使用命令 mkdir Test</li>
-<li>接下来，进入到Test目录，然后 git clone Github上的仓库地址，就可以了</li>
-</ol>
-</blockquote>
-<h3 id="Linux下提交项目"><a href="#Linux下提交项目" class="headerlink" title="Linux下提交项目"></a>Linux下提交项目</h3><blockquote>
-<p>再修改之后，只停留到了本地，没有交到Github维护，因此我们需要同步到Github</p>
-</blockquote>
-<ol>
-<li>首先使用 git status 查看工作区的状态</li>
-<li>对于未跟踪的文件，使用git add 文件名（不包括文件类型），进行跟踪</li>
-<li>然后键入 git commit 命令，并对修改进行描述，这里提交的是提交到了本地的仓库，并没有提交给Github维护</li>
-<li>键入git push，输入Github账户和密码，然后成功提交给Github进行维护</li>
-</ol>
-<h3 id="Windows下检出并提交项目"><a href="#Windows下检出并提交项目" class="headerlink" title="Windows下检出并提交项目"></a>Windows下检出并提交项目</h3><ol>
-<li>首先进入GitHub官方主页，并进入项目所对应的仓库主页，然后点击 open in desktop，选择本地的一个目录，此时检出完成，只需要我们对其进行修改</li>
-<li>修改之后，首先要做的提交修改的东东，并对修改的东西进行一个修改说明</li>
-<li>之后进行同步就可以了</li>
-</ol>
-]]></content>
-      
-        <categories>
-            
-            <category> git </category>
-            
-            <category> 入门 </category>
-            
-        </categories>
-        
-        
-        <tags>
-            
-            <tag> git </tag>
-            
-            <tag> GitHub </tag>
-            
-            <tag> 版本管理工具 </tag>
-            
-        </tags>
-        
-    </entry>
-    
-    <entry>
-      <title><![CDATA[版本管理工具-Git篇[1]]]></title>
       <url>/2017/01/15/%E7%89%88%E6%9C%AC%E7%AE%A1%E7%90%86%E5%B7%A5%E5%85%B7-Git%E7%AF%87%5B1%5D/</url>
       <content type="html"><![CDATA[<h2 id="版本管理工具的介绍"><a href="#版本管理工具的介绍" class="headerlink" title="版本管理工具的介绍"></a>版本管理工具的介绍</h2><p>作用：备份文件，与U盘等备份文件相比，可以随时随地，项目中经常使用。</p>
 <h3 id="版本管理工具可以记录历史"><a href="#版本管理工具可以记录历史" class="headerlink" title="版本管理工具可以记录历史"></a>版本管理工具可以记录历史</h3><p>网盘 u盘 保存了文件的最新状态，而不会记录修改的历史纪录，而版本管理工具对每次的修改都会进行备份，并且保留了时间和修改人，可以让我们回溯，如果不小心删除版本管理工具中的备份时，我们可以通过历史纪录对其进行找回，因此使用版本管理工具无需担心，而且使用版本管理工具，可以多端共享，例如我们经常所说的云盘，而且只要提交一次，我们就可以在任何地方通过版本管理工具对提交的代码进行下载。尤其对于，一些经常需要分开工作的工作人员比较实用</p>
@@ -6639,6 +6640,77 @@ at java.net.SocketInputStream.read(SocketInputStream.java:129)
             <tag> Tools </tag>
             
             <tag> Git </tag>
+            
+        </tags>
+        
+    </entry>
+    
+    <entry>
+      <title><![CDATA[版本管理工具-Git篇[1]]]></title>
+      <url>/2017/01/15/%E7%89%88%E6%9C%AC%E7%AE%A1%E7%90%86%E5%B7%A5%E5%85%B7-Git%E7%AF%87/</url>
+      <content type="html"><![CDATA[<h2 id="版本管理工具的介绍"><a href="#版本管理工具的介绍" class="headerlink" title="版本管理工具的介绍"></a>版本管理工具的介绍</h2><p>作用：备份文件，与U盘等备份文件相比，可以随时随地，项目中经常使用。</p>
+<h3 id="版本管理工具可以记录历史"><a href="#版本管理工具可以记录历史" class="headerlink" title="版本管理工具可以记录历史"></a>版本管理工具可以记录历史</h3><p>网盘 u盘 保存了文件的最新状态，而不会记录修改的历史纪录，而版本管理工具对每次的修改都会进行备份，并且保留了时间和修改人，可以让我们回溯，如果不小心删除版本管理工具中的备份时，我们可以通过历史纪录对其进行找回，因此使用版本管理工具无需担心，而且使用版本管理工具，可以多端共享，例如我们经常所说的云盘，而且只要提交一次，我们就可以在任何地方通过版本管理工具对提交的代码进行下载。尤其对于，一些经常需要分开工作的工作人员比较实用</p>
+<a id="more"></a>
+<h3 id="历史"><a href="#历史" class="headerlink" title="历史"></a>历史</h3><ol>
+<li><p>CVS： 版本管理工具始祖，也是被第一个大规模使用的版本管理工具。由荷兰一所大学教授所开发，由于当时三个人分开工作，为了便于一起协调，创建了CVS。集中式的工具，放到中心服务器上，需要联网</p>
+</li>
+<li><p>SVN： 2000年诞生，也是集中式的工具</p>
+</li>
+<li><p>git： 2005年诞生，Geek社区主流工具，分布式工具！</p>
+</li>
+<li><p>Github： 程序员社区，托管代码基于Git操作。大牛多在这里！！！</p>
+</li>
+</ol>
+<h3 id="集中式-与-分布式-区别"><a href="#集中式-与-分布式-区别" class="headerlink" title="集中式 与 分布式 区别"></a>集中式 与 分布式 区别</h3><ol>
+<li>集中式需要放到中心服务器上，并且操作需要联网，不方便</li>
+<li>分布式则是只要有版本库，就可以在不联网的前提下，快速完成文件提交，记录查看，以及删除等操作，效率高！</li>
+</ol>
+<hr>
+<h2 id="初探Git"><a href="#初探Git" class="headerlink" title="初探Git"></a>初探Git</h2><h3 id="Git-下载-与-安装"><a href="#Git-下载-与-安装" class="headerlink" title="Git 下载 与 安装"></a>Git 下载 与 安装</h3><h4 id="Linux下的安装"><a href="#Linux下的安装" class="headerlink" title="Linux下的安装"></a>Linux下的安装</h4><blockquote>
+<p>打开终端 执行 yum install git 然后键入 yes 等待既可以安装完成 Git</p>
+</blockquote>
+<h2 id="入门Github"><a href="#入门Github" class="headerlink" title="入门Github"></a>入门Github</h2><blockquote>
+<p>GitHub由于下载比较难，推荐离线安装包安装</p>
+</blockquote>
+<h3 id="Linux下检出项目到本地"><a href="#Linux下检出项目到本地" class="headerlink" title="Linux下检出项目到本地"></a>Linux下检出项目到本地</h3><blockquote>
+<p>使用 git clone Github上的仓库地址</p>
+<ol>
+<li>首先创建一个 目录，用来存放 我们检出的项目，使用命令 mkdir Test</li>
+<li>接下来，进入到Test目录，然后 git clone Github上的仓库地址，就可以了</li>
+</ol>
+</blockquote>
+<h3 id="Linux下提交项目"><a href="#Linux下提交项目" class="headerlink" title="Linux下提交项目"></a>Linux下提交项目</h3><blockquote>
+<p>再修改之后，只停留到了本地，没有交到Github维护，因此我们需要同步到Github</p>
+</blockquote>
+<ol>
+<li>首先使用 git status 查看工作区的状态</li>
+<li>对于未跟踪的文件，使用git add 文件名（不包括文件类型），进行跟踪</li>
+<li>然后键入 git commit 命令，并对修改进行描述，这里提交的是提交到了本地的仓库，并没有提交给Github维护</li>
+<li>键入git push，输入Github账户和密码，然后成功提交给Github进行维护</li>
+</ol>
+<h3 id="Windows下检出并提交项目"><a href="#Windows下检出并提交项目" class="headerlink" title="Windows下检出并提交项目"></a>Windows下检出并提交项目</h3><ol>
+<li>首先进入GitHub官方主页，并进入项目所对应的仓库主页，然后点击 open in desktop，选择本地的一个目录，此时检出完成，只需要我们对其进行修改</li>
+<li>修改之后，首先要做的提交修改的东东，并对修改的东西进行一个修改说明</li>
+<li>之后进行同步就可以了</li>
+</ol>
+]]></content>
+      
+        <categories>
+            
+            <category> git </category>
+            
+            <category> 入门 </category>
+            
+        </categories>
+        
+        
+        <tags>
+            
+            <tag> git </tag>
+            
+            <tag> GitHub </tag>
+            
+            <tag> 版本管理工具 </tag>
             
         </tags>
         

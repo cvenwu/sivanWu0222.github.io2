@@ -252,6 +252,91 @@
         <ul class="post-list">
         
             <li class="post-list-item fade">
+                <article id="post-解决MySql-8小时自动关闭的问题"
+  class="article-card article-type-post" itemprop="blogPost">
+  
+    
+    
+    
+        
+
+
+  
+    <h3 class="post-title re-title" itemprop="name">
+      <a class="post-title-link" href="/2017/10/28/解决MySql-8小时自动关闭的问题/">解决MySql 8小时自动关闭的问题</a>
+    </h3>
+  
+
+
+
+    
+    <div class="post-meta">
+        <time class="post-time" title="2017-10-28 02:08:04" datetime="2017-10-28T02:08:04.000Z"  itemprop="datePublished">2017-10-28</time>
+
+        
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/MySql/">MySql</a><ul class="article-category-list-child"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/MySql/8小时/">8小时</a></li></ul></li></ul>
+
+
+
+        
+	<span id="/2017/10/28/解决MySql-8小时自动关闭的问题/" class="leancloud_visitors" data-flag-title="解决MySql 8小时自动关闭的问题" title="解决MySql 8小时自动关闭的问题">
+		
+			<i class="icon icon-eye"></i>
+		
+		<span class="leancloud-visitors-count"></span>
+	</span>
+ 
+
+        
+
+
+        
+        
+    </div>
+    
+    <div class="post-content" id="post-content" itemprop="postContent">
+    
+    
+        <h2 id="前言："><a href="#前言：" class="headerlink" title="前言："></a>前言：</h2><blockquote>
+<p>记得自己之前在服务器上部署了一个很low的假期签到系统，每次叫大家签到都是晚上，很大程度上讲，时间已经过了将近16个小时，每次第二天叫大家签到的时候，很多人，都发了同一个问题给我，服务器报了连接异常，后来听到身边的大牛才知道，原来MySql如果配置不当，连接空闲超过8小时，MySql将会关闭该连接，但是我们服务器认为连接还是存在的，因此还会访问，所以就会出现异常情况</p>
+</blockquote>
+<blockquote>
+<p>也有一部分原因自己是知道的，因为自己采用了c3p0数据源，所以才会出现这个情况，而dbcp则不会出现如此情况！</p>
+</blockquote>
+<hr>
+<h2 id="查询当前数据库连接超时时间"><a href="#查询当前数据库连接超时时间" class="headerlink" title="查询当前数据库连接超时时间"></a>查询当前数据库连接超时时间</h2><blockquote>
+<p>mysql 命令行中 键入如下命令</p>
+</blockquote>
+<p>SHOW GLOBAL VARIABLES LIKE ‘wait_timeout’;</p>
+<blockquote>
+<p>结果如下</p>
+</blockquote>
+<p><img src="http://on3w7gc9m.bkt.clouddn.com/QQ%E5%9B%BE%E7%89%8720171030103053.png"></p   class="index-item-img">
+<p>超时时间为28800秒，换算下来也就是8小时</p>
+<hr>
+<h2 id="解决方法"><a href="#解决方法" class="headerlink" title="解决方法"></a>解决方法</h2><h3 id="方法一："><a href="#方法一：" class="headerlink" title="方法一："></a>方法一：</h3><blockquote>
+<p>这个也是自己之前的方法：也就是采用一个简单的定时器，每隔7小时定时查一下数据库，不让连接自动关闭，</p>
+</blockquote>
+<h3 id="方法二："><a href="#方法二：" class="headerlink" title="方法二："></a>方法二：</h3><blockquote>
+<p>每次当我们连接到数据库中的时候，url可改为：<br>jdbc:mysql://localhost:3306/test?user=root&amp;password=root&amp;useUnicode=true&amp;characterEncoding=utf8&amp;autoReconnect=true&amp;failOverReadOnly=false</p>
+</blockquote>
+    
+    <a href="/2017/10/28/解决MySql-8小时自动关闭的问题/" class="post-more waves-effect waves-button">
+        more
+    </a>
+    </div>
+</article>
+
+<div class="post-footer">
+    
+	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Hibernate/">Hibernate</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/MySql/">MySql</a></li></ul>
+
+</div>
+
+
+            </li>
+        
+            <li class="post-list-item fade">
                 <article id="post-Spring中使用注解"
   class="article-card article-type-post" itemprop="blogPost">
   
@@ -981,81 +1066,6 @@
 <div class="post-footer">
     
 	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Internationalization/">Internationalization</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Java/">Java</a></li></ul>
-
-</div>
-
-
-            </li>
-        
-            <li class="post-list-item fade">
-                <article id="post-C3P0连接池的使用"
-  class="article-card article-type-post" itemprop="blogPost">
-  
-    
-    
-    
-        
-
-
-  
-    <h3 class="post-title re-title" itemprop="name">
-      <a class="post-title-link" href="/2017/07/07/C3P0连接池的使用/">C3P0连接池的使用</a>
-    </h3>
-  
-
-
-
-    
-    <div class="post-meta">
-        <time class="post-time" title="2017-07-07 04:42:40" datetime="2017-07-07T04:42:40.000Z"  itemprop="datePublished">2017-07-07</time>
-
-        
-	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/Java/">Java</a></li></ul>
-
-
-
-        
-	<span id="/2017/07/07/C3P0连接池的使用/" class="leancloud_visitors" data-flag-title="C3P0连接池的使用" title="C3P0连接池的使用">
-		
-			<i class="icon icon-eye"></i>
-		
-		<span class="leancloud-visitors-count"></span>
-	</span>
- 
-
-        
-
-
-        
-        
-    </div>
-    
-    <div class="post-content" id="post-content" itemprop="postContent">
-    
-    
-        <blockquote>
-<p>C3P0作为JDBC一个开源的连接池之一，有自己的很大优点，与DBCP相比，C3P0可以自动回收空闲连接，它实现了数据源和JNDI绑定，并且支持JDBC3规范和JDBC2的标准扩展，甚至Hibernate 和 Spring 都采用它作为JDBC的连接池</p>
-</blockquote>
-<hr>
-<h2 id="前提："><a href="#前提：" class="headerlink" title="前提："></a>前提：</h2><ol>
-<li>导入两个<a href="https://github.com/sivanWu0222/JavaExercises/tree/master/JavaJY/13/WebContent/WEB-INF/lib" target="_blank" rel="noopener">Jar包</a></li>
-</ol>
-<hr>
-<h2 id="使用方法一："><a href="#使用方法一：" class="headerlink" title="使用方法一："></a>使用方法一：</h2><blockquote>
-<p>不采用封装，直接进行使用，对于一些连接数据库所需要的参数写在了mysql.ini配置文件中，包括driver,url,user,pass 四个配置选项，采用 windows配置文件的格式（键值对）进行配置</p>
-</blockquote>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="keyword">import</span> java.beans.PropertyVetoException;</span><br><span class="line"><span class="keyword">import</span> java.io.FileInputStream;</span><br><span class="line"><span class="keyword">import</span> java.io.IOException;</span><br><span class="line"><span class="keyword">import</span> java.sql.Connection;</span><br><span class="line"><span class="keyword">import</span> java.sql.SQLException;</span><br><span class="line"><span class="keyword">import</span> java.util.Properties;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> com.mchange.v2.c3p0.ComboPooledDataSource;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">ToUseC3p0</span> </span>&#123;</span><br><span class="line">	</span><br><span class="line">	</span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span></span>&#123;</span><br><span class="line">		</span><br><span class="line">		<span class="comment">/*初始化数据库连接参数*/</span></span><br><span class="line">		Properties props = <span class="keyword">new</span> Properties();</span><br><span class="line">		<span class="keyword">try</span> &#123;</span><br><span class="line">			props.load(<span class="keyword">new</span> FileInputStream(<span class="string">"mysql.ini"</span>));</span><br><span class="line">		&#125; <span class="keyword">catch</span> (IOException e1) &#123;</span><br><span class="line">			</span><br><span class="line">			e1.printStackTrace();</span><br><span class="line">		&#125;</span><br><span class="line">		String driver = props.getProperty(<span class="string">"driver"</span>);</span><br><span class="line">		String user = props.getProperty(<span class="string">"user"</span>);</span><br><span class="line">		String pass = props.getProperty(<span class="string">"pass"</span>);</span><br><span class="line">		String url = props.getProperty(<span class="string">"url"</span>);</span><br><span class="line">		</span><br><span class="line">		ComboPooledDataSource cpds = <span class="keyword">new</span> ComboPooledDataSource();</span><br><span class="line">		<span class="keyword">try</span> &#123;</span><br><span class="line">			cpds.setDriverClass(driver);</span><br><span class="line">		&#125; <span class="keyword">catch</span> (PropertyVetoException e) &#123;</span><br><span class="line">			</span><br><span class="line">			e.printStackTrace();</span><br><span class="line">		&#125;</span><br><span class="line">		cpds.setJdbcUrl(url);</span><br><span class="line">		cpds.setUser(user);</span><br><span class="line">		cpds.setPassword(pass);</span><br><span class="line">		</span><br><span class="line">		</span><br><span class="line">		</span><br><span class="line">		<span class="comment">/*获得连接，使用连接，然后释放连接*/</span></span><br><span class="line">		Connection conn = <span class="keyword">null</span>;</span><br><span class="line">		<span class="keyword">try</span> &#123;</span><br><span class="line">			 conn = cpds.getConnection();</span><br><span class="line">		&#125; <span class="keyword">catch</span> (SQLException e) &#123;</span><br><span class="line">			</span><br><span class="line">			e.printStackTrace();</span><br><span class="line">		&#125;<span class="keyword">finally</span> &#123;</span><br><span class="line">			<span class="keyword">try</span> &#123;</span><br><span class="line">				conn.close(); </span><br><span class="line">										</span><br><span class="line">				<span class="comment">/*这里并没有真正释放连接，而是将连接归还到连接池中*/</span></span><br><span class="line">			&#125; <span class="keyword">catch</span> (SQLException e) &#123;</span><br><span class="line">				</span><br><span class="line">				e.printStackTrace();</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line">		</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<hr>
-    
-    <a href="/2017/07/07/C3P0连接池的使用/" class="post-more waves-effect waves-button">
-        more
-    </a>
-    </div>
-</article>
-
-<div class="post-footer">
-    
-	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/C3P0/">C3P0</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Java/">Java</a></li></ul>
 
 </div>
 
