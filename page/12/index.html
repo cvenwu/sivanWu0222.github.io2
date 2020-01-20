@@ -252,6 +252,86 @@
         <ul class="post-list">
         
             <li class="post-list-item fade">
+                <article id="post-认识线程"
+  class="article-card article-type-post" itemprop="blogPost">
+  
+    
+    
+    
+        
+
+
+  
+    <h3 class="post-title re-title" itemprop="name">
+      <a class="post-title-link" href="/2017/05/08/认识线程/">认识线程</a>
+    </h3>
+  
+
+
+
+    
+    <div class="post-meta">
+        <time class="post-time" title="2017-05-08 07:10:31" datetime="2017-05-08T07:10:31.000Z"  itemprop="datePublished">2017-05-08</time>
+
+        
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/Java/">Java</a><ul class="article-category-list-child"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/Java/线程/">线程</a></li></ul></li></ul>
+
+
+
+        
+	<span id="/2017/05/08/认识线程/" class="leancloud_visitors" data-flag-title="认识线程" title="认识线程">
+		
+			<i class="icon icon-eye"></i>
+		
+		<span class="leancloud-visitors-count"></span>
+	</span>
+ 
+
+        
+
+
+        
+        
+    </div>
+    
+    <div class="post-content" id="post-content" itemprop="postContent">
+    
+    
+        <blockquote>
+<p>早期的操作系统，建立在了所谓的cpu，存储器，IO设备之上，但是最为宝贵的便是cpu，计算机发展至今，硬盘已经从几M发展到现在的几TB，cpu仍在不紧不慢发展，作为计算机的大脑，cpu可谓肩负重任，早期的操作系统，由于系统的缺陷，cpu只能运行单道作业，如果要等待IO，便会一直等下去，直到我们使用完IO之后，才会响应，这便是所谓的单道作业的缺陷！</p>
+</blockquote>
+<p>  随着操作系统发展，我们将cpu分的越来越详细，从最初的一个程序–&gt;作业–&gt;进程–&gt;线程，个人认为是由于cpu的发展跟不上我们的需求，才会促使我们将cpu更为紧细的利用，直到现在的多核多线程，我们便开始专心研究多线程，以提高任务效率，而不是促使我们的应用程序崩溃！</p>
+<h1 id="线程"><a href="#线程" class="headerlink" title="线程"></a>线程</h1><blockquote>
+<p>线程来源于一个进程，但是由于进程切换开销大，为了提高cpu的利用率，所以我们便将单个进程分为多个线程，多个线程可以并发或者并行运行，各线程在运行过程中会因为访问共享数据及等待数据而发生互斥与同步的关系<br>多线程可以使程序反应更快，交互性更强，执行效率更高</p>
+</blockquote>
+<h2 id="创建一个线程"><a href="#创建一个线程" class="headerlink" title="创建一个线程"></a>创建一个线程</h2><blockquote>
+<p>Java中的程序，我们通常从main方法开始执行，jvm便会给main创建一个线程，从上到下开始执行main方法<br>当Java程序作为applet开始运行的时候，web浏览器便会启动一个线程来运行applet</p>
+</blockquote>
+<h3 id="实现Runnable接口"><a href="#实现Runnable接口" class="headerlink" title="实现Runnable接口"></a>实现Runnable接口</h3><blockquote>
+<p>通常我们采用该方法来实现多线程</p>
+</blockquote>
+<ol>
+<li>实现Runnable接口以及相应的run方法</li>
+<li>创建一个Thread，并分配任务给Thread</li>
+<li>调用Thread实例的start方法开启线程（<font color="red">不可以调用run方法，如果调用，只是在当前线程执行run方法，并不会产生多线程</font>）</li>
+</ol>
+    
+    <a href="/2017/05/08/认识线程/" class="post-more waves-effect waves-button">
+        more
+    </a>
+    </div>
+</article>
+
+<div class="post-footer">
+    
+	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Java/">Java</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/线程/">线程</a></li></ul>
+
+</div>
+
+
+            </li>
+        
+            <li class="post-list-item fade">
                 <article id="post-JTable表头，表数据居中以及关键字查找和分页"
   class="article-card article-type-post" itemprop="blogPost">
   
@@ -867,75 +947,11 @@
 
             </li>
         
-            <li class="post-list-item fade">
-                <article id="post-Hexo常用命令"
-  class="article-card article-type-post" itemprop="blogPost">
-  
-    
-    
-    
-        
-
-
-  
-    <h3 class="post-title re-title" itemprop="name">
-      <a class="post-title-link" href="/2016/12/25/Hexo常用命令/">Hexo常用命令</a>
-    </h3>
-  
-
-
-
-    
-    <div class="post-meta">
-        <time class="post-time" title="2016-12-25 02:55:55" datetime="2016-12-25T02:55:55.000Z"  itemprop="datePublished">2016-12-25</time>
-
-        
-	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/常用命令/">常用命令</a></li></ul>
-
-
-
-        
-	<span id="/2016/12/25/Hexo常用命令/" class="leancloud_visitors" data-flag-title="Hexo常用命令" title="Hexo常用命令">
-		
-			<i class="icon icon-eye"></i>
-		
-		<span class="leancloud-visitors-count"></span>
-	</span>
- 
-
-        
-
-
-        
-        
-    </div>
-    
-    <div class="post-content" id="post-content" itemprop="postContent">
-    
-    
-        <p>这里收录了一些常用的Hexo命令，经常用到</p>
-<h2 id="Hexo"><a href="#Hexo" class="headerlink" title="Hexo"></a>Hexo</h2><p>npm install hexo -g #安装<br>npm update hexo -g #升级<br>hexo init #初始化</p>
-    
-    <a href="/2016/12/25/Hexo常用命令/" class="post-more waves-effect waves-button">
-        more
-    </a>
-    </div>
-</article>
-
-<div class="post-footer">
-    
-	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Hexo/">Hexo</a></li></ul>
-
-</div>
-
-
-            </li>
-        
         </ul>
         
 <nav id="page-nav">
     <div class="inner">
-    <a class="extend prev" rel="prev" href="/page/11/">上一页</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/10/">10</a><a class="page-number" href="/page/11/">11</a><span class="page-number current">12</span><a class="page-number" href="/page/13/">13</a><a class="extend next" rel="next" href="/page/13/">下一页</a>
+    <a class="extend prev" rel="prev" href="/page/11/">上一页</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/10/">10</a><a class="page-number" href="/page/11/">11</a><span class="page-number current">12</span><a class="page-number" href="/page/13/">13</a><a class="page-number" href="/page/14/">14</a><a class="extend next" rel="next" href="/page/13/">下一页</a>
     </div>
 </nav>
 

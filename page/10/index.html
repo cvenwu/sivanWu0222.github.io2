@@ -252,6 +252,76 @@
         <ul class="post-list">
         
             <li class="post-list-item fade">
+                <article id="post-使用json级联改变部门员工"
+  class="article-card article-type-post" itemprop="blogPost">
+  
+    
+    
+    
+        
+
+
+  
+    <h3 class="post-title re-title" itemprop="name">
+      <a class="post-title-link" href="/2017/10/30/使用json级联改变部门员工/">使用json级联改变部门员工</a>
+    </h3>
+  
+
+
+
+    
+    <div class="post-meta">
+        <time class="post-time" title="2017-10-30 01:55:07" datetime="2017-10-30T01:55:07.000Z"  itemprop="datePublished">2017-10-30</time>
+
+        
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/json/">json</a><ul class="article-category-list-child"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/json/级联/">级联</a></li></ul></li></ul>
+
+
+
+        
+	<span id="/2017/10/30/使用json级联改变部门员工/" class="leancloud_visitors" data-flag-title="使用json级联改变部门员工" title="使用json级联改变部门员工">
+		
+			<i class="icon icon-eye"></i>
+		
+		<span class="leancloud-visitors-count"></span>
+	</span>
+ 
+
+        
+
+
+        
+        
+    </div>
+    
+    <div class="post-content" id="post-content" itemprop="postContent">
+    
+    
+        <blockquote>
+<p>这里使用Hibernate + json + Ajax + 级联改变部门员工</p>
+</blockquote>
+<h2 id="基本的页面编写："><a href="#基本的页面编写：" class="headerlink" title="基本的页面编写："></a>基本的页面编写：</h2><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="tag">&lt;<span class="name">%@</span> <span class="attr">page</span> <span class="attr">language</span>=<span class="string">"java"</span> <span class="attr">import</span>=<span class="string">"java.util.*"</span> <span class="attr">pageEncoding</span>=<span class="string">"UTF-8"</span>%&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">%</span></span></span><br><span class="line"><span class="tag"><span class="attr">String</span> <span class="attr">path</span> = <span class="string">request.getContextPath();</span></span></span><br><span class="line"><span class="tag"><span class="attr">String</span> <span class="attr">basePath</span> = <span class="string">request.getScheme()+</span>"<span class="attr">:</span>//"+<span class="attr">request.getServerName</span>()+"<span class="attr">:</span>"+<span class="attr">request.getServerPort</span>()+<span class="attr">path</span>+"/";</span></span><br><span class="line"><span class="tag">%&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="meta">&lt;!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">html</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">head</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;/<span class="name">head</span>&gt;</span></span><br><span class="line"></span><br><span class="line">  <span class="tag">&lt;<span class="name">body</span>&gt;</span></span><br><span class="line">  	部门：<span class="tag">&lt;<span class="name">select</span> <span class="attr">id</span>=<span class="string">"dep"</span>&gt;</span><span class="tag">&lt;/<span class="name">select</span>&gt;</span></span><br><span class="line">  	员工：<span class="tag">&lt;<span class="name">select</span> <span class="attr">id</span>=<span class="string">"emp"</span>&gt;</span><span class="tag">&lt;/<span class="name">select</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;/<span class="name">body</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">html</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<hr>
+<h2 id="servlet的生成"><a href="#servlet的生成" class="headerlink" title="servlet的生成"></a>servlet的生成</h2><blockquote>
+<p>DepServlet<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="keyword">import</span> java.io.IOException;</span><br><span class="line"><span class="keyword">import</span> java.util.List;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> javax.servlet.ServletException;</span><br><span class="line"><span class="keyword">import</span> javax.servlet.annotation.WebServlet;</span><br><span class="line"><span class="keyword">import</span> javax.servlet.http.HttpServlet;</span><br><span class="line"><span class="keyword">import</span> javax.servlet.http.HttpServletRequest;</span><br><span class="line"><span class="keyword">import</span> javax.servlet.http.HttpServletResponse;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> com.dao.DepDAO;</span><br><span class="line"><span class="keyword">import</span> com.pojo.Dep;</span><br><span class="line"><span class="meta">@WebServlet</span>(<span class="string">"/dep.do"</span>)</span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">DepServlet</span> <span class="keyword">extends</span> <span class="title">HttpServlet</span> </span>&#123;</span><br><span class="line">	<span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> <span class="keyword">long</span> serialVersionUID = <span class="number">1L</span>;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">	<span class="keyword">private</span> DepDAO depDao = <span class="keyword">new</span> DepDAO();</span><br><span class="line"></span><br><span class="line">	<span class="function"><span class="keyword">protected</span> <span class="keyword">void</span> <span class="title">service</span><span class="params">(HttpServletRequest request, HttpServletResponse response)</span> <span class="keyword">throws</span> ServletException, IOException </span>&#123;</span><br><span class="line"></span><br><span class="line">		response.setContentType(<span class="string">"text/html;charset=utf-8"</span>);</span><br><span class="line"></span><br><span class="line">		String method = request.getParameter(<span class="string">"method"</span>);</span><br><span class="line">		<span class="keyword">if</span> ( <span class="string">"dep"</span>.equals(method) ) &#123;</span><br><span class="line">			doDep(request, response);</span><br><span class="line">		&#125;</span><br><span class="line"></span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="comment">/**</span></span><br><span class="line"><span class="comment">	 * <span class="doctag">@throws</span> IOException</span></span><br><span class="line"><span class="comment">	 *</span></span><br><span class="line"><span class="comment">	 */</span></span><br><span class="line">	<span class="function"><span class="keyword">private</span> <span class="keyword">void</span> <span class="title">doDep</span><span class="params">(HttpServletRequest request, HttpServletResponse response)</span> <span class="keyword">throws</span> IOException </span>&#123;</span><br><span class="line">		List&lt;Dep&gt; list = depDao.findAll();</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">		<span class="comment">/*将list转换为json格式的数据*/</span></span><br><span class="line">		StringBuffer sb = <span class="keyword">new</span> StringBuffer();</span><br><span class="line">		sb.append(<span class="string">"["</span>);</span><br><span class="line">		<span class="keyword">for</span> (Dep dep : list) &#123;</span><br><span class="line">			sb.append(<span class="string">"&#123; 'depId': '"</span> + dep.getDepId() + <span class="string">"', 'depName': '"</span> + dep.getDepName() + <span class="string">"' &#125;,"</span> );</span><br><span class="line">		&#125;</span><br><span class="line">		sb.deleteCharAt(sb.length() - <span class="number">1</span>);</span><br><span class="line">		sb.append(<span class="string">"]"</span>);</span><br><span class="line">		response.getWriter().print(sb.toString());</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+</blockquote>
+    
+    <a href="/2017/10/30/使用json级联改变部门员工/" class="post-more waves-effect waves-button">
+        more
+    </a>
+    </div>
+</article>
+
+<div class="post-footer">
+    
+	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Hibernate/">Hibernate</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/json/">json</a></li></ul>
+
+</div>
+
+
+            </li>
+        
+            <li class="post-list-item fade">
                 <article id="post-解决MySql-8小时自动关闭的问题"
   class="article-card article-type-post" itemprop="blogPost">
   
@@ -990,93 +1060,11 @@
 
             </li>
         
-            <li class="post-list-item fade">
-                <article id="post-Java全球化与格式化"
-  class="article-card article-type-post" itemprop="blogPost">
-  
-    
-    
-    
-        
-
-
-  
-    <h3 class="post-title re-title" itemprop="name">
-      <a class="post-title-link" href="/2017/07/19/Java全球化与格式化/">Java全球化与格式化</a>
-    </h3>
-  
-
-
-
-    
-    <div class="post-meta">
-        <time class="post-time" title="2017-07-19 14:38:55" datetime="2017-07-19T14:38:55.000Z"  itemprop="datePublished">2017-07-19</time>
-
-        
-	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/Java/">Java</a><ul class="article-category-list-child"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/Java/Internationalization/">Internationalization</a></li></ul></li></ul>
-
-
-
-        
-	<span id="/2017/07/19/Java全球化与格式化/" class="leancloud_visitors" data-flag-title="Java全球化与格式化" title="Java全球化与格式化">
-		
-			<i class="icon icon-eye"></i>
-		
-		<span class="leancloud-visitors-count"></span>
-	</span>
- 
-
-        
-
-
-        
-        
-    </div>
-    
-    <div class="post-content" id="post-content" itemprop="postContent">
-    
-    
-        <blockquote>
-<p>最近几年，随着软件蔓延全球的趋势，全球化的脚步不断前进，全球化就意味着我们必须根据不同用户所在的不同地域使用不同的语言，其中最简单的就是根据用户所在地区进行相应语言的设置，也就是本地化，因此全球化离不开本地化！</p>
-</blockquote>
-<h2 id="Java中的全球化"><a href="#Java中的全球化" class="headerlink" title="Java中的全球化"></a>Java中的全球化</h2><blockquote>
-<p>最近几年，随着JDK版本的的深入，Java也不断升级，提供了对不同国家和不同地区的支持！</p>
-</blockquote>
-<h3 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h3><p>将程序中的标签，提示等信息放在资源文件中，根据用户所在的地区进行相应的选择，其中每个资源文件采用key—-value形式进行配对，每个资源文件中的key不变，随着地区进行value的改变</p>
-<h3 id="用到的类"><a href="#用到的类" class="headerlink" title="用到的类"></a>用到的类</h3><ol>
-<li>java.util.Locale         加载国家、资源语言包</li>
-<li>java.util.ResourceBundle   封装特定国家、地区环境</li>
-<li>java.text.MessageFormat    对带占位符的字符串进行格式化</li>
-</ol>
-<h3 id="资源文件命名规范"><a href="#资源文件命名规范" class="headerlink" title="资源文件命名规范"></a>资源文件命名规范</h3><blockquote>
-<p>对于不同语言资源文件的配置，我们也有一套规范</p>
-</blockquote>
-<ol>
-<li>值通常采用 Key —– value 形式进行使用</li>
-<li>资源文件通常采用 propertyname_language.properties 的文件名形式进行命名</li>
-</ol>
-<h3 id="获取Java支持的国家和语言"><a href="#获取Java支持的国家和语言" class="headerlink" title="获取Java支持的国家和语言"></a>获取Java支持的国家和语言</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * 事实上JAVA不可能支持所有国家和地区，如果需要获取JAVA支持的国家和地区，</span></span><br><span class="line"><span class="comment"> * 则可以调用Locale类的getAvailableLocales()方法，返回一个Locale数组</span></span><br><span class="line"><span class="comment"> * 包含了支持的国家和地区，</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">GetSupportClassAndArea</span> </span>&#123;</span><br><span class="line">  <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">    Locale[] locales = Locale.getAvailableLocales();</span><br><span class="line">    <span class="keyword">for</span> (Locale locale : locales) &#123;</span><br><span class="line">      System.out.println(locale.getDisplayCountry() + <span class="string">"="</span> +   locale.getCountry() + <span class="string">"\t"</span> + locale.getLanguage() + <span class="string">"="</span> + locale.getDisplayLanguage());</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-    
-    <a href="/2017/07/19/Java全球化与格式化/" class="post-more waves-effect waves-button">
-        more
-    </a>
-    </div>
-</article>
-
-<div class="post-footer">
-    
-	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Internationalization/">Internationalization</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Java/">Java</a></li></ul>
-
-</div>
-
-
-            </li>
-        
         </ul>
         
 <nav id="page-nav">
     <div class="inner">
-    <a class="extend prev" rel="prev" href="/page/9/">上一页</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/8/">8</a><a class="page-number" href="/page/9/">9</a><span class="page-number current">10</span><a class="page-number" href="/page/11/">11</a><a class="page-number" href="/page/12/">12</a><a class="page-number" href="/page/13/">13</a><a class="extend next" rel="next" href="/page/11/">下一页</a>
+    <a class="extend prev" rel="prev" href="/page/9/">上一页</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/8/">8</a><a class="page-number" href="/page/9/">9</a><span class="page-number current">10</span><a class="page-number" href="/page/11/">11</a><a class="page-number" href="/page/12/">12</a><span class="space">&hellip;</span><a class="page-number" href="/page/14/">14</a><a class="extend next" rel="next" href="/page/11/">下一页</a>
     </div>
 </nav>
 

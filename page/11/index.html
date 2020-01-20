@@ -252,6 +252,88 @@
         <ul class="post-list">
         
             <li class="post-list-item fade">
+                <article id="post-Java全球化与格式化"
+  class="article-card article-type-post" itemprop="blogPost">
+  
+    
+    
+    
+        
+
+
+  
+    <h3 class="post-title re-title" itemprop="name">
+      <a class="post-title-link" href="/2017/07/19/Java全球化与格式化/">Java全球化与格式化</a>
+    </h3>
+  
+
+
+
+    
+    <div class="post-meta">
+        <time class="post-time" title="2017-07-19 14:38:55" datetime="2017-07-19T14:38:55.000Z"  itemprop="datePublished">2017-07-19</time>
+
+        
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/Java/">Java</a><ul class="article-category-list-child"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/Java/Internationalization/">Internationalization</a></li></ul></li></ul>
+
+
+
+        
+	<span id="/2017/07/19/Java全球化与格式化/" class="leancloud_visitors" data-flag-title="Java全球化与格式化" title="Java全球化与格式化">
+		
+			<i class="icon icon-eye"></i>
+		
+		<span class="leancloud-visitors-count"></span>
+	</span>
+ 
+
+        
+
+
+        
+        
+    </div>
+    
+    <div class="post-content" id="post-content" itemprop="postContent">
+    
+    
+        <blockquote>
+<p>最近几年，随着软件蔓延全球的趋势，全球化的脚步不断前进，全球化就意味着我们必须根据不同用户所在的不同地域使用不同的语言，其中最简单的就是根据用户所在地区进行相应语言的设置，也就是本地化，因此全球化离不开本地化！</p>
+</blockquote>
+<h2 id="Java中的全球化"><a href="#Java中的全球化" class="headerlink" title="Java中的全球化"></a>Java中的全球化</h2><blockquote>
+<p>最近几年，随着JDK版本的的深入，Java也不断升级，提供了对不同国家和不同地区的支持！</p>
+</blockquote>
+<h3 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h3><p>将程序中的标签，提示等信息放在资源文件中，根据用户所在的地区进行相应的选择，其中每个资源文件采用key—-value形式进行配对，每个资源文件中的key不变，随着地区进行value的改变</p>
+<h3 id="用到的类"><a href="#用到的类" class="headerlink" title="用到的类"></a>用到的类</h3><ol>
+<li>java.util.Locale         加载国家、资源语言包</li>
+<li>java.util.ResourceBundle   封装特定国家、地区环境</li>
+<li>java.text.MessageFormat    对带占位符的字符串进行格式化</li>
+</ol>
+<h3 id="资源文件命名规范"><a href="#资源文件命名规范" class="headerlink" title="资源文件命名规范"></a>资源文件命名规范</h3><blockquote>
+<p>对于不同语言资源文件的配置，我们也有一套规范</p>
+</blockquote>
+<ol>
+<li>值通常采用 Key —– value 形式进行使用</li>
+<li>资源文件通常采用 propertyname_language.properties 的文件名形式进行命名</li>
+</ol>
+<h3 id="获取Java支持的国家和语言"><a href="#获取Java支持的国家和语言" class="headerlink" title="获取Java支持的国家和语言"></a>获取Java支持的国家和语言</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * 事实上JAVA不可能支持所有国家和地区，如果需要获取JAVA支持的国家和地区，</span></span><br><span class="line"><span class="comment"> * 则可以调用Locale类的getAvailableLocales()方法，返回一个Locale数组</span></span><br><span class="line"><span class="comment"> * 包含了支持的国家和地区，</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">GetSupportClassAndArea</span> </span>&#123;</span><br><span class="line">  <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">    Locale[] locales = Locale.getAvailableLocales();</span><br><span class="line">    <span class="keyword">for</span> (Locale locale : locales) &#123;</span><br><span class="line">      System.out.println(locale.getDisplayCountry() + <span class="string">"="</span> +   locale.getCountry() + <span class="string">"\t"</span> + locale.getLanguage() + <span class="string">"="</span> + locale.getDisplayLanguage());</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+    
+    <a href="/2017/07/19/Java全球化与格式化/" class="post-more waves-effect waves-button">
+        more
+    </a>
+    </div>
+</article>
+
+<div class="post-footer">
+    
+	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Internationalization/">Internationalization</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Java/">Java</a></li></ul>
+
+</div>
+
+
+            </li>
+        
+            <li class="post-list-item fade">
                 <article id="post-C3P0连接池的使用"
   class="article-card article-type-post" itemprop="blogPost">
   
@@ -896,91 +978,11 @@ at java.net.SocketInputStream.read(SocketInputStream.java:129)
 
             </li>
         
-            <li class="post-list-item fade">
-                <article id="post-认识线程"
-  class="article-card article-type-post" itemprop="blogPost">
-  
-    
-    
-    
-        
-
-
-  
-    <h3 class="post-title re-title" itemprop="name">
-      <a class="post-title-link" href="/2017/05/08/认识线程/">认识线程</a>
-    </h3>
-  
-
-
-
-    
-    <div class="post-meta">
-        <time class="post-time" title="2017-05-08 07:10:31" datetime="2017-05-08T07:10:31.000Z"  itemprop="datePublished">2017-05-08</time>
-
-        
-	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/Java/">Java</a><ul class="article-category-list-child"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/Java/线程/">线程</a></li></ul></li></ul>
-
-
-
-        
-	<span id="/2017/05/08/认识线程/" class="leancloud_visitors" data-flag-title="认识线程" title="认识线程">
-		
-			<i class="icon icon-eye"></i>
-		
-		<span class="leancloud-visitors-count"></span>
-	</span>
- 
-
-        
-
-
-        
-        
-    </div>
-    
-    <div class="post-content" id="post-content" itemprop="postContent">
-    
-    
-        <blockquote>
-<p>早期的操作系统，建立在了所谓的cpu，存储器，IO设备之上，但是最为宝贵的便是cpu，计算机发展至今，硬盘已经从几M发展到现在的几TB，cpu仍在不紧不慢发展，作为计算机的大脑，cpu可谓肩负重任，早期的操作系统，由于系统的缺陷，cpu只能运行单道作业，如果要等待IO，便会一直等下去，直到我们使用完IO之后，才会响应，这便是所谓的单道作业的缺陷！</p>
-</blockquote>
-<p>  随着操作系统发展，我们将cpu分的越来越详细，从最初的一个程序–&gt;作业–&gt;进程–&gt;线程，个人认为是由于cpu的发展跟不上我们的需求，才会促使我们将cpu更为紧细的利用，直到现在的多核多线程，我们便开始专心研究多线程，以提高任务效率，而不是促使我们的应用程序崩溃！</p>
-<h1 id="线程"><a href="#线程" class="headerlink" title="线程"></a>线程</h1><blockquote>
-<p>线程来源于一个进程，但是由于进程切换开销大，为了提高cpu的利用率，所以我们便将单个进程分为多个线程，多个线程可以并发或者并行运行，各线程在运行过程中会因为访问共享数据及等待数据而发生互斥与同步的关系<br>多线程可以使程序反应更快，交互性更强，执行效率更高</p>
-</blockquote>
-<h2 id="创建一个线程"><a href="#创建一个线程" class="headerlink" title="创建一个线程"></a>创建一个线程</h2><blockquote>
-<p>Java中的程序，我们通常从main方法开始执行，jvm便会给main创建一个线程，从上到下开始执行main方法<br>当Java程序作为applet开始运行的时候，web浏览器便会启动一个线程来运行applet</p>
-</blockquote>
-<h3 id="实现Runnable接口"><a href="#实现Runnable接口" class="headerlink" title="实现Runnable接口"></a>实现Runnable接口</h3><blockquote>
-<p>通常我们采用该方法来实现多线程</p>
-</blockquote>
-<ol>
-<li>实现Runnable接口以及相应的run方法</li>
-<li>创建一个Thread，并分配任务给Thread</li>
-<li>调用Thread实例的start方法开启线程（<font color="red">不可以调用run方法，如果调用，只是在当前线程执行run方法，并不会产生多线程</font>）</li>
-</ol>
-    
-    <a href="/2017/05/08/认识线程/" class="post-more waves-effect waves-button">
-        more
-    </a>
-    </div>
-</article>
-
-<div class="post-footer">
-    
-	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Java/">Java</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/线程/">线程</a></li></ul>
-
-</div>
-
-
-            </li>
-        
         </ul>
         
 <nav id="page-nav">
     <div class="inner">
-    <a class="extend prev" rel="prev" href="/page/10/">上一页</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/9/">9</a><a class="page-number" href="/page/10/">10</a><span class="page-number current">11</span><a class="page-number" href="/page/12/">12</a><a class="page-number" href="/page/13/">13</a><a class="extend next" rel="next" href="/page/12/">下一页</a>
+    <a class="extend prev" rel="prev" href="/page/10/">上一页</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/9/">9</a><a class="page-number" href="/page/10/">10</a><span class="page-number current">11</span><a class="page-number" href="/page/12/">12</a><a class="page-number" href="/page/13/">13</a><a class="page-number" href="/page/14/">14</a><a class="extend next" rel="next" href="/page/12/">下一页</a>
     </div>
 </nav>
 

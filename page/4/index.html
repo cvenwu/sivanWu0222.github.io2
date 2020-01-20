@@ -252,6 +252,77 @@
         <ul class="post-list">
         
             <li class="post-list-item fade">
+                <article id="post-Python-爬虫篇-4-设置代理服务器-DebugLog实战"
+  class="article-card article-type-post" itemprop="blogPost">
+  
+    
+    
+    <div class="top" data-title="2">
+    <div class="top-wrap">
+        <p></p>
+    </div>
+</div>
+    
+    
+        
+
+
+  
+    <h3 class="post-title re-title" itemprop="name">
+      <a class="post-title-link" href="/2019/04/28/Python-爬虫篇-4-设置代理服务器-DebugLog实战/">[Python 爬虫篇](4)设置代理服务器 DebugLog实战</a>
+    </h3>
+  
+
+
+
+    
+    <div class="post-meta">
+        <time class="post-time" title="2019-04-28 02:17:36" datetime="2019-04-28T02:17:36.000Z"  itemprop="datePublished">2019-04-28</time>
+
+        
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/Python/">Python</a><ul class="article-category-list-child"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/Python/爬虫/">爬虫</a></li></ul></li></ul>
+
+
+
+        
+	<span id="/2019/04/28/Python-爬虫篇-4-设置代理服务器-DebugLog实战/" class="leancloud_visitors" data-flag-title="[Python 爬虫篇](4)设置代理服务器 DebugLog实战" title="[Python 爬虫篇](4)设置代理服务器 DebugLog实战">
+		
+			<i class="icon icon-eye"></i>
+		
+		<span class="leancloud-visitors-count"></span>
+	</span>
+ 
+
+        
+
+
+        
+  <span><i class="icon icon-github"></i></span>
+
+        
+    </div>
+    
+    <div class="post-content" id="post-content" itemprop="postContent">
+    
+    
+        
+    
+    <a href="/2019/04/28/Python-爬虫篇-4-设置代理服务器-DebugLog实战/" class="post-more waves-effect waves-button">
+        more
+    </a>
+    </div>
+</article>
+
+<div class="post-footer">
+    
+	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Python/">Python</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/爬虫/">爬虫</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/精通Python网络爬虫、核心技术、框架与项目实战/">精通Python网络爬虫、核心技术、框架与项目实战</a></li></ul>
+
+</div>
+
+
+            </li>
+        
+            <li class="post-list-item fade">
                 <article id="post-Python-爬虫篇-3-超时设置与Get、Post请求"
   class="article-card article-type-post" itemprop="blogPost">
   
@@ -969,95 +1040,11 @@ urllib.request.urlopen(timeout=1) # 设置1秒为超时界限
 
             </li>
         
-            <li class="post-list-item fade">
-                <article id="post-Ubuntu-18-04-使用科学代理"
-  class="article-card article-type-post" itemprop="blogPost">
-  
-    
-    
-    <div class="top" data-title="2">
-    <div class="top-wrap">
-        <p></p>
-    </div>
-</div>
-    
-    
-        
-
-
-  
-    <h3 class="post-title re-title" itemprop="name">
-      <a class="post-title-link" href="/2019/04/09/Ubuntu-18-04-使用科学代理/">Ubuntu 18.04 使用科学代理</a>
-    </h3>
-  
-
-
-
-    
-    <div class="post-meta">
-        <time class="post-time" title="2019-04-09 11:35:48" datetime="2019-04-09T11:35:48.000Z"  itemprop="datePublished">2019-04-09</time>
-
-        
-	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/Ubuntu/">Ubuntu</a></li></ul>
-
-
-
-        
-	<span id="/2019/04/09/Ubuntu-18-04-使用科学代理/" class="leancloud_visitors" data-flag-title="Ubuntu 18.04 使用科学代理" title="Ubuntu 18.04 使用科学代理">
-		
-			<i class="icon icon-eye"></i>
-		
-		<span class="leancloud-visitors-count"></span>
-	</span>
- 
-
-        
-
-
-        
-        
-    </div>
-    
-    <div class="post-content" id="post-content" itemprop="postContent">
-    
-    
-        <h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>由于自己在使用Ubuntu安装FAISS的时候，总是遇到如下问题</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">yirufeng@ubuntu:/etc/apt/sources.list.d$ conda install faiss-cpu</span><br><span class="line">conda: error: failed to fetch repodata from 'http://repo.continuum.io/pkgs/pro/linux-64/'</span><br></pre></td></tr></table></figure>
-<p>通过Google和百度都没有找到解决方案，最后想尝试一下科学代理，但是网上关于Ubuntu18 搭建科学代理的回答很少，大都是基于Ubuntu 14或者Ubuntu 16</p>
-<h2 id="步骤"><a href="#步骤" class="headerlink" title="步骤"></a>步骤</h2><blockquote>
-<p>说明：shadowsocks-qt5是ubuntu上一个可视化的版本</p>
-</blockquote>
-<h3 id="安装shadowsocks-qt5"><a href="#安装shadowsocks-qt5" class="headerlink" title="安装shadowsocks-qt5"></a>安装shadowsocks-qt5</h3><ul>
-<li>sudo add-apt-repository ppa:hzwhuang/ss-qt5</li>
-<li>sudo apt-get update<br>出现如下问题：<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">yirufeng@ubuntu:~$ sudo apt-get update</span><br><span class="line">命中:1 http://security.ubuntu.com/ubuntu bionic-security InRelease                      </span><br><span class="line">命中:2 http://us.archive.ubuntu.com/ubuntu bionic InRelease                              </span><br><span class="line">忽略:3 http://ppa.launchpad.net/hzwhuang/ss-qt5/ubuntu bionic InRelease</span><br><span class="line">命中:4 http://us.archive.ubuntu.com/ubuntu bionic-updates InRelease    </span><br><span class="line">命中:5 http://us.archive.ubuntu.com/ubuntu bionic-backports InRelease                  </span><br><span class="line">错误:6 http://ppa.launchpad.net/hzwhuang/ss-qt5/ubuntu bionic Release</span><br><span class="line">404  Not Found [IP: 91.189.95.83 80]</span><br><span class="line">正在读取软件包列表... 完成</span><br><span class="line">E: 仓库 “http://ppa.launchpad.net/hzwhuang/ss-qt5/ubuntu bionic Release” 没有 Release 文件。 </span><br><span class="line">N: 无法安全地用该源进行更新，所以默认禁用该源。</span><br><span class="line">N: 参见 apt-secure(8) 手册以了解仓库创建和用户配置方面的细节。</span><br></pre></td></tr></table></figure>
-</li>
-</ul>
-<p><strong>解决方案</strong>：<br>$ cd /etc/apt/sources.list.d/hzwhuang-ubuntu-ss-qt5-bionic.list<br>修改 hzwhuang-ubuntu-ss-qt5-bionic.list 文件内容为如下：(bionic 是18.04版本代号, xenial 是16.04的版本代号)<br><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span> deb http://ppa.launchpad.net/hzwhuang/ss-qt5/ubuntu bionic main</span><br><span class="line"><span class="meta">#</span> deb-src http://ppa.launchpad.net/hzwhuang/ss-qt5/ubuntu bionic main</span><br><span class="line">deb http://ppa.launchpad.net/hzwhuang/ss-qt5/ubuntu xenial main</span><br><span class="line"><span class="meta">#</span> deb-src http://ppa.launchpad.net/hzwhuang/ss-qt5/ubuntu bionic main</span><br></pre></td></tr></table></figure></p>
-<ul>
-<li>执行下面两个命令<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span> sudo apt-get update</span><br><span class="line"><span class="meta">$</span> sudo apt-get install shadowsocks-qt5</span><br></pre></td></tr></table></figure>
-</li>
-</ul>
-    
-    <a href="/2019/04/09/Ubuntu-18-04-使用科学代理/" class="post-more waves-effect waves-button">
-        more
-    </a>
-    </div>
-</article>
-
-<div class="post-footer">
-    
-	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Ubuntu/">Ubuntu</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/软件安装/">软件安装</a></li></ul>
-
-</div>
-
-
-            </li>
-        
         </ul>
         
 <nav id="page-nav">
     <div class="inner">
-    <a class="extend prev" rel="prev" href="/page/3/">上一页</a><a class="page-number" href="/">1</a><a class="page-number" href="/page/2/">2</a><a class="page-number" href="/page/3/">3</a><span class="page-number current">4</span><a class="page-number" href="/page/5/">5</a><a class="page-number" href="/page/6/">6</a><span class="space">&hellip;</span><a class="page-number" href="/page/13/">13</a><a class="extend next" rel="next" href="/page/5/">下一页</a>
+    <a class="extend prev" rel="prev" href="/page/3/">上一页</a><a class="page-number" href="/">1</a><a class="page-number" href="/page/2/">2</a><a class="page-number" href="/page/3/">3</a><span class="page-number current">4</span><a class="page-number" href="/page/5/">5</a><a class="page-number" href="/page/6/">6</a><span class="space">&hellip;</span><a class="page-number" href="/page/14/">14</a><a class="extend next" rel="next" href="/page/5/">下一页</a>
     </div>
 </nav>
 

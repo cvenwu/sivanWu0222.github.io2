@@ -252,6 +252,108 @@
         <ul class="post-list">
         
             <li class="post-list-item fade">
+                <article id="post-使用OpenCV计算图像熵"
+  class="article-card article-type-post" itemprop="blogPost">
+  
+    
+    
+    <div class="top" data-title="2">
+    <div class="top-wrap">
+        <p></p>
+    </div>
+</div>
+    
+    
+        
+
+
+  
+    <h3 class="post-title re-title" itemprop="name">
+      <a class="post-title-link" href="/2020/01/20/使用OpenCV计算图像熵/">使用OpenCV计算一维和二维图像熵</a>
+    </h3>
+  
+
+
+
+    
+    <div class="post-meta">
+        <time class="post-time" title="2020-01-20 12:33:46" datetime="2020-01-20T12:33:46.000Z"  itemprop="datePublished">2020-01-20</time>
+
+        
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/OpenCV/">OpenCV</a><ul class="article-category-list-child"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/OpenCV/Image-Entropy/">Image Entropy</a></li></ul></li></ul>
+
+
+
+        
+	<span id="/2020/01/20/使用OpenCV计算图像熵/" class="leancloud_visitors" data-flag-title="使用OpenCV计算一维和二维图像熵" title="使用OpenCV计算一维和二维图像熵">
+		
+			<i class="icon icon-eye"></i>
+		
+		<span class="leancloud-visitors-count"></span>
+	</span>
+ 
+
+        
+
+
+        
+  <span><i class="icon icon-github"></i></span>
+
+        
+    </div>
+    
+    <div class="post-content" id="post-content" itemprop="postContent">
+    
+    
+        <h1 id="图像熵"><a href="#图像熵" class="headerlink" title="图像熵"></a>图像熵</h1><p>熵用来衡量混乱情况，在图像中我们可以理解为图像可以取值的像素种类越多，则该图像熵越大。</p>
+<h2 id="一维图像熵的计算"><a href="#一维图像熵的计算" class="headerlink" title="一维图像熵的计算"></a>一维图像熵的计算</h2><h3 id="一维灰度图像熵的计算"><a href="#一维灰度图像熵的计算" class="headerlink" title="一维灰度图像熵的计算"></a>一维灰度图像熵的计算</h3><p>参考：<a href="https://blog.csdn.net/marleylee/article/details/78813630" target="_blank" rel="noopener">https://blog.csdn.net/marleylee/article/details/78813630</a></p>
+<blockquote>
+<p>图像熵是一种特征的统计形式，它反映了图像中平均信息量的多少。图像的一维熵表示图像中灰度分布的聚集特征所包含的信息量，令Pi 表示图像中灰度值为i的像素所占的比例，则定义灰度图像的一元灰度熵为：</p>
+</blockquote>
+<p><strong>$H = -\sum\limits_{i=0}^{255}p_i * \log_2p_i$</strong></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">calc_entropy_gray_image</span><span class="params">(image)</span>:</span></span><br><span class="line">    <span class="string">"""</span></span><br><span class="line"><span class="string">    计算灰度图的熵，使用最简单的熵计算公式</span></span><br><span class="line"><span class="string">    :param image: 使用opencv读取的灰度图</span></span><br><span class="line"><span class="string">    :return:</span></span><br><span class="line"><span class="string">    """</span></span><br><span class="line">    hist = cv2.calcHist([image], [<span class="number">0</span>], <span class="literal">None</span>, [<span class="number">256</span>], [<span class="number">0</span>, <span class="number">256</span>])</span><br><span class="line">    hist = hist[<span class="number">1</span>:]</span><br><span class="line">    probablity = hist / np.sum(hist)</span><br><span class="line">    print(<span class="string">'sum of probability:'</span>, np.sum(probablity))</span><br><span class="line">    result = np.sum(np.matmul(probablity.T, np.log2(probablity)))</span><br><span class="line">    <span class="keyword">return</span> -result</span><br></pre></td></tr></table></figure>
+<h3 id="各个颜色空间的图像熵的计算"><a href="#各个颜色空间的图像熵的计算" class="headerlink" title="各个颜色空间的图像熵的计算"></a>各个颜色空间的图像熵的计算</h3><p><strong>每个分量的熵计算公式都采用上面所描述的公式</strong></p>
+<blockquote>
+<p>返回的result是一个列表，包含每个颜色空间分量的熵，例如在HSV颜色空间中，将会返回一个包含3个元素的列表，包括H对应的熵，S对应的熵，V对应的熵</p>
+</blockquote>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">calc_image_entropy_HSV</span><span class="params">(image)</span>:</span></span><br><span class="line">    <span class="string">"""</span></span><br><span class="line"><span class="string">    :param image:</span></span><br><span class="line"><span class="string">    :return:</span></span><br><span class="line"><span class="string">    """</span></span><br><span class="line">    image_HSV = cv2.cvtColor(image, cv2.COLOR_BGR2HSV)</span><br><span class="line">    size = image_HSV.shape</span><br><span class="line">    result = []</span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> range(size[len(size) - <span class="number">1</span>]):</span><br><span class="line">        hist = cv2.calcHist([image_HSV], [i], <span class="literal">None</span>, [<span class="number">256</span>], [<span class="number">0</span>, <span class="number">256</span>])</span><br><span class="line">        hist = hist[hist &gt; <span class="number">0</span>]</span><br><span class="line">        <span class="comment"># print(hist)</span></span><br><span class="line">        probablity = hist / np.sum(hist)</span><br><span class="line">        print(<span class="string">'sum of probability:'</span>, np.sum(probablity))</span><br><span class="line">        result.append(-(np.matmul(probablity.T, np.log2(probablity))))</span><br><span class="line">    print(result)</span><br><span class="line">    <span class="keyword">return</span> result</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">calc_image_entropy_YCrCb</span><span class="params">(image)</span>:</span></span><br><span class="line">    <span class="string">"""</span></span><br><span class="line"><span class="string">    :param image:</span></span><br><span class="line"><span class="string">    :return:</span></span><br><span class="line"><span class="string">    """</span></span><br><span class="line">    image_YCrCb = cv2.cvtColor(image, cv2.COLOR_BGR2YCrCb)</span><br><span class="line">    size = image_YCrCb.shape</span><br><span class="line">    result = []</span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> range(size[len(size) - <span class="number">1</span>]):</span><br><span class="line">        hist = cv2.calcHist([image_YCrCb], [i], <span class="literal">None</span>, [<span class="number">256</span>], [<span class="number">0</span>, <span class="number">256</span>])</span><br><span class="line">        hist = hist[hist &gt; <span class="number">0</span>]</span><br><span class="line">        <span class="comment"># print(hist)</span></span><br><span class="line">        probablity = hist / np.sum(hist)</span><br><span class="line">        print(<span class="string">'sum of probability:'</span>, np.sum(probablity))</span><br><span class="line">        result.append(-(np.matmul(probablity.T, np.log2(probablity))))</span><br><span class="line">    print(result)</span><br><span class="line">    <span class="keyword">return</span> result</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">calc_image_entropy_HLS</span><span class="params">(image)</span>:</span></span><br><span class="line">    <span class="string">"""</span></span><br><span class="line"><span class="string">    :param image:</span></span><br><span class="line"><span class="string">    :return:</span></span><br><span class="line"><span class="string">    """</span></span><br><span class="line">    image_HLS = cv2.cvtColor(image, cv2.COLOR_BGR2HLS)</span><br><span class="line">    size = image_HLS.shape</span><br><span class="line">    result = []</span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> range(size[len(size) - <span class="number">1</span>]):</span><br><span class="line">        hist = cv2.calcHist([image_HLS], [i], <span class="literal">None</span>, [<span class="number">256</span>], [<span class="number">0</span>, <span class="number">256</span>])</span><br><span class="line">        hist = hist[hist &gt; <span class="number">0</span>]</span><br><span class="line">        <span class="comment"># print(hist)</span></span><br><span class="line">        probablity = hist / np.sum(hist)</span><br><span class="line">        print(<span class="string">'sum of probability:'</span>, np.sum(probablity))</span><br><span class="line">        result.append(-(np.matmul(probablity.T, np.log2(probablity))))</span><br><span class="line">    print(result)</span><br><span class="line">    <span class="keyword">return</span> result</span><br></pre></td></tr></table></figure>
+<h2 id="二维图像熵的计算"><a href="#二维图像熵的计算" class="headerlink" title="二维图像熵的计算"></a>二维图像熵的计算</h2><h3 id="二维图像熵"><a href="#二维图像熵" class="headerlink" title="二维图像熵"></a>二维图像熵</h3><p>图像的一维熵可以表示图像灰度分布的聚集特征，却不能反映图像灰度分布的空间特征，为了表征这种空间特征，可以在一维熵的基础上引入能够反映灰度分布空间特征的特征量来组成图像的二维熵。选择图像的邻域灰度均值作为灰度分布的空间特征量，与图像的像素灰度组成特征二元组，记为( i, j )，其中i 表示像素的灰度值(0 &lt;= i &lt;= 255)，j 表示邻域灰度均值(0 &lt;= j &lt;= 255)：</p>
+<p>上式能反应某像素位置上的灰度值与其周围像素灰度分布的综合特征，其中f(i, j)为特征二元组(i, j)出现的频数，N 为图像的尺度。</p>
+<p>参考：<a href="https://blog.csdn.net/marleylee/article/details/78813630" target="_blank" rel="noopener">https://blog.csdn.net/marleylee/article/details/78813630</a></p>
+<p>公式：<strong>$H = -\sum\limits_{i}\sum\limits_{j}p_{(i,j)} * \log_2p_{(i,j)}$</strong></p>
+<p><strong>其中$p(i, j) = f(i, j) / N ^ 2$</strong></p>
+<p>代码对应的原理实现：</p>
+<ol>
+<li>对于一幅已知的图像我们在第一行，第一列，最后一行和最后一列填充0，经过一个3*3的平均滤波器核得到一个矩阵，此时矩阵宽度和高度等于原始图像的宽度和高度</li>
+<li>计算f(i, j) 并得到probability</li>
+<li>根据熵公式计算熵</li>
+</ol>
+<p>例子： 一幅图像的像素为<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">1   2   3   4 </span><br><span class="line">5   6   7   8</span><br><span class="line">8   10  11  12</span><br><span class="line">13  14  15  16</span><br></pre></td></tr></table></figure></p>
+<p>首先填充0，得到的结果为<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">0   0   0   0   0   0</span><br><span class="line">0   1   2   3   4   0</span><br><span class="line">0   5   6   7   8   0</span><br><span class="line">0   9   10  11  12  0</span><br><span class="line">0   13  14  15  16  0</span><br><span class="line">0   0   0   0   0   0</span><br></pre></td></tr></table></figure></p>
+<p>经过一个3*3的均值滤波器核，等同于于神经网络中的卷积操作<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">14/9  23/9  30/9  22/9</span><br><span class="line">33/9  54/9  63/9  45/9</span><br><span class="line">57/9  90/9  99/9  69/9</span><br><span class="line">46/9  72/9  78/9  54/9</span><br></pre></td></tr></table></figure></p>
+<p>计算f(i, j)<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">14/9对应的中心像素点的像素值为1, 因此f(1, 14/9) = 1</span><br><span class="line">23/9对应的中心像素点的像素值为1, 因此f(2, 23/9) = 1</span><br><span class="line">30/9对应的中心像素点的像素值为1, 因此f(3, 30/9) = 1</span><br><span class="line">22/9对应的中心像素点的像素值为1, 因此f(4, 22/9) = 1</span><br><span class="line">33/9对应的中心像素点的像素值为1, 因此f(5, 33/9) = 1</span><br><span class="line">54/9对应的中心像素点的像素值为1, 因此f(6, 54/9) = 1</span><br><span class="line">63/9对应的中心像素点的像素值为1, 因此f(7, 63/9) = 1</span><br><span class="line">45/9对应的中心像素点的像素值为1, 因此f(8, 45/9) = 1</span><br><span class="line">57/9对应的中心像素点的像素值为1, 因此f(9, 57/9) = 1</span><br><span class="line">90/9对应的中心像素点的像素值为1, 因此f(10, 90/9) = 1</span><br><span class="line">99/9对应的中心像素点的像素值为1, 因此f(11, 99/9) = 1</span><br><span class="line">69/9对应的中心像素点的像素值为1, 因此f(12, 69/9) = 1</span><br><span class="line">46/9对应的中心像素点的像素值为1, 因此f(13, 46/9) = 1</span><br><span class="line">72/9对应的中心像素点的像素值为1, 因此f(14, 72/9) = 1</span><br><span class="line">78/9对应的中心像素点的像素值为1, 因此f(15, 78/9) = 1</span><br><span class="line">54/9对应的中心像素点的像素值为1, 因此f(16, 54/9) = 1</span><br></pre></td></tr></table></figure></p>
+<p>得到probability</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[1/16, 1/16, 1/16, 1/16, 1/16, 1/16, 1/16, 1/16, 1/16, 1/16, 1/16, 1/16, 1/16, 1/16, 1/16, 1/16]</span><br></pre></td></tr></table></figure>
+<p>根据熵公式计算熵<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">H = - [(1/16) * log2(1/16)] * 16</span><br></pre></td></tr></table></figure></p>
+<p>结果：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">概率之和： 1.0</span><br><span class="line">熵: 4.0</span><br></pre></td></tr></table></figure></p>
+<p>代码实现：<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">calc_entropy_two_dims_gray</span><span class="params">(image_path, area=<span class="number">3</span>)</span>:</span></span><br><span class="line">    <span class="string">"""</span></span><br><span class="line"><span class="string">    计算图像空间二维熵：https://blog.csdn.net/marleylee/article/details/78813630</span></span><br><span class="line"><span class="string">        p(i, j) = f(i, j) / N*N  其中i表示像素的灰度值(0 &lt;= i &lt;= 255)，j 表示邻域灰度均值(0 &lt;= j &lt;= 255)</span></span><br><span class="line"><span class="string">    上式能反应某像素位置上的灰度值与其周围像素灰度分布的综合特征，其中f(i, j)为特征二元组(i, j)出现的频数，N 为图像的尺度。</span></span><br><span class="line"><span class="string">        H = -sum_i(sum_j(p(i, j) * log2 p(i, j)))</span></span><br><span class="line"><span class="string">    :param image: 要计算熵的图像</span></span><br><span class="line"><span class="string">    :param area: 空间区域</span></span><br><span class="line"><span class="string">    :return: 返回计算好的熵</span></span><br><span class="line"><span class="string">    """</span></span><br><span class="line">    image_gray = cv2.cvtColor(cv2.imread(image_path), cv2.COLOR_BGR2GRAY)</span><br><span class="line">    <span class="comment"># image_gray = np.array([[1, 2, 3, 4], [5, 6, 7, 8], [9, 10, 11, 12], [13, 14, 15, 16]])</span></span><br><span class="line">    np.random.seed(<span class="number">12</span>)</span><br><span class="line">    original_height, original_width = image_gray.shape</span><br><span class="line">    <span class="comment"># 首行增加0</span></span><br><span class="line">    image_gray = np.insert(image_gray, <span class="number">0</span>, values=<span class="number">0.0</span>, axis=<span class="number">0</span>)</span><br><span class="line">    <span class="comment"># 首列增加0</span></span><br><span class="line">    image_gray = np.insert(image_gray, <span class="number">0</span>, values=<span class="number">0.0</span>, axis=<span class="number">1</span>)</span><br><span class="line">    <span class="comment"># 最后一行加全0</span></span><br><span class="line">    image_gray = np.row_stack((image_gray, np.zeros([original_width + <span class="number">1</span>])))</span><br><span class="line">    <span class="comment"># 最后一列加全0</span></span><br><span class="line">    image_gray = np.column_stack((image_gray, np.zeros([original_height + <span class="number">2</span>])))</span><br><span class="line"></span><br><span class="line">    <span class="comment"># 计算f(i, j)</span></span><br><span class="line">    kernel = np.ones((area, area), np.float32) / (area ** <span class="number">2</span>)</span><br><span class="line">    dst_image = cv2.filter2D(image_gray, <span class="number">-1</span>, kernel)</span><br><span class="line"></span><br><span class="line">    <span class="comment"># 根据均值滤波器计算得到的像素均值</span></span><br><span class="line">    dst_image = dst_image[<span class="number">1</span>:<span class="number">-1</span>, <span class="number">1</span>:<span class="number">-1</span>]</span><br><span class="line"></span><br><span class="line">    <span class="comment"># 计算均值滤波器</span></span><br><span class="line">    height, width = image_gray.shape</span><br><span class="line">    f_i_j = []</span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> range(height - <span class="number">2</span>):</span><br><span class="line">        <span class="keyword">for</span> j <span class="keyword">in</span> range(width - <span class="number">2</span>):</span><br><span class="line">            <span class="comment"># 存储均值滤波器中心点位于原图的像素</span></span><br><span class="line">            f_i = image_gray[i + <span class="number">1</span>, j + <span class="number">1</span>]</span><br><span class="line">            <span class="comment"># 存储均值滤波器计算时候的均值像素</span></span><br><span class="line">            f_j = dst_image[i, j]</span><br><span class="line">            temp = (f_i, f_j)</span><br><span class="line">            f_i_j.append(temp)</span><br><span class="line"></span><br><span class="line">    f_i_j_set = set(f_i_j)</span><br><span class="line">    probability = []</span><br><span class="line">    count = <span class="number">1</span></span><br><span class="line">    <span class="keyword">for</span> ele <span class="keyword">in</span> f_i_j_set:</span><br><span class="line">        probability.append(f_i_j.count(ele))</span><br><span class="line">        count += <span class="number">1</span></span><br><span class="line">    probability = np.array(probability, np.float32) / (original_width * original_height)</span><br><span class="line">    print(<span class="string">"概率之和："</span>, np.sum(probability))</span><br><span class="line">    <span class="comment"># 统计位于列表中出现特征二元组的次数，同时计算概率 ,参考：https://segmentfault.com/q/1010000016716175?utm_source=tag-newest</span></span><br><span class="line">    <span class="comment"># for i in f_i_j_set:</span></span><br><span class="line">    <span class="comment">#     probability.append(f_i_j.count(i))</span></span><br><span class="line">    <span class="comment"># 根据计算出的概率和熵公式计算熵</span></span><br><span class="line">    H = -np.matmul(probability, np.log2(probability).T)</span><br><span class="line">    print(<span class="string">"熵:"</span>, H)</span><br><span class="line">    <span class="keyword">return</span> H</span><br></pre></td></tr></table></figure></p>
+    
+    <a href="/2020/01/20/使用OpenCV计算图像熵/" class="post-more waves-effect waves-button">
+        more
+    </a>
+    </div>
+</article>
+
+<div class="post-footer">
+    
+	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/OpenCV/">OpenCV</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Python/">Python</a></li></ul>
+
+</div>
+
+
+            </li>
+        
+            <li class="post-list-item fade">
                 <article id="post-opencv-直方图统计与显示"
   class="article-card article-type-post" itemprop="blogPost">
   
@@ -965,109 +1067,11 @@
 
             </li>
         
-            <li class="post-list-item fade">
-                <article id="post-Paper-TL-A-survery-on-transfer-learning"
-  class="article-card article-type-post" itemprop="blogPost">
-  
-    
-    
-    <div class="top" data-title="2">
-    <div class="top-wrap">
-        <p></p>
-    </div>
-</div>
-    
-    
-        
-
-
-  
-    <h3 class="post-title re-title" itemprop="name">
-      <a class="post-title-link" href="/2019/11/11/Paper-TL-A-survery-on-transfer-learning/">A survey on transfer learning</a>
-    </h3>
-  
-
-
-
-    
-    <div class="post-meta">
-        <time class="post-time" title="2019-11-11 04:33:15" datetime="2019-11-11T04:33:15.000Z"  itemprop="datePublished">2019-11-11</time>
-
-        
-	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/Paper/">Paper</a><ul class="article-category-list-child"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/Paper/Transfer-Learning/">Transfer Learning</a></li></ul></li></ul>
-
-
-
-        
-	<span id="/2019/11/11/Paper-TL-A-survery-on-transfer-learning/" class="leancloud_visitors" data-flag-title="A survey on transfer learning" title="A survey on transfer learning">
-		
-			<i class="icon icon-eye"></i>
-		
-		<span class="leancloud-visitors-count"></span>
-	</span>
- 
-
-        
-
-
-        
-        
-    </div>
-    
-    <div class="post-content" id="post-content" itemprop="postContent">
-    
-    
-        <h2 id="three-main-research-issues-of-transfer-learning"><a href="#three-main-research-issues-of-transfer-learning" class="headerlink" title="three main research issues of transfer learning"></a>three main research issues of transfer learning</h2><ol>
-<li><p>what to transfer</p>
-<blockquote>
-<p>“What to transfer” asks which part of knowledge can be transferred across domains or tasks. Some knowledge is specific for individual domains or tasks, and some knowledge may be common between different domains such that they may help improve performance for the target domain or task.</p>
-</blockquote>
-</li>
-<li><p>how to transfer</p>
-<blockquote>
-<p> After discovering which knowledge can be transferred, learning algorithms need to be developed to transfer the knowledge, which corresponds to the “how to transfer” issue.</p>
-</blockquote>
-</li>
-<li><p>when to transfer</p>
-<blockquote>
-<p>Most current work on transfer learning focuses on “What to transfer” and “How to transfer”, by implicitly assuming that the source and target domains be related to each other. However, how to avoid negative transfer is an important open issue that is attracting more and more attention in the future</p>
-</blockquote>
-</li>
-</ol>
-<h2 id="迁移学习怎么来的"><a href="#迁移学习怎么来的" class="headerlink" title="迁移学习怎么来的"></a>迁移学习怎么来的</h2><p>The fundamental motivation for Transfer learning in the field of machine learning was<br>discussed in a NIPS-95 workshop on “Learning to Learn” 1, which focused on the need for lifelong machine-learning methods that retain and reuse previously learned knowledge</p>
-<h2 id="How-to-transfer-3种不同的迁移模式-based-on-the-definition-of-transfer-learning"><a href="#How-to-transfer-3种不同的迁移模式-based-on-the-definition-of-transfer-learning" class="headerlink" title="How to transfer?(3种不同的迁移模式, based on the definition of transfer learning)"></a>How to transfer?(3种不同的迁移模式, based on the definition of transfer learning)</h2><ol>
-<li>inductive transfer learning  (推导迁移学习)</li>
-<li>transductive transfer learning (转导迁移学习)</li>
-<li>unsupervised transfer learning (无监督迁移学习)<blockquote>
-<p>Transfer learning is classified to three different settings: inductive transfer learning, transductive transfer learning and unsupervised transfer learning. Most previous works focused on the former two settings. Unsupervised transfer learning may attract more and more attention in the future.</p>
-</blockquote>
-</li>
-</ol>
-<figure class="image-box">
-                <img src="/2019/11/11/Paper-TL-A-survery-on-transfer-learning/根据方式分类.png" alt="根据方式进行分类" title class="index-item-img">
-                <p>根据方式进行分类</p>
-            </figure>
-    
-    <a href="/2019/11/11/Paper-TL-A-survery-on-transfer-learning/" class="post-more waves-effect waves-button">
-        more
-    </a>
-    </div>
-</article>
-
-<div class="post-footer">
-    
-	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Paper/">Paper</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/notes/">notes</a></li></ul>
-
-</div>
-
-
-            </li>
-        
         </ul>
         
 <nav id="page-nav">
     <div class="inner">
-    <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="page-number" href="/page/3/">3</a><span class="space">&hellip;</span><a class="page-number" href="/page/13/">13</a><a class="extend next" rel="next" href="/page/2/">下一页</a>
+    <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="page-number" href="/page/3/">3</a><span class="space">&hellip;</span><a class="page-number" href="/page/14/">14</a><a class="extend next" rel="next" href="/page/2/">下一页</a>
     </div>
 </nav>
 
