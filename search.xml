@@ -69,6 +69,22 @@
 <li>显示直方图</li>
 </ol>
 <h1 id="直方图"><a href="#直方图" class="headerlink" title="直方图"></a>直方图</h1><p>什么是直方图呢？通过直方图你可以对整幅图像的灰度分布有一个整体的 了解。直方图的 x 轴是灰度值（0 到 255），y 轴是图片中具有同一个灰度值的 点的数目</p>
+<h2 id="什么是直方图"><a href="#什么是直方图" class="headerlink" title="什么是直方图"></a>什么是直方图</h2><p>通过直方图你可以对整幅图像的灰度分布有一个整体的了解。直方图的 x 轴是灰度值（0 到 255），y 轴是图片中具有同一个灰度值的点的数目</p>
+<h2 id="Opencv中统计直方图的使用"><a href="#Opencv中统计直方图的使用" class="headerlink" title="Opencv中统计直方图的使用"></a>Opencv中统计直方图的使用</h2><p>参考链接：<a href="https://www.cnblogs.com/Undo-self-blog/p/8439149.html" target="_blank" rel="noopener">https://www.cnblogs.com/Undo-self-blog/p/8439149.html</a></p>
+<p><code>BINS：上面的直方图显示了每个灰度值对应的像素数。如果像素值为 0到 255，你就需要 256 个数来显示上面的直方图。但是，如果你不需要知道每一个像素值的像素点数目的，而只希望知道两个像素值之间的像素点数目怎么办呢？举例来说，我们想知道像素值在 0 到 15 之间的像素点的数目，接着是 16 到 31,....，240 到 255。我们只需要 16 个值来绘制直方图。OpenCVTutorials on histograms中例子所演示的内容。
+那到底怎么做呢？你只需要把原来的 256 个值等分成 16 小组，取每组的总和。而这里的每一个小组就被成为 BIN。第一个例子中有 256 个 BIN，第二个例子中有 16 个 BIN。在 OpenCV 的文档中用 histSize 表示 BINS</code></p>
+<p><code>DIMS：表示我们收集数据的参数数目。在本例中，我们对收集到的数据只考虑一件事：灰度值。所以这里就是 1。
+　　RANGE：就是要统计的灰度值范围，一般来说为 [0，256]，也就是说所有的灰度值</code><br><code>使用 OpenCV 统计直方图 函数 cv2.calcHist 可以帮助我们统计一幅图像的直方图</code></p>
+<p><code>可以帮助我们统计一幅图像的直方图。我们一起来熟悉一下这个函数和它的参数：</code></p>
+<p><code>cv2.calcHist(images,channels,mask,histSize,ranges[,hist[,accumulate]])</code>
+　　</p>
+<ol>
+<li>images: 原图像（图像格式为 uint8 或 float32）。当传入函数时应该用中括号 [] 括起来，例如：[img]。</li>
+<li>channels: 同样需要用中括号括起来，它会告诉函数我们要统计那幅图像的直方图。如果输入图像是灰度图，它的值就是 [0]；如果是彩色图像的话，传入的参数可以是 [0]，[1]，[2] 它们分别对应着通道 B，G，R。</li>
+<li>mask: 掩模图像。要统计整幅图像的直方图就把它设为 None。但是如果你想统计图像某一部分的直方图的话，你就需要制作一个掩模图像，并使用它。（后边有例子）</li>
+<li>histSize:BIN 的数目。也应该用中括号括起来，例如：[256]。</li>
+<li>ranges: 像素值范围，通常为 [0，256]</li>
+</ol>
 <p>直方图的绘制包括最核心的两步：<strong>统计直方图，绘制直方图</strong></p>
 <h2 id="使用opencv-统计直方图"><a href="#使用opencv-统计直方图" class="headerlink" title="使用opencv 统计直方图"></a>使用opencv 统计直方图</h2><p><strong>函数 cv2.calcHist 可以帮助我们统计一幅图像 的直方图</strong></p>
 <p>cv2.calcHist(images, channels, mask, histSize, ranges, hist, accumulate)</p>
